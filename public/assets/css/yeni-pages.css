@@ -1,0 +1,843 @@
+/* =====================================================================
+   yeni-pages.css — İç sayfalar (blog liste + detay) ve footer
+
+   "Yeni" koyu tema diliyle yeniden yazılmış iç sayfa stilleri. Yalnızca
+   yeni renk token'larını (--bg-*, --ink-*, --blue*, --line*) ve tema
+   bağımsız ölçü token'larını (--space-*, --fs-*, --radius-*, --dur-*)
+   kullanır; böylece theme-light.css token'ları çevirince tüm bu bölümler
+   otomatik olarak aydınlık temaya döner.
+
+   layouts/inner.php tarafından yeni.css'ten sonra yüklenir.
+   ===================================================================== */
+
+/* ----------------------------- Yardımcılar -------------------------- */
+.container {
+    width: 100%;
+    max-width: var(--container-max, 1280px);
+    margin-inline: auto;
+    padding-inline: var(--container-pad, clamp(1.15rem, 0.5rem + 2.4vw, 2.5rem));
+}
+
+main#main-content { display: block; }
+
+/* Düğme: çizgili (outline) varyant — yeni temaya uyumlu */
+.btn--outline {
+    border: 1px solid var(--line-2);
+    color: var(--ink-1);
+    background: transparent;
+}
+@media (hover: hover) and (pointer: fine) {
+    .btn--outline:hover { border-color: var(--blue-bright); color: var(--ink-1); background: var(--blue-soft); }
+}
+
+/* Görsel çerçevesi + yer tutucu (gerçek foto eklenene kadar) */
+.media-frame {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: var(--radius, 18px);
+    background-color: var(--bg-3);
+    background-image: var(--blueprint), var(--placeholder-dark);
+    background-size: var(--blueprint-size), cover;
+    color: var(--ink-3);
+}
+.media-frame--tall { aspect-ratio: 16 / 9; }
+.media-frame__placeholder svg { width: 64px; height: 64px; opacity: 0.5; }
+
+/* Kapak fotoğrafı kancaları (ana sayfayla aynı kural): dosyayı
+   public/assets/images/blog/ içine tam adıyla bırak, yer tutucuyu boyar. */
+[data-img="blog/blog-adr-safety.jpg"]       { background-image: url('../images/blog/blog-adr-safety.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+[data-img="blog/blog-silo-maintenance.jpg"] { background-image: url('../images/blog/blog-silo-maintenance.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+[data-img="blog/blog-lowbed-guide.jpg"]     { background-image: url('../images/blog/blog-lowbed-guide.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+[data-img="blog/blog-lightweight-chassis.jpg"] { background-image: url('../images/blog/blog-lightweight-chassis.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+[data-img="blog/blog-cold-chain.jpg"]       { background-image: url('../images/blog/blog-cold-chain.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+[data-img="blog/blog-winter-maintenance.jpg"] { background-image: url('../images/blog/blog-winter-maintenance.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+
+/* ----------------------------- Sayfa hero --------------------------- */
+.page-hero {
+    position: relative;
+    background-color: var(--bg-1);
+    border-block-end: 1px solid var(--line);
+    padding-block: clamp(2.6rem, 1.8rem + 4vw, 4.6rem);
+    isolation: isolate;
+    overflow: hidden;
+}
+.page-hero::after {
+    content: "";
+    position: absolute;
+    inset-inline-end: -140px;
+    inset-block-end: -180px;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 91, 170, 0.22), transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+.page-hero__title {
+    color: var(--ink-1);
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin-block: var(--space-3) 0;
+    max-width: 24ch;
+}
+.page-hero__lead {
+    color: var(--ink-2);
+    font-size: var(--fs-lead);
+    margin-block: var(--space-4) 0;
+    max-width: 58ch;
+}
+
+.breadcrumb-trail {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--fs-300);
+}
+.breadcrumb-trail__item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--ink-3);
+}
+.breadcrumb-trail__item:not(:first-child)::before { content: "/"; color: var(--ink-3); opacity: 0.6; }
+.breadcrumb-trail__item a { color: var(--ink-3); text-decoration: none; transition: color var(--dur-fast) var(--ease-out); }
+.breadcrumb-trail__item a:hover { color: var(--ink-1); }
+.breadcrumb-trail__item.is-current {
+    color: var(--blue-bright);
+    font-weight: 500;
+    max-width: 38ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* --------------------------- Blog liste ----------------------------- */
+.blog-section { padding-block: var(--sec-y); background: var(--bg-0); }
+
+.blog-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    align-items: start;
+}
+@media (min-width: 992px) {
+    .blog-layout { grid-template-columns: 320px minmax(0, 1fr); gap: var(--space-7); }
+    .blog-sidebar { position: sticky; top: calc(var(--header-h) + var(--space-5)); }
+}
+
+.blog-sidebar { display: grid; gap: var(--space-5); }
+
+.sidebar-widget {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: var(--space-5);
+}
+.sidebar-widget__title {
+    color: var(--ink-1);
+    font-size: var(--fs-500);
+    font-weight: 700;
+    margin-block: 0 var(--space-4);
+    padding-block-end: var(--space-3);
+    border-block-end: 1px solid var(--line);
+    position: relative;
+}
+.sidebar-widget__title::after {
+    content: "";
+    position: absolute;
+    inset-block-end: -1px;
+    inset-inline-start: 0;
+    width: 48px;
+    height: 2px;
+    background: var(--blue);
+}
+
+/* Arama */
+.sidebar-search {
+    display: flex;
+    border: 1px solid var(--line-2);
+    border-radius: var(--pill);
+    overflow: hidden;
+    transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.sidebar-search:focus-within {
+    border-color: var(--blue-bright);
+    box-shadow: 0 0 0 3px var(--blue-soft);
+}
+.sidebar-search__input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    padding: var(--space-3) var(--space-4);
+    font: inherit;
+    font-size: var(--fs-300);
+    color: var(--ink-1);
+    background: transparent;
+}
+.sidebar-search__input::placeholder { color: var(--ink-3); }
+.sidebar-search__submit {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    border: 0;
+    background: var(--blue);
+    color: #fff;
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease-out);
+}
+.sidebar-search__submit:hover { background: #0a6dc4; }
+.sidebar-search__submit svg { width: 18px; height: 18px; }
+
+/* Kategoriler */
+.sidebar-categories { display: grid; gap: var(--space-1); }
+.sidebar-categories__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    border-radius: var(--radius-sm);
+    color: var(--ink-2);
+    text-decoration: none;
+    font-size: var(--fs-300);
+    font-weight: 500;
+    transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.sidebar-categories__link:hover { background: var(--blue-soft); color: var(--ink-1); }
+.sidebar-categories__link.is-active { background: var(--blue); color: #fff; }
+.sidebar-categories__count {
+    display: inline-grid;
+    place-items: center;
+    min-width: 28px;
+    padding: 2px var(--space-2);
+    border-radius: var(--pill);
+    background: var(--bg-3);
+    color: var(--ink-2);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.sidebar-categories__link.is-active .sidebar-categories__count { background: rgba(255, 255, 255, 0.22); color: #fff; }
+
+/* Filtre bilgi şeridi */
+.blog-filterbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    margin-block-end: var(--space-5);
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-inline-start: 3px solid var(--blue);
+    border-radius: var(--radius-sm);
+}
+.blog-filterbar__info { margin: 0; font-size: var(--fs-300); color: var(--ink-2); }
+.blog-filterbar__info strong { color: var(--blue-bright); }
+.blog-filterbar__clear { font-size: var(--fs-300); font-weight: 600; color: var(--blue-bright); text-decoration: none; }
+.blog-filterbar__clear:hover { text-decoration: underline; }
+
+/* Kart ızgarası */
+.blog-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
+@media (min-width: 768px) { .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Boş durum */
+.blog-empty {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: var(--space-3);
+    padding: var(--space-8) var(--space-5);
+    background: var(--bg-1);
+    border: 1px dashed var(--line-2);
+    border-radius: var(--radius);
+}
+.blog-empty__icon { color: var(--ink-3); }
+.blog-empty__icon svg { width: 56px; height: 56px; }
+.blog-empty__title { color: var(--ink-1); font-size: var(--fs-h3); margin: 0; }
+.blog-empty__text { color: var(--ink-3); max-width: 44ch; margin: 0; }
+
+/* ----------------------------- Blog kart ---------------------------- */
+.blog-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform var(--dur-base) var(--ease-out),
+                border-color var(--dur-base) var(--ease-out),
+                box-shadow var(--dur-base) var(--ease-out);
+}
+.blog-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--line-2);
+    box-shadow: 0 24px 50px -28px rgba(3, 7, 14, 0.7);
+}
+.blog-card__media { display: block; aspect-ratio: 16 / 10; min-height: 0; border-radius: 0; }
+.blog-card__body { display: flex; flex-direction: column; flex: 1; gap: var(--space-3); padding: var(--space-5); }
+.blog-card__date {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--ink-3);
+    font-size: var(--fs-300);
+    font-weight: 500;
+}
+.blog-card__date svg { width: 15px; height: 15px; color: var(--blue-bright); }
+.blog-card__title { font-size: var(--fs-500); font-weight: 700; line-height: 1.35; margin: 0; }
+.blog-card__title a { color: var(--ink-1); text-decoration: none; transition: color var(--dur-fast) var(--ease-out); }
+.blog-card__title a:hover { color: var(--blue-bright); }
+.blog-card__excerpt {
+    color: var(--ink-2);
+    font-size: var(--fs-300);
+    line-height: var(--lh-base);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.blog-card__more {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-block-start: auto;
+    padding-block-start: var(--space-2);
+    color: var(--blue-bright);
+    font-size: var(--fs-300);
+    font-weight: 600;
+    text-decoration: none;
+}
+.blog-card__more svg { width: 16px; height: 16px; transition: transform var(--dur-base) var(--ease-out); }
+.blog-card__more:hover { color: var(--ink-1); }
+.blog-card__more:hover svg { transform: translateX(4px); }
+[dir="rtl"] .blog-card__more svg { transform: scaleX(-1); }
+[dir="rtl"] .blog-card__more:hover svg { transform: scaleX(-1) translateX(4px); }
+
+/* ----------------------------- Blog detay --------------------------- */
+.blog-article { padding-block: clamp(2.4rem, 1.6rem + 3vw, 4rem); background: var(--bg-0); }
+.blog-article__inner { max-width: 1040px; margin-inline: auto; }
+.blog-article__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); margin-block-end: var(--space-5); }
+.blog-article__date {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--ink-3);
+    font-size: var(--fs-300);
+    font-weight: 500;
+}
+.blog-article__date svg { width: 16px; height: 16px; color: var(--blue-bright); }
+.blog-article__category {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-1) var(--space-4);
+    border-radius: var(--pill);
+    background: var(--blue-soft);
+    color: var(--blue-bright);
+    font-size: var(--fs-300);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.blog-article__category:hover { background: var(--blue); color: #fff; }
+.blog-article__cover { margin-block-end: var(--space-6); }
+.blog-article__content { font-size: var(--fs-400); line-height: var(--lh-base); color: var(--ink-2); }
+.blog-article__content p { margin-block: 0 var(--space-4); }
+.blog-article__content h2 {
+    color: var(--ink-1);
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    margin-block: var(--space-6) var(--space-4);
+    padding-inline-start: var(--space-4);
+    border-inline-start: 3px solid var(--blue);
+}
+.blog-article__content ul { margin-block: 0 var(--space-4); padding-inline-start: var(--space-5); display: grid; gap: var(--space-2); list-style: disc; }
+.blog-article__content li::marker { color: var(--blue-bright); }
+.blog-article__content a { color: var(--blue-bright); text-decoration: underline; text-underline-offset: 2px; }
+.blog-article__footer {
+    margin-block-start: var(--space-7);
+    padding-block-start: var(--space-5);
+    border-block-start: 1px solid var(--line);
+}
+.blog-article__footer .btn svg { width: 16px; height: 16px; }
+[dir="rtl"] .blog-article__footer .btn svg { transform: scaleX(-1); }
+
+/* İlgili yazılar */
+.blog-related { padding-block: clamp(2.4rem, 1.6rem + 3vw, 4rem); background: var(--bg-1); border-block-start: 1px solid var(--line); }
+.blog-related__grid { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
+@media (min-width: 768px) { .blog-related__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.blog-related .blog-card { background: var(--bg-2); }
+
+/* Bölüm başlığı (ilgili yazılar üstü) */
+.section-head { max-width: 680px; margin-block-end: clamp(1.8rem, 1.2rem + 2.4vw, 3rem); }
+.section-head__eyebrow {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-block-end: 0.7rem;
+}
+.section-head__title {
+    color: var(--ink-1);
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+}
+
+/* ------------------------------- Footer ----------------------------- */
+/* =====================================================================
+   HİZMETLER — liste (kart ızgarası) + detay (görsel + genel anlatım)
+   ===================================================================== */
+.services-section { padding-block: var(--sec-y); background: var(--bg-0); }
+
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+}
+@media (min-width: 560px) { .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 992px) { .services-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* Hizmet kartı */
+.service-card {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: transform var(--dur-base) var(--ease-out),
+                border-color var(--dur-base) var(--ease-out),
+                box-shadow var(--dur-base) var(--ease-out),
+                background-color var(--dur-base) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+    .service-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--line-2);
+        box-shadow: 0 24px 50px -28px rgba(3, 7, 14, 0.7);
+    }
+}
+.service-card__icon {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--blue-soft);
+    color: var(--blue-bright);
+    transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+}
+.service-card__icon svg { width: 24px; height: 24px; }
+@media (hover: hover) and (pointer: fine) {
+    .service-card:hover .service-card__icon { background: var(--blue); color: #fff; }
+}
+.service-card__body { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+.service-card__name { color: var(--ink-1); font-family: var(--font-display); font-weight: 700; font-size: var(--fs-500); line-height: 1.3; }
+.service-card__desc { color: var(--ink-2); font-size: var(--fs-300); line-height: var(--lh-base); }
+.service-card__more {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-block-start: var(--space-2);
+    color: var(--blue-bright);
+    font-size: var(--fs-300);
+    font-weight: 600;
+}
+.service-card__more svg { width: 16px; height: 16px; transition: transform var(--dur-base) var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .service-card:hover .service-card__more svg { transform: translateX(4px); } }
+[dir="rtl"] .service-card__more svg { transform: scaleX(-1); }
+[dir="rtl"] .service-card:hover .service-card__more svg { transform: scaleX(-1) translateX(4px); }
+
+/* Hizmetler liste CTA şeridi */
+.services-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+    margin-block-start: var(--space-7);
+    padding: clamp(1.4rem, 1rem + 2vw, 2.4rem);
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background-image: radial-gradient(80% 140% at 100% 0, var(--blue-soft), transparent 60%);
+}
+.services-cta__text { display: grid; gap: 0.35rem; min-width: 220px; }
+.services-cta__text strong { color: var(--ink-1); font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 700; }
+.services-cta__text span { color: var(--ink-2); font-size: var(--fs-300); max-width: 52ch; }
+.services-cta__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+
+/* ----------------------------- Detay -------------------------------- */
+.service-detail { padding-block: clamp(2.4rem, 1.6rem + 3vw, 4rem); background: var(--bg-0); }
+.service-detail__intro {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    align-items: start;
+}
+@media (min-width: 900px) {
+    .service-detail__intro { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-7); }
+    .service-detail__media { position: sticky; top: calc(var(--header-h) + var(--space-5)); }
+}
+.service-detail__media { aspect-ratio: 4 / 3; }
+.service-detail__body { font-size: var(--fs-400); line-height: var(--lh-base); color: var(--ink-2); }
+.service-detail__body p { margin-block: 0 var(--space-4); }
+.service-detail__body p:last-child { margin-block-end: 0; }
+
+.service-points { margin-block-start: var(--space-5); }
+.service-points__title {
+    color: var(--ink-1);
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    margin-block: 0 var(--space-4);
+}
+.service-points__list { display: grid; gap: var(--space-3); }
+.service-points__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    color: var(--ink-1);
+    font-size: var(--fs-400);
+    font-weight: 500;
+}
+.service-points__list svg {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-block-start: 2px;
+    padding: 3px;
+    border-radius: 50%;
+    background: var(--blue-soft);
+    color: var(--blue-bright);
+}
+
+.service-detail__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+    margin-block-start: var(--space-6);
+    padding-block-start: var(--space-5);
+    border-block-start: 1px solid var(--line);
+}
+.service-detail__back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--ink-3);
+    font-size: var(--fs-300);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+}
+.service-detail__back:hover { color: var(--ink-1); }
+.service-detail__back svg { width: 16px; height: 16px; }
+[dir="rtl"] .service-detail__back svg { transform: scaleX(-1); }
+
+.services-related { padding-block: clamp(2.4rem, 1.6rem + 3vw, 4rem); background: var(--bg-1); border-block-start: 1px solid var(--line); }
+.services-related .service-card { background: var(--bg-2); }
+
+/* Hizmet kapak görseli kancaları (dosyayı public/assets/images/services/ içine bırak) */
+[data-img="services/srv-trailer-repair.jpg"]          { background-image: url('../images/services/srv-trailer-repair.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+[data-img="services/srv-frigo-repair.jpg"]            { background-image: url('../images/services/srv-frigo-repair.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+[data-img="services/srv-silobas-repair.jpg"]          { background-image: url('../images/services/srv-silobas-repair.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+[data-img="services/srv-curtain-repair.jpg"]          { background-image: url('../images/services/srv-curtain-repair.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+[data-img="services/srv-adr-tanker-repair.jpg"]       { background-image: url('../images/services/srv-adr-tanker-repair.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+[data-img="services/srv-lowbed-repair.jpg"]           { background-image: url('../images/services/srv-lowbed-repair.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+[data-img="services/srv-aluminum-silobas-repair.jpg"] { background-image: url('../images/services/srv-aluminum-silobas-repair.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+[data-img="services/srv-fuel-center.jpg"]             { background-image: url('../images/services/srv-fuel-center.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+[data-img="services/srv-axle-repair.jpg"]             { background-image: url('../images/services/srv-axle-repair.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+[data-img="services/srv-suspension-repair.jpg"]       { background-image: url('../images/services/srv-suspension-repair.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+
+/* ===================================================================
+   MEDYA SAYFASI (pages/media) — Fotoğraflar + Videolar sekmeleri
+   =================================================================== */
+.media-section { padding-block: clamp(2.75rem, 2rem + 3vw, 4.5rem); background: var(--bg-0); }
+
+/* ----- Sekme çubuğu ----- */
+.media-tabs { margin-block-end: clamp(1.6rem, 1rem + 2vw, 2.6rem); }
+.media-tabs__list {
+    display: flex;
+    gap: var(--space-2);
+    border-block-end: 1px solid var(--line);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.media-tabs__list::-webkit-scrollbar { display: none; }
+.media-tabs__tab {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    margin-block-end: -1px;
+    background: transparent;
+    border: 0;
+    border-block-end: 2px solid transparent;
+    color: var(--ink-3);
+    font: inherit;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color var(--ease-out) .2s, border-color var(--ease-out) .2s;
+}
+.media-tabs__tab svg { width: 19px; height: 19px; }
+.media-tabs__tab.is-active { color: var(--ink-1); border-block-end-color: var(--blue-bright); }
+.media-tabs__count {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    padding-inline: .45rem;
+    border-radius: var(--radius-pill);
+    background: var(--blue-soft);
+    color: var(--blue-bright);
+    font-size: .72rem;
+    font-weight: 700;
+}
+.media-tabs__tab.is-active .media-tabs__count { background: var(--blue); color: #fff; }
+@media (hover: hover) and (pointer: fine) {
+    .media-tabs__tab:hover { color: var(--ink-1); }
+}
+
+/* ----- Panel + giriş animasyonu ----- */
+.media-panel[hidden] { display: none; }
+.media-panel:focus { outline: none; }
+.media-panel.is-active { animation: media-fade .45s var(--ease-out) both; }
+@keyframes media-fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* ----- Izgara ----- */
+.media-grid {
+    list-style: none;
+    margin: 0 0 127px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: clamp(var(--space-3), 1vw + .4rem, var(--space-5));
+}
+.media-grid--video { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.media-grid__item { margin: 0; }
+
+/* ----- Fotoğraf küçük resmi ----- */
+.media-thumb {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--bg-2);
+    cursor: zoom-in;
+    transition: border-color var(--ease-out) .25s, transform var(--ease-out) .25s;
+}
+.media-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--ease-out) .5s;
+}
+.media-thumb__zoom {
+    position: absolute;
+    inset-block-end: var(--space-3);
+    inset-inline-end: var(--space-3);
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: var(--radius-pill);
+    background: rgba(7, 13, 23, .6);
+    color: #fff;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity var(--ease-out) .25s, transform var(--ease-out) .25s;
+}
+.media-thumb__zoom svg { width: 18px; height: 18px; }
+@media (hover: hover) and (pointer: fine) {
+    .media-thumb:hover { border-color: var(--line-2); transform: translateY(-3px); }
+    .media-thumb:hover img { transform: scale(1.06); }
+    .media-thumb:hover .media-thumb__zoom { opacity: 1; transform: none; }
+}
+.media-thumb:focus-visible { outline: 2px solid var(--blue-bright); outline-offset: 3px; }
+
+/* ----- Boş durum (Fotoğraflar) ----- */
+.media-empty {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: var(--space-3);
+    padding: clamp(var(--space-7), 5vw, var(--space-9)) var(--space-5);
+    background: var(--bg-1);
+    border: 1px dashed var(--line-2);
+    border-radius: var(--radius);
+}
+.media-empty__icon { color: var(--ink-3); }
+.media-empty__icon svg { width: 56px; height: 56px; }
+.media-empty__title { color: var(--ink-1); font-size: var(--fs-h3); margin: 0; }
+.media-empty__text { color: var(--ink-3); max-width: 46ch; margin: 0; }
+
+/* ----- Bilgi notu (Videolar boşken) ----- */
+.media-note { margin-block-end: var(--space-5); max-width: 60ch; }
+.media-note__title { color: var(--ink-1); font-size: var(--fs-h3); margin: 0 0 var(--space-2); }
+.media-note__text { color: var(--ink-3); margin: 0; }
+
+/* ----- Örnek görsel notu (geçici site görselleri kullanılırken) ----- */
+.media-samples-note {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0 0 var(--space-5);
+    padding: .5rem .85rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--bg-1);
+    color: var(--ink-3);
+    font-size: .85rem;
+}
+.media-samples-note svg { width: 16px; height: 16px; color: var(--blue-bright); flex: none; }
+
+/* ----- Video kartı ----- */
+.video-card { display: grid; gap: var(--space-3); }
+.video-card__frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: #000;
+}
+.video-card__frame { display: block; }
+.video-card__frame video,
+.video-card__frame img { width: 100%; height: 100%; object-fit: cover; display: block; background: #000; }
+.video-card__frame img { transition: transform var(--ease-out) .5s; }
+.video-card__title { margin: 0; display: block; color: var(--ink-1); font-size: 1rem; font-weight: 600; text-align: start; }
+
+/* Yer tutucu (yakında) video kartı = tıklanınca büyüyen görsel + oynat ikonu */
+.video-card--placeholder {
+    display: grid;
+    gap: var(--space-3);
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    text-align: start;
+    cursor: zoom-in;
+}
+.video-card__play {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: var(--radius-pill);
+    background: rgba(7, 13, 23, .55);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #fff;
+    backdrop-filter: blur(4px);
+    transition: transform var(--ease-out) .25s, background var(--ease-out) .25s;
+}
+.video-card__play svg { width: 26px; height: 26px; margin-inline-start: 2px; }
+.video-card__badge {
+    position: absolute;
+    inset-block-start: var(--space-3);
+    inset-inline-end: var(--space-3);
+    padding: .3rem .7rem;
+    border-radius: var(--radius-pill);
+    background: var(--blue);
+    color: #fff;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+}
+.video-card--placeholder .video-card__frame {
+    border-color: var(--line);
+    transition: border-color var(--ease-out) .25s;
+}
+@media (hover: hover) and (pointer: fine) {
+    .video-card--placeholder:hover .video-card__frame { border-color: var(--line-2); }
+    .video-card--placeholder:hover .video-card__frame img { transform: scale(1.06); }
+    .video-card--placeholder:hover .video-card__play { transform: translate(-50%, -50%) scale(1.08); background: var(--blue); }
+}
+.video-card--placeholder:focus-visible { outline: 2px solid var(--blue-bright); outline-offset: 3px; }
+
+/* ----- Lightbox (fotoğraf büyütme) ----- */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: grid;
+    place-items: center;
+    padding: clamp(1rem, 4vw, 3rem);
+    opacity: 0;
+    transition: opacity var(--ease-out) .25s;
+}
+.lightbox[hidden] { display: none; }
+.lightbox.is-open { opacity: 1; }
+.lightbox__backdrop { position: absolute; inset: 0; background: rgba(3, 7, 14, .9); backdrop-filter: blur(6px); }
+.lightbox__figure { position: relative; margin: 0; max-width: 100%; max-height: 100%; }
+.lightbox__img {
+    display: block;
+    max-width: min(1200px, 92vw);
+    max-height: 86vh;
+    width: auto;
+    height: auto;
+    border-radius: var(--radius);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .6);
+}
+.lightbox__btn {
+    position: absolute;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: var(--radius-pill);
+    background: rgba(11, 19, 34, .7);
+    color: #fff;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: background var(--ease-out) .2s, transform var(--ease-out) .2s;
+}
+.lightbox__btn svg { width: 22px; height: 22px; }
+.lightbox__close { inset-block-start: clamp(1rem, 3vw, 2rem); inset-inline-end: clamp(1rem, 3vw, 2rem); }
+.lightbox__nav { inset-block-start: 50%; transform: translateY(-50%); }
+.lightbox__nav--prev { inset-inline-start: clamp(.5rem, 2vw, 1.5rem); }
+.lightbox__nav--next { inset-inline-end: clamp(.5rem, 2vw, 1.5rem); }
+@media (hover: hover) and (pointer: fine) {
+    .lightbox__btn:hover { background: var(--blue); }
+    .lightbox__nav:hover { transform: translateY(-50%) scale(1.06); }
+}
+.lightbox__btn:focus-visible { outline: 2px solid var(--blue-bright); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+    .media-panel.is-active { animation: none; }
+    .media-thumb, .media-thumb img, .media-thumb__zoom, .lightbox, .lightbox__btn,
+    .video-card__frame img, .video-card__play, .video-card--placeholder .video-card__frame { transition: none; }
+}

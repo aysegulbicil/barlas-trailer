@@ -1,0 +1,135 @@
+/* =====================================================================
+   theme-light.css — Aydınlık tema kaplaması (site geneli)
+
+   Yeni tema ("yeni.css") ve ortak header ("yeni-header.css") koyu renk
+   token'larıyla çalışır. Bu dosya, <html data-theme="light"> olduğunda
+   o token'ları aydınlık değerlerle ezer; böylece token kullanan tüm
+   bölümler (ana sayfa, blog, iç sayfalar, footer) otomatik olarak
+   aydınlık temaya döner. Yalnızca token kullanmayan birkaç sabit koyu
+   yüzey için hedefli ezme kuralları eklenmiştir.
+
+   Her iki layout'ta da (layouts/yeni.php ve layouts/inner.php) en son
+   yüklenir. data-theme yoksa veya "dark" ise hiçbir kural uygulanmaz.
+   ===================================================================== */
+
+/* ------------------------- 1) Çekirdek token'lar -------------------- */
+:root[data-theme="light"] {
+    /* Yüzeyler (yumuşak soğuk beyazlar; saf beyaz yalnızca kartlarda) */
+    --bg-0: #F4F7FB;
+    --bg-1: #FFFFFF;
+    --bg-2: #FFFFFF;
+    --bg-3: #EEF2F8;
+
+    /* Metin (koyu grafit-lacivert) */
+    --ink-1: #0E1726;
+    --ink-2: rgba(20, 31, 50, 0.78);
+    --ink-3: rgba(20, 31, 50, 0.54);
+
+    /* Vurgu: Barlas mavisi — aydınlıkta okunur ton */
+    --blue: #005BAA;
+    --blue-bright: #0A6DC4;
+    --blue-soft: rgba(0, 91, 170, 0.10);
+
+    /* Çizgiler */
+    --line: rgba(16, 26, 44, 0.10);
+    --line-2: rgba(16, 26, 44, 0.16);
+
+    color-scheme: light;
+}
+
+/* Gövde arka planı token'a bağlı; data-theme değişince yumuşak geçiş. */
+:root[data-theme="light"] body {
+    background: var(--bg-0);
+    color: var(--ink-2);
+}
+
+/* ------------------------- 2) Ortak header -------------------------- */
+:root[data-theme="light"] .site-header {
+    --yh-bg-0: #FFFFFF;
+    --yh-bg-1: #FFFFFF;
+    --yh-bg-2: #FFFFFF;
+    --yh-ink-1: #0E1726;
+    --yh-ink-2: rgba(20, 31, 50, 0.74);
+    --yh-ink-3: rgba(20, 31, 50, 0.52);
+    --yh-line: rgba(16, 26, 44, 0.10);
+    --yh-line-2: rgba(16, 26, 44, 0.16);
+    --yh-blue: #005BAA;
+    --yh-blue-bright: #0A6DC4;
+}
+
+/* Ana menü çubuğu: yarı saydam beyaz (koyu rgba değerlerini ezer) */
+:root[data-theme="light"] .navbar-main {
+    background: rgba(255, 255, 255, 0.88);
+    border-block-end-color: var(--yh-line);
+}
+:root[data-theme="light"] .site-header.is-scrolled .navbar-main {
+    background: rgba(255, 255, 255, 0.96);
+    border-block-end-color: var(--yh-line-2);
+    box-shadow: 0 18px 40px -26px rgba(16, 26, 44, 0.35);
+}
+
+/* Beyaz-tint hover'lar aydınlıkta görünmez; koyu-tint'e çevir */
+:root[data-theme="light"] .lang-switcher__toggle:hover {
+    background: rgba(16, 26, 44, 0.06);
+}
+:root[data-theme="light"] .lang-switcher__item:hover {
+    background: rgba(16, 26, 44, 0.05);
+}
+:root[data-theme="light"] .lang-switcher__menu {
+    box-shadow: 0 24px 60px -24px rgba(16, 26, 44, 0.28);
+}
+
+/* ------------------------- 3) Tema değiştirici düğme ----------------- */
+:root[data-theme="light"] .theme-toggle:hover {
+    background: rgba(16, 26, 44, 0.06);
+}
+
+/* ------------------------- 4) Ana sayfanın sabit koyu yüzeyleri ------ */
+/* Token kullanmayan birkaç gölge/yüzey aydınlıkta yumuşatılır. */
+:root[data-theme="light"] .road__fallback,
+:root[data-theme="light"] .showcase__img {
+    filter: drop-shadow(0 22px 34px rgba(16, 26, 44, 0.18));
+}
+:root[data-theme="light"] .hero__fallback {
+    filter: drop-shadow(0 26px 38px rgba(16, 26, 44, 0.20));
+}
+:root[data-theme="light"] .road__cap {
+    background: rgba(255, 255, 255, 0.82);
+}
+@media (prefers-reduced-transparency: reduce) {
+    :root[data-theme="light"] .road__cap { background: var(--bg-1); }
+}
+
+/* ------------------------- 5) Mega menü panelleri ------------------- */
+/* Mega panellerin İÇ metinleri (navigation.css) sabit açık-gri tonlardır
+   ve KOYU zemin için tasarlanmıştır. Açık temada .site-header, --yh-bg-1'i
+   beyaza çevirdiği için yeni-header.css'teki ".mega-panel { background:
+   var(--yh-bg-1) }" kuralıyla panel beyazlaşıyor; metinler açık gri kalınca
+   okunmaz hale geliyordu. Tasarım gereği mega paneller her temada koyudur —
+   bu yüzden açık temada da panel yüzeyini koyu tutuyoruz (dark moddaki
+   --yh-bg-1 = #0B1322 ile aynı). Böylece içerik renkleri yine okunur. */
+:root[data-theme="light"] .mega-panel {
+    background-color: #0B1322;
+}
+
+/* Tema geçişini yumuşat (yalnızca renkler; layout/transform etkilenmez) */
+:root[data-theme] body,
+:root[data-theme] .navbar-main,
+:root[data-theme] .topbar,
+:root[data-theme] .page-hero,
+:root[data-theme] .blog-card,
+:root[data-theme] .sidebar-widget,
+:root[data-theme] .site-footer {
+    transition: background-color var(--t-base, 240ms) var(--ease-out),
+                border-color var(--t-base, 240ms) var(--ease-out),
+                color var(--t-base, 240ms) var(--ease-out);
+}
+@media (prefers-reduced-motion: reduce) {
+    :root[data-theme] body,
+    :root[data-theme] .navbar-main,
+    :root[data-theme] .topbar,
+    :root[data-theme] .page-hero,
+    :root[data-theme] .blog-card,
+    :root[data-theme] .sidebar-widget,
+    :root[data-theme] .site-footer { transition: none; }
+}

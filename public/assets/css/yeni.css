@@ -1,0 +1,1396 @@
+/* =====================================================================
+   Barlas Trailer — yeni arayüz
+   CodeIgniter ana sayfası kullanır
+   (app/Views/pages/home.php + layouts/yeni.php).
+   Tema kilidi: tüm sayfa koyu. Tek vurgu: Barlas mavisi ailesi.
+   Hareket: yalnızca transform/opacity; güçlü ease-out eğrileri.
+   Başlangıçta gizlenen her şey html.has-anim altındadır (no-JS güvenli).
+   ===================================================================== */
+
+/* ------------------------------ Tokens ------------------------------ */
+:root {
+    /* Yüzeyler (grafit-lacivert; saf siyah yok) */
+    --bg-0: #070D17;
+    --bg-1: #0B1322;
+    --bg-2: #101A2E;
+    --bg-3: #16223A;
+
+    /* Metin */
+    --ink-1: #F0F5FC;
+    --ink-2: rgba(226, 236, 248, 0.72);
+    --ink-3: rgba(226, 236, 248, 0.46);
+
+    /* Tek vurgu: Barlas mavisi */
+    --blue: #005BAA;
+    --blue-bright: #4AA3E6;
+    --blue-soft: rgba(74, 163, 230, 0.14);
+
+    /* Çizgiler */
+    --line: rgba(226, 236, 248, 0.08);
+    --line-2: rgba(226, 236, 248, 0.16);
+
+    /* Tipografi */
+    --font-display: 'Sora', 'Inter', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --fs-hero: clamp(2.6rem, 1.6rem + 5vw, 5.2rem);
+    --fs-h2: clamp(1.7rem, 1.2rem + 2.4vw, 2.9rem);
+    --fs-h3: clamp(1.2rem, 1.05rem + 0.8vw, 1.6rem);
+    --fs-lead: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
+
+    /* Köşe sistemi: kartlar 18px, etkileşimliler pill (belgeli kural) */
+    --radius: 18px;
+    --pill: 999px;
+
+    /* Hareket */
+    --ease-out: cubic-bezier(0.22, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+    --t-press: 140ms;
+    --t-base: 240ms;
+    --t-reveal: 640ms;
+
+    /* Düzen */
+    --shell: 1240px;
+    --pad: clamp(1.1rem, 0.6rem + 2.4vw, 2.4rem);
+    --sec-y: clamp(4.5rem, 3rem + 6vw, 8.5rem);
+    --header-h: 72px;
+}
+
+/* ------------------------------ Reset ------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+    margin: 0;
+    background: var(--bg-0);
+    color: var(--ink-2);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+h1, h2, h3, p, ul, ol, address { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+address { font-style: normal; }
+
+::selection { background: var(--blue); color: #fff; }
+:focus-visible { outline: 2px solid var(--blue-bright); outline-offset: 3px; }
+
+.sr-only {
+    position: absolute; width: 1px; height: 1px; margin: -1px;
+    clip-path: inset(50%); overflow: hidden; white-space: nowrap;
+}
+
+.shell { max-width: var(--shell); margin-inline: auto; padding-inline: var(--pad); }
+
+/* ----------------------------- Butonlar ----------------------------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.6rem;
+    border-radius: var(--pill);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform var(--t-press) var(--ease-out),
+                background-color var(--t-base) var(--ease-out),
+                border-color var(--t-base) var(--ease-out),
+                color var(--t-base) var(--ease-out);
+}
+.btn:active { transform: scale(0.97); }
+.btn--lg { padding: 1rem 2rem; font-size: 1rem; }
+
+.btn--primary { background: var(--blue); color: #fff; }
+@media (hover: hover) and (pointer: fine) {
+    .btn--primary:hover { background: #0a6dc4; transform: translateY(-1px); }
+    .btn--ghost:hover { border-color: var(--blue-bright); color: var(--ink-1); }
+}
+.btn--ghost { border: 1px solid var(--line-2); color: var(--ink-2); background: transparent; }
+
+/* ------------------------------ Header ------------------------------ */
+.header {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline: 0;
+    z-index: 100;
+    transition: background-color var(--t-base) var(--ease-out),
+                border-color var(--t-base) var(--ease-out);
+    border-block-end: 1px solid transparent;
+}
+.header.is-scrolled {
+    background: rgba(7, 13, 23, 0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-color: var(--line);
+}
+@media (prefers-reduced-transparency: reduce) {
+    .header.is-scrolled { background: var(--bg-0); backdrop-filter: none; }
+}
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: var(--header-h);
+}
+
+.brand { display: inline-flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+.brand__mark {
+    display: grid;
+    place-items: center;
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--blue);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.15rem;
+}
+.brand__text {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--ink-1);
+    line-height: 1.15;
+}
+.brand__sub { font-family: var(--font-body); font-weight: 500; font-size: 0.68rem; color: var(--ink-3); letter-spacing: 0.02em; }
+
+.nav { display: flex; gap: 1.6rem; margin-inline-start: auto; }
+.nav__link {
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--ink-2);
+    transition: color var(--t-base) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) { .nav__link:hover { color: var(--ink-1); } }
+
+.header__cta { margin-inline-start: 0.5rem; }
+
+.nav-toggle { display: none; }
+
+@media (max-width: 860px) {
+    .nav {
+        position: fixed;
+        inset-block-start: var(--header-h);
+        inset-inline: 0;
+        flex-direction: column;
+        gap: 0;
+        background: var(--bg-1);
+        border-block: 1px solid var(--line);
+        padding: 0.5rem var(--pad) 1rem;
+        transform: translateY(-8px);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform var(--t-base) var(--ease-out),
+                    opacity var(--t-base) var(--ease-out),
+                    visibility 0s linear var(--t-base);
+    }
+    .nav.is-open { transform: none; opacity: 1; visibility: visible; transition-delay: 0s; }
+    .nav__link { padding-block: 0.8rem; border-block-end: 1px solid var(--line); }
+    .header__cta { display: none; }
+
+    .nav-toggle {
+        display: grid;
+        gap: 5px;
+        margin-inline-start: auto;
+        padding: 10px 6px;
+    }
+    .nav-toggle span {
+        width: 22px; height: 2px;
+        background: var(--ink-1);
+        transition: transform var(--t-base) var(--ease-out);
+    }
+    .nav-toggle[aria-expanded="true"] span:first-child { transform: translateY(3.5px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+}
+
+/* ------------------------------- Hero ------------------------------- */
+.hero {
+    position: relative;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    /* Header artık akış içinde (sticky); hero ek ofsete gerek duymaz */
+    padding-block-start: 0;
+}
+
+.hero__halo {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(58% 70% at 74% 46%, rgba(0, 91, 170, 0.22), transparent 65%),
+        radial-gradient(40% 50% at 12% 88%, rgba(0, 91, 170, 0.10), transparent 70%);
+}
+
+.hero__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    align-items: center;
+    gap: 2rem;
+    flex: 1;
+    width: 100%;
+}
+
+.hero__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-hero);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: var(--ink-1);
+}
+.hero__mask { display: block; overflow: hidden; padding-block-end: 0.09em; margin-block-end: -0.09em; }
+.hero__line { display: inline-block; }
+.hero__line--accent {
+    font-size: 0.92em;
+    color: var(--blue-bright);
+}
+
+.hero__sub {
+    max-width: 46ch;
+    margin-block: 1.4rem 2rem;
+    font-size: var(--fs-lead);
+    color: var(--ink-2);
+}
+
+.hero__actions { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+.hero__stage { position: relative; min-height: clamp(420px, 52vh, 560px); }
+.hero__stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero__fallback { width: 92%; margin-inline: auto; filter: drop-shadow(0 30px 40px rgba(3, 7, 14, 0.6)); }
+.hero.has-3d .hero__fallback { visibility: hidden; }
+
+@media (min-width: 992px) and (prefers-reduced-motion: no-preference) {
+    .hero__fallback { visibility: hidden; }
+    .hero.has-static-fallback .hero__fallback { visibility: visible; }
+}
+
+/* Süreç şeridi */
+.hero__steps { border-block-start: 1px solid var(--line); }
+.hero__steps-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.3rem;
+}
+.hero__step {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1rem, 0.9rem + 1vw, 1.5rem);
+    color: var(--ink-1);
+}
+.hero__step-sep { flex: 1; height: 1px; background: var(--line-2); margin-inline: 1rem; }
+
+/* Giriş animasyonu başlangıç durumları */
+html.has-anim .hero__line { transform: translateY(112%); }
+html.has-anim [data-hero-item] { opacity: 0; transform: translateY(16px); }
+
+@media (max-width: 991.98px) {
+    .hero__inner { grid-template-columns: 1fr; gap: 1rem; padding-block-start: 1.5rem; }
+    .hero__stage { min-height: 240px; order: 1; }
+    .hero__copy { order: 0; }
+}
+
+/* ------------------------- Ticker (güven bandı) --------------------- */
+.ticker {
+    /* Yumuşak kenarlı güven bandı: çekirdek bg-1, üst/alt bg-0'a erir */
+    background: linear-gradient(180deg,
+        var(--bg-0) 0%,
+        var(--bg-1) 42%,
+        var(--bg-1) 58%,
+        var(--bg-0) 100%);
+    overflow: hidden;
+    padding-block: 1.15rem;
+}
+.ticker__track { display: flex; width: max-content; animation: ticker 28s linear infinite; }
+.ticker:hover .ticker__track { animation-play-state: paused; }
+.ticker__group { display: flex; }
+.ticker__group li {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--ink-3);
+    padding-inline-end: 1.1rem;
+}
+.ticker__group li::after {
+    content: "";
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--blue);
+    margin-inline-start: 1.1rem;
+}
+@keyframes ticker { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ticker__track { animation: none; } }
+
+/* ----------------------------- İstatistik --------------------------- */
+.stats { padding-block: var(--sec-y); }
+.stats__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+.stat { padding: 0.4rem 1.8rem; }
+.stat + .stat { border-inline-start: 1px solid var(--line); }
+.stat__num {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.2rem, 1.6rem + 2.6vw, 3.6rem);
+    line-height: 1.05;
+    color: var(--ink-1);
+}
+.stat__num > span { color: var(--ink-1); }
+.stat__label { display: block; margin-block-start: 0.5rem; font-size: 0.9rem; color: var(--ink-3); }
+
+@media (max-width: 860px) {
+    .stats__grid { grid-template-columns: repeat(2, 1fr); row-gap: 2rem; }
+    .stat:nth-child(3) { border-inline-start: 0; }
+}
+@media (max-width: 520px) {
+    .stats__grid { grid-template-columns: 1fr; }
+    .stat + .stat { border-inline-start: 0; border-block-start: 1px solid var(--line); padding-block-start: 1.4rem; }
+}
+
+/* --------------------------- Bölüm başlığı -------------------------- */
+.sec-head { max-width: 680px; margin-block-end: clamp(2.2rem, 1.5rem + 3vw, 4rem); }
+.sec-head__eyebrow {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-block-end: 0.9rem;
+}
+.sec-head__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+    color: var(--ink-1);
+}
+.sec-head__lead { margin-block-start: 0.9rem; font-size: var(--fs-lead); color: var(--ink-2); max-width: 56ch; }
+
+/* Reveal primitifleri — sinematik, yumuşak giriş (fade + yüksel + hafif odak) */
+html.has-anim [data-reveal] { opacity: 0; transform: translateY(42px) scale(0.985); filter: blur(5px); }
+html.has-anim [data-reveal].is-in {
+    opacity: 1; transform: none; filter: blur(0);
+    transition: opacity 0.9s var(--ease-out), transform 1s var(--ease-out), filter 0.9s var(--ease-out);
+}
+html.has-anim [data-reveal-group] > * { opacity: 0; transform: translateY(30px) scale(0.99); filter: blur(4px); }
+html.has-anim [data-reveal-group] > .is-in {
+    opacity: 1; transform: none; filter: blur(0);
+    transition: opacity 0.8s var(--ease-out), transform 0.9s var(--ease-out), filter 0.8s var(--ease-out);
+}
+
+/* Reveal yön çeşitleri — bölümlere farklı giriş hareketleri (çeşitlilik) */
+html.has-anim [data-reveal="down"] { transform: translateY(-46px) scale(0.985); }
+html.has-anim [data-reveal="zoom"] { transform: scale(0.9); }
+html.has-anim [data-reveal="down"].is-in,
+html.has-anim [data-reveal="zoom"].is-in {
+    transform: none;
+    transition: opacity 0.9s var(--ease-out),
+                transform 1s cubic-bezier(0.34, 1.3, 0.64, 1),
+                filter 0.9s var(--ease-out);
+}
+
+/* Parçalı (fragmented) grup: öğeler dönüşümlü olarak alt/üstten toplanır */
+html.has-anim [data-reveal-group="frag"] > *:nth-child(odd)  { transform: translateY(38px) scale(0.95); }
+html.has-anim [data-reveal-group="frag"] > *:nth-child(even) { transform: translateY(-38px) scale(0.95); }
+html.has-anim [data-reveal-group="frag"] > .is-in {
+    transform: none;
+    transition: opacity 0.8s var(--ease-out),
+                transform 0.95s cubic-bezier(0.34, 1.4, 0.64, 1),
+                filter 0.8s var(--ease-out);
+}
+
+/* Sinematik derinlik: sayfa boyunca süzülen arka plan ışık katmanları
+   (yeni-app.js tarafından <body> içine eklenir; scroll ile yavaşça kayar) */
+.depth-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.depth-bg__layer { position: absolute; border-radius: 50%; filter: blur(72px); opacity: 0; transition: opacity 1.4s var(--ease-out); will-change: transform; }
+html.has-anim .depth-bg__layer { opacity: 0.5; }
+.depth-bg__layer--a { width: 46vw; height: 46vw; left: -12vw; top: -6vh; background: radial-gradient(closest-side, rgba(74, 163, 230, 0.16), transparent 70%); }
+.depth-bg__layer--b { width: 40vw; height: 40vw; right: -10vw; top: 42vh; background: radial-gradient(closest-side, rgba(0, 91, 170, 0.18), transparent 70%); }
+.depth-bg__layer--c { width: 50vw; height: 50vw; left: 26vw; top: 84vh; background: radial-gradient(closest-side, rgba(74, 163, 230, 0.12), transparent 70%); }
+@media (prefers-reduced-motion: reduce) { .depth-bg { display: none; } }
+
+/* ----------------- Tanıtım 1: tanker yolda (pinli 3D) ---------------- */
+.road {
+    position: relative;
+    background: var(--bg-0);
+    overflow: hidden;
+}
+/* 3B sahnenin üst/alt SERT kenarını sayfa rengine eritir (düz geçiş kalmaz);
+   alt dikişte yumuşak mavi ışık periyodik olarak süzülür (hareket). */
+.road::before,
+.road::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: clamp(80px, 13vh, 160px);
+    z-index: 1;
+    pointer-events: none;
+}
+.road::before { top: 0; background: linear-gradient(to bottom, var(--bg-0), transparent); }
+.road::after {
+    bottom: 0;
+    background:
+        linear-gradient(to top, var(--bg-0), transparent),
+        linear-gradient(100deg, transparent 42%, rgba(74, 163, 230, 0.22) 50%, transparent 58%);
+    background-size: 100% 100%, 240% 100%;
+    background-repeat: no-repeat;
+    background-position: 0 0, -70% 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+    html.has-anim .road::after { animation: roadSeam 6.5s ease-in-out infinite; }
+}
+@keyframes roadSeam {
+    0%, 100% { background-position: 0 0, -70% 0; }
+    50%      { background-position: 0 0, 170% 0; }
+}
+.road__frame {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.road__stage { position: absolute; inset: 0; }
+.road__stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* 3D aktifken statik görsel gizlenir */
+.road__fallback {
+    position: absolute;
+    inset-inline: 10%;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    width: 80%;
+    filter: drop-shadow(0 26px 36px rgba(3, 7, 14, 0.55));
+}
+.road--3d .road__fallback { display: none; }
+
+.road__head {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding-block-start: calc(var(--header-offset, var(--header-h)) + 2.5rem);
+    pointer-events: none;
+}
+.road__head .sec-head__lead { color: var(--ink-2); }
+
+.road__caps {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    margin-block-start: auto;
+    padding-block-end: 3rem;
+    min-height: 8.5rem;
+    pointer-events: none;
+}
+.road__cap {
+    position: absolute;
+    inset-inline-start: var(--pad);
+    inset-block-end: 3rem;
+    max-width: 420px;
+    padding: 1rem 1.2rem;
+    border-radius: 14px;
+    border: 1px solid var(--line-2);
+    background: rgba(11, 19, 34, 0.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out);
+}
+.road__cap strong {
+    display: block;
+    font-family: var(--font-display);
+    color: var(--ink-1);
+    margin-block-end: 0.2rem;
+}
+.road__cap.is-on { opacity: 1; transform: none; }
+
+/* 3D yokken (mobil / reduced-motion / WebGL yok): sade statik düzen */
+.road:not(.road--3d) .road__frame { min-height: 0; padding-block: var(--sec-y); justify-content: flex-start; }
+.road:not(.road--3d) .road__stage { position: relative; inset: auto; min-height: 300px; order: 1; }
+.road:not(.road--3d) .road__fallback { position: relative; inset: auto; transform: none; width: min(680px, 92%); margin-inline: auto; }
+.road:not(.road--3d) .road__head { padding-block-start: 0; }
+.road:not(.road--3d) .road__caps { margin-block-start: 1.5rem; min-height: 0; display: grid; gap: 0.8rem; order: 2; }
+.road:not(.road--3d) .road__cap { position: static; opacity: 1; transform: none; max-width: 560px; }
+
+@media (prefers-reduced-transparency: reduce) {
+    .road__cap { background: var(--bg-2); backdrop-filter: none; }
+}
+
+/* --------------------- (eski) ürün sahnesi stilleri ------------------- */
+.showcase { padding-block: var(--sec-y); }
+.showcase__stage {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background:
+        radial-gradient(70% 90% at 50% 110%, rgba(0, 91, 170, 0.16), transparent 70%),
+        var(--bg-1);
+    padding: clamp(1.5rem, 4vw, 4rem);
+    overflow: visible;
+}
+/* Görsel ve hotspot'lar ortak çerçevede: görsel küçülünce noktalar da hizalı kalır */
+.showcase__frame { position: relative; max-width: 700px; margin-inline: auto; }
+.showcase__img { width: 100%; filter: drop-shadow(0 26px 36px rgba(3, 7, 14, 0.55)); }
+
+.spot {
+    position: absolute;
+    inset-inline-start: var(--x);
+    inset-block-start: var(--y);
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+.spot__dot {
+    display: grid;
+    place-items: center;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.85rem;
+    box-shadow: 0 0 0 0 rgba(74, 163, 230, 0.45);
+    animation: spot-pulse 2.6s var(--ease-in-out) infinite;
+    transition: transform var(--t-press) var(--ease-out);
+}
+.spot:active .spot__dot { transform: scale(0.94); }
+@keyframes spot-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(74, 163, 230, 0.45); }
+    70%  { box-shadow: 0 0 0 14px rgba(74, 163, 230, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(74, 163, 230, 0); }
+}
+@media (prefers-reduced-motion: reduce) { .spot__dot { animation: none; } }
+
+.spot__card {
+    position: absolute;
+    inset-block-end: calc(100% + 12px);
+    inset-inline-start: 50%;
+    translate: -50% 0;
+    width: 230px;
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    background: var(--bg-3);
+    border: 1px solid var(--line-2);
+    text-align: start;
+    font-size: 0.85rem;
+    color: var(--ink-2);
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+    visibility: hidden;
+    transition: opacity var(--t-base) var(--ease-out),
+                transform var(--t-base) var(--ease-out),
+                visibility 0s linear var(--t-base);
+    pointer-events: none;
+}
+.spot__card strong { display: block; color: var(--ink-1); margin-block-end: 0.2rem; font-size: 0.92rem; }
+.spot[aria-expanded="true"] .spot__card {
+    opacity: 1; transform: none; visibility: visible; transition-delay: 0s;
+}
+
+/* ---------------- Neden Barlas (kart ızgarası + öne çıkan görsel) ---- */
+.why { padding-block: var(--sec-y); position: relative; isolation: isolate; }
+
+/* Bölüm zemininde yavaşça gezinen mavi ışık (ortam hareketi) */
+.why::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset-block-start: 6%;
+    inset-inline-start: -8%;
+    width: 62%;
+    height: 72%;
+    background: radial-gradient(closest-side, rgba(74, 163, 230, 0.16), transparent 72%);
+    filter: blur(18px);
+    opacity: 0.75;
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+
+.why__head {
+    max-width: 760px;
+    margin-inline: auto;
+    margin-block-end: clamp(2rem, 4vw, 3.4rem);
+    text-align: center;
+}
+.why__head .sec-head__title { margin-block: 0.6rem 0.8rem; }
+.why__head .sec-head__lead {
+    color: var(--ink-2);
+    max-width: 56ch;
+    margin-inline: auto;
+}
+
+.why__layout {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.6rem, 3.5vw, 3.5rem);
+    align-items: stretch;
+}
+
+/* Kart ızgarası: 2x2, üstten düşerek sıralı gelir.
+   grid-auto-rows: 1fr → dört kart da eşit yükseklikte olur. */
+.why__cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+    gap: clamp(1rem, 1.6vw, 1.4rem);
+    height: 100%;
+}
+.why-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: clamp(1.3rem, 2vw, 1.8rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--bg-1);
+    box-shadow: 0 24px 50px -42px rgba(6, 16, 34, 0.5);
+    transition: transform var(--t-base) var(--ease-out),
+                border-color var(--t-base) var(--ease-out),
+                box-shadow var(--t-base) var(--ease-out);
+}
+/* Üst kenarda hover'da soldan açılan mavi şerit */
+.why-card::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: 0;
+    height: 3px;
+    border-start-start-radius: var(--radius);
+    border-start-end-radius: var(--radius);
+    background: linear-gradient(90deg, var(--blue), var(--blue-bright));
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform var(--t-base) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+    .why-card:hover { transform: translateY(-6px); border-color: var(--line-2); box-shadow: 0 30px 60px -34px rgba(6, 16, 34, 0.55); }
+    .why-card:hover::before { transform: scaleX(1); }
+    /* Sürekli yüzme animasyonu transform'u sürdüğü için hover'da yalnızca renk değişir */
+    .why-card:hover .why-card__icon { background: var(--blue); color: #fff; }
+}
+.why-card__icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--blue-soft);
+    border: 1px solid var(--line-2);
+    color: var(--blue-bright);
+    transition: transform var(--t-base) var(--ease-out),
+                background var(--t-base) var(--ease-out),
+                color var(--t-base) var(--ease-out);
+}
+.why-card__icon svg { width: 24px; height: 24px; }
+.why-card__title { font-family: var(--font-display); font-weight: 700; font-size: 1.08rem; color: var(--ink-1); }
+.why-card__desc { margin: 0; color: var(--ink-2); font-size: 0.92rem; line-height: 1.55; }
+
+/* Üstten düşüş animasyonu (data-reveal-group + JS .is-in) — geneli ezer */
+html.has-anim .why__cards > * { opacity: 0; transform: translateY(-36px); filter: blur(4px); }
+html.has-anim .why__cards > .is-in {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+    transition: opacity var(--t-reveal) var(--ease-out),
+                transform var(--t-reveal) cubic-bezier(0.34, 1.56, 0.64, 1),
+                filter var(--t-reveal) var(--ease-out);
+}
+
+/* Öne çıkan görsel (masaüstünde yapışkan) + metrik rozeti */
+.why__feature {
+    position: sticky;
+    top: calc(var(--header-offset, var(--header-h)) + 4vh);
+    aspect-ratio: 1;
+    height: 100%;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(95% 75% at 50% 0%, rgba(0, 91, 170, 0.22), transparent 70%),
+        var(--bg-2);
+}
+.why__feature img { width: 100%; height: 100%; object-fit: contain; padding: clamp(1rem, 3vw, 2.2rem); }
+/* Görselin üzerinden periyodik geçen ışık parıltısı (specular sweep) */
+.why__feature::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(115deg, transparent 32%, rgba(255, 255, 255, 0.10) 48%, transparent 64%);
+    transform: translateX(-130%);
+    pointer-events: none;
+}
+.why__metric {
+    position: absolute;
+    z-index: 2;
+    inset-block-end: 16px;
+    inset-inline-start: 16px;
+    padding: 0.85rem 1.1rem;
+    border-radius: 16px;
+    border: 1px solid var(--line-2);
+    background: color-mix(in srgb, var(--bg-0) 78%, transparent);
+    backdrop-filter: blur(10px);
+}
+.why__metric-value {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 1;
+    font-size: clamp(2rem, 1.4rem + 2vw, 2.8rem);
+    color: var(--blue-bright);
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .why__metric-value {
+        background: linear-gradient(135deg, var(--blue), var(--blue-bright));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
+}
+.why__metric-plus { font-size: 0.62em; font-weight: 800; vertical-align: top; margin-inline-start: 0.04em; }
+.why__metric-label {
+    display: block;
+    margin-block-start: 0.25rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+}
+
+/* ---- Sürekli hareket: ince, yalnızca transform/opacity, reduced-motion güvenli ---- */
+@media (prefers-reduced-motion: no-preference) {
+    /* Ortam ışığı yavaşça gezinir */
+    html.has-anim .why::before { animation: whyGlowDrift 19s var(--ease-in-out) infinite; }
+
+    /* Kart ikonları nazikçe yüzer (kart başına kaydırılmış faz) */
+    html.has-anim .why-card__icon { animation: whyIconFloat 5.6s var(--ease-in-out) infinite; }
+    html.has-anim .why-card:nth-child(2) .why-card__icon { animation-delay: -1.3s; }
+    html.has-anim .why-card:nth-child(3) .why-card__icon { animation-delay: -2.7s; }
+    html.has-anim .why-card:nth-child(4) .why-card__icon { animation-delay: -4s; }
+
+    /* Öne çıkan görsel yavaşça süzülür */
+    html.has-anim .why__feature img { animation: whyFeatureFloat 7.5s var(--ease-in-out) infinite; }
+
+    /* Işık parıltısı periyodik olarak görselin üzerinden geçer */
+    html.has-anim .why__feature::after { animation: whySheen 7s ease-in-out 1.4s infinite; }
+
+    /* Metrik rozeti hafifçe nefes alır */
+    html.has-anim .why__metric { animation: whyMetricPulse 4.6s ease-in-out infinite; }
+}
+
+@keyframes whyGlowDrift {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.62; }
+    50%      { transform: translate3d(26%, 14%, 0) scale(1.16); opacity: 1; }
+}
+@keyframes whyIconFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+}
+@keyframes whyFeatureFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(-10px) scale(1.012); }
+}
+@keyframes whySheen {
+    0%   { transform: translateX(-130%); }
+    16%  { transform: translateX(130%); }
+    100% { transform: translateX(130%); }
+}
+@keyframes whyMetricPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(74, 163, 230, 0); }
+    50%      { box-shadow: 0 0 0 6px rgba(74, 163, 230, 0.10); }
+}
+
+@media (max-width: 980px) {
+    .why__layout { grid-template-columns: 1fr; gap: 2rem; }
+    .why__feature { position: static; order: -1; aspect-ratio: 16 / 10; }
+}
+@media (max-width: 560px) {
+    .why__cards { grid-template-columns: 1fr; }
+}
+
+/* ------------------- Tanıtım 2: üretim süreci ------------------------ */
+.process { padding-block: var(--sec-y); }
+.process__track {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.4rem;
+}
+.process__line {
+    position: absolute;
+    inset-inline: 17px;
+    inset-block-start: 16px;
+    height: 2px;
+    background: var(--line);
+}
+.process__fill {
+    display: block;
+    width: 100%; height: 100%;
+    background: var(--blue-bright);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+}
+.step { position: relative; padding-block-start: 3rem; }
+.step__dot {
+    position: absolute;
+    inset-block-start: 0;
+    display: grid;
+    place-items: center;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--bg-2);
+    border: 1px solid var(--line-2);
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: var(--ink-2);
+    transition: background-color var(--t-base) var(--ease-out),
+                border-color var(--t-base) var(--ease-out),
+                color var(--t-base) var(--ease-out);
+}
+.step.is-active .step__dot { background: var(--blue); border-color: var(--blue); color: #fff; }
+.step__title { font-family: var(--font-display); font-size: 1.02rem; font-weight: 700; color: var(--ink-1); margin-block-end: 0.35rem; }
+.step__desc { font-size: 0.9rem; color: var(--ink-3); }
+
+@media (max-width: 860px) {
+    .process__track { grid-template-columns: 1fr; gap: 1.8rem; }
+    .process__line { inset-inline-start: 16px; inset-inline-end: auto; inset-block: 17px; width: 2px; height: auto; }
+    .process__fill { transform: scaleY(0); transform-origin: 50% 0; }
+    .step { padding-block-start: 0; padding-inline-start: 3rem; }
+}
+
+/* ------------------------ Yapay zeka asistanı ------------------------ */
+.ai {
+    position: relative;
+    padding-block: var(--sec-y);
+    /* Sert kenar yerine üst/alt komşuya eriyen yumuşak bant */
+    background: linear-gradient(180deg,
+        var(--bg-0) 0%,
+        var(--bg-1) 15%,
+        var(--bg-1) 85%,
+        var(--bg-0) 100%);
+    overflow: hidden;
+}
+/* Konsolun arkasında yumuşak marka ışıması (derinlik) */
+.ai::before {
+    content: "";
+    position: absolute;
+    inset-block-start: -12%;
+    inset-inline-start: 50%;
+    width: min(900px, 92%);
+    height: 440px;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse at center, var(--blue-soft), transparent 70%);
+    pointer-events: none;
+}
+.ai__inner { position: relative; }
+.ai .sec-head { max-width: 720px; }
+
+.ai__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.42rem 0.95rem;
+    border-radius: var(--pill);
+    border: 1px solid var(--line-2);
+    background: var(--blue-soft);
+    color: var(--blue-bright);
+    font-size: 0.86rem;
+    font-weight: 600;
+    margin-block-end: 1rem;
+}
+.ai__badge svg { width: 16px; height: 16px; }
+
+.console {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    border: 1px solid var(--line-2);
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--bg-0);
+    box-shadow: 0 32px 64px -42px rgba(6, 16, 34, 0.5);
+}
+/* Üstte ince marka şeridi */
+.console::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--blue-bright) 55%, transparent);
+    z-index: 2;
+}
+.console__side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
+    padding: 1.5rem 1.4rem;
+    border-inline-end: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
+}
+.console__side-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    color: var(--ink-1);
+    font-size: 0.92rem;
+    margin-block-end: 0.5rem;
+}
+.console__side-title::before {
+    content: "";
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--blue-bright);
+}
+.console__chip {
+    position: relative;
+    width: 100%;
+    padding: 0.62rem 2rem 0.62rem 0.95rem;
+    border-radius: 12px;
+    border: 1px solid var(--line-2);
+    background: var(--bg-1);
+    font-size: 0.85rem;
+    color: var(--ink-2);
+    text-align: start;
+    transition: border-color var(--t-base) var(--ease-out),
+                color var(--t-base) var(--ease-out),
+                background var(--t-base) var(--ease-out),
+                transform var(--t-press) var(--ease-out);
+}
+/* Hover'da beliren yön oku */
+.console__chip::after {
+    content: "→";
+    position: absolute;
+    inset-inline-end: 0.85rem;
+    inset-block-start: 50%;
+    transform: translateY(-50%) translateX(-4px);
+    color: var(--blue-bright);
+    opacity: 0;
+    transition: opacity var(--t-base) var(--ease-out), transform var(--t-base) var(--ease-out);
+}
+.console__chip:active { transform: scale(0.98); }
+@media (hover: hover) and (pointer: fine) {
+    .console__chip:hover {
+        border-color: var(--blue-bright);
+        color: var(--ink-1);
+        background: var(--blue-soft);
+        transform: translateX(2px);
+    }
+    .console__chip:hover::after { opacity: 1; transform: translateY(-50%) translateX(0); }
+}
+.console__note { margin-block-start: auto; padding-block-start: 1rem; font-size: 0.78rem; color: var(--ink-3); }
+
+.console__chat {
+    display: flex;
+    flex-direction: column;
+    min-height: 380px;
+    /* Çok hafif blueprint nokta dokusu (mühendislik dokunuşu) */
+    background-image: radial-gradient(circle, var(--line) 1px, transparent 1px);
+    background-size: 22px 22px;
+    background-position: -11px -11px;
+}
+.console__messages {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.6rem 1.5rem;
+    overflow-y: auto;
+    max-height: 420px;
+}
+
+.msg { display: flex; gap: 0.7rem; max-width: 86%; }
+.msg p {
+    padding: 0.8rem 1.05rem;
+    border-radius: 16px;
+    font-size: 0.92rem;
+    line-height: 1.55;
+}
+.msg--bot p {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-start-start-radius: 4px;
+    color: var(--ink-2);
+    box-shadow: 0 12px 26px -22px rgba(6, 16, 34, 0.55);
+}
+.msg--user { align-self: flex-end; flex-direction: row-reverse; }
+.msg--user p {
+    background: linear-gradient(135deg, var(--blue), var(--blue-bright));
+    color: #fff;
+    border-end-end-radius: 4px;
+    box-shadow: 0 14px 28px -18px var(--blue);
+}
+.msg__avatar {
+    flex: 0 0 32px;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--blue-bright));
+    color: #fff;
+    box-shadow: 0 0 0 3px var(--blue-soft);
+}
+.msg__avatar svg { width: 17px; height: 17px; }
+@media (prefers-reduced-motion: no-preference) {
+    .msg--bot .msg__avatar { animation: aiPulse 3s var(--ease-in-out) infinite; }
+}
+@keyframes aiPulse {
+    0%, 100% { box-shadow: 0 0 0 3px var(--blue-soft); }
+    50%      { box-shadow: 0 0 0 7px color-mix(in srgb, var(--blue-soft) 60%, transparent); }
+}
+
+.msg--typing p { display: inline-flex; gap: 4px; align-items: center; }
+.msg--typing i {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--ink-3);
+    animation: typing 1s var(--ease-in-out) infinite;
+}
+.msg--typing i:nth-child(2) { animation-delay: 0.15s; }
+.msg--typing i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes typing { 0%, 100% { opacity: 0.3; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-2px); } }
+
+.console__form {
+    display: flex;
+    gap: 0.6rem;
+    padding: 1rem 1.4rem;
+    border-block-start: 1px solid var(--line);
+    background: var(--bg-2);
+}
+.console__form input {
+    flex: 1;
+    padding: 0.8rem 1.1rem;
+    border-radius: var(--pill);
+    border: 1px solid var(--line-2);
+    background: var(--bg-1);
+    color: var(--ink-1);
+    font: inherit;
+    font-size: 0.92rem;
+    transition: border-color var(--t-base) var(--ease-out),
+                box-shadow var(--t-base) var(--ease-out);
+}
+.console__form input::placeholder { color: var(--ink-3); }
+.console__form input:focus {
+    outline: none;
+    border-color: var(--blue-bright);
+    box-shadow: 0 0 0 4px var(--blue-soft);
+}
+.console__send {
+    display: grid;
+    place-items: center;
+    flex: 0 0 46px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--blue-bright));
+    color: #fff;
+    box-shadow: 0 12px 24px -14px var(--blue);
+    transition: transform var(--t-press) var(--ease-out),
+                box-shadow var(--t-base) var(--ease-out),
+                filter var(--t-base) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+    .console__send:hover {
+        filter: brightness(1.08);
+        transform: translateY(-1px);
+        box-shadow: 0 16px 28px -12px var(--blue);
+    }
+}
+.console__send:active { transform: scale(0.94); }
+.console__send svg { width: 18px; height: 18px; }
+
+.ai__disclaimer { margin-block-start: 1rem; font-size: 0.8rem; color: var(--ink-3); }
+
+@media (max-width: 860px) {
+    .console { grid-template-columns: 1fr; }
+    .console__side { border-inline-end: 0; border-block-end: 1px solid var(--line); }
+}
+
+/* ------------------- Referanslar (oto-kayan bant) ------------------- */
+.refs { padding-block: var(--sec-y); }
+.refs .sec-head { margin-block-end: 1.6rem; }
+
+.refs__belt {
+    overflow: hidden;
+    border-block: 1px solid var(--line);
+    padding-block: 2rem;
+}
+.refs__belt-track {
+    display: flex;
+    width: max-content;
+    /* Üstteki güven bandının tersi yönde, daha ağır akar */
+    animation: refs-belt 36s linear infinite reverse;
+}
+.refs__belt:hover .refs__belt-track { animation-play-state: paused; }
+.refs__belt--reverse { border-block-start: 0; }
+.refs__belt--reverse .refs__belt-track { animation-direction: normal; }
+.refs__belt-group {
+    display: flex;
+    align-items: center;
+    gap: clamp(2.5rem, 5vw, 5rem);
+    padding-inline-end: clamp(2.5rem, 5vw, 5rem);
+    margin: 0;
+    padding-block: 0;
+    list-style: none;
+}
+
+@keyframes refs-belt {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+.refs__logo {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    opacity: 0.55;
+    filter: grayscale(1);
+    transition: opacity var(--t-base) var(--ease-out), filter var(--t-base) var(--ease-out);
+}
+
+.refs__logo:hover { opacity: 1; filter: grayscale(0); }
+.refs__logo img { height: 34px; width: auto; display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+    .refs__belt-track { animation: none; flex-wrap: wrap; width: auto; }
+}
+
+/* --------------------------- Galeri ---------------------------------
+   Üretimden kareler: 3 sütunlu mozaik. Kareler ekrana girerken hafifçe
+   alttan/üstten kayarak yerine oturur (yeni-app.js → html.g-anim +
+   .gallery__item.is-in). JS yoksa her şey baştan görünür. ------------ */
+.gallery { padding-block: var(--sec-y); }
+
+.gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.9rem, 2vw, 1.6rem);
+    align-items: start;
+    margin-block-start: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.gallery__col { display: grid; gap: clamp(0.9rem, 2vw, 1.6rem); }
+.gallery__col:nth-child(2) { margin-block-start: clamp(1.5rem, 4vw, 3.5rem); }
+
+.gallery__item {
+    margin: 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--bg-1);
+}
+
+.gallery__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+    display: block;
+    transition: transform 800ms var(--ease-out);
+}
+
+.gallery__item:hover img { transform: scale(1.04); }
+
+/* JS reveal durumları (yalnızca gözlemci kurulduysa eklenir) */
+html.g-anim .gallery__item {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+}
+html.g-anim .gallery__item--up { transform: translateY(-26px); }
+html.g-anim .gallery__item.is-in { opacity: 1; transform: none; }
+
+.gallery__more { display: flex; justify-content: center; margin-block-start: clamp(1.8rem, 3vw, 3rem); }
+
+@media (max-width: 860px) {
+    .gallery__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .gallery__col:nth-child(3) { display: none; }
+}
+
+@media (max-width: 560px) {
+    .gallery__grid { grid-template-columns: 1fr; }
+    .gallery__col:nth-child(2) { margin-block-start: 0; }
+    .gallery__col:nth-child(3) { display: grid; }
+}
+
+/* --------------------------- Footer --------------------------------- */
+.footer {
+    border-block-start: 1px solid var(--line);
+    background: var(--bg-1);
+    padding-block-start: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.footer__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 3fr) minmax(0, 4fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    padding-block-end: clamp(2rem, 4vw, 3.5rem);
+}
+
+.footer__about {
+    margin: 1rem 0 0;
+    color: var(--ink-2);
+    max-width: 44ch;
+    line-height: 1.7;
+}
+
+.footer__nav { display: grid; gap: 0.7rem; align-content: start; }
+
+.footer__nav a {
+    color: var(--ink-2);
+    text-decoration: none;
+    width: fit-content;
+    transition: color var(--t-base) var(--ease-out);
+}
+
+.footer__nav a:hover { color: var(--blue-bright); }
+
+.footer__contact { font-style: normal; display: grid; gap: 0.6rem; align-content: start; color: var(--ink-2); }
+.footer__contact p { margin: 0; line-height: 1.7; }
+.footer__contact a { color: var(--ink-1); text-decoration: none; }
+.footer__contact a:hover { color: var(--blue-bright); }
+
+.footer__bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding-block: 1.2rem;
+    border-block-start: 1px solid var(--line);
+    font-size: 0.85rem;
+    color: var(--ink-3);
+}
+
+.footer__bar p { margin: 0; }
+
+@media (max-width: 860px) {
+    .footer__grid { grid-template-columns: 1fr; }
+}
+
+/* ======================================================================
+   Tekerlek imleci (.cursor)
+   ----------------------------------------------------------------------
+   yeni-app.js → initCursor() bir .cursor div'i (içinde tekerlek SVG'si)
+   enjekte eder ve transform ile imleci anlık takip ettirir. Aşağıdaki
+   stiller SVG'yi küçük bir treyler tekerleğine boyutlandırır ve renklendirir.
+   Bu kurallar olmadan SVG, tarayıcı varsayılanı olan ~300px'lik SİYAH bir
+   daireye düşer (eski "dev siyah nokta" hatası). Yalnızca hassas işaretçili
+   (mouse) cihazlarda kurulur; dokunmatik/azaltılmış hareket'te JS hiç açmaz.
+   ====================================================================== */
+
+/* Özel imleç açıkken sistem imlecini gizle; metin alanlarında geri getir. */
+@media (hover: hover) and (pointer: fine) {
+    html.has-cursor,
+    html.has-cursor a,
+    html.has-cursor button,
+    html.has-cursor [role="button"],
+    html.has-cursor .btn,
+    html.has-cursor summary,
+    html.has-cursor label { cursor: none; }
+
+    html.has-cursor input,
+    html.has-cursor textarea,
+    html.has-cursor select,
+    html.has-cursor [contenteditable="true"] { cursor: auto; }
+}
+
+.cursor {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    width: 30px;
+    height: 30px;
+    /* translate(clientX,clientY) sol-üstü taşır; yarısı kadar geri al → ortala */
+    margin-block-start: -15px;
+    margin-inline-start: -15px;
+    pointer-events: none;
+    z-index: 12000;            /* header/overlay üstünde */
+    opacity: 0;
+    /* ÖNEMLİ: .cursor'a scale/transform VERME. JS burada transform:translate
+       kullanıyor; tekil scale, transform'dan önce uygulanıp translate'i
+       çarptığı için imleç hover'da işaretçiden kayar. Büyütme bu yüzden
+       içteki .cursor__wheel'e uygulanır (aşağıda). */
+    transition: opacity 220ms ease;
+    will-change: transform;
+}
+
+.cursor.is-on     { opacity: 1; }
+.cursor.is-hidden { opacity: 0; }
+
+.cursor__wheel {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    transition: scale 160ms ease;   /* yalnızca ölçek; rotate JS'te sürülür */
+    /* dönüş yeni-app.js'te wheel.style.rotate ile sürülür */
+}
+
+/* Büyütme/sıkışma dıştaki konumu bozmadan, tekerleğin kendi merkezinde olur. */
+.cursor.is-hover .cursor__wheel { scale: 1.25; }   /* link/buton üzerinde büyür */
+.cursor.is-down  .cursor__wheel { scale: 0.85; }   /* tıklamada hafif sıkışır */
+
+/* SVG circle/line varsayılan dolgusu siyahtır — sıfırla, çizgi olarak çiz. */
+.cursor__wheel circle,
+.cursor__wheel line { fill: none; }
+
+/* Tümü Barlas mavisi; lastik kalın → belirgin tekerlek görünümü. */
+.cursor__tire {
+    stroke: var(--blue-bright);
+    stroke-width: 5;
+    opacity: 1;
+}
+.cursor__rim {
+    stroke: var(--blue-bright);
+    stroke-width: 3;
+    opacity: 0.95;
+}
+.cursor__spokes line,
+.cursor__spokes circle {
+    stroke: var(--blue-bright);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    opacity: 0.9;
+}
+.cursor__hub {
+    fill: var(--blue-bright);
+    stroke: none;
+}
+
+/* Güvenlik ağı: dokunmatikte asla görünmesin. */
+@media (hover: none) {
+    .cursor { display: none; }
+}

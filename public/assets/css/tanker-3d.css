@@ -1,0 +1,27 @@
+/* =====================================================================
+   tanker-3d.css — Fixed WebGL stage for the scroll-driven tanker actor
+   The canvas is a full-viewport, pointer-transparent layer that sits
+   above section backgrounds but below the header. The 3D module adds
+   `html.has-tanker-3d` only when WebGL + libraries + desktop + motion
+   are all available, so everything here is progressive enhancement.
+   ===================================================================== */
+
+.tanker-stage {
+    position: fixed;
+    inset: 0;
+    z-index: 5;                /* below --z-header (1000), above section content */
+    pointer-events: none;
+    opacity: 0;                /* driven by the choreography (JS) */
+    contain: strict;
+}
+
+.tanker-stage canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* When the 3D actor is live, the static hero product image and the
+   decorative SVG silhouette step aside (layout is preserved). */
+html.has-tanker-3d .hero__product { visibility: hidden; }
+html.has-tanker-3d .hero__vehicle { display: none; }

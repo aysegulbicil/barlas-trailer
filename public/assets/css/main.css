@@ -1,0 +1,19 @@
+/* =====================================================================
+   main.css — Entry stylesheet
+   Imports the design system in cascade order. Only this file is linked
+   from the layout; everything else is modular and imported here.
+   Order matters: tokens -> reset -> type -> layout -> components -> rtl.
+   ===================================================================== */
+
+@import url('variables.css');
+@import url('base.css');
+@import url('typography.css');
+@import url('layout.css');
+@import url('navigation.css');
+@import url('components.css');
+@import url('sections.css');
+@import url('blog.css');
+@import url('redesign.css');
+@import url('tanker-3d.css');
+@import url('flow.css');
+@import url('rtl.css');

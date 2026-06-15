@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barlas — Hizmetler önizleme</title>
+<script>
+  (function () {
+    try {
+      var k = 'barlas-theme', s = localStorage.getItem(k);
+      var t = (s === 'light' || s === 'dark') ? s
+        : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="public/assets/css/variables.css">
+<link rel="stylesheet" href="public/assets/css/navigation.css">
+<link rel="stylesheet" href="public/assets/css/yeni.css">
+<link rel="stylesheet" href="public/assets/css/yeni-pages.css">
+<link rel="stylesheet" href="public/assets/css/yeni-header.css">
+<link rel="stylesheet" href="public/assets/css/theme-light.css">
+<style>
+  .preview-note{position:fixed;inset-block-end:14px;inset-inline-end:14px;z-index:9999;background:var(--bg-2);color:var(--ink-2);border:1px solid var(--line-2);border-radius:12px;padding:.6rem .9rem;font:500 13px/1.4 Inter,sans-serif;max-width:240px}
+  .preview-note b{color:var(--ink-1)}
+  .preview-sep{max-width:1240px;margin:0 auto;padding:0 var(--container-pad);}
+  .preview-sep h2{color:var(--ink-3);font:600 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:2.5rem 0 0}
+</style>
+</head>
+<body class="page page--services">
+
+<header class="site-header" data-header>
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__contact"><a href="#" class="topbar__link"><span class="topbar__icon">&#9742;</span> +90 312 000 00 00</a></div>
+      <div class="topbar__actions">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Temayı değiştir" title="Temayı değiştir">
+          <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+          <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2v2.6M12 19.4V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.6M19.4 12H22M4.2 19.8 6 18M18 6l1.8-1.8"></path></svg>
+        </button>
+        <div class="topbar__lang"><span class="lang-switcher__toggle">TR &#9662;</span></div>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar-main" aria-label="Ana menü">
+    <div class="container navbar-main__inner">
+      <a class="brand" href="#"><span class="brand__mark">B</span><span class="brand__text"><span class="brand__name">Barlas</span><span class="brand__sub">Treyler</span></span></a>
+      <ul class="nav-menu" data-nav-menu>
+        <li class="nav-menu__item"><div class="nav-menu__entry"><a class="nav-menu__link" href="#">Ana Sayfa</a></div></li>
+        <li class="nav-menu__item"><div class="nav-menu__entry"><a class="nav-menu__link is-active" href="#">Hizmetlerimiz</a></div></li>
+        <li class="nav-menu__item"><div class="nav-menu__entry"><a class="nav-menu__link" href="#">Blog</a></div></li>
+      </ul>
+      <a class="btn btn--primary nav-cta" href="#">Teklif Al</a>
+    </div>
+  </nav>
+</header>
+
+<main id="main-content" role="main">
+
+  <div class="preview-sep"><h2>Liste sayfası</h2></div>
+  <section class="page-hero"><div class="container page-hero__inner">
+    <nav class="page-hero__breadcrumb"><ol class="breadcrumb-trail"><li class="breadcrumb-trail__item"><a href="#">Ana Sayfa</a></li><li class="breadcrumb-trail__item is-current">Hizmetler</li></ol></nav>
+    <h1 class="page-hero__title">Hizmetlerimiz</h1>
+    <p class="page-hero__lead">Her marka treyler ve üst yapı için uçtan uca bakım, onarım ve revizyon hizmetleri.</p>
+  </div></section>
+
+  <section class="services-section"><div class="container">
+    <div class="services-grid" id="grid"></div>
+    <div class="services-cta">
+      <div class="services-cta__text"><strong>Aracınız için hızlı çözüm</strong><span>Uzman ekibimiz aracınız için hazır; hızlı dönüş ve güvenilir işçilik sağlıyoruz.</span></div>
+      <div class="services-cta__actions"><a class="btn btn--primary" href="#">Teklif Al</a><a class="btn btn--outline" href="#">Hemen Ara</a></div>
+    </div>
+  </div></section>
+
+  <div class="preview-sep"><h2>Detay sayfası</h2></div>
+  <section class="page-hero"><div class="container page-hero__inner">
+    <nav class="page-hero__breadcrumb"><ol class="breadcrumb-trail"><li class="breadcrumb-trail__item"><a href="#">Ana Sayfa</a></li><li class="breadcrumb-trail__item"><a href="#">Hizmetler</a></li><li class="breadcrumb-trail__item is-current">Dorse Tamiri</li></ol></nav>
+    <h1 class="page-hero__title">Dorse Tamiri</h1>
+    <p class="page-hero__lead">Her marka dorse için kapsamlı bakım, onarım ve revizyon.</p>
+  </div></section>
+
+  <article class="service-detail"><div class="container service-detail__intro">
+    <div class="service-detail__media media-frame media-frame--tall">
+      <span class="media-frame__placeholder"><svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 58h52M18 58V34l14-10 14 10v24M50 58V30h12v28"></path><path d="M25 58v-9h8v9"></path></svg></span>
+    </div>
+    <div class="service-detail__copy">
+      <div class="service-detail__body"><p>Barlas servis ekibi; şasi, üst yapı, fren ve elektrik sistemleri dahil her marka dorsede uçtan uca bakım ve onarım yapar. Arızayı doğru teşhis eder, orijinal veya eşdeğer parçayla kalıcı çözüm sunarız.</p><p>Periyodik bakımdan ağır hasar onarımına kadar tüm işlemleri, aracınızı en kısa sürede güvenle yola çıkaracak şekilde planlarız.</p></div>
+      <div class="service-points">
+        <h2 class="service-points__title">Neler yapıyoruz</h2>
+        <ul class="service-points__list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>Şasi düzeltme ve kaynak onarımı</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>Fren, aks ve elektrik sistemleri</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>Periyodik bakım ve revizyon</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>Her marka için yedek parça</li>
+        </ul>
+      </div>
+      <div class="service-detail__actions">
+        <a class="btn btn--primary" href="#">Teklif Al</a>
+        <a class="btn btn--outline" href="#">Hemen Ara</a>
+        <a class="service-detail__back" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"></path></svg>Tüm hizmetler</a>
+      </div>
+    </div>
+  </div></article>
+
+  <section class="services-related"><div class="container">
+    <div class="section-head"><span class="section-head__eyebrow">Hizmet</span><h2 class="section-head__title">Diğer hizmetler</h2></div>
+    <div class="services-grid" id="grid-related"></div>
+  </div></section>
+
+</main>
+
+<div class="preview-note">Sağ üstteki <b>ay/güneş</b> ile temayı değiştir. Kartlar mega menüdeki ikon ve metinlerle aynı.</div>
+
+<script>
+  var SVC = [
+    ['Dorse Tamiri','Her marka dorse için kapsamlı bakım, onarım ve revizyon.','M14.5 6.5a4 4 0 11-5 5L4 17l3 3 5.5-5.5a4 4 0 002-8z'],
+    ['Frigo Tamiri','Frigorifik kasa, yalıtım ve soğutucu ünite onarımı.','M12 3v18 M5 7l14 10 M19 7L5 17'],
+    ['Silobas Tamiri','Silobas gövde ve boşaltma sistemi onarımı.','M5 21V9l7-5 7 5v12 M9 21v-6h6v6'],
+    ['Tenteli Tamiri','Tente, perde ve mekanizma yenileme.','M4 6h16v12H4z M8 6v12 M12 6v12 M16 6v12'],
+    ['ADR Tanker Tamiri','ADR standartlarında sertifikalı tanker onarımı.','M12 4l9 15H3z M12 10v4 M12 17h.01'],
+    ['Lowbed Tamiri','Lowbed şasi ve hidrolik sistem onarımı.','M2 15h20 M4 15v-4h10l3 4 M6 18a1.5 1.5 0 100-3'],
+    ['Alüminyum Silobas Tamiri','Alüminyum gövdelerde uzman kaynak ve onarım.','M5 21V9l7-5 7 5v12 M9 13l3 3 3-3'],
+    ['Akaryakıt Tamir Merkezi','Akaryakıt tankerlerine özel tamir merkezi.','M6 21V4h8v17 M6 21h8 M14 8h3v9a2 2 0 11-4 0'],
+    ['Dingil Tamiri','Dingil ve aks sistemleri bakım-onarımı.','M2 12h20 M7 14.5a2.5 2.5 0 100-5 M17 14.5a2.5 2.5 0 100-5'],
+    ['Kulak Tamiri','Kulak ve süspansiyon bağlantıları onarımı.','M4 17c2-3 4 3 6 0s4 3 6 0 4 3 4 0 M4 7h16']
+  ];
+  function card(s){
+    return '<a class="service-card" href="#"><span class="service-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="'+s[2]+'"></path></svg></span>'+
+      '<span class="service-card__body"><span class="service-card__name">'+s[0]+'</span><span class="service-card__desc">'+s[1]+'</span>'+
+      '<span class="service-card__more">Detayları gör <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></span></a>';
+  }
+  document.getElementById('grid').innerHTML = SVC.map(card).join('');
+  document.getElementById('grid-related').innerHTML = SVC.slice(1,4).map(card).join('');
+</script>
+<script src="public/assets/js/theme-toggle.js" defer></script>
+</body>
+</html>

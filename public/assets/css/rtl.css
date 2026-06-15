@@ -1,0 +1,38 @@
+/* =====================================================================
+   rtl.css — Right-to-left refinements (Arabic and similar)
+   Most layout uses CSS logical properties and flips automatically.
+   This file only covers the few cases that need an explicit override:
+   directional transforms, gradients and decorative origins.
+   ===================================================================== */
+
+[dir="rtl"] {
+    /* Slightly looser tracking suits Arabic display type */
+    --tracking-heading: 0;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3 {
+    letter-spacing: 0;
+}
+
+/* Service item hover nudges toward the reading direction */
+[dir="rtl"] .service-item:hover {
+    transform: translateX(-6px);
+}
+
+/* Category top accent bar should grow from the inline-start (right in RTL) */
+[dir="rtl"] .category-card::before {
+    transform-origin: right;
+}
+
+/* Hero glow sits on the leading edge */
+[dir="rtl"] .hero__glow {
+    inset-inline-end: auto;
+    inset-inline-start: -10%;
+}
+
+/* The "discover" arrow is written with a literal → in markup; flip it */
+[dir="rtl"] .category-card__more {
+    direction: rtl;
+}

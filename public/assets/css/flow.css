@@ -1,0 +1,438 @@
+/* =====================================================================
+   flow.css — Cinematic flow layer (loaded after redesign.css)
+   The scroll-driven recomposition of the homepage: single kinetic hero,
+   horizontal product strip, light mid-page (theme lock), dark finale.
+   Driven by assets/js/flow.js (Lenis + GSAP ScrollTrigger).
+
+   Conventions (docs/DESIGN.md):
+   - transform/opacity-only motion, Emil easings from variables.css
+   - initial-hidden states ONLY under html.has-flow (no-JS stays visible)
+   - every pinned pattern has an explicit < 992px / reduced-motion fallback
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   1. HERO — cinematic single hero
+   --------------------------------------------------------------------- */
+.hero--cine {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 100dvh;
+    overflow: hidden;
+}
+
+.hero--cine .hero__frame { width: 100%; }
+
+.hero--cine .hero__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: center;
+    gap: var(--space-7);
+    padding-block: calc(var(--header-h) + var(--space-6)) var(--space-7);
+}
+
+.hero--cine .hero__title {
+    display: flex;
+    flex-direction: column;
+    margin-block: var(--space-5) var(--space-5);
+}
+
+/* Masked kinetic lines */
+.hero--cine .hero__mask {
+    display: block;
+    overflow: hidden;
+    /* Reserve for descenders so the mask never clips them */
+    padding-block-end: 0.08em;
+    margin-block-end: -0.08em;
+}
+
+.hero--cine .hero__line {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: var(--fs-900);
+    font-weight: var(--fw-black);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-display);
+    color: var(--text-on-dark-strong);
+    will-change: transform;
+}
+
+.hero--cine .hero__line--accent { color: var(--primary-bright); }
+
+/* The 3D actor owns the right column; static image is the fallback */
+.hero--cine .hero__visual { position: relative; min-height: 320px; }
+html.has-tanker-3d .hero--cine .hero__product { visibility: hidden; }
+
+.hero--cine .hero__product { position: relative; }
+.hero--cine .hero__product-shadow {
+    position: absolute;
+    inset-inline: 8%;
+    inset-block-end: -6%;
+    height: 18%;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(5, 8, 15, 0.45), transparent 70%);
+    filter: blur(6px);
+}
+.hero--cine .hero__product-image { width: 100%; height: auto; display: block; }
+
+/* Initial hidden states (flow.js animates these in) */
+html.has-flow .hero--cine .hero__line { transform: translateY(112%); }
+html.has-flow .hero--cine [data-hero-item] { opacity: 0; transform: translateY(18px); }
+
+/* Mobile collapse: single column, visual below the message */
+@media (max-width: 991.98px) {
+    .hero--cine .hero__layout {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+        padding-block: calc(var(--header-h) + var(--space-7)) var(--space-7);
+    }
+    .hero--cine .hero__visual { min-height: 220px; }
+}
+
+/* ---------------------------------------------------------------------
+   2. CATEGORIES — horizontal scroll pan
+   --------------------------------------------------------------------- */
+.categories { overflow: hidden; }
+
+.categories__viewport { margin-block-start: var(--space-6); }
+
+.categories__track {
+    display: flex;
+    align-items: stretch;
+    gap: var(--space-5);
+    padding-inline: var(--container-pad);
+    width: max-content;          /* track is as wide as its cards */
+}
+
+.categories__track .product-card {
+    flex: 0 0 clamp(280px, 26vw, 380px);
+    width: clamp(280px, 26vw, 380px);
+    min-height: 440px;
+}
+
+/* End cap — quiet, typographic, single exit CTA of the strip */
+.categories__endcap {
+    flex: 0 0 clamp(240px, 20vw, 300px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    background: var(--bg-subtle);
+    text-decoration: none;
+    transition: border-color var(--dur-base) var(--ease-out),
+                transform var(--dur-base) var(--ease-out);
+}
+.categories__endcap:hover { border-color: var(--primary); transform: translateY(-3px); }
+.categories__endcap:active { transform: scale(0.98); }
+
+.categories__endcap-count {
+    font-family: var(--font-display);
+    font-size: var(--fs-800);
+    font-weight: var(--fw-black);
+    color: var(--primary);
+    line-height: 1;
+}
+.categories__endcap-label {
+    font-weight: var(--fw-semibold);
+    color: var(--text-base);
+    font-size: var(--fs-500);
+}
+.categories__endcap-arrow {
+    font-size: var(--fs-600);
+    color: var(--primary);
+    transition: transform var(--dur-base) var(--ease-out);
+}
+.categories__endcap:hover .categories__endcap-arrow { transform: translateX(6px); }
+
+/* Mobile / reduced-motion / no-JS: native scroll-snap strip */
+@media (max-width: 991.98px) {
+    .categories__viewport { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+    .categories__track .product-card,
+    .categories__endcap { scroll-snap-align: start; }
+}
+html:not(.has-flow) .categories__viewport { overflow-x: auto; }
+
+/* ---------------------------------------------------------------------
+   3. ABOUT — editorial clip reveal on the media column
+   --------------------------------------------------------------------- */
+html.has-flow [data-clip-reveal] {
+    clip-path: inset(0 0 100% 0);
+    will-change: clip-path;
+}
+html.has-flow [data-clip-reveal].is-revealed {
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 900ms var(--ease-out);
+}
+
+/* ---------------------------------------------------------------------
+   4. STATS — light band (theme lock: no random dark strip mid-page)
+   --------------------------------------------------------------------- */
+.stats {
+    background: var(--bg-subtle);
+    border-block: 1px solid var(--hairline);
+    padding-block: var(--section-y);
+}
+.stats__overlay,
+.stats .section-decor { display: none; }
+
+.stats__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.stats .stat-card {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    padding: var(--space-4) var(--space-6);
+    text-align: start;
+}
+.stats .stat-card + .stat-card { border-inline-start: 1px solid var(--hairline); }
+
+.stats .stat-card__value { display: flex; align-items: baseline; }
+.stats .stat-card__number,
+.stats .stat-card__suffix {
+    font-family: var(--font-display);
+    font-weight: var(--fw-black);
+    font-size: var(--fs-800);
+    line-height: 1;
+    color: var(--text-base);
+}
+.stats .stat-card__suffix { color: var(--primary); }
+.stats .stat-card__label {
+    margin-block-start: var(--space-3);
+    color: var(--text-soft);
+    font-size: var(--fs-300);
+    font-weight: var(--fw-medium);
+}
+
+@media (max-width: 991.98px) {
+    .stats__grid { grid-template-columns: repeat(2, 1fr); row-gap: var(--space-6); }
+    .stats .stat-card:nth-child(3) { border-inline-start: 0; }
+}
+@media (max-width: 575.98px) {
+    .stats__grid { grid-template-columns: 1fr; }
+    .stats .stat-card + .stat-card { border-inline-start: 0; border-block-start: 1px solid var(--hairline); }
+}
+
+/* ---------------------------------------------------------------------
+   5. SERVICES — bento rhythm for the card grid
+   --------------------------------------------------------------------- */
+.services__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+}
+/* 6 items → 6 cells with rhythm: first and last span the full row */
+.services__list .service-card:first-child,
+.services__list .service-card:last-child { grid-column: 1 / -1; }
+
+/* Visual variation: the two wide cells get tinted industrial surfaces */
+.services__list .service-card:first-child {
+    background:
+        linear-gradient(120deg, var(--primary-tint), transparent 55%),
+        var(--bg-surface);
+}
+.services__list .service-card:last-child {
+    background:
+        var(--blueprint) 0 0 / var(--blueprint-size),
+        var(--bg-subtle);
+}
+
+@media (max-width: 767.98px) {
+    .services__list { grid-template-columns: 1fr; }
+}
+
+/* ---------------------------------------------------------------------
+   6. AI ASSISTANT — joins the light body (theme lock), glows retired
+   --------------------------------------------------------------------- */
+.ai-assistant {
+    background: var(--bg-surface);
+    border-block-start: 1px solid var(--hairline);
+}
+.ai-assistant__glow,
+.ai-assistant__grid { display: none; }
+
+.ai-assistant__title,
+.ai-assistant__lead { color: inherit; }
+.ai-assistant__title { color: var(--text-base); }
+.ai-assistant__lead { color: var(--text-soft); }
+
+/* Restyle the former eyebrow as a quiet badge (not an uppercase label) */
+.ai-assistant__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-pill);
+    background: var(--primary-tint);
+    color: var(--primary);
+    font-size: var(--fs-300);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.ai-console {
+    background: var(--bg-surface);
+    border: 1px solid var(--hairline);
+    box-shadow: var(--shadow-md);
+}
+
+/* ---------------------------------------------------------------------
+   7. REFERENCES — hairline logo wall (the marquee retired; one per page)
+   --------------------------------------------------------------------- */
+.references__wall {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: var(--space-7) 0 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.references__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-6) var(--space-5);
+    color: var(--gray-400);
+    border-inline-start: 1px solid var(--hairline);
+    border-block-start: 1px solid var(--hairline);
+    transition: color var(--dur-base) var(--ease-out);
+}
+.references__logo:nth-child(-n+4) { border-block-start: 0; }
+.references__logo:nth-child(4n+1) { border-inline-start: 0; }
+.references__logo:hover { color: var(--gray-600); }
+.references__logo svg { width: 120px; height: 40px; }
+
+@media (max-width: 767.98px) {
+    .references__wall { grid-template-columns: repeat(2, 1fr); }
+    .references__logo:nth-child(-n+4) { border-block-start: 1px solid var(--hairline); }
+    .references__logo:nth-child(-n+2) { border-block-start: 0; }
+    .references__logo:nth-child(4n+1) { border-inline-start: 1px solid var(--hairline); }
+    .references__logo:nth-child(2n+1) { border-inline-start: 0; }
+}
+
+/* Stagger reveal primitive (flow.js batches children) */
+html.has-flow [data-flow-stagger] > * { opacity: 0; transform: translateY(16px); }
+html.has-flow [data-flow-stagger] > .is-in {
+    opacity: 1;
+    transform: none;
+    transition: opacity var(--dur-reveal) var(--ease-out),
+                transform var(--dur-reveal) var(--ease-out);
+}
+
+/* ---------------------------------------------------------------------
+   8. CTA — dark finale (the one deliberate theme switch, closing bookend)
+   --------------------------------------------------------------------- */
+.cta-band--finale {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 72vh;
+    overflow: hidden;
+    background:
+        radial-gradient(90% 120% at 70% 110%, rgba(0, 91, 170, 0.25), transparent 60%),
+        var(--dark);
+}
+
+.cta-band--finale .cta-band__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-6);
+    text-align: start;
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin-inline-end: auto;
+}
+
+.cta-band--finale .cta-band__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-800);
+    font-weight: var(--fw-black);
+    letter-spacing: var(--tracking-display);
+    line-height: var(--lh-tight);
+    color: var(--text-on-dark-strong);
+}
+
+.cta-band--finale .cta-band__lead {
+    color: var(--text-on-dark);
+    max-width: 48ch;
+}
+
+.cta-band--finale .cta-band__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: flex-start;
+}
+
+html.has-flow .cta-band--finale [data-cta-inner] { opacity: 0; transform: translateY(28px); }
+html.has-flow .cta-band--finale [data-cta-inner].is-in {
+    opacity: 1;
+    transform: none;
+    transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+}
+
+/* ---------------------------------------------------------------------
+   9. HEADER — scroll state (compact, frosted, hairline)
+   --------------------------------------------------------------------- */
+.site-header { transition: transform var(--dur-base) var(--ease-out); }
+
+.site-header.is-scrolled .topbar {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+.topbar {
+    max-height: 60px;
+    transition: max-height var(--dur-base) var(--ease-in-out),
+                opacity var(--dur-fast) var(--ease-out);
+}
+
+.site-header.is-scrolled .navbar-main {
+    background: rgba(11, 18, 32, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-block-end: 1px solid var(--hairline-light);
+}
+
+/* Hide on scroll down, return on scroll up (flow.js toggles) */
+.site-header.is-hidden { transform: translateY(-100%); }
+
+@media (prefers-reduced-transparency: reduce) {
+    .site-header.is-scrolled .navbar-main { background: var(--dark); backdrop-filter: none; }
+}
+
+/* ---------------------------------------------------------------------
+   10. PROCESS — scroll-scrubbed line (flow.js drives --process-progress)
+   --------------------------------------------------------------------- */
+html.has-flow .process__line-fill {
+    width: 100%;
+    height: 100%;
+    transform: scaleX(0);            /* flow.js scrubs this with ScrollTrigger */
+    transition: none;
+}
+
+/* ---------------------------------------------------------------------
+   11. REDUCED MOTION — flow.js bails; make sure nothing stays hidden
+   --------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    html.has-flow .hero--cine .hero__line,
+    html.has-flow .hero--cine [data-hero-item],
+    html.has-flow [data-flow-stagger] > *,
+    html.has-flow .cta-band--finale [data-cta-inner] {
+        opacity: 1;
+        transform: none;
+    }
+    html.has-flow [data-clip-reveal] { clip-path: none; }
+}

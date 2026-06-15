@@ -1,0 +1,271 @@
+/* =====================================================================
+   yeni-header.css — ORTAK koyu header kaplaması (tek kaynak)
+
+   Amaç: partials/header.php (topbar + mega menülü ana menü + dil
+   seçici) HER sayfada aynı görünsün ve koyu "yeni" temaya uysun.
+
+   İki katman içerir:
+   1) YAPI: yeni layout (layouts/yeni.php) layout.css/components.css
+      yüklemediği için header'ın yapısal kuralları burada da var.
+      Değerler eski dosyalarla birebir aynı tutuldu; main.css'li
+      sayfalarda zararsız tekrar olarak davranır.
+   2) KAPLAMA: koyu tema renkleri. Her iki layout'ta da en son
+      yüklenir, açık tema kurallarını (layout/redesign/components)
+      ezerek header'ı koyulaştırır.
+
+   Renkler yeni.css token'larıyla aynı; yeni.css yüklü olmayan
+   sayfalar için yereller (--yh-*) üzerinden sabitlenmiştir.
+   ===================================================================== */
+
+.site-header {
+    --yh-bg-0: #070D17;
+    --yh-bg-1: #0B1322;
+    --yh-bg-2: #101A2E;
+    --yh-ink-1: #F0F5FC;
+    --yh-ink-2: rgba(226, 236, 248, 0.72);
+    --yh-ink-3: rgba(226, 236, 248, 0.46);
+    --yh-line: rgba(226, 236, 248, 0.08);
+    --yh-line-2: rgba(226, 236, 248, 0.16);
+    --yh-blue: #005BAA;
+    --yh-blue-bright: #4AA3E6;
+}
+
+/* ------------------------------------------------------------------ */
+/* 1) YAPI (yeni layout için gerekli; main layout'ta birebir tekrar)  */
+/* ------------------------------------------------------------------ */
+
+.site-header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: var(--z-header, 1000);
+}
+
+/* Header içindeki hiçbir bağlantıda alt çizgi olmasın (yeni layout
+   genel bağlantı sıfırlaması içermez; burada garantiye alınır). */
+.site-header a,
+.site-header a:hover,
+.site-header a:focus { text-decoration: none; }
+
+.site-header .container {
+    width: 100%;
+    max-width: var(--container-max, 1280px);
+    margin-inline: auto;
+    padding-inline: var(--container-pad, clamp(1.15rem, 0.5rem + 2.4vw, 2.5rem));
+}
+
+.topbar { font-size: var(--fs-300, 0.875rem); }
+
+.topbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 40px;
+    gap: var(--space-4, 1rem);
+}
+
+.topbar__contact { display: flex; align-items: center; gap: var(--space-5, 1.5rem); }
+.topbar__link { display: inline-flex; align-items: center; gap: var(--space-2, 0.5rem); }
+
+.navbar-main__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5, 1.5rem);
+    min-height: var(--header-h, 72px);
+}
+
+.site-header .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3, 0.75rem);
+    margin-inline-end: auto;
+}
+
+.site-header .brand__mark {
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 12px;
+    background: linear-gradient(150deg, var(--yh-blue) 0%, #00467f 100%);
+    color: #fff;
+    font-weight: 800;
+}
+
+.site-header .brand__text { display: flex; flex-direction: column; line-height: 1.15; }
+.site-header .brand__name { font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em; }
+.site-header .brand__sub { font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; }
+
+.site-header .nav-cta { flex-shrink: 0; }
+
+/* Dil seçici (components.css'ten; yapı + koyu kaplama birlikte) */
+.lang-switcher { position: relative; }
+
+.lang-switcher__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2, 0.5rem);
+    font-size: var(--fs-300, 0.875rem);
+    font-weight: 500;
+    padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+    border-radius: var(--radius-sm, 8px);
+}
+
+.lang-switcher__caret { transition: transform 240ms var(--ease-out, ease-out); }
+.lang-switcher.is-open .lang-switcher__caret { transform: rotate(180deg); }
+
+.lang-switcher__menu {
+    position: absolute;
+    inset-block-start: calc(100% + 8px);
+    inset-inline-end: 0;
+    min-width: 170px;
+    border-radius: var(--radius-md, 14px);
+    padding: var(--space-2, 0.5rem);
+    display: grid;
+    gap: 2px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 240ms var(--ease-out, ease-out),
+                transform 240ms var(--ease-out, ease-out),
+                visibility 240ms;
+    z-index: var(--z-dropdown, 1010);
+}
+
+.lang-switcher.is-open .lang-switcher__menu { opacity: 1; visibility: visible; transform: translateY(0); }
+
+.lang-switcher__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3, 0.75rem);
+    padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+    border-radius: var(--radius-sm, 8px);
+    font-size: var(--fs-300, 0.875rem);
+}
+
+.lang-switcher__code { font-weight: 700; min-width: 26px; }
+
+/* ------------------------------------------------------------------ */
+/* 2) KOYU KAPLAMA (her iki layout'ta açık tema kurallarını ezer)     */
+/* ------------------------------------------------------------------ */
+
+.site-header { background: transparent; box-shadow: none; }
+
+.topbar {
+    background: var(--yh-bg-0);
+    color: var(--yh-ink-2);
+    border-block-end: 1px solid var(--yh-line);
+}
+.topbar__link { color: var(--yh-ink-2); }
+.topbar__link:hover { color: var(--yh-ink-1); }
+.topbar__icon { color: var(--yh-blue-bright); }
+
+.navbar-main {
+    background: rgba(11, 19, 34, 0.88);
+    backdrop-filter: saturate(160%) blur(14px);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    border-block-end: 1px solid var(--yh-line);
+    transition: background 240ms var(--ease-out, ease-out),
+                border-color 240ms var(--ease-out, ease-out);
+}
+.site-header.is-scrolled .navbar-main {
+    background: rgba(7, 13, 23, 0.94);
+    border-block-end-color: var(--yh-line-2);
+    box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.65);
+}
+
+.site-header .brand__name { color: var(--yh-ink-1); }
+.site-header .brand__sub { color: var(--yh-ink-3); }
+
+.nav-menu__link { color: var(--yh-ink-2); }
+.nav-menu__link:hover,
+.nav-menu__link.is-active,
+.nav-menu__item.is-open .nav-menu__link { color: var(--yh-ink-1); }
+.nav-menu__link::after { background: var(--yh-blue-bright); }
+
+.nav-menu__caret { color: var(--yh-ink-3); }
+.nav-menu__caret:hover,
+.nav-menu__item.is-open .nav-menu__caret { color: var(--yh-blue-bright); }
+
+.nav-menu__link:focus-visible,
+.nav-menu__caret:focus-visible { outline-color: var(--yh-blue-bright); }
+
+/* Hamburger: 3 çizgi, açık renk (yeni.css'in 2 çizgili eski kuralını da ezer) */
+.site-header .nav-toggle { display: none; flex-direction: column; gap: 5px; padding: var(--space-2, 0.5rem); }
+.site-header .nav-toggle span {
+    width: 26px;
+    height: 2px;
+    background: var(--yh-ink-1);
+    border-radius: 2px;
+    opacity: 1;
+    transform: none;
+    transition: transform 240ms var(--ease-out, ease-out), opacity 180ms;
+}
+.site-header .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.site-header .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.site-header .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobil çekmece koyu */
+@media (max-width: 991px) {
+    .site-header .nav-toggle { display: flex; }
+    .nav-menu { background: var(--yh-bg-1); }
+    .nav-menu__item { border-block-end-color: var(--yh-line); }
+}
+
+/* Dil seçici koyu */
+.lang-switcher__toggle { color: var(--yh-ink-2); }
+.lang-switcher__toggle:hover { color: var(--yh-ink-1); background: rgba(255, 255, 255, 0.08); }
+
+.lang-switcher__menu {
+    background: var(--yh-bg-2);
+    border: 1px solid var(--yh-line);
+    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.6);
+}
+.lang-switcher__item { color: var(--yh-ink-2); }
+.lang-switcher__item:hover { background: rgba(255, 255, 255, 0.06); color: var(--yh-ink-1); }
+.lang-switcher__item.is-active { background: var(--yh-blue); color: #fff; }
+
+/* Topbar sağ blok: tema düğmesi + dil seçici yan yana */
+.topbar__actions {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2, 0.5rem);
+}
+
+/* Aydınlık / koyu tema değiştirici düğme */
+.theme-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-sm, 8px);
+    color: var(--yh-ink-2);
+    transition: color 180ms var(--ease-out, ease-out),
+                background-color 180ms var(--ease-out, ease-out);
+}
+.theme-toggle:hover { color: var(--yh-ink-1); background: rgba(255, 255, 255, 0.08); }
+.theme-toggle:focus-visible { outline: 2px solid var(--yh-blue-bright); outline-offset: 2px; }
+.theme-toggle__icon { width: 18px; height: 18px; display: block; }
+
+/* Koyu temada ay, aydınlık temada güneş ikonu gösterilir. */
+.theme-toggle__icon--sun { display: none; }
+.theme-toggle__icon--moon { display: block; }
+:root[data-theme="light"] .theme-toggle__icon--moon { display: none; }
+:root[data-theme="light"] .theme-toggle__icon--sun { display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-toggle { transition: none; }
+}
+
+/* Mega paneller zaten koyu (navigation.css); yüzeyi yeni tema
+   tonuna çek ve turuncu vurguları maviye çevir. */
+.mega-panel { background-color: var(--yh-bg-1); }
+.mega-srv__cta-btn { background: var(--yh-blue); }
+.mega-srv__cta-btn:hover { background: #00467f; }
+
+/* Hareket azaltma */
+@media (prefers-reduced-motion: reduce) {
+    .navbar-main,
+    .lang-switcher__menu,
+    .lang-switcher__caret,
+    .site-header .nav-toggle span { transition: none; }
+}
