@@ -39,4 +39,6 @@ $routes->group('{locale}', static function (RouteCollection $routes): void {
     $routes->get('products/(:segment)', 'Products::category/$1', ['as' => 'products.category']);
     $routes->get('products/(:segment)/(:segment)', 'Products::detail/$1/$2', ['as' => 'products.detail']);
     $routes->get('media', 'Media::index', ['as' => 'media']);
+    $routes->get('contact', 'Contact::index', ['as' => 'contact']);
+    $routes->post('contact', 'Contact::submit', ['as' => 'contact.submit']);
 });

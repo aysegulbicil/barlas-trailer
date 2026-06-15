@@ -53,6 +53,9 @@ $asset = static function (string $path): string {
     <link rel="stylesheet" href="<?= $asset('assets/css/yeni-footer.css') ?>">
     <link rel="stylesheet" href="<?= $asset('assets/css/yeni-header.css') ?>">
     <link rel="stylesheet" href="<?= $asset('assets/css/theme-light.css') ?>">
+
+    <!-- Sayfaya özel stiller (opsiyonel) -->
+    <?= $this->renderSection('styles') ?>
 </head>
 <body>
 
