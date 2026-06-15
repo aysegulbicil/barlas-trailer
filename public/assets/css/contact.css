@@ -1,0 +1,519 @@
+/* =====================================================================
+   contact.css — İletişim sayfası (layouts/yeni.php)
+
+   Sol: büyük prosedürel 3D TIR sahnesi (canvas) + SVG yedeği — formu
+   "getirir". Sağ: cam panelli form. Altta: iletişim kartları ve harita.
+
+   Yalnızca yeni.css + theme-light.css token'larını kullanır; koyu/aydınlık
+   temada otomatik uyumlu. Hareket: yalnızca transform/opacity. RTL güvenli.
+   ===================================================================== */
+
+.contact {
+    background: var(--bg-0);
+    overflow-x: clip;
+}
+
+/* ------------------------------- HERO ------------------------------- */
+.contact-hero {
+    position: relative;
+    padding-block-start: calc(var(--header-h) + clamp(1.6rem, 1rem + 3vw, 3.5rem));
+    padding-block-end: clamp(3rem, 2rem + 5vw, 6rem);
+    overflow: clip;
+}
+
+.contact-hero__bg { position: absolute; inset: 0; pointer-events: none; overflow: clip; }
+.contact-hero__grid {
+    position: absolute;
+    inset: -2px;
+    background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 34px 34px;
+    mask-image: radial-gradient(120% 90% at 28% 34%, #000 0%, transparent 72%);
+    -webkit-mask-image: radial-gradient(120% 90% at 28% 34%, #000 0%, transparent 72%);
+    opacity: 0.7;
+}
+.contact-hero__glow {
+    position: absolute;
+    inset-block-start: -16%;
+    inset-inline-start: -10%;
+    width: min(680px, 70%);
+    aspect-ratio: 1;
+    background: radial-gradient(circle, var(--blue-soft) 0%, transparent 66%);
+    filter: blur(6px);
+}
+
+.contact-hero__inner { position: relative; }
+
+/* Konvoy: TIR sahnesi + çeki demiri + form, tek parça (sağdan sürülür) */
+.contact-convoy {
+    display: grid;
+    gap: clamp(1.25rem, 0.6rem + 2vw, 2.6rem);
+    align-items: center;
+    will-change: transform;
+}
+@media (min-width: 992px) {
+    .contact-convoy {
+        grid-template-columns: minmax(0, 0.95fr) auto minmax(0, 1.05fr);
+    }
+}
+/* Mobilde: önce form, sonra (statik) TIR; çeki demiri gizli */
+@media (max-width: 991px) {
+    .contact-convoy      { grid-template-columns: 1fr; }
+    .contact-hero__main  { order: 1; }
+    .contact-hitch       { display: none; }
+    .contact-hero__stage { order: 2; }
+}
+
+/* ----------------------- Çeki demiri (hitch) ----------------------- */
+.contact-hitch {
+    position: relative;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 54px;
+    height: 24px;
+    transform-origin: 0% 50%;
+    transition: opacity 0.5s var(--ease-out);
+}
+.contact-hitch__beam {
+    flex: 1 1 auto;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--blue), var(--blue-bright));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 6px 16px -8px var(--blue-soft);
+}
+.contact-hitch__ring {
+    flex: none;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 3px solid var(--blue-bright);
+    background: var(--bg-1);
+}
+.contact-hitch__ring--truck { margin-inline-end: -3px; }
+.contact-hitch__ring--form  { margin-inline-start: -3px; }
+.contact-hero__stage.is-done ~ .contact-hitch { opacity: 0; }
+
+/* --------------------------- Hero başlık ---------------------------- */
+.contact-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-block-end: 0.9rem;
+}
+.contact-eyebrow__spark { width: 26px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--accent), transparent); }
+.contact-hero__title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    font-size: clamp(1.9rem, 1.2rem + 2.6vw, 3.1rem);
+    color: var(--ink-1);
+    max-width: 18ch;
+}
+.contact-hero__lead {
+    margin-block-start: 1rem;
+    font-size: var(--fs-lead);
+    color: var(--ink-2);
+    max-width: 52ch;
+}
+
+/* ------------------------------- FORM ------------------------------- */
+.contact-form {
+    position: relative;
+    border: 1px solid var(--line-2);
+    border-radius: var(--radius);
+    padding: clamp(1.25rem, 0.9rem + 1.6vw, 2.2rem);
+    background: var(--bg-1);
+    box-shadow: 0 30px 80px -40px rgba(8, 16, 32, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    margin-block-start: clamp(1.4rem, 1rem + 2vw, 2.2rem);
+}
+@supports (backdrop-filter: blur(6px)) or (-webkit-backdrop-filter: blur(6px)) {
+    .contact-form {
+        background: color-mix(in srgb, var(--bg-1) 82%, transparent);
+        -webkit-backdrop-filter: blur(14px) saturate(1.1);
+        backdrop-filter: blur(14px) saturate(1.1);
+    }
+}
+.contact-form::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: 14%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--blue-bright), transparent);
+    opacity: 0.7;
+}
+
+.contact-form__head { margin-block-end: 1.2rem; }
+.contact-form__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.6rem);
+    color: var(--ink-1);
+}
+.contact-form__subtitle { margin-block-start: 0.35rem; font-size: 0.95rem; color: var(--ink-3); }
+
+.contact-form__banner {
+    margin-block-end: 1rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radius-sm, 10px);
+    border: 1px solid color-mix(in srgb, var(--danger, #EF4444) 50%, transparent);
+    background: color-mix(in srgb, var(--danger, #EF4444) 12%, transparent);
+    color: var(--ink-1);
+    font-size: 0.9rem;
+}
+
+.contact-form__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem 1rem; }
+.contact-field--full { grid-column: 1 / -1; }
+@media (max-width: 560px) { .contact-form__grid { grid-template-columns: 1fr; } }
+
+.contact-field { display: flex; flex-direction: column; gap: 0.4rem; min-width: 0; }
+.contact-field__label { font-size: 0.82rem; font-weight: 600; color: var(--ink-2); letter-spacing: 0.01em; }
+.contact-field__req { color: var(--accent); }
+
+.contact-field__input {
+    width: 100%;
+    font: inherit;
+    font-size: 0.95rem;
+    color: var(--ink-1);
+    background: color-mix(in srgb, var(--bg-2) 70%, transparent);
+    border: 1px solid var(--line-2);
+    border-radius: 12px;
+    padding: 0.72rem 0.85rem;
+    transition: border-color var(--t-base) var(--ease-out),
+                box-shadow var(--t-base) var(--ease-out),
+                background var(--t-base) var(--ease-out);
+    -webkit-appearance: none;
+    appearance: none;
+}
+.contact-field__input::placeholder { color: var(--ink-3); }
+.contact-field__input:hover { border-color: color-mix(in srgb, var(--blue-bright) 45%, var(--line-2)); }
+.contact-field__input:focus {
+    outline: none;
+    border-color: var(--blue-bright);
+    box-shadow: 0 0 0 4px var(--blue-soft);
+    background: var(--bg-1);
+}
+.contact-field__textarea { resize: vertical; min-height: 118px; line-height: 1.5; }
+
+.contact-field__select { position: relative; }
+.contact-field__select .contact-field__input { padding-inline-end: 2.4rem; cursor: pointer; }
+.contact-field__caret {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: 0.85rem;
+    transform: translateY(-50%);
+    width: 18px; height: 18px;
+    color: var(--ink-3);
+    pointer-events: none;
+}
+.contact-field__select select option { color: #101a2c; background: #fff; }
+
+.contact-field.is-invalid .contact-field__input {
+    border-color: var(--danger, #EF4444);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--danger, #EF4444) 16%, transparent);
+}
+.contact-field__error {
+    font-size: 0.8rem;
+    color: var(--danger, #EF4444);
+    min-height: 0;
+    opacity: 0;
+    transform: translateY(-3px);
+    transition: opacity var(--t-base) var(--ease-out), transform var(--t-base) var(--ease-out);
+}
+.contact-field.is-invalid .contact-field__error,
+.contact-field__error:not(:empty) { opacity: 1; transform: none; }
+.contact-field__error:empty { display: none; }
+.contact-field__error--consent { margin-block-start: -0.2rem; }
+
+.contact-hp { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); inset-inline-start: -9999px; }
+
+.contact-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    margin-block-start: 1.1rem;
+    cursor: pointer;
+    font-size: 0.88rem;
+    color: var(--ink-2);
+    line-height: 1.5;
+}
+.contact-consent input { position: absolute; opacity: 0; width: 0; height: 0; }
+.contact-consent__box {
+    flex: none;
+    width: 22px; height: 22px;
+    margin-block-start: 1px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line-2);
+    border-radius: 7px;
+    background: color-mix(in srgb, var(--bg-2) 70%, transparent);
+    color: #fff;
+    transition: background var(--t-base) var(--ease-out), border-color var(--t-base) var(--ease-out);
+}
+.contact-consent__box svg { width: 14px; height: 14px; opacity: 0; transform: scale(0.6); transition: opacity var(--t-base) var(--ease-out), transform var(--t-base) var(--ease-out); }
+.contact-consent input:checked + .contact-consent__box { background: var(--blue); border-color: var(--blue); }
+.contact-consent input:checked + .contact-consent__box svg { opacity: 1; transform: none; }
+.contact-consent input:focus-visible + .contact-consent__box { outline: 2px solid var(--blue-bright); outline-offset: 2px; }
+.contact-consent.is-invalid .contact-consent__box { border-color: var(--danger, #EF4444); }
+.contact-form__link { color: var(--blue-bright); text-decoration: underline; text-underline-offset: 2px; }
+
+.contact-form__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-block-start: 1.3rem;
+}
+.contact-form__hint { font-size: 0.8rem; color: var(--ink-3); }
+.contact-form__submit { position: relative; gap: 0.6rem; }
+.contact-form__spinner {
+    width: 17px; height: 17px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    border-block-start-color: #fff;
+    display: none;
+    animation: ctSpin 0.7s linear infinite;
+}
+.contact-form.is-loading .contact-form__submit { pointer-events: none; opacity: 0.85; }
+.contact-form.is-loading .contact-form__spinner { display: inline-block; }
+@keyframes ctSpin { to { transform: rotate(360deg); } }
+
+.contact-form__status { margin-block-start: 0.8rem; font-size: 0.85rem; color: var(--ink-3); min-height: 1.1em; }
+
+/* Gönderim anı: form içeriği TIR'a "yüklenip" çıkar, sonra başarı belirir */
+.contact-form.is-sending .contact-form__inner {
+    opacity: 0;
+    transform: translateX(-26px) scale(0.98);
+    pointer-events: none;
+    transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+}
+
+.contact-form__success {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.7rem;
+    padding: clamp(1.5rem, 1rem + 2vw, 2.6rem) 0.5rem;
+}
+.contact-form.is-sent .contact-form__inner { display: none; }
+.contact-form.is-sent .contact-form__success { display: flex; }
+.contact-form__success-ic {
+    width: 64px; height: 64px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #fff;
+    background: radial-gradient(120% 120% at 30% 22%, var(--blue-bright), var(--blue));
+    box-shadow: 0 12px 30px -10px var(--blue-soft);
+    animation: ctPop 0.6s var(--ease-spring, var(--ease-out)) both;
+}
+.contact-form__success-ic svg { width: 30px; height: 30px; }
+.contact-form__success-title { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; color: var(--ink-1); }
+.contact-form__success-text { color: var(--ink-2); max-width: 38ch; }
+@keyframes ctPop { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
+
+/* ---------------------------- 3D SAHNE ------------------------------ */
+.contact-hero__stage {
+    position: relative;
+    min-height: clamp(300px, 50vw, 600px);
+    border-radius: var(--radius);
+}
+.contact-stage__mount { position: absolute; inset: 0; }
+.contact-stage__mount canvas { width: 100% !important; height: 100% !important; display: block; }
+
+.contact-stage__fallback {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    transition: opacity var(--t-base) var(--ease-out), visibility var(--t-base);
+}
+.contact-stage__fallback svg { width: min(100%, 560px); height: auto; filter: drop-shadow(0 24px 40px rgba(8, 16, 32, 0.4)); }
+.contact-hero__stage.is-3d .contact-stage__fallback { opacity: 0; visibility: hidden; }
+
+.contact-stage__cap {
+    position: absolute;
+    inset-block-end: clamp(0.5rem, 2vw, 1.4rem);
+    inset-inline-start: clamp(0.5rem, 2vw, 1.2rem);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: var(--pill);
+    background: color-mix(in srgb, var(--bg-1) 80%, transparent);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--line-2);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink-2);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity var(--t-base) var(--ease-out), transform var(--t-base) var(--ease-out);
+}
+.contact-hero__stage.is-arrived .contact-stage__cap { opacity: 1; transform: none; }
+.contact-stage__cap-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent);
+    animation: ctPing 1.8s var(--ease-out) infinite;
+}
+@keyframes ctPing {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); }
+    70%, 100% { box-shadow: 0 0 0 10px transparent; }
+}
+
+/* Gönderim sonrası onay (TIR yola çıkınca stage'de belirir) */
+.contact-stage__done {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    text-align: center;
+    padding: 1rem;
+    opacity: 0;
+    transform: scale(0.92);
+    pointer-events: none;
+    transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+.contact-hero__stage.is-done .contact-stage__done { opacity: 1; transform: none; }
+.contact-hero__stage.is-done .contact-stage__cap { opacity: 0; }
+.contact-stage__done-ic {
+    width: 76px; height: 76px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #fff;
+    background: radial-gradient(120% 120% at 30% 22%, var(--blue-bright), var(--blue));
+    box-shadow: 0 18px 44px -14px var(--blue-soft);
+    animation: ctPop 0.6s var(--ease-spring, var(--ease-out)) both;
+}
+.contact-stage__done-ic svg { width: 36px; height: 36px; }
+.contact-stage__done-text { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; color: var(--ink-1); max-width: 22ch; }
+
+@media (max-width: 991px) {
+    .contact-hero__stage { min-height: 240px; }
+    .contact-stage__cap { display: none; }
+}
+
+/* ---------------------- İLETİŞİM BİLGİLERİ -------------------------- */
+.contact-info {
+    position: relative;
+    padding-block: clamp(3rem, 2rem + 4vw, 5.5rem);
+    background: var(--bg-1);
+    border-block-start: 1px solid var(--line);
+}
+.contact-info__head { max-width: 60ch; margin-block-end: clamp(1.6rem, 1rem + 2vw, 2.6rem); }
+.contact-info__title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h2); color: var(--ink-1); letter-spacing: -0.01em; }
+.contact-info__lead { margin-block-start: 0.6rem; color: var(--ink-2); font-size: var(--fs-lead); }
+
+.contact-info__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: clamp(0.9rem, 0.6rem + 1vw, 1.4rem);
+    align-items: stretch;
+}
+
+.contact-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: clamp(1.1rem, 0.9rem + 0.8vw, 1.6rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--bg-2);
+    text-decoration: none;
+    color: var(--ink-1);
+    transition: transform var(--t-base) var(--ease-out),
+                border-color var(--t-base) var(--ease-out),
+                box-shadow var(--t-base) var(--ease-out);
+}
+a.contact-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--blue-bright) 50%, var(--line));
+    box-shadow: 0 24px 50px -30px rgba(8, 16, 32, 0.5);
+}
+.contact-card__ic {
+    width: 42px; height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--blue-soft);
+    color: var(--blue-bright);
+    margin-block-end: 0.3rem;
+}
+.contact-card__ic svg { width: 21px; height: 21px; }
+.contact-card__label { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+.contact-card__value { font-weight: 600; color: var(--ink-1); line-height: 1.45; }
+.contact-card__link {
+    margin-block-start: auto;
+    padding-block-start: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--blue-bright);
+    text-decoration: none;
+}
+.contact-card__link svg { width: 15px; height: 15px; transition: transform var(--t-base) var(--ease-out); }
+.contact-card__link:hover svg { transform: translate(2px, -2px); }
+
+/* ------------------------------ HARİTA ------------------------------ */
+.contact-map { padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem); background: var(--bg-0); }
+.contact-map__head { margin-block-end: clamp(1.2rem, 0.8rem + 1.5vw, 2rem); }
+.contact-map__title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h2); color: var(--ink-1); }
+.contact-map__note { margin-block-start: 0.5rem; color: var(--ink-2); }
+.contact-map__frame {
+    position: relative;
+    margin-inline: auto;
+    max-width: var(--shell);
+    width: calc(100% - 2 * var(--pad));
+    aspect-ratio: 21 / 9;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line-2);
+    box-shadow: 0 30px 70px -40px rgba(8, 16, 32, 0.5);
+}
+.contact-map__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(0.2) contrast(1.02); }
+@media (max-width: 700px) { .contact-map__frame { aspect-ratio: 4 / 3; } }
+
+/* --------------------------- Giriş hareketi ------------------------- */
+/* Konvoy (TIR + çeki demiri + form) teslimat yolundayken sağ dışta bekler;
+   JS onu içeri sürer. JS yoksa/başarısızsa güvenlik zamanlayıcısı yerine
+   oturtur. Teslimat aktif değilse (mobil / WebGL yok / reduced-motion)
+   konvoy normal/sabit görünür. */
+html.contact-deliver .contact-convoy:not(.is-delivered) {
+    transform: translateX(62vw);
+}
+html.contact-anim .contact-hero__intro .contact-hero__title,
+html.contact-anim .contact-hero__intro .contact-hero__lead { animation: ctLift 640ms var(--ease-out) both; }
+html.contact-anim .contact-hero__intro .contact-hero__lead { animation-delay: 90ms; }
+@keyframes ctLift {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html.contact-anim .contact-hero__intro .contact-hero__title,
+    html.contact-anim .contact-hero__intro .contact-hero__lead { animation: none; }
+    .contact-form__success-ic, .contact-stage__cap-dot, .contact-stage__done-ic { animation: none; }
+    .contact-stage__cap, .contact-stage__done, .contact-form.is-sending .contact-form__inner { transition: none; }
+}
