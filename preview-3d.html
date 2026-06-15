@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!--
+    preview-3d.html — standalone test bench for the CINEMATIC FLOW layer.
+    Mirrors the new homepage structure (single kinetic hero, horizontal
+    product strip, light body, dark finale) with static TR copy so
+    flow.js + tanker-3d.js can be verified without PHP. Open by
+    double-clicking (file://). Safe to delete; not used by the app.
+-->
+<html lang="tr" class="page--home">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barlas Trailer — akış önizlemesi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="public/assets/css/main.css">
+<style>
+    .pv-note { position: fixed; inset-block-end: 12px; inset-inline-start: 12px;
+               z-index: 2000; font: 600 12px/1 Inter, sans-serif; color: #fff;
+               background: rgba(11,18,32,.8); padding: 8px 12px; border-radius: 999px; }
+</style>
+</head>
+<body class="page page--home">
+
+<header class="site-header" data-header>
+    <div class="topbar">
+        <div class="container topbar__inner">
+            <div class="topbar__contact"><a class="topbar__link" href="#">+90 000 000 00 00</a></div>
+        </div>
+    </div>
+    <nav class="navbar-main">
+        <div class="container navbar-main__inner">
+            <a class="brand" href="#"><span class="brand__mark">B</span>
+                <span class="brand__text"><span class="brand__name">Barlas</span><span class="brand__sub">Trailer</span></span></a>
+            <ul class="nav-menu"><li class="nav-menu__item"><div class="nav-menu__entry"><a class="nav-menu__link is-active" href="#">Anasayfa</a></div></li>
+                <li class="nav-menu__item"><div class="nav-menu__entry"><a class="nav-menu__link" href="#">Ürünler</a></div></li>
+                <li class="nav-menu__item"><div class="nav-menu__entry"><a class="nav-menu__link" href="#">Hizmetler</a></div></li>
+                <li class="nav-menu__item"><div class="nav-menu__entry"><a class="nav-menu__link" href="#">İletişim</a></div></li></ul>
+            <a class="btn btn--primary nav-cta" href="#">Teklif Al</a>
+        </div>
+    </nav>
+</header>
+
+<main id="main-content">
+
+    <!-- ===== HERO (cinematic single) ===== -->
+    <section class="hero hero--cine" data-hero id="top">
+        <div class="hero__decor" aria-hidden="true"><span class="hero__grid"></span></div>
+        <div class="container hero__frame" data-hero-frame>
+            <div class="hero__layout">
+                <div class="hero__content" data-hero-content>
+                    <span class="hero__eyebrow" data-hero-item><span class="hero__eyebrow-dot"></span>Endüstriyel Taşıma Çözümleri</span>
+                    <h1 class="hero__title">
+                        <span class="hero__mask"><span class="hero__line" data-hero-line>Ağır Yükün</span></span>
+                        <span class="hero__mask"><span class="hero__line hero__line--accent" data-hero-line>Güçlü Mühendisliği</span></span>
+                    </h1>
+                    <p class="hero__subtitle" data-hero-item>Tankerlerden lowbedlere, silobaslardan frigorifik araçlara kadar her sektör için dayanıklı, güvenli ve yüksek performanslı treyler çözümleri üretiyoruz.</p>
+                    <div class="hero__actions" data-hero-item>
+                        <a class="btn btn--primary btn--lg" href="#products">Ürünleri Keşfet</a>
+                        <a class="btn btn--ghost btn--lg" href="#cta">Teklif Al</a>
+                    </div>
+                </div>
+                <div class="hero__visual" data-hero-visual aria-hidden="true">
+                    <div class="hero__product">
+                        <span class="hero__product-shadow"></span>
+                        <img class="hero__product-image" src="public/assets/images/hero-1.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MARQUEE (the single marquee) ===== -->
+    <section class="marquee" aria-label="Güven göstergeleri">
+        <div class="marquee__track" data-marquee>
+            <ul class="marquee__group">
+                <li class="marquee__item"><span class="marquee__text">ADR Sertifikalı Üretim</span></li>
+                <li class="marquee__item"><span class="marquee__text">40+ Ülkeye İhracat</span></li>
+                <li class="marquee__item"><span class="marquee__text">35 Yıllık Tecrübe</span></li>
+                <li class="marquee__item"><span class="marquee__text">Tam Kapsamlı Servis</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT (editorial, clip reveal) ===== -->
+    <section class="about" id="about">
+        <div class="container about__inner">
+            <div class="about__media">
+                <div class="about__image media-frame" data-clip-reveal style="min-height:420px"></div>
+                <div class="about__badge"><span class="about__badge-num">35</span><span class="about__badge-plus">+</span>
+                    <span class="about__badge-label">Yıllık Tecrübe</span></div>
+            </div>
+            <div class="about__content">
+                <h2 class="about__title">Üç kuşaktır çelikle çalışıyoruz</h2>
+                <p class="about__lead">Barlas Trailer, tanker ve treyler üretiminde köklü bir mühendislik markasıdır.</p>
+                <p class="about__text">Her şasi, her kaynak dikişi ve her vana kendi tesislerimizde mühendis gözetiminde üretilir; 40'tan fazla ülkeye ihraç edilir.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CATEGORIES (horizontal pan) ===== -->
+    <section class="categories" id="products" data-cat-section>
+        <div class="container">
+            <div class="section-head">
+                <span class="section-head__eyebrow">Ürün Gruplarımız</span>
+                <h2 class="section-head__title">Her Yük İçin Doğru Çözüm</h2>
+                <p class="section-head__lead">Geniş ürün yelpazemizle her taşıma ihtiyacına özel çözümler.</p>
+            </div>
+        </div>
+        <div class="categories__viewport" data-cat-viewport>
+            <div class="categories__track" data-cat-track role="list">
+                <!-- 8 kart -->
+                <a class="product-card" role="listitem" href="#"><span class="product-card__num">01</span><span class="product-card__media" aria-hidden="true"><span class="product-card__overlay"></span></span><span class="product-card__body"><span class="product-card__title">Tankerler</span><span class="product-card__desc">Akaryakıt, kimyasal ve gıda tankerleri</span><span class="product-card__more">İncele &rarr;</span></span></a>
+                <a class="product-card" role="listitem" href="#"><span class="product-card__num">02</span><span class="product-card__media" aria-hidden="true"><span class="product-card__overlay"></span></span><span class="product-card__body"><span class="product-card__title">Silobaslar</span><span class="product-card__desc">Toz ve granül yük taşıma</span><span class="product-card__more">İncele &rarr;</span></span></a>
+                <a class="product-card" role="listitem" href="#"><span class="product-card__num">03</span><span class="product-card__media" aria-hidden="true"><span class="product-card__overlay"></span></span><span class="product-card__body"><span class="product-card__title">Damperler</span><span class="product-card__desc">İnşaat ve maden yükleri</span><span class="product-card__more">İncele &rarr;</span></span></a>
+                <a class="product-card" role="listitem" href="#"><span class="product-card__num">04</span><span class="product-card__media" aria-hidden="true"><span class="product-card__overlay"></span></span><span class="product-card__body"><span class="product-card__title">Kuru Yük</span><span class="product-card__desc">Genel kargo çözümleri</span><span class="product-card__more">İncele &rarr;</span></span></a>
+                <a class="product-card" role="listitem" href="#"><span class="product-card__num">05</span><span class="product-card__media" aria-hidden="true"><span class="product-card__overlay"></span></span><span class="product-card__body"><span class="product-card__title">Tenteli</span><span class="product-card__desc">Esnek yükleme seçenekleri</span><span class="product-card__more">İncele &rarr;</span></span></a>
+                <a class="product-card" role="listitem" href="#"><span class="product-card__num">06</span><span class="product-card__media" aria-hidden="true"><span class="product-card__overlay"></span></span><span class="product-card__body"><span class="product-card__title">Frigorifik</span><span class="product-card__desc">Soğuk zincir taşımacılığı</span><span class="product-card__more">İncele &rarr;</span></span></a>
+                <a class="product-card" role="listitem" href="#"><span class="product-card__num">07</span><span class="product-card__media" aria-hidden="true"><span class="product-card__overlay"></span></span><span class="product-card__body"><span class="product-card__title">Lowbed</span><span class="product-card__desc">Ağır makine taşıma</span><span class="product-card__more">İncele &rarr;</span></span></a>
+                <a class="product-card" role="listitem" href="#"><span class="product-card__num">08</span><span class="product-card__media" aria-hidden="true"><span class="product-card__overlay"></span></span><span class="product-card__body"><span class="product-card__title">Konteyner</span><span class="product-card__desc">Konteyner şasileri</span><span class="product-card__more">İncele &rarr;</span></span></a>
+                <a class="categories__endcap" role="listitem" href="#">
+                    <span class="categories__endcap-count">08+</span>
+                    <span class="categories__endcap-label">Tüm Ürünleri Gör</span>
+                    <span class="categories__endcap-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS (light band) ===== -->
+    <section class="stats" id="stats">
+        <div class="container">
+            <div class="stats__grid">
+                <div class="stat-card"><div class="stat-card__value"><span class="stat-card__number">35</span><span class="stat-card__suffix">+</span></div><div class="stat-card__label">Yıllık Tecrübe</div></div>
+                <div class="stat-card"><div class="stat-card__value"><span class="stat-card__number">120</span><span class="stat-card__suffix">+</span></div><div class="stat-card__label">Ürün Modeli</div></div>
+                <div class="stat-card"><div class="stat-card__value"><span class="stat-card__number">40</span><span class="stat-card__suffix">+</span></div><div class="stat-card__label">İhracat Ülkesi</div></div>
+                <div class="stat-card"><div class="stat-card__value"><span class="stat-card__number">12000</span><span class="stat-card__suffix">+</span></div><div class="stat-card__label">Teslim Edilen Araç</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROCESS (scrubbed line) ===== -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-head">
+                <span class="section-head__eyebrow">Üretim Sürecimiz</span>
+                <h2 class="section-head__title">Tasarımdan Teslimata</h2>
+            </div>
+            <ol class="process__track" data-process>
+                <span class="process__line" aria-hidden="true"><span class="process__line-fill" data-process-fill></span></span>
+                <li class="process-step is-active"><span class="process-step__dot"><span class="process-step__num">01</span></span><div class="process-step__body"><h3 class="process-step__title">Tasarım</h3><p class="process-step__desc">Mühendislik ve modelleme</p></div></li>
+                <li class="process-step is-active"><span class="process-step__dot"><span class="process-step__num">02</span></span><div class="process-step__body"><h3 class="process-step__title">Kesim</h3><p class="process-step__desc">Lazer hassasiyeti</p></div></li>
+                <li class="process-step is-active"><span class="process-step__dot"><span class="process-step__num">03</span></span><div class="process-step__body"><h3 class="process-step__title">Kaynak</h3><p class="process-step__desc">Sertifikalı kaynakçılar</p></div></li>
+                <li class="process-step is-active"><span class="process-step__dot"><span class="process-step__num">04</span></span><div class="process-step__body"><h3 class="process-step__title">Test</h3><p class="process-step__desc">Basınç ve sızdırmazlık</p></div></li>
+                <li class="process-step is-active"><span class="process-step__dot"><span class="process-step__num">05</span></span><div class="process-step__body"><h3 class="process-step__title">Teslimat</h3><p class="process-step__desc">Dünyanın her yerine</p></div></li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ===== REFERENCES (logo wall) ===== -->
+    <section class="references" id="references">
+        <div class="container">
+            <div class="section-head"><h2 class="section-head__title">Bizi Tercih Edenler</h2></div>
+            <ul class="references__wall" data-flow-stagger>
+                <li class="references__logo"><svg viewBox="0 0 120 40" fill="none"><rect x="2" y="10" width="20" height="20" rx="4" fill="currentColor" opacity="0.6"></rect><rect x="30" y="14" width="60" height="6" rx="3" fill="currentColor" opacity="0.45"></rect></svg></li>
+                <li class="references__logo"><svg viewBox="0 0 120 40" fill="none"><rect x="2" y="10" width="20" height="20" rx="4" fill="currentColor" opacity="0.6"></rect><rect x="30" y="14" width="60" height="6" rx="3" fill="currentColor" opacity="0.45"></rect></svg></li>
+                <li class="references__logo"><svg viewBox="0 0 120 40" fill="none"><rect x="2" y="10" width="20" height="20" rx="4" fill="currentColor" opacity="0.6"></rect><rect x="30" y="14" width="60" height="6" rx="3" fill="currentColor" opacity="0.45"></rect></svg></li>
+                <li class="references__logo"><svg viewBox="0 0 120 40" fill="none"><rect x="2" y="10" width="20" height="20" rx="4" fill="currentColor" opacity="0.6"></rect><rect x="30" y="14" width="60" height="6" rx="3" fill="currentColor" opacity="0.45"></rect></svg></li>
+                <li class="references__logo"><svg viewBox="0 0 120 40" fill="none"><rect x="2" y="10" width="20" height="20" rx="4" fill="currentColor" opacity="0.6"></rect><rect x="30" y="14" width="60" height="6" rx="3" fill="currentColor" opacity="0.45"></rect></svg></li>
+                <li class="references__logo"><svg viewBox="0 0 120 40" fill="none"><rect x="2" y="10" width="20" height="20" rx="4" fill="currentColor" opacity="0.6"></rect><rect x="30" y="14" width="60" height="6" rx="3" fill="currentColor" opacity="0.45"></rect></svg></li>
+                <li class="references__logo"><svg viewBox="0 0 120 40" fill="none"><rect x="2" y="10" width="20" height="20" rx="4" fill="currentColor" opacity="0.6"></rect><rect x="30" y="14" width="60" height="6" rx="3" fill="currentColor" opacity="0.45"></rect></svg></li>
+                <li class="references__logo"><svg viewBox="0 0 120 40" fill="none"><rect x="2" y="10" width="20" height="20" rx="4" fill="currentColor" opacity="0.6"></rect><rect x="30" y="14" width="60" height="6" rx="3" fill="currentColor" opacity="0.45"></rect></svg></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ===== CTA FINALE (dark bookend; tanker arrives) ===== -->
+    <section class="cta-band cta-band--finale" id="cta">
+        <div class="container cta-band__inner" data-cta-inner>
+            <div class="cta-band__text">
+                <h2 class="cta-band__title">Projeniz için teklif alın</h2>
+                <p class="cta-band__lead">Mühendislerimiz ihtiyacınıza özel konfigürasyonu 24 saat içinde fiyatlandırır.</p>
+            </div>
+            <div class="cta-band__actions">
+                <a class="btn btn--light btn--lg" href="#">İletişime Geç</a>
+                <a class="btn btn--ghost btn--lg" href="#">+90 000 000 00 00</a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<span class="pv-note">Akış önizlemesi — preview-3d.html</span>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js" defer></script>
+<script src="public/assets/js/flow.js" defer></script>
+<script src="public/assets/js/tanker-3d.js" defer></script>
+</body>
+</html>

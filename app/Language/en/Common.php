@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * Common language strings (en)
+ */
+return [
+    'site_name'             => 'Barlas Trailer',
+    'brand_tagline'         => 'Trailers & Tankers',
+
+    // Default SEO
+    'meta_title'            => 'Industrial Trailer and Tanker Manufacturer',
+    'meta_description'      => 'Barlas Trailer is an industrial trailer manufacturer delivering premium-quality tankers, silo trailers, tippers, lowbeds and specialized transport solutions.',
+
+    // Contact
+    'phone'                 => '+90 (312) 000 00 00',
+    'phone_raw'             => '+903120000000',
+    'email'                 => 'info@barlastrailer.com',
+    'address'               => "Organized Industrial Zone\nAnkara, Turkey",
+
+    // Footer
+    'footer_about'          => 'Industrial trailer and tanker solutions engineered for durability, safety and performance — built to perform on the toughest roads.',
+    'footer_products_title' => 'Products',
+    'footer_contact_title'  => 'Contact',
+    'footer_slogan'         => 'Reliable solutions for the long haul.',
+    'rights_reserved'       => 'All rights reserved.',
+
+    // Footer — extended (social, legal, utility)
+    'footer_follow_title'   => 'Follow us',
+    'footer_whatsapp'       => 'Chat on WhatsApp',
+    'footer_privacy'        => 'Privacy Policy',
+    'footer_cookies'        => 'Cookie Policy',
+    'footer_kvkk'           => 'Data Protection',
+    'footer_back_to_top'    => 'Back to top',
+];

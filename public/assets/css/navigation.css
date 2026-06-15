@@ -1,0 +1,762 @@
+/* =====================================================================
+   navigation.css — Primary menu, mega panels & mobile drawer
+   Owns everything below the topbar/brand level: nav links, the
+   Products showcase mega menu, the compact Services panel and the
+   mobile accordion drawer. Tokens come from variables.css.
+   ===================================================================== */
+
+:root {
+    --mega-rail-w: 320px;
+    /* Updated by navigation.js to the real header height (topbar + nav). */
+    --header-offset: 112px;
+}
+
+/* ---------- Primary menu (desktop baseline) ---------- */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+}
+
+.nav-menu__entry {
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu__link {
+    position: relative;
+    font-weight: var(--fw-medium);
+    color: var(--text-base);
+    padding-block: var(--space-2);
+}
+
+.nav-menu__link::after {
+    content: "";
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-start: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width var(--dur-base) var(--ease-out);
+}
+
+.nav-menu__link:hover,
+.nav-menu__link.is-active,
+.nav-menu__item.is-open .nav-menu__link { color: var(--primary); }
+
+.nav-menu__link:hover::after,
+.nav-menu__link.is-active::after,
+.nav-menu__item.is-open .nav-menu__link::after { width: 100%; }
+
+/* Caret: the disclosure control for mega items (keyboard & touch) */
+.nav-menu__caret {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    margin-inline-start: 2px;
+    color: var(--gray-500);
+    border-radius: var(--radius-sm);
+    transition: transform var(--dur-base) var(--ease-out), color var(--dur-fast);
+}
+
+.nav-menu__caret svg { width: 14px; height: 14px; }
+.nav-menu__caret:hover { color: var(--primary); }
+.nav-menu__item.is-open .nav-menu__caret { transform: rotate(180deg); color: var(--primary); }
+
+.nav-menu__link:focus-visible,
+.nav-menu__caret:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.nav-cta { flex-shrink: 0; }
+
+/* Mobile menu toggle (hamburger) */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: var(--space-2);
+}
+
+.nav-toggle span {
+    width: 26px;
+    height: 2px;
+    background: var(--dark);
+    border-radius: 2px;
+    transition: transform var(--dur-base) var(--ease-out), opacity var(--dur-fast);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* =====================================================================
+   Mega panels — shared shell
+   ===================================================================== */
+.mega-panel {
+    background: var(--dark);
+    background-image: var(--blueprint);
+    background-size: var(--blueprint-size);
+    color: var(--text-on-dark);
+}
+
+.mega__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block-end: var(--space-4);
+    border-block-end: 1px solid rgba(255, 255, 255, 0.08);
+    margin-block-end: var(--space-5);
+}
+
+.mega__tagline {
+    font-size: var(--fs-300);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+}
+
+.mega__all {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--fs-300);
+    font-weight: var(--fw-semibold);
+    color: var(--primary-bright);
+    white-space: nowrap;
+}
+
+.mega__all svg { width: 16px; height: 16px; transition: transform var(--dur-base) var(--ease-out); }
+.mega__all:hover { color: var(--white); }
+.mega__all:hover svg { transform: translateX(4px); }
+
+/* =====================================================================
+   Products mega — category rail + preview pane
+   ===================================================================== */
+.mega-cat__row { display: flex; align-items: center; }
+
+.mega-cat__link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex: 1;
+    padding: 9px var(--space-3);
+    border-radius: var(--radius-sm);
+    color: var(--gray-300);
+    font-size: var(--fs-300);
+    font-weight: var(--fw-medium);
+    transition: background var(--dur-fast), color var(--dur-fast);
+}
+
+.mega-cat__num {
+    font-size: 0.7rem;
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.08em;
+    color: var(--gray-500);
+    min-width: 20px;
+    transition: color var(--dur-fast);
+}
+
+.mega-cat__name { flex: 1; }
+
+.mega-cat__chev {
+    width: 14px;
+    height: 14px;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity var(--dur-fast), transform var(--dur-base) var(--ease-out);
+}
+
+.mega-cat__link:hover,
+.mega-cat.is-active .mega-cat__link {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--white);
+}
+
+.mega-cat.is-active .mega-cat__num { color: var(--primary-bright); }
+
+.mega-cat.is-active .mega-cat__chev,
+.mega-cat__link:hover .mega-cat__chev {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mega-cat__link:focus-visible {
+    outline: 2px solid var(--primary-bright);
+    outline-offset: -2px;
+}
+
+/* Second-level accordion toggle — mobile only */
+.mega-cat__toggle {
+    display: none;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    color: var(--gray-500);
+    transition: transform var(--dur-base) var(--ease-out), color var(--dur-fast);
+}
+
+.mega-cat__toggle svg { width: 16px; height: 16px; }
+.mega-cat.is-open > .mega-cat__row .mega-cat__toggle { transform: rotate(180deg); color: var(--primary-bright); }
+.mega-cat__toggle:focus-visible { outline: 2px solid var(--primary-bright); outline-offset: -2px; }
+
+/* ---- Preview pane content ---- */
+.mega-pane__inner {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: var(--space-6);
+    align-items: start;
+    height: 100%;
+}
+
+.mega-pane__title {
+    font-size: var(--fs-600);
+    font-weight: var(--fw-bold);
+    color: var(--white);
+    margin-block-end: var(--space-2);
+}
+
+.mega-pane__desc {
+    font-size: var(--fs-300);
+    color: var(--gray-400);
+    max-width: 46ch;
+    margin-block-end: var(--space-5);
+}
+
+.mega-pane__label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    margin-block-end: var(--space-3);
+}
+
+/* Featured subcategories as badge chips */
+.mega-pane__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-block-end: var(--space-6);
+}
+
+.mega-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-pill);
+    background: rgba(255, 255, 255, 0.03);
+    font-size: var(--fs-300);
+    font-weight: var(--fw-medium);
+    color: var(--gray-300);
+    transition: color var(--dur-fast), border-color var(--dur-fast),
+                background var(--dur-fast), transform var(--dur-base) var(--ease-out);
+}
+
+.mega-chip:hover {
+    color: var(--white);
+    border-color: var(--primary-bright);
+    background: rgba(0, 91, 170, 0.35);
+    transform: translateY(-2px);
+}
+
+.mega-chip:focus-visible { outline: 2px solid var(--primary-bright); outline-offset: 2px; }
+
+/* Category footer: model counter + per-category CTA */
+.mega-pane__footer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    flex-wrap: wrap;
+}
+
+.mega-pane__count {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    padding-inline-end: var(--space-5);
+    border-inline-end: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mega-pane__count-num {
+    font-size: var(--fs-600);
+    font-weight: var(--fw-black);
+    color: var(--primary-bright);
+}
+
+.mega-pane__count-label {
+    font-size: 0.7rem;
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+}
+
+.mega-pane__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 10px 18px;
+    border-radius: var(--radius-sm);
+    background: var(--primary);
+    color: var(--white);
+    font-size: var(--fs-300);
+    font-weight: var(--fw-semibold);
+    transition: background var(--dur-fast), transform var(--dur-base) var(--ease-out);
+}
+
+.mega-pane__cta svg { width: 15px; height: 15px; }
+.mega-pane__cta:hover { background: var(--primary-dark); color: var(--white); transform: translateY(-2px); }
+.mega-pane__cta:focus-visible { outline: 2px solid var(--primary-bright); outline-offset: 2px; }
+
+/* ---- Placeholder visual (photo-ready via data-img, like homepage cards) ---- */
+.mega-pane__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    background-image: var(--blueprint), var(--placeholder-dark);
+    background-size: var(--blueprint-size), cover;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+}
+
+.mega-pane__silhouette {
+    width: 46%;
+    height: 46%;
+    color: rgba(255, 255, 255, 0.22);
+}
+
+.mega-pane__corner {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-color: var(--primary-bright);
+    border-style: solid;
+    opacity: 0.85;
+}
+
+.mega-pane__corner--tl { inset-block-start: 10px; inset-inline-start: 10px; border-width: 2px 0 0 2px; }
+.mega-pane__corner--br { inset-block-end: 10px; inset-inline-end: 10px; border-width: 0 2px 2px 0; }
+
+.mega-pane__num {
+    position: absolute;
+    inset-block-end: 2px;
+    inset-inline-end: 12px;
+    font-size: 3rem;
+    font-weight: var(--fw-black);
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+}
+
+/* Real-photo hooks (opt-in to avoid 404s).
+   The blueprint + dark placeholder below is the default look for every
+   category pane. To upgrade one pane to a real photo: drop the file at
+   assets/images/category-{slug}.jpg AND add a `has-photo` class hook, e.g.
+       .mega-pane__media[data-img="category-tankers.jpg"].has-photo {
+           background-image: url('../images/category-tankers.jpg'), var(--blueprint), var(--placeholder-dark);
+           background-size: cover, var(--blueprint-size), cover; background-position: center;
+       }
+   Because the images are no longer referenced unconditionally, the browser
+   never requests missing files, so the console stays clean. */
+.mega-pane__media[data-img^="category-"] {
+    background-image: var(--blueprint), var(--placeholder-dark);
+    background-size: var(--blueprint-size), cover;
+    background-position: center;
+}
+
+/* ---- Featured-chip preview (navigation.js → .mega-preview) ----
+   Chip hover'ında medya kutusu ürün önizlemesine geçer: görsel katmanı
+   crossfade + hafif zoom + alttan clip-reveal ile gelir, ürün adı
+   plakası gecikmeli yükselir; siluet ve numara geri çekilir. Foto yoksa
+   yalnızca isim plakası animasyonu çalışır (yer tutucu görünür kalır). */
+.mega-preview {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 320ms var(--ease-out, ease);
+}
+
+.mega-pane__media.is-preview .mega-preview { opacity: 1; }
+
+.mega-preview__img {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transform: scale(1.08);
+    clip-path: inset(100% 0 0 0);
+}
+
+.mega-preview.is-swap .mega-preview__img {
+    animation: mega-preview-reveal 560ms cubic-bezier(0.22, 1, 0.32, 1) forwards;
+}
+
+@keyframes mega-preview-reveal {
+    from { opacity: 0; transform: scale(1.08); clip-path: inset(100% 0 0 0); }
+    60%  { opacity: 1; }
+    to   { opacity: 1; transform: scale(1); clip-path: inset(0 0 0 0); }
+}
+
+.mega-preview__name {
+    position: absolute;
+    inset-block-end: 12px;
+    inset-inline-start: 12px;
+    max-width: calc(100% - 24px);
+    padding: 0.4rem 0.7rem;
+    border-inline-start: 2px solid var(--primary-bright, #4AA3E6);
+    border-radius: 6px;
+    background: rgba(7, 13, 23, 0.72);
+    backdrop-filter: blur(6px);
+    color: #eef4fc;
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.3;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.mega-preview.is-swap .mega-preview__name {
+    animation: mega-preview-name 420ms cubic-bezier(0.22, 1, 0.32, 1) 140ms forwards;
+}
+
+@keyframes mega-preview-name {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* Önizleme açıkken kategori siluetini ve numarayı geri çek. */
+.mega-pane__silhouette,
+.mega-pane__num {
+    transition: opacity 280ms ease, transform 280ms ease;
+}
+
+.mega-pane__media.is-preview .mega-pane__silhouette { opacity: 0; transform: scale(0.85); }
+.mega-pane__media.is-preview .mega-pane__num { opacity: 0.25; }
+
+@media (prefers-reduced-motion: reduce) {
+    .mega-preview { transition: none; }
+    .mega-preview.is-swap .mega-preview__img,
+    .mega-preview.is-swap .mega-preview__name { animation: none; opacity: 1; transform: none; clip-path: inset(0 0 0 0); }
+}
+
+/* =====================================================================
+   Services mini mega
+   ===================================================================== */
+.mega-srv__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-1) var(--space-5);
+}
+
+.mega-srv {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    border-radius: var(--radius-sm);
+    transition: background var(--dur-fast);
+}
+
+.mega-srv__icon {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-sm);
+    color: var(--primary-bright);
+    transition: border-color var(--dur-fast), color var(--dur-fast);
+}
+
+.mega-srv__icon svg { width: 18px; height: 18px; }
+
+.mega-srv__body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.mega-srv__name { font-size: var(--fs-300); font-weight: var(--fw-semibold); color: var(--gray-200, #e2e8f0); transition: color var(--dur-fast); }
+.mega-srv__desc { font-size: 0.78rem; color: var(--gray-500); }
+
+.mega-srv:hover { background: rgba(255, 255, 255, 0.05); }
+.mega-srv:hover .mega-srv__name { color: var(--white); }
+.mega-srv:hover .mega-srv__icon { border-color: var(--primary-bright); }
+.mega-srv:focus-visible { outline: 2px solid var(--primary-bright); outline-offset: -2px; }
+
+.mega-srv__cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-block-start: var(--space-5);
+    padding-block-start: var(--space-5);
+    border-block-start: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mega-srv__cta-text { display: flex; flex-direction: column; gap: 2px; }
+.mega-srv__cta-text strong { color: var(--white); font-size: var(--fs-400); }
+.mega-srv__cta-text span { color: var(--gray-400); font-size: var(--fs-300); }
+
+.mega-srv__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 10px 18px;
+    border-radius: var(--radius-sm);
+    background: var(--accent);
+    color: var(--white);
+    font-size: var(--fs-300);
+    font-weight: var(--fw-semibold);
+    transition: background var(--dur-fast), transform var(--dur-base) var(--ease-out);
+}
+
+.mega-srv__cta-btn svg { width: 15px; height: 15px; }
+.mega-srv__cta-btn:hover { background: var(--accent-dark); color: var(--white); transform: translateY(-2px); }
+.mega-srv__cta-btn:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+
+/* =====================================================================
+   Desktop flyout behaviour (≥992px)
+   ===================================================================== */
+@media (min-width: 992px) {
+    .mega-panel {
+        position: absolute;
+        inset-block-start: 100%;
+        inset-inline: 0;
+        z-index: var(--z-dropdown);
+        border-block-start: 1px solid rgba(255, 255, 255, 0.06);
+        box-shadow: var(--shadow-lg);
+        max-height: calc(100vh - var(--header-offset) - 12px);
+        overflow-y: auto;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        pointer-events: none;
+        transition: opacity var(--dur-base) var(--ease-out),
+                    transform var(--dur-base) var(--ease-out),
+                    visibility var(--dur-base);
+    }
+
+    /* Engineering accent line along the top edge */
+    .mega-panel::before {
+        content: "";
+        position: absolute;
+        inset-block-start: 0;
+        inset-inline-start: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary), var(--primary-bright) 35%, transparent 75%);
+    }
+
+    .nav-menu__item.is-open > .mega-panel {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    .mega {
+        max-width: var(--container-max);
+        margin-inline: auto;
+        padding: var(--space-6) var(--container-pad) var(--space-7);
+    }
+
+    /* Compact services panel: anchored under the header, centered box */
+    .mega-panel--compact {
+        inset-inline: auto;
+        left: 50%;
+        width: min(820px, calc(100vw - 2 * var(--container-pad)));
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-block-start: none;
+        border-end-start-radius: var(--radius-md);
+        border-end-end-radius: var(--radius-md);
+        transform: translateX(-50%) translateY(10px);
+    }
+
+    .nav-menu__item.is-open > .mega-panel--compact { transform: translateX(-50%) translateY(0); }
+
+    .mega--services { padding: var(--space-5) var(--space-6) var(--space-6); }
+
+    /* ---- Products: rail on the inline-start, pane floats beside it ---- */
+    .mega__body { position: relative; }
+
+    .mega__body::before {
+        content: "";
+        position: absolute;
+        inset-block: 0;
+        inset-inline-start: calc(var(--mega-rail-w) + var(--space-5));
+        width: 1px;
+        background: rgba(255, 255, 255, 0.07);
+    }
+
+    .mega-cat { width: var(--mega-rail-w); }
+
+    .mega-cat__pane {
+        position: absolute;
+        inset-block: 0;
+        inset-inline-start: calc(var(--mega-rail-w) + var(--space-7));
+        inset-inline-end: 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(8px);
+        transition: opacity var(--dur-base) var(--ease-out),
+                    transform var(--dur-base) var(--ease-out),
+                    visibility var(--dur-base);
+    }
+
+    .mega-cat.is-active > .mega-cat__pane {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+}
+
+/* =====================================================================
+   Mobile drawer & accordions (<992px)
+   ===================================================================== */
+@media (max-width: 991px) {
+    .nav-toggle { display: flex; }
+
+    /* Set by navigation.js while the drawer is open */
+    html.nav-locked { overflow: hidden; }
+
+    .nav-menu {
+        position: fixed;
+        inset-block-start: var(--header-offset);
+        inset-block-end: 0;
+        inset-inline: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: var(--white);
+        padding: var(--space-3) var(--container-pad) var(--space-8);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        transform: translateY(-12px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity var(--dur-base) var(--ease-out),
+                    transform var(--dur-base) var(--ease-out),
+                    visibility var(--dur-base);
+    }
+
+    .nav-menu.is-open {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-menu__item { border-block-end: 1px solid var(--border-color); }
+    .nav-menu__link { flex: 1; display: block; padding-block: var(--space-4); }
+    .nav-menu__link::after { display: none; }
+
+    .nav-menu__caret {
+        width: 48px;
+        height: 48px;
+        margin-inline-start: 0;
+        color: var(--gray-500);
+    }
+
+    .nav-menu__caret svg { width: 18px; height: 18px; }
+
+    .nav-cta { display: none; }
+    .topbar__link--hide-sm { display: none; }
+
+    /* ---- First-level accordion: the mega panel collapses below its row ---- */
+    .mega-panel {
+        display: grid;
+        grid-template-rows: 0fr;
+        border-radius: var(--radius-md);
+        transition: grid-template-rows var(--dur-base) var(--ease-out),
+                    margin var(--dur-base) var(--ease-out);
+    }
+
+    .mega-panel > .mega { overflow: hidden; min-height: 0; }
+    .nav-menu__item.is-open > .mega-panel { grid-template-rows: 1fr; margin-block-end: var(--space-4); }
+
+    .mega { padding: var(--space-4); }
+
+    .mega__head { margin-block-end: var(--space-3); padding-block-end: var(--space-3); }
+    .mega__tagline { display: none; }
+
+    /* ---- Second-level accordion: category panes ---- */
+    .mega-cat__toggle { display: grid; }
+    .mega-cat__chev { display: none; }
+    .mega-cat + .mega-cat { border-block-start: 1px solid rgba(255, 255, 255, 0.06); }
+
+    .mega-cat__link { padding-block: var(--space-3); font-size: var(--fs-400); }
+
+    .mega-cat__pane {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows var(--dur-base) var(--ease-out);
+    }
+
+    .mega-cat__pane > .mega-pane__inner { overflow: hidden; min-height: 0; }
+    .mega-cat.is-open > .mega-cat__pane { grid-template-rows: 1fr; }
+
+    .mega-pane__inner {
+        display: block;
+        padding: var(--space-2) var(--space-3) var(--space-4) calc(20px + var(--space-3) + var(--space-3));
+    }
+
+    /* Row already names the category; keep the pane lean on mobile */
+    .mega-pane__title,
+    .mega-pane__media { display: none; }
+
+    .mega-pane__desc { margin-block-end: var(--space-3); }
+    .mega-pane__chips { margin-block-end: var(--space-4); }
+    .mega-chip { padding-block: 9px; }
+    .mega-pane__footer { gap: var(--space-4); }
+
+    /* ---- Services panel on mobile ---- */
+    .mega-srv__grid { grid-template-columns: 1fr; gap: var(--space-1); }
+    .mega-srv { padding-block: var(--space-2); }
+    .mega-srv__cta { flex-direction: column; align-items: stretch; text-align: center; }
+    .mega-srv__cta-btn { justify-content: center; min-height: 48px; }
+}
+
+/* =====================================================================
+   RTL — flip directional arrows/chevrons & slide directions
+   ===================================================================== */
+[dir="rtl"] .mega__all svg,
+[dir="rtl"] .mega-pane__cta svg,
+[dir="rtl"] .mega-srv__cta-btn svg { transform: scaleX(-1); }
+
+[dir="rtl"] .mega-cat__chev { transform: scaleX(-1) translateX(6px); }
+
+[dir="rtl"] .mega-cat.is-active .mega-cat__chev,
+[dir="rtl"] .mega-cat__link:hover .mega-cat__chev { transform: scaleX(-1) translateX(0); }
+
+[dir="rtl"] .mega__all:hover svg { transform: scaleX(-1) translateX(4px); }
+[dir="rtl"] .mega-cat.is-active > .mega-cat__pane { transform: translateX(0); }
+
+@media (min-width: 992px) {
+    [dir="rtl"] .mega-cat__pane { transform: translateX(-8px); }
+    [dir="rtl"] .mega-panel::before { background: linear-gradient(270deg, var(--primary), var(--primary-bright) 35%, transparent 75%); }
+}
+
+/* =====================================================================
+   Reduced motion
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    .nav-menu,
+    .mega-panel,
+    .mega-cat__pane,
+    .mega-cat__chev,
+    .mega-cat__toggle,
+    .nav-menu__caret,
+    .mega__all svg,
+    .mega-chip,
+    .mega-pane__cta,
+    .mega-srv__cta-btn { transition: none; }
+}

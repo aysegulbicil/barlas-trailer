@@ -1,0 +1,386 @@
+/* =====================================================================
+   yeni-footer.css — Site footer (home + inner layouts)
+
+   Industrial footer on a FIXED DARK surface in both themes (like the mega
+   panels). It overrides the theme tokens locally, so the whole block keeps
+   its light-on-dark palette even under <html data-theme="light">.
+
+   Visual identity: a decorative "logistics route" network — echoing the
+   hero — plus a faint blueprint grid, a soft blue glow and a large wordmark
+   watermark sit behind a four-column grid. A weld-spark accent hairline
+   marks the top edge. Motion is intentionally minimal: the route motif is
+   static; only interactive controls have subtle hover affordances.
+   ===================================================================== */
+
+/* ----------------------------- 1) Surface --------------------------- */
+.site-footer {
+    /* Local dark palette (wins over theme tokens for all descendants) */
+    --ft-bg-0: #090F1C;
+    --ft-bg-1: #0B1322;
+    --ink-1: #F0F5FC;
+    --ink-2: rgba(226, 236, 248, 0.72);
+    --ink-3: rgba(226, 236, 248, 0.46);
+    --line: rgba(226, 236, 248, 0.10);
+    --line-2: rgba(226, 236, 248, 0.16);
+    --blue-bright: #4AA3E6;
+
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    color: var(--ink-2);
+    background:
+        radial-gradient(130% 90% at 50% -20%, #11203A 0%, rgba(17, 32, 58, 0) 58%),
+        linear-gradient(180deg, var(--ft-bg-1) 0%, var(--ft-bg-0) 100%);
+    border-block-start: 1px solid rgba(226, 236, 248, 0.06);
+}
+
+/* Weld-spark accent hairline at the top edge */
+.site-footer::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: 0;
+    height: 2px;
+    z-index: 3;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--accent) 34%,
+        var(--blue-bright) 64%,
+        transparent 100%);
+    opacity: 0.85;
+}
+
+.site-footer .container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: var(--container-max, 1280px);
+    margin-inline: auto;
+    padding-inline: var(--container-pad, clamp(1.15rem, 0.5rem + 2.4vw, 2.5rem));
+}
+
+/* --------------------------- 2) Decor layer ------------------------- */
+.site-footer__decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Blueprint grid — strongest near the top, fades downward */
+.site-footer__bp {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(226, 236, 248, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(226, 236, 248, 0.05) 1px, transparent 1px);
+    background-size: 34px 34px;
+    -webkit-mask-image: radial-gradient(125% 95% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.35) 46%, transparent 76%);
+            mask-image: radial-gradient(125% 95% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.35) 46%, transparent 76%);
+    opacity: 0.6;
+}
+
+/* Logistics route / map network (static) */
+.site-footer__network {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: 0;
+    width: 100%;
+    height: 82%;
+    opacity: 0.9;
+}
+.site-footer__route { fill: none; stroke-linecap: round; }
+.site-footer__route--2 { opacity: 0.85; }
+.site-footer__route--3 { opacity: 0.5; }
+.site-footer__route--dash { stroke-dasharray: 2 9; stroke-linecap: round; opacity: 0.55; }
+.site-footer__node { fill: var(--node); }
+.site-footer__node--live {
+    fill: var(--node-live);
+    filter: drop-shadow(0 0 7px var(--node-live));
+}
+.site-footer__halo { fill: none; stroke: var(--node); stroke-width: 1; opacity: 0.35; }
+.site-footer__halo--live { stroke: var(--node-live); opacity: 0.5; }
+
+/* Soft blue depth glow */
+.site-footer__glow {
+    position: absolute;
+    inset-block-start: -28%;
+    inset-inline-end: -8%;
+    width: 58%;
+    height: 120%;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(0, 91, 170, 0.28) 0%, transparent 70%);
+}
+
+/* Oversized wordmark watermark, clipped by the footer overflow */
+.site-footer__wordmark {
+    position: absolute;
+    inset-block-end: -2.5rem;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(4.5rem, 18vw, 16rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: rgba(226, 236, 248, 0.035);
+    user-select: none;
+    pointer-events: none;
+}
+
+/* ----------------------------- 3) Grid ------------------------------ */
+.site-footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    padding-block: clamp(3rem, 2rem + 3vw, 4.75rem) var(--space-7);
+}
+@media (min-width: 640px) {
+    .site-footer__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 992px) {
+    .site-footer__grid { grid-template-columns: 1.7fr 1fr 1fr 1.3fr; gap: var(--space-7); }
+}
+
+/* ----------------------------- 4) Brand ----------------------------- */
+.site-footer .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-block-end: var(--space-4);
+    text-decoration: none;
+}
+.site-footer .brand__mark {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    background: linear-gradient(150deg, var(--blue) 0%, #00467f 100%);
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 800;
+    box-shadow: 0 10px 22px -10px rgba(0, 91, 170, 0.75);
+}
+.site-footer .brand__text { display: flex; flex-direction: column; line-height: 1.15; }
+.site-footer .brand__name {
+    color: var(--ink-1);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+.site-footer .brand__sub {
+    color: var(--ink-3);
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.site-footer__about {
+    max-width: 42ch;
+    margin: 0 0 var(--space-5);
+    color: var(--ink-3);
+    font-size: var(--fs-300);
+    line-height: var(--lh-base);
+}
+
+/* --------------------- 5) Follow / social + WhatsApp ---------------- */
+.site-footer__follow { margin-block-end: var(--space-5); }
+.site-footer__follow-label {
+    display: block;
+    margin-block-end: var(--space-3);
+    color: var(--ink-3);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+.site-footer__social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.site-footer__social-link {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+    background: rgba(226, 236, 248, 0.02);
+    color: var(--ink-2);
+    transition: color var(--dur-fast) var(--ease-out),
+                border-color var(--dur-fast) var(--ease-out),
+                background-color var(--dur-fast) var(--ease-out),
+                transform var(--dur-fast) var(--ease-out);
+}
+.site-footer__social-link svg { width: 19px; height: 19px; }
+.site-footer__social-link:hover {
+    color: var(--blue-bright);
+    border-color: var(--blue-bright);
+    background: rgba(74, 163, 230, 0.10);
+    transform: translateY(-2px);
+}
+
+/* --------------------------- 6) Link columns ------------------------ */
+.site-footer__title {
+    margin-block: 0 var(--space-4);
+    color: var(--ink-1);
+    font-size: var(--fs-300);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.site-footer__list {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.site-footer__list a {
+    color: var(--ink-2);
+    font-size: var(--fs-300);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+}
+.site-footer__list a:hover { color: var(--blue-bright); }
+
+/* ----------------------------- 7) Contact --------------------------- */
+.site-footer__contact {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+    color: var(--ink-2);
+    font-size: var(--fs-300);
+    font-style: normal;
+    line-height: 1.5;
+}
+.site-footer__contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin: 0;
+}
+.site-footer__contact-ic {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    margin-block-start: 1px;
+    border-radius: 9px;
+    border: 1px solid var(--line);
+    background: rgba(74, 163, 230, 0.06);
+    color: var(--blue-bright);
+}
+.site-footer__contact-ic svg { width: 16px; height: 16px; }
+.site-footer__contact a {
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+}
+.site-footer__contact a:hover { color: var(--blue-bright); }
+
+/* ----------------------------- 8) Legal bar ------------------------- */
+.site-footer__bar {
+    position: relative;
+    z-index: 1;
+    border-block-start: 1px solid var(--line);
+}
+.site-footer__bar-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    padding-block: var(--space-5);
+    text-align: center;
+}
+@media (min-width: 768px) {
+    .site-footer__bar-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-5);
+        text-align: start;
+    }
+}
+.site-footer__bar-meta { display: flex; flex-direction: column; gap: 0.15rem; }
+.site-footer__copy { margin: 0; color: var(--ink-3); font-size: var(--fs-300); }
+.site-footer__credit { margin: 0; color: var(--ink-2); font-size: var(--fs-300); }
+
+.site-footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.site-footer__legal li { display: inline-flex; align-items: center; }
+.site-footer__legal li:not(:last-child)::after {
+    content: "\00B7";
+    margin-inline: var(--space-3);
+    color: var(--ink-3);
+    opacity: 0.55;
+}
+.site-footer__legal a {
+    color: var(--ink-3);
+    font-size: var(--fs-300);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+}
+.site-footer__legal a:hover { color: var(--ink-1); }
+
+.site-footer__top {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--line-2);
+    background: rgba(226, 236, 248, 0.05);
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: color var(--dur-fast) var(--ease-out),
+                border-color var(--dur-fast) var(--ease-out),
+                background-color var(--dur-fast) var(--ease-out),
+                transform var(--dur-fast) var(--ease-out);
+}
+.site-footer__top svg { width: 18px; height: 18px; }
+.site-footer__top:hover {
+    color: var(--blue-bright);
+    border-color: var(--blue-bright);
+    background: rgba(74, 163, 230, 0.10);
+    transform: translateY(-2px);
+}
+
+/* ------------------------- 9) Focus + a11y -------------------------- */
+.site-footer a:focus-visible,
+.site-footer__social-link:focus-visible,
+.site-footer__whatsapp:focus-visible,
+.site-footer__top:focus-visible {
+    outline: 2px solid var(--blue-bright);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+/* ------------------------- 10) Motion / RTL ------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .site-footer * { transition: none !important; }
+}
+/* The route motif is decorative texture; drop it if transparency is reduced */
+@media (prefers-reduced-transparency: reduce) {
+    .site-footer__bp,
+    .site-footer__network,
+    .site-footer__glow,
+    .site-footer__wordmark { display: none; }
+}

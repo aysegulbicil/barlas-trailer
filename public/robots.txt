@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap (generated in a later phase)
+Sitemap: http://localhost:8080/sitemap.xml

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neden Barlas — Önizleme</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap">
+
+<!-- Sitenin gerçek stilleri (aynı sıra) -->
+<link rel="stylesheet" href="public/assets/css/variables.css">
+<link rel="stylesheet" href="public/assets/css/yeni.css">
+<link rel="stylesheet" href="public/assets/css/theme-light.css">
+
+<style>
+    body { margin: 0; font-family: Inter, system-ui, sans-serif; background: var(--bg-0); color: var(--ink-2); }
+    .pv-toolbar {
+        position: sticky; top: 0; z-index: 10;
+        display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+        padding: 0.75rem clamp(1rem, 4vw, 3rem);
+        background: color-mix(in srgb, var(--bg-1) 86%, transparent);
+        backdrop-filter: blur(8px); border-block-end: 1px solid var(--line);
+    }
+    .pv-toolbar strong { color: var(--ink-1); font-size: 0.95rem; }
+    .pv-btn { font: 600 0.85rem/1 Inter, sans-serif; padding: 0.6rem 1rem; border-radius: 999px;
+        border: 1px solid var(--line-2); background: var(--bg-2); color: var(--ink-1); cursor: pointer; }
+    .pv-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+    .pv-hint { font-size: 0.8rem; color: var(--ink-3); }
+    .sec-head__eyebrow { display:inline-block; font-family: Sora, sans-serif; font-weight:600; font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; color: var(--blue-bright); }
+    .sec-head__title { font-family: Sora, Inter, sans-serif; font-weight: 800; color: var(--ink-1); line-height: 1.12; font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
+    .sec-head__lead { line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="pv-toolbar">
+    <strong>Barlas · "Neden Barlas" önizlemesi</strong>
+    <span class="pv-hint">Boş alana tıkla → animasyon baştan oynar</span>
+    <button class="pv-btn" type="button" id="themeBtn">☀️ / 🌙</button>
+</div>
+
+<section class="why" id="neden">
+    <div class="shell why__head" data-reveal>
+        <span class="sec-head__eyebrow">Neden Barlas</span>
+        <h2 class="sec-head__title">Uluslararası standartlarda üretici</h2>
+        <p class="sec-head__lead">Markaları Barlas’ı tercih etmeye yönlendiren değerler.</p>
+    </div>
+
+    <div class="shell why__layout">
+        <div class="why__cards" data-reveal-group>
+            <article class="why-card">
+                <span class="why-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.4 3 7.6 7 9 4-1.4 7-4.6 7-9V6z M9 12l2 2 4-4"></path></svg></span>
+                <h3 class="why-card__title">Sertifikalı Kalite</h3>
+                <p class="why-card__desc">ADR, ISO 9001 ve TSE standartlarında üretim.</p>
+            </article>
+            <article class="why-card">
+                <span class="why-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z M12 2.5v3 M12 18.5v3 M2.5 12h3 M18.5 12h3 M5.1 5.1l2.1 2.1 M16.8 16.8l2.1 2.1 M18.9 5.1l-2.1 2.1 M7.2 16.8l-2.1 2.1"></path></svg></span>
+                <h3 class="why-card__title">Mühendislik Gücü</h3>
+                <p class="why-card__desc">Projeye özel tasarım ve hesaplama.</p>
+            </article>
+            <article class="why-card">
+                <span class="why-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 100 18 9 9 0 000-18z M3 12h18 M12 3c2.6 2.7 2.6 15.3 0 18 M12 3c-2.6 2.7-2.6 15.3 0 18"></path></svg></span>
+                <h3 class="why-card__title">Global Servis Ağı</h3>
+                <p class="why-card__desc">40+ ülkede satış sonrası destek.</p>
+            </article>
+            <article class="why-card">
+                <span class="why-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 100 18 9 9 0 000-18z M12 7.5V12l3 2"></path></svg></span>
+                <h3 class="why-card__title">Uzun Ömür</h3>
+                <p class="why-card__desc">Dayanıklı malzeme ve işçilik garantisi.</p>
+            </article>
+        </div>
+
+        <div class="why__feature" data-reveal>
+            <img src="public/assets/images/hero-2.png" alt="" loading="lazy" decoding="async">
+            <div class="why__metric">
+                <span class="why__metric-value"><span data-count="40">0</span><span class="why__metric-plus">+</span></span>
+                <span class="why__metric-label">ülkede servis ağı</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var root = document.documentElement;
+    root.setAttribute('data-theme', 'light');
+    document.getElementById('themeBtn').addEventListener('click', function () {
+        root.setAttribute('data-theme', root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+    });
+
+    /* Sitenin reveal + sayaç davranışını taklit et (önizleme; sitede GSAP yapar) */
+    root.classList.add('has-anim');
+    function reveal() {
+        document.querySelectorAll('[data-reveal]').forEach(function (el) { el.classList.add('is-in'); });
+        document.querySelectorAll('[data-reveal-group]').forEach(function (g) {
+            Array.prototype.slice.call(g.children).forEach(function (c, i) {
+                c.style.transitionDelay = (i * 110) + 'ms';
+                setTimeout(function () { c.classList.add('is-in'); }, 60);
+            });
+        });
+        document.querySelectorAll('[data-count]').forEach(function (el) {
+            var target = Number(el.dataset.count || 0), t0 = null, dur = 1400;
+            (function tick(t) {
+                if (t0 === null) t0 = t;
+                var p = Math.min(1, (t - t0) / dur);
+                el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+                if (p < 1) requestAnimationFrame(tick);
+            })(performance.now());
+        });
+    }
+    setTimeout(reveal, 250);
+    document.querySelector('.why').addEventListener('click', function (e) {
+        if (e.target.closest('.why-card, .cert, a, button')) return;
+        document.querySelectorAll('.is-in').forEach(function (el) { el.classList.remove('is-in'); });
+        document.querySelectorAll('[data-count]').forEach(function (el) { el.textContent = '0'; });
+        setTimeout(reveal, 140);
+    });
+</script>
+</body>
+</html>

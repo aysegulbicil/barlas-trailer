@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Konsol — Önizleme</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap">
+
+<!-- Sitenin gerçek stilleri (aynı sıra) -->
+<link rel="stylesheet" href="public/assets/css/variables.css">
+<link rel="stylesheet" href="public/assets/css/yeni.css">
+<link rel="stylesheet" href="public/assets/css/theme-light.css">
+
+<style>
+    /* Yalnızca bu önizleme sayfası için yardımcılar (siteyi etkilemez) */
+    body {
+        margin: 0;
+        font-family: Inter, system-ui, sans-serif;
+        background: var(--bg-0);
+        color: var(--ink-2);
+    }
+    .shell { max-width: 1100px; margin-inline: auto; padding-inline: clamp(1rem, 4vw, 3rem); }
+    .pv-toolbar {
+        position: sticky; top: 0; z-index: 10;
+        display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+        padding: 0.75rem clamp(1rem, 4vw, 3rem);
+        background: color-mix(in srgb, var(--bg-1) 86%, transparent);
+        backdrop-filter: blur(8px);
+        border-block-end: 1px solid var(--line);
+    }
+    .pv-toolbar strong { color: var(--ink-1); font-size: 0.95rem; }
+    .pv-btn {
+        font: 600 0.85rem/1 Inter, sans-serif;
+        padding: 0.6rem 1rem; border-radius: 999px;
+        border: 1px solid var(--line-2); background: var(--bg-2); color: var(--ink-1);
+        cursor: pointer;
+    }
+    .pv-btn:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+    /* Başlık tipografisini siteyle hizala */
+    .sec-head__title { font-family: Sora, Inter, sans-serif; font-weight: 800; color: var(--ink-1); line-height: 1.1; font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0 0 0.6rem; }
+    .sec-head__lead { color: var(--ink-2); max-width: 52ch; margin: 0; line-height: 1.6; }
+    .sec-head { margin-block-end: 2rem; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+</style>
+</head>
+<body>
+
+<div class="pv-toolbar">
+    <strong>Barlas · AI Konsol önizlemesi</strong>
+    <button class="pv-btn" type="button" id="themeBtn">☀️ Aydınlık / 🌙 Koyu</button>
+</div>
+
+<section class="ai" id="asistan">
+    <div class="shell ai__inner">
+        <header class="sec-head">
+            <span class="ai__badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"></path></svg>
+                Yapay Zeka Destekli
+            </span>
+            <h2 class="sec-head__title">İhtiyacınızı anlatın, size uygun treyleri birlikte bulalım</h2>
+            <p class="sec-head__lead">Taşıdığınız yükü, sektörünüzü ve çalışma koşullarınızı yazın; Barlas çözümleri arasından doğru seçeneğe yönlendirelim.</p>
+        </header>
+
+        <div class="console">
+            <aside class="console__side">
+                <span class="console__side-title">Örnek ihtiyaçlar</span>
+                <button class="console__chip" type="button">Akaryakıt taşımacılığı yapıyoruz</button>
+                <button class="console__chip" type="button">Maden sahası için damper arıyoruz</button>
+                <button class="console__chip" type="button">Ağır iş makinesi taşıyacağız</button>
+                <button class="console__chip" type="button">Gıda için paslanmaz tanker gerekli</button>
+                <button class="console__chip" type="button">Konteyner taşımacılığına başlayacağız</button>
+                <button class="console__chip" type="button">Özel ölçülerde treyler istiyoruz</button>
+                <p class="console__note">Bu alan şu anda tasarım demosudur. Ürün öneri sistemi sonraki aşamada bağlanacaktır.</p>
+            </aside>
+
+            <div class="console__chat">
+                <div class="console__messages" aria-live="polite">
+                    <div class="msg msg--bot">
+                        <span class="msg__avatar" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="7" width="14" height="11" rx="4"></rect><path d="M9 11h.01M15 11h.01M9 15h6M12 4v3"></path></svg>
+                        </span>
+                        <p>Merhaba! Taşıdığınız yükü, sektörünüzü veya ihtiyacınızı anlatın; uygun treyler çözümünü belirlemenize yardımcı olayım.</p>
+                    </div>
+
+                    <div class="msg msg--user">
+                        <p>Kimyasal madde taşımak için ADR uyumlu bir tanker arıyoruz.</p>
+                    </div>
+
+                    <div class="msg msg--bot msg--typing">
+                        <span class="msg__avatar" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="7" width="14" height="11" rx="4"></rect><path d="M9 11h.01M15 11h.01M9 15h6M12 4v3"></path></svg>
+                        </span>
+                        <p><i></i><i></i><i></i></p>
+                    </div>
+                </div>
+
+                <form class="console__form" onsubmit="return false">
+                    <label class="sr-only" for="ai-input">Mesajınız</label>
+                    <input id="ai-input" type="text" autocomplete="off"
+                           placeholder="Örn. Kimyasal madde taşımak için ADR uyumlu bir tanker arıyoruz">
+                    <button class="console__send" type="submit" aria-label="Gönder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 2 11 13"></path><path d="m22 2-7 20-4-9-9-4z"></path></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <p class="ai__disclaimer">Öneriler yapay zeka tarafından hazırlanacaktır. Nihai ürün seçimi için teknik ekibimiz doğrulama yapar.</p>
+    </div>
+</section>
+
+<script>
+    var root = document.documentElement;
+    root.setAttribute('data-theme', 'light');   // önizleme aydınlıkta açılır
+    document.getElementById('themeBtn').addEventListener('click', function () {
+        root.setAttribute('data-theme', root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+    });
+</script>
+</body>
+</html>
