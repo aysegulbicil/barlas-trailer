@@ -194,3 +194,238 @@ $social = [
         })();
     </script>
 </footer>
+
+<?php
+/* =====================================================================
+   Yüzen iletişim butonları — her sayfada sabit. İmleci takip ETMEZ;
+   footer'a yapışmaz; sayfa aşağı kaydıkça ekranda kalmaya devam eder.
+   Üstte telefon (mavi), altta WhatsApp (yeşil): parlak degrade, canlı
+   nabız halkaları, parıltı süpürmesi ve hafif salınım.
+   WhatsApp: 0552 500 20 00  →  https://wa.me/905525002000
+   Telefon : 0543 578 08 00  →  tel:+905435780800
+   ===================================================================== */
+$waHref   = 'https://wa.me/905525002000?text=' . rawurlencode(lang('Common.whatsapp_message'));
+$callHref = 'tel:+905435780800';
+?>
+<div class="fab-stack">
+<a class="wa-fab wa-fab--call" href="<?= esc($callHref, 'attr') ?>"
+   aria-label="<?= esc(lang('Common.footer_call'), 'attr') ?>">
+    <span class="wa-fab__pulse" aria-hidden="true"></span>
+    <span class="wa-fab__pulse wa-fab__pulse--2" aria-hidden="true"></span>
+    <span class="wa-fab__btn">
+        <svg class="wa-fab__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.25 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+        </svg>
+    </span>
+    <span class="wa-fab__label"><?= esc(lang('Common.footer_call')) ?></span>
+</a>
+<a class="wa-fab" href="<?= esc($waHref, 'attr') ?>" target="_blank" rel="noopener"
+   aria-label="<?= esc(lang('Common.footer_whatsapp'), 'attr') ?>">
+    <span class="wa-fab__pulse" aria-hidden="true"></span>
+    <span class="wa-fab__pulse wa-fab__pulse--2" aria-hidden="true"></span>
+    <span class="wa-fab__btn">
+        <svg class="wa-fab__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+        </svg>
+    </span>
+    <span class="wa-fab__badge" aria-hidden="true"></span>
+    <span class="wa-fab__label"><?= esc(lang('Common.footer_whatsapp')) ?></span>
+</a>
+</div>
+
+<style>
+/* ===== Yüzen iletişim butonları (parlak + hareketli, imleçten bağımsız) ===== */
+.fab-stack{
+    position: fixed;
+    inset-block-end: clamp(1.1rem, 1rem + 1.2vw, 2.1rem);
+    inset-inline-end: clamp(1.1rem, 1rem + 1.2vw, 2.1rem);
+    z-index: 1090;                 /* header (1000) üstünde, overlay (1100) altında */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+.wa-fab{
+    position: relative;
+    width: 62px;
+    height: 62px;
+    display: grid;
+    place-items: center;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    animation: wa-pop .7s .3s cubic-bezier(.34, 1.4, .64, 1) both;
+}
+.wa-fab--call{ animation-delay: .15s; }   /* telefon biraz önce belirir */
+.wa-fab__btn{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    color: #fff;
+    overflow: hidden;
+    background: radial-gradient(125% 125% at 30% 22%, #57ec88 0%, #25d366 45%, #12a150 100%);
+    box-shadow:
+        0 10px 26px rgba(18, 178, 89, .45),
+        0 4px 10px rgba(11, 18, 32, .30),
+        inset 0 1px 1px rgba(255, 255, 255, .5);
+    animation: wa-bob 3.4s ease-in-out infinite;
+    transition: transform .26s cubic-bezier(.22, 1, .32, 1), box-shadow .26s ease;
+}
+.wa-fab__icon{
+    position: relative;
+    z-index: 2;
+    width: 32px;
+    height: 32px;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .22));
+}
+/* Parıltı süpürmesi — "parlak" his */
+.wa-fab__btn::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    background: linear-gradient(120deg, transparent 32%, rgba(255, 255, 255, .6) 47%, rgba(255, 255, 255, 0) 60%);
+    background-size: 250% 100%;
+    background-position: 180% 0;
+    animation: wa-shine 5s ease-in-out infinite;
+    pointer-events: none;
+}
+/* Genişleyen canlı nabız halkaları */
+.wa-fab__pulse{
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    z-index: 1;
+    width: 62px;
+    height: 62px;
+    border-radius: 999px;
+    background: rgba(37, 211, 102, .5);
+    animation: wa-pulse 2.6s cubic-bezier(.22, 1, .32, 1) infinite;
+}
+.wa-fab__pulse--2{ animation-delay: 1.3s; }
+/* Çevrimiçi rozeti */
+.wa-fab__badge{
+    position: absolute;
+    z-index: 3;
+    inset-block-start: -1px;
+    inset-inline-end: -1px;
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    background: #34e07a;
+    border: 2px solid #fff;
+    animation: wa-blink 1.8s ease-in-out infinite;
+}
+/* Üzerine gelince çıkan etiket */
+.wa-fab__label{
+    position: absolute;
+    z-index: 2;
+    inset-inline-end: calc(100% + 14px);
+    inset-block-start: 50%;
+    transform: translateY(-50%) translateX(10px) scale(.96);
+    transform-origin: center right;
+    white-space: nowrap;
+    background: #0b1220;
+    color: #eef4fc;
+    font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+    font-size: .86rem;
+    font-weight: 600;
+    letter-spacing: .01em;
+    padding: .55rem .85rem;
+    border-radius: 11px;
+    box-shadow: 0 14px 30px rgba(11, 18, 32, .30);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .26s ease, transform .26s cubic-bezier(.22, 1, .32, 1);
+    pointer-events: none;
+}
+.wa-fab__label::after{
+    content: "";
+    position: absolute;
+    inset-inline-end: -5px;
+    inset-block-start: 50%;
+    width: 11px;
+    height: 11px;
+    background: inherit;
+    transform: translateY(-50%) rotate(45deg);
+}
+/* Etkileşim */
+.wa-fab:hover .wa-fab__btn,
+.wa-fab:focus-visible .wa-fab__btn{
+    transform: scale(1.09);
+    box-shadow:
+        0 18px 38px rgba(18, 178, 89, .55),
+        0 7px 16px rgba(11, 18, 32, .34),
+        inset 0 1px 1px rgba(255, 255, 255, .55);
+    animation-play-state: paused;
+}
+.wa-fab:hover .wa-fab__label,
+.wa-fab:focus-visible .wa-fab__label{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0) scale(1);
+}
+.wa-fab:focus-visible{ outline: none; }
+.wa-fab:focus-visible .wa-fab__btn{ outline: 3px solid rgba(37, 211, 102, .65); outline-offset: 3px; }
+.wa-fab:active .wa-fab__btn{ transform: scale(1.02); }
+
+/* Telefon butonu — marka mavisi degrade + mavi nabız halkaları */
+.wa-fab--call .wa-fab__btn{
+    background: radial-gradient(125% 125% at 30% 22%, #6cc0ff 0%, #2f8fe0 45%, #005baa 100%);
+    box-shadow:
+        0 10px 26px rgba(0, 91, 170, .45),
+        0 4px 10px rgba(11, 18, 32, .30),
+        inset 0 1px 1px rgba(255, 255, 255, .5);
+}
+.wa-fab--call .wa-fab__pulse{ background: rgba(74, 163, 230, .5); animation-delay: .9s; }
+.wa-fab--call .wa-fab__pulse--2{ animation-delay: 2.2s; }
+.wa-fab--call:hover .wa-fab__btn,
+.wa-fab--call:focus-visible .wa-fab__btn{
+    box-shadow:
+        0 18px 38px rgba(0, 91, 170, .55),
+        0 7px 16px rgba(11, 18, 32, .34),
+        inset 0 1px 1px rgba(255, 255, 255, .55);
+}
+.wa-fab--call:focus-visible .wa-fab__btn{ outline-color: rgba(74, 163, 230, .65); }
+
+@keyframes wa-pop{
+    from{ opacity: 0; transform: translateY(18px) scale(.5); }
+    to{ opacity: 1; transform: none; }
+}
+@keyframes wa-bob{
+    0%, 100%{ translate: 0 0; }
+    50%{ translate: 0 -6px; }
+}
+@keyframes wa-pulse{
+    0%{ transform: scale(1); opacity: .55; }
+    75%{ opacity: 0; }
+    100%{ transform: scale(2); opacity: 0; }
+}
+@keyframes wa-shine{
+    0%, 60%{ background-position: 180% 0; }
+    88%, 100%{ background-position: -120% 0; }
+}
+@keyframes wa-blink{
+    0%, 100%{ opacity: 1; box-shadow: 0 0 0 0 rgba(52, 224, 122, .55); }
+    50%{ opacity: .45; box-shadow: 0 0 0 5px rgba(52, 224, 122, 0); }
+}
+
+@media (max-width: 600px){
+    .fab-stack{ inset-block-end: 1rem; inset-inline-end: 1rem; gap: 14px; }
+    .wa-fab{ width: 56px; height: 56px; }
+    .wa-fab__pulse{ width: 56px; height: 56px; }
+    .wa-fab__icon{ width: 29px; height: 29px; }
+    .wa-fab__label{ display: none; }
+}
+@media (prefers-reduced-motion: reduce){
+    .wa-fab,
+    .wa-fab__btn,
+    .wa-fab__pulse,
+    .wa-fab__badge,
+    .wa-fab__btn::before{ animation: none !important; }
+}
+</style>

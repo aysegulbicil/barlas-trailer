@@ -27,6 +27,8 @@ return [
     // Footer — extended (social, legal, utility)
     'footer_follow_title'   => 'Follow us',
     'footer_whatsapp'       => 'Chat on WhatsApp',
+    'whatsapp_message'      => 'Hello, I would like to get information about Barlas Trailer products.',
+    'footer_call'           => 'Call us',
     'footer_privacy'        => 'Privacy Policy',
     'footer_cookies'        => 'Cookie Policy',
     'footer_kvkk'           => 'Data Protection',

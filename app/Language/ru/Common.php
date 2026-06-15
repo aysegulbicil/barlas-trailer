@@ -27,6 +27,8 @@ return [
     // Footer — расширенный (соцсети, правовые ссылки, утилиты)
     'footer_follow_title'   => 'Мы в соцсетях',
     'footer_whatsapp'       => 'Написать в WhatsApp',
+    'whatsapp_message'      => 'Здравствуйте! Хочу получить информацию о продукции Barlas Trailer.',
+    'footer_call'           => 'Позвоните нам',
     'footer_privacy'        => 'Политика конфиденциальности',
     'footer_cookies'        => 'Политика использования файлов cookie',
     'footer_kvkk'           => 'Защита данных',
