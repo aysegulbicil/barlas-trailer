@@ -30,6 +30,8 @@ return [
     // Footer — genişletilmiş (sosyal, yasal, yardımcı)
     'footer_follow_title'   => 'Bizi takip edin',
     'footer_whatsapp'       => 'WhatsApp\'tan yazın',
+    'whatsapp_message'      => 'Merhaba, Barlas Trailer ürünleri hakkında bilgi almak istiyorum.',
+    'footer_call'           => 'Bizi arayın',
     'footer_privacy'        => 'Gizlilik Politikası',
     'footer_cookies'        => 'Çerez Politikası',
     'footer_kvkk'           => 'KVKK Aydınlatma Metni',
