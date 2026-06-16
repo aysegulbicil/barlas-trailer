@@ -269,3 +269,7 @@
     .lang-switcher__caret,
     .site-header .nav-toggle span { transition: none; }
 }
+
+/* Marka logosu (görsel) — koyu header için beyaz yazılı logo */
+.site-header .brand__img { display: block; height: 46px; width: auto; }
+@media (max-width: 768px) { .site-header .brand__img { height: 38px; } }

@@ -53,14 +53,18 @@
     will-change: transform;
 }
 @media (min-width: 992px) {
+    /* Geniş form (≈1000px) için konvoy, standart shell'den biraz taşar ve
+       ortada durur; tanker ile form yan yana dengeli kalır. */
+    .contact-hero__inner { max-width: min(1720px, 94vw); }
     .contact-convoy {
-        grid-template-columns: minmax(0, 0.95fr) auto minmax(0, 1.05fr);
+        grid-template-columns: minmax(0, 0.5fr) auto minmax(0, 1fr);
+        justify-content: center;
     }
 }
 /* Mobilde: önce form, sonra (statik) TIR; çeki demiri gizli */
 @media (max-width: 991px) {
     .contact-convoy      { grid-template-columns: 1fr; }
-    .contact-hero__main  { order: 1; }
+    .contact-hero__main  { order: 1; max-width: 1000px; margin-inline: auto; width: 100%; }
     .contact-hitch       { display: none; }
     .contact-hero__stage { order: 2; }
 }
@@ -117,18 +121,20 @@
     letter-spacing: -0.02em;
     font-size: clamp(1.9rem, 1.2rem + 2.6vw, 3.1rem);
     color: var(--ink-1);
-    max-width: 18ch;
+    max-width: none;
 }
 .contact-hero__lead {
     margin-block-start: 1rem;
     font-size: var(--fs-lead);
     color: var(--ink-2);
-    max-width: 52ch;
+    max-width: 66ch;
 }
 
 /* ------------------------------- FORM ------------------------------- */
 .contact-form {
     position: relative;
+    width: 100%;
+    max-width: 1000px;
     border: 1px solid var(--line-2);
     border-radius: var(--radius);
     padding: clamp(1.25rem, 0.9rem + 1.6vw, 2.2rem);
@@ -342,6 +348,7 @@
     transition: opacity var(--t-base) var(--ease-out), visibility var(--t-base);
 }
 .contact-stage__fallback svg { width: min(100%, 560px); height: auto; filter: drop-shadow(0 24px 40px rgba(8, 16, 32, 0.4)); }
+html.contact-deliver .contact-stage__fallback { opacity: 0; visibility: hidden; }
 .contact-hero__stage.is-3d .contact-stage__fallback { opacity: 0; visibility: hidden; }
 
 .contact-stage__cap {

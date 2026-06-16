@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barlas — İletişim önizleme (geniş form)</title>
+<script>
+  (function () {
+    try {
+      var k = 'barlas-theme', s = localStorage.getItem(k);
+      var t = (s === 'light' || s === 'dark') ? s
+        : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="public/assets/css/variables.css">
+<link rel="stylesheet" href="public/assets/css/navigation.css">
+<link rel="stylesheet" href="public/assets/css/yeni.css">
+<link rel="stylesheet" href="public/assets/css/yeni-pages.css">
+<link rel="stylesheet" href="public/assets/css/yeni-header.css">
+<link rel="stylesheet" href="public/assets/css/theme-light.css">
+<link rel="stylesheet" href="public/assets/css/contact.css">
+<style>
+  /* Yalnızca önizleme yardımcıları — gerçek sayfada yok */
+  .pv-badge{position:fixed;inset-block-start:12px;inset-inline-end:12px;z-index:9999;background:var(--bg-2);color:var(--ink-1);border:1px solid var(--line-2);border-radius:10px;padding:.5rem .8rem;font:600 13px/1 Inter,sans-serif}
+  .pv-badge span{color:var(--blue-bright)}
+  .pv-note{position:fixed;inset-block-end:12px;inset-inline-end:12px;z-index:9999;background:var(--bg-2);color:var(--ink-2);border:1px solid var(--line-2);border-radius:12px;padding:.6rem .9rem;font:500 12px/1.45 Inter,sans-serif;max-width:260px}
+  .pv-note b{color:var(--ink-1)}
+</style>
+</head>
+<body class="page">
+<div class="pv-badge">Pencere genişliği: <span id="pvW">—</span> px</div>
+
+<main id="main" class="contact">
+
+  <section class="contact-hero" data-contact-hero>
+    <div class="contact-hero__bg" aria-hidden="true">
+      <span class="contact-hero__grid"></span>
+      <span class="contact-hero__glow"></span>
+    </div>
+
+    <div class="shell contact-hero__inner">
+      <div class="contact-convoy" data-convoy>
+
+        <!-- Sol: TIR sahnesi (SVG yedeği — statik park hâli) -->
+        <aside class="contact-hero__stage" data-contact-stage aria-hidden="true">
+          <div class="contact-stage__fallback" data-stage-fallback>
+            <svg viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Barlas tanker">
+              <defs>
+                <linearGradient id="ctTank" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#e8edf4"></stop>
+                  <stop offset="0.5" stop-color="#cfd8e4"></stop>
+                  <stop offset="1" stop-color="#9aa6b5"></stop>
+                </linearGradient>
+                <linearGradient id="ctCab" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#2f8fe0"></stop>
+                  <stop offset="1" stop-color="#005baa"></stop>
+                </linearGradient>
+              </defs>
+              <ellipse cx="280" cy="246" rx="240" ry="16" fill="rgba(3,6,12,0.45)"></ellipse>
+              <rect x="196" y="92" width="320" height="116" rx="58" fill="url(#ctTank)"></rect>
+              <ellipse cx="196" cy="150" rx="26" ry="58" fill="#b9c3d1"></ellipse>
+              <ellipse cx="516" cy="150" rx="20" ry="58" fill="#aeb9c8"></ellipse>
+              <rect x="300" y="120" width="150" height="26" rx="13" fill="#005baa" opacity="0.92"></rect>
+              <text x="375" y="139" text-anchor="middle" font-family="Sora, Inter, sans-serif" font-weight="800" font-size="20" fill="#ffffff" letter-spacing="2">BARLAS</text>
+              <circle cx="250" cy="84" r="6" fill="#9aa6b5"></circle>
+              <circle cx="330" cy="84" r="6" fill="#9aa6b5"></circle>
+              <circle cx="410" cy="84" r="6" fill="#9aa6b5"></circle>
+              <path d="M52 208 V120 q0-22 22-22 h70 q14 0 20 12 l20 40 V208 Z" fill="url(#ctCab)"></path>
+              <path d="M150 118 l16 34 h-44 V118 Z" fill="#0a1422" opacity="0.85"></path>
+              <rect x="44" y="150" width="14" height="40" rx="4" fill="#0a1422"></rect>
+              <rect x="120" y="200" width="404" height="12" rx="4" fill="#10182a"></rect>
+              <g fill="#14181f">
+                <circle cx="120" cy="214" r="30"></circle>
+                <circle cx="300" cy="214" r="30"></circle>
+                <circle cx="372" cy="214" r="30"></circle>
+                <circle cx="444" cy="214" r="30"></circle>
+              </g>
+              <g fill="#cfd6df">
+                <circle cx="120" cy="214" r="12"></circle>
+                <circle cx="300" cy="214" r="12"></circle>
+                <circle cx="372" cy="214" r="12"></circle>
+                <circle cx="444" cy="214" r="12"></circle>
+              </g>
+            </svg>
+          </div>
+        </aside>
+
+        <!-- Çeki demiri -->
+        <div class="contact-hitch" data-hitch aria-hidden="true">
+          <span class="contact-hitch__ring contact-hitch__ring--truck"></span>
+          <span class="contact-hitch__beam"></span>
+          <span class="contact-hitch__ring contact-hitch__ring--form"></span>
+        </div>
+
+        <!-- Sağ: başlık + form -->
+        <div class="contact-hero__main">
+          <header class="contact-hero__intro">
+            <p class="contact-eyebrow">
+              <span class="contact-eyebrow__spark" aria-hidden="true"></span>
+              İletişim
+            </p>
+            <h1 class="contact-hero__title">Yükü biz taşırız, ilk adımı siz atın</h1>
+            <p class="contact-hero__lead">Teklif, servis veya özel proje — formu doldurun, ekibimiz aynı gün dönüş yapsın. Tankerimiz mesajınızı almak için yola çıktı bile.</p>
+          </header>
+
+          <form class="contact-form" method="post" action="#" novalidate>
+            <div class="contact-form__inner">
+              <div class="contact-form__head">
+                <h2 class="contact-form__title">Bize yazın</h2>
+                <p class="contact-form__subtitle">Alanları doldurun, talebinizi doğrudan satış ekibimize iletelim.</p>
+              </div>
+
+              <div class="contact-form__grid">
+                <div class="contact-field" data-field="name">
+                  <label class="contact-field__label" for="cf-name">Ad Soyad <span class="contact-field__req" aria-hidden="true">*</span></label>
+                  <input class="contact-field__input" id="cf-name" name="name" type="text" placeholder="Adınız ve soyadınız" autocomplete="name">
+                  <p class="contact-field__error" data-error-for="name"></p>
+                </div>
+
+                <div class="contact-field" data-field="email">
+                  <label class="contact-field__label" for="cf-email">E-posta <span class="contact-field__req" aria-hidden="true">*</span></label>
+                  <input class="contact-field__input" id="cf-email" name="email" type="email" placeholder="ornek@firma.com" autocomplete="email">
+                  <p class="contact-field__error" data-error-for="email"></p>
+                </div>
+
+                <div class="contact-field" data-field="phone">
+                  <label class="contact-field__label" for="cf-phone">Telefon</label>
+                  <input class="contact-field__input" id="cf-phone" name="phone" type="tel" placeholder="+90 5xx xxx xx xx" autocomplete="tel">
+                  <p class="contact-field__error" data-error-for="phone"></p>
+                </div>
+
+                <div class="contact-field" data-field="company">
+                  <label class="contact-field__label" for="cf-company">Firma</label>
+                  <input class="contact-field__input" id="cf-company" name="company" type="text" placeholder="Firma adı (opsiyonel)" autocomplete="organization">
+                  <p class="contact-field__error" data-error-for="company"></p>
+                </div>
+
+                <div class="contact-field contact-field--full" data-field="subject">
+                  <label class="contact-field__label" for="cf-subject">Konu</label>
+                  <div class="contact-field__select">
+                    <select class="contact-field__input" id="cf-subject" name="subject">
+                      <option value="">Konu / ürün seçin</option>
+                      <option>Teklif talebi</option>
+                      <option>Tanker / ADR</option>
+                      <option>Silobas</option>
+                      <option>Damper</option>
+                      <option>Servis &amp; Tamir</option>
+                      <option>Yedek parça</option>
+                      <option>Diğer</option>
+                    </select>
+                    <svg class="contact-field__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                  </div>
+                  <p class="contact-field__error" data-error-for="subject"></p>
+                </div>
+
+                <div class="contact-field contact-field--full" data-field="message">
+                  <label class="contact-field__label" for="cf-message">Mesajınız <span class="contact-field__req" aria-hidden="true">*</span></label>
+                  <textarea class="contact-field__input contact-field__textarea" id="cf-message" name="message" rows="4" placeholder="İhtiyacınızı kısaca anlatın: ürün, adet, teslim yeri…"></textarea>
+                  <p class="contact-field__error" data-error-for="message"></p>
+                </div>
+              </div>
+
+              <label class="contact-consent" data-field="consent">
+                <input type="checkbox" name="consent" value="1">
+                <span class="contact-consent__box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"></path></svg>
+                </span>
+                <span class="contact-consent__text">Kişisel verilerimin <a href="#" class="contact-form__link">KVKK Aydınlatma Metni</a> kapsamında işlenmesini kabul ediyorum.</span>
+              </label>
+              <p class="contact-field__error contact-field__error--consent" data-error-for="consent"></p>
+
+              <div class="contact-form__foot">
+                <p class="contact-form__hint">* zorunlu alanlar</p>
+                <button class="btn btn--primary btn--lg contact-form__submit" type="button" data-submit>
+                  <span class="contact-form__submit-label">Mesajı gönder</span>
+                  <span class="contact-form__spinner" aria-hidden="true"></span>
+                </button>
+              </div>
+
+              <p class="contact-form__status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="pv-note"><b>Önizleme.</b> Gerçek <code>contact.css</code> yüklü. Pencereyi yatayda daraltıp genişleterek form + tankerin ortalanmasını ve taşma olmadığını kontrol edin.</div>
+
+<script>
+  var w = document.getElementById('pvW');
+  function upd(){ w.textContent = window.innerWidth; }
+  upd(); window.addEventListener('resize', upd);
+</script>
+</body>
+</html>

@@ -202,10 +202,10 @@ $social = [
    Üstte telefon (mavi), altta WhatsApp (yeşil): parlak degrade, canlı
    nabız halkaları, parıltı süpürmesi ve hafif salınım.
    WhatsApp: 0552 500 20 00  →  https://wa.me/905525002000
-   Telefon : 0543 578 08 00  →  tel:+905435780800
+   Telefon : 0543 578 08 00  →  tel:+905525002000
    ===================================================================== */
 $waHref   = 'https://wa.me/905525002000?text=' . rawurlencode(lang('Common.whatsapp_message'));
-$callHref = 'tel:+905435780800';
+$callHref = 'tel:+905525002000';
 ?>
 <div class="fab-stack">
 <a class="wa-fab wa-fab--call" href="<?= esc($callHref, 'attr') ?>"

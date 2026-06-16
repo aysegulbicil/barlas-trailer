@@ -15,8 +15,8 @@ return [
     'meta_description'      => 'Barlas Trailer; tankerler, silobaslar, damperler, lowbed ve özel taşıma çözümlerinde premium kalite sunan endüstriyel treyler üreticisidir.',
 
     // Contact
-    'phone'                 => '+90 (312) 000 00 00',
-    'phone_raw'             => '+903120000000',
+    'phone'                 => '0 552 500 20 00',
+    'phone_raw'             => '05525002000',
     'email'                 => 'info@barlastrailer.com',
     'address'               => "Organize Sanayi Bölgesi\nAnkara, Türkiye",
 

@@ -60,11 +60,7 @@ $currentPath = current_path();
     <nav class="navbar-main" aria-label="<?= esc(lang('Navigation.aria_primary'), 'attr') ?>">
         <div class="container navbar-main__inner">
             <a class="brand" href="<?= esc(locale_url()) ?>" aria-label="<?= esc(lang('Common.site_name'), 'attr') ?>">
-                <span class="brand__mark">B</span>
-                <span class="brand__text">
-                    <span class="brand__name">Barlas</span>
-                    <span class="brand__sub"><?= esc(lang('Common.brand_tagline')) ?></span>
-                </span>
+                <img class="brand__img" src="<?= base_url('assets/logo.png') ?>" alt="<?= esc(lang('Common.site_name'), 'attr') ?>" width="200" height="47" decoding="async">
             </a>
 
             <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu"

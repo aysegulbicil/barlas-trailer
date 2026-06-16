@@ -47,6 +47,7 @@ $canonical   = current_url();
 
 <!-- Favicons -->
 <link rel="icon" href="<?= base_url('favicon.ico') ?>" sizes="any">
+<link rel="apple-touch-icon" href="<?= base_url('apple-touch-icon.png') ?>">
 
 <!-- Preconnect to CDN for faster asset loading -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
