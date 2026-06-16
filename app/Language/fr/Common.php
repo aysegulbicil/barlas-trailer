@@ -12,8 +12,8 @@ return [
     'meta_description'      => 'Barlas Trailer est un fabricant de remorques industrielles proposant citernes, semi-remorques silo, bennes, porte-engins et solutions de transport spécialisées de qualité premium.',
 
     // Contact
-    'phone'                 => '+90 (312) 000 00 00',
-    'phone_raw'             => '+903120000000',
+    'phone'                 => '0 552 500 20 00',
+    'phone_raw'             => '05525002000',
     'email'                 => 'info@barlastrailer.com',
     'address'               => "Zone Industrielle Organisée\nAnkara, Turquie",
 
