@@ -15,7 +15,7 @@ return [
     'phone'                 => '0 552 500 20 00',
     'phone_raw'             => '05525002000',
     'email'                 => 'info@barlastrailer.com',
-    'address'               => "Организованная промышленная зона\nАнкара, Турция",
+    'address'               => "Fevziçakmak Mahallesi\nŞehit Hamdi Karagöz Caddesi No: 4s\nKaratay, Konya, Турция",
 
     // Footer
     'footer_about'          => 'Промышленные прицепы и цистерны, созданные для долговечности, безопасности и высокой производительности на самых сложных дорогах.',

@@ -17,9 +17,9 @@ $footerLinks = ['home', 'products', 'services', 'blog', 'contact'];
 
 // Social profiles — replace with the brand's real handles.
 $social = [
-    'linkedin'  => 'https://www.linkedin.com/company/barlastrailer',
-    'instagram' => 'https://www.instagram.com/barlastrailer',
-    'youtube'   => 'https://www.youtube.com/@barlastrailer',
+    'linkedin'  => 'https://www.linkedin.com/company/barlastrailer/',
+    'instagram' => 'https://www.instagram.com/barlastanker?igsh=MW1lcGttNjMzeWl1aw==',
+    'youtube'   => 'https://youtube.com/@barlastanker?si=S83nH374D8UozOew',
 ];
 ?>
 <footer class="site-footer site-footer--routes">

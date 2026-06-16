@@ -15,7 +15,7 @@ return [
     'phone'                 => '0 552 500 20 00',
     'phone_raw'             => '05525002000',
     'email'                 => 'info@barlastrailer.com',
-    'address'               => "Zone Industrielle Organisée\nAnkara, Turquie",
+    'address'               => "Fevziçakmak Mahallesi\nŞehit Hamdi Karagöz Caddesi No: 4s\nKaratay, Konya, Turquie",
 
     // Footer
     'footer_about'          => 'Des solutions de remorques et citernes industrielles conçues pour la durabilité, la sécurité et la performance sur les routes les plus exigeantes.',

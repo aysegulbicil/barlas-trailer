@@ -15,7 +15,7 @@ return [
     'phone'                 => '0 552 500 20 00',
     'phone_raw'             => '05525002000',
     'email'                 => 'info@barlastrailer.com',
-    'address'               => "المنطقة الصناعية المنظمة\nأنقرة، تركيا",
+    'address'               => "Fevziçakmak Mahallesi\nŞehit Hamdi Karagöz Caddesi No: 4s\nKaratay, Konya, تركيا",
 
     // Footer
     'footer_about'          => 'حلول مقطورات وصهاريج صناعية مصمّمة لتحقيق المتانة والأمان والأداء العالي على أصعب الطرقات.',
