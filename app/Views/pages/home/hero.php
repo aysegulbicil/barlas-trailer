@@ -47,10 +47,10 @@
                     <?= esc(lang('Home.hero_eyebrow')) ?>
                 </span>
 
-                <h1 class="hero__title">
+                <h2 class="hero__title">
                     <span class="hero__mask"><span class="hero__line" data-hero-line><?= esc(lang('Home.hero_title_1')) ?></span></span>
                     <span class="hero__mask"><span class="hero__line hero__line--accent" data-hero-line><?= esc(lang('Home.hero_title_2')) ?></span></span>
-                </h1>
+                </h2>
 
                 <p class="hero__subtitle" data-hero-item><?= esc(lang('Home.hero_subtitle')) ?></p>
 

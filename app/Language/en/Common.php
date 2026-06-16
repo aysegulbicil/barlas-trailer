@@ -15,7 +15,7 @@ return [
     'phone'                 => '0 552 500 20 00',
     'phone_raw'             => '05525002000',
     'email'                 => 'info@barlastrailer.com',
-    'address'               => "Organized Industrial Zone\nAnkara, Turkey",
+    'address'               => "Fevzicakmak Mahallesi\nSehit Hamdi Karagoz Caddesi No: 4s\nKaratay, Konya, Turkey",
 
     // Footer
     'footer_about'          => 'Industrial trailer and tanker solutions engineered for durability, safety and performance — built to perform on the toughest roads.',

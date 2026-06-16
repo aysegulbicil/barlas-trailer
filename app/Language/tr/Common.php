@@ -18,7 +18,7 @@ return [
     'phone'                 => '0 552 500 20 00',
     'phone_raw'             => '05525002000',
     'email'                 => 'info@barlastrailer.com',
-    'address'               => "Organize Sanayi Bölgesi\nAnkara, Türkiye",
+    'address'               => "Fevziçakmak Mahallesi\nŞehit Hamdi Karagöz Caddesi \nNo: 4s Karatay, Konya",
 
     // Footer
     'footer_about'          => 'Yüksek mühendislik kalitesiyle tasarlanan endüstriyel treyler ve tanker çözümleri. Dayanıklılık, güvenlik ve performans bir arada.',

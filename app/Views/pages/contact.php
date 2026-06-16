@@ -39,7 +39,7 @@ $email     = lang('Common.email');
 $address   = lang('Common.address');
 $mapQuery  = trim(str_replace(["\r\n", "\n", "\r"], ', ', $address));
 $mapEmbed  = 'https://www.google.com/maps?q=' . rawurlencode($mapQuery) . '&output=embed';
-$mapLink   = 'https://www.google.com/maps?q=' . rawurlencode($mapQuery);
+$mapLink   = 'https://maps.app.goo.gl/kC6t9j8MRdYTsojn7';
 
 /* Sayfaya özel asset sürümleri (layout'taki $asset kapanışı burada yok) */
 $cssVer = is_file(FCPATH . 'assets/css/contact.css') ? filemtime(FCPATH . 'assets/css/contact.css') : '1';
