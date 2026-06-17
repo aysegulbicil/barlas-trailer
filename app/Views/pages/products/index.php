@@ -31,6 +31,22 @@ $catDesc = static function (array $category): string {
     $label = lang($key);
     return $label === $key ? '' : $label;
 };
+$catCoverStyle = static function (array $category): string {
+    $slug = $category['slug'];
+    $categoryPath = 'assets/images/category-' . $slug . '.jpg';
+    if (is_file(FCPATH . $categoryPath)) {
+        return '';
+    }
+
+    foreach ($category['products'] ?? [] as $product) {
+        $productPath = 'assets/images/products/' . $slug . '-' . $product['slug'] . '.jpg';
+        if (is_file(FCPATH . $productPath)) {
+            return 'background-image: url(\'' . base_url($productPath) . '?v=' . filemtime(FCPATH . $productPath) . '\'); background-size: cover; background-position: center;';
+        }
+    }
+
+    return '';
+};
 ?>
 
 <?php $this->section('bodyClass') ?>products<?php $this->endSection() ?>
@@ -77,7 +93,7 @@ $catDesc = static function (array $category): string {
                 $preview  = array_slice($category['products'], 0, 3);
                 ?>
                 <a class="prd-cat-card" href="<?= esc($url) ?>">
-                    <div class="prd-cat-card__media" data-img="category-<?= esc($category['slug'], 'attr') ?>.jpg" aria-hidden="true">
+                    <div class="prd-cat-card__media" data-img="category-<?= esc($category['slug'], 'attr') ?>.jpg" style="<?= esc($catCoverStyle($category), 'attr') ?>" aria-hidden="true">
                         <span class="prd-cat-card__num"><?= esc($num) ?></span>
                         <span class="prd-cat-card__corner prd-cat-card__corner--tl"></span>
                         <span class="prd-cat-card__corner prd-cat-card__corner--br"></span>
