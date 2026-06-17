@@ -9,6 +9,8 @@
  * on mobile / reduced-motion the track degrades to a native
  * scroll-snap strip. Card markup (and its hover reveal) is unchanged.
  */
+use App\Libraries\ProductCatalog;
+
 $categories = [
     ['slug' => 'tankers',    'key' => 'tankers',    'icon' => 'M3 13h18l-2 6H5z M4 13V8h12l3 5'],
     ['slug' => 'silos',      'key' => 'silos',      'icon' => 'M5 21V9l7-5 7 5v12 M9 21v-6h6v6'],
@@ -19,6 +21,23 @@ $categories = [
     ['slug' => 'lowbed',     'key' => 'lowbed',     'icon' => 'M2 15h20 M4 15v-4h10l3 4 M6 18a1.5 1.5 0 100-3'],
     ['slug' => 'containers', 'key' => 'containers', 'icon' => 'M3 8h18v9H3z M7 8v9 M11 8v9 M15 8v9'],
 ];
+
+$catCoverStyle = static function (string $slug): string {
+    $categoryPath = 'assets/images/category-' . $slug . '.jpg';
+    if (is_file(FCPATH . $categoryPath)) {
+        return '';
+    }
+
+    $category = ProductCatalog::category($slug);
+    foreach (($category['products'] ?? []) as $product) {
+        $productPath = 'assets/images/products/' . $slug . '-' . $product['slug'] . '.jpg';
+        if (is_file(FCPATH . $productPath)) {
+            return 'background-image: url(\'' . base_url($productPath) . '?v=' . filemtime(FCPATH . $productPath) . '\'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center;';
+        }
+    }
+
+    return '';
+};
 ?>
 <section class="categories" id="products" data-cat-section>
     <div class="container">
@@ -35,7 +54,7 @@ $categories = [
                 <a class="product-card" role="listitem" href="<?= esc(locale_url('products/' . $cat['slug'])) ?>">
                     <span class="product-card__num"><?= esc(str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT)) ?></span>
 
-                    <span class="product-card__media" data-img="category-<?= esc($cat['slug'], 'attr') ?>.jpg" aria-hidden="true">
+                    <span class="product-card__media" data-img="category-<?= esc($cat['slug'], 'attr') ?>.jpg" style="<?= esc($catCoverStyle($cat['slug']), 'attr') ?>" aria-hidden="true">
                         <span class="product-card__silhouette">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
                                  stroke-linecap="round" stroke-linejoin="round">

@@ -1,5 +1,5 @@
 {
- "generated_from": "TUM_URUNLER_HIYERARSIK_KATALOG (3).docx",
+ "generated_from": "TUM_URUNLER_HIYERARSIK_KATALOG_EDITED.docx",
  "categories": [
   {
    "no": 1,
@@ -10454,6 +10454,195 @@
      ]
     },
     {
+     "no": "3.2",
+     "name": "Damper",
+     "slug": "damper",
+     "aliases": [
+      "T.SKS B / 22 - 12 / 27",
+      "T.SKS BF / 22 - 12 / 27",
+      "T.SKS BS / 22 - 12 / 27"
+     ],
+     "variants": [
+      {
+       "model": "T.SKS BS / 22 - 12 / 27",
+       "slug": "t-sks-bs-22-12-27",
+       "specs": [
+        {
+         "t": "g",
+         "x": "Teknik Ölçüler"
+        },
+        {
+         "t": "p",
+         "x": "Hacim: 22,0 m³"
+        },
+        {
+         "t": "p",
+         "x": "5.Teker Yüksekliği (H5): 1.220 mm"
+        },
+        {
+         "t": "p",
+         "x": "Dingil Mesafesi (Wb): 5.010 mm"
+        },
+        {
+         "t": "p",
+         "x": "Dış Uzunluk (L): 8.550 mm"
+        },
+        {
+         "t": "p",
+         "x": "Kasa Uzunluğu (A): 7.500"
+        },
+        {
+         "t": "p",
+         "x": "Araç Genişliği (W): 2.550 mm"
+        },
+        {
+         "t": "p",
+         "x": "İç Genişlik (IW): 2.360 mm"
+        },
+        {
+         "t": "p",
+         "x": "Araç Yüksekliği (H): 3.100 mm"
+        },
+        {
+         "t": "g",
+         "x": "Teknik Kapasite"
+        },
+        {
+         "t": "p",
+         "x": "Dingil Yükü: 27.000 kg"
+        },
+        {
+         "t": "p",
+         "x": "King Pin Kapasitesi: 12.000 kg"
+        },
+        {
+         "t": "p",
+         "x": "Boş Ağırlık ±%3: 6.350 kg"
+        },
+        {
+         "t": "p",
+         "x": "Toplam Ağırlık: 39.000 kg"
+        },
+        {
+         "t": "g",
+         "x": "Teknik Bilgi"
+        },
+        {
+         "t": "p",
+         "x": "Şasi: ISO 1726 ve ISO 1726-2 Normuna uygun, KTL kaplı, kaliteli ve yüksek mukavamete sahip S700 MC çeliğinden üretilmiştir. I kesitli iki adet lonjerondan meydana gelmektedir ve ana kros ile kin pin kros bağlantılıdır."
+        },
+        {
+         "t": "p",
+         "x": "Kasa: Ön duvar, kapak ve yan duvar ve taban HB450 yüksek mukavemetli, aşınmaya ve darbelere dayanıklı çelik sacdan imal edilmiştir. Küvet içi ön kısımda, sağ ve sol köşelerde mukavemet için köşebentler mevcuttur. Bu köşebentler ile aynı zamanda küvet içine giriş ve çıkış da sağlanabilmektedir."
+        },
+        {
+         "t": "p",
+         "x": "Dingiller: BPW marka AL II, her biri 9 ton kapasiteli, havalı süspansiyonlu ve kampanalı fren sistemli dingiller mevcuttur."
+        },
+        {
+         "t": "p",
+         "x": "Toplam Lastik-Jant Adedi: 6 adet + 1 adet (Stepne) lastik ve 7 adet jant"
+        },
+        {
+         "t": "p",
+         "x": "Lastik Ebadı: 385/65 R22.5"
+        },
+        {
+         "t": "p",
+         "x": "Dingil Kaldırma: Otomatik 1. dingil kaldırma"
+        },
+        {
+         "t": "p",
+         "x": "Fren Sistemi: UN ECE R13 regülasyonuna uygun, antiblokaj (ABS) ve yalpa kontrol sistemi (RSS) içeren çift devreli elektro-pnömatik Wabco marka EBS 2S/2M fren sistemi"
+        },
+        {
+         "t": "p",
+         "x": "Elektronik Süspansiyon Kontrol: Yükleme ve boşaltmayı kolaylaştıran, sürüş yardımlı Elektronik Kontrollü Süspansiyon (ECAS) sistemi bulunmaktadır."
+        },
+        {
+         "t": "p",
+         "x": "Elektrik Sistemi: UN ECE R48 regülasyonu ve ADR mevzuatına uygun 2 x 7 ve 1 x 15 pinli sokete sahip, 24 V LED yan pozisyon lambalı Aspöck Europoint III marka aydınlatma sistemi"
+        },
+        {
+         "t": "p",
+         "x": "Hidrolik Sistem: 4* kademeli silindir; Havalı kullanma kolu ile indirme/kaldırma sistemi (*24, 27 ve 32 m³ DE müflerinde 5)"
+        },
+        {
+         "t": "p",
+         "x": "Body Fix: Araç stabilizesini artırarak sarsıntı ve sesi önleyen Body Fix sistemi bulunmaktadır."
+        },
+        {
+         "t": "p",
+         "x": "Devrilme Uyarı Fonksiyonu: Tilt Alert sistemi sayesinde; yük boşaltılırken 3° üzerindeki eğimli yüzeylerde, sesli ikaz sistemi devreye girer ve böylece sürücünün devrilme riskli boşaltım yaptığı farkındalığı oluşturulur."
+        },
+        {
+         "t": "p",
+         "x": "Otomatik Körük Boşaltma Sistemi: Havuz kaldırma konumuna alındığında, otomatik körük boşaltma sistemi devreye girerek, aracın ağırlık merkezini aşağıya indirir ve uygun boşaltma pozisyonuna getirir."
+        },
+        {
+         "t": "p",
+         "x": "Finishere Uyarlı Frenleme Sistemi: Asfaltlama makinasına uygun, çevirmeli buton kontrollü otomatik fren sistemi Finisher ile donatılmıştır."
+        },
+        {
+         "t": "p",
+         "x": "Güvenlik Fren Fonksiyonu: Damper kasası kalkış pozisyonundayken, otomatik frenleme ile aracın hareketini engelleyen ve tehlike anında uyarı verme özelliği sayesinde olası kazaları engelleyen Güvenlik Freni Sistemi mevcuttur."
+        },
+        {
+         "t": "p",
+         "x": "Mekanik Ayak: ISO 1726 ve ISO 1726-2 standardına uygun, 24.000 kg teknik taşıma kapasiteli mekanik ayak bulunmaktadır."
+        },
+        {
+         "t": "p",
+         "x": "Yangın Dolabı: 1 adet yangın söndürme tüpü dolabı (tüpsüz)"
+        },
+        {
+         "t": "p",
+         "x": "Su Deposu: 1 adet 40 lt. kapasiteli plastik su deposu aracın sağ kısmına konumlandırılmıştır."
+        }
+       ],
+       "has_specs": true
+      },
+      {
+       "model": "T.SKS B / 22 - 12 / 27",
+       "slug": "t-sks-b-22-12-27",
+       "specs": [
+        {
+         "t": "p",
+         "x": "1.1 T.SKS BS / 22 - 12 / 27 modeliyle aynı teknik özelliklere sahiptir."
+        },
+        {
+         "t": "g",
+         "x": "Farklı Özellik"
+        },
+        {
+         "t": "p",
+         "x": "Boş Ağırlık ±%3: 5.950 kg"
+        }
+       ],
+       "has_specs": true
+      },
+      {
+       "model": "T.SKS BF / 22 - 12 / 27",
+       "slug": "t-sks-bf-22-12-27",
+       "specs": [
+        {
+         "t": "p",
+         "x": "1.1 T.SKS BS / 22 - 12 / 27 modeliyle aynı teknik özelliklere sahiptir."
+        },
+        {
+         "t": "g",
+         "x": "Farklı Özellik"
+        },
+        {
+         "t": "p",
+         "x": "Boş Ağırlık ±%3: 6.600 kg"
+        }
+       ],
+       "has_specs": true
+      }
+     ]
+    },
+    {
      "no": "3.3",
      "name": "Havuz / Küvet Damper",
      "slug": "havuz-kuvet-damper",
@@ -16973,6 +17162,228 @@
      ]
     },
     {
+     "no": "8.3",
+     "name": "Low-Bed Platform",
+     "slug": "low-bed-platform",
+     "aliases": [],
+     "variants": [
+      {
+       "model": "Low-Bed Platform",
+       "slug": "low-bed-platform",
+       "specs": [
+        {
+         "t": "g",
+         "x": "TEKNİK ÖLÇÜLER"
+        },
+        {
+         "t": "p",
+         "x": "Dış Uzunluk (L): 13.535 mm"
+        },
+        {
+         "t": "p",
+         "x": "Platform Uzaması (Pe): 6.900 mm platform uzaması"
+        },
+        {
+         "t": "p",
+         "x": "Araç Genişliği (W): 2.550 mm"
+        },
+        {
+         "t": "p",
+         "x": "Deve Boynu (NH): 120 mm"
+        },
+        {
+         "t": "p",
+         "x": "5.Teker Yüksekliği (H5): 950 mm"
+        },
+        {
+         "t": "p",
+         "x": "Platform Yüksekliği (Yüklü): 1.040 mm"
+        },
+        {
+         "t": "p",
+         "x": "5.Teker Yüksekliği (H5): 1.150 mm"
+        },
+        {
+         "t": "p",
+         "x": "Deve Boynu (NH): 180 mm"
+        },
+        {
+         "t": "p",
+         "x": "Araç Genişliği (W): 2.540 mm"
+        },
+        {
+         "t": "p",
+         "x": "Platform Uzunluğu: 13.600 mm"
+        },
+        {
+         "t": "p",
+         "x": "Platform Yüksekliği (Yüklü): 1.300 mm"
+        },
+        {
+         "t": "g",
+         "x": "TEKNİK KAPASİTE"
+        },
+        {
+         "t": "p",
+         "x": "King Pin Kapasitesi: 18.000 kg teknik king pin taşıma kapasitesi"
+        },
+        {
+         "t": "p",
+         "x": "Dingil Yükü: 27.000 kg"
+        },
+        {
+         "t": "p",
+         "x": "Toplam Araç Ağırlığı: Teknik Toplam Ağırlık [80 km/sa] 45.000 kg"
+        },
+        {
+         "t": "p",
+         "x": "Boş Ağırlık ±%3: 7.050 kg"
+        },
+        {
+         "t": "g",
+         "x": "TEKNİK BİLGİ"
+        },
+        {
+         "t": "p",
+         "x": "Şasi: ISO 1726 Standardına uygun yüksek mukavemetli çelik S700 MC"
+        },
+        {
+         "t": "p",
+         "x": "Fren Sistemi: UN ECE R13 yönetmeliğine uygun, antiblokaj (ABS) ve sürüş stabilite sistemi (RSS) içeren çift devreli elektro-pnömatik Wabco marka EBS 4S/3M fren sistemi"
+        },
+        {
+         "t": "p",
+         "x": "Lastik Ebadı: 445/45 R19.5 ebadında lastikler"
+        },
+        {
+         "t": "p",
+         "x": "Dingiller: BPW marka hava süspansiyonlu ve disk frenli dingiller"
+        },
+        {
+         "t": "p",
+         "x": "Elektrik Sistemi: 76/756/EEC Yönetmeliğine uygun 2 x 7 + 1 x 15 pin soketli 24 Volt aydınlatma tesisatı"
+        },
+        {
+         "t": "p",
+         "x": "Taban Döşeme: 2 mm omega profil arası 30 mm kalınlığında tahta zemin"
+        },
+        {
+         "t": "p",
+         "x": "Dümenleme Tipi: Öndeki 2 adet dingil sabit ve arkadaki 1 adet dingil serseridir"
+        },
+        {
+         "t": "p",
+         "x": "Ön Panel Tipi: 1.500 mm yüksekliğinde Code-XL sertifikalı çelik malzemeden ön panel"
+        },
+        {
+         "t": "p",
+         "x": "Şasi: Yüksek mukavemetli çelik S700 MC"
+        },
+        {
+         "t": "p",
+         "x": "Lastik Ebadı: 385/65 R 22.5 ebadında lastikler"
+        },
+        {
+         "t": "p",
+         "x": "Fren Sistemi: UN ECE R13 yönetmeliğine uygun, antiblokaj (ABS) ve sürüş stabilite sistemi (RSS) içeren çift devreli elektro-pnömatik Wabco marka EBS 2S/2M fren sistemi"
+        },
+        {
+         "t": "p",
+         "x": "Lastik Ebadı: 385/65/R 22.5 ebadında lastikler"
+        },
+        {
+         "t": "p",
+         "x": "Taban Döşeme: 30 mm kalınlığında sac omega arası tahta zemin"
+        }
+       ],
+       "has_specs": true
+      }
+     ]
+    },
+    {
+     "no": "8.4",
+     "name": "Lowbed",
+     "slug": "lowbed",
+     "aliases": [],
+     "variants": [
+      {
+       "model": "Lowbed",
+       "slug": "lowbed",
+       "specs": [
+        {
+         "t": "g",
+         "x": "Kasa"
+        },
+        {
+         "t": "p",
+         "x": "Üretiminde aşınmaya ve darbelere dayanıklı, yüksek mukavemetli yerli ve ithal saclar tercih edilir."
+        },
+        {
+         "t": "g",
+         "x": "Aydınlatma Sistemi"
+        },
+        {
+         "t": "p",
+         "x": "24 V aydınlatma, 2x7+1x15 pin soketlidir."
+        },
+        {
+         "t": "g",
+         "x": "Hidrolik Sistem"
+        },
+        {
+         "t": "p",
+         "x": "Uyumlu pompa ve silindirler tercih edilecektir."
+        },
+        {
+         "t": "g",
+         "x": "Boya"
+        },
+        {
+         "t": "p",
+         "x": "Girit metal kumlama, epoksi astar ve akrilik boya uygulaması (Fırınlı boya kabininde)."
+        },
+        {
+         "t": "g",
+         "x": "Standart Özellikler"
+        },
+        {
+         "t": "li",
+         "x": "Teker takozu"
+        },
+        {
+         "t": "li",
+         "x": "Sac çamurluk"
+        },
+        {
+         "t": "li",
+         "x": "Su tankı"
+        },
+        {
+         "t": "g",
+         "x": "Opsiyonlar"
+        },
+        {
+         "t": "li",
+         "x": "Taban lastiği"
+        },
+        {
+         "t": "li",
+         "x": "Baklavalı sac"
+        },
+        {
+         "t": "li",
+         "x": "Arka rampa"
+        },
+        {
+         "t": "li",
+         "x": "Uzunluk halatlı tambur"
+        }
+       ],
+       "has_specs": true
+      }
+     ]
+    },
+    {
      "no": "8.5",
      "name": "Önden Yüklemeli Lowbed",
      "slug": "onden-yuklemeli-lowbed",
@@ -17589,6 +18000,304 @@
    "slug": "platform",
    "products": [
     {
+     "no": "9.1",
+     "name": "Hafif Platform",
+     "slug": "hafif-platform",
+     "aliases": [],
+     "variants": [
+      {
+       "model": "Hafif Platform",
+       "slug": "hafif-platform",
+       "specs": [
+        {
+         "t": "g",
+         "x": "TEKNİK ÖLÇÜLER"
+        },
+        {
+         "t": "p",
+         "x": "5.Teker Yüksekliği (H5): 1.180 mm"
+        },
+        {
+         "t": "p",
+         "x": "Deve Boynu (NH): 200 mm"
+        },
+        {
+         "t": "p",
+         "x": "Dingil Mesafesi (Wb): 7.700 mm"
+        },
+        {
+         "t": "p",
+         "x": "Dış Uzunluk (L): 13.670 mm"
+        },
+        {
+         "t": "p",
+         "x": "Boş Ağırlık ±%3: 5.950 kg"
+        },
+        {
+         "t": "p",
+         "x": "Dış Uzunluk (L): 13.640 mm"
+        },
+        {
+         "t": "p",
+         "x": "Boş Ağırlık ±%3: 5.865 kg"
+        },
+        {
+         "t": "g",
+         "x": "TEKNİK KAPASİTE"
+        },
+        {
+         "t": "p",
+         "x": "King Pin Kapasitesi: 12.000 kg"
+        },
+        {
+         "t": "p",
+         "x": "Dingil Yükü: 27.000 kg"
+        },
+        {
+         "t": "p",
+         "x": "Toplam Ağırlık: 39.000 kg"
+        },
+        {
+         "t": "g",
+         "x": "TEKNİK BİLGİ"
+        },
+        {
+         "t": "p",
+         "x": "Şasi: ISO 1726 ve ISO 1726-2 Normuna uygun, KTL kaplı, kaliteli ve yüksek mukavamete sahip çelikten üretilmiştir. I kesitli iki adet lonjerondan meydana gelmektedir ve ana kros ile king pin krosu bağlantılıdır."
+        },
+        {
+         "t": "p",
+         "x": "Fren Sistemi: UN ECE R13 regülasyonuna uygun, antiblokaj (ABS) ve yalpa kontrol sistemi (RSS) içeren fren lambası üzerinden gerilim beslemesi (24V) bulunduran çift devreli elektro-pnömatik EBS 2S/2M fren sistemi bulunmaktadır."
+        },
+        {
+         "t": "p",
+         "x": "Lastik Ebadı: 385/65 R22.5"
+        },
+        {
+         "t": "p",
+         "x": "Dingiller: Her biri 9 ton teknik kapasiteli, BPW marka, disk frenli dingiller kullanılmaktadır."
+        },
+        {
+         "t": "p",
+         "x": "Elektrik Sistemi: UN ECE R48 regülasyonu ve ADR mevzuatına uygun 2x7 ve 1x15 pinli sokete sahip, 24 V Aspöck Marka aydınlatma sistemi bulunmaktadır. Ön pozisyon lambaları ve yan pozisyon lambaları Led'li ve arka stop lambaları Aspöck Europoint III ampullü tip aydınlatma sistemidir."
+        },
+        {
+         "t": "p",
+         "x": "Taban Döşeme: EN 283 normuna uygun, 5.460 kg forklift aks yüküne dayanıklı ve 30 mm kalınlığında fenol reçine kaplı kontraplak taban mevcuttur."
+        },
+        {
+         "t": "p",
+         "x": "Yük Bağlama Halkası: EN 12640 normuna uygun, televre üzerinde her biri 2,5 ton kapasiteli 13 x 2 adet yük bağlama halkası bulunmaktadır."
+        },
+        {
+         "t": "p",
+         "x": "Ön Panel Tipi: 1.500 mm yüksekliğinde, yüksek mukavemetli çelikten üretilmiş, rollform da şekillendirilmiş ön panel bulunmaktadır. Branda toplama yeri ve çalışma merdiveni bulunmaktadır. Ön panelin iç kısmında paneli içeriden gelecek darbelere karşı korumak üzere 30 mm kalınlığında kontraplak tabaka bulunmaktadır."
+        },
+        {
+         "t": "p",
+         "x": "Dikme Baba Ve Yuvası: Yok"
+        },
+        {
+         "t": "p",
+         "x": "Şasi: ISO 1726 ve ISO 1726-2 Normuna uygun, KTL kaplı, kaliteli ve yüksek mukavamete sahip çelikten üretilmiştir. I kesitli iki adet lonjerondan meydana gelmektedir ve ana kros ile king pin kros bağlantılıdır."
+        },
+        {
+         "t": "p",
+         "x": "Taban Döşeme: EN 283 normlarına uygun, 7.200 kg forklift aks yüküne dayanıklı, 30 mm kalınlığında sert tahta taban bulunmaktadır."
+        },
+        {
+         "t": "p",
+         "x": "Konteyner Kilitleri: 6x2 adet adet 1 x 20 ft ortada, 2 x 20 ft ve 1 x 40 ft HC konteyner taşımaya uygun konteyner kilidi bulunmaktadır."
+        },
+        {
+         "t": "p",
+         "x": "K-Fix: Televre üzerinde her 100 mm aralıkta bulunan, tek noktadan 2.5 ton teknik taşıma kapasiteli yük bağlama noktaları bulunmaktadır"
+        },
+        {
+         "t": "p",
+         "x": "Ön Panel Tipi: 1.500 mm yüksekliğinde, yüksek mukavemetli çelikten üretilmiş, rollform da şekillendirilmiş ön panel bulunmaktadır. Branda toplama yeri ve çalışma merdiveni bulunmaktadır. (30 mm kalınlığında ön panel iç kısmında Plywood koruma plakası bulunmaktadır)"
+        },
+        {
+         "t": "p",
+         "x": "Dikme Baba Ve Yuvası: 10 x 2 adet 83 x 83 mm ebadında baba yuvaları yan televre üzerinde, ek olarak 4 sıra 18 adet 83 mm x 83 mm ebadında baba yuvaları taban üzerinde bulunmaktadır."
+        }
+       ],
+       "has_specs": true
+      }
+     ]
+    },
+    {
+     "no": "9.2",
+     "name": "Platform",
+     "slug": "platform",
+     "aliases": [],
+     "variants": [
+      {
+       "model": "Platform Semi Treyler",
+       "slug": "platform-semi-treyler",
+       "specs": [
+        {
+         "t": "g",
+         "x": "Ölçüler"
+        },
+        {
+         "t": "p",
+         "x": "Genişlik: max. 2.550 mm"
+        },
+        {
+         "t": "p",
+         "x": "Yükseklik: max. 2.600 mm (Ön duvar yüksekliği dahil edilmiştir)"
+        },
+        {
+         "t": "p",
+         "x": "Dingil Mesafe Aralığı: 1.300 ~ 1.400 mm *"
+        },
+        {
+         "t": "p",
+         "x": "King-Pin Yüksekliği: 1.250 ~ 1.350 mm *"
+        },
+        {
+         "t": "p",
+         "x": "Boş Ağırlık: 8500 kg. ± %5"
+        },
+        {
+         "t": "g",
+         "x": "Kapasite"
+        },
+        {
+         "t": "p",
+         "x": "Taşıma Kapasitesi: 25 ~ 50 Ton"
+        },
+        {
+         "t": "p",
+         "x": "Kilit Sayısı: 4 ~ 12"
+        },
+        {
+         "t": "g",
+         "x": "Damper"
+        },
+        {
+         "t": "p",
+         "x": "Taşıyacağı Ürünler: Genel kargo yükleri, (çimento, tuğla, paket çimento, rulo metal vd.)"
+        },
+        {
+         "t": "p",
+         "x": "Sertifikalandırma: Almanya KBA araç tip onayı"
+        },
+        {
+         "t": "li",
+         "x": "Seçilen ürün tipine ve opsiyonel donanıma göre değişiklik gösterir."
+        },
+        {
+         "t": "g",
+         "x": "Platform"
+        },
+        {
+         "t": "p",
+         "x": "Kare kesitli, yüksek performanslı, yükleme ve boşaltma koşullarıyla uyumlu tasarım,"
+        },
+        {
+         "t": "p",
+         "x": "Aşınmaya ve darbelere karşı dayanıklı, yüksek mukavemetli çelik malzeme,"
+        },
+        {
+         "t": "p",
+         "x": "ISO 3834 Kaynaklı imalat kalite yeterlilik onayı mevcuttur,"
+        },
+        {
+         "t": "p",
+         "x": "Enlemesine konumlandırılmış, gövdeden gelen yükü taşıyacak sıklıkta ve eşit aralıklarla dizilmiş “Z” traversler,"
+        },
+        {
+         "t": "p",
+         "x": "Taban sacı, enine ve boyuna en geniş yekpare plakadan oluşur; yardımcı şasiye enlemesine yerleştirilen traverslere metot kaynak yöntemiyle eşit ve düzenli biçimde, mükemmel bir kaynak performansıyla birleştirilir. “U” formunda kıvrılarak mukavemeti artırılmış etek saclarıyla bütünlük sağlanır ve uzun ömürlü, emniyetli, yüksek mukavemetli bir taban ortaya çıkar. Yük tipine bağlı olarak kontrplak malzeme de uygulanabilir."
+        },
+        {
+         "t": "p",
+         "x": "En geniş yekpare plakadan üretilen, mukavemeti artırılmış bükümlerle donatılmış, taban ve sabit ön mesnetlerle bütünlük oluşturan güçlü ön duvar"
+        },
+        {
+         "t": "p",
+         "x": "Kapaklı, kapaksız, tam kapalı ve kafesli alternatifleriyle kullanıcı ihtiyaç ve beklentilerine uyumlu, eşsiz gövde yapısı."
+        },
+        {
+         "t": "g",
+         "x": "Şasi"
+        },
+        {
+         "t": "p",
+         "x": "Robotik kaynak teknolojisi ile üretilen, “I” kesitli, ara traverslerle güçlendirilmiş, burulma ve eğilmelere karşı esnek, devrilme emniyeti sağlayan, gövde dizaynına uyumlu, özel tasarım, yüksek mukavemetli çelik malzemeden tam şasi,"
+        },
+        {
+         "t": "p",
+         "x": "Şasi yan kolu üzerinde yer alan, yol şartlarından yürüyüş grubuna gelen kuvveti dağıtarak stresi azaltan bağlantı braketleri,"
+        },
+        {
+         "t": "p",
+         "x": "Şasi konstrüksiyonunu oluşturan parçalar, ISO 3834 Kaynaklı imalat kalite yeterlilik onayı çerçevesinde sertifikalı kaynakçılarca sinerjik kaynak makineleri kullanılarak mükemmel bir uyum içinde imal edilir."
+        },
+        {
+         "t": "g",
+         "x": "Şasi Ekipmanları"
+        },
+        {
+         "t": "p",
+         "x": "King-Pin: ECE R 55 regülasyonuna uygun aksam tip onaylı, 2” alttan sökülüp takılabilen"
+        },
+        {
+         "t": "p",
+         "x": "Mekanik Ayaklar: Her biri çift hızlı, 25 ton dinamik, 50 ton statik yük kapasiteli treyler destek ayakları,"
+        },
+        {
+         "t": "p",
+         "x": "Dingiller: Her biri 9 ton kapasiteli, hava süspansiyonlu, kampana veya disk frenli dingil seti"
+        },
+        {
+         "t": "p",
+         "x": "Jantlar: 11,75 x 22,5"
+        },
+        {
+         "t": "p",
+         "x": "Lastikler: 385/65 R 22,5"
+        },
+        {
+         "t": "p",
+         "x": "Fren Sistemi: ECE R 13 regülasyonuna uygun EBS fren sistemi"
+        },
+        {
+         "t": "p",
+         "x": "Elektrik Sistemi: ECE R 105 regülasyonuna uygun elektrik seti"
+        },
+        {
+         "t": "p",
+         "x": "Tampon: ECE R 58 regülasyonuna uygun"
+        },
+        {
+         "t": "g",
+         "x": "Boya"
+        },
+        {
+         "t": "p",
+         "x": "Boyama işlemi en az 2 kat epoksi astar ile yapılır,"
+        },
+        {
+         "t": "p",
+         "x": "Son kat olarak 2 kat akrilik boya ile “FIRIN BOYA” uygulaması,"
+        },
+        {
+         "t": "p",
+         "x": "Geliştirilmiş teknik teçhizat sayesinde gövdenin her noktasında homojen dağılım ve vernikli boya glossunda yüzey parlaklığı elde edilir."
+        },
+        {
+         "t": "p",
+         "x": "BARLAS, ürünlerinde değişiklik yapma hakkını saklı tutar. Verilen teknik bilgiler yaklaşık değerler olup standart ürün uygulamasını esas alır. Ölçüler, kamyonun marka ve modeline bağlı olarak farklılık gösterebilir. Yukarıdaki bilgiler teklif niteliğinde değildir. Ürünle ilgili diğer detay bilgilere bizimle iletişime geçerek ulaşabilirsiniz."
+        }
+       ],
+       "has_specs": true
+      }
+     ]
+    },
+    {
      "no": "9.3",
      "name": "Rulo Taşıyıcı Flatbed",
      "slug": "rulo-tasiyici-flatbed",
@@ -17767,8 +18476,8 @@
    "products": [
     {
      "no": "10.1",
-     "name": "Akslı Römork",
-     "slug": "aksli-romork",
+     "name": "2 Akslı Römork",
+     "slug": "2-aksli-romork",
      "aliases": [],
      "variants": [
       {
@@ -17897,59 +18606,13 @@
         }
        ],
        "has_specs": true
-      },
-      {
-       "model": "3 Akslı Römork",
-       "slug": "3-aksli-romork",
-       "specs": [
-        {
-         "t": "p",
-         "x": "Not: 2 Akslı Römork modeli ile aynı teknik yapıya sahiptir. Temel fark yürür aksam ve lastik kapasitesidir."
-        },
-        {
-         "t": "g",
-         "x": "Yürür Aksam"
-        },
-        {
-         "t": "p",
-         "x": "Hava süspansiyonlu, 70 tek kat makaslı, 3x9 veya 3x12 ton kapasiteli kampanalı yerli dingil seti."
-        },
-        {
-         "t": "p",
-         "x": "Barlas tarafından seçilen markada, 385x65xR22,5 ölçülerine 6 adet lastik ile bu lastiklere uyumlu jant ya da farklı ölçülerde lastikler."
-        }
-       ],
-       "has_specs": true
-      },
-      {
-       "model": "4 Akslı Römork",
-       "slug": "4-aksli-romork",
-       "specs": [
-        {
-         "t": "p",
-         "x": "Not: 3 Akslı Römork modeli ile benzer teknik özelliklere sahiptir."
-        },
-        {
-         "t": "g",
-         "x": "Yürür Aksam"
-        },
-        {
-         "t": "p",
-         "x": "Hava süspansiyonlu, 70 tek kat makaslı, 3x9 veya 3x12 ton kapasiteli kampanalı yerli dingil seti."
-        },
-        {
-         "t": "p",
-         "x": "Barlas tarafından seçilen markada, 385x65xR22,5 ölçülerinde 6 adet lastik ve bu lastiklerle uyumlu jant."
-        }
-       ],
-       "has_specs": true
       }
      ]
     },
     {
      "no": "10.2",
-     "name": "Dingilli Kamyon Taşıyıcı",
-     "slug": "dingilli-kamyon-tasiyici",
+     "name": "2 Dingilli Kamyon Taşıyıcı",
+     "slug": "2-dingilli-kamyon-tasiyici",
      "aliases": [],
      "variants": [
       {
@@ -17978,7 +18641,46 @@
         }
        ],
        "has_specs": true
-      },
+      }
+     ]
+    },
+    {
+     "no": "10.3",
+     "name": "3 Akslı Römork",
+     "slug": "3-aksli-romork",
+     "aliases": [],
+     "variants": [
+      {
+       "model": "3 Akslı Römork",
+       "slug": "3-aksli-romork",
+       "specs": [
+        {
+         "t": "p",
+         "x": "Not: 2 Akslı Römork modeli ile aynı teknik yapıya sahiptir. Temel fark yürür aksam ve lastik kapasitesidir."
+        },
+        {
+         "t": "g",
+         "x": "Yürür Aksam"
+        },
+        {
+         "t": "p",
+         "x": "Hava süspansiyonlu, 70 tek kat makaslı, 3x9 veya 3x12 ton kapasiteli kampanalı yerli dingil seti."
+        },
+        {
+         "t": "p",
+         "x": "Barlas tarafından seçilen markada, 385x65xR22,5 ölçülerine 6 adet lastik ile bu lastiklere uyumlu jant ya da farklı ölçülerde lastikler."
+        }
+       ],
+       "has_specs": true
+      }
+     ]
+    },
+    {
+     "no": "10.4",
+     "name": "3 Dingilli Kamyon Taşıyıcı",
+     "slug": "3-dingilli-kamyon-tasiyici",
+     "aliases": [],
+     "variants": [
       {
        "model": "3 Dingilli Kamyon Taşıyıcı",
        "slug": "3-dingilli-kamyon-tasiyici",
@@ -18009,7 +18711,208 @@
      ]
     },
     {
-     "no": "10.3",
+     "no": "10.5",
+     "name": "4 Akslı Römork",
+     "slug": "4-aksli-romork",
+     "aliases": [],
+     "variants": [
+      {
+       "model": "4 Akslı Römork",
+       "slug": "4-aksli-romork",
+       "specs": [
+        {
+         "t": "p",
+         "x": "Not: 3 Akslı Römork modeli ile benzer teknik özelliklere sahiptir."
+        },
+        {
+         "t": "g",
+         "x": "Yürür Aksam"
+        },
+        {
+         "t": "p",
+         "x": "Hava süspansiyonlu, 70 tek kat makaslı, 3x9 veya 3x12 ton kapasiteli kampanalı yerli dingil seti."
+        },
+        {
+         "t": "p",
+         "x": "Barlas tarafından seçilen markada, 385x65xR22,5 ölçülerinde 6 adet lastik ve bu lastiklerle uyumlu jant."
+        }
+       ],
+       "has_specs": true
+      }
+     ]
+    },
+    {
+     "no": "10.6",
+     "name": "6'lı Otomobil Taşıyıcı",
+     "slug": "6-li-otomobil-tasiyici",
+     "aliases": [],
+     "variants": [
+      {
+       "model": "6'lı Otomobil Taşıyıcı",
+       "slug": "6-li-otomobil-tasiyici",
+       "specs": [
+        {
+         "t": "g",
+         "x": "Şasi"
+        },
+        {
+         "t": "p",
+         "x": "Şasi ana sacı (ayna sacı – lonjeron), alt ve üst lamalar ile tüm krosların imalatında yüksek mukavemetli ithal ve st52 sac cinsi sac tercih edilir. Şasi, I kesitli formda robot kaynağıyla üretilir."
+        },
+        {
+         "t": "g",
+         "x": "Kasa"
+        },
+        {
+         "t": "p",
+         "x": "Üretimde aşınmaya ve darbelere dayanıklı, yüksek mukavemetli ithal saclar tercih edilir."
+        },
+        {
+         "t": "g",
+         "x": "Aydınlatma Sistemi"
+        },
+        {
+         "t": "p",
+         "x": "24 V aydınlatma, 2x7+1x15 pin soketlidir."
+        },
+        {
+         "t": "g",
+         "x": "Fren Sistemi"
+        },
+        {
+         "t": "p",
+         "x": "WABCO veya KNORR-BREMSE marka, RSS özellikli 2S-2M EBS sistemi."
+        },
+        {
+         "t": "g",
+         "x": "Yürür Aksam"
+        },
+        {
+         "t": "p",
+         "x": "Hava süspansiyonlu, 70 tek kat makaslı, 2x9 ton kapasiteli kampanalı yerli dingil seti."
+        },
+        {
+         "t": "p",
+         "x": "Barlas tarafından seçilen markada 8 adet lastik ile bu lastiklere uyumlu jant."
+        },
+        {
+         "t": "g",
+         "x": "Boya"
+        },
+        {
+         "t": "p",
+         "x": "Girit metal kumlama, epoksi astar ve akrilik boya uygulaması (Fırınlı boya kabininde)."
+        },
+        {
+         "t": "g",
+         "x": "Standart Aksesuarlar"
+        },
+        {
+         "t": "li",
+         "x": "2 hızlı mekanik park ayakları"
+        },
+        {
+         "t": "li",
+         "x": "1 adet borulu stepne yeri"
+        },
+        {
+         "t": "li",
+         "x": "1 adet takoz yeri ve takozu"
+        },
+        {
+         "t": "li",
+         "x": "2 adet dolap"
+        },
+        {
+         "t": "li",
+         "x": "Araçta 1 adet yangın söndürücü dolabı bulunur"
+        },
+        {
+         "t": "li",
+         "x": "1 adet su tankı"
+        },
+        {
+         "t": "li",
+         "x": "6 adet plastik tam çamurluk"
+        },
+        {
+         "t": "li",
+         "x": "1 adet tonaj saati"
+        },
+        {
+         "t": "g",
+         "x": "Standart Özellikler"
+        },
+        {
+         "t": "li",
+         "x": "1. dingil için manuel kaldırma ve fren kesici"
+        },
+        {
+         "t": "li",
+         "x": "Hidrolik açılır tampon"
+        },
+        {
+         "t": "li",
+         "x": "Hidrolik olarak açılan üst kat kızakları"
+        },
+        {
+         "t": "li",
+         "x": "Üst katlarda çelik halat ağı ve güvenlik çubukları"
+        },
+        {
+         "t": "li",
+         "x": "4000 Watt güce sahip Power Pack yağ basınçlandırıcı ünite"
+        },
+        {
+         "t": "g",
+         "x": "Opsiyonlar"
+        },
+        {
+         "t": "li",
+         "x": "Diskli dingiller"
+        },
+        {
+         "t": "li",
+         "x": "Alüminyum jant"
+        },
+        {
+         "t": "li",
+         "x": "Konteyner kilitleri"
+        },
+        {
+         "t": "li",
+         "x": "Park ayağı"
+        },
+        {
+         "t": "li",
+         "x": "King pin"
+        }
+       ],
+       "has_specs": true
+      }
+     ]
+    },
+    {
+     "no": "10.7",
+     "name": "8'li Otomobil Taşıyıcı",
+     "slug": "8-li-otomobil-tasiyici",
+     "aliases": [],
+     "variants": [
+      {
+       "model": "8'li Otomobil Taşıyıcı",
+       "slug": "8-li-otomobil-tasiyici",
+       "specs": [
+        {
+         "t": "p",
+         "x": "Not: Mevcut teknik dokümanlara göre 8'li Otomobil Taşıyıcı modelinin teknik özellikleri 6'lı Otomobil Taşıyıcı modeli ile aynıdır. İncelenen içeriklerde teknik farklılık tespit edilmemiştir."
+        }
+       ],
+       "has_specs": true
+      }
+     ]
+    },
+    {
+     "no": "10.8",
      "name": "Tarım Römork Dorse Treyler",
      "slug": "tarim-romork-dorse-treyler",
      "aliases": [],
@@ -18070,61 +18973,6 @@
    "name": "Diğer Özel Ürünler",
    "slug": "special",
    "products": [
-    {
-     "no": "11.11",
-     "name": "Oto Taşıyıcı Dorse",
-     "slug": "oto-tasiyici-dorse",
-     "aliases": [],
-     "variants": [
-      {
-       "model": "Oto Taşıyıcı Dorse",
-       "slug": "oto-tasiyici-dorse",
-       "specs": [
-        {
-         "t": "p",
-         "x": "Çift katlı uzayabilir oto taşıyıcı dorseler, otomobil taşımacılığına özel olarak tasarlanan ve üretilen yüksek kapasiteli taşıma çözümleridir. Taşınan araç sayısını artırmak amacıyla bu dorseler genellikle iki katlı bir yapıda tasarlanır. Üst katlar alt kattan farklı seviyelerde yer alır ve araçların yüklenip boşaltılmasına imkân verecek biçimde çoğunlukla hidrolik veya mekanik sistemlerle donatılır."
-        },
-        {
-         "t": "g",
-         "x": "Özellikler ve Avantajlar"
-        },
-        {
-         "t": "p",
-         "x": "Çift katlı uzayabilir oto taşıyıcı dorseleri öne çıkaran özellikler şunlardır:"
-        },
-        {
-         "t": "p",
-         "x": "Yüksek Kapasite: İki katlı yapıları sayesinde tek katlı dorselere göre daha fazla araç taşıma kapasitesine sahiptirler."
-        },
-        {
-         "t": "p",
-         "x": "Esnek Yükleme Sistemi: Hidrolik veya mekanik sistemlerle donatılmış üst ve alt katlar, araçların hızlı ve güvenli bir şekilde yüklenip boşaltılmasını sağlar."
-        },
-        {
-         "t": "p",
-         "x": "Dayanıklılık ve Güvenlik: Güçlü yapıları ve taşıma sırasında araçların sabitlenmesi için kullanılan güvenlik sistemleri, taşınan araçların güvenliğini sağlar."
-        },
-        {
-         "t": "p",
-         "x": "Uzun Mesafe Taşımacılığı: Uzun mesafe taşımacılığı için ideal olan bu dorseler, otomobil üreticileri, distribütörleri ve lojistik firmaları için önemli bir çözüm sunar."
-        },
-        {
-         "t": "p",
-         "x": "Operasyonel Verimlilik: Yüksek kapasiteleri ve hızlı yükleme/boşaltma sistemleri, operasyonel verimliliği artırır ve işletme maliyetlerini düşürmeye yardımcı olur."
-        },
-        {
-         "t": "g",
-         "x": "Sektördeki Kullanım Alanları"
-        },
-        {
-         "t": "p",
-         "x": "Otomobil üreticileri, satıcıları, taşıyıcı şirketler ve lojistik firmaları, çift katlı uzayabilir oto taşıyıcı dorseleri yaygın biçimde kullanır. Bu dorseler özellikle büyük miktarlarda otomobil taşıma gerektiren operasyonlarda tercih edilir."
-        }
-       ],
-       "has_specs": true
-      }
-     ]
-    },
     {
      "no": "11.1",
      "name": "Arazöz",
@@ -18556,6 +19404,93 @@
      ]
     },
     {
+     "no": "11.3",
+     "name": "Çöp Aktarma İstasyonu",
+     "slug": "cop-aktarma-istasyonu",
+     "aliases": [],
+     "variants": [
+      {
+       "model": "Çöp Aktarma İstasyonu",
+       "slug": "cop-aktarma-istasyonu",
+       "specs": [
+        {
+         "t": "g",
+         "x": "Kullanım Alanı"
+        },
+        {
+         "t": "p",
+         "x": "Özellikle sit alanlarında, arazi zorluğu yaşanan bölgelerde ve 5 ton - 100 ton aralığındaki bölge, şehir ve ilçelerde tercih edilir."
+        },
+        {
+         "t": "li",
+         "x": "Aktarma işlemini herhangi bir enerji gereksinimi olmaksızın gerçekleştirebilir."
+        },
+        {
+         "t": "li",
+         "x": "Çöp, taş, moloz ve benzeri atıkların aktarımında kullanım imkânı sunar."
+        },
+        {
+         "t": "li",
+         "x": "Yapısı sayesinde yer kaplamaz."
+        },
+        {
+         "t": "li",
+         "x": "İstenen boş alanlara rahatlıkla taşınabilir."
+        },
+        {
+         "t": "li",
+         "x": "Belediyeler ve özel sektör kullanımına uyumludur."
+        },
+        {
+         "t": "li",
+         "x": "Yatırım maliyeti, klasik aktarma istasyonlarına kıyasla daha düşüktür."
+        },
+        {
+         "t": "g",
+         "x": "Teknik Özellikler"
+        },
+        {
+         "t": "li",
+         "x": "Katı atık, çöp ve hayvan atıklarının balyalanması amacıyla kullanılır."
+        },
+        {
+         "t": "li",
+         "x": "Sıvı atıklar, yerinde süzüldükten sonra taşınır."
+        },
+        {
+         "t": "li",
+         "x": "Tonaj avantajı sağlar."
+        },
+        {
+         "t": "li",
+         "x": "Treyler üzerinde gereksiz bir sistem ağırlığı meydana getirmez."
+        },
+        {
+         "t": "li",
+         "x": "30 m³ - 150 m³ aralığında pres kapasitesi"
+        },
+        {
+         "t": "li",
+         "x": "İstenen uzunlukta balyalama olanağı"
+        },
+        {
+         "t": "li",
+         "x": "5 m - 25 m aralığında balya uzunluğu"
+        },
+        {
+         "t": "li",
+         "x": "Maksimum ölçü: 5 m x 25 m x 2,40 m"
+        },
+        {
+         "t": "li",
+         "x": "18 ton - 100 ton aralığında presli stoklama kapasitesi"
+        }
+       ],
+       "has_specs": true
+      }
+     ]
+    },
+    {
      "no": "11.4",
      "name": "Çöp Toplama",
      "slug": "cop-toplama",
@@ -18640,6 +19575,145 @@
         {
          "t": "li",
          "x": "Otomatik yağlama sistemi"
+        }
+       ],
+       "has_specs": true
+      }
+     ]
+    },
+    {
+     "no": "11.5",
+     "name": "Çöp Transfer",
+     "slug": "cop-transfer",
+     "aliases": [],
+     "variants": [
+      {
+       "model": "Çöp Transfer",
+       "slug": "cop-transfer",
+       "specs": [
+        {
+         "t": "g",
+         "x": "Şasi"
+        },
+        {
+         "t": "p",
+         "x": "Şasi ana sacı (ayna sacı – lonjeron), alt ve üst lamalar ile tüm krosların imalatında yüksek mukavemetli ithal ve st52 sac cinsi sac tercih edilir. Şasi, I kesitli formda robot kaynağıyla üretilir."
+        },
+        {
+         "t": "g",
+         "x": "Kasa"
+        },
+        {
+         "t": "li",
+         "x": "40 - 70 m³ ölçülerinde üretim"
+        },
+        {
+         "t": "li",
+         "x": "Üstten dolum sistemi"
+        },
+        {
+         "t": "li",
+         "x": "Kedili sıkıştırma sistemi"
+        },
+        {
+         "t": "li",
+         "x": "Arkadan boşaltım sistemi"
+        },
+        {
+         "t": "li",
+         "x": "Aşınmaya ve darbelere dayanıklı, yüksek mukavemetli ithal saclardan üretilir"
+        },
+        {
+         "t": "g",
+         "x": "Aydınlatma Sistemi"
+        },
+        {
+         "t": "p",
+         "x": "24 V aydınlatma, 2x7+1x15 pin soketlidir."
+        },
+        {
+         "t": "g",
+         "x": "Fren Sistemi"
+        },
+        {
+         "t": "p",
+         "x": "WABCO veya KNORR-BREMSE marka, RSS özellikli 2S-2M EBS sistemi."
+        },
+        {
+         "t": "g",
+         "x": "Yürür Aksam"
+        },
+        {
+         "t": "p",
+         "x": "Hava süspansiyonlu, 70 tek kat makaslı, 3x9 ton kapasiteli kampanalı yerli dingil seti."
+        },
+        {
+         "t": "p",
+         "x": "Barlas tarafından seçilen markada, 6+1 adet 385x65xR22,5 ölçülerinde lastik ve bu lastiklerle uyumlu jant."
+        },
+        {
+         "t": "g",
+         "x": "Boya"
+        },
+        {
+         "t": "p",
+         "x": "Girit metal kumlama, epoksi astar ve akrilik boya uygulaması (Fırınlı boya kabininde)."
+        },
+        {
+         "t": "g",
+         "x": "Standart Aksesuarlar"
+        },
+        {
+         "t": "li",
+         "x": "2 hızlı mekanik park ayakları"
+        },
+        {
+         "t": "li",
+         "x": "1 adet borulu stepne yeri"
+        },
+        {
+         "t": "li",
+         "x": "1 adet takoz yeri ve takozu"
+        },
+        {
+         "t": "li",
+         "x": "2 adet dolap"
+        },
+        {
+         "t": "li",
+         "x": "Araçta 1 adet yangın söndürücü dolabı bulunur"
+        },
+        {
+         "t": "li",
+         "x": "1 adet su tankı"
+        },
+        {
+         "t": "li",
+         "x": "6 adet plastik tam çamurluk"
+        },
+        {
+         "t": "li",
+         "x": "1 adet tonaj saati"
+        },
+        {
+         "t": "g",
+         "x": "Standart Özellikler"
+        },
+        {
+         "t": "li",
+         "x": "1. dingil için manuel kaldırma ve fren kesici"
+        },
+        {
+         "t": "g",
+         "x": "Opsiyonlar"
+        },
+        {
+         "t": "li",
+         "x": "Dizel motor"
+        },
+        {
+         "t": "li",
+         "x": "Hidrolik park ayağı"
         }
        ],
        "has_specs": true
@@ -19386,6 +20460,61 @@
         {
          "t": "g",
          "x": "CANLI HAYVAN TAŞIYICI"
+        }
+       ],
+       "has_specs": true
+      }
+     ]
+    },
+    {
+     "no": "11.11",
+     "name": "Oto Taşıyıcı Dorse",
+     "slug": "oto-tasiyici-dorse",
+     "aliases": [],
+     "variants": [
+      {
+       "model": "Oto Taşıyıcı Dorse",
+       "slug": "oto-tasiyici-dorse",
+       "specs": [
+        {
+         "t": "p",
+         "x": "Çift katlı uzayabilir oto taşıyıcı dorseler, otomobil taşımacılığına özel olarak tasarlanan ve üretilen yüksek kapasiteli taşıma çözümleridir. Taşınan araç sayısını artırmak amacıyla bu dorseler genellikle iki katlı bir yapıda tasarlanır. Üst katlar alt kattan farklı seviyelerde yer alır ve araçların yüklenip boşaltılmasına imkân verecek biçimde çoğunlukla hidrolik veya mekanik sistemlerle donatılır."
+        },
+        {
+         "t": "g",
+         "x": "Özellikler ve Avantajlar"
+        },
+        {
+         "t": "p",
+         "x": "Çift katlı uzayabilir oto taşıyıcı dorseleri öne çıkaran özellikler şunlardır:"
+        },
+        {
+         "t": "p",
+         "x": "Yüksek Kapasite: İki katlı yapıları sayesinde tek katlı dorselere göre daha fazla araç taşıma kapasitesine sahiptirler."
+        },
+        {
+         "t": "p",
+         "x": "Esnek Yükleme Sistemi: Hidrolik veya mekanik sistemlerle donatılmış üst ve alt katlar, araçların hızlı ve güvenli bir şekilde yüklenip boşaltılmasını sağlar."
+        },
+        {
+         "t": "p",
+         "x": "Dayanıklılık ve Güvenlik: Güçlü yapıları ve taşıma sırasında araçların sabitlenmesi için kullanılan güvenlik sistemleri, taşınan araçların güvenliğini sağlar."
+        },
+        {
+         "t": "p",
+         "x": "Uzun Mesafe Taşımacılığı: Uzun mesafe taşımacılığı için ideal olan bu dorseler, otomobil üreticileri, distribütörleri ve lojistik firmaları için önemli bir çözüm sunar."
+        },
+        {
+         "t": "p",
+         "x": "Operasyonel Verimlilik: Yüksek kapasiteleri ve hızlı yükleme/boşaltma sistemleri, operasyonel verimliliği artırır ve işletme maliyetlerini düşürmeye yardımcı olur."
+        },
+        {
+         "t": "g",
+         "x": "Sektördeki Kullanım Alanları"
+        },
+        {
+         "t": "p",
+         "x": "Otomobil üreticileri, satıcıları, taşıyıcı şirketler ve lojistik firmaları, çift katlı uzayabilir oto taşıyıcı dorseleri yaygın biçimde kullanır. Bu dorseler özellikle büyük miktarlarda otomobil taşıma gerektiren operasyonlarda tercih edilir."
         }
        ],
        "has_specs": true

@@ -43,6 +43,23 @@ $megaIcons = [
 
 $megaCategories = ProductCatalog::categories();
 
+$megaCoverStyle = static function (array $category): string {
+    $slug = $category['slug'];
+    $categoryPath = 'assets/images/category-' . $slug . '.jpg';
+    if (is_file(FCPATH . $categoryPath)) {
+        return '';
+    }
+
+    foreach ($category['products'] ?? [] as $product) {
+        $productPath = 'assets/images/products/' . $slug . '-' . $product['slug'] . '.jpg';
+        if (is_file(FCPATH . $productPath)) {
+            return 'background-image: url(\'' . base_url($productPath) . '?v=' . filemtime(FCPATH . $productPath) . '\'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center;';
+        }
+    }
+
+    return '';
+};
+
 /** Localized category strings with catalogue fallback. */
 $megaLang = static function (string $slug, string $suffix, string $fallback): string {
     $key   = 'Navigation.cat_' . str_replace('-', '_', $slug) . $suffix;
@@ -129,7 +146,7 @@ $megaLang = static function (string $slug, string $suffix, string $fallback): st
                             </div>
                         </div>
 
-                        <div class="mega-pane__media" data-img="category-<?= esc($slug, 'attr') ?>.jpg"
+                        <div class="mega-pane__media" data-img="category-<?= esc($slug, 'attr') ?>.jpg" style="<?= esc($megaCoverStyle($cat), 'attr') ?>"
                              data-mega-media aria-hidden="true">
                             <svg class="mega-pane__silhouette" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                  stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
