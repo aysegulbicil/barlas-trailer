@@ -55,6 +55,16 @@ return [
     // ---- Email (notification body) ----
     'email_subject' => 'New enquiry from the website',
     'email_intro'   => 'A new enquiry was received from the website contact form:',
+    // ---- Email (auto-reply to the user) ----
+    'autoreply_subject'       => 'We received your message — Barlas Trailer',
+    'autoreply_preheader'     => 'Your enquiry has reached us; we will get back to you shortly.',
+    'autoreply_greeting'      => 'Dear {0},',
+    'autoreply_intro'         => 'Your enquiry has successfully reached us. Our team will review your message and get back to you as soon as possible.',
+    'autoreply_summary_title' => 'The details you sent us',
+    'autoreply_closing'       => 'For urgent matters you can also reach us by phone or WhatsApp.',
+    'autoreply_regards'       => 'Best regards,',
+    'autoreply_team'          => 'The Barlas Trailer Team',
+    'autoreply_auto_note'     => 'This is an automated confirmation; you can reply directly to this email.',
 
     // ---- Contact info ----
     'info_title'     => 'Reach us directly',

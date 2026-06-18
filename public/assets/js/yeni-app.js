@@ -238,7 +238,10 @@
         var messages = root.querySelector('[data-ai-messages]');
         var form = root.querySelector('[data-ai-form]');
         var input = root.querySelector('[data-ai-input]');
+        var honeypot = root.querySelector('[data-ai-hp]');
+        var endpoint = root.dataset.endpoint || '';
         var demoResponse = root.dataset.demoResponse || '';
+        var errorMessage = root.dataset.errorMessage || demoResponse;
         var busy = false;
 
         var botAvatar = '<span class="msg__avatar" aria-hidden="true">' +
@@ -261,21 +264,143 @@
             return d.innerHTML;
         }
 
+        // Bot balonu: metin + urun/hizmet kartlari + iletisim butonlari (innerHTML'siz, XSS guvenli).
+        function renderBot(text, data) {
+            data = data || {};
+            var wrap = document.createElement('div');
+            wrap.className = 'msg msg--bot';
+            wrap.innerHTML = botAvatar;
+
+            var body = document.createElement('div');
+            body.className = 'msg__body';
+
+            var p = document.createElement('p');
+            String(text || '').split('\n').forEach(function (line, i) {
+                if (i > 0) p.appendChild(document.createElement('br'));
+                p.appendChild(document.createTextNode(line));
+            });
+            body.appendChild(p);
+
+            // Urun ve hizmet kartlari (Urune/Hizmete Git butonlu).
+            var cards = (data.products || []).concat(data.services || []);
+            if (cards.length) {
+                var grid = document.createElement('div');
+                grid.className = 'ai-cards';
+                cards.forEach(function (c) {
+                    if (!c || !c.url) return;
+                    var card = document.createElement('div');
+                    card.className = 'ai-card';
+
+                    if (c.image) {
+                        var im = document.createElement('img');
+                        im.className = 'ai-card__img';
+                        im.src = c.image;
+                        im.alt = c.name || '';
+                        im.loading = 'lazy';
+                        card.appendChild(im);
+                    }
+
+                    var info = document.createElement('div');
+                    info.className = 'ai-card__info';
+                    var nm = document.createElement('span');
+                    nm.className = 'ai-card__name';
+                    nm.textContent = c.name || '';
+                    info.appendChild(nm);
+                    if (c.category) {
+                        var cat = document.createElement('span');
+                        cat.className = 'ai-card__cat';
+                        cat.textContent = c.category;
+                        info.appendChild(cat);
+                    }
+                    card.appendChild(info);
+
+                    var go = document.createElement('a');
+                    go.className = 'ai-card__btn';
+                    go.href = c.url;
+                    go.textContent = (c.button || 'Git') + ' →';
+                    card.appendChild(go);
+
+                    grid.appendChild(card);
+                });
+                if (grid.childNodes.length) body.appendChild(grid);
+            }
+
+            // Iletisim (lead) butonlari.
+            if (data.cta && data.cta.actions && data.cta.actions.length) {
+                if (data.cta.text) {
+                    var ct = document.createElement('p');
+                    ct.className = 'ai-cta__text';
+                    ct.textContent = data.cta.text;
+                    body.appendChild(ct);
+                }
+                var actions = document.createElement('div');
+                actions.className = 'ai-cta';
+                data.cta.actions.forEach(function (a) {
+                    if (!a || !a.url) return;
+                    var btn = document.createElement('a');
+                    btn.className = 'ai-cta__btn ai-cta__btn--' + (a.type || 'contact');
+                    btn.href = a.url;
+                    btn.textContent = a.label || a.url;
+                    if (a.type === 'whatsapp') { btn.target = '_blank'; btn.rel = 'noopener'; }
+                    actions.appendChild(btn);
+                });
+                if (actions.childNodes.length) body.appendChild(actions);
+            }
+
+            wrap.appendChild(body);
+            messages.appendChild(wrap);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
         function send(text) {
-            if (busy || !text.trim()) return;
+            text = (text || '').trim();
+            if (busy || !text) return;
             busy = true;
 
-            append('<div class="msg msg--user"><p>' + esc(text.trim()) + '</p></div>');
+            append('<div class="msg msg--user"><p>' + esc(text) + '</p></div>');
             input.value = '';
 
             var typing = append('<div class="msg msg--bot msg--typing">' + botAvatar +
                 '<p><i></i><i></i><i></i></p></div>');
 
-            window.setTimeout(function () {
-                typing.remove();
-                append('<div class="msg msg--bot">' + botAvatar + '<p>' + esc(demoResponse) + '</p></div>');
-                busy = false;
-            }, 1100);
+            var started = Date.now();
+            function finish(answer, data) {
+                var wait = Math.max(0, 450 - (Date.now() - started));
+                window.setTimeout(function () {
+                    typing.remove();
+                    renderBot(answer, data);
+                    busy = false;
+                    input.focus();
+                }, wait);
+            }
+
+            if (!endpoint) {
+                finish(demoResponse, null);
+                return;
+            }
+
+            fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({ q: text, website: honeypot ? honeypot.value : '' })
+            })
+                .then(function (r) { return r.json().catch(function () { return null; }); })
+                .then(function (data) {
+                    if (data && typeof data.answer === 'string' && data.answer !== '') {
+                        finish(data.answer, data);
+                    } else if (data && data.ok && data.answer === '') {
+                        typing.remove();
+                        busy = false;
+                        input.focus();
+                    } else {
+                        finish(errorMessage, null);
+                    }
+                })
+                .catch(function () { finish(errorMessage, null); });
         }
 
         form.addEventListener('submit', function (e) {

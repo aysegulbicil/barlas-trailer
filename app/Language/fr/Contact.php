@@ -55,6 +55,16 @@ return [
     // ---- Email (notification body) ----
     'email_subject' => 'Nouvelle demande depuis le site web',
     'email_intro'   => 'Une nouvelle demande a été reçue via le formulaire de contact du site :',
+    // ---- E-mail (confirmation automatique au visiteur) ----
+    'autoreply_subject'       => 'Nous avons bien reçu votre message — Barlas Trailer',
+    'autoreply_preheader'     => 'Votre demande nous est parvenue ; nous vous répondrons dans les plus brefs délais.',
+    'autoreply_greeting'      => 'Bonjour {0},',
+    'autoreply_intro'         => 'Votre demande nous est bien parvenue. Notre équipe l’examinera et vous répondra dans les plus brefs délais.',
+    'autoreply_summary_title' => 'Les informations que vous nous avez transmises',
+    'autoreply_closing'       => 'Pour toute urgence, vous pouvez également nous joindre par téléphone ou WhatsApp.',
+    'autoreply_regards'       => 'Cordialement,',
+    'autoreply_team'          => 'L’équipe Barlas Trailer',
+    'autoreply_auto_note'     => 'Ceci est une confirmation automatique ; vous pouvez répondre directement à cet e-mail.',
 
     // ---- Contact info ----
     'info_title'     => 'Joignez-nous directement',

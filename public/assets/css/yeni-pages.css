@@ -625,6 +625,71 @@ main#main-content { display: block; }
 .media-panel.is-active { animation: media-fade .45s var(--ease-out) both; }
 @keyframes media-fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
+/* ----- Kategori filtreleri ----- */
+.media-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-block-end: clamp(1.4rem, 1rem + 1.5vw, 2.2rem);
+}
+.media-filter {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    padding: .5rem .95rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--bg-1);
+    color: var(--ink-2);
+    font: inherit;
+    font-size: .9rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color var(--ease-out) .2s, border-color var(--ease-out) .2s, background var(--ease-out) .2s;
+}
+.media-filter__count {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.4rem;
+    height: 1.4rem;
+    padding-inline: .4rem;
+    border-radius: var(--radius-pill);
+    background: var(--blue-soft);
+    color: var(--blue-bright);
+    font-size: .72rem;
+    font-weight: 700;
+}
+.media-filter.is-active {
+    color: #fff;
+    background: var(--blue);
+    border-color: var(--blue);
+}
+.media-filter.is-active .media-filter__count {
+    background: rgba(255, 255, 255, .22);
+    color: #fff;
+}
+@media (hover: hover) and (pointer: fine) {
+    .media-filter:not(.is-active):hover { color: var(--ink-1); border-color: var(--line-2); }
+}
+.media-filter:focus-visible { outline: 2px solid var(--blue-bright); outline-offset: 2px; }
+
+/* Dar ekranda filtreler tek satırda yatay kayar */
+@media (max-width: 560px) {
+    .media-filters {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+        margin-inline: calc(-1 * var(--space-4));
+        padding-inline: var(--space-4);
+    }
+    .media-filters::-webkit-scrollbar { display: none; }
+}
+
+/* Filtre dışında kalan görseller */
+.media-grid__item.is-hidden { display: none; }
+
 /* ----- Izgara ----- */
 .media-grid {
     list-style: none;
@@ -693,6 +758,8 @@ main#main-content { display: block; }
     border: 1px dashed var(--line-2);
     border-radius: var(--radius);
 }
+/* hidden özniteliği display:grid'i ezmesin (boş durum yalnız JS açınca görünür) */
+.media-empty[hidden] { display: none; }
 .media-empty__icon { color: var(--ink-3); }
 .media-empty__icon svg { width: 56px; height: 56px; }
 .media-empty__title { color: var(--ink-1); font-size: var(--fs-h3); margin: 0; }

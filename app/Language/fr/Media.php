@@ -21,6 +21,13 @@ return [
     'tab_photos' => 'Photos',
     'tab_videos' => 'Vidéos',
 
+    // Filtres par catégorie (Photos)
+    'filter_aria'              => 'Filtrer par catégorie',
+    'filter_all'               => 'Tout',
+    'cat_before_after'         => 'Avant / Après',
+    'before_after_empty_title' => 'Avant / Après bientôt disponible',
+    'before_after_empty'       => 'Des images avant-après seront bientôt ajoutées à cette catégorie.',
+
     // Photos — état vide
     'photos_empty_title' => 'Photos bientôt disponibles',
     'photos_empty_text'  => 'Des photos de production et de notre usine seront bientôt ajoutées ici.',

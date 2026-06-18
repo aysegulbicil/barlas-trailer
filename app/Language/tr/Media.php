@@ -21,6 +21,13 @@ return [
     'tab_photos' => 'Fotoğraflar',
     'tab_videos' => 'Videolar',
 
+    // Kategori filtreleri (Fotoğraflar)
+    'filter_aria'              => 'Kategoriye göre filtrele',
+    'filter_all'               => 'Tümü',
+    'cat_before_after'         => 'Önce / Sonra',
+    'before_after_empty_title' => 'Önce / Sonra yakında',
+    'before_after_empty'       => 'Bu kategoriye yakında öncesi–sonrası görselleri eklenecek.',
+
     // Fotoğraflar — boş durum
     'photos_empty_title' => 'Fotoğraflar yakında',
     'photos_empty_text'  => 'Bu alana yakında üretim ve tesis fotoğraflarımız eklenecek.',

@@ -21,6 +21,8 @@ return [
     'call_button'      => 'Позвонить',
     'related_title'    => 'Другие услуги',
     'back_to_services' => 'Все услуги',
+    'gallery_prev'     => 'Предыдущее фото',
+    'gallery_next'     => 'Следующее фото',
 
     'items' => [
         'trailer-repair' => [

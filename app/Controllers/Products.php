@@ -87,9 +87,16 @@ class Products extends BaseController
             $related[] = $siblings[($index + $step) % $count];
         }
 
+        // OG görseli: ürün fotoğrafı varsa WhatsApp/sosyal medya önizleme kartı
+        // bunu kullanır (assets/images/products/{kategori}-{ürün}.jpg). Yoksa
+        // meta.php varsayılan OG görseline düşer.
+        $imageRel  = 'assets/images/products/' . $categorySlug . '-' . $productSlug . '.jpg';
+        $metaImage = is_file(FCPATH . $imageRel) ? base_url($imageRel) : null;
+
         return view('pages/products/detail', [
             'metaTitle'       => $product['name'] . ' — ' . $this->categoryName($category),
             'metaDescription' => lang('Products.detail_meta', [$product['name']]),
+            'metaImage'       => $metaImage,
             'category'        => $category,
             'categoryName'    => $this->categoryName($category),
             'product'         => $product,

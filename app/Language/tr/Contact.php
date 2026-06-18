@@ -57,6 +57,16 @@ return [
     // ---- E-posta (bildirim gövdesi) ----
     'email_subject' => 'Web sitesinden yeni başvuru',
     'email_intro'   => 'Web sitesi iletişim formundan yeni bir başvuru alındı:',
+    // ---- E-posta (kullanıcıya otomatik onay) ----
+    'autoreply_subject'       => 'Talebinizi aldık — Barlas Trailer',
+    'autoreply_preheader'     => 'İletişim talebiniz bize ulaştı; en kısa sürede dönüş yapacağız.',
+    'autoreply_greeting'      => 'Sayın {0},',
+    'autoreply_intro'         => 'İletişim talebiniz bize başarıyla ulaştı. Ekibimiz mesajınızı en kısa sürede inceleyip size dönüş yapacaktır.',
+    'autoreply_summary_title' => 'Bize ilettiğiniz bilgiler',
+    'autoreply_closing'       => 'Acil durumlar için bize telefon ya da WhatsApp üzerinden de ulaşabilirsiniz.',
+    'autoreply_regards'       => 'Saygılarımızla,',
+    'autoreply_team'          => 'Barlas Trailer Ekibi',
+    'autoreply_auto_note'     => 'Bu otomatik bir bilgilendirme e-postasıdır; bu adrese doğrudan yanıt verebilirsiniz.',
 
     // ---- İletişim bilgileri ----
     'info_title'     => 'Doğrudan ulaşın',

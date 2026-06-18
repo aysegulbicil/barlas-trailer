@@ -5,21 +5,27 @@ namespace App\Controllers;
 /**
  * Contact controller
  *
- * index()  — renders the localized contact page (uses layouts/yeni).
- * submit() — validates the enquiry, ALWAYS persists it as a lead (so a
- *            message is never lost even before SMTP is configured), then
- *            sends a notification e-mail to the sales inbox as a best-effort
- *            layer. Responds with JSON for the AJAX (fetch) flow and falls
- *            back to a redirect + flashdata for no-JS submissions.
+ * index()    — renders the localized contact page (uses layouts/yeni).
+ * submit()   — validates the enquiry, ALWAYS persists it as a lead (so a
+ *              message is never lost even before SMTP is configured), then
+ *              (1) notifies the sales inbox and (2) sends an automatic
+ *              confirmation ("auto-reply") to the visitor — both best-effort.
+ *              Responds with JSON for the AJAX (fetch) flow and falls back to
+ *              a redirect + flashdata for no-JS submissions.
  *
- * NOTE — e-posta teslimi için: app/Config/Email.php (veya .env) içinde
- * protocol = 'smtp' ve SMTP bilgilerini doldurun. Doldurulana kadar her
+ * NOTE — e-posta teslimi için: .env (veya app/Config/Email.php) içinde
+ * email.protocol = smtp ve SMTP bilgilerini doldurun. Doldurulana kadar her
  * başvuru writable/leads/YYYY-MM.jsonl dosyasına yazılır; form yine çalışır.
  */
 class Contact extends BaseController
 {
-    /** Satış kutusu — bildirimler buraya gider / yanıtlar buradan döner. */
-    private const INBOX = 'info@barlastrailer.com';
+    /**
+     * Satış kutusu — bildirimler buraya gider / yanıtlar buradan döner.
+     * ŞİMDİLİK: gerçek bir alan adı postası (info@barlastrailer.com) henüz
+     * olmadığı için bildirimler test Gmail'ine yönlendirildi. Alan adı maili
+     * hazır olunca bu satırı tek başına değiştirmen yeterli.
+     */
+    private const INBOX = 'aysegullbicill@gmail.com';
 
     public function index(): string
     {
@@ -87,7 +93,8 @@ class Contact extends BaseController
         ];
 
         $this->persistLead($lead);   // her zaman: kayıt kaynağı
-        $this->notify($lead);        // en iyi çaba: e-posta (başarısızlık ölümcül değil)
+        $this->notify($lead);        // en iyi çaba: satış kutusuna bildirim
+        $this->autoReply($lead);     // en iyi çaba: kullanıcıya otomatik onay
 
         return $this->respondOk($wantsJson);
     }
@@ -139,7 +146,7 @@ class Contact extends BaseController
                 . str_repeat('-', 48) . "\n"
                 . 'Locale: ' . $lead['locale'] . '  |  IP: ' . $lead['ip'] . '  |  ' . $lead['time'] . "\n";
 
-            $email = service('email');
+            $email = service('email', null, false);
             $email->setFrom(self::INBOX, lang('Common.site_name'));
             $email->setTo(self::INBOX);
             if (filter_var($lead['email'], FILTER_VALIDATE_EMAIL)) {
@@ -148,11 +155,83 @@ class Contact extends BaseController
             $email->setSubject('[Web] ' . $subject . ' — ' . $lead['name']);
             $email->setMessage($body);
 
-            if (! $email->send(false)) {
-                log_message('error', '[contact] e-posta gönderilemedi: ' . $email->printDebugger(['headers']));
+            if (! $email->send()) {
+                log_message('error', '[contact] bildirim e-postası gönderilemedi: ' . $email->printDebugger(['headers']));
             }
         } catch (\Throwable $e) {
-            log_message('error', '[contact] e-posta istisnası: ' . $e->getMessage());
+            log_message('error', '[contact] bildirim e-postası istisnası: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Kullanıcıya otomatik onay (auto-reply) e-postası — en iyi çaba.
+     *
+     * Ziyaretçinin formda girdiği e-posta adresine, gezindiği dilde
+     * (lead['locale']) "bilgileriniz alınmıştır, en kısa sürede dönüş
+     * yapılacaktır" mesajını gönderir. SMTP yapılandırılmamışsa sessizce
+     * loglanır; form akışı yine başarıyla tamamlanır.
+     */
+    private function autoReply(array $lead): void
+    {
+        // Geçersiz adrese gönderme deneme.
+        if (! filter_var($lead['email'], FILTER_VALIDATE_EMAIL)) {
+            return;
+        }
+
+        try {
+            $locale   = $lead['locale'] ?: 'tr';
+            $siteName = lang('Common.site_name', [], $locale);
+
+            // Özet satırları — alan etiketleri kullanıcının diliyle.
+            $rows = [
+                lang('Contact.f_name',    [], $locale) => $lead['name'],
+                lang('Contact.f_email',   [], $locale) => $lead['email'],
+                lang('Contact.f_phone',   [], $locale) => $lead['phone']   ?: '—',
+                lang('Contact.f_company', [], $locale) => $lead['company'] ?: '—',
+                lang('Contact.f_subject', [], $locale) => $lead['subject'] ?: '—',
+                lang('Contact.f_message', [], $locale) => $lead['message'],
+            ];
+
+            $html = view('emails/autoreply', [
+                'locale'       => $locale,
+                'siteName'     => $siteName,
+                'preheader'    => lang('Contact.autoreply_preheader', [], $locale),
+                'greeting'     => lang('Contact.autoreply_greeting', [$lead['name']], $locale),
+                'intro'        => lang('Contact.autoreply_intro', [], $locale),
+                'summaryTitle' => lang('Contact.autoreply_summary_title', [], $locale),
+                'rows'         => $rows,
+                'closing'      => lang('Contact.autoreply_closing', [], $locale),
+                'regards'      => lang('Contact.autoreply_regards', [], $locale),
+                'team'         => lang('Contact.autoreply_team', [], $locale),
+                'autoNote'     => lang('Contact.autoreply_auto_note', [], $locale),
+            ]);
+
+            // HTML görüntülenemeyen istemciler için düz metin alternatifi.
+            $alt = lang('Contact.autoreply_greeting', [$lead['name']], $locale) . "\n\n"
+                . lang('Contact.autoreply_intro', [], $locale) . "\n\n"
+                . lang('Contact.autoreply_summary_title', [], $locale) . ":\n";
+            foreach ($rows as $label => $value) {
+                $alt .= '• ' . $label . ': ' . $value . "\n";
+            }
+            $alt .= "\n" . lang('Contact.autoreply_closing', [], $locale) . "\n\n"
+                . lang('Contact.autoreply_regards', [], $locale) . "\n"
+                . lang('Contact.autoreply_team', [], $locale);
+
+            // İzole (paylaşılmayan) örnek: notify() durumundan etkilenmez.
+            $email = service('email', null, false);
+            $email->setFrom(self::INBOX, $siteName);
+            $email->setTo($lead['email']);
+            $email->setReplyTo(self::INBOX, $siteName);
+            $email->setSubject(lang('Contact.autoreply_subject', [], $locale));
+            $email->setMailType('html');
+            $email->setMessage($html);
+            $email->setAltMessage($alt);
+
+            if (! $email->send()) {
+                log_message('error', '[contact] onay e-postası gönderilemedi: ' . $email->printDebugger(['headers']));
+            }
+        } catch (\Throwable $e) {
+            log_message('error', '[contact] onay e-postası istisnası: ' . $e->getMessage());
         }
     }
 }

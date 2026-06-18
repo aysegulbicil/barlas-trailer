@@ -21,6 +21,13 @@ return [
     'tab_photos' => 'الصور',
     'tab_videos' => 'الفيديوهات',
 
+    // مرشّحات الفئات (الصور)
+    'filter_aria'              => 'تصفية حسب الفئة',
+    'filter_all'               => 'الكل',
+    'cat_before_after'         => 'قبل / بعد',
+    'before_after_empty_title' => 'قبل / بعد قريبًا',
+    'before_after_empty'       => 'ستُضاف صور «قبل وبعد» إلى هذه الفئة قريبًا.',
+
     // الصور — حالة فارغة
     'photos_empty_title' => 'الصور قريبًا',
     'photos_empty_text'  => 'ستُضاف هنا قريبًا صور الإنتاج والمنشأة.',

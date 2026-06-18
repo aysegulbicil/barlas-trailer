@@ -297,6 +297,35 @@
     }
 
     /* ===================================================================
+       GLB NORMALİZE: modeli XZ'de ortala, tabanı gölge düzlemine indir,
+       en uzun yatay eksene göre hedef boya ölçekle, gerekirse Y'de döndür.
+       Bir "holder" döner; rig bunu içerir, yaylanma rig'e uygulanır.
+       =================================================================== */
+
+    function normalizeContactModel(THREE, root, targetLen, yaw) {
+        root.updateMatrixWorld(true);
+        var box = new THREE.Box3().setFromObject(root);
+        var size = box.getSize(new THREE.Vector3());
+        var center = box.getCenter(new THREE.Vector3());
+        root.position.x -= center.x;
+        root.position.z -= center.z;
+        root.position.y -= box.min.y;            /* taban -> y=0 */
+        root.traverse(function (o) {
+            if (o.isMesh && o.material) {
+                o.frustumCulled = false;
+                if (o.material.map) o.material.map.anisotropy = 8;
+                if ('envMapIntensity' in o.material) o.material.envMapIntensity = 1.0;
+            }
+        });
+        var holder = new THREE.Group();
+        holder.add(root);
+        holder.scale.setScalar(targetLen / (Math.max(size.x, size.z) || 1));
+        holder.rotation.y = yaw || 0;
+        holder.position.y = -1.12;               /* taban, gölge düzlemine otursun */
+        return holder;
+    }
+
+    /* ===================================================================
        SAHNE: TIR sağdan girer → frenler → yaylanır → park → formu getirir
        =================================================================== */
 
@@ -328,15 +357,13 @@
         rimL.position.set(7, 3, -5);
         scene.add(rimL);
 
-        /* Konvoy: çekici (ön, -X) + tanker dorse (arka, +X) — daha büyük */
+        /* Aktör: gerçek GLB kamyon (tanker-1.glb). Yaylanma, park ve çıkış
+           zaman çizelgesinin tamamı 'rig' grubuna uygulanır; bu yüzden ister
+           GLB ister prosedürel yedek olsun aynı şekilde çalışır. GLB'de ayrı
+           teker yoktur (giriş kayışıyla dönmez) — yaylanma korunur. */
         var rig = new THREE.Group();
-        var trailer = buildTanker(THREE);
-        trailer.position.set(1.6, 0.32, 0);
-        rig.add(trailer);
-        var tractor = buildTractor(THREE);
-        tractor.position.set(-2.55, 0.32, 0);
-        rig.add(tractor);
-        rig.scale.setScalar(1.16);
+        var wheels = [];
+        var WHEEL_R = 0.32;
 
         var shadow = new THREE.Mesh(
             new THREE.PlaneGeometry(12, 3.4),
@@ -351,8 +378,39 @@
         rig.position.set(REST_X, BASE_Y, 0);   // TIR dünyada sabit; "sürüş" konvoyu DOM olarak kayar
         scene.add(rig);
 
-        var wheels = trailer.userData.wheels.concat(tractor.userData.wheels);
-        var WHEEL_R = 0.32;
+        /* GLTFLoader yoksa / yükleme başarısızsa eski prosedürel çekici+tanker */
+        function buildProceduralRig() {
+            var trailer = buildTanker(THREE);
+            trailer.position.set(1.6, 0.32, 0);
+            rig.add(trailer);
+            var tractor = buildTractor(THREE);
+            tractor.position.set(-2.55, 0.32, 0);
+            rig.add(tractor);
+            rig.scale.setScalar(1.16);
+            wheels = trailer.userData.wheels.concat(tractor.userData.wheels);
+        }
+
+        var CONTACT_URL = window.__BARLAS_CONTACT_MODEL || null;
+        var CONTACT_YAW = 0;   /* kabin yanlış yöne bakarsa Math.PI yap */
+        if (window.GLTFLoader && CONTACT_URL) {
+            try {
+                new window.GLTFLoader().load(CONTACT_URL, function (gltf) {
+                    try {
+                        rig.add(normalizeContactModel(THREE, gltf.scene, 9.6, CONTACT_YAW));
+                    } catch (e) {
+                        if (window.console) console.error('[barlas-contact] normalize', e);
+                        buildProceduralRig();
+                    }
+                }, undefined, function (err) {
+                    if (window.console) console.error('[barlas-contact] glb yüklenemedi', err);
+                    buildProceduralRig();
+                });
+            } catch (e) {
+                buildProceduralRig();
+            }
+        } else {
+            buildProceduralRig();
+        }
 
         /* Konvoy (sahne + çeki demiri + form) tek parça olarak sağdan içeri sürülür.
            Tanker sabit kalır; tekerlekler bu kaymayla senkron döner → "çekiyor" hissi. */

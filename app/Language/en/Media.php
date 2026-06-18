@@ -21,6 +21,13 @@ return [
     'tab_photos' => 'Photos',
     'tab_videos' => 'Videos',
 
+    // Category filters (Photos)
+    'filter_aria'              => 'Filter by category',
+    'filter_all'               => 'All',
+    'cat_before_after'         => 'Before / After',
+    'before_after_empty_title' => 'Before / After coming soon',
+    'before_after_empty'       => 'Before-and-after images will be added to this category soon.',
+
     // Photos — empty state
     'photos_empty_title' => 'Photos coming soon',
     'photos_empty_text'  => 'Production and facility photos will be added here soon.',

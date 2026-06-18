@@ -21,6 +21,8 @@ return [
     'call_button'      => 'Appeler',
     'related_title'    => 'Autres services',
     'back_to_services' => 'Tous les services',
+    'gallery_prev'     => 'Image précédente',
+    'gallery_next'     => 'Image suivante',
 
     'items' => [
         'trailer-repair' => [

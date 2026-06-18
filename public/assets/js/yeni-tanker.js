@@ -8,8 +8,11 @@
  *
  * Aşamalı geliştirme: THREE yoksa, WebGL yoksa, ekran < 992px ise veya
  * reduced-motion açıksa hiç başlamaz; statik yedek görsel görünür kalır.
- * Gerçek bir .glb'ye geçiş: buildTanker() yerine GLTFLoader sonucu koyun
- * (uzunluk ~6 birim, tekerlekler userData.wheels altında).
+ *
+ * YOL SAHNESİ (initRoad): artık gerçek GLB kamyonlardan bir KONVOY yükler
+ * (window.__BARLAS_MODELS → assets/models/tanker-*.glb), art arda dizip
+ * akan yolda sürdürür. GLTFLoader yoksa/yükleme başarısızsa prosedürel
+ * çekici+tanker rig'ine düşer. HERO sahnesi (init) hâlâ prosedüreldir.
  */
 (function () {
     'use strict';
@@ -291,6 +294,103 @@
         return g;
     }
 
+    /* --------------- prosedürel yedek rig (GLB yoksa) ---------------- */
+
+    function buildProceduralRig(THREE) {
+        var rig = new THREE.Group();
+        var trailer = buildTanker(THREE);
+        trailer.position.set(1.6, 0.32, 0);
+        rig.add(trailer);
+        /* Showroom kontakt gölgesi yolda kapatılır */
+        trailer.children.forEach(function (child) {
+            if (child.geometry && child.geometry.type === 'PlaneGeometry') child.visible = false;
+        });
+        var tractor = buildTractor(THREE);
+        tractor.position.set(-2.55, 0.32, 0);
+        rig.add(tractor);
+        rig.scale.setScalar(0.92);
+        return { group: rig, wheels: trailer.userData.wheels.concat(tractor.userData.wheels) };
+    }
+
+    /* ------------------- GLB normalize + konvoy yükleyici ------------- */
+
+    /**
+     * GLB sahnesini standartlaştır: XZ'de ortala, tabanı y=0'a indir,
+     * uzunluğu (X) hedef birime ölçekle, gerekirse Y ekseninde döndür.
+     * Bir "holder" grubu döner; konvoy bunları X boyunca dizer.
+     */
+    function normalizeModel(THREE, root, targetLen, yaw) {
+        root.updateMatrixWorld(true);
+        var box = new THREE.Box3().setFromObject(root);
+        var size = box.getSize(new THREE.Vector3());
+        var center = box.getCenter(new THREE.Vector3());
+        root.position.x -= center.x;
+        root.position.z -= center.z;
+        root.position.y -= box.min.y;              /* taban -> y=0 */
+        root.traverse(function (o) {
+            if (o.isMesh && o.material) {
+                o.frustumCulled = false;
+                if (o.material.map) o.material.map.anisotropy = 8;
+                if ('envMapIntensity' in o.material) o.material.envMapIntensity = 1.0;
+            }
+        });
+        var holder = new THREE.Group();
+        holder.add(root);
+        /* Eşit boy: en uzun yatay eksene göre ölçekle (model X ya da Z uzun olabilir) */
+        holder.scale.setScalar(targetLen / (Math.max(size.x, size.z) || 1));
+        holder.rotation.y = yaw || 0;
+        holder.userData.targetLen = targetLen;
+        return holder;
+    }
+
+    /**
+     * Hero sahnesi için: modeli her eksende ortala (taban değil, merkez),
+     * en uzun yatay eksene göre hedef boya ölçekle. Hero, sahneyi y ekseninde
+     * hafifçe aşağıda konumlar; bu yüzden konvoydan farklı olarak Y de ortalanır.
+     */
+    function centerModel(THREE, root, targetLen, yaw) {
+        root.updateMatrixWorld(true);
+        var box = new THREE.Box3().setFromObject(root);
+        var size = box.getSize(new THREE.Vector3());
+        var center = box.getCenter(new THREE.Vector3());
+        root.position.x -= center.x;
+        root.position.y -= center.y;
+        root.position.z -= center.z;
+        root.traverse(function (o) {
+            if (o.isMesh && o.material) {
+                o.frustumCulled = false;
+                if (o.material.map) o.material.map.anisotropy = 8;
+                if ('envMapIntensity' in o.material) o.material.envMapIntensity = 1.0;
+            }
+        });
+        var holder = new THREE.Group();
+        holder.add(root);
+        holder.scale.setScalar(targetLen / (Math.max(size.x, size.z) || 1));
+        holder.rotation.y = yaw || 0;
+        return holder;
+    }
+
+    function loadConvoy(THREE, urls, opts, onTruck, onDone) {
+        var loader = new window.GLTFLoader();
+        var holders = new Array(urls.length);
+        var done = 0;
+        urls.forEach(function (url, i) {
+            loader.load(url, function (gltf) {
+                try {
+                    holders[i] = normalizeModel(THREE, gltf.scene, opts.targetLen,
+                        (opts.yaw && opts.yaw[i]) || 0);
+                    if (onTruck) onTruck(holders[i], i);
+                } catch (e) {
+                    if (window.console) console.error('[barlas-3d] normalize', e);
+                }
+                if (++done === urls.length && onDone) onDone(holders);
+            }, undefined, function (err) {
+                if (window.console) console.error('[barlas-3d] glb yüklenemedi', url, err);
+                if (++done === urls.length && onDone) onDone(holders);
+            });
+        });
+    }
+
     /* ------------------------- yol dokuları --------------------------- */
 
     function makeRoadTexture(THREE) {
@@ -340,6 +440,7 @@
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.05;
         stage.appendChild(renderer.domElement);
+        renderer.domElement.style.opacity = '0';   /* araç hazır olunca yumuşakça açılır */
 
         var scene = new THREE.Scene();
         scene.fog = new THREE.Fog(0x070d17, 16, 44);
@@ -358,25 +459,79 @@
         rimL.position.set(-7, 4, -6);
         scene.add(rimL);
 
-        /* Araç: çekici + tanker dorse (tek konvoy grubu, -X yönüne gider) */
-        var rig = new THREE.Group();
-        var trailer = buildTanker(THREE);
-        trailer.position.set(1.6, 0.32, 0);
-        rig.add(trailer);
-        /* Dorsenin kendi kontakt gölgesi showroom içindi; yolda kapatılır
-           (aksi halde asfaltın üzerinde asılı koyu elips görünür). */
-        trailer.children.forEach(function (child) {
-            if (child.geometry && child.geometry.type === 'PlaneGeometry') child.visible = false;
-        });
-        var tractor = buildTractor(THREE);
-        tractor.position.set(-2.55, 0.32, 0);
-        rig.add(tractor);
-        rig.scale.setScalar(0.92);
-        /* Teker altları asfalt yüzeyine (y=-1.02) tam otursun diye yükselt */
-        rig.position.y = 0.41;
-        scene.add(rig);
+        /* ---- Konvoy: gerçek GLB kamyonlar, art arda (-X yönüne sürer) ----
+           GLB modellerinde ayrı teker yok; hareket hissini yolun akışı ve
+           refüj direkleri verir. GLTFLoader yoksa / yükleme başarısızsa
+           eski prosedürel çekici+tanker rig'ine düşülür. */
+        var vehicle = new THREE.Group();
+        scene.add(vehicle);
+        var wheels = [];
+        var vehicleBaseY = -1.0;      /* asfalt ~ y=-1.02; kamyon tabanı oturur */
+        var vehicleReady = false;
+        var canvasFade = 0;
 
-        var wheels = trailer.userData.wheels.concat(tractor.userData.wheels);
+        var CONVOY = {
+            targetLen: 3.6,           /* her aracın dünya-birimi uzunluğu (eşit boy) */
+            lane: 1.9,                /* şerit ofseti (|z|): orta çizgiden uzaklık */
+            gap: 5.0,                 /* ön–arka mesafe (X) */
+            baseY: -1.0,
+            /* 4 model sırası: tanker-1, tanker-2, tanker-4, tanker-5.
+               Hepsinin kabini -X (ileri) → 0. Bir araç hâlâ ters görünürse
+               ilgili indise Math.PI yaz (önizlemedeki "Yön çevir" ile netleştir). */
+            yaw: [0, 0, 0, 0],
+            /* Dizilim: 2x2 konvoy — 2 önde + 2 arkada, iki şeritte. Orta çizgide
+               (z=0) kimse durmaz. fx: -1 ön / +1 arka (gidiş -X), ln: -1/+1 şerit. */
+            slots: [
+                { fx: -1, ln: -1 },   /* ön sol  (tanker-1) */
+                { fx: -1, ln:  1 },   /* ön sağ  (tanker-2) */
+                { fx:  1, ln: -1 },   /* arka sol (tanker-4) */
+                { fx:  1, ln:  1 }    /* arka sağ (tanker-5) */
+            ]
+        };
+        var MODEL_URLS = (window.__BARLAS_MODELS && window.__BARLAS_MODELS.length)
+            ? window.__BARLAS_MODELS
+            : ['assets/models/tanker-1.glb', 'assets/models/tanker-2.glb',
+               'assets/models/tanker-4.glb', 'assets/models/tanker-5.glb'];
+
+        function fitConvoy(holders) {
+            holders.forEach(function (h, k) {
+                if (!h) return;
+                var s = CONVOY.slots[k] || { fx: 0, ln: 0 };
+                h.position.x = s.fx * CONVOY.gap / 2;   /* ön: - / arka: + (gidiş -X) */
+                h.position.z = s.ln * CONVOY.lane;       /* şerit (orta çizgi dışı) */
+                vehicle.add(h);
+            });
+            vehicleBaseY = CONVOY.baseY;
+            vehicleReady = true;
+        }
+
+        function proceduralFallback() {
+            var rig = buildProceduralRig(THREE);
+            vehicle.add(rig.group);
+            for (var i = 0; i < rig.wheels.length; i++) wheels.push(rig.wheels[i]);
+            vehicleBaseY = 0.41;
+            vehicleReady = true;
+        }
+
+        function startConvoyLoad() {
+            if (!window.GLTFLoader) { proceduralFallback(); return; }
+            loadConvoy(THREE, MODEL_URLS, CONVOY, null, function (holders) {
+                if (holders.some(Boolean)) fitConvoy(holders);
+                else proceduralFallback();
+            });
+        }
+
+        /* Tembel yükleme: bölüm görünüme ~1 ekran kala başlat (rootMargin) */
+        var loadKicked = false;
+        function kickLoad() { if (loadKicked) return; loadKicked = true; startConvoyLoad(); }
+        if ('IntersectionObserver' in window) {
+            var lio = new IntersectionObserver(function (es) {
+                if (es[0].isIntersecting) { kickLoad(); lio.disconnect(); }
+            }, { rootMargin: '100% 0px' });
+            lio.observe(stage);
+        } else {
+            kickLoad();
+        }
 
         /* Yol */
         var roadTex = makeRoadTexture(THREE);
@@ -515,14 +670,20 @@
                 if (posts[i].position.x > 46) posts[i].position.x -= 90;
             }
 
-            /* Tekerlekler döner (yarıçap ~0.45 dünyada) */
+            /* Tekerlekler (prosedürel yedekte döner; GLB konvoyda liste boş) */
             for (var w = 0; w < wheels.length; w++) {
                 wheels[w].rotation.z += speed / 0.45;
             }
 
-            /* Süspansiyon esnemesi: hafif yaşam belirtisi (0.41 = zemin hizası) */
-            rig.position.y = 0.41 + Math.sin(t * 9) * 0.012;
-            rig.rotation.z = Math.sin(t * 6.3) * 0.0035;
+            /* Süspansiyon esnemesi + hafif yalpa (yaşam belirtisi) */
+            vehicle.position.y = vehicleBaseY + Math.sin(t * 9) * 0.012;
+            vehicle.rotation.z = Math.sin(t * 6.3) * 0.0035;
+
+            /* Araç yüklenince canvas'ı yumuşakça aç (altta statik görsel bekler) */
+            if (vehicleReady && canvasFade < 1) {
+                canvasFade = Math.min(1, canvasFade + 0.04);
+                renderer.domElement.style.opacity = canvasFade.toFixed(3);
+            }
 
             /* Kamera */
             lerpKeys(progress);
@@ -545,6 +706,8 @@
         if (THREE.sRGBEncoding !== undefined) renderer.outputEncoding = THREE.sRGBEncoding;
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.05;
+        /* Canvas sahne kutusundan geniş taşar; kopya/CTA tıklamalarını engellemesin */
+        renderer.domElement.style.pointerEvents = 'none';
         stage.appendChild(renderer.domElement);
 
         var scene = new THREE.Scene();
@@ -564,18 +727,63 @@
         rimL.position.set(-6, 3, -5);
         scene.add(rimL);
 
-        var tanker = buildTanker(THREE);
-        tanker.scale.setScalar(0.96);
+        /* Hero aktörü: gerçek GLB (tanker-3.glb). GLTFLoader yoksa ya da
+           yükleme başarısızsa prosedürel tankere düşülür. Model hazır olana
+           kadar canvas saydam kalır; altta statik görsel görünür (crossfade). */
+        var HERO_TARGET_LEN = 6.4;   /* dünya-birimi uzunluk (prosedürel ~6.1) */
+        var HERO_YAW = 0;            /* kabin yanlış yöne bakarsa Math.PI yap */
+        var tanker = new THREE.Group();
         scene.add(tanker);
+        var modelReady = false;
 
         var hero = document.querySelector('.hero');
-        if (hero) hero.classList.add('has-3d');
 
-        /* Boyutlandırma: sahne kutusuna göre */
+        function useProcedural() {
+            var t = buildTanker(THREE);
+            t.scale.setScalar(0.96);
+            tanker.add(t);
+            modelReady = true;
+        }
+
+        var HERO_URL = window.__BARLAS_HERO_MODEL || null;
+        if (window.GLTFLoader && HERO_URL) {
+            try {
+                new window.GLTFLoader().load(HERO_URL, function (gltf) {
+                    try {
+                        tanker.add(centerModel(THREE, gltf.scene, HERO_TARGET_LEN, HERO_YAW));
+                        modelReady = true;
+                    } catch (e) {
+                        if (window.console) console.error('[barlas-3d] hero normalize', e);
+                        useProcedural();
+                    }
+                }, undefined, function (err) {
+                    if (window.console) console.error('[barlas-3d] hero glb yüklenemedi', err);
+                    useProcedural();
+                });
+            } catch (e) {
+                useProcedural();
+            }
+        } else {
+            useProcedural();
+        }
+
+        /* Boyutlandırma: sahne kutusundan biraz GENİŞ render et (yanlara nefes
+           payı). Dikey FOV sabit olduğundan modelin yüksekliği/boyutu değişmez;
+           sadece yatay görüş alanı genişler → cursor orbit'te yanlardan kırpılmaz.
+           Canvas ortalanarak taşar; model sahne sütununun ortasında kalır. */
+        var SIDE_SCALE = 1.5;
         function size() {
             var r = stage.getBoundingClientRect();
-            var w = Math.max(1, r.width), h = Math.max(1, r.height);
+            var h = Math.max(1, r.height);
+            var baseW = Math.max(1, r.width);
+            var w = Math.round(baseW * SIDE_SCALE);
             renderer.setSize(w, h, false);
+            var el = renderer.domElement;
+            el.style.width = w + 'px';
+            el.style.height = h + 'px';
+            el.style.top = '0px';
+            el.style.left = Math.round((baseW - w) / 2) + 'px';
+            el.style.right = 'auto';
             camera.aspect = w / h;
             camera.updateProjectionMatrix();
         }
@@ -614,6 +822,7 @@
         var clock = new THREE.Clock();
         var running = true;
         var fadeIn = 0;
+        var heroSwapped = false;
 
         document.addEventListener('visibilitychange', function () {
             running = !document.hidden;
@@ -625,7 +834,14 @@
             window.requestAnimationFrame(loop);
 
             var t = clock.getElapsedTime();
-            fadeIn = Math.min(1, fadeIn + 0.02);
+            /* Model (GLB ya da prosedürel yedek) hazır olunca aç. */
+            if (modelReady) fadeIn = Math.min(1, fadeIn + 0.04);
+
+            /* Canvas yeterince açıldığında statik görseli gizle (crossfade). */
+            if (!heroSwapped && fadeIn > 0.6 && hero) {
+                hero.classList.add('has-3d');
+                heroSwapped = true;
+            }
 
             orbit.ry += ((pointer.x * 0.55) - orbit.ry) * 0.06;
             orbit.rx += ((pointer.y * 0.16) - orbit.rx) * 0.06;

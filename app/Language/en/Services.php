@@ -21,6 +21,8 @@ return [
     'call_button'      => 'Call Now',
     'related_title'    => 'Other services',
     'back_to_services' => 'All services',
+    'gallery_prev'     => 'Previous image',
+    'gallery_next'     => 'Next image',
 
     'items' => [
         'trailer-repair' => [

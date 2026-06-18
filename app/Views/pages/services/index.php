@@ -36,7 +36,7 @@ $this->extend('layouts/inner');
                 <span><?= esc(lang('Services.cta_text')) ?></span>
             </div>
             <div class="services-cta__actions">
-                <a class="btn btn--primary" href="<?= esc(locale_url('contact')) ?>">
+                <a class="btn btn--primary" href="<?= esc(locale_url('teklif')) ?>">
                     <?= esc(lang('Navigation.get_quote')) ?>
                 </a>
                 <a class="btn btn--outline" href="tel:<?= esc(lang('Common.phone_raw'), 'attr') ?>">

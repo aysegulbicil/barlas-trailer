@@ -58,7 +58,7 @@
                     <a class="btn btn--primary btn--lg" href="<?= esc(locale_url('products')) ?>">
                         <?= esc(lang('Home.hero_cta_primary')) ?>
                     </a>
-                    <a class="btn btn--ghost btn--lg" href="<?= esc(locale_url('contact')) ?>">
+                    <a class="btn btn--ghost btn--lg" href="<?= esc(locale_url('teklif')) ?>">
                         <?= esc(lang('Home.hero_cta_secondary')) ?>
                     </a>
                 </div>

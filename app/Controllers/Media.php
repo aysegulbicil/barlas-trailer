@@ -2,22 +2,26 @@
 
 namespace App\Controllers;
 
+use App\Libraries\ProductCatalog;
+
 /**
  * Media controller — "Medya" sayfası (fotoğraflar + videolar)
  *
- * İçerik DOSYA TABANLIDIR: kod düzenlemeye gerek yoktur. Sayfa, açılışta
- * şu iki klasörü tarar ve içindeki dosyaları otomatik listeler:
+ * FOTOĞRAFLAR — kategorili galeri (dosya tabanlı, kod düzenlemeye gerek yok):
+ *   • Ürün görselleri:
+ *       public/assets/images/products/{kategori}-{ürün}.jpg
+ *     ProductCatalog'taki 11 kategoriye göre otomatik gruplanır. Dosya adı
+ *     ürün sayfalarıyla aynı kuralı kullanır; yeni bir ürün görseli ekleyince
+ *     ilgili kategoride kendiliğinden listelenir.
+ *   • Önce / Sonra:
+ *       public/assets/media/before-after/  (.jpg .jpeg .png .webp .gif .avif)
+ *     Buraya bırakılan görseller — her biri tek karede öncesi+sonrasını
+ *     gösterir — "Önce / Sonra" kategorisi altında listelenir. Klasör boşken
+ *     bu kategori filtresi "yakında" durumu gösterir.
  *
- *   public/assets/media/photos/   →  Fotoğraflar sekmesi (.jpg .jpeg .png .webp .gif .avif)
- *   public/assets/media/videos/   →  Videolar sekmesi   (.mp4 .webm .ogg .mov)
- *
- * Video kapağı (poster): bir video ile aynı ada sahip bir görsel
- * (örn. tanitim.mp4 + tanitim.jpg) aynı klasöre konursa otomatik kapak olur.
- *
- * Klasörler boşken: sayfa boş kalmasın diye GEÇİCİ olarak sitedeki mevcut
- * görseller örnek olarak gösterilir (Fotoğraflar tek tek; Videolar "Yakında"
- * rozetli yer tutucu kartlar). Kendi dosyalarınızı yukarıdaki klasörlere
- * bıraktığınız an örnekler kaybolur, gerçek galeri/oynatıcılar görünür.
+ * VİDEOLAR — public/assets/media/videos/ taranır (.mp4 .webm .ogg .mov).
+ *   Klasör boşken "Yakında" rozetli yer tutucu kartlar gösterilir. Bir video
+ *   ile aynı ada sahip görsel (tanitim.mp4 + tanitim.jpg) otomatik kapak olur.
  */
 class Media extends BaseController
 {
@@ -26,24 +30,16 @@ class Media extends BaseController
     private const VIDEO_EXT  = ['mp4', 'webm', 'ogg', 'mov'];
     private const POSTER_EXT = ['jpg', 'jpeg', 'png', 'webp', 'avif'];
 
-    /** Klasör boşken Fotoğraflar sekmesinde gösterilecek örnek görseller. */
-    private const FALLBACK_PHOTOS = [
-        'hero-1.png', 'hero-2.png', 'hero-3.png',
-        'hero-11.png', 'hero-13.png', 'hero-33.png', 'about.jpg',
-    ];
+    /** Önce/Sonra kategorisinin slug'ı (filtre kimliği + klasör adı). */
+    private const BEFORE_AFTER = 'before-after';
 
     /** Yer tutucu video kartlarında küçük resim olarak kullanılacak görseller. */
     private const FALLBACK_VIDEO_THUMBS = ['hero-2.png', 'hero-3.png', 'hero-1.png'];
 
     public function index(): string
     {
-        // --- Fotoğraflar: klasör → yoksa örnek site görselleri ---
-        $photos          = $this->scanPhotos();
-        $photosAreSamples = false;
-        if ($photos === []) {
-            $photos          = $this->fallbackPhotos();
-            $photosAreSamples = true;
-        }
+        // --- Fotoğraflar: kategorili galeri (ürünler + Önce/Sonra) ---
+        [$photos, $categories] = $this->buildPhotoGallery();
 
         // --- Videolar: klasör → yoksa "Yakında" yer tutucu kartlar ---
         $videos               = $this->scanVideos();
@@ -57,32 +53,90 @@ class Media extends BaseController
             'metaTitle'            => lang('Media.meta_title'),
             'metaDescription'      => lang('Media.meta_description'),
             'photos'               => $photos,
-            'photosAreSamples'     => $photosAreSamples,
+            'categories'           => $categories,
             'videos'               => $videos,
             'videosArePlaceholder' => $videosArePlaceholder,
         ]);
     }
 
     /**
-     * Fotoğraf klasörünü tarar.
+     * Kategorili fotoğraf galerisini kurar.
      *
-     * @return list<array{url:string,alt:string,placeholder:bool}>
+     * Dönen değer iki listeden oluşur:
+     *   0 → bütün fotoğraflar  (her biri kategori slug'ıyla etiketli)
+     *   1 → filtre çubuğu      (görseli olan kategoriler + her zaman Önce/Sonra)
+     *
+     * @return array{
+     *     0: list<array{url:string,alt:string,cat:string}>,
+     *     1: list<array{slug:string,name:string,count:int}>
+     * }
      */
-    private function scanPhotos(): array
+    private function buildPhotoGallery(): array
     {
-        $dir   = FCPATH . 'assets/media/photos';
-        $files = $this->filesWithExt($dir, self::PHOTO_EXT);
+        $photos     = [];
+        $categories = [];
 
-        $photos = [];
-        foreach ($files as $file) {
+        // 1) Ürün görselleri — katalog sırasına göre kategoriler.
+        foreach (ProductCatalog::categories() as $category) {
+            $slug  = (string) ($category['slug'] ?? '');
+            if ($slug === '') {
+                continue;
+            }
+
+            $count = 0;
+            foreach ($category['products'] ?? [] as $product) {
+                $file = $slug . '-' . ($product['slug'] ?? '') . '.jpg';
+                if (! is_file(FCPATH . 'assets/images/products/' . $file)) {
+                    continue;
+                }
+                $photos[] = [
+                    'url' => base_url('assets/images/products/' . rawurlencode($file)),
+                    'alt' => (string) ($product['name'] ?? $this->categoryName($slug, $category)),
+                    'cat' => $slug,
+                ];
+                $count++;
+            }
+
+            if ($count > 0) {
+                $categories[] = [
+                    'slug'  => $slug,
+                    'name'  => $this->categoryName($slug, $category),
+                    'count' => $count,
+                ];
+            }
+        }
+
+        // 2) Önce / Sonra — kendi klasöründen tek tek görseller.
+        $baDir   = FCPATH . 'assets/media/' . self::BEFORE_AFTER;
+        $baFiles = $this->filesWithExt($baDir, self::PHOTO_EXT);
+        foreach ($baFiles as $file) {
             $photos[] = [
-                'url'         => base_url('assets/media/photos/' . rawurlencode($file)),
-                'alt'         => $this->prettyName($file),
-                'placeholder' => false,
+                'url' => base_url('assets/media/' . self::BEFORE_AFTER . '/' . rawurlencode($file)),
+                'alt' => $this->prettyName($file),
+                'cat' => self::BEFORE_AFTER,
             ];
         }
 
-        return $photos;
+        // Önce/Sonra her zaman bir filtre olarak görünür (boşken "yakında").
+        $categories[] = [
+            'slug'  => self::BEFORE_AFTER,
+            'name'  => lang('Media.cat_before_after'),
+            'count' => count($baFiles),
+        ];
+
+        return [$photos, $categories];
+    }
+
+    /**
+     * Bir kategorinin yerelleştirilmiş adı. Çeviri anahtarı yoksa katalogdaki
+     * ada düşer (Products controller'daki davranışla aynı).
+     */
+    private function categoryName(string $slug, array $category): string
+    {
+        $key   = 'Navigation.cat_' . str_replace('-', '_', $slug);
+        $label = lang($key);
+
+        return $label === $key ? (string) ($category['name'] ?? $slug) : $label;
     }
 
     /**
@@ -124,30 +178,6 @@ class Media extends BaseController
     }
 
     /**
-     * Klasör boşken gösterilecek örnek fotoğraflar (sitedeki görseller).
-     *
-     * @return list<array{url:string,alt:string,placeholder:bool}>
-     */
-    private function fallbackPhotos(): array
-    {
-        $alt = lang('Common.site_name');
-
-        $photos = [];
-        foreach (self::FALLBACK_PHOTOS as $file) {
-            if (! is_file(FCPATH . 'assets/images/' . $file)) {
-                continue;
-            }
-            $photos[] = [
-                'url'         => base_url('assets/images/' . $file),
-                'alt'         => $alt,
-                'placeholder' => true,
-            ];
-        }
-
-        return $photos;
-    }
-
-    /**
      * Klasör boşken gösterilecek "Yakında" yer tutucu video kartları.
      * Başlıklar dil dosyasından, küçük resimler sitedeki görsellerden gelir.
      *
@@ -178,8 +208,8 @@ class Media extends BaseController
     }
 
     /**
-     * Bir klasördeki, verilen uzantılara sahip dosya adlarını
-     * (poster görselleri hariç) doğal sırada döndürür.
+     * Bir klasördeki, verilen uzantılara sahip dosya adlarını doğal sırada
+     * döndürür.
      *
      * @param list<string> $ext
      * @return list<string>

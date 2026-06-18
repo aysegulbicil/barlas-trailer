@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barlas — Konvoy Önizleme</title>
+<style>
+  :root { --bg:#070d17; --panel:#0d1626; --line:#1d2a40; --txt:#e7eef9; --muted:#8aa0bf;
+          --blue:#3aa0ff; --accent:#f97316; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--txt);
+              font-family:Inter,system-ui,Segoe UI,Arial,sans-serif; overflow:hidden; }
+  #c { position:fixed; inset:0; display:block; }
+  #panel { position:fixed; top:14px; left:14px; width:268px; max-height:calc(100vh - 28px);
+           overflow:auto; background:rgba(13,22,38,.86); backdrop-filter:blur(8px);
+           border:1px solid var(--line); border-radius:14px; padding:14px 14px 12px;
+           font-size:13px; z-index:5; box-shadow:0 18px 50px rgba(0,0,0,.45); }
+  #panel h1 { font-family:Sora,Inter,sans-serif; font-size:14px; margin:0 0 2px; letter-spacing:.2px; }
+  #panel .sub { color:var(--muted); font-size:11.5px; margin:0 0 12px; line-height:1.4; }
+  .row { margin:10px 0; }
+  .row label { display:flex; justify-content:space-between; color:var(--muted); margin-bottom:5px; }
+  .row label b { color:var(--txt); font-weight:600; font-variant-numeric:tabular-nums; }
+  input[type=range] { width:100%; accent-color:var(--blue); }
+  .flips { display:flex; gap:8px; margin-top:6px; }
+  .flips label { display:flex; align-items:center; gap:5px; background:#0a1322; border:1px solid var(--line);
+                 border-radius:8px; padding:6px 8px; flex:1; color:var(--txt); cursor:pointer; font-size:12px; }
+  .flips input { accent-color:var(--accent); }
+  .btns { display:flex; gap:8px; margin-top:12px; }
+  button { flex:1; background:#13233b; color:var(--txt); border:1px solid var(--line); border-radius:9px;
+           padding:8px; font-size:12px; cursor:pointer; }
+  button:hover { border-color:var(--blue); }
+  button.primary { background:var(--blue); border-color:var(--blue); color:#04101f; font-weight:700; }
+  #vals { margin-top:10px; font-size:11px; color:var(--muted); background:#0a1322; border:1px solid var(--line);
+          border-radius:8px; padding:8px; white-space:pre-wrap; font-family:ui-monospace,Menlo,Consolas,monospace; }
+  #status { position:fixed; bottom:14px; left:14px; right:14px; z-index:5; display:flex; gap:8px;
+            flex-wrap:wrap; pointer-events:none; }
+  .chip { background:rgba(13,22,38,.86); border:1px solid var(--line); border-radius:999px;
+          padding:6px 12px; font-size:12px; color:var(--muted); }
+  .chip b { color:var(--txt); }
+  .chip.ok b { color:#7CFFB2; } .chip.err b { color:#ff8080; }
+  #err { position:fixed; inset:0; display:none; place-items:center; z-index:9; background:rgba(7,13,23,.92);
+         text-align:center; padding:24px; }
+  #err div { max-width:520px; } #err h2{ color:#ff9d9d; font-family:Sora,sans-serif; }
+  #err code { background:#0a1322; border:1px solid var(--line); padding:2px 7px; border-radius:6px; color:var(--blue); }
+  .hint { position:fixed; top:14px; right:14px; z-index:5; background:rgba(13,22,38,.86);
+          border:1px solid var(--line); border-radius:10px; padding:8px 12px; font-size:11.5px; color:var(--muted); }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="panel">
+  <h1>Konvoy Önizleme</h1>
+  <p class="sub">4 araç, 2x2 konvoy (2 önde + 2 arkada, iki şeritte). Döndürmek için sürükle, yakınlaşmak için tekerlek. Beğendiğin değerleri bana söyle.</p>
+
+  <div class="row">
+    <label>Kamyon uzunluğu <b id="vLen">3.6</b></label>
+    <input id="len" type="range" min="1.5" max="6" step="0.1" value="3.6">
+  </div>
+  <div class="row">
+    <label>Şerit aralığı <b id="vLane">1.9</b></label>
+    <input id="lane" type="range" min="0" max="3.5" step="0.1" value="1.9">
+  </div>
+  <div class="row">
+    <label>Ön–arka mesafe <b id="vGap">5.0</b></label>
+    <input id="gap" type="range" min="2" max="10" step="0.1" value="5.0">
+  </div>
+  <div class="row">
+    <label>Zemin yüksekliği <b id="vY">-1.00</b></label>
+    <input id="by" type="range" min="-2" max="0" step="0.05" value="-1.0">
+  </div>
+  <div class="row">
+    <label>Yol hızı <b id="vSpd">0.30</b></label>
+    <input id="spd" type="range" min="0" max="1" step="0.02" value="0.3">
+  </div>
+  <div class="row">
+    <label>Yön çevir (180°)</label>
+    <div class="flips">
+      <label><input type="checkbox" data-flip="0">T1</label>
+      <label><input type="checkbox" data-flip="1">T2</label>
+      <label><input type="checkbox" data-flip="2">T4</label>
+      <label><input type="checkbox" data-flip="3">T5</label>
+    </div>
+  </div>
+
+  <div class="btns">
+    <button id="reset">Sıfırla</button>
+    <button id="copy" class="primary">Değerleri kopyala</button>
+  </div>
+  <div id="vals"></div>
+</div>
+
+<div class="hint">Sürükle: döndür · Tekerlek: yakınlaş · Çift tık: oto-kamera</div>
+
+<div id="status">
+  <div class="chip" id="lib">three: <b>…</b></div>
+  <div class="chip" id="m0">tanker-1: <b>…</b></div>
+  <div class="chip" id="m1">tanker-2: <b>…</b></div>
+  <div class="chip" id="m2">tanker-4: <b>…</b></div>
+  <div class="chip" id="m3">tanker-5: <b>…</b></div>
+</div>
+
+<div id="err"><div>
+  <h2>Modeller yüklenemedi</h2>
+  <p>Bu sayfayı doğrudan dosyadan (file://) açtıysan tarayıcı .glb dosyalarını okuyamaz.
+  Lütfen yerel sunucu üzerinden aç:</p>
+  <p><code id="errurl">http://localhost:8080/assets/convoy-preview.html</code></p>
+</div></div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.149.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const MODELS = ['models/tanker-1.glb', 'models/tanker-2.glb', 'models/tanker-4.glb', 'models/tanker-5.glb'];
+const $ = (s) => document.querySelector(s);
+document.getElementById('errurl').textContent = location.origin + location.pathname;
+
+/* ---------- renderer / scene / camera ---------- */
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75));
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0x070d17, 18, 52);
+
+const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 0.1, 120);
+camera.position.set(-9, 3.4, 10);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 0.1, 0);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.maxPolarAngle = Math.PI * 0.52;
+
+/* ---------- studio env (fake HDRI) ---------- */
+function studioEnv() {
+  const c = document.createElement('canvas'); c.width = 1024; c.height = 512;
+  const x = c.getContext('2d');
+  const g = x.createLinearGradient(0, 0, 0, 512);
+  g.addColorStop(0, '#36435c'); g.addColorStop(.5, '#1b2436'); g.addColorStop(1, '#05080f');
+  x.fillStyle = g; x.fillRect(0, 0, 1024, 512);
+  const box = (a, b, w, h, col, al) => { x.save(); x.globalAlpha = al; x.filter = 'blur(14px)';
+    x.fillStyle = col; x.fillRect(a, b, w, h); x.restore(); };
+  box(90, 60, 300, 70, '#fff', .95); box(560, 95, 360, 56, '#dfe9f6', .8);
+  box(330, 205, 180, 36, '#9fc6ef', .55); box(0, 460, 1024, 52, '#1c2638', .9);
+  const t = new THREE.CanvasTexture(c); t.mapping = THREE.EquirectangularReflectionMapping; return t;
+}
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromEquirectangular(studioEnv()).texture; pmrem.dispose();
+
+scene.add(new THREE.HemisphereLight(0xbfd6ee, 0x0b1220, 0.5));
+const key = new THREE.DirectionalLight(0xffffff, 1.0); key.position.set(5, 8, 6); scene.add(key);
+const rim = new THREE.DirectionalLight(0x4aa3e6, 0.5); rim.position.set(-7, 4, -6); scene.add(rim);
+
+/* ---------- road + posts ---------- */
+function roadTexture() {
+  const c = document.createElement('canvas'); c.width = 1024; c.height = 512;
+  const x = c.getContext('2d');
+  x.fillStyle = '#10141c'; x.fillRect(0, 0, 1024, 512);
+  for (let i = 0; i < 900; i++) { x.fillStyle = 'rgba(255,255,255,' + (Math.random() * .03) + ')';
+    x.fillRect(Math.random() * 1024, Math.random() * 512, 2, 2); }
+  x.fillStyle = 'rgba(226,236,248,.35)'; x.fillRect(0, 54, 1024, 6); x.fillRect(0, 452, 1024, 6);
+  x.fillStyle = 'rgba(226,236,248,.5)'; for (let a = 0; a < 1024; a += 170) x.fillRect(a, 252, 90, 8);
+  const t = new THREE.CanvasTexture(c); t.wrapS = THREE.RepeatWrapping; t.repeat.set(4, 1); t.anisotropy = 8; return t;
+}
+const roadTex = roadTexture();
+const road = new THREE.Mesh(new THREE.PlaneGeometry(120, 9),
+  new THREE.MeshStandardMaterial({ map: roadTex, roughness: .95, metalness: 0 }));
+road.rotation.x = -Math.PI / 2; road.position.y = -1.02; scene.add(road);
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(160, 90),
+  new THREE.MeshStandardMaterial({ color: 0x0a1019, roughness: 1 }));
+ground.rotation.x = -Math.PI / 2; ground.position.y = -1.06; scene.add(ground);
+
+const posts = [];
+const pg = new THREE.BoxGeometry(0.08, 0.85, 0.08);
+const pm = new THREE.MeshStandardMaterial({ color: 0x2a3852, roughness: .8 });
+const cm = new THREE.MeshStandardMaterial({ color: 0x4aa3e6, emissive: 0x1c4a73, emissiveIntensity: .6 });
+for (let i = 0; i < 18; i++) [-5.6, 5.6].forEach((z) => {
+  const p = new THREE.Group(); p.add(new THREE.Mesh(pg, pm));
+  const cap = new THREE.Mesh(new THREE.BoxGeometry(.1, .08, .1), cm); cap.position.y = .46; p.add(cap);
+  p.position.set(-48 + i * 5.6 + (z > 0 ? 2.8 : 0), -0.62, z); scene.add(p); posts.push(p);
+});
+
+/* ---------- convoy ---------- */
+const vehicle = new THREE.Group(); scene.add(vehicle);
+const state = { len: 3.6, lane: 1.9, gap: 5.0, baseY: -1.0, spd: 0.3, flip: [false, false, false, false] };
+const trucks = [];   // { holder, sizeMax }
+
+function normalize(root) {
+  root.updateMatrixWorld(true);
+  const box = new THREE.Box3().setFromObject(root);
+  const size = box.getSize(new THREE.Vector3());
+  const center = box.getCenter(new THREE.Vector3());
+  root.position.x -= center.x; root.position.z -= center.z; root.position.y -= box.min.y;
+  root.traverse((o) => { if (o.isMesh && o.material) { o.frustumCulled = false;
+    if (o.material.map) o.material.map.anisotropy = 8; } });
+  const holder = new THREE.Group(); holder.add(root);
+  return { holder, sizeMax: Math.max(size.x, size.z) || 1 };
+}
+function slotsFor() {
+  // 2x2: 2 önde (fx=-1) + 2 arkada (fx=+1), iki şeritte (ln ±1). Orta çizgi boş.
+  return [
+    { fx: -1, ln: -1 },   // ön sol
+    { fx: -1, ln:  1 },   // ön sağ
+    { fx:  1, ln: -1 },   // arka sol
+    { fx:  1, ln:  1 }    // arka sağ
+  ];
+}
+function applyLayout() {
+  const slots = slotsFor();
+  trucks.forEach((t, k) => {
+    if (!t) return;
+    const s = slots[k] || { fx: 0, ln: 0 };
+    t.holder.scale.setScalar(state.len / t.sizeMax);
+    t.holder.rotation.y = state.flip[k] ? Math.PI : 0;
+    t.holder.position.x = s.fx * state.gap / 2;
+    t.holder.position.z = s.ln * state.lane;
+  });
+  vehicle.position.y = state.baseY;
+  readout();
+}
+function readout() {
+  $('#vLen').textContent = state.len.toFixed(1);
+  $('#vLane').textContent = state.lane.toFixed(1);
+  $('#vGap').textContent = state.gap.toFixed(1);
+  $('#vY').textContent = state.baseY.toFixed(2);
+  $('#vSpd').textContent = state.spd.toFixed(2);
+  $('#vals').textContent =
+    'targetLen: ' + state.len.toFixed(2) + '\nlane:      ' + state.lane.toFixed(2) +
+    '\ngap:       ' + state.gap.toFixed(2) + '\nbaseY:     ' + state.baseY.toFixed(2) +
+    '\nyaw flips: [' + state.flip.map((f) => f ? 'π' : '0').join(', ') + ']';
+}
+
+const loader = new GLTFLoader();
+let loaded = 0, failed = 0;
+MODELS.forEach((url, i) => {
+  loader.load(url, (gltf) => {
+    const n = normalize(gltf.scene);
+    trucks[i] = n; vehicle.add(n.holder);
+    const chip = $('#m' + i); chip.classList.add('ok'); chip.querySelector('b').textContent = 'tamam';
+    loaded++; applyLayout();
+  }, undefined, (e) => {
+    failed++; const chip = $('#m' + i); chip.classList.add('err'); chip.querySelector('b').textContent = 'hata';
+    if (failed === 1) $('#err').style.display = 'grid';
+    console.error('yüklenemedi', url, e);
+  });
+});
+
+/* ---------- controls wiring ---------- */
+$('#len').addEventListener('input', (e) => { state.len = +e.target.value; applyLayout(); });
+$('#lane').addEventListener('input', (e) => { state.lane = +e.target.value; applyLayout(); });
+$('#gap').addEventListener('input', (e) => { state.gap = +e.target.value; applyLayout(); });
+$('#by').addEventListener('input', (e) => { state.baseY = +e.target.value; applyLayout(); });
+$('#spd').addEventListener('input', (e) => { state.spd = +e.target.value; readout(); });
+document.querySelectorAll('[data-flip]').forEach((cb) => cb.addEventListener('change', (e) => {
+  state.flip[+e.target.dataset.flip] = e.target.checked; applyLayout();
+}));
+$('#reset').addEventListener('click', () => {
+  Object.assign(state, { len: 3.6, lane: 1.9, gap: 5.0, baseY: -1.0, spd: 0.3, flip: [false, false, false, false] });
+  $('#len').value = 3.6; $('#lane').value = 1.9; $('#gap').value = 5.0; $('#by').value = -1.0; $('#spd').value = 0.3;
+  document.querySelectorAll('[data-flip]').forEach((cb, i) => cb.checked = state.flip[i]);
+  applyLayout();
+});
+$('#copy').addEventListener('click', () => {
+  navigator.clipboard && navigator.clipboard.writeText($('#vals').textContent);
+  $('#copy').textContent = 'Kopyalandı ✓'; setTimeout(() => $('#copy').textContent = 'Değerleri kopyala', 1200);
+});
+
+/* auto-camera toggle on double click */
+let auto = false;
+renderer.domElement.addEventListener('dblclick', () => { auto = !auto; controls.enabled = !auto; });
+
+/* ---------- loop ---------- */
+$('#lib').classList.add('ok'); $('#lib').querySelector('b').textContent = 'r' + THREE.REVISION;
+const clock = new THREE.Clock();
+function resize() { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+
+function tick() {
+  requestAnimationFrame(tick);
+  const t = clock.getElapsedTime();
+  const s = 0.06 + state.spd * 0.5;
+  roadTex.offset.x -= s * 0.055;
+  for (const p of posts) { p.position.x += s; if (p.position.x > 50) p.position.x -= 105; }
+  vehicle.position.y = state.baseY + Math.sin(t * 9) * 0.012;
+  vehicle.rotation.z = Math.sin(t * 6.3) * 0.0035;
+  if (auto) { const a = t * 0.18; camera.position.set(Math.cos(a) * 11, 3.2 + Math.sin(t * 0.4) * 1.2, Math.sin(a) * 11); camera.lookAt(0, 0.1, 0); }
+  else controls.update();
+  renderer.render(scene, camera);
+}
+tick();
+</script>
+</body>
+</html>

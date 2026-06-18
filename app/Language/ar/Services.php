@@ -21,6 +21,8 @@ return [
     'call_button'      => 'اتصل الآن',
     'related_title'    => 'خدمات أخرى',
     'back_to_services' => 'جميع الخدمات',
+    'gallery_prev'     => 'الصورة السابقة',
+    'gallery_next'     => 'الصورة التالية',
 
     'items' => [
         'trailer-repair' => [
