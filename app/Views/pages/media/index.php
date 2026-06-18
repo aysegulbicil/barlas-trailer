@@ -17,8 +17,8 @@
 $this->extend('layouts/inner');
 
 $photos               = $photos ?? [];
+$categories           = $categories ?? [];
 $videos               = $videos ?? [];
-$photosAreSamples     = $photosAreSamples ?? false;
 $videosArePlaceholder = $videosArePlaceholder ?? false;
 ?>
 
@@ -73,7 +73,7 @@ $videosArePlaceholder = $videosArePlaceholder ?? false;
         <div class="media-panel is-active" role="tabpanel" id="panel-photos"
              aria-labelledby="tab-photos" data-panel="photos" tabindex="0">
 
-            <?php if (empty($photos)): ?>
+            <?php if (empty($photos) && empty($categories)): ?>
                 <div class="media-empty">
                     <span class="media-empty__icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -86,11 +86,27 @@ $videosArePlaceholder = $videosArePlaceholder ?? false;
                     <p class="media-empty__text"><?= esc(lang('Media.photos_empty_text')) ?></p>
                 </div>
             <?php else: ?>
-                <?php if ($photosAreSamples): ?>
-                <?php endif; ?>
-                <ul class="media-grid" data-lightbox-group>
+                <!-- Kategori filtreleri -->
+                <div class="media-filters" role="group"
+                     aria-label="<?= esc(lang('Media.filter_aria'), 'attr') ?>" data-filters>
+                    <button class="media-filter is-active" type="button" data-filter="all" aria-pressed="true">
+                        <span><?= esc(lang('Media.filter_all')) ?></span>
+                        <span class="media-filter__count"><?= esc((string) count($photos)) ?></span>
+                    </button>
+                    <?php foreach ($categories as $cat): ?>
+                        <button class="media-filter" type="button"
+                                data-filter="<?= esc($cat['slug'], 'attr') ?>" aria-pressed="false">
+                            <span><?= esc($cat['name']) ?></span>
+                            <?php if ($cat['count'] > 0): ?>
+                                <span class="media-filter__count"><?= esc((string) $cat['count']) ?></span>
+                            <?php endif; ?>
+                        </button>
+                    <?php endforeach; ?>
+                </div>
+
+                <ul class="media-grid" data-lightbox-group data-photo-grid>
                     <?php foreach ($photos as $photo): ?>
-                        <li class="media-grid__item">
+                        <li class="media-grid__item" data-cat="<?= esc($photo['cat'], 'attr') ?>">
                             <button class="media-thumb" type="button"
                                     data-lightbox data-src="<?= esc($photo['url'], 'attr') ?>"
                                     data-alt="<?= esc($photo['alt'], 'attr') ?>"
@@ -107,6 +123,19 @@ $videosArePlaceholder = $videosArePlaceholder ?? false;
                         </li>
                     <?php endforeach; ?>
                 </ul>
+
+                <!-- Seçili kategoride görsel yoksa (örn. Önce/Sonra henüz boş) -->
+                <div class="media-empty" data-photo-empty hidden>
+                    <span class="media-empty__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="16" rx="2.5"></rect>
+                            <circle cx="8.5" cy="9.5" r="1.7"></circle>
+                            <path d="M21 16l-5-5L5 20"></path>
+                        </svg>
+                    </span>
+                    <h2 class="media-empty__title"><?= esc(lang('Media.before_after_empty_title')) ?></h2>
+                    <p class="media-empty__text"><?= esc(lang('Media.before_after_empty')) ?></p>
+                </div>
             <?php endif; ?>
         </div>
 
@@ -220,6 +249,38 @@ $videosArePlaceholder = $videosArePlaceholder ?? false;
         if (h.indexOf('video') !== -1) { activate('videos'); }
     }
 
+    /* ---------------- Kategori filtreleri (Fotoğraflar) ---------------- */
+    var filterBar  = document.querySelector('[data-filters]');
+    var photoGrid  = document.querySelector('[data-photo-grid]');
+    var photoEmpty = document.querySelector('[data-photo-empty]');
+    if (filterBar && photoGrid) {
+        var filterBtns = Array.prototype.slice.call(filterBar.querySelectorAll('[data-filter]'));
+        var photoItems = Array.prototype.slice.call(photoGrid.querySelectorAll('.media-grid__item'));
+
+        function applyFilter(cat) {
+            var visible = 0;
+            photoItems.forEach(function (li) {
+                var on = cat === 'all' || li.getAttribute('data-cat') === cat;
+                li.classList.toggle('is-hidden', !on);
+                if (on) { visible++; }
+            });
+            filterBtns.forEach(function (b) {
+                var active = b.getAttribute('data-filter') === cat;
+                b.classList.toggle('is-active', active);
+                b.setAttribute('aria-pressed', active ? 'true' : 'false');
+            });
+            photoGrid.style.display = visible === 0 ? 'none' : '';
+            if (photoEmpty) {
+                if (visible === 0) { photoEmpty.removeAttribute('hidden'); }
+                else { photoEmpty.setAttribute('hidden', ''); }
+            }
+        }
+
+        filterBtns.forEach(function (b) {
+            b.addEventListener('click', function () { applyFilter(b.getAttribute('data-filter')); });
+        });
+    }
+
     /* ---------------- Lightbox (sekmeye göre gruplanır) ---------------- */
     var modal = document.querySelector('[data-lightbox-modal]');
     if (modal) {
@@ -238,7 +299,11 @@ $videosArePlaceholder = $videosArePlaceholder ?? false;
         }
         function openFrom(trigger) {
             var scope = trigger.closest('[data-lightbox-group]') || document;
-            group = Array.prototype.slice.call(scope.querySelectorAll('[data-lightbox]'));
+            // Yalnızca o an görünür (filtrelenmemiş) görseller gezilir.
+            group = Array.prototype.slice.call(scope.querySelectorAll('[data-lightbox]')).filter(function (el) {
+                var li = el.closest('.media-grid__item');
+                return !li || !li.classList.contains('is-hidden');
+            });
             var solo = group.length < 2;
             if (prevBtn) { prevBtn.style.display = solo ? 'none' : ''; }
             if (nextBtn) { nextBtn.style.display = solo ? 'none' : ''; }

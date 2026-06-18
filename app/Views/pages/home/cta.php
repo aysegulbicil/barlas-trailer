@@ -14,7 +14,7 @@
             <p class="cta-band__lead"><?= esc(lang('Home.cta_lead')) ?></p>
         </div>
         <div class="cta-band__actions">
-            <a class="btn btn--light btn--lg" href="<?= esc(locale_url('contact')) ?>">
+            <a class="btn btn--light btn--lg" href="<?= esc(locale_url('teklif')) ?>">
                 <?= esc(lang('Home.cta_button')) ?>
             </a>
             <a class="btn btn--ghost btn--lg" href="tel:<?= esc(lang('Common.phone_raw'), 'attr') ?>">

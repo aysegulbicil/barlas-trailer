@@ -25,6 +25,8 @@ return [
     'call_button'      => 'Hemen Ara',
     'related_title'    => 'Diğer hizmetler',
     'back_to_services' => 'Tüm hizmetler',
+    'gallery_prev'     => 'Önceki görsel',
+    'gallery_next'     => 'Sonraki görsel',
 
     'items' => [
         'trailer-repair' => [

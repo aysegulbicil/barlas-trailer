@@ -68,10 +68,51 @@ $asset = static function (string $path): string {
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js" defer></script>
     <script src="<?= $asset('assets/js/yeni-app.js') ?>" defer></script>
-    <script src="<?= $asset('assets/js/yeni-tanker.js') ?>" defer></script>
     <script src="<?= $asset('assets/js/theme-toggle.js') ?>" defer></script>
+
+    <!-- 3D: tek bir THREE örneği (ESM) + GLTFLoader. three 0.149 artık global
+         "examples/js" sunmuyor; bu yüzden import map ile 'three' eşlenir ve
+         GLTFLoader aynı örneği kullanır. Hazır olunca yeni-tanker.js yüklenir. -->
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.149.0/examples/jsm/"
+      }
+    }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+        import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.149.0/examples/jsm/loaders/GLTFLoader.js';
+        window.THREE = THREE;
+        window.GLTFLoader = GLTFLoader;
+        // Konvoy modelleri (sürüye eklenecek sırayla). Cache-busting'li yollar.
+        window.__BARLAS_MODELS = [
+            '<?= $asset('assets/models/tanker-1.glb') ?>',
+            '<?= $asset('assets/models/tanker-2.glb') ?>',
+            '<?= $asset('assets/models/tanker-4.glb') ?>',
+            '<?= $asset('assets/models/tanker-5.glb') ?>'
+        ];
+        // Hero (slide) sahnesinde sergilenen tek model: tanker-3.glb
+        window.__BARLAS_HERO_MODEL = '<?= $asset('assets/models/tanker-3.glb') ?>';
+        // İletişim sayfası 3D sahnesinde sergilenen model: tanker-1.glb
+        window.__BARLAS_CONTACT_MODEL = '<?= $asset('assets/models/tanker-1.glb') ?>';
+        (function () {
+            function boot() {
+                var s = document.createElement('script');
+                s.src = '<?= $asset('assets/js/yeni-tanker.js') ?>';
+                document.body.appendChild(s);
+            }
+            // gsap/ScrollTrigger defer scriptleri DOMContentLoaded'a kadar yüklenir;
+            // yeni-tanker.js'i o aşamada enjekte et ki yol sahnesi (scrub) çalışsın.
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', boot, { once: true });
+            } else {
+                boot();
+            }
+        })();
+    </script>
 
     <!-- Ortak header davranışı: mobil çekmece, mega menüler, dil seçici,
          scrolled durumu (eski tasarımla aynı modül — tek kaynak) -->

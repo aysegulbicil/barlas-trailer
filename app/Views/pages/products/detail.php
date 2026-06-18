@@ -86,7 +86,7 @@ $masterIcons = [
                 <?php endif; ?>
 
                 <div class="prd-detail-card__actions">
-                    <a class="btn btn--primary" href="<?= esc(locale_url('contact')) ?>">
+                    <a class="btn btn--primary" href="<?= esc(locale_url('teklif/' . $category['slug'] . '/' . $product['slug'])) ?>">
                         <?= esc(lang('Navigation.get_quote')) ?>
                     </a>
                 </div>
@@ -209,7 +209,7 @@ $masterIcons = [
                 <span><?= esc(lang('Products.cta_product_text', [$product['name']])) ?></span>
             </div>
             <div class="prd-cta__actions">
-                <a class="btn btn--primary" href="<?= esc(locale_url('contact')) ?>">
+                <a class="btn btn--primary" href="<?= esc(locale_url('teklif/' . $category['slug'] . '/' . $product['slug'])) ?>">
                     <?= esc(lang('Navigation.get_quote')) ?>
                 </a>
                 <a class="btn btn--outline" href="<?= esc(locale_url('products/' . $category['slug'])) ?>">

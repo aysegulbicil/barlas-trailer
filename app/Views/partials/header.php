@@ -106,7 +106,7 @@ $currentPath = current_path();
                 <?php endforeach; ?>
             </ul>
 
-            <a class="btn btn--primary nav-cta" href="<?= esc(locale_url('contact')) ?>">
+            <a class="btn btn--primary nav-cta" href="<?= esc(locale_url('teklif')) ?>">
                 <?= esc(lang('Navigation.get_quote')) ?>
             </a>
         </div>

@@ -70,7 +70,7 @@ $stats = [
 
             <div class="hero__actions" data-hero-item>
                 <a class="btn btn--primary btn--lg" href="<?= esc(locale_url('products')) ?>"><?= esc(lang('Home.hero_cta_primary')) ?></a>
-                <a class="btn btn--ghost btn--lg" href="<?= esc(locale_url('contact')) ?>"><?= esc(lang('Home.hero_cta_secondary')) ?></a>
+                <a class="btn btn--ghost btn--lg" href="<?= esc(locale_url('teklif')) ?>"><?= esc(lang('Home.hero_cta_secondary')) ?></a>
             </div>
         </div>
 
@@ -207,7 +207,10 @@ $stats = [
             <p class="sec-head__lead"><?= esc(lang('Home.ai_lead')) ?></p>
         </header>
 
-        <div class="console" data-reveal="zoom" data-ai data-demo-response="<?= esc(lang('Home.ai_demo_response'), 'attr') ?>">
+        <div class="console" data-reveal="zoom" data-ai
+             data-endpoint="<?= esc(locale_url('ai/ask'), 'attr') ?>"
+             data-demo-response="<?= esc(lang('Home.ai_demo_response'), 'attr') ?>"
+             data-error-message="<?= esc(lang('Home.ai_error'), 'attr') ?>">
             <aside class="console__side">
                 <span class="console__side-title"><?= esc(lang('Home.ai_examples_title')) ?></span>
                 <?php foreach ($aiExamples as $example): ?>
@@ -228,6 +231,8 @@ $stats = [
 
                 <form class="console__form" data-ai-form>
                     <label class="sr-only" for="ai-input"><?= esc(lang('Home.ai_input_label')) ?></label>
+                    <!-- Bal kabı: botlar doldurur, gerçek kullanıcılar görmez. -->
+                    <input class="console__hp" type="text" name="website" data-ai-hp tabindex="-1" autocomplete="off" aria-hidden="true">
                     <input id="ai-input" type="text" autocomplete="off" data-ai-input
                            placeholder="<?= esc(lang('Home.ai_placeholder'), 'attr') ?>">
                     <button class="console__send" type="submit" aria-label="<?= esc(lang('Home.ai_send'), 'attr') ?>">

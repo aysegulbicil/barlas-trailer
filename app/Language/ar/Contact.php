@@ -55,6 +55,16 @@ return [
     // ---- Email (notification body) ----
     'email_subject' => 'طلب جديد من الموقع الإلكتروني',
     'email_intro'   => 'تم استلام طلب جديد عبر نموذج التواصل في الموقع:',
+    // ---- البريد الإلكتروني (تأكيد تلقائي للزائر) ----
+    'autoreply_subject'       => 'لقد استلمنا رسالتك — Barlas Trailer',
+    'autoreply_preheader'     => 'لقد وصلنا طلبك؛ وسنعاود التواصل معك في أقرب وقت ممكن.',
+    'autoreply_greeting'      => 'عزيزي/عزيزتي {0}،',
+    'autoreply_intro'         => 'لقد وصلنا طلبك بنجاح. سيقوم فريقنا بمراجعة رسالتك والرد عليك في أقرب وقت ممكن.',
+    'autoreply_summary_title' => 'البيانات التي أرسلتها إلينا',
+    'autoreply_closing'       => 'للحالات العاجلة يمكنك أيضًا التواصل معنا عبر الهاتف أو واتساب.',
+    'autoreply_regards'       => 'مع خالص التقدير،',
+    'autoreply_team'          => 'فريق Barlas Trailer',
+    'autoreply_auto_note'     => 'هذه رسالة تأكيد تلقائية؛ يمكنك الرد مباشرة على هذا البريد.',
 
     // ---- Contact info ----
     'info_title'     => 'تواصل معنا مباشرةً',

@@ -95,7 +95,7 @@ $asset = static function (string $path): string {
                 <strong><?= esc(lang('Products.cta_title')) ?></strong>
                 <span><?= esc(lang('Products.cta_text')) ?></span>
             </div>
-            <a class="btn btn--primary" href="<?= esc(locale_url('contact')) ?>">
+            <a class="btn btn--primary" href="<?= esc(locale_url('teklif')) ?>">
                 <?= esc(lang('Navigation.get_quote')) ?>
             </a>
         </div>

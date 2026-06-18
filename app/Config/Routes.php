@@ -39,6 +39,18 @@ $routes->group('{locale}', static function (RouteCollection $routes): void {
     $routes->get('products/(:segment)', 'Products::category/$1', ['as' => 'products.category']);
     $routes->get('products/(:segment)/(:segment)', 'Products::detail/$1/$2', ['as' => 'products.detail']);
     $routes->get('media', 'Media::index', ['as' => 'media']);
+
+    // Teklif (Quote) — ürün-bağlamlı teklif akışı.
+    //   teklif                          → ürün seçtirme sayfası (genel butonlar)
+    //   teklif/{kategori}/{ürün}         → WhatsApp'a yönlendirir
+    //   teklif/{kategori}/{ürün}/{varyant} → belirli varyant için
+    $routes->get('teklif', 'Quote::index', ['as' => 'quote']);
+    $routes->get('teklif/(:segment)/(:segment)', 'Quote::start/$1/$2', ['as' => 'quote.start']);
+    $routes->get('teklif/(:segment)/(:segment)/(:segment)', 'Quote::start/$1/$2/$3', ['as' => 'quote.start.variant']);
+
     $routes->get('contact', 'Contact::index', ['as' => 'contact']);
     $routes->post('contact', 'Contact::submit', ['as' => 'contact.submit']);
+
+    // Yapay zeka asistanı (ana sayfa #asistan konsolu) — yalnızca POST/JSON.
+    $routes->post('ai/ask', 'Ai::ask', ['as' => 'ai.ask']);
 });

@@ -81,6 +81,11 @@ class Services extends BaseController
             $related[] = $services[($index + $step) % $count];
         }
 
+        // Galeri: public/assets/images/services/{slug} klasöründeki tüm
+        // fotoğraflar (varsa) sırayla slider'a dizilir. Klasör yoksa veya
+        // boşsa detay sayfası eski tek-foto placeholder davranışına döner.
+        $service['images'] = $this->galleryImages($service['slug']);
+
         $data = [
             'metaTitle'       => $service['name'] . ' — ' . lang('Navigation.services'),
             'metaDescription' => $service['lead'] !== '' ? $service['lead'] : $service['desc'],
@@ -89,6 +94,45 @@ class Services extends BaseController
         ];
 
         return view('pages/services/detail', $data);
+    }
+
+    /**
+     * Scans public/assets/images/services/{slug}/ and returns the public
+     * URLs of every image inside, naturally sorted by filename (so files
+     * named 01.jpg, 02.jpg control the slider order). Supports jpg/jpeg/
+     * png/webp in any letter case. Returns [] when the folder is missing
+     * or empty, in which case the view falls back to the placeholder.
+     * No database, no config: drop files in, they appear.
+     *
+     * @return list<string>
+     */
+    private function galleryImages(string $slug): array
+    {
+        // Slug guard: only the safe characters our slugs use, so the
+        // path can never escape the services image directory.
+        if (preg_match('/[^a-z0-9\-]/', $slug)) {
+            return [];
+        }
+
+        $dir = FCPATH . 'assets/images/services/' . $slug;
+        if (! is_dir($dir)) {
+            return [];
+        }
+
+        $files = glob($dir . '/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', GLOB_BRACE);
+        if ($files === false || $files === []) {
+            return [];
+        }
+
+        natcasesort($files);
+
+        $base = 'assets/images/services/' . $slug . '/';
+        $urls = [];
+        foreach ($files as $file) {
+            $urls[] = base_url($base . basename($file));
+        }
+
+        return array_values($urls);
     }
 
     /**
