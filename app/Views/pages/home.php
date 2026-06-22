@@ -35,9 +35,9 @@ $aiExamples = lang('Home.ai_examples');
 $aiExamples = is_array($aiExamples) ? $aiExamples : [];
 
 $galleryCols = [
-    ['speed' => -8,  'images' => ['hero-1.png', 'hero-11.png']],
-    ['speed' => 7,   'images' => ['about.jpg', 'hero-3.png']],
-    ['speed' => -12, 'images' => ['hero-13.png', 'hero-33.png']],
+    ['speed' => -8,  'images' => ['hero-1.webp', 'hero-11.webp']],
+    ['speed' => 7,   'images' => ['about.webp', 'hero-3.webp']],
+    ['speed' => -12, 'images' => ['hero-13.webp', 'hero-33.webp']],
 ];
 
 /* Footer hızlı bağlantıları (header artık partials/header'dan gelir) */
@@ -75,7 +75,7 @@ $stats = [
         </div>
 
         <div class="hero__stage" data-hero-stage aria-hidden="true">
-            <img class="hero__fallback" src="<?= base_url('assets/images/hero-1.png') ?>" alt="" loading="eager" fetchpriority="high" decoding="async">
+            <img class="hero__fallback" src="<?= base_url('assets/images/hero-1.webp') ?>" alt="" loading="eager" fetchpriority="high" decoding="async">
         </div>
     </div>
 
@@ -120,7 +120,7 @@ $stats = [
     <div class="road__frame">
         <div class="road__stage" data-road-stage aria-hidden="true">
             <!-- 3D yoksa / mobilde: statik görsel -->
-            <img class="road__fallback" src="<?= base_url('assets/images/hero-2.png') ?>" alt="" loading="lazy" decoding="async">
+            <img class="road__fallback" src="<?= base_url('assets/images/hero-2.webp') ?>" alt="" loading="lazy" decoding="async">
         </div>
 
         <div class="shell road__head" data-reveal="down">
@@ -164,7 +164,7 @@ $stats = [
         </div>
 
         <div class="why__feature" data-reveal="zoom">
-            <img src="<?= base_url('assets/images/hero-2.png') ?>" alt="" loading="lazy" decoding="async">
+            <img src="<?= base_url('assets/images/hero-2.webp') ?>" alt="" loading="lazy" decoding="async">
             <div class="why__metric">
                 <span class="why__metric-value"><span data-count="40">0</span><span class="why__metric-plus">+</span></span>
                 <span class="why__metric-label"><?= esc(lang('Home.why_metric_label')) ?></span>

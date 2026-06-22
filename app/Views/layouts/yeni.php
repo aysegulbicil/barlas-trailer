@@ -85,8 +85,20 @@ $asset = static function (string $path): string {
     <script type="module">
         import * as THREE from 'three';
         import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.149.0/examples/jsm/loaders/GLTFLoader.js';
+        import { DRACOLoader } from 'https://cdn.jsdelivr.net/npm/three@0.149.0/examples/jsm/loaders/DRACOLoader.js';
         window.THREE = THREE;
-        window.GLTFLoader = GLTFLoader;
+        // Draco ile sıkıştırılmış .glb'leri çözmek için DRACOLoader gerekir. Decoder (wasm)
+        // yalnızca ilk Draco modeli yüklenince CDN'den çekilir; sıkıştırılmamış modellerde
+        // hiç devreye girmez (ileriye dönük güvenli — model sıkıştırılmamış olsa bile çalışır).
+        var __barlasDraco = new DRACOLoader();
+        __barlasDraco.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.149.0/examples/jsm/libs/draco/');
+        // Mevcut "new window.GLTFLoader()" çağrıları (yeni-tanker.js + contact-tanker.js)
+        // hiç değişmeden Draco desteği kazanır: ctor bir nesne döndürünce "new" o nesneyi verir.
+        window.GLTFLoader = function () {
+            var loader = new GLTFLoader();
+            loader.setDRACOLoader(__barlasDraco);
+            return loader;
+        };
         // Konvoy modelleri (sürüye eklenecek sırayla). Cache-busting'li yollar.
         window.__BARLAS_MODELS = [
             '<?= $asset('assets/models/tanker-1.glb') ?>',
