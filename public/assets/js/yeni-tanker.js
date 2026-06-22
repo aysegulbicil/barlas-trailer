@@ -602,10 +602,10 @@
         ScrollTrigger.create({
             trigger: section,
             start: 'top top',
-            end: '+=170%',
+            end: '+=110%',
             pin: true,
             anticipatePin: 1,
-            scrub: true,
+            scrub: 0.5,
             onUpdate: function (self) { progress = self.progress; }
         });
         /* Pin, sayfaya ~1.7 ekranlık boşluk ekler; daha önce kurulmuş

@@ -35,9 +35,18 @@ $aiExamples = lang('Home.ai_examples');
 $aiExamples = is_array($aiExamples) ? $aiExamples : [];
 
 $galleryCols = [
-    ['speed' => -8,  'images' => ['hero-1.webp', 'hero-11.webp']],
-    ['speed' => 7,   'images' => ['about.webp', 'hero-3.webp']],
-    ['speed' => -12, 'images' => ['hero-13.webp', 'hero-33.webp']],
+    ['speed' => -8,  'items' => [
+        ['img' => 'products/tankers-gida-tankeri.webp',                      'name' => 'Gıda Tankeri',                     'url' => 'products/tankers/gida-tankeri'],
+        ['img' => 'products/silos-damperli-silobas.webp',                    'name' => 'Damperli Silobas',                 'url' => 'products/silos/damperli-silobas'],
+    ]],
+    ['speed' => 7,   'items' => [
+        ['img' => 'products/silos-v-tipi-silobas.webp',                      'name' => 'V Tipi Silobas',                   'url' => 'products/silos/v-tipi-silobas'],
+        ['img' => 'products/tippers-akordiyon-hububat-tipi-damper.webp',     'name' => 'Akordiyon Hububat Tipi Damper',    'url' => 'products/tippers/akordiyon-hububat-tipi-damper'],
+    ]],
+    ['speed' => -12, 'items' => [
+        ['img' => 'products/dry-cargo-kapali-kasa-celik-kargo-tasiyici.webp', 'name' => 'Kapalı Kasa Çelik Kargo Taşıyıcı', 'url' => 'products/dry-cargo/kapali-kasa-celik-kargo-tasiyici'],
+        ['img' => 'products/trailers-dingilli-kamyon-tasiyici.webp',         'name' => 'Dingilli Kamyon Taşıyıcı',         'url' => 'products/trailers/dingilli-kamyon-tasiyici'],
+    ]],
 ];
 
 /* Footer hızlı bağlantıları (header artık partials/header'dan gelir) */
@@ -295,9 +304,11 @@ $stats = [
     <div class="shell gallery__grid">
         <?php foreach ($galleryCols as $col): ?>
             <div class="gallery__col" data-g-col data-g-speed="<?= esc((string) $col['speed'], 'attr') ?>">
-                <?php foreach ($col['images'] as $img): ?>
+                <?php foreach ($col['items'] as $item): ?>
                     <figure class="gallery__item">
-                        <img src="<?= base_url('assets/images/' . $img) ?>" alt="<?= esc(lang('Common.site_name'), 'attr') ?>" loading="lazy" decoding="async">
+                        <a href="<?= esc(locale_url($item['url'])) ?>" style="display:block" aria-label="<?= esc($item['name'], 'attr') ?>">
+                            <img src="<?= base_url('assets/images/' . $item['img']) ?>" alt="<?= esc($item['name'], 'attr') ?>" loading="lazy" decoding="async">
+                        </a>
                     </figure>
                 <?php endforeach; ?>
             </div>
