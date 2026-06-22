@@ -431,7 +431,7 @@
         /* Lenis smooth scroll (yalnızca hassas işaretçili cihazlar) */
         var lenis = null;
         if (window.Lenis && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-            lenis = new window.Lenis({ duration: 1.15, smoothWheel: true });
+            lenis = new window.Lenis({ duration: 0.8, smoothWheel: true });
             lenis.on('scroll', ScrollTrigger.update);
             gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
             gsap.ticker.lagSmoothing(0);
@@ -555,14 +555,10 @@
             '<span class="depth-bg__layer depth-bg__layer--c"></span>';
         document.body.appendChild(depthBg);
 
-        var depthDrift = [-70, 100, -130];
-        Array.prototype.forEach.call(depthBg.children, function (layer, i) {
-            gsap.to(layer, {
-                y: depthDrift[i] || 0,
-                ease: 'none',
-                scrollTrigger: { start: 0, end: 'max', scrub: 0.8 }
-            });
-        });
+        /* Performans: arka plan ışık katmanlarının TÜM SAYFA boyu scroll drift'i
+           kaldırıldı. (start:0, end:'max' → her scroll karesinde sayfa boyu
+           transform; bölümler arası takılmanın sürekli yüklerinden biriydi.)
+           Katmanlar statik dekoratif olarak yerinde kalır. */
 
         /* Hero: arka ışık + sahne farklı hızlarda kayar (derinlik) */
         var heroHalo = document.querySelector('.hero__halo');
