@@ -56,6 +56,22 @@ $stats = [
     ['value' => 40,    'label' => lang('Home.stat_countries')],
     ['value' => 12000, 'label' => lang('Home.stat_delivered')],
 ];
+
+/* ---------------------------------------------------------------------
+   Referans logoları — public/assets/images/refs/ klasörünü otomatik tarar.
+   YENİ LOGO EKLEMEK: temizlenmiş görseli (beyaz/şeffaf zemin) bu klasöre at,
+   adın başına sıra no koy (örn. 08-firma.png). Bant kendiliğinden güncellenir,
+   kod değişikliği gerekmez. Klasör boşsa eski yer tutucu logo gösterilir.
+--------------------------------------------------------------------- */
+$refLogos = [];
+$refDir   = FCPATH . 'assets/images/refs';
+if (is_dir($refDir)) {
+    foreach (glob($refDir . '/*.{png,jpg,jpeg,webp,svg,gif}', GLOB_BRACE) ?: [] as $logoPath) {
+        $refLogos[] = 'refs/' . basename($logoPath);
+    }
+    natcasesort($refLogos);
+    $refLogos = array_values($refLogos);
+}
 ?>
 
 <?= $this->section('content') ?>
@@ -263,33 +279,40 @@ $stats = [
         </header>
     </div>
 
-    <div class="refs__belt" data-reveal>
-        <div class="refs__belt-track">
-            <?php for ($pass = 0; $pass < 2; $pass++): ?>
-                <ul class="refs__belt-group" <?= $pass === 1 ? 'aria-hidden="true"' : '' ?>>
-                    <?php for ($n = 1; $n <= 8; $n++): ?>
-                        <li class="refs__logo" data-logo="partner-<?= esc((string) $n, 'attr') ?>">
-                            <img src="<?= base_url('assets/images/logo.png') ?>" alt="<?= esc(lang('Common.site_name'), 'attr') ?>" loading="lazy" decoding="async">
-                        </li>
-                    <?php endfor; ?>
-                </ul>
-            <?php endfor; ?>
-        </div>
-    </div>
+    <?php
+    // Logolar $refLogos'tan gelir (refs klasörü). Yoksa eski yer tutucu.
+    // Az logoda boşluk kalmasın diye set en az ~16 yuvaya ulaşana dek tekrarlanır.
+    $usePlaceholder = empty($refLogos);
+    $beltCount      = $usePlaceholder ? 8 : count($refLogos);
+    $reps           = max(2, (int) ceil(16 / max(1, $beltCount)));
+    ?>
 
-    <div class="refs__belt refs__belt--reverse" data-reveal>
+    <?php for ($belt = 0; $belt < 2; $belt++): ?>
+    <div class="refs__belt<?= $belt === 1 ? ' refs__belt--reverse' : '' ?>" data-reveal>
         <div class="refs__belt-track">
             <?php for ($pass = 0; $pass < 2; $pass++): ?>
-                <ul class="refs__belt-group" <?= $pass === 1 ? 'aria-hidden="true"' : '' ?>>
-                    <?php for ($n = 1; $n <= 8; $n++): ?>
-                        <li class="refs__logo" data-logo="partner-<?= esc((string) $n, 'attr') ?>">
-                            <img src="<?= base_url('assets/images/logo.png') ?>" alt="<?= esc(lang('Common.site_name'), 'attr') ?>" loading="lazy" decoding="async">
-                        </li>
+                <ul class="refs__belt-group"<?= $pass === 1 ? ' aria-hidden="true"' : '' ?>>
+                    <?php for ($r = 0; $r < $reps; $r++): ?>
+                        <?php if ($usePlaceholder): ?>
+                            <li class="refs__logo">
+                                <img src="<?= base_url('assets/images/logo.png') ?>" alt="<?= esc(lang('Common.site_name'), 'attr') ?>" loading="lazy" decoding="async">
+                            </li>
+                        <?php else: foreach ($refLogos as $logo): ?>
+                            <?php
+                            $logoSlug = pathinfo($logo, PATHINFO_FILENAME);
+                            $logoName = preg_replace('/^\d+[-_]/', '', $logoSlug);
+                            $logoName = ucwords(str_replace(['-', '_'], ' ', $logoName));
+                            ?>
+                            <li class="refs__logo" data-logo="<?= esc($logoSlug, 'attr') ?>">
+                                <img src="<?= base_url('assets/images/' . $logo) ?>" alt="<?= esc($logoName, 'attr') ?>" loading="lazy" decoding="async">
+                            </li>
+                        <?php endforeach; endif; ?>
                     <?php endfor; ?>
                 </ul>
             <?php endfor; ?>
         </div>
     </div>
+    <?php endfor; ?>
 </section>
 
 <!-- ===================== GALERİ ===================== -->
