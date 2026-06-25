@@ -68,6 +68,14 @@ $megaLang = static function (string $slug, string $suffix, string $fallback): st
 };
 ?>
 <div class="mega mega--products" data-assets-base="<?= esc(base_url('assets/images'), 'attr') ?>">
+    <!-- Mobil: sade kategori bağlantı listesi (masaüstünde gizli). -->
+    <ul class="mega-mlist">
+        <li><a class="mega-mlist__link mega-mlist__link--all" href="<?= esc(locale_url('products')) ?>"><?= esc(lang('Navigation.all_products')) ?></a></li>
+        <?php foreach ($megaCategories as $cat): ?>
+            <li><a class="mega-mlist__link" href="<?= esc(locale_url('products/' . $cat['slug'])) ?>"><?= esc($megaLang($cat['slug'], '', $cat['name'])) ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+
     <div class="mega__head">
         <span class="mega__tagline"><?= esc(lang('Navigation.mega_products_tagline')) ?></span>
         <a class="mega__all" href="<?= esc(locale_url('products')) ?>">

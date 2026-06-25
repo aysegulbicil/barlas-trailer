@@ -22,6 +22,14 @@ $megaServices = [
 ];
 ?>
 <div class="mega mega--services">
+    <!-- Mobil: sade hizmet bağlantı listesi (masaüstünde gizli). -->
+    <ul class="mega-mlist">
+        <li><a class="mega-mlist__link mega-mlist__link--all" href="<?= esc(locale_url('services')) ?>"><?= esc(lang('Navigation.all_services')) ?></a></li>
+        <?php foreach ($megaServices as $srv): ?>
+            <li><a class="mega-mlist__link" href="<?= esc(locale_url('services/' . $srv['slug'])) ?>"><?= esc(lang('Navigation.srv_' . $srv['key'])) ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+
     <div class="mega__head mega__head--services">
         <span class="mega__tagline"><?= esc(lang('Navigation.mega_services_tagline')) ?></span>
     </div>

@@ -578,15 +578,21 @@
             });
         }
 
-        /* Galeri sütunları: data-g-speed'e göre farklı hızlarda paralaks */
-        gsap.utils.toArray('[data-g-col]').forEach(function (col) {
-            var sp = parseFloat(col.getAttribute('data-g-speed')) || 0;
-            if (!sp) return;
-            gsap.to(col, {
-                y: sp * 9, ease: 'none',
-                scrollTrigger: { trigger: '.gallery', start: 'top bottom', end: 'bottom top', scrub: 0.9 }
+        /* Galeri sütunları: data-g-speed'e göre farklı hızlarda paralaks.
+           Yalnızca masaüstünde (>=992px) sütunlar yan yanayken çalışır; mobilde
+           sütunlar alt alta yığıldığı için paralaks kapatılır (yoksa görseller
+           farklı hızlarda kayıp üst üste biner). */
+        var galleryParallaxOK = window.matchMedia('(min-width: 992px)').matches;
+        if (galleryParallaxOK) {
+            gsap.utils.toArray('[data-g-col]').forEach(function (col) {
+                var sp = parseFloat(col.getAttribute('data-g-speed')) || 0;
+                if (!sp) return;
+                gsap.to(col, {
+                    y: sp * 9, ease: 'none',
+                    scrollTrigger: { trigger: '.gallery', start: 'top bottom', end: 'bottom top', scrub: 0.9 }
+                });
             });
-        });
+        }
 
         window.dispatchEvent(new CustomEvent('barlas:motion-ready'));
         window.addEventListener('load', function () { ScrollTrigger.refresh(); });

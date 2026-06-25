@@ -524,3 +524,12 @@ html.contact-anim .contact-hero__intro .contact-hero__lead { animation-delay: 90
     .contact-form__success-ic, .contact-stage__cap-dot, .contact-stage__done-ic { animation: none; }
     .contact-stage__cap, .contact-stage__done, .contact-form.is-sending .contact-form__inner { transition: none; }
 }
+
+/* =====================================================================
+   3D TIR sahnesi ve yedek (placeholder) görsel kaldırıldı (kullanıcı isteği).
+   Sahne + çeki demiri gizlenir; form her ekranda tam genişlik olur.
+   ===================================================================== */
+.contact-hero__stage { display: none; }
+.contact-hitch { display: none; }
+.contact-convoy { grid-template-columns: 1fr; transform: none; }
+.contact-hero__main { max-width: 900px; margin-inline: auto; width: 100%; }

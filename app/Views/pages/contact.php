@@ -62,9 +62,8 @@ $jsVer  = is_file(FCPATH . 'assets/js/contact-tanker.js') ? filemtime(FCPATH . '
                         (c.getContext('webgl') || c.getContext('experimental-webgl')));
                 } catch (e) { return false; }
             }
-            if (!rm && window.innerWidth >= 992 && wgl()) {
-                document.documentElement.classList.add('contact-deliver');
-            }
+            // İletişim sayfasındaki 3D teslimat sahnesi kaldırıldı (kullanıcı isteği);
+            // 'contact-deliver' eklenmez, form normal (gizlenmemiş) halinde görünür.
         } catch (e) {}
     })();
 </script>

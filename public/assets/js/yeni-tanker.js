@@ -6,8 +6,9 @@
  * sağ sahnesinde cursor ile orbit eder (Spline hissi); sayfa hero'dan
  * çıkarken hafifçe yola döner ve söner (ScrollTrigger varsa).
  *
- * Aşamalı geliştirme: THREE yoksa, WebGL yoksa, ekran < 992px ise veya
- * reduced-motion açıksa hiç başlamaz; statik yedek görsel görünür kalır.
+ * Aşamalı geliştirme: THREE yoksa, WebGL yoksa veya reduced-motion açıksa
+ * hiç başlamaz; statik yedek görsel görünür kalır. 3D hem masaüstünde hem
+ * mobilde çalışır (eski < 992px mobil kapatması kaldırıldı).
  *
  * YOL SAHNESİ (initRoad): artık gerçek GLB kamyonlardan bir KONVOY yükler
  * (window.__BARLAS_MODELS → assets/models/tanker-*.glb), art arda dizip
@@ -41,7 +42,9 @@
     onReady(function () {
         window.setTimeout(function () {
             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-            if (window.innerWidth < 992) return;
+            // Not: 3D artık mobilde de çalışır (kullanıcı isteği). Eskiden
+            // "window.innerWidth < 992" ile mobilde kapatılıyordu; kaldırıldı.
+            // Yine de WebGL yoksa aşağıdaki kontrol statik yedeğe düşer.
 
             if (!window.THREE || !webglOk()) {
                 showStaticFallback();

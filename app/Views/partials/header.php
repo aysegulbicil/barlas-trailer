@@ -104,6 +104,13 @@ $currentPath = current_path();
                         <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
+
+                <!-- Mobil drawer: Teklif Al (masaüstünde CSS ile gizli) -->
+                <li class="nav-menu__item nav-menu__cta-item">
+                    <a class="btn btn--primary nav-menu__cta" href="<?= esc(locale_url('teklif')) ?>">
+                        <?= esc(lang('Navigation.get_quote')) ?>
+                    </a>
+                </li>
             </ul>
 
             <a class="btn btn--primary nav-cta" href="<?= esc(locale_url('teklif')) ?>">

@@ -25,6 +25,7 @@ return [
     // Mega menu — shared UI
     'mega_products_tagline' => 'Engineering-driven manufacturing across 11 product groups',
     'all_products'          => 'Explore All Products',
+    'all_services'          => 'All Services',
     'featured_models'       => 'Featured Models',
     'view_category'         => 'View Category',
     'models_label'          => 'Models',
