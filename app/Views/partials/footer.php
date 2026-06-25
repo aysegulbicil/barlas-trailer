@@ -244,6 +244,13 @@ $callHref = 'tel:+905525002000';
     flex-direction: column;
     align-items: center;
     gap: 18px;
+    transition: opacity .2s ease, visibility .2s ease;
+}
+/* Mobil menü (çekmece) açıkken yüzen butonlar menünün üstüne binmesin. */
+html.nav-locked .fab-stack{
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 .wa-fab{
     position: relative;

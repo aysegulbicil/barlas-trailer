@@ -65,6 +65,9 @@ body {
     font-size: 1rem;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
+    /* Mobil yatay kaydırma koruması (base.css bu sayfalarda yüklenmez).
+       clip → sticky/fixed header bozulmaz. */
+    overflow-x: clip;
 }
 img { max-width: 100%; display: block; }
 h1, h2, h3, p, ul, ol, address { margin: 0; }
@@ -175,7 +178,7 @@ address { font-style: normal; }
 
 .nav-toggle { display: none; }
 
-@media (max-width: 860px) {
+@media (max-width: 991px) {
     .nav {
         position: fixed;
         inset-block-start: var(--header-h);
@@ -298,9 +301,18 @@ html.has-anim .hero__line { transform: translateY(112%); }
 html.has-anim [data-hero-item] { opacity: 0; transform: translateY(16px); }
 
 @media (max-width: 991.98px) {
+    /* Mobilde hero tam-ekran yüksekliği yerine içeriğe göre — alttaki bölümler
+       ekranın dibine itilmesin, ilk ekranda ticker/istatistik de görünsün. */
+    .hero { min-height: auto; padding-block: 4.5rem 2rem; }
     .hero__inner { grid-template-columns: 1fr; gap: 1rem; padding-block-start: 1.5rem; }
     .hero__stage { min-height: 240px; order: 1; }
     .hero__copy { order: 0; }
+}
+
+@media (max-width: 560px) {
+    /* Dar ekranda süreç adımları taşmasın: sarmala, ayraçları gizle */
+    .hero__steps-inner { flex-wrap: wrap; justify-content: flex-start; gap: 0.4rem 1.1rem; }
+    .hero__step-sep { display: none; }
 }
 
 /* ------------------------- Ticker (güven bandı) --------------------- */
@@ -356,7 +368,7 @@ html.has-anim [data-hero-item] { opacity: 0; transform: translateY(16px); }
 .stat__num > span { color: var(--ink-1); }
 .stat__label { display: block; margin-block-start: 0.5rem; font-size: 0.9rem; color: var(--ink-3); }
 
-@media (max-width: 860px) {
+@media (max-width: 991px) {
     .stats__grid { grid-template-columns: repeat(2, 1fr); row-gap: 2rem; }
     .stat:nth-child(3) { border-inline-start: 0; }
 }
@@ -829,7 +841,7 @@ html.has-anim .why__cards > .is-in {
     50%      { box-shadow: 0 0 0 6px rgba(74, 163, 230, 0.10); }
 }
 
-@media (max-width: 980px) {
+@media (max-width: 991px) {
     .why__layout { grid-template-columns: 1fr; gap: 2rem; }
     .why__feature { position: static; order: -1; aspect-ratio: 16 / 10; }
 }
@@ -863,6 +875,7 @@ html.has-anim .why__cards > .is-in {
 .step__dot {
     position: absolute;
     inset-block-start: 0;
+    inset-inline-start: 0;
     display: grid;
     place-items: center;
     width: 34px; height: 34px;
@@ -880,7 +893,7 @@ html.has-anim .why__cards > .is-in {
 .step__title { font-family: var(--font-display); font-size: 1.02rem; font-weight: 700; color: var(--ink-1); margin-block-end: 0.35rem; }
 .step__desc { font-size: 0.9rem; color: var(--ink-3); }
 
-@media (max-width: 860px) {
+@media (max-width: 991px) {
     .process__track { grid-template-columns: 1fr; gap: 1.8rem; }
     .process__line { inset-inline-start: 16px; inset-inline-end: auto; inset-block: 17px; width: 2px; height: auto; }
     .process__fill { transform: scaleY(0); transform-origin: 50% 0; }
@@ -1213,7 +1226,7 @@ html.has-anim .why__cards > .is-in {
 
 .ai__disclaimer { margin-block-start: 1rem; font-size: 0.8rem; color: var(--ink-3); }
 
-@media (max-width: 860px) {
+@media (max-width: 991px) {
     .console { grid-template-columns: 1fr; }
     .console__side { border-inline-end: 0; border-block-end: 1px solid var(--line); }
 }
@@ -1324,9 +1337,12 @@ html.g-anim .gallery__item.is-in { opacity: 1; transform: none; }
 
 .gallery__more { display: flex; justify-content: center; margin-block-start: clamp(1.8rem, 3vw, 3rem); }
 
-@media (max-width: 860px) {
+@media (max-width: 991px) {
     .gallery__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .gallery__col:nth-child(3) { display: none; }
+    /* Güvence: mobilde sütun paralaksı (JS) çalışsa bile dönüşümü iptal et;
+       sütunlar alt alta yığılıyken kayıp üst üste binmesin. */
+    .gallery__col { transform: none !important; }
 }
 
 @media (max-width: 560px) {
@@ -1385,7 +1401,7 @@ html.g-anim .gallery__item.is-in { opacity: 1; transform: none; }
 
 .footer__bar p { margin: 0; }
 
-@media (max-width: 860px) {
+@media (max-width: 991px) {
     .footer__grid { grid-template-columns: 1fr; }
 }
 

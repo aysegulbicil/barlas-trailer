@@ -494,3 +494,18 @@
 [data-img="blog/blog-lightweight-chassis.jpg"] { background-image: url('../images/blog/blog-lightweight-chassis.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
 [data-img="blog/blog-cold-chain.jpg"] { background-image: url('../images/blog/blog-cold-chain.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
 [data-img="blog/blog-winter-maintenance.jpg"] { background-image: url('../images/blog/blog-winter-maintenance.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+
+/* =====================================================================
+   Mobil yerleşim — genel boşluk & hizalama (kullanıcı isteği)
+   Dar ekranda dikey boşlukları toparlar; hero, kenar çubuğu, filtre çubuğu
+   ve kartlar derli toplu ve hizalı görünür (büyük --section-y boşluğu kırpılır).
+   ===================================================================== */
+@media (max-width: 768px) {
+    .page-hero { padding-block: clamp(2.25rem, 1.6rem + 3vw, 3.25rem); }
+    .blog-section { padding-block: clamp(2.25rem, 1.5rem + 4vw, 3.5rem); }
+    .blog-layout { gap: var(--space-5); }
+    .blog-sidebar { gap: var(--space-4); }
+    .sidebar-widget { padding: var(--space-4); }
+    .blog-filterbar { margin-block-end: var(--space-4); }
+    .blog-grid { gap: var(--space-4); }
+}

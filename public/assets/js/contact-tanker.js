@@ -61,11 +61,18 @@
             window.setTimeout(revealConvoy, 2800);
         }
 
+        // İletişim sayfasındaki 3D TIR sahnesi kaldırıldı (kullanıcı isteği).
+        // 3D motoru hiç başlatılmaz; form gönderimi (initForm) ve açık/kapalı
+        // rozeti (initHours) yukarıda zaten çalışır.
+        return;
+
         var stage = document.querySelector('[data-contact-stage]');
         if (!stage) return;
 
         window.setTimeout(function () {
-            if (reducedMotion() || window.innerWidth < MIN_WIDTH) return;
+            // 3D mobilde de açık (kullanıcı isteği). Eski "innerWidth < MIN_WIDTH"
+            // mobil kapatması kaldırıldı; yalnızca reduced-motion ve WebGL kontrolü kalır.
+            if (reducedMotion()) return;
             if (!window.THREE || !webglOk()) return;
             var mount = stage.querySelector('[data-stage-mount]');
             if (!mount) return;

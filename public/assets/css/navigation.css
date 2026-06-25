@@ -623,8 +623,35 @@
 /* =====================================================================
    Mobile drawer & accordions (<992px)
    ===================================================================== */
+
+/* Teklif Al CTA: masaüstünde yatay nav'da ayrı .nav-cta gösterilir; drawer
+   içindeki kopya yalnızca mobilde görünür (aşağıdaki @media'da açılır). */
+.nav-menu__cta-item { display: none; }
+
+/* Mobil ürün/hizmet bağlantı listesi (sade <ul>) — masaüstünde gizli. */
+.mega-mlist { display: none; list-style: none; margin: 0; padding: 0; }
+.mega-mlist__link {
+    display: block;
+    padding: 0.72rem 0.25rem;
+    color: var(--white);
+    font-size: var(--fs-400);
+    text-decoration: none;
+    border-block-end: 1px solid rgba(255, 255, 255, 0.07);
+}
+.mega-mlist__link:hover { color: var(--primary-bright); }
+.mega-mlist__link--all { color: var(--primary-bright); font-weight: 600; }
+
 @media (max-width: 991px) {
     .nav-toggle { display: flex; }
+
+    /* Ürünler/Hizmetler mobilde: başlığın yanındaki oka dokununca sade bir
+       bağlantı listesi (mega-mlist) açılır. Karmaşık masaüstü mega içeriği
+       (kartlar/çipler/görseller) gizlenir — kutu gelmez. */
+    .mega-mlist { display: block; }
+    .mega-panel .mega__head,
+    .mega-panel .mega__body,
+    .mega-srv__grid,
+    .mega-srv__cta { display: none; }
 
     /* Set by navigation.js while the drawer is open */
     html.nav-locked { overflow: hidden; }
@@ -669,6 +696,9 @@
     .nav-menu__caret svg { width: 18px; height: 18px; }
 
     .nav-cta { display: none; }
+    /* Teklif Al drawer'ın içinde tam genişlik, erişilebilir CTA */
+    .nav-menu__cta-item { display: block; border-block-end: 0; padding-block-start: var(--space-5); }
+    .nav-menu__cta { width: 100%; justify-content: center; min-height: 48px; }
     .topbar__link--hide-sm { display: none; }
 
     /* ---- First-level accordion: the mega panel collapses below its row ---- */

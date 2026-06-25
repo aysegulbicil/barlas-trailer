@@ -29,6 +29,7 @@ return [
     // Mega menu — shared UI
     'mega_products_tagline' => '11 ana grupta mühendislik odaklı üretim',
     'all_products'          => 'Tüm Ürünleri Keşfet',
+    'all_services'          => 'Tüm Hizmetler',
     'featured_models'       => 'Öne Çıkan Modeller',
     'view_category'         => 'Kategoriyi İncele',
     'models_label'          => 'Model',

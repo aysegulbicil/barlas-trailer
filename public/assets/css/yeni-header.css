@@ -63,8 +63,10 @@
     gap: var(--space-4, 1rem);
 }
 
-.topbar__contact { display: flex; align-items: center; gap: var(--space-5, 1.5rem); }
-.topbar__link { display: inline-flex; align-items: center; gap: var(--space-2, 0.5rem); }
+.topbar__contact { display: flex; align-items: center; gap: var(--space-5, 1.5rem); min-width: 0; }
+/* Telefon/e-posta tek satırda kalsın — boşluklardan kırılıp dikey yığılmasın. */
+.topbar__link { display: inline-flex; align-items: center; gap: var(--space-2, 0.5rem); white-space: nowrap; }
+.topbar__icon { flex: none; }
 
 .navbar-main__inner {
     display: flex;
@@ -107,6 +109,7 @@
     font-size: var(--fs-300, 0.875rem);
     font-weight: 500;
     padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+    min-height: 40px;
     border-radius: var(--radius-sm, 8px);
 }
 
@@ -207,6 +210,27 @@
 /* Mobil çekmece koyu */
 @media (max-width: 991px) {
     .site-header .nav-toggle { display: flex; }
+
+    /* Üst şeritte e-postayı gizle: telefon + tema + dil kalır, üst üste binmez.
+       (navigation.css'teki .topbar__link--hide-sm, sonradan yüklenen
+       .topbar__link tarafından eziliyordu; daha yüksek özgüllükle geri alınır.) */
+    .site-header .topbar__link--hide-sm { display: none; }
+
+    /* "Teklif Al" header çubuğundan kaldırılır; aynı buton çekmecenin içinde
+       (.nav-menu__cta) zaten var. (.btn display'i .nav-cta'yı eziyordu.) */
+    .site-header .nav-cta { display: none; }
+
+    /* ÖNEMLİ: .navbar-main'deki backdrop-filter, position:fixed çekmece için
+       "kapsayıcı blok" oluşturuyordu; çekmece viewport yerine navbar kutusuna
+       hapsolup yalnızca ilk öğeyi gösteriyor, arkadaki sayfa sızıyordu.
+       Mobilde blur kapatılır ve düz koyu zemin verilir → çekmece tam ekran olur. */
+    .site-header .navbar-main {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: var(--yh-bg-1);
+    }
+
+    /* Çekmece: header altından ekran sonuna kadar koyu, kaydırılabilir panel */
     .nav-menu { background: var(--yh-bg-1); }
     .nav-menu__item { border-block-end-color: var(--yh-line); }
 }
@@ -235,8 +259,8 @@
 .theme-toggle {
     display: inline-grid;
     place-items: center;
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
     border-radius: var(--radius-sm, 8px);
     color: var(--yh-ink-2);
     transition: color 180ms var(--ease-out, ease-out),
@@ -273,3 +297,12 @@
 /* Marka logosu (görsel) — koyu header için beyaz yazılı logo */
 .site-header .brand__img { display: block; height: 46px; width: auto; }
 @media (max-width: 768px) { .site-header .brand__img { height: 38px; } }
+
+/* Dar ekranlarda üst şerit: telefon solda (tek satır) + tema/dil sağda sıkışmadan sığsın */
+@media (max-width: 560px) {
+    .topbar { font-size: 0.8rem; }
+    .topbar__inner { gap: 0.5rem; min-height: 38px; }
+    .topbar__contact { gap: 0.9rem; }
+    .topbar__actions { gap: 0.15rem; }
+    .lang-switcher__toggle { padding-inline: var(--space-2, 0.5rem); }
+}

@@ -25,6 +25,7 @@ return [
     // Mega menu — shared UI
     'mega_products_tagline' => 'تصنيع هندسي في 11 مجموعة منتجات',
     'all_products'          => 'استكشف جميع المنتجات',
+    'all_services'          => 'جميع الخدمات',
     'featured_models'       => 'موديلات مميزة',
     'view_category'         => 'تصفح الفئة',
     'models_label'          => 'موديل',
