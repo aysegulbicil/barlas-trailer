@@ -428,9 +428,11 @@
         var html = document.documentElement;
         html.classList.add('has-anim');
 
-        /* Lenis smooth scroll (yalnızca hassas işaretçili cihazlar) */
+        /* Lenis smooth scroll — performans için KAPALI: native scroll daha akıcı
+           ve "takılma" hissini azaltır. Tekrar açmak için USE_LENIS = true yap. */
+        var USE_LENIS = false;
         var lenis = null;
-        if (window.Lenis && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        if (USE_LENIS && window.Lenis && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
             lenis = new window.Lenis({ duration: 0.8, smoothWheel: true });
             lenis.on('scroll', ScrollTrigger.update);
             gsap.ticker.add(function (t) { lenis.raf(t * 1000); });

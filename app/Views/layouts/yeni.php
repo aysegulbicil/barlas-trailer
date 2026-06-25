@@ -45,6 +45,19 @@ $asset = static function (string $path): string {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap">
 
+    <!-- Perf: yalnızca ana sayfada 3D zincirini erken başlat — CDN bağlantısını
+         ısıt, Three.js modülünü ve hero modelini (tanker-3) paralel önceden indir.
+         Böylece hero 3D, JS zincirini beklemeden gözle görülür şekilde erken belirir. -->
+    <?php
+        $__ctrl = '';
+        try { $__ctrl = (string) service('router')->controllerName(); } catch (\Throwable $e) { $__ctrl = ''; }
+    ?>
+    <?php if (stripos($__ctrl, 'Home') !== false): ?>
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+        <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.module.js">
+        <link rel="preload" as="fetch" crossorigin href="<?= $asset('assets/models/tanker-3.glb') ?>">
+    <?php endif; ?>
+
     <!-- Ortak header: eski tasarımın token + menü/mega stilleri,
          sonra yeni tema, en sonda koyu header kaplaması (sıra önemli) -->
     <link rel="stylesheet" href="<?= $asset('assets/css/variables.css') ?>">

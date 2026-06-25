@@ -788,8 +788,8 @@ html.has-anim .why__cards > .is-in {
 
 /* ---- Sürekli hareket: ince, yalnızca transform/opacity, reduced-motion güvenli ---- */
 @media (prefers-reduced-motion: no-preference) {
-    /* Ortam ışığı yavaşça gezinir */
-    html.has-anim .why::before { animation: whyGlowDrift 19s var(--ease-in-out) infinite; }
+    /* Ortam ışığı drift — perf için KAPALI (büyük blur alanı sürekli repaint eder).
+       html.has-anim .why::before { animation: whyGlowDrift 19s var(--ease-in-out) infinite; } */
 
     /* Kart ikonları nazikçe yüzer (kart başına kaydırılmış faz) */
     html.has-anim .why-card__icon { animation: whyIconFloat 5.6s var(--ease-in-out) infinite; }
@@ -797,11 +797,11 @@ html.has-anim .why__cards > .is-in {
     html.has-anim .why-card:nth-child(3) .why-card__icon { animation-delay: -2.7s; }
     html.has-anim .why-card:nth-child(4) .why-card__icon { animation-delay: -4s; }
 
-    /* Öne çıkan görsel yavaşça süzülür */
-    html.has-anim .why__feature img { animation: whyFeatureFloat 7.5s var(--ease-in-out) infinite; }
+    /* Öne çıkan görsel süzülme — perf için KAPALI (büyük görsel sürekli ölçek/repaint).
+       html.has-anim .why__feature img { animation: whyFeatureFloat 7.5s var(--ease-in-out) infinite; } */
 
-    /* Işık parıltısı periyodik olarak görselin üzerinden geçer */
-    html.has-anim .why__feature::after { animation: whySheen 7s ease-in-out 1.4s infinite; }
+    /* Parıltı sweep — perf için KAPALI (sürekli gradient çizimi).
+       html.has-anim .why__feature::after { animation: whySheen 7s ease-in-out 1.4s infinite; } */
 
     /* Metrik rozeti hafifçe nefes alır */
     html.has-anim .why__metric { animation: whyMetricPulse 4.6s ease-in-out infinite; }
@@ -1224,14 +1224,19 @@ html.has-anim .why__cards > .is-in {
 
 .refs__belt {
     overflow: hidden;
-    border-block: 1px solid var(--line);
-    padding-block: 2rem;
+    background: #fff;
+    border-block: 1px solid rgba(7, 13, 23, 0.08);
+    padding-block: 1.8rem;
 }
 .refs__belt-track {
     display: flex;
     width: max-content;
-    /* Üstteki güven bandının tersi yönde, daha ağır akar */
-    animation: refs-belt 36s linear infinite reverse;
+    /* Üstteki güven bandının tersi yönde akar */
+    animation: refs-belt 20s linear infinite reverse;
+    /* Perf: kendi GPU katmanına al — animasyon compositor'da izole çalışır,
+       ana iş parçacığı/WebGL meşgulken bile takılmaz. */
+    will-change: transform;
+    backface-visibility: hidden;
 }
 .refs__belt:hover .refs__belt-track { animation-play-state: paused; }
 .refs__belt--reverse { border-block-start: 0; }
@@ -1255,13 +1260,12 @@ html.has-anim .why__cards > .is-in {
     flex: 0 0 auto;
     display: grid;
     place-items: center;
-    opacity: 0.55;
-    filter: grayscale(1);
-    transition: opacity var(--t-base) var(--ease-out), filter var(--t-base) var(--ease-out);
+    opacity: 1;
+    transition: transform var(--t-base) var(--ease-out);
 }
 
-.refs__logo:hover { opacity: 1; filter: grayscale(0); }
-.refs__logo img { height: 34px; width: auto; display: block; }
+.refs__logo:hover { transform: translateY(-2px) scale(1.04); }
+.refs__logo img { height: 36px; width: auto; max-width: 170px; object-fit: contain; display: block; }
 
 @media (prefers-reduced-motion: reduce) {
     .refs__belt-track { animation: none; flex-wrap: wrap; width: auto; }

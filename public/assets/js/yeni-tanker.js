@@ -434,8 +434,10 @@
         var stage = section.querySelector('[data-road-stage]');
         if (!stage) return;
 
-        var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
+        /* Perf: yol arka plan sahnesi — antialias kapalı + düşük pixelRatio
+           (retina'da GPU dolum yükünü büyük ölçüde azaltır, fark belli olmaz). */
+        var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.2));
         if (THREE.sRGBEncoding !== undefined) renderer.outputEncoding = THREE.sRGBEncoding;
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.05;
@@ -626,11 +628,21 @@
         section.classList.add('road--3d');
         document.documentElement.classList.add('has-road');
 
+        var ROAD_BASE_FOV = 48;
         function size() {
             var r = stage.getBoundingClientRect();
             var w = Math.max(1, r.width), h = Math.max(1, r.height);
             renderer.setSize(w, h, false);
             camera.aspect = w / h;
+            /* Portrait/dar ekranda perspektif yatayda daralıp konvoyu büyütür.
+               Dikey FOV'u artırarak yatay çerçevelemeyi koru → mobilde "çok
+               büyük" görünmesin (üst sınır 82° ile aşırı balıkgözü engellenir). */
+            if (camera.aspect < 1) {
+                var halfH = Math.tan(ROAD_BASE_FOV * Math.PI / 360);
+                camera.fov = Math.min(82, 2 * Math.atan(halfH / camera.aspect) * 180 / Math.PI);
+            } else {
+                camera.fov = ROAD_BASE_FOV;
+            }
             camera.updateProjectionMatrix();
         }
         size();
@@ -639,6 +651,12 @@
             window.clearTimeout(rT);
             rT = window.setTimeout(size, 120);
         });
+        /* Sıkışma kök çözümü: stage boyutu HER değiştiğinde (pin, mobil adres
+           çubuğu, yönelim, düzen) anında yeniden boyutlandır. resize olayı
+           bunların hepsini yakalamaz; ResizeObserver yakalar. */
+        if ('ResizeObserver' in window) {
+            new ResizeObserver(function () { size(); }).observe(stage);
+        }
 
         /* Döngü: yol akar, tekerlekler döner, kamera keyframe'ler arasında süzülür */
         var running = true;
@@ -691,8 +709,13 @@
             camera.lookAt(camLook);
 
             updateCaps(progress);
-            renderer.render(scene, camera);
+
+            /* Perf: yol sahnesi ~30fps render — hareket her karede güncellenir
+               (hız değişmez), yalnızca GPU çizimi her 2. karede yapılır. */
+            roadFrame++;
+            if (roadFrame % 2 === 0) renderer.render(scene, camera);
         }
+        var roadFrame = 0;
         loop();
     }
 
@@ -701,8 +724,10 @@
     function init(stage) {
         var THREE = window.THREE;
 
+        /* Perf: hero showcase — AA açık (merkez sahne crisp kalsın) ama
+           pixelRatio biraz düşürüldü (retina'da fill yükü azalır). */
         var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.4));
         if (THREE.sRGBEncoding !== undefined) renderer.outputEncoding = THREE.sRGBEncoding;
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.05;
@@ -776,7 +801,10 @@
             var r = stage.getBoundingClientRect();
             var h = Math.max(1, r.height);
             var baseW = Math.max(1, r.width);
-            var w = Math.round(baseW * SIDE_SCALE);
+            /* Dar ekranda (mobil/tablet) yan-taşma yerine tam genişlik kullan;
+               aksi halde model 1.5x ölçeklenip "çok büyük" görünür. */
+            var scale = (baseW < 992) ? 1.0 : SIDE_SCALE;
+            var w = Math.round(baseW * scale);
             renderer.setSize(w, h, false);
             var el = renderer.domElement;
             el.style.width = w + 'px';
@@ -793,6 +821,9 @@
             window.clearTimeout(rT);
             rT = window.setTimeout(size, 120);
         });
+        if ('ResizeObserver' in window) {
+            new ResizeObserver(function () { size(); }).observe(stage);
+        }
 
         /* Cursor orbit + scroll'da yola dönüş */
         var pointer = { x: 0, y: 0 };
