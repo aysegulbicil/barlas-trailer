@@ -294,8 +294,15 @@
     .site-header .nav-toggle span { transition: none; }
 }
 
-/* Marka logosu (görsel) — koyu header için beyaz yazılı logo */
-.site-header .brand__img { display: block; height: 46px; width: auto; }
+/* Marka logosu (görsel) — tema duyarlı: koyu temada beyaz yazılı logo,
+   açık temada koyu yazılı logo (dark-logo.png) görünür. */
+.site-header .brand__img { height: 46px; width: auto; }
+/* Varsayılan (koyu) tema: beyaz logo görünür, koyu logo gizli */
+.site-header .brand__img--on-dark { display: block; }
+.site-header .brand__img--on-light { display: none; }
+/* Açık tema: tersine çevir */
+:root[data-theme="light"] .site-header .brand__img--on-dark { display: none; }
+:root[data-theme="light"] .site-header .brand__img--on-light { display: block; }
 @media (max-width: 768px) { .site-header .brand__img { height: 38px; } }
 
 /* Dar ekranlarda üst şerit: telefon solda (tek satır) + tema/dil sağda sıkışmadan sığsın */

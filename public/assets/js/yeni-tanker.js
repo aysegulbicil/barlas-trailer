@@ -61,8 +61,21 @@
                 }
             }
 
+            /* Perf: yol(konvoy) sahnesini SAYFA AÇILIŞINDA değil, bölüm
+               yaklaşınca kur. Böylece hero ile yol sahnesi aynı anda
+               başlamaz (sıralı aktivasyon); açılış yükü tek sahneye iner.
+               Kurulana kadar .road:not(.road--3d) statik yedeği gösterir. */
             var road = document.querySelector('[data-road]');
-            if (road && window.gsap && window.ScrollTrigger) initRoad(road);
+            if (road && window.gsap && window.ScrollTrigger) {
+                if ('IntersectionObserver' in window) {
+                    var roadIO = new IntersectionObserver(function (es) {
+                        if (es[0].isIntersecting) { roadIO.disconnect(); initRoad(road); }
+                    }, { rootMargin: '150% 0px' });
+                    roadIO.observe(road);
+                } else {
+                    initRoad(road);
+                }
+            }
         }, 0);
     });
 
@@ -377,8 +390,13 @@
         var loader = new window.GLTFLoader();
         var holders = new Array(urls.length);
         var done = 0;
-        urls.forEach(function (url, i) {
-            loader.load(url, function (gltf) {
+        /* Perf: modelleri SIRAYLA yükle. Hepsini paralel decode etmek
+           (4 model birden) tek karede büyük bir Draco-decode + GPU-upload
+           yığını oluşturup takılmaya yol açıyordu. Bir model bitince bir
+           sonraki boş karede sıradakini başlat → yük zamana yayılır. */
+        function next(i) {
+            if (i >= urls.length) return;
+            loader.load(urls[i], function (gltf) {
                 try {
                     holders[i] = normalizeModel(THREE, gltf.scene, opts.targetLen,
                         (opts.yaw && opts.yaw[i]) || 0);
@@ -387,11 +405,14 @@
                     if (window.console) console.error('[barlas-3d] normalize', e);
                 }
                 if (++done === urls.length && onDone) onDone(holders);
+                (window.requestAnimationFrame || window.setTimeout)(function () { next(i + 1); });
             }, undefined, function (err) {
-                if (window.console) console.error('[barlas-3d] glb yüklenemedi', url, err);
+                if (window.console) console.error('[barlas-3d] glb yüklenemedi', urls[i], err);
                 if (++done === urls.length && onDone) onDone(holders);
+                (window.requestAnimationFrame || window.setTimeout)(function () { next(i + 1); });
             });
-        });
+        }
+        next(0);
     }
 
     /* ------------------------- yol dokuları --------------------------- */
@@ -858,6 +879,16 @@
         var fadeIn = 0;
         var heroSwapped = false;
 
+        /* Perf: hero sahnesi yalnızca ekrandayken iş yapsın. Aşağı kaydırıp
+           yol sahnesine geçince hero'nun orbit/render işi durur → iki sahne
+           aynı anda CPU/GPU yemez. (Yol sahnesindeki 'active' ile aynı kalıp.) */
+        var heroActive = true;
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (es) {
+                heroActive = es[0].isIntersecting;
+            }, { threshold: 0 }).observe(stage);
+        }
+
         document.addEventListener('visibilitychange', function () {
             running = !document.hidden;
             if (running) loop();
@@ -866,6 +897,7 @@
         function loop() {
             if (!running) return;
             window.requestAnimationFrame(loop);
+            if (!heroActive) return;
 
             var t = clock.getElapsedTime();
             /* Model (GLB ya da prosedürel yedek) hazır olunca aç. */

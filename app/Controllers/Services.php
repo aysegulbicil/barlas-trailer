@@ -32,7 +32,6 @@ class Services extends BaseController
         ['slug' => 'adr-tanker-repair',       'key' => 'adr_tanker_repair',       'image' => 'srv-adr-tanker-repair.jpg',       'icon' => 'M12 4l9 15H3z M12 10v4 M12 17h.01'],
         ['slug' => 'lowbed-repair',           'key' => 'lowbed_repair',           'image' => 'srv-lowbed-repair.jpg',           'icon' => 'M2 15h20 M4 15v-4h10l3 4 M6 18a1.5 1.5 0 100-3'],
         ['slug' => 'aluminum-silobas-repair', 'key' => 'aluminum_silobas_repair', 'image' => 'srv-aluminum-silobas-repair.jpg', 'icon' => 'M5 21V9l7-5 7 5v12 M9 13l3 3 3-3'],
-        ['slug' => 'fuel-tank-repair-center', 'key' => 'fuel_center',             'image' => 'srv-fuel-center.jpg',             'icon' => 'M6 21V4h8v17 M6 21h8 M14 8h3v9a2 2 0 11-4 0'],
         ['slug' => 'axle-repair',             'key' => 'axle_repair',             'image' => 'srv-axle-repair.jpg',             'icon' => 'M2 12h20 M7 14.5a2.5 2.5 0 100-5 M17 14.5a2.5 2.5 0 100-5'],
         ['slug' => 'suspension-repair',       'key' => 'suspension_repair',       'image' => 'srv-suspension-repair.jpg',       'icon' => 'M4 17c2-3 4 3 6 0s4 3 6 0 4 3 4 0 M4 7h16'],
     ];

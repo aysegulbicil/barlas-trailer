@@ -60,7 +60,9 @@ $currentPath = current_path();
     <nav class="navbar-main" aria-label="<?= esc(lang('Navigation.aria_primary'), 'attr') ?>">
         <div class="container navbar-main__inner">
             <a class="brand" href="<?= esc(locale_url()) ?>" aria-label="<?= esc(lang('Common.site_name'), 'attr') ?>">
-                <img class="brand__img" src="<?= base_url('assets/logo.png') ?>" alt="<?= esc(lang('Common.site_name'), 'attr') ?>" width="200" height="47" decoding="async">
+                <!-- Tema duyarlı logo: koyu temada beyaz logo, açık temada koyu logo -->
+                <img class="brand__img brand__img--on-dark" src="<?= base_url('assets/logo.png') ?>" alt="<?= esc(lang('Common.site_name'), 'attr') ?>" width="195" height="46" decoding="async">
+                <img class="brand__img brand__img--on-light" src="<?= base_url('assets/dark-logo.png') ?>" alt="<?= esc(lang('Common.site_name'), 'attr') ?>" width="208" height="46" decoding="async">
             </a>
 
             <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu"

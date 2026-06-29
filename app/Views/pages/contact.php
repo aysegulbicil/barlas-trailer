@@ -18,14 +18,6 @@ $this->extend('layouts/yeni');
 /* Konu / ürün seçenekleri (değer = okunur etiket → e-postada anlamlı görünür) */
 $subjects = ['subj_quote', 'subj_tanker', 'subj_silo', 'subj_tipper', 'subj_service', 'subj_parts', 'subj_other'];
 
-/* KVKK onayı: {link} yer tutucusunu güvenli bir bağlantıyla değiştir */
-$consentHtml = esc(lang('Contact.consent'));
-$consentHtml = str_replace(
-    '{link}',
-    '<a href="#" class="contact-form__link">' . esc(lang('Contact.consent_link')) . '</a>',
-    $consentHtml
-);
-
 /* Sunucu tarafı durum (no-JS / yeniden yükleme) */
 $flashSuccess   = session('form_success');
 $flashErrorsMsg = session('form_error');
@@ -163,7 +155,6 @@ $jsVer  = is_file(FCPATH . 'assets/js/contact-tanker.js') ? filemtime(FCPATH . '
                       data-msg-name="<?= esc(lang('Contact.err_name'), 'attr') ?>"
                       data-msg-email="<?= esc(lang('Contact.err_email'), 'attr') ?>"
                       data-msg-message="<?= esc(lang('Contact.err_message'), 'attr') ?>"
-                      data-msg-consent="<?= esc(lang('Contact.err_consent'), 'attr') ?>"
                       data-msg-generic="<?= esc(lang('Contact.form_error'), 'attr') ?>"
                       novalidate>
                     <?= csrf_field() ?>
@@ -249,15 +240,6 @@ $jsVer  = is_file(FCPATH . 'assets/js/contact-tanker.js') ? filemtime(FCPATH . '
                         <div class="contact-hp" aria-hidden="true">
                             <label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
                         </div>
-
-                        <label class="contact-consent" data-field="consent">
-                            <input type="checkbox" name="consent" value="1" <?= old('consent') ? 'checked' : '' ?> required>
-                            <span class="contact-consent__box" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"></path></svg>
-                            </span>
-                            <span class="contact-consent__text"><?= $consentHtml ?></span>
-                        </label>
-                        <p class="contact-field__error contact-field__error--consent" data-error-for="consent"><?= $fieldErr('consent') ?></p>
 
                         <div class="contact-form__foot">
                             <p class="contact-form__hint"><?= esc(lang('Contact.required_hint')) ?></p>

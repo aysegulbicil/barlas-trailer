@@ -16,7 +16,6 @@ $megaServices = [
     ['key' => 'adr_tanker_repair',       'slug' => 'adr-tanker-repair',       'icon' => 'M12 4l9 15H3z M12 10v4 M12 17h.01'],
     ['key' => 'lowbed_repair',           'slug' => 'lowbed-repair',           'icon' => 'M2 15h20 M4 15v-4h10l3 4 M6 18a1.5 1.5 0 100-3'],
     ['key' => 'aluminum_silobas_repair', 'slug' => 'aluminum-silobas-repair', 'icon' => 'M5 21V9l7-5 7 5v12 M9 13l3 3 3-3'],
-    ['key' => 'fuel_center',             'slug' => 'fuel-tank-repair-center', 'icon' => 'M6 21V4h8v17 M6 21h8 M14 8h3v9a2 2 0 11-4 0'],
     ['key' => 'axle_repair',             'slug' => 'axle-repair',             'icon' => 'M2 12h20 M7 14.5a2.5 2.5 0 100-5 M17 14.5a2.5 2.5 0 100-5'],
     ['key' => 'suspension_repair',       'slug' => 'suspension-repair',       'icon' => 'M4 17c2-3 4 3 6 0s4 3 6 0 4 3 4 0 M4 7h16'],
 ];

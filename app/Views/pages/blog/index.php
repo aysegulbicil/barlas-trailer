@@ -31,7 +31,7 @@ $totalCount = array_sum($categoryCounts);
         <!-- Sidebar: search + categories only -->
         <aside class="blog-sidebar" aria-label="<?= esc(lang('Blog.search_title') . ' / ' . lang('Blog.categories_title'), 'attr') ?>">
 
-            <div class="sidebar-widget" data-aos="fade-up">
+            <div class="sidebar-widget" data-reveal>
                 <h2 class="sidebar-widget__title"><?= esc(lang('Blog.search_title')) ?></h2>
                 <form class="sidebar-search" action="<?= esc(locale_url('blog')) ?>" method="get" role="search">
                     <?php if ($activeCategory !== ''): ?>
@@ -50,7 +50,7 @@ $totalCount = array_sum($categoryCounts);
                 </form>
             </div>
 
-            <div class="sidebar-widget" data-aos="fade-up" data-aos-delay="90">
+            <div class="sidebar-widget" data-reveal>
                 <h2 class="sidebar-widget__title"><?= esc(lang('Blog.categories_title')) ?></h2>
                 <ul class="sidebar-categories">
                     <li>
@@ -80,7 +80,7 @@ $totalCount = array_sum($categoryCounts);
         <div class="blog-main">
 
             <?php if ($isFiltered): ?>
-                <div class="blog-filterbar" data-aos="fade-up">
+                <div class="blog-filterbar" data-reveal>
                     <p class="blog-filterbar__info">
                         <strong><?= esc((string) count($posts)) ?></strong> <?= esc(lang('Blog.results_found')) ?>
                         <?php if ($searchQuery !== ''): ?>
@@ -94,7 +94,7 @@ $totalCount = array_sum($categoryCounts);
             <?php endif; ?>
 
             <?php if ($posts === []): ?>
-                <div class="blog-empty" data-aos="fade-up">
+                <div class="blog-empty" data-reveal>
                     <span class="blog-empty__icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="11" cy="11" r="7"></circle>
@@ -106,9 +106,9 @@ $totalCount = array_sum($categoryCounts);
                     <a class="btn btn--outline" href="<?= esc(locale_url('blog')) ?>"><?= esc(lang('Blog.clear_filters')) ?></a>
                 </div>
             <?php else: ?>
-                <div class="blog-grid">
-                    <?php foreach ($posts as $i => $post): ?>
-                        <div data-aos="fade-up" data-aos-delay="<?= esc((string) (($i % 2) * 90), 'attr') ?>">
+                <div class="blog-grid" data-reveal-group>
+                    <?php foreach ($posts as $post): ?>
+                        <div>
                             <?= view('partials/blog-card', ['post' => $post]) ?>
                         </div>
                     <?php endforeach; ?>

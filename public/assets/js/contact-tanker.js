@@ -576,11 +576,10 @@
             name: form.dataset.msgName || 'Required',
             email: form.dataset.msgEmail || 'Invalid email',
             message: form.dataset.msgMessage || 'Required',
-            consent: form.dataset.msgConsent || 'Required',
             generic: form.dataset.msgGeneric || 'Please check the form.'
         };
         var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        var KEYS = ['name', 'email', 'phone', 'company', 'subject', 'message', 'consent'];
+        var KEYS = ['name', 'email', 'phone', 'company', 'subject', 'message'];
 
         function el(name) { return form.elements && form.elements[name] ? form.elements[name] : null; }
         function val(name) { var e = el(name); return e ? ('' + e.value).trim() : ''; }
@@ -601,8 +600,6 @@
             if (val('name').length < 2) bad('name', msgs.name);
             if (!EMAIL_RE.test(val('email'))) bad('email', msgs.email);
             if (val('message').length < 10) bad('message', msgs.message);
-            var consent = el('consent');
-            if (!consent || !consent.checked) bad('consent', msgs.consent);
 
             if (firstBad) {
                 var f = el(firstBad);

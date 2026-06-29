@@ -27,7 +27,7 @@ main#main-content { display: block; }
     background: transparent;
 }
 @media (hover: hover) and (pointer: fine) {
-    .btn--outline:hover { border-color: var(--blue-bright); color: var(--ink-1); background: var(--blue-soft); }
+    .btn--outline:hover { border-color: var(--blue-bright); color: var(--ink-1); background: var(--blue-soft); transform: translateY(-2px); }
 }
 
 /* Görsel çerçevesi + yer tutucu (gerçek foto eklenene kadar) */
@@ -58,9 +58,13 @@ main#main-content { display: block; }
 /* ----------------------------- Sayfa hero --------------------------- */
 .page-hero {
     position: relative;
-    background-color: var(--bg-1);
-    border-block-end: 1px solid var(--line);
-    padding-block: clamp(2.6rem, 1.8rem + 4vw, 4.6rem);
+    /* Sert 1px dikiş yerine: hero yüzeyi (bg-1) altta içerik rengine (bg-0)
+       erir → bölüm geçişi yumuşak, "blok" hissi kalkar. */
+    background: linear-gradient(180deg,
+        var(--bg-1) 0%,
+        var(--bg-1) 66%,
+        var(--bg-0) 100%);
+    padding-block: clamp(2.9rem, 2rem + 4vw, 5rem);
     isolation: isolate;
     overflow: hidden;
 }
@@ -281,7 +285,7 @@ main#main-content { display: block; }
 .blog-card:hover {
     transform: translateY(-6px);
     border-color: var(--line-2);
-    box-shadow: 0 24px 50px -28px rgba(3, 7, 14, 0.7);
+    box-shadow: var(--lift-md);
 }
 .blog-card__media { display: block; aspect-ratio: 16 / 10; min-height: 0; border-radius: 0; }
 .blog-card__body { display: flex; flex-direction: column; flex: 1; gap: var(--space-3); padding: var(--space-5); }
@@ -325,7 +329,7 @@ main#main-content { display: block; }
 [dir="rtl"] .blog-card__more:hover svg { transform: scaleX(-1) translateX(4px); }
 
 /* ----------------------------- Blog detay --------------------------- */
-.blog-article { padding-block: clamp(2.4rem, 1.6rem + 3vw, 4rem); background: var(--bg-0); }
+.blog-article { padding-block: var(--sec-y-sm); background: var(--bg-0); }
 .blog-article__inner { max-width: 1040px; margin-inline: auto; }
 .blog-article__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); margin-block-end: var(--space-5); }
 .blog-article__date {
@@ -373,8 +377,13 @@ main#main-content { display: block; }
 .blog-article__footer .btn svg { width: 16px; height: 16px; }
 [dir="rtl"] .blog-article__footer .btn svg { transform: scaleX(-1); }
 
-/* İlgili yazılar */
-.blog-related { padding-block: clamp(2.4rem, 1.6rem + 3vw, 4rem); background: var(--bg-1); border-block-start: 1px solid var(--line); }
+/* İlgili yazılar — üstte bg-0'dan bg-1'e erir; sert kenarlık yerine
+   ortada parlayıp kenarlarda sönen yumuşak dikiş (.soft-seam). */
+.blog-related {
+    position: relative;
+    padding-block: var(--sec-y-sm);
+    background: linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 16%);
+}
 .blog-related__grid { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
 @media (min-width: 768px) { .blog-related__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .blog-related .blog-card { background: var(--bg-2); }
@@ -431,7 +440,7 @@ main#main-content { display: block; }
     .service-card:hover {
         transform: translateY(-6px);
         border-color: var(--line-2);
-        box-shadow: 0 24px 50px -28px rgba(3, 7, 14, 0.7);
+        box-shadow: var(--lift-md);
     }
 }
 .service-card__icon {
@@ -486,7 +495,7 @@ main#main-content { display: block; }
 .services-cta__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
 
 /* ----------------------------- Detay -------------------------------- */
-.service-detail { padding-block: clamp(2.4rem, 1.6rem + 3vw, 4rem); background: var(--bg-0); }
+.service-detail { padding-block: var(--sec-y-sm); background: var(--bg-0); }
 .service-detail__intro {
     display: grid;
     grid-template-columns: 1fr;
@@ -553,8 +562,30 @@ main#main-content { display: block; }
 .service-detail__back svg { width: 16px; height: 16px; }
 [dir="rtl"] .service-detail__back svg { transform: scaleX(-1); }
 
-.services-related { padding-block: clamp(2.4rem, 1.6rem + 3vw, 4rem); background: var(--bg-1); border-block-start: 1px solid var(--line); }
+.services-related {
+    position: relative;
+    padding-block: var(--sec-y-sm);
+    background: linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 16%);
+}
 .services-related .service-card { background: var(--bg-2); }
+
+/* ----------------------- Yumuşak bölüm dikişi ----------------------- */
+/* "İlgili" şeritlerinin üst kenarında: ortada hafif beliren, kenarlara
+   doğru sönen ince hairline. Tam-genişlik sert 1px çizginin premium hali. */
+.blog-related::before,
+.services-related::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--line-2) 28%,
+        var(--line-2) 72%,
+        transparent 100%);
+    pointer-events: none;
+}
 
 /* Hizmet kapak görseli kancaları (dosyayı public/assets/images/services/ içine bırak) */
 [data-img="services/srv-trailer-repair.jpg"]          { background-image: url('../images/services/srv-trailer-repair.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
@@ -572,7 +603,7 @@ main#main-content { display: block; }
 /* ===================================================================
    MEDYA SAYFASI (pages/media) — Fotoğraflar + Videolar sekmeleri
    =================================================================== */
-.media-section { padding-block: clamp(2.75rem, 2rem + 3vw, 4.5rem); background: var(--bg-0); }
+.media-section { padding-block: var(--sec-y-sm); background: var(--bg-0); }
 
 /* ----- Sekme çubuğu ----- */
 .media-tabs { margin-block-end: clamp(1.6rem, 1rem + 2vw, 2.6rem); }
@@ -693,7 +724,7 @@ main#main-content { display: block; }
 /* ----- Izgara ----- */
 .media-grid {
     list-style: none;
-    margin: 0 0 127px;
+    margin: 0;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -714,7 +745,7 @@ main#main-content { display: block; }
     overflow: hidden;
     background: var(--bg-2);
     cursor: zoom-in;
-    transition: border-color var(--ease-out) .25s, transform var(--ease-out) .25s;
+    transition: border-color var(--ease-out) .25s, transform var(--ease-out) .25s, box-shadow var(--ease-out) .25s;
 }
 .media-thumb img {
     width: 100%;
@@ -741,7 +772,7 @@ main#main-content { display: block; }
 }
 .media-thumb__zoom svg { width: 18px; height: 18px; }
 @media (hover: hover) and (pointer: fine) {
-    .media-thumb:hover { border-color: var(--line-2); transform: translateY(-3px); }
+    .media-thumb:hover { border-color: var(--line-2); transform: translateY(-3px); box-shadow: var(--lift-sm); }
     .media-thumb:hover img { transform: scale(1.06); }
     .media-thumb:hover .media-thumb__zoom { opacity: 1; transform: none; }
 }
