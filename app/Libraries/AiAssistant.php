@@ -33,7 +33,6 @@ final class AiAssistant
         ['slug' => 'adr-tanker-repair',       'key' => 'adr_tanker_repair'],
         ['slug' => 'lowbed-repair',           'key' => 'lowbed_repair'],
         ['slug' => 'aluminum-silobas-repair', 'key' => 'aluminum_silobas_repair'],
-        ['slug' => 'fuel-tank-repair-center', 'key' => 'fuel_center'],
         ['slug' => 'axle-repair',             'key' => 'axle_repair'],
         ['slug' => 'suspension-repair',       'key' => 'suspension_repair'],
     ];

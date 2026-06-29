@@ -38,7 +38,7 @@ $videosArePlaceholder = $videosArePlaceholder ?? false;
     <div class="container">
 
         <!-- Sekmeler -->
-        <div class="media-tabs" data-tabs>
+        <div class="media-tabs" data-tabs data-reveal="down">
             <div class="media-tabs__list" role="tablist" aria-label="<?= esc(lang('Media.page_title'), 'attr') ?>">
                 <button class="media-tabs__tab is-active" type="button" role="tab"
                         id="tab-photos" aria-selected="true" aria-controls="panel-photos"
@@ -88,7 +88,7 @@ $videosArePlaceholder = $videosArePlaceholder ?? false;
             <?php else: ?>
                 <!-- Kategori filtreleri -->
                 <div class="media-filters" role="group"
-                     aria-label="<?= esc(lang('Media.filter_aria'), 'attr') ?>" data-filters>
+                     aria-label="<?= esc(lang('Media.filter_aria'), 'attr') ?>" data-filters data-reveal>
                     <button class="media-filter is-active" type="button" data-filter="all" aria-pressed="true">
                         <span><?= esc(lang('Media.filter_all')) ?></span>
                         <span class="media-filter__count"><?= esc((string) count($photos)) ?></span>
@@ -104,7 +104,7 @@ $videosArePlaceholder = $videosArePlaceholder ?? false;
                     <?php endforeach; ?>
                 </div>
 
-                <ul class="media-grid" data-lightbox-group data-photo-grid>
+                <ul class="media-grid" data-lightbox-group data-photo-grid data-reveal>
                     <?php foreach ($photos as $photo): ?>
                         <li class="media-grid__item" data-cat="<?= esc($photo['cat'], 'attr') ?>">
                             <button class="media-thumb" type="button"

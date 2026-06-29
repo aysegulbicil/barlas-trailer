@@ -82,6 +82,8 @@
         var lastScroll = window.scrollY || 0;
 
         /* Tekerlek imleci anında izler (gecikme yok: hassasiyet) */
+        function applyRotation() { wheel.style.rotate = (angle % 360) + 'deg'; }
+
         document.addEventListener('mousemove', function (e) {
             if (!seen) {
                 seen = true;
@@ -92,17 +94,29 @@
             angle += (e.clientX - lastX) * (180 / (Math.PI * 17));
             lastX = e.clientX;
             el.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
+            applyRotation();
         }, { passive: true });
 
-        /* Dönüş döngüsü: scroll = yol alma, hover = serbest dönüş */
-        (function raf() {
+        /* Dönüş döngüsü: scroll = yol alma, hover = serbest dönüş.
+           Perf: SÜREKLI rAF yerine yalnızca scroll değişimi ya da hover varken
+           çalışır; boştayken tamamen durur. (Önceki sürüm 60fps sabit dönüp her
+           karede imleci repaint ediyordu → sürekli takılma kaynağı.) */
+        var spinId = null;
+        function spin() {
             var s = window.scrollY || 0;
-            angle += (s - lastScroll) * 0.45;
+            var d = s - lastScroll;
             lastScroll = s;
+            angle += d * 0.45;
             if (hover) angle += 2.2;
-            wheel.style.rotate = (angle % 360) + 'deg';
-            window.requestAnimationFrame(raf);
-        })();
+            applyRotation();
+            if (hover || Math.abs(d) > 0.05) {
+                spinId = window.requestAnimationFrame(spin);
+            } else {
+                spinId = null;   /* boşta: döngüyü bırak */
+            }
+        }
+        function kickSpin() { if (spinId === null) spinId = window.requestAnimationFrame(spin); }
+        window.addEventListener('scroll', kickSpin, { passive: true });
 
         var HOT = 'a, button, [role="button"], [data-spot], .btn, summary, label';
         var FIELD = 'input, textarea, select, [contenteditable="true"]';
@@ -113,6 +127,7 @@
             el.classList.toggle('is-hidden', overField);
             hover = !overField && !!(t.closest && t.closest(HOT));
             el.classList.toggle('is-hover', hover);
+            if (hover) kickSpin();   /* hover serbest dönüşünü başlat */
         });
 
         document.addEventListener('mousedown', function () { el.classList.add('is-down'); });

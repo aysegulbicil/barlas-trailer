@@ -4,3 +4,4 @@
 {"time":"2026-06-17T12:54:47+00:00","locale":"tr","q":"naber canım","intent":"no_match","products":[],"services":[],"iphash":"245c0ffc0f6a"}
 {"time":"2026-06-17T13:00:37+00:00","locale":"tr","q":"Gıda için paslanmaz tanker gerekli","intent":"product","products":["Gıda Tankeri","Çelik Tanker","V Tipi Un ve Gıda Silobası"],"services":[],"iphash":"245c0ffc0f6a"}
 {"time":"2026-06-17T14:18:58+00:00","locale":"tr","q":"frigorifik istiyorum","intent":"product","products":["Frigorifik"],"services":[],"iphash":"245c0ffc0f6a"}
+{"time":"2026-06-29T14:17:46+00:00","locale":"tr","q":"Akaryakıt taşımacılığı yapıyoruz","intent":"product","products":["Akaryakıt / Yakıt Tankeri","Gıda Tankeri","Damperli Silobas"],"services":[],"iphash":"245c0ffc0f6a"}

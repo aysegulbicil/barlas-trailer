@@ -50,7 +50,7 @@
 
 /* Real-photo layers (keyed on data-img / class). Photo sits over the
    placeholder; a soft dark gradient keeps any overlaid text readable. */
-[data-img="about.jpg"] { background-image: url('../images/about.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
+[data-img="about.jpg"] { background-image: url('../images/about.webp'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
 [data-img="why-bg.jpg"] { background-image: url('../images/why-bg.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }
 [data-img="showcase.png"] { background-image: url('../images/showcase.png'), var(--blueprint), linear-gradient(160deg, var(--dark), var(--primary-dark)); background-size: contain, var(--blueprint-size), cover; background-position: center; background-repeat: no-repeat; }
 [data-img="services-workshop.jpg"] { background-image: url('../images/services-workshop.jpg'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center; }

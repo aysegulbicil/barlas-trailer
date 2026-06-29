@@ -31,8 +31,8 @@
         var groupKids = [];
         groups.forEach(function (g) {
             Array.prototype.slice.call(g.children).forEach(function (child, i) {
-                // Hafif kademeli giriş
-                child.style.transitionDelay = Math.min(i * 70, 420) + 'ms';
+                // Hafif kademeli giriş (ana sayfayla aynı ritim: 60ms adım)
+                child.style.transitionDelay = Math.min(i * 60, 360) + 'ms';
                 groupKids.push(child);
             });
         });

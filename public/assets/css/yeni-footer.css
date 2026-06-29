@@ -151,6 +151,9 @@
     margin-block-end: var(--space-4);
     text-decoration: none;
 }
+/* Marka logosu (görsel) — koyu footer zemini için beyaz yazılı logo */
+.site-footer .brand__img { display: block; height: 44px; width: auto; }
+@media (max-width: 768px) { .site-footer .brand__img { height: 38px; } }
 .site-footer .brand__mark {
     display: grid;
     place-items: center;

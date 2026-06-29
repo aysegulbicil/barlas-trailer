@@ -54,13 +54,11 @@ class Contact extends BaseController
             'company' => 'permit_empty|max_length[160]',
             'subject' => 'permit_empty|max_length[140]',
             'message' => 'required|min_length[10]|max_length[4000]',
-            'consent' => 'required',
         ];
         $messages = [
             'name'    => ['required' => lang('Contact.err_name'),    'min_length' => lang('Contact.err_name')],
             'email'   => ['required' => lang('Contact.err_email'),   'valid_email' => lang('Contact.err_email')],
             'message' => ['required' => lang('Contact.err_message'), 'min_length' => lang('Contact.err_message')],
-            'consent' => ['required' => lang('Contact.err_consent')],
         ];
 
         if (! $this->validate($rules, $messages)) {

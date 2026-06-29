@@ -13,7 +13,7 @@
    ===================================================================== */
 
 /* ------------------------------ Bölüm ------------------------------- */
-.prd-section { padding-block: clamp(2.5rem, 1.5rem + 3vw, 4.5rem) var(--sec-y, 6rem); }
+.prd-section { padding-block: var(--sec-y-sm, 4.5rem) var(--sec-y, 6rem); }
 
 /* ------------------------------ Sayaçlar ---------------------------- */
 .prd-stats {
@@ -691,7 +691,7 @@ a.prd-badge:hover { border-color: var(--blue-bright, #4AA3E6); color: var(--ink-
 .prd-nospec p + p { margin-block-start: 0.5rem; }
 
 /* ------------------------------ İlgili ------------------------------ */
-.prd-related { margin-block-start: clamp(2.5rem, 1.8rem + 2vw, 4rem); }
+.prd-related { margin-block-start: var(--sec-y-sm, 4.5rem); }
 
 .prd-related__title {
     margin: 0 0 1rem;
@@ -741,7 +741,7 @@ a.prd-badge:hover { border-color: var(--blue-bright, #4AA3E6); color: var(--ink-
 
 /* -------------------------------- CTA ------------------------------- */
 .prd-cta {
-    margin-block-start: clamp(2.5rem, 1.8rem + 2vw, 4rem);
+    margin-block-start: var(--sec-y-sm, 4.5rem);
     padding: clamp(1.4rem, 1rem + 1.5vw, 2.2rem);
     border: 1px solid var(--line, rgba(226, 236, 248, 0.08));
     border-radius: var(--radius, 18px);

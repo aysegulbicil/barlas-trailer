@@ -61,12 +61,9 @@ $social = [
     <div class="container site-footer__grid">
 
         <div class="site-footer__col site-footer__col--brand">
-            <a class="brand brand--light" href="<?= esc(locale_url()) ?>">
-                <span class="brand__mark">B</span>
-                <span class="brand__text">
-                    <span class="brand__name">Barlas</span>
-                    <span class="brand__sub"><?= esc(lang('Common.brand_tagline')) ?></span>
-                </span>
+            <a class="brand brand--light" href="<?= esc(locale_url()) ?>" aria-label="<?= esc(lang('Common.site_name'), 'attr') ?>">
+                <!-- Footer koyu zeminde — beyaz yazılı logo kullanılır (header ile aynı görsel) -->
+                <img class="brand__img" src="<?= base_url('assets/logo.png') ?>" alt="<?= esc(lang('Common.site_name'), 'attr') ?>" width="187" height="44" loading="lazy" decoding="async">
             </a>
             <p class="site-footer__about"><?= esc(lang('Common.footer_about')) ?></p>
 
