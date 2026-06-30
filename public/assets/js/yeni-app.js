@@ -46,6 +46,66 @@
         initAiConsole();
         initGalleryReveal();
         initCursor();
+        initTankerShowcase();
+    }
+
+    /* Tanker sergisi (spatial product showcase): kayan segment anahtarı
+       Performans/Güvenlik spec görünümlerini değiştirir; görünür panelin
+       metrik barları her geçişte 0'dan değerine dolar. Bağımlılıksız.
+       Bölüm görünüme girince ilk barlar dolar (IntersectionObserver).
+       reduced-motion'da barlar CSS ile anında dolu gelir (burada da güvenli). */
+    function initTankerShowcase() {
+        var root = document.querySelector('[data-tshow]');
+        if (!root) return;
+
+        var sw    = root.querySelector('[data-tshow-switch]');
+        var tabs  = Array.prototype.slice.call(root.querySelectorAll('[data-tshow-tab]'));
+        var panes = Array.prototype.slice.call(root.querySelectorAll('[data-tshow-pane]'));
+        if (!tabs.length) return; /* anahtar/barlar kaldırıldı: yapacak iş yok */
+
+        /* Bir panelin barlarını sıfırlayıp yeniden doldurur (geçişte canlanır). */
+        function fillPane(pane) {
+            if (!pane) return;
+            pane.querySelectorAll('[data-tshow-bar]').forEach(function (bar) {
+                bar.classList.remove('is-filled');
+                void bar.offsetWidth; /* reflow: geçiş yeniden tetiklensin */
+                bar.classList.add('is-filled');
+            });
+        }
+
+        function activate(index) {
+            tabs.forEach(function (tab, i) {
+                var on = i === index;
+                tab.classList.toggle('is-active', on);
+                tab.setAttribute('aria-selected', on ? 'true' : 'false');
+            });
+            panes.forEach(function (pane, i) {
+                var on = i === index;
+                pane.hidden = !on;
+                pane.classList.toggle('is-active', on);
+            });
+            if (sw) sw.setAttribute('data-active', String(index));
+            fillPane(panes[index]);
+        }
+
+        tabs.forEach(function (tab, i) {
+            tab.addEventListener('click', function () { activate(i); });
+        });
+
+        /* İlk dolum: bölüm görünüme girdiğinde aktif panel dolsun. */
+        var active = panes.find ? panes.find(function (p) { return !p.hidden; }) : panes[0];
+        if (!('IntersectionObserver' in window)) {
+            fillPane(active);
+            return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                io.disconnect();
+                fillPane(active);
+            });
+        }, { threshold: 0.3 });
+        io.observe(root);
     }
 
     /* Tekerlek imleç: imleç her zaman bir treyler tekerleğidir
@@ -577,16 +637,23 @@
            transform; bölümler arası takılmanın sürekli yüklerinden biriydi.)
            Katmanlar statik dekoratif olarak yerinde kalır. */
 
+        /* Perf: dekoratif scrub paralaksları yalnızca masaüstünde çalışsın.
+           Mobil/dokunmatikte scroll jank'ının en kötü olduğu yer burası; üstelik
+           hero sahne paralaksı pinlenen 3D yol sahnesiyle aynı anda kayınca
+           takılma artıyor. 3D'ye DOKUNULMAZ — sadece süsleme katmanı kapanır.
+           (Galeri paralaksı zaten bu kapının arkasındaydı; hero'yu da aldık.) */
+        var desktopParallax = window.matchMedia('(min-width: 992px) and (pointer: fine)').matches;
+
         /* Hero: arka ışık + sahne farklı hızlarda kayar (derinlik) */
         var heroHalo = document.querySelector('.hero__halo');
-        if (heroHalo) {
+        if (desktopParallax && heroHalo) {
             gsap.to(heroHalo, {
                 yPercent: 28, ease: 'none',
                 scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.8 }
             });
         }
         var heroStage = document.querySelector('.hero__stage');
-        if (heroStage) {
+        if (desktopParallax && heroStage) {
             gsap.to(heroStage, {
                 y: 60, ease: 'none',
                 scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.8 }
@@ -597,8 +664,7 @@
            Yalnızca masaüstünde (>=992px) sütunlar yan yanayken çalışır; mobilde
            sütunlar alt alta yığıldığı için paralaks kapatılır (yoksa görseller
            farklı hızlarda kayıp üst üste biner). */
-        var galleryParallaxOK = window.matchMedia('(min-width: 992px)').matches;
-        if (galleryParallaxOK) {
+        if (desktopParallax) {
             gsap.utils.toArray('[data-g-col]').forEach(function (col) {
                 var sp = parseFloat(col.getAttribute('data-g-speed')) || 0;
                 if (!sp) return;

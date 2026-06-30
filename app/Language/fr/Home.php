@@ -197,4 +197,32 @@ return [
     // Scène de route (section 3D épinglée)
     'road_title' => 'Sur toutes les routes, sous toutes les charges',
     'road_lead'  => 'Les véhicules Barlas restent en service sur les routes les plus exigeantes.',
+
+    // Vitrine citerne (spatial product showcase — produit unique, thème bleu)
+    'tanker_showcase' => [
+        'eyebrow'    => 'Produit phare · Vitrine d’ingénierie',
+        'title'      => 'Citerne Barlas',
+        'kicker'     => 'Un produit · Ingénierie complète',
+        'lead'       => 'Examinez de plus près la citerne 3D de la scène principale. Chaque indicateur reflète nos standards de production réels.',
+        'desc'       => 'Notre citerne phare — corps certifié ADR, système multi-compartiments et essieux et freins haut de gamme — conçue pour le transport de carburant, de produits chimiques et alimentaires.',
+        'status'     => 'Système actif',
+        'specs_cta'  => 'Caractéristiques techniques',
+        'badge'      => 'Certifiée ADR',
+        'stat_value' => '35+',
+        'stat_label' => 'ans de fabrication',
+        'tabs' => [
+            ['id' => 'perf',   'label' => 'Performance'],
+            ['id' => 'safety', 'label' => 'Sécurité'],
+        ],
+        'views' => [
+            'perf' => [
+                ['label' => 'Capacité de charge',          'value' => 95],
+                ['label' => 'Tenue de route & suspension', 'value' => 88],
+            ],
+            'safety' => [
+                ['label' => 'Conformité ADR',              'value' => 100],
+                ['label' => 'Étanchéité & test de pression', 'value' => 96],
+            ],
+        ],
+    ],
 ];

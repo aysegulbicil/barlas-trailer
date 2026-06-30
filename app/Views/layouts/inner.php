@@ -45,7 +45,10 @@ $asset = static function (string $path): string {
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap">
+    <!-- Perf: fontları render-blocking yapma — print medyasıyla yükle, gelince
+         'all'a çevir. display=swap zaten fallback fontla anında metin gösterir. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"></noscript>
 
     <!-- Sıra önemli: token'lar → menü → yeni tema → iç sayfalar →
          koyu header kaplaması → en sonda aydınlık tema ezmesi. -->

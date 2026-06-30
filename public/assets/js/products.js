@@ -43,14 +43,24 @@
             document.querySelectorAll('[data-img^="products/"]')
         );
         nodes.forEach(function (el) {
-            var src = ASSETS_BASE + 'assets/images/' + el.getAttribute('data-img');
-            var probe = new Image();
-            probe.onload = function () {
+            var orig = ASSETS_BASE + 'assets/images/' + el.getAttribute('data-img');
+            // Optimizasyon: önce .webp dene (çok daha küçük); yoksa orijinale düş.
+            var webp = orig.replace(/\.(jpe?g|png)$/i, '.webp');
+
+            function paint(src) {
                 el.style.backgroundImage = 'url("' + src + '")';
                 el.style.backgroundSize = 'cover';
                 el.style.backgroundPosition = 'center';
+            }
+
+            var probe = new Image();
+            probe.onload = function () { paint(webp); };
+            probe.onerror = function () {
+                var f = new Image();
+                f.onload = function () { paint(orig); };
+                f.src = orig;
             };
-            probe.src = src;
+            probe.src = webp;
         });
     }
 

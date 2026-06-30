@@ -70,7 +70,7 @@
                     <span class="hero__product-shadow"></span>
                     <img
                         class="hero__product-image"
-                        src="<?= base_url('assets/images/hero-1.png') ?>"
+                        src="<?= base_url('assets/images/hero-1.webp') ?>"
                         alt=""
                         loading="eager"
                         fetchpriority="high"

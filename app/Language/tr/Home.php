@@ -197,4 +197,32 @@ return [
     // Yol sahnesi (pinli 3D tanıtım)
     'road_title' => 'Her yolda, her yükte',
     'road_lead'  => 'Barlas araçları en zorlu rotalarda da görevde.',
+
+    // Tanker sergisi (spatial product showcase — tek ürün, mavi tema)
+    'tanker_showcase' => [
+        'eyebrow'    => 'Amiral Gemisi · Mühendislik Vitrini',
+        'title'      => 'Barlas Tankeri',
+        'kicker'     => 'Tek Ürün · Tam Mühendislik',
+        'lead'       => 'Ana sahnedeki 3D tankerimizi yakından inceleyin. Her metrik, gerçek üretim standartlarımızı yansıtır.',
+        'desc'       => 'ADR sertifikalı gövde, çok bölmeli kompartıman sistemi ve premium aks-fren donanımıyla; akaryakıt, kimyasal ve gıda taşımacılığı için tasarlanan amiral gemisi tankerimiz.',
+        'status'     => 'Sistem Aktif',
+        'specs_cta'  => 'Teknik Özellikler',
+        'badge'      => 'ADR Sertifikalı',
+        'stat_value' => '35+',
+        'stat_label' => 'yıllık üretim tecrübesi',
+        'tabs' => [
+            ['id' => 'perf',   'label' => 'Performans'],
+            ['id' => 'safety', 'label' => 'Güvenlik'],
+        ],
+        'views' => [
+            'perf' => [
+                ['label' => 'Taşıma Kapasitesi',         'value' => 95],
+                ['label' => 'Yol Tutuş & Süspansiyon',   'value' => 88],
+            ],
+            'safety' => [
+                ['label' => 'ADR Uyumluluğu',            'value' => 100],
+                ['label' => 'Sızdırmazlık & Basınç Testi', 'value' => 96],
+            ],
+        ],
+    ],
 ];

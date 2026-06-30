@@ -653,6 +653,13 @@
     .mega-srv__grid,
     .mega-srv__cta { display: none; }
 
+    /* Düzeltme: panelin koyu "blueprint" (milimetrik kâğıt) zemini, akordeon
+       kapalıyken ince bir şerit halinde sızıp boş kutu gibi görünüyordu.
+       Mobilde bu deseni kaldır ve panel KAPALIYKEN tamamen gizle; yalnızca
+       oka dokununca (.is-open) sade bağlantı listesi açılır. */
+    .mega-panel { background-image: none; }
+    .nav-menu__item:not(.is-open) > .mega-panel { display: none; }
+
     /* Set by navigation.js while the drawer is open */
     html.nav-locked { overflow: hidden; }
 
