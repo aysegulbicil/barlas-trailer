@@ -197,4 +197,32 @@ return [
     // Road scene (pinned 3D feature)
     'road_title' => 'On every road, under every load',
     'road_lead'  => 'Barlas vehicles stay on duty on the toughest routes.',
+
+    // Tanker showcase (spatial product showcase — single product, blue theme)
+    'tanker_showcase' => [
+        'eyebrow'    => 'Flagship · Engineering Showcase',
+        'title'      => 'Barlas Tanker',
+        'kicker'     => 'One Product · Full Engineering',
+        'lead'       => 'Take a closer look at the 3D tanker from the main stage. Every metric reflects our real production standards.',
+        'desc'       => 'Our flagship tanker — built with an ADR-certified body, a multi-compartment system and premium axle and brake hardware — engineered for fuel, chemical and food transport.',
+        'status'     => 'System Active',
+        'specs_cta'  => 'Technical Specs',
+        'badge'      => 'ADR Certified',
+        'stat_value' => '35+',
+        'stat_label' => 'years of manufacturing',
+        'tabs' => [
+            ['id' => 'perf',   'label' => 'Performance'],
+            ['id' => 'safety', 'label' => 'Safety'],
+        ],
+        'views' => [
+            'perf' => [
+                ['label' => 'Load Capacity',           'value' => 95],
+                ['label' => 'Handling & Suspension',   'value' => 88],
+            ],
+            'safety' => [
+                ['label' => 'ADR Compliance',          'value' => 100],
+                ['label' => 'Sealing & Pressure Test', 'value' => 96],
+            ],
+        ],
+    ],
 ];

@@ -1205,6 +1205,7 @@ html.has-anim .why__cards > .is-in {
 }
 .console__form input {
     flex: 1;
+    min-width: 0;   /* flex item içeriğinin altına küçülebilsin (savunma amaçlı) */
     padding: 0.8rem 1.1rem;
     border-radius: var(--pill);
     border: 1px solid var(--line-2);
@@ -1248,7 +1249,12 @@ html.has-anim .why__cards > .is-in {
 .ai__disclaimer { margin-block-start: 1rem; font-size: 0.8rem; color: var(--ink-3); }
 
 @media (max-width: 991px) {
-    .console { grid-template-columns: 1fr; }
+    /* minmax(0,1fr): düz '1fr' track'in min genişliği 'auto' olduğundan, uzun
+       bot metni + giriş/buton satırının min-content'ine göre BÜYÜYÜP paneli
+       taşırıyor ve overflow:hidden gönder butonunu kırpıyordu. minmax(0,…) +
+       chat'e min-width:0 ile track içeriğin altına küçülebilir, her şey içeride. */
+    .console { grid-template-columns: minmax(0, 1fr); }
+    .console__chat { min-width: 0; }
     .console__side { border-inline-end: 0; border-block-end: 1px solid var(--line); }
 }
 
@@ -1536,3 +1542,328 @@ html.has-anim .why__cards > *,
 html.has-anim .why__cards > .is-in { filter: none !important; }
 
 .marquee__track { will-change: transform; backface-visibility: hidden; transform: translateZ(0); }
+
+/* =====================================================================
+   Tanker Showcase — "spatial product showcase" (mavi tema, tek ürün)
+   React earbud bileşeninin sıfır-bağımlılık uyarlaması. Dönen kesik
+   halka + parlayan orb + süzülen tanker + kayan segment anahtarı.
+   Tüm hareket transform/opacity; reduced-motion'da animasyonlar durur.
+   ===================================================================== */
+.tshow {
+    position: relative;
+    padding-block: var(--sec-y);
+    overflow: hidden;
+}
+.tshow__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(48% 60% at 24% 42%, rgba(0, 91, 170, 0.20), transparent 64%),
+        radial-gradient(38% 48% at 88% 78%, rgba(74, 163, 230, 0.10), transparent 70%);
+}
+.tshow .shell { position: relative; }
+.tshow__head { max-width: 720px; }
+
+/* Hero/slide olarak: ilk ekranı doldurur (sticky header payını sayar),
+   içerik dikey ortalanır. Eski .hero yerine geçen ana sahne. */
+.tshow--hero {
+    min-height: calc(100svh - var(--header-h));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.tshow--hero .tshow__head { margin-block-end: clamp(1.6rem, 1rem + 2vw, 3rem); }
+
+.tshow__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5.6fr) minmax(0, 6fr);  /* metin sol · 3D sağ */
+    align-items: center;
+    gap: clamp(2rem, 1rem + 4vw, 5.5rem);
+}
+
+/* ---- Sağ: dairesel 3D sahne (bir tık büyük) ---- */
+.tshow__stage {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    width: min(100%, 520px);
+    margin-inline: auto;
+    display: grid;
+    place-items: center;
+    isolation: isolate;
+}
+.tshow__ring,
+.tshow__orb,
+.tshow__floor,
+.tshow__viewport,
+.tshow__status { grid-area: 1 / 1; }
+
+/* 3D viewport: tanker canvas'ı buraya eklenir; statik görsel yedek olarak içeride */
+.tshow__viewport {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    z-index: 2;
+}
+.tshow__viewport canvas {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none;
+}
+/* Yalnızca 3D çalışamadığında yedek görsel görünür (JS is-static ekler) */
+.tshow__stage.is-static .tshow__img { visibility: visible; }
+.tshow__stage:not(.is-static) .tshow__img { animation: none; }
+
+.tshow__ring {
+    width: 86%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px dashed rgba(74, 163, 230, 0.34);
+    box-shadow: inset 0 0 60px rgba(74, 163, 230, 0.06);
+    animation: tshow-spin 26s linear infinite;
+}
+.tshow__ring--inner {
+    width: 64%;
+    border-style: solid;
+    border-color: var(--line);
+    animation-duration: 40s;
+    animation-direction: reverse;
+}
+.tshow__orb {
+    width: 58%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 32%, rgba(74, 163, 230, 0.55), rgba(0, 91, 170, 0.30) 46%, transparent 72%);
+    filter: blur(8px);
+    animation: tshow-pulse 5.5s var(--ease-in-out) infinite;
+}
+.tshow__floor {
+    width: 70%;
+    height: 18%;
+    align-self: end;
+    margin-block-end: 6%;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(4, 9, 18, 0.65), transparent 78%);
+    filter: blur(2px);
+}
+.tshow__img {
+    position: relative;
+    z-index: 2;
+    width: 96%;             /* sahne içinde, iki yandan boşluklu (kesik durmasın) */
+    max-width: none;
+    visibility: hidden;     /* varsayılan gizli: başta PNG flaş'ı yok (3D gelir) */
+    object-fit: contain;
+    filter: drop-shadow(0 28px 38px rgba(3, 7, 14, 0.6));
+    animation: tshow-bob 6s var(--ease-in-out) infinite;
+}
+.tshow__status {
+    position: relative;
+    z-index: 3;
+    align-self: end;
+    justify-self: center;
+    margin-block-end: -0.4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.95rem;
+    border-radius: var(--pill);
+    background: rgba(7, 13, 23, 0.82);
+    border: 1px solid var(--line-2);
+    backdrop-filter: blur(8px);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    white-space: nowrap;
+}
+.tshow__status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--blue-bright);
+    box-shadow: 0 0 0 0 rgba(74, 163, 230, 0.55);
+    animation: tshow-ping 2.4s var(--ease-out) infinite;
+}
+
+/* ---- Sağ: teknik panel ---- */
+.tshow__kicker {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-block-end: 0.6rem;
+}
+.tshow__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+    color: var(--ink-1);
+    background: linear-gradient(180deg, var(--ink-1), rgba(226, 236, 248, 0.55));
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+.tshow__desc {
+    margin-block: 0.9rem 1.6rem;
+    max-width: 46ch;
+    color: var(--ink-2);
+}
+
+/* Hero başlık: büyük, iki satır; ikinci satır mavi vurgu (eski hero gibi).
+   Gradient-clip kapatılır ki satır renkleri (vurgu) görünsün. */
+.tshow__title--hero {
+    font-size: var(--fs-hero);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: var(--ink-1);
+}
+.tshow__line { display: block; }
+.tshow__line--accent { color: var(--blue-bright); }
+.tshow__actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-block-start: 2rem; }
+
+/* Kayan segment anahtarı (Dynamic Island esinli) */
+.tshow__switch {
+    position: relative;
+    display: inline-flex;
+    padding: 5px;
+    gap: 2px;
+    border-radius: var(--pill);
+    background: rgba(7, 13, 23, 0.7);
+    border: 1px solid var(--line-2);
+    box-shadow: var(--lift-sm);
+    margin-block-end: 1.7rem;
+}
+.tshow__switch-thumb {
+    position: absolute;
+    z-index: 0;
+    top: 5px;
+    left: 5px;
+    bottom: 5px;
+    width: calc(50% - 5px);
+    border-radius: var(--pill);
+    background: linear-gradient(180deg, var(--blue), var(--blue-dark, #00467f));
+    box-shadow: 0 6px 16px -8px var(--blue);
+    transition: transform var(--t-base) var(--ease-out);
+}
+.tshow__switch[data-active="1"] .tshow__switch-thumb { transform: translateX(100%); }
+.tshow__seg {
+    position: relative;
+    z-index: 1;
+    min-width: 7.5rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: var(--pill);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ink-3);
+    transition: color var(--t-base) var(--ease-out);
+}
+.tshow__seg.is-active { color: #fff; }
+@media (hover: hover) and (pointer: fine) {
+    .tshow__seg:not(.is-active):hover { color: var(--ink-1); }
+}
+
+/* Metrik görünümleri + barlar */
+.tshow__metrics {
+    background: rgba(11, 19, 34, 0.5);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(1.2rem, 0.9rem + 1vw, 1.8rem);
+    backdrop-filter: blur(6px);
+}
+.tshow__view { display: grid; gap: 1.35rem; }
+.tshow__view[hidden] { display: none; }
+.tshow__metric-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-block-end: 0.6rem;
+}
+.tshow__metric-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--ink-1);
+}
+.tshow__metric-icon { width: 17px; height: 17px; color: var(--blue-bright); flex-shrink: 0; }
+.tshow__metric-val { font-variant-numeric: tabular-nums; font-size: 0.82rem; color: var(--ink-3); }
+.tshow__track {
+    display: block;
+    height: 8px;
+    border-radius: var(--pill);
+    background: rgba(7, 13, 23, 0.75);
+    overflow: hidden;
+}
+.tshow__fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--blue), var(--blue-bright));
+    box-shadow: 0 0 12px rgba(74, 163, 230, 0.35);
+    transition: width 1s var(--ease-out);
+}
+html:not(.has-anim) .tshow__fill,
+.tshow__fill.is-filled { width: var(--val); }
+
+/* Alt satır: CTA + rozet + istatistik */
+.tshow__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    margin-block-start: 1.7rem;
+}
+.tshow__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink-2);
+}
+.tshow__badge svg { width: 18px; height: 18px; color: var(--blue-bright); }
+.tshow__stat { display: inline-flex; align-items: baseline; gap: 0.4rem; margin-inline-start: auto; }
+.tshow__stat-num { font-family: var(--font-display); font-size: 1.35rem; font-weight: 800; color: var(--ink-1); }
+.tshow__stat-label { font-size: 0.8rem; color: var(--ink-3); }
+
+/* Hareketler */
+@keyframes tshow-spin { to { transform: rotate(360deg); } }
+@keyframes tshow-pulse { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.07); opacity: 1; } }
+@keyframes tshow-bob { 0%, 100% { transform: translateY(-8px); } 50% { transform: translateY(8px); } }
+@keyframes tshow-ping {
+    0% { box-shadow: 0 0 0 0 rgba(74, 163, 230, 0.5); }
+    70%, 100% { box-shadow: 0 0 0 7px rgba(74, 163, 230, 0); }
+}
+
+/* Mobil: tek sütun, sahne küçülür */
+@media (max-width: 991px) {
+    .tshow__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .tshow__stage { width: min(78%, 360px); order: -1; }
+    .tshow__panel { text-align: left; }
+    .tshow__stat { margin-inline-start: 0; }
+}
+@media (max-width: 560px) {
+    .tshow__seg { min-width: 0; flex: 1; padding-inline: 0.6rem; }
+    .tshow__switch { display: flex; width: 100%; }
+    .tshow__switch-thumb { width: calc(50% - 5px); }
+}
+
+/* Reduced-motion: tüm döngüsel hareketler dursun, içerik yerinde kalır */
+@media (prefers-reduced-motion: reduce) {
+    .tshow__ring, .tshow__orb, .tshow__img, .tshow__status-dot { animation: none !important; }
+    .tshow__img { transform: none; }
+    .tshow__fill { transition: none; }
+}

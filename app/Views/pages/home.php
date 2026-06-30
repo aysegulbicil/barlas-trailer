@@ -80,40 +80,9 @@ if (is_dir($refDir)) {
 
 <main>
 
-<!-- ===================== HERO ===================== -->
-<section class="hero" id="hero">
-    <div class="hero__halo" aria-hidden="true"></div>
-
-    <div class="shell hero__inner">
-        <div class="hero__copy">
-            <h2 class="hero__title">
-                <span class="hero__mask"><span class="hero__line" data-hero-line><?= esc(lang('Home.hero_title_1')) ?></span></span>
-                <span class="hero__mask"><span class="hero__line hero__line--accent" data-hero-line><?= esc(lang('Home.hero_title_2')) ?></span></span>
-            </h2>
-
-            <p class="hero__sub" data-hero-item><?= esc(lang('Home.hero_subtitle')) ?></p>
-
-            <div class="hero__actions" data-hero-item>
-                <a class="btn btn--primary btn--lg" href="<?= esc(locale_url('products')) ?>"><?= esc(lang('Home.hero_cta_primary')) ?></a>
-                <a class="btn btn--ghost btn--lg" href="<?= esc(locale_url('teklif')) ?>"><?= esc(lang('Home.hero_cta_secondary')) ?></a>
-            </div>
-        </div>
-
-        <div class="hero__stage" data-hero-stage aria-hidden="true">
-            <img class="hero__fallback" src="<?= base_url('assets/images/hero-1.webp') ?>" alt="" loading="eager" fetchpriority="high" decoding="async">
-        </div>
-    </div>
-
-    <div class="hero__steps" data-hero-item>
-        <div class="shell hero__steps-inner">
-            <span class="hero__step"><?= esc(lang('Home.flow_step_1')) ?></span>
-            <span class="hero__step-sep" aria-hidden="true"></span>
-            <span class="hero__step"><?= esc(lang('Home.flow_step_2')) ?></span>
-            <span class="hero__step-sep" aria-hidden="true"></span>
-            <span class="hero__step"><?= esc(lang('Home.flow_step_3')) ?></span>
-        </div>
-    </div>
-</section>
+<!-- ===================== HERO / SLIDE (tanker spatial showcase) ===================== -->
+<!-- Eski hero bölümü kaldırıldı; ana sahne (slide) artık 3D tanker sergisi. -->
+<?= $this->include('pages/home/tanker-showcase') ?>
 
 <!-- ===================== GÜVEN BANDI ===================== -->
 <section class="ticker" aria-label="<?= esc(lang('Home.references_eyebrow'), 'attr') ?>">

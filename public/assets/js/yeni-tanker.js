@@ -39,15 +39,24 @@
         if (hero) hero.classList.add('has-static-fallback');
     }
 
+    /* Tanker sergisi: 3D çalışamadığında (WebGL/THREE yok, reduced-motion ya da
+       init hatası) statik yedek görseli göster. Aksi halde görsel gizli kalır
+       (başta PNG flaş'ı olmaz; orb görünür, tanker yumuşakça belirir). */
+    function revealTshowStatic() {
+        var s = document.querySelector('.tshow__stage');
+        if (s) s.classList.add('is-static');
+    }
+
     onReady(function () {
         window.setTimeout(function () {
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { revealTshowStatic(); return; }
             // Not: 3D artık mobilde de çalışır (kullanıcı isteği). Eskiden
             // "window.innerWidth < 992" ile mobilde kapatılıyordu; kaldırıldı.
             // Yine de WebGL yoksa aşağıdaki kontrol statik yedeğe düşer.
 
             if (!window.THREE || !webglOk()) {
                 showStaticFallback();
+                revealTshowStatic();
                 return;
             }
 
@@ -74,6 +83,25 @@
                     roadIO.observe(road);
                 } else {
                     initRoad(road);
+                }
+            }
+
+            /* Tanker sergisi (spatial showcase) 3D sahnesi: hero ile aynı GLB
+               (tanker-3.glb) dairesel orb içinde yavaş dönen turntable olarak.
+               Perf: bölüm yaklaşınca tembel kurulur; ekran dışında render durur.
+               3D hazır olunca statik görsel gizlenir (.tshow__stage.has-3d). */
+            var tshow = document.querySelector('[data-tshow-stage]');
+            if (tshow) {
+                if ('IntersectionObserver' in window) {
+                    var tshowIO = new IntersectionObserver(function (es) {
+                        if (!es[0].isIntersecting) return;
+                        tshowIO.disconnect();
+                        try { initShowcase(tshow); }
+                        catch (err) { revealTshowStatic(); if (window.console && console.error) console.error('[barlas-3d]', err); }
+                    }, { rootMargin: '120% 0px' });
+                    tshowIO.observe(tshow);
+                } else {
+                    try { initShowcase(tshow); } catch (err) { revealTshowStatic(); }
                 }
             }
         }, 0);
@@ -761,7 +789,12 @@
 
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera(34, 1, 0.1, 60);
-        camera.position.set(0, 0.65, 8.6);
+        /* Kamera mesafesi: araç sahnenin sağ yarısında ortalandığından, uzun
+           treylerin arkası önceden hero'nun overflow:hidden sağ kenarına taşıp
+           kırpılıyordu. Kamerayı biraz geri çekince (8.6 -> 10.2) tüm araç
+           kadraja sığar; model boyutu/yerleşimi değişmez, sadece biraz uzaktan
+           çerçevelenir. */
+        camera.position.set(0, 0.65, 9.7);
         camera.lookAt(0, -0.2, 0);
 
         var pmrem = new THREE.PMREMGenerator(renderer);
@@ -919,6 +952,151 @@
             var opacity = Math.max(0, Math.min(1, fadeIn * (1 + pose.o)));
             renderer.domElement.style.opacity = opacity.toFixed(3);
             if (opacity > 0.005) renderer.render(scene, camera);
+        }
+        loop();
+    }
+
+    /* --------------------- tanker sergisi sahnesi --------------------- */
+
+    /**
+     * Spatial product showcase 3D sahnesi (anasayfada hero'nun altındaki
+     * "tshow" bölümü). Hero ile AYNI model (window.__BARLAS_HERO_MODEL →
+     * tanker-3.glb) dairesel orb'un üzerinde yavaşça döner (turntable) ve
+     * cursor'a hafifçe yaslanır. Hero sahnesinden farkı: scroll'a bağlı poz
+     * yok, sürekli otomatik dönüş var; kare/ortalanmış çerçeveleme.
+     * GLTFLoader yoksa / yükleme başarısızsa prosedürel tankere düşülür;
+     * 3D hiç başlamazsa altta statik görsel (.tshow__img) görünür kalır.
+     */
+    function initShowcase(stage) {
+        var THREE = window.THREE;
+
+        var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.4));
+        if (THREE.sRGBEncoding !== undefined) renderer.outputEncoding = THREE.sRGBEncoding;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.05;
+        renderer.domElement.style.pointerEvents = 'none';
+        stage.appendChild(renderer.domElement);
+
+        var scene = new THREE.Scene();
+        /* Kare/ortalanmış çerçeve. Kamera mesafesi (z) küçüldükçe tanker büyür;
+           ÇOK yakın olursa uzun tanker iki yandan kare canvas'ın kenarına dayanıp
+           kesik görünür. z=13 → bir tık büyük ama ön kabin ve arka tekerler yine
+           iki yanda boşluklu, tam görünür şekilde süzülür (eski hero hissi). */
+        var camera = new THREE.PerspectiveCamera(32, 1, 0.1, 60);
+        camera.position.set(0, 0.9, 13);
+        camera.lookAt(0, -0.2, 0);
+
+        var pmrem = new THREE.PMREMGenerator(renderer);
+        scene.environment = pmrem.fromEquirectangular(makeStudioEnv(THREE)).texture;
+        pmrem.dispose();
+
+        scene.add(new THREE.HemisphereLight(0xbfd6ee, 0x0b1220, 0.5));
+        var key = new THREE.DirectionalLight(0xffffff, 1.05);
+        key.position.set(4, 7, 6);
+        scene.add(key);
+        var rimL = new THREE.DirectionalLight(0x4aa3e6, 0.6);
+        rimL.position.set(-6, 3, -5);
+        scene.add(rimL);
+
+        var TARGET_LEN = 6.6, YAW = 0;
+        var tanker = new THREE.Group();
+        scene.add(tanker);
+        var modelReady = false;
+        var box3d = stage.closest ? stage.closest('.tshow__stage') : null;
+
+        function useProcedural() {
+            var t = buildTanker(THREE);
+            t.scale.setScalar(0.96);
+            tanker.add(t);
+            modelReady = true;
+        }
+
+        var URL = window.__BARLAS_HERO_MODEL || null;
+        if (window.GLTFLoader && URL) {
+            try {
+                new window.GLTFLoader().load(URL, function (gltf) {
+                    try {
+                        tanker.add(centerModel(THREE, gltf.scene, TARGET_LEN, YAW));
+                        modelReady = true;
+                    } catch (e) {
+                        if (window.console) console.error('[barlas-3d] tshow normalize', e);
+                        useProcedural();
+                    }
+                }, undefined, function (err) {
+                    if (window.console) console.error('[barlas-3d] tshow glb yüklenemedi', err);
+                    useProcedural();
+                });
+            } catch (e) {
+                useProcedural();
+            }
+        } else {
+            useProcedural();
+        }
+
+        function size() {
+            var r = stage.getBoundingClientRect();
+            var w = Math.max(1, r.width), h = Math.max(1, r.height);
+            renderer.setSize(w, h, false);
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+        }
+        size();
+        var rT;
+        window.addEventListener('resize', function () {
+            window.clearTimeout(rT);
+            rT = window.setTimeout(size, 120);
+        });
+        if ('ResizeObserver' in window) {
+            new ResizeObserver(function () { size(); }).observe(stage);
+        }
+
+        var pointer = { x: 0, y: 0 };
+        window.addEventListener('pointermove', function (e) {
+            pointer.x = e.clientX / window.innerWidth - 0.5;
+            pointer.y = e.clientY / window.innerHeight - 0.5;
+        }, { passive: true });
+
+        /* Perf: yalnızca ekrandayken render et (hero/yol sahneleriyle aynı kalıp) */
+        var running = true, active = true;
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (es) {
+                active = es[0].isIntersecting;
+            }, { threshold: 0 }).observe(stage);
+        }
+        document.addEventListener('visibilitychange', function () {
+            running = !document.hidden;
+            if (running) loop();
+        });
+
+        var clock = new THREE.Clock();
+        var orbit = { ry: 0, rx: 0 };
+        var fadeIn = 0, swapped = false;
+
+        function loop() {
+            if (!running) return;
+            window.requestAnimationFrame(loop);
+            if (!active) return;
+
+            var t = clock.getElapsedTime();
+            if (modelReady) fadeIn = Math.min(1, fadeIn + 0.04);
+
+            /* 3D yeterince açıldığında statik görseli gizle (crossfade) */
+            if (!swapped && fadeIn > 0.6 && box3d) {
+                box3d.classList.add('has-3d');
+                swapped = true;
+            }
+
+            orbit.ry += ((pointer.x * 0.4) - orbit.ry) * 0.05;
+            orbit.rx += ((pointer.y * 0.12) - orbit.rx) * 0.05;
+
+            /* Yavaş turntable + cursor parallax + hafif dikey süzülme */
+            tanker.rotation.y = t * 0.18 + orbit.ry;
+            tanker.rotation.x = 0.06 + orbit.rx;
+            tanker.position.y = -0.1 + Math.sin(t * 0.8) * 0.06;
+
+            renderer.domElement.style.opacity = fadeIn.toFixed(3);
+            if (fadeIn > 0.005) renderer.render(scene, camera);
         }
         loop();
     }

@@ -123,6 +123,24 @@ class Services extends BaseController
             return [];
         }
 
+        // Aynı isimde hem orijinal (jpg/png) hem .webp varsa, sadece webp'i
+        // tut: webp'ler optimizasyonla üretildi ve aynı görselin küçük eşi.
+        // Önce webp dosyalarının taban adlarını topla, sonra eşi olan
+        // raster'ları ele (galeri görseli iki kez göstermesin).
+        $webpStems = [];
+        foreach ($files as $file) {
+            if (strtolower(pathinfo($file, PATHINFO_EXTENSION)) === 'webp') {
+                $webpStems[strtolower(pathinfo($file, PATHINFO_FILENAME))] = true;
+            }
+        }
+        $files = array_filter($files, static function (string $file) use ($webpStems): bool {
+            $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+            if ($ext === 'webp') {
+                return true;
+            }
+            return ! isset($webpStems[strtolower(pathinfo($file, PATHINFO_FILENAME))]);
+        });
+
         natcasesort($files);
 
         $base = 'assets/images/services/' . $slug . '/';
