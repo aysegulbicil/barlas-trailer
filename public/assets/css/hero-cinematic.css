@@ -1,0 +1,300 @@
+/* =============================================================================
+   hero-cinematic.css — tam ekran sinematik 3D hero
+   -----------------------------------------------------------------------------
+   Motor: assets/js/hero-cinematic.js. View: pages/home/hero-cinematic.php.
+   Mevcut .tshow hero'suna DOKUNMAZ (o yerinde/çalışır kalır). Renkler yeni
+   temanın değişkenlerinden (variables.css / yeni.css) gelir.
+
+   Katman z-index'i:  reveal(0) < stage/canvas(1) < seam(2) < overlay(3) < header(1000)
+   Durum sınıfları (JS ekler):  .hc--ready (3D aktif) · .hc--static (3D yok) · .hc--pinned
+============================================================================= */
+
+.hc {
+    position: relative;
+    background: var(--bg-0, #070D17);
+}
+
+.hc__pin {
+    position: relative;
+    width: 100%;
+    /* Sticky header (topbar 41px + navbar 73px = 114px) altında tam ekran kalsın →
+       araç + zemin neon + "aşağı kaydırın" ipucu tek ekranda görünür (referans gibi).
+       Split açılma efekti scroll-oranına bağlı olduğundan bu yükseklikten etkilenmez. */
+    height: calc(100svh - 114px);
+    min-height: 520px;
+    overflow: hidden;
+    /* Saf 3D canvas — arka planda görsel/dekor/gradyan YOK. Yalnızca canvas
+       yüklenene kadar görünecek düz koyu zemin (3D sahne fonuyla aynı: #05070d). */
+    background: #05070d;
+    isolation: isolate;
+}
+
+/* ------------------------------ 3D canvas ------------------------------ */
+.hc__stage {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    transform-origin: 50% 50%;
+    will-change: opacity, transform;
+}
+
+.hc__stage canvas {
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none;
+    opacity: 0;                 /* JS fade-in (model hazır olunca) */
+}
+
+/* --------------------------- ışık çizgisi (seam) ----------------------- */
+/* Yalnızca düşük-güç/mobil yolunda animasyonlanır; shader yolunda görünmez. */
+.hc__seam {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 2;
+    width: 2px;
+    height: 100%;
+    transform: translateX(-50%) scaleY(0.2);
+    transform-origin: 50% 50%;
+    background: linear-gradient(180deg,
+        transparent, rgba(191, 224, 255, 0.15) 12%,
+        rgba(191, 224, 255, 0.95) 50%,
+        rgba(191, 224, 255, 0.15) 88%, transparent);
+    box-shadow: 0 0 22px 4px rgba(120, 190, 255, 0.55);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ------------------------- kapı arkası: giriş -------------------------- */
+/* 3D aktifken: sahne yarılınca açılan boşluktan görünen katman. */
+.hc--ready .hc__reveal {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: grid;
+    place-items: center;
+    padding: calc(var(--header-h, 72px) + 2rem) var(--pad, 1.5rem) 3rem;
+    opacity: 0;                 /* JS kontrol eder */
+    transform: scale(1.08);
+    /* Kapı arkası: sade, dekorsuz koyu yüzey (kapılar açılınca hafif derinlik). */
+    background: var(--bg-1, #0B1322);
+    pointer-events: none;
+    text-align: center;
+}
+
+.hc__reveal-inner {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.15rem;
+}
+
+.hc__reveal-eyebrow {
+    font-family: var(--font-display, 'Sora', sans-serif);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: var(--blue-bright, #4AA3E6);
+}
+
+.hc__reveal-title {
+    font-family: var(--font-display, 'Sora', sans-serif);
+    font-weight: 800;
+    line-height: 1.04;
+    font-size: clamp(2rem, 1.2rem + 3.6vw, 3.6rem);
+    color: var(--ink-1, #F0F5FC);
+    margin: 0;
+}
+
+.hc__reveal-sub {
+    color: var(--ink-2, rgba(226, 236, 248, 0.72));
+    font-size: clamp(1rem, 0.9rem + 0.4vw, 1.15rem);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* --------------------------- metin / CTA overlay ---------------------- */
+.hc__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;            /* referans: metin alt-solda, araç üst-sağı doldurur */
+    padding: calc(var(--header-h, 72px) + 1rem) var(--pad, 1.5rem) clamp(4rem, 12vh, 8rem);
+    pointer-events: none;                 /* canvas etkileşimi geçsin */
+    will-change: opacity, transform;
+}
+
+/* Okunabilirlik scrim'i: metnin arkasını hafifçe koyulaştırır (parlak metal
+   dorse üzerinde başlık net kalsın). Aracın sağ tarafı açık kalır. */
+.hc--ready .hc__overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        linear-gradient(90deg, rgba(4, 9, 18, 0.72) 0%, rgba(4, 9, 18, 0.42) 34%, rgba(4, 9, 18, 0) 62%),
+        linear-gradient(0deg, rgba(4, 9, 18, 0.55) 0%, rgba(4, 9, 18, 0) 38%);
+}
+
+.hc__inner {
+    width: min(100%, var(--shell, 1240px));
+    margin-inline: auto;                  /* şebeke ile hizalı (header logosuyla aynı sol kenar) */
+    max-width: none;
+    pointer-events: auto;                 /* CTA'lar tıklanabilir */
+}
+
+.hc__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-display, 'Sora', sans-serif);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: var(--ink-2, rgba(226, 236, 248, 0.72));
+    margin-bottom: 1.2rem;
+}
+
+.hc__eyebrow-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--blue-bright, #4AA3E6);
+    box-shadow: 0 0 0 4px rgba(74, 163, 230, 0.2);
+    animation: hc-pulse 2.6s ease-in-out infinite;
+}
+
+.hc__title {
+    font-family: var(--font-display, 'Sora', sans-serif);
+    font-weight: 800;
+    line-height: 1.02;
+    font-size: clamp(2.6rem, 1.2rem + 6vw, 5.6rem);
+    color: var(--ink-1, #F0F5FC);
+    margin: 0 0 1.4rem;
+    text-shadow: 0 2px 40px rgba(3, 8, 20, 0.55);
+}
+
+.hc__line { display: block; }
+
+.hc__line--accent {
+    background: linear-gradient(100deg, var(--blue-bright, #4AA3E6), #8fd0ff 60%, var(--blue, #005BAA));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.hc__sub {
+    max-width: 46ch;
+    color: var(--ink-2, rgba(226, 236, 248, 0.78));
+    font-size: clamp(1rem, 0.92rem + 0.5vw, 1.25rem);
+    line-height: 1.6;
+    margin: 0 0 2rem;
+    text-shadow: 0 2px 24px rgba(3, 8, 20, 0.5);
+}
+
+.hc__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+}
+
+/* --------------------------- scroll ipucu ----------------------------- */
+.hc__hint {
+    position: absolute;
+    left: 50%;
+    bottom: 1.6rem;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    pointer-events: none;
+}
+
+.hc__hint-label {
+    font-size: 0.66rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--ink-2, rgba(226, 236, 248, 0.7));
+}
+
+/* İnce inen çizgi + chevron ok (referanstaki "AŞAĞI KAYDIRIN" oku). */
+.hc__hint-arrow {
+    position: relative;
+    width: 1px;
+    height: 42px;
+    background: linear-gradient(180deg, transparent, var(--blue-bright, #4AA3E6));
+}
+
+.hc__hint-arrow::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 8px;
+    height: 8px;
+    border-right: 1.5px solid var(--blue-bright, #4AA3E6);
+    border-bottom: 1.5px solid var(--blue-bright, #4AA3E6);
+    transform: translate(-50%, 20%) rotate(45deg);
+    animation: hc-arrow 1.9s ease-in-out infinite;
+}
+
+/* ------------------------------ animasyonlar --------------------------- */
+@keyframes hc-pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(74, 163, 230, 0.20); }
+    50%      { box-shadow: 0 0 0 8px rgba(74, 163, 230, 0.04); }
+}
+@keyframes hc-arrow {
+    0%, 100% { transform: translate(-50%, 20%) rotate(45deg); opacity: 0.5; }
+    50%      { transform: translate(-50%, 60%) rotate(45deg); opacity: 1; }
+}
+
+/* ============================ STATİK FALLBACK ========================== */
+/* 3D yok / reduced-motion: hero normal okunur bölüm; giriş katmanı altta akar. */
+.hc--static .hc__pin {
+    height: auto;
+    min-height: calc(100svh - var(--header-h, 72px));
+    display: flex;
+    align-items: center;
+}
+.hc--static .hc__stage,
+.hc--static .hc__seam,
+.hc--static .hc__hint {
+    display: none;
+}
+.hc--static .hc__overlay {
+    position: relative;
+    inset: auto;
+}
+.hc--static .hc__reveal {
+    position: relative;
+    padding-block: var(--sec-y, 6rem);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    background:
+        radial-gradient(80% 70% at 50% 0%, rgba(0, 91, 170, 0.16), transparent 66%),
+        var(--bg-1, #0B1322);
+}
+
+/* ============================== RESPONSIVE ============================= */
+@media (max-width: 860px) {
+    .hc__overlay { justify-content: flex-end; padding-bottom: 5.5rem; }
+    .hc__inner { max-width: 100%; }
+    .hc__sub { margin-bottom: 1.6rem; }
+    .hc__actions .btn { flex: 1 1 auto; }
+}
+
+/* =========================== REDUCED MOTION =========================== */
+@media (prefers-reduced-motion: reduce) {
+    .hc__eyebrow-dot { animation: none !important; }
+    .hc__hint-arrow::after { animation: none !important; }
+    .hc__stage canvas { opacity: 1; }
+}

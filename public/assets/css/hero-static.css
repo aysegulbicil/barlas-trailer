@@ -1,0 +1,269 @@
+/* =============================================================================
+   hero-static.css — tam ekran statik sinematik hero (hazır render görseli)
+   -----------------------------------------------------------------------------
+   Motor: assets/js/hero-static.js. View: pages/home/hero-static.php.
+   3D YOK. Hero = referans kompozisyonunu içeren tek görsel (araç + ışık dikişi +
+   alt-orta içe-açılan neon çukur GÖMÜLÜ). Görsel iki özdeş yarıya bölünür; scroll'da
+   yana kayıp ortayı açar → arkadaki .hs__reveal görünür ("ikiye ayrılma", WebGL'siz).
+
+   Katman z-index:  reveal(0) < scene/yarılar(1) < overlay(3) < header(1000)
+   Durum sınıfları (JS): .hs--ready (aktif) · .hs--static (JS/motion yok) · .hs--pinned
+   Renkler yeni temadan (variables.css / yeni.css).
+============================================================================= */
+
+.hs {
+    position: relative;
+    background: var(--bg-0, #05070d);
+}
+
+.hs__pin {
+    position: relative;
+    width: 100%;
+    /* Sticky header (topbar 41 + navbar 73 = 114px) altında tam ekran kalsın →
+       araç + çukur + "aşağı kaydırın" tek ekranda görünür (referans gibi). */
+    height: calc(100svh - 114px);
+    min-height: 520px;
+    overflow: hidden;
+    background: #05070d;
+    isolation: isolate;
+}
+
+/* ------------------------- sahne: görsel iki yarı ---------------------- */
+.hs__scene {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+/* İki yarı da AYNI görseli tam-kutu kaplar (cover) → birleşince kusursuz tam
+   görsel. clip-path her birini kendi yarısına keser; transform'u JS sürer.
+   background-position: alt-orta → içe-açılan çukur (görselin altında) korunur. */
+.hs__half {
+    position: absolute;
+    inset: 0;
+    background-image: var(--hs-img);
+    background-repeat: no-repeat;
+    /* X=merkez (dikiş %50 bölünmeyle hizalı kalır). Y=%62 → üstten biraz daha
+       görünür, çukur yine büyük ölçüde korunur. */
+    background-position: center 62%;
+    background-size: cover;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+}
+
+.hs__half--l { clip-path: inset(0 50% 0 0); }
+.hs__half--r { clip-path: inset(0 0 0 50%); }
+
+/* ------------------------- kapı arkası: giriş ------------------------- */
+.hs__reveal {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: grid;
+    place-items: center;
+    padding: calc(var(--header-h, 72px) + 2rem) var(--pad, 1.5rem) 3rem;
+    opacity: 0;                 /* JS kontrol eder */
+    transform: scale(1.06);
+    background: var(--bg-1, #0B1322);
+    pointer-events: none;
+    text-align: center;
+}
+
+.hs__reveal-inner {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.15rem;
+}
+
+.hs__reveal-eyebrow {
+    font-family: var(--font-display, 'Sora', sans-serif);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: var(--blue-bright, #4AA3E6);
+}
+
+.hs__reveal-title {
+    font-family: var(--font-display, 'Sora', sans-serif);
+    font-weight: 800;
+    line-height: 1.04;
+    font-size: clamp(2rem, 1.2rem + 3.6vw, 3.6rem);
+    color: var(--ink-1, #F0F5FC);
+    margin: 0;
+}
+
+.hs__reveal-sub {
+    color: var(--ink-2, rgba(226, 236, 248, 0.72));
+    font-size: clamp(1rem, 0.9rem + 0.4vw, 1.15rem);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* --------------------------- metin / CTA overlay ---------------------- */
+.hs__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;            /* referans: metin alt-solda, koyu zemin üzerinde */
+    padding: calc(var(--header-h, 72px) + 1rem) var(--pad, 1.5rem) clamp(3.5rem, 11vh, 7rem);
+    pointer-events: none;
+    will-change: opacity, transform;
+}
+
+/* Okunabilirlik scrim'i: sol tarafı koyulaştırır (parlak araç sağda, metin solda net). */
+.hs__overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        linear-gradient(90deg, rgba(4, 9, 18, 0.74) 0%, rgba(4, 9, 18, 0.42) 34%, rgba(4, 9, 18, 0) 60%),
+        linear-gradient(0deg, rgba(4, 9, 18, 0.5) 0%, rgba(4, 9, 18, 0) 34%);
+}
+
+/* Arapça (RTL): metin sağa hizalanır → scrim'i çevir ki koyu taraf metin tarafında olsun. */
+[dir="rtl"] .hs__overlay::before {
+    background:
+        linear-gradient(270deg, rgba(4, 9, 18, 0.74) 0%, rgba(4, 9, 18, 0.42) 34%, rgba(4, 9, 18, 0) 60%),
+        linear-gradient(0deg, rgba(4, 9, 18, 0.5) 0%, rgba(4, 9, 18, 0) 34%);
+}
+
+.hs__inner {
+    width: min(100%, var(--shell, 1240px));
+    margin-inline: auto;                  /* şebeke ile hizalı (header logosuyla aynı sol kenar) */
+    pointer-events: auto;
+}
+
+.hs__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-display, 'Sora', sans-serif);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-size: 0.68rem;
+    /* Hero görseli DAİMA koyu → metin temadan bağımsız beyaz (açık temada da görünür). */
+    color: rgba(238, 244, 252, 0.82);
+    margin-bottom: 1rem;
+}
+
+.hs__eyebrow-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--blue-bright, #4AA3E6);
+    box-shadow: 0 0 0 4px rgba(74, 163, 230, 0.2);
+    animation: hs-pulse 2.6s ease-in-out infinite;
+}
+
+.hs__title {
+    font-family: var(--font-display, 'Sora', sans-serif);
+    font-weight: 800;
+    line-height: 1.06;
+    /* Referanstaki gibi daha küçük başlık */
+    font-size: clamp(1.8rem, 1rem + 3vw, 3rem);
+    /* Temadan bağımsız beyaz (koyu hero üzerinde daima okunur) */
+    color: #F4F8FF;
+    margin: 0 0 1rem;
+    text-shadow: 0 2px 40px rgba(3, 8, 20, 0.6);
+}
+
+.hs__line { display: block; }
+
+.hs__line--accent {
+    background: linear-gradient(100deg, var(--blue-bright, #4AA3E6), #8fd0ff 60%, var(--blue, #005BAA));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.hs__sub {
+    max-width: 42ch;
+    /* Temadan bağımsız açık gri-beyaz */
+    color: rgba(233, 240, 250, 0.85);
+    font-size: clamp(0.92rem, 0.88rem + 0.32vw, 1.08rem);
+    line-height: 1.6;
+    margin: 0 0 1.7rem;
+    text-shadow: 0 2px 24px rgba(3, 8, 20, 0.6);
+}
+
+.hs__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+}
+
+/* --------------------------- scroll ipucu ----------------------------- */
+.hs__hint {
+    position: absolute;
+    left: 50%;
+    bottom: 1.6rem;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+    pointer-events: none;
+}
+
+.hs__hint-label {
+    font-size: 0.64rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: rgba(233, 240, 250, 0.78);
+}
+
+.hs__hint-arrow {
+    position: relative;
+    width: 1px;
+    height: 42px;
+    background: linear-gradient(180deg, transparent, var(--blue-bright, #4AA3E6));
+}
+
+.hs__hint-arrow::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 8px;
+    height: 8px;
+    border-right: 1.5px solid var(--blue-bright, #4AA3E6);
+    border-bottom: 1.5px solid var(--blue-bright, #4AA3E6);
+    transform: translate(-50%, 20%) rotate(45deg);
+    animation: hs-arrow 1.9s ease-in-out infinite;
+}
+
+/* ------------------------------ animasyonlar --------------------------- */
+@keyframes hs-pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(74, 163, 230, 0.20); }
+    50%      { box-shadow: 0 0 0 8px rgba(74, 163, 230, 0.04); }
+}
+@keyframes hs-arrow {
+    0%, 100% { transform: translate(-50%, 20%) rotate(45deg); opacity: 0.5; }
+    50%      { transform: translate(-50%, 60%) rotate(45deg); opacity: 1; }
+}
+
+/* ============================== RESPONSIVE ============================= */
+@media (max-width: 860px) {
+    /* NOT: background-position DEĞİŞTİRİLMEZ → görselin ortadaki dikişi ve alt
+       çukuru %50 bölünme çizgisiyle hizalı kalır (yatay kaydırma dikişi kaçırıp
+       "ikiye ayrılma" hizasını bozardı). Dar ekranda araç doğal olarak kırpılır. */
+    .hs__overlay { justify-content: flex-end; padding-bottom: 5.5rem; }
+    .hs__sub { margin-bottom: 1.6rem; }
+    .hs__actions .btn { flex: 1 1 auto; }
+}
+
+/* =========================== REDUCED MOTION =========================== */
+/* Hareket istenmiyor: açılma yok, tam-ekran statik görsel + okunur metin. */
+@media (prefers-reduced-motion: reduce) {
+    .hs__eyebrow-dot,
+    .hs__hint-arrow::after { animation: none !important; }
+    .hs__half { transform: none !important; }
+}

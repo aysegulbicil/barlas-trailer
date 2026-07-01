@@ -79,7 +79,7 @@
                 if ('IntersectionObserver' in window) {
                     var roadIO = new IntersectionObserver(function (es) {
                         if (es[0].isIntersecting) { roadIO.disconnect(); initRoad(road); }
-                    }, { rootMargin: '150% 0px' });
+                    }, { rootMargin: '300% 0px' });
                     roadIO.observe(road);
                 } else {
                     initRoad(road);
@@ -575,13 +575,15 @@
             });
         }
 
-        /* Tembel yükleme: bölüm görünüme ~1 ekran kala başlat (rootMargin) */
+        /* Yükleme tetiği: hero artık STATİK (3D rekabeti yok) → konvoy modellerini
+           bölümden ~3 ekran önce, yani pratikte SAYFA AÇILIŞINDA indirmeye başla ki
+           kullanıcı aşağı indiğinde konvoy hazır olsun (geç gelmesin). */
         var loadKicked = false;
         function kickLoad() { if (loadKicked) return; loadKicked = true; startConvoyLoad(); }
         if ('IntersectionObserver' in window) {
             var lio = new IntersectionObserver(function (es) {
                 if (es[0].isIntersecting) { kickLoad(); lio.disconnect(); }
-            }, { rootMargin: '100% 0px' });
+            }, { rootMargin: '300% 0px' });
             lio.observe(stage);
         } else {
             kickLoad();

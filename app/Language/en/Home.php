@@ -6,8 +6,9 @@
 return [
     // Hero
     'hero_eyebrow'        => 'Industrial Transport Solutions',
-    'hero_title_1'        => 'Powerful Engineering',
-    'hero_title_2'        => 'for Heavy Loads',
+    'hero_title_1'        => '',
+    'hero_title_2'        => 'Powerful',
+    'hero_title_3'        => 'Engineering for Heavy Loads',
     'hero_subtitle'       => 'From tankers to lowbeds, silo trailers to refrigerated units, we engineer durable, safe and high-performance trailer solutions for every industry.',
     'hero_cta_primary'    => 'Explore Products',
     'hero_cta_secondary'  => 'Get a Quote',

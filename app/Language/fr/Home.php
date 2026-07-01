@@ -6,8 +6,9 @@
 return [
     // Hero
     'hero_eyebrow'        => 'Solutions de transport industriel',
-    'hero_title_1'        => 'Une ingénierie puissante',
-    'hero_title_2'        => 'pour charges lourdes',
+    'hero_title_1'        => 'Une ingénierie',
+    'hero_title_2'        => 'puissante',
+    'hero_title_3'        => 'pour charges lourdes',
     'hero_subtitle'       => 'Des citernes aux porte-engins, des semi-remorques silo aux unités frigorifiques, nous concevons des solutions de remorques durables, sûres et performantes pour chaque secteur.',
     'hero_cta_primary'    => 'Découvrir les produits',
     'hero_cta_secondary'  => 'Demander un devis',

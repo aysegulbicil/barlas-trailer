@@ -7,14 +7,15 @@ return [
     // Hero
     'hero_eyebrow'        => 'Endüstriyel Taşıma Çözümleri',
     'hero_title_1'        => 'Ağır Yükün',
-    'hero_title_2'        => 'Güçlü Mühendisliği',
+    'hero_title_2'        => 'Güçlü',
+    'hero_title_3'        => 'Mühendisliği',
     'hero_subtitle'       => 'Tankerlerden lowbedlere, silobaslardan frigorifik araçlara kadar her sektör için dayanıklı, güvenli ve yüksek performanslı treyler çözümleri üretiyoruz.',
     'hero_cta_primary'    => 'Ürünleri Keşfet',
     'hero_cta_secondary'  => 'Teklif Al',
     'hero_trust_1'        => 'ADR Sertifikalı Üretim',
     'hero_trust_2'        => '40+ Ülkeye İhracat',
     'hero_trust_3'        => 'Tam Kapsamlı Satış Sonrası Destek',
-    'scroll_down'         => 'Aşağı kaydır',
+    'scroll_down'         => 'Aşağı kaydırın',
 
     // Hero slider slides (nested; accessed via Home.slides.{i}.{key})
     'slides' => [

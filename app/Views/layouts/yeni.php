@@ -48,9 +48,9 @@ $asset = static function (string $path): string {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"></noscript>
 
-    <!-- Perf: yalnızca ana sayfada 3D zincirini erken başlat — CDN bağlantısını
-         ısıt, Three.js modülünü ve hero modelini (tanker-3) paralel önceden indir.
-         Böylece hero 3D, JS zincirini beklemeden gözle görülür şekilde erken belirir. -->
+    <!-- Perf: CDN bağlantısını ısıt + Three.js modülünü erken indir (yol konvoyu
+         sahnesi için gerekli). Ana sayfada ayrıca STATİK hero görselini, iletişim
+         sayfasında teslimat modelini önceden indir → ilk boya beklemesin. -->
     <?php
         $__ctrl = '';
         try { $__ctrl = (string) service('router')->controllerName(); } catch (\Throwable $e) { $__ctrl = ''; }
@@ -61,7 +61,8 @@ $asset = static function (string $path): string {
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
         <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.module.js">
         <?php if ($__isHome): ?>
-            <link rel="preload" as="fetch" crossorigin href="<?= $asset('assets/models/tanker-3.glb') ?>">
+            <!-- Statik hero görselini erken indir → hero'nun ilk boyası hızlansın -->
+            <link rel="preload" as="image" href="<?= $asset('assets/images/cfa5531d-3c63-4571-936f-a964650bfef4.png') ?>" fetchpriority="high">
         <?php else: ?>
             <!-- İletişim sayfası teslimat sahnesinin modeli erken indirilsin:
                  araç + form beraber gelsin diye bekleme kısalır -->
@@ -74,6 +75,10 @@ $asset = static function (string $path): string {
     <link rel="stylesheet" href="<?= $asset('assets/css/variables.css') ?>">
     <link rel="stylesheet" href="<?= $asset('assets/css/navigation.css') ?>">
     <link rel="stylesheet" href="<?= $asset('assets/css/yeni.css') ?>">
+    <?php if ($__isHome): ?>
+        <!-- Statik tam ekran sinematik hero (yalnızca ana sayfa) -->
+        <link rel="stylesheet" href="<?= $asset('assets/css/hero-static.css') ?>">
+    <?php endif; ?>
     <link rel="stylesheet" href="<?= $asset('assets/css/yeni-footer.css') ?>">
     <link rel="stylesheet" href="<?= $asset('assets/css/yeni-header.css') ?>">
     <link rel="stylesheet" href="<?= $asset('assets/css/theme-light.css') ?>">
@@ -130,7 +135,9 @@ $asset = static function (string $path): string {
             '<?= $asset('assets/models/tanker-4.glb') ?>',
             '<?= $asset('assets/models/tanker-5.glb') ?>'
         ];
-        // Hero (slide) sahnesinde sergilenen tek model: tanker-3.glb
+        // Yalnızca 3D YEDEK hero (hero-cinematic) için tutulur; statik hero bunu
+        // kullanmaz. Aktif ana sayfa hero'su artık statik görsel olduğundan bu
+        // model reachable değildir (indirilmez).
         window.__BARLAS_HERO_MODEL = '<?= $asset('assets/models/tanker-3.glb') ?>';
         // İletişim sayfası 3D sahnesinde sergilenen model: tanker-1.glb
         window.__BARLAS_CONTACT_MODEL = '<?= $asset('assets/models/tanker-1.glb') ?>';
@@ -139,6 +146,13 @@ $asset = static function (string $path): string {
                 var s = document.createElement('script');
                 s.src = '<?= $asset('assets/js/yeni-tanker.js') ?>';
                 document.body.appendChild(s);
+                <?php if ($__isHome): ?>
+                /* Statik sinematik hero motoru (yalnızca ana sayfa). Görsel "ikiye
+                   ayrılma" için yalnızca GSAP + ScrollTrigger (defer) gerekir; 3D yok. */
+                var hs = document.createElement('script');
+                hs.src = '<?= $asset('assets/js/hero-static.js') ?>';
+                document.body.appendChild(hs);
+                <?php endif; ?>
             }
             // gsap/ScrollTrigger defer scriptleri DOMContentLoaded'a kadar yüklenir;
             // yeni-tanker.js'i o aşamada enjekte et ki yol sahnesi (scrub) çalışsın.
