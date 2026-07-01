@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "autoPort": false,
+  "configurations": [
+    {
+      "name": "barlas",
+      "runtimeExecutable": "php",
+      "runtimeArgs": ["spark", "serve", "--port", "8123"],
+      "port": 8123
+    }
+  ]
+}

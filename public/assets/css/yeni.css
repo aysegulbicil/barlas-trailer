@@ -1262,10 +1262,13 @@ html.has-anim .why__cards > .is-in {
 .refs { padding-block: var(--sec-y); }
 .refs .sec-head { margin-block-end: 1.6rem; }
 
+/* Bant zemini sabit lacivert (#181849) — koyu ve aydınlık temada aynı.
+   Literal renk olduğu için tema ezmelerinden etkilenmez. Logolara hiçbir
+   müdahale yok; kaynak neyse öyle gösterilir. */
 .refs__belt {
     overflow: hidden;
-    background: #fff;
-    border-block: 1px solid rgba(7, 13, 23, 0.08);
+    background: #090F1C;
+    border-block: 1px solid var(--hairline);
     padding-block: 1.8rem;
 }
 .refs__belt-track {
@@ -1296,6 +1299,7 @@ html.has-anim .why__cards > .is-in {
     to   { transform: translateX(-50%); }
 }
 
+/* Logolar karta alınmaz — doğrudan bant zeminine oturur. */
 .refs__logo {
     flex: 0 0 auto;
     display: grid;
@@ -1303,7 +1307,6 @@ html.has-anim .why__cards > .is-in {
     opacity: 1;
     transition: transform var(--t-base) var(--ease-out);
 }
-
 .refs__logo:hover { transform: translateY(-2px) scale(1.04); }
 .refs__logo img { height: 36px; width: auto; max-width: 170px; object-fit: contain; display: block; }
 

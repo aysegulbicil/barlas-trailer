@@ -54,11 +54,19 @@ $asset = static function (string $path): string {
     <?php
         $__ctrl = '';
         try { $__ctrl = (string) service('router')->controllerName(); } catch (\Throwable $e) { $__ctrl = ''; }
+        $__isHome    = stripos($__ctrl, 'Home') !== false;
+        $__isContact = stripos($__ctrl, 'Contact') !== false;
     ?>
-    <?php if (stripos($__ctrl, 'Home') !== false): ?>
+    <?php if ($__isHome || $__isContact): ?>
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
         <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.module.js">
-        <link rel="preload" as="fetch" crossorigin href="<?= $asset('assets/models/tanker-3.glb') ?>">
+        <?php if ($__isHome): ?>
+            <link rel="preload" as="fetch" crossorigin href="<?= $asset('assets/models/tanker-3.glb') ?>">
+        <?php else: ?>
+            <!-- İletişim sayfası teslimat sahnesinin modeli erken indirilsin:
+                 araç + form beraber gelsin diye bekleme kısalır -->
+            <link rel="preload" as="fetch" crossorigin href="<?= $asset('assets/models/tanker-1.glb') ?>">
+        <?php endif; ?>
     <?php endif; ?>
 
     <!-- Ortak header: eski tasarımın token + menü/mega stilleri,
