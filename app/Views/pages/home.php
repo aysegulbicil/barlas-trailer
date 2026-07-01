@@ -80,9 +80,16 @@ if (is_dir($refDir)) {
 
 <main>
 
-<!-- ===================== HERO / SLIDE (tanker spatial showcase) ===================== -->
-<!-- Eski hero bölümü kaldırıldı; ana sahne (slide) artık 3D tanker sergisi. -->
-<?= $this->include('pages/home/tanker-showcase') ?>
+<!-- ===================== HERO (statik sinematik görsel + "ikiye ayrılma") ===================== -->
+<!-- Hero, referans kompozisyonunu içeren tek görseldir (araç + ışık dikişi +
+     alt-orta içe-açılan neon çukur GÖMÜLÜ). Scroll'da görsel iki yarıya ayrılıp
+     arkadaki katmanı açar (assets/js/hero-static.js + assets/css/hero-static.css).
+     GERİ ALMAK İÇİN: 'hero-static' satırını yorumla, istediğin yedeği aç. -->
+<?= $this->include('pages/home/hero-static') ?>
+<?php /* Yedek hero'lar (tek satır geri dönüş):
+<?= $this->include('pages/home/hero-cinematic') ?>   // canlı 3D sahne
+<?= $this->include('pages/home/tanker-showcase') ?>  // eski showcase
+*/ ?>
 
 <!-- ===================== GÜVEN BANDI ===================== -->
 <section class="ticker" aria-label="<?= esc(lang('Home.references_eyebrow'), 'attr') ?>">

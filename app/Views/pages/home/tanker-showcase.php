@@ -26,9 +26,15 @@ $ts = is_array($ts) ? $ts : [];
 
             <!-- Sol: tanıtım metni (ana hero metni) -->
             <div class="tshow__panel" data-reveal>
+                <?php $ht1 = lang('Home.hero_title_1'); $ht3 = lang('Home.hero_title_3'); ?>
                 <h1 class="tshow__title tshow__title--hero">
-                    <span class="tshow__line"><?= esc(lang('Home.hero_title_1')) ?></span>
+                    <?php if ($ht1 !== '' && $ht1 !== 'Home.hero_title_1'): ?>
+                        <span class="tshow__line"><?= esc($ht1) ?></span>
+                    <?php endif; ?>
                     <span class="tshow__line tshow__line--accent"><?= esc(lang('Home.hero_title_2')) ?></span>
+                    <?php if ($ht3 !== '' && $ht3 !== 'Home.hero_title_3'): ?>
+                        <span class="tshow__line"><?= esc($ht3) ?></span>
+                    <?php endif; ?>
                 </h1>
                 <p class="tshow__desc"><?= esc(lang('Home.hero_subtitle')) ?></p>
 

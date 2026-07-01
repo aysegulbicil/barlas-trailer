@@ -47,9 +47,15 @@
                     <?= esc(lang('Home.hero_eyebrow')) ?>
                 </span>
 
+                <?php $ht1 = lang('Home.hero_title_1'); $ht3 = lang('Home.hero_title_3'); ?>
                 <h2 class="hero__title">
-                    <span class="hero__mask"><span class="hero__line" data-hero-line><?= esc(lang('Home.hero_title_1')) ?></span></span>
+                    <?php if ($ht1 !== '' && $ht1 !== 'Home.hero_title_1'): ?>
+                        <span class="hero__mask"><span class="hero__line" data-hero-line><?= esc($ht1) ?></span></span>
+                    <?php endif; ?>
                     <span class="hero__mask"><span class="hero__line hero__line--accent" data-hero-line><?= esc(lang('Home.hero_title_2')) ?></span></span>
+                    <?php if ($ht3 !== '' && $ht3 !== 'Home.hero_title_3'): ?>
+                        <span class="hero__mask"><span class="hero__line" data-hero-line><?= esc($ht3) ?></span></span>
+                    <?php endif; ?>
                 </h2>
 
                 <p class="hero__subtitle" data-hero-item><?= esc(lang('Home.hero_subtitle')) ?></p>
