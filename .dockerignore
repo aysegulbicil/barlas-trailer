@@ -1,0 +1,13 @@
+# İmaj inşa bağlamını küçük tut (uygulama runtime'da bind-mount edilir).
+.git
+.github
+.claude
+tests
+docs
+node_modules
+*.docx
+*.md
+writable/cache/*
+writable/debugbar/*
+writable/logs/*
+writable/session/*

@@ -1,0 +1,25 @@
+# Barlas Trailer — hızlı yerel/üretim sunucusu (Apache + mod_php)
+#
+# Kullanım:
+#   docker compose up -d --build      # imajı kur + arka planda başlat
+#   http://localhost:8080             # site
+#   docker compose logs -f web        # Apache logları
+#   docker compose down               # durdur
+#
+# NOT: Elle başlatılan eski "barlas-trailer" (ubuntu + php spark serve)
+# container'ı 8080'i tutuyorsa önce onu durdurun:
+#   docker stop barlas-trailer
+services:
+  web:
+    build: .
+    container_name: barlas-apache
+    ports:
+      - "8080:80"
+    volumes:
+      # Proje canlı bağlanır; kod/varlık düzenlemeleri anında yansır.
+      - ./:/var/www/html
+    environment:
+      # .env yoksa CI4 zaten "production" olur. Geliştirirken ayrıntılı
+      # hata ekranı isterseniz "development" yapın.
+      - CI_ENVIRONMENT=production
+    restart: unless-stopped

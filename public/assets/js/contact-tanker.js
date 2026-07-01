@@ -56,22 +56,24 @@
 
         initHours();
 
-        // Güvenlik ağı: 3D teslimat başlamazsa konvoyu yine de yerine koy
+        // Güvenlik ağı: 3D teslimat hiç başlamazsa konvoyu yine de yerine koy.
+        // Drive-in artık modeli bekliyor (en geç 4 sn'de prosedürel TIR'la başlar
+        // ve convoyRevealed'i kilitler), bu yüzden bu ağ ondan SONRA (6 sn) devreye
+        // girsin; aksi halde formu erken yerine koyup drive-in ile çakışırdı.
         if (document.documentElement.classList.contains('contact-deliver')) {
-            window.setTimeout(revealConvoy, 2800);
+            window.setTimeout(revealConvoy, 6000);
         }
 
-        // İletişim sayfasındaki 3D TIR sahnesi kaldırıldı (kullanıcı isteği).
-        // 3D motoru hiç başlatılmaz; form gönderimi (initForm) ve açık/kapalı
-        // rozeti (initHours) yukarıda zaten çalışır.
-        return;
-
+        // 3D TIR sahnesi geri açıldı: aşağıdaki initScene konvoyu sürer ve
+        // süspansiyon yaylanmasıyla formu getirir. reduced-motion / WebGL yoksa
+        // aşağıdaki kontroller sahneyi başlatmaz; SVG yedeği görünür kalır.
         var stage = document.querySelector('[data-contact-stage]');
         if (!stage) return;
 
         window.setTimeout(function () {
-            // 3D mobilde de açık (kullanıcı isteği). Eski "innerWidth < MIN_WIDTH"
-            // mobil kapatması kaldırıldı; yalnızca reduced-motion ve WebGL kontrolü kalır.
+            // Mobilde 3D YOK (kullanıcı isteği): dar ekranda sahne hiç başlatılmaz —
+            // SVG yedeği + statik form gösterilir, WebGL bağlamı hiç açılmaz.
+            if (window.innerWidth < MIN_WIDTH) return;
             if (reducedMotion()) return;
             if (!window.THREE || !webglOk()) return;
             var mount = stage.querySelector('[data-stage-mount]');
@@ -347,6 +349,10 @@
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.06;
         renderer.domElement.style.pointerEvents = 'none';
+        /* Canvas baştan gizli: üstte SVG yedeği görünür; 3D hazır olunca (startDriveIn)
+           canvas fade-in + SVG fade-out ile crossfade yapılır. Böylece başta yalnızca
+           SVG araç görünür, boş kutu/gölge sızıntısı olmaz. */
+        renderer.domElement.style.opacity = '0';
         mount.appendChild(renderer.domElement);
 
         var scene = new THREE.Scene();
@@ -385,8 +391,20 @@
         rig.position.set(REST_X, BASE_Y, 0);   // TIR dünyada sabit; "sürüş" konvoyu DOM olarak kayar
         scene.add(rig);
 
+        /* Araç + form BERABER gelsin: drive-in animasyonu, aracın (GLB ya da
+           prosedürel yedek) sahnede HAZIR olmasını bekler. modelLoaded olunca
+           ve sahne görünürken maybeStart() konvoyu içeri sürer. */
+        var modelLoaded = false, rigBuilt = false, started = false, inView = false;
+        function markReady() {
+            if (modelLoaded) return;
+            modelLoaded = true;
+            maybeStart();
+        }
+
         /* GLTFLoader yoksa / yükleme başarısızsa eski prosedürel çekici+tanker */
         function buildProceduralRig() {
+            if (rigBuilt) return;
+            rigBuilt = true;
             var trailer = buildTanker(THREE);
             trailer.position.set(1.6, 0.32, 0);
             rig.add(trailer);
@@ -395,6 +413,7 @@
             rig.add(tractor);
             rig.scale.setScalar(1.16);
             wheels = trailer.userData.wheels.concat(tractor.userData.wheels);
+            markReady();
         }
 
         var CONTACT_URL = window.__BARLAS_CONTACT_MODEL || null;
@@ -402,10 +421,14 @@
         if (window.GLTFLoader && CONTACT_URL) {
             try {
                 new window.GLTFLoader().load(CONTACT_URL, function (gltf) {
+                    if (rigBuilt) return;   /* 4 sn güvenliği prosedürele düştüyse atla */
                     try {
+                        rigBuilt = true;
                         rig.add(normalizeContactModel(THREE, gltf.scene, 9.6, CONTACT_YAW));
+                        markReady();
                     } catch (e) {
                         if (window.console) console.error('[barlas-contact] normalize', e);
+                        rigBuilt = false;
                         buildProceduralRig();
                     }
                 }, undefined, function (err) {
@@ -418,6 +441,10 @@
         } else {
             buildProceduralRig();
         }
+
+        /* Güvenlik: model 4 sn'de gelmezse prosedürel TIR'la başla — boş sahneyle
+           drive-in yapma (form yine araçla beraber gelsin). */
+        window.setTimeout(function () { buildProceduralRig(); }, 4000);
 
         /* Konvoy (sahne + çeki demiri + form) tek parça olarak sağdan içeri sürülür.
            Tanker sabit kalır; tekerlekler bu kaymayla senkron döner → "çekiyor" hissi. */
@@ -448,56 +475,59 @@
             rT = window.setTimeout(frame, 120);
         });
 
-        stage.classList.add('is-3d');
-
+        /* Canvas başta gizli (opacity 0); startDriveIn'de 3D render'a hazır olunca
+           yumuşakça belirir. (SVG placeholder kaldırıldığı için crossfade gerekmez.) */
         var prevX = REST_X;
         var arrived = false;
         var leaving = false;
         var wheelAngle = 0;
 
         function startDriveIn() {
-            var formEl = convoyEl ? convoyEl.querySelector('[data-contact-form]') : null;
             var hitchEl = convoyEl ? convoyEl.querySelector('[data-hitch]') : null;
 
             if (!gsap || !deliver) {
-                if (deliver) revealConvoy();   // gsap yoksa: konvoyu yerine koy
+                if (deliver) revealConvoy();   // gsap yoksa: yerinde göster
                 arrived = true;
                 return;
             }
 
-            /* Konvoyu sağ dışta başlat, sonra içeri sür (TIR formu çekip getiriyor). */
+            /* ARAÇ + FORM BERABER GELİR: TIR gizliydi (canvas opacity 0); burada
+               canvas belirir, TIR görünür şekilde sağdan içeri sürer (sadece yaylanma
+               değil), süspansiyonla oturur ve AYNI ANDA form sağdan kayarak "teslim"
+               edilir (CSS: .contact-convoy.is-delivered .contact-form). Form transform'u
+               sürerken cam blur'u kapatılır (CSS: .is-driving .contact-form) → jank yok;
+               form oturunca (~1.05 sn) blur geri gelir. Çeki demiri ikisini bağlar. */
+            var canvas = renderer.domElement;
             convoyRevealed = true;                  // güvenlik zamanlayıcısı devreye girmesin
-            conv.x = OFF;
-            applyConvoy();
-            convoyEl.classList.add('is-delivered'); // CSS offset kuralını bırak; kontrol JS'te
-            if (formEl) formEl.style.pointerEvents = 'none';
+            convoyEl.classList.add('is-driving');    // form girişi boyunca cam blur kapalı
+            convoyEl.classList.add('is-delivered');  // formu sağdan kaydırarak getirir
 
             var tl = gsap.timeline({ onComplete: function () { arrived = true; } });
+            /* Cam blur'u form oturur oturmaz (~1.05 sn) geri getir. TIR'ın elastik
+               yaylanması ~2.5 sn sürer ama form çoktan yerindedir; blur'u o kadar
+               bekletirsek geç ve fark edilir bir "blur snap" olur. */
+            gsap.delayedCall(1.05, function () { convoyEl.classList.remove('is-driving'); });
 
-            /* 1) Konvoy sağdan içeri sürülür — tekerlekler bununla senkron döner */
-            tl.to(conv, { x: 0, duration: 1.8, ease: 'power3.out', onUpdate: applyConvoy }, 0);
+            /* TIR canvas'ı yumuşakça belirir */
+            tl.to(canvas, { opacity: 1, duration: 0.7, ease: 'power2.out' }, 0);
 
-            /* 2) Durunca: süspansiyon yaylanması */
-            tl.to(rig.rotation, { z: 0.06, duration: 0.2, ease: 'power2.out' }, 1.35);
-            tl.to(rig.position, { y: BASE_Y - 0.08, duration: 0.2, ease: 'power2.out' }, 1.35);
-            tl.to(rig.rotation, { z: 0, duration: 1.2, ease: 'elastic.out(1, 0.3)' }, 1.55);
-            tl.to(rig.position, { y: BASE_Y, duration: 1.2, ease: 'elastic.out(1, 0.28)' }, 1.55);
+            /* TIR görünür şekilde sağdan içeri sürer — tekerlekler döner */
+            gsap.set(rig.position, { x: REST_X + 4.2 });
+            tl.to(rig.position, { x: REST_X, duration: 1.25, ease: 'power3.out' }, 0);
 
-            /* Çekilen yük (form) fren anında öne savrulur, sonra elastikçe oturur */
-            if (formEl) {
-                tl.to(formEl, { x: -16, duration: 0.18, ease: 'power2.out' }, 1.35);
-                tl.to(formEl, {
-                    x: 0, duration: 1.05, ease: 'elastic.out(1, 0.4)',
-                    onComplete: function () { formEl.style.pointerEvents = ''; gsap.set(formEl, { clearProps: 'transform' }); }
-                }, 1.53);
-            }
-            /* Çeki demiri gerilir: kısa squash, sonra elastik */
+            /* Durunca: süspansiyon yaylanması */
+            tl.to(rig.rotation, { z: 0.06, duration: 0.2, ease: 'power2.out' }, 1.1);
+            tl.to(rig.position, { y: BASE_Y - 0.08, duration: 0.2, ease: 'power2.out' }, 1.1);
+            tl.to(rig.rotation, { z: 0, duration: 1.2, ease: 'elastic.out(1, 0.3)' }, 1.3);
+            tl.to(rig.position, { y: BASE_Y, duration: 1.2, ease: 'elastic.out(1, 0.28)' }, 1.3);
+
+            /* Çeki demiri gerilir (görünür → elastik gerilme), form gelişiyle senkron */
             if (hitchEl) {
-                tl.to(hitchEl, { scaleX: 0.82, duration: 0.18, ease: 'power2.out' }, 1.35);
-                tl.to(hitchEl, {
-                    scaleX: 1, duration: 1.0, ease: 'elastic.out(1, 0.45)',
+                gsap.set(hitchEl, { transformOrigin: 'right center' });
+                tl.fromTo(hitchEl, { scaleX: 0.2 }, {
+                    scaleX: 1, duration: 1.0, ease: 'elastic.out(1, 0.5)',
                     onComplete: function () { gsap.set(hitchEl, { clearProps: 'transform' }); }
-                }, 1.53);
+                }, 0.55);
             }
         }
 
@@ -522,9 +552,24 @@
             gsap.delayedCall(0.85, function () { if (stageDone) stage.classList.add('is-done'); });
         }, { once: true });
 
-        /* Görünürlüğe girince başlat */
-        var started = false;
-        function begin() { if (!started) { started = true; startDriveIn(); } }
+        /* Başlatma koşulu: sahne görünür VE araç hazır (beraber gelsinler).
+           maybeStart iki koşul da sağlanınca drive-in'i bir kez tetikler. */
+        function maybeStart() {
+            if (started || !inView || !modelLoaded) return;
+            started = true;
+            /* Başlangıç takılması: yeni eklenen TIR materyallerinin shader DERLEMESİ +
+               geometri/doku GPU UPLOAD'u ilk render'da pahalıdır; drive-in'in ilk
+               karesiyle çakışınca takılır. Canvas'ı önce GİZLE (opacity 0 → belirme
+               flaş'ı yok), sonra derle + warm-up render → ağır iş görünmez yapılır.
+               İki kare sonra startDriveIn canvas'ı yumuşakça 0→1 açar → akıcı giriş. */
+            renderer.domElement.style.opacity = '0';
+            try { renderer.compile(scene, camera); } catch (e) {}
+            renderer.render(scene, camera);
+            window.requestAnimationFrame(function () {
+                window.requestAnimationFrame(startDriveIn);
+            });
+        }
+        function begin() { inView = true; maybeStart(); }
         if ('IntersectionObserver' in window) {
             var io = new IntersectionObserver(function (entries) {
                 if (entries[0].isIntersecting) { begin(); io.disconnect(); }

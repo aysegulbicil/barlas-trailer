@@ -54,8 +54,10 @@ $jsVer  = is_file(FCPATH . 'assets/js/contact-tanker.js') ? filemtime(FCPATH . '
                         (c.getContext('webgl') || c.getContext('experimental-webgl')));
                 } catch (e) { return false; }
             }
-            // İletişim sayfasındaki 3D teslimat sahnesi kaldırıldı (kullanıcı isteği);
-            // 'contact-deliver' eklenmez, form normal (gizlenmemiş) halinde görünür.
+            // 3D teslimat sahnesi: yalnızca MASAÜSTÜ (≥992px) + hareket açık + WebGL.
+            // Mobilde 3D YOK → contact-deliver eklenmez, konvoy normal akar ve SVG
+            // tanker yedeği görünür (form sabit/normal). reduced-motion'da da kapalı.
+            if (!rm && wgl() && window.innerWidth >= 992) document.documentElement.classList.add('contact-deliver');
         } catch (e) {}
     })();
 </script>
@@ -74,51 +76,12 @@ $jsVer  = is_file(FCPATH . 'assets/js/contact-tanker.js') ? filemtime(FCPATH . '
         <div class="shell contact-hero__inner">
           <div class="contact-convoy" data-convoy>
 
-            <!-- Sol: büyük 3D TIR sahnesi (formu çekip getirir) -->
+            <!-- Sol: büyük 3D TIR sahnesi (formu çekip getirir). Placeholder/SVG
+                 yedeği KALDIRILDI (kullanıcı isteği): başta görsel yok; 3D teslimat
+                 aktif değilse (mobil / WebGL yok / reduced-motion) sahne hiç
+                 gösterilmez (contact.css'teki html:not(.contact-deliver) kuralı). -->
             <aside class="contact-hero__stage" data-contact-stage aria-hidden="true">
                 <div class="contact-stage__mount" data-stage-mount></div>
-
-                <!-- SVG yedeği: WebGL/JS yoksa ya da reduced-motion'da kalır -->
-                <div class="contact-stage__fallback" data-stage-fallback>
-                    <svg viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Barlas tanker">
-                        <defs>
-                            <linearGradient id="ctTank" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0" stop-color="#e8edf4"></stop>
-                                <stop offset="0.5" stop-color="#cfd8e4"></stop>
-                                <stop offset="1" stop-color="#9aa6b5"></stop>
-                            </linearGradient>
-                            <linearGradient id="ctCab" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0" stop-color="#2f8fe0"></stop>
-                                <stop offset="1" stop-color="#005baa"></stop>
-                            </linearGradient>
-                        </defs>
-                        <ellipse cx="280" cy="246" rx="240" ry="16" fill="rgba(3,6,12,0.45)"></ellipse>
-                        <rect x="196" y="92" width="320" height="116" rx="58" fill="url(#ctTank)"></rect>
-                        <ellipse cx="196" cy="150" rx="26" ry="58" fill="#b9c3d1"></ellipse>
-                        <ellipse cx="516" cy="150" rx="20" ry="58" fill="#aeb9c8"></ellipse>
-                        <rect x="300" y="120" width="150" height="26" rx="13" fill="#005baa" opacity="0.92"></rect>
-                        <text x="375" y="139" text-anchor="middle" font-family="Sora, Inter, sans-serif" font-weight="800" font-size="20" fill="#ffffff" letter-spacing="2">BARLAS</text>
-                        <circle cx="250" cy="84" r="6" fill="#9aa6b5"></circle>
-                        <circle cx="330" cy="84" r="6" fill="#9aa6b5"></circle>
-                        <circle cx="410" cy="84" r="6" fill="#9aa6b5"></circle>
-                        <path d="M52 208 V120 q0-22 22-22 h70 q14 0 20 12 l20 40 V208 Z" fill="url(#ctCab)"></path>
-                        <path d="M150 118 l16 34 h-44 V118 Z" fill="#0a1422" opacity="0.85"></path>
-                        <rect x="44" y="150" width="14" height="40" rx="4" fill="#0a1422"></rect>
-                        <rect x="120" y="200" width="404" height="12" rx="4" fill="#10182a"></rect>
-                        <g fill="#14181f">
-                            <circle cx="120" cy="214" r="30"></circle>
-                            <circle cx="300" cy="214" r="30"></circle>
-                            <circle cx="372" cy="214" r="30"></circle>
-                            <circle cx="444" cy="214" r="30"></circle>
-                        </g>
-                        <g fill="#cfd6df">
-                            <circle cx="120" cy="214" r="12"></circle>
-                            <circle cx="300" cy="214" r="12"></circle>
-                            <circle cx="372" cy="214" r="12"></circle>
-                            <circle cx="444" cy="214" r="12"></circle>
-                        </g>
-                    </svg>
-                </div>
 
                 <!-- Gönderim sonrası: TIR yola çıkınca beliren onay -->
                 <div class="contact-stage__done" data-stage-done aria-hidden="true">
