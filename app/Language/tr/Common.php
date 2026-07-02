@@ -36,4 +36,9 @@ return [
     'footer_cookies'        => 'Çerez Politikası',
     'footer_kvkk'           => 'KVKK Aydınlatma Metni',
     'footer_back_to_top'    => 'Yukarı çık',
+
+    // ---- Çocuk testi arayüzü (seçenek kartları / asistan / sesli mod) ----
+    'assistant_fab' => 'Asistan',
+    'assistant_title' => 'Dijital Satış Şefi',
+    'assistant_close' => 'Kapat',
 ];

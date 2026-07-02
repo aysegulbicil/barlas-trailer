@@ -1,0 +1,126 @@
+/* =====================================================================
+   faq-legal.css — SSS akordeonu + yasal sayfa tipografisi
+   Mantıksal özellikler (RTL-safe); dokunma hedefleri ≥ 48px.
+   ===================================================================== */
+
+.faq-section,
+.legal-section {
+    padding-block: 3rem 4.5rem;
+}
+
+/* ---------- SSS ---------- */
+.faq-list {
+    max-inline-size: 820px;
+}
+
+.faq-item {
+    border: 1px solid rgba(127, 152, 190, 0.25);
+    border-radius: 14px;
+    background: rgba(127, 152, 190, 0.06);
+    margin-block-end: 0.8rem;
+    overflow: hidden;
+}
+
+.faq-item__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 56px;
+    padding: 0.9rem 1.2rem;
+    font-weight: 600;
+    font-size: 1.02rem;
+    cursor: pointer;
+    list-style: none;
+}
+
+.faq-item__q::-webkit-details-marker { display: none; }
+
+.faq-item__q:focus-visible {
+    outline: 2px solid var(--blue-bright, #4AA3E6);
+    outline-offset: -2px;
+    border-radius: 14px;
+}
+
+.faq-item__chev {
+    flex: none;
+    inline-size: 20px;
+    block-size: 20px;
+    color: var(--blue-bright, #4AA3E6);
+    transition: transform 0.2s ease;
+}
+
+.faq-item[open] .faq-item__chev { transform: rotate(180deg); }
+
+.faq-item__a {
+    margin: 0;
+    padding: 0 1.2rem 1.1rem;
+    color: var(--ink-2, inherit);
+    line-height: 1.65;
+}
+
+.faq-cta {
+    margin-block-start: 2.2rem;
+    padding: 1.4rem;
+    border: 1px dashed rgba(127, 152, 190, 0.4);
+    border-radius: 14px;
+    text-align: center;
+}
+
+.faq-cta p { margin: 0 0 1rem; color: var(--ink-2, inherit); }
+
+.faq-cta__actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+
+.faq-cta__actions .btn { min-height: 48px; }
+
+/* ---------- Yasal sayfalar ---------- */
+.legal-body {
+    max-inline-size: 820px;
+}
+
+.legal-block {
+    margin-block-end: 1.8rem;
+}
+
+.legal-block__title {
+    margin: 0 0 0.6rem;
+    font-size: 1.18rem;
+}
+
+.legal-block__text {
+    margin: 0 0 0.7rem;
+    color: var(--ink-2, inherit);
+    line-height: 1.7;
+}
+
+.legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-block-start: 2.2rem;
+    padding-block-start: 1.4rem;
+    border-block-start: 1px solid rgba(127, 152, 190, 0.25);
+}
+
+.legal-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(127, 152, 190, 0.35);
+    border-radius: 999px;
+    color: inherit;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.legal-links a:hover { border-color: var(--blue-bright, #4AA3E6); }
+
+@media (prefers-reduced-motion: reduce) {
+    .faq-item__chev { transition: none; }
+}

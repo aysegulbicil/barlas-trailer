@@ -19,8 +19,12 @@
  */
 
 // Önbellek kırıcılı URL — layout'taki $asset() preload'u ile BİREBİR eşleşmeli
-// (yoksa preload boşa gider, görsel iki kez inerdi).
-$heroRel  = 'assets/images/cfa5531d-3c63-4571-936f-a964650bfef4.png';
+// (yoksa preload boşa gider, görsel iki kez inerdi). WebP ~91KB; PNG yalnız
+// WebP dosyası silinirse devreye giren yedektir.
+$heroRel = 'assets/images/cfa5531d-3c63-4571-936f-a964650bfef4.webp';
+if (! is_file(FCPATH . $heroRel)) {
+    $heroRel = 'assets/images/cfa5531d-3c63-4571-936f-a964650bfef4.png';
+}
 $heroFile = FCPATH . $heroRel;
 $heroImg  = base_url($heroRel) . '?v=' . (is_file($heroFile) ? (string) filemtime($heroFile) : '1');
 ?>

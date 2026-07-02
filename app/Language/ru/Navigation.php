@@ -14,6 +14,7 @@ return [
     'quick_links'     => 'Быстрые ссылки',
     'tools'           => 'Калькуляторы',
     'quiz'            => 'Какой полуприцеп?',
+    'faq'             => 'Вопросы и ответы',
 
     // Accessibility / UI
     'aria_primary'    => 'Главное меню',
@@ -159,4 +160,9 @@ return [
     'srv_axle_repair_desc'             => 'Обслуживание и ремонт осевых систем.',
     'srv_suspension_repair'            => 'Ремонт кронштейнов подвески',
     'srv_suspension_repair_desc'       => 'Ремонт кронштейнов и элементов подвески.',
+
+    // ---- Çocuk testi arayüzü (seçenek kartları / asistan / sesli mod) ----
+    'voice_start' => 'Прослушать страницу',
+    'voice_stop' => 'Остановить чтение',
+    'skip_to_content' => 'Перейти к содержимому',
 ];

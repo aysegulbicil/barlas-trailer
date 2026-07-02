@@ -18,6 +18,7 @@ return [
     'quick_links'     => 'Hızlı Erişim',
     'tools'           => 'Hesaplayıcılar',
     'quiz'            => 'Hangi Treyler?',
+    'faq'             => 'SSS',
 
     // Accessibility / UI
     'aria_primary'    => 'Ana menü',
@@ -163,4 +164,9 @@ return [
     'srv_axle_repair_desc'             => 'Dingil ve aks sistemleri bakım-onarımı.',
     'srv_suspension_repair'            => 'Kulak Tamiri',
     'srv_suspension_repair_desc'       => 'Kulak ve süspansiyon bağlantıları onarımı.',
+
+    // ---- Çocuk testi arayüzü (seçenek kartları / asistan / sesli mod) ----
+    'voice_start' => 'Sayfayı sesli dinle',
+    'voice_stop' => 'Sesli okumayı durdur',
+    'skip_to_content' => 'İçeriğe atla',
 ];

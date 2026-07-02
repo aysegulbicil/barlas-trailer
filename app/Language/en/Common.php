@@ -33,4 +33,9 @@ return [
     'footer_cookies'        => 'Cookie Policy',
     'footer_kvkk'           => 'Data Protection',
     'footer_back_to_top'    => 'Back to top',
+
+    // ---- Çocuk testi arayüzü (seçenek kartları / asistan / sesli mod) ----
+    'assistant_fab' => 'Assistant',
+    'assistant_title' => 'Digital Sales Chief',
+    'assistant_close' => 'Close',
 ];

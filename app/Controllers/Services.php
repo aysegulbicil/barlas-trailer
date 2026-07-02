@@ -47,6 +47,8 @@ class Services extends BaseController
      */
     public function index(): string
     {
+        $this->cachePage(3600);
+
         $data = [
             'metaTitle'       => lang('Services.meta_title'),
             'metaDescription' => lang('Services.meta_description'),
@@ -62,6 +64,8 @@ class Services extends BaseController
      */
     public function detail(string $slug): string
     {
+        $this->cachePage(3600);
+
         $services = $this->localizedServices();
         $service  = null;
         $index    = null;

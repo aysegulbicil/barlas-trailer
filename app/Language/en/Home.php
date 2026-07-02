@@ -226,4 +226,16 @@ return [
             ],
         ],
     ],
+
+    // ---- Çocuk testi arayüzü (seçenek kartları / asistan / sesli mod) ----
+    'options_title' => 'How can we help you?',
+    'options_lead' => 'Reach your goal in one tap — products, a quote, the right model or service.',
+    'opt_products_title' => 'Explore Products',
+    'opt_products_desc' => '11 categories, 76 vehicles: tankers, silos, tippers, lowbeds and more.',
+    'opt_quote_title' => 'Get a Quick Quote',
+    'opt_quote_desc' => 'Pick your vehicle and get a quote in minutes via WhatsApp.',
+    'opt_quiz_title' => 'Which Trailer Suits Me?',
+    'opt_quiz_desc' => 'Take the two-minute quiz and get the right model for your cargo.',
+    'opt_services_title' => 'Service & Repair',
+    'opt_services_desc' => 'Expert team for tanker, silo, reefer and chassis repairs.',
 ];

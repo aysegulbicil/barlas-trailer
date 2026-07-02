@@ -190,12 +190,12 @@
     outline-offset: -2px;
 }
 
-/* Second-level accordion toggle — mobile only */
+/* Second-level accordion toggle — mobile only (min 48px touch target) */
 .mega-cat__toggle {
     display: none;
     place-items: center;
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     color: var(--gray-500);
     transition: transform var(--dur-base) var(--ease-out), color var(--dur-fast);
 }
@@ -631,7 +631,9 @@
 /* Mobil ürün/hizmet bağlantı listesi (sade <ul>) — masaüstünde gizli. */
 .mega-mlist { display: none; list-style: none; margin: 0; padding: 0; }
 .mega-mlist__link {
-    display: block;
+    display: flex;
+    align-items: center;
+    min-height: 48px; /* eldivenli şoför standardı */
     padding: 0.72rem 0.25rem;
     color: var(--white);
     font-size: var(--fs-400);
@@ -640,6 +642,53 @@
 }
 .mega-mlist__link:hover { color: var(--primary-bright); }
 .mega-mlist__link--all { color: var(--primary-bright); font-weight: 600; }
+
+/* Mobilde öne çıkan ürün çipleri: ürün detayına 3 dokunuşta ulaşım */
+.mega-mlist__feat {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.2rem 0.25rem 0.75rem;
+    border-block-end: 1px solid rgba(255, 255, 255, 0.07);
+}
+.mega-mlist__feat-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: var(--fs-300, 0.85rem);
+    text-decoration: none;
+}
+.mega-mlist__feat-link:hover {
+    color: var(--white);
+    border-color: var(--primary-bright);
+}
+
+/* Skip-to-content — yalnız klavye odağında görünür (WCAG) */
+.skip-link {
+    position: fixed;
+    inset-block-start: 0.6rem;
+    inset-inline-start: 0.6rem;
+    z-index: 2000;
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0.7rem 1.2rem;
+    border-radius: 10px;
+    background: var(--primary, #005baa);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(-250%);
+}
+.skip-link:focus-visible {
+    transform: none;
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
 
 @media (max-width: 991px) {
     .nav-toggle { display: flex; }

@@ -14,6 +14,7 @@ return [
     'quick_links'     => 'روابط سريعة',
     'tools'           => 'الحاسبات',
     'quiz'            => 'أي مقطورة تناسبني؟',
+    'faq'             => 'الأسئلة الشائعة',
 
     // Accessibility / UI
     'aria_primary'    => 'القائمة الرئيسية',
@@ -159,4 +160,9 @@ return [
     'srv_axle_repair_desc'             => 'صيانة وإصلاح أنظمة المحاور.',
     'srv_suspension_repair'            => 'إصلاح مساند التعليق',
     'srv_suspension_repair_desc'       => 'إصلاح مساند وكتائف نظام التعليق.',
+
+    // ---- Çocuk testi arayüzü (seçenek kartları / asistan / sesli mod) ----
+    'voice_start' => 'الاستماع إلى الصفحة',
+    'voice_stop' => 'إيقاف القراءة الصوتية',
+    'skip_to_content' => 'تخطّي إلى المحتوى',
 ];

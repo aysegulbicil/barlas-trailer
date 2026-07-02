@@ -54,9 +54,15 @@ $routes->group('{locale}', static function (RouteCollection $routes): void {
     $routes->get('products/(:segment)/(:segment)', 'Products::detail/$1/$2', ['as' => 'products.detail']);
     $routes->get('media', 'Media::index', ['as' => 'media']);
 
-    // Trafik motorları: hesaplayıcılar + "Hangi treyler bana uygun?" testi.
+    // Trafik motorları: hesaplayıcılar + "Hangi treyler bana uygun?" testi + SSS.
     $routes->get('tools', 'Tools::index', ['as' => 'tools']);
     $routes->get('quiz', 'Tools::quiz', ['as' => 'quiz']);
+    $routes->get('faq', 'Faq::index', ['as' => 'faq']);
+
+    // Şeffaflık sayfaları (KVKK / gizlilik / çerez) — footer yasal barı.
+    $routes->get('kvkk', 'Legal::page/kvkk', ['as' => 'legal.kvkk']);
+    $routes->get('privacy', 'Legal::page/privacy', ['as' => 'legal.privacy']);
+    $routes->get('cookies', 'Legal::page/cookies', ['as' => 'legal.cookies']);
 
     // Teklif (Quote) — ürün-bağlamlı teklif akışı.
     //   teklif                          → ürün seçtirme sayfası (genel butonlar)

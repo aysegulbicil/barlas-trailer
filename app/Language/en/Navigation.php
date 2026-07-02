@@ -14,6 +14,7 @@ return [
     'quick_links'     => 'Quick Links',
     'tools'           => 'Calculators',
     'quiz'            => 'Which Trailer?',
+    'faq'             => 'FAQ',
 
     // Accessibility / UI
     'aria_primary'    => 'Main menu',
@@ -159,4 +160,9 @@ return [
     'srv_axle_repair_desc'             => 'Axle system maintenance and repair.',
     'srv_suspension_repair'            => 'Suspension Hanger Repair',
     'srv_suspension_repair_desc'       => 'Suspension hanger and bracket repair.',
+
+    // ---- Çocuk testi arayüzü (seçenek kartları / asistan / sesli mod) ----
+    'voice_start' => 'Listen to this page',
+    'voice_stop' => 'Stop reading aloud',
+    'skip_to_content' => 'Skip to content',
 ];

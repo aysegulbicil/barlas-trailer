@@ -34,6 +34,20 @@ $currentPath = current_path();
                 </a>
             </div>
             <div class="topbar__actions">
+                <!-- Sesli Site Modu: Web Speech destekliyse voice-mode.js düğmeyi açar -->
+                <button class="theme-toggle voice-toggle" type="button" data-voice-toggle hidden
+                        aria-pressed="false"
+                        aria-label="<?= esc(lang('Navigation.voice_start'), 'attr') ?>"
+                        title="<?= esc(lang('Navigation.voice_start'), 'attr') ?>"
+                        data-label-start="<?= esc(lang('Navigation.voice_start'), 'attr') ?>"
+                        data-label-stop="<?= esc(lang('Navigation.voice_stop'), 'attr') ?>">
+                    <svg class="theme-toggle__icon voice-toggle__icon" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M11 5 6 9H3v6h3l5 4z"></path>
+                        <path d="M15.5 8.5a5 5 0 010 7"></path>
+                        <path d="M18.5 5.5a9 9 0 010 13"></path>
+                    </svg>
+                </button>
                 <button class="theme-toggle" type="button" data-theme-toggle
                         aria-label="<?= esc(lang('Navigation.theme_toggle'), 'attr') ?>"
                         title="<?= esc(lang('Navigation.theme_toggle'), 'attr') ?>">

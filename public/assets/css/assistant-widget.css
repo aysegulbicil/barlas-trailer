@@ -1,0 +1,217 @@
+/* =====================================================================
+   assistant-widget.css — site geneli asistan paneli
+   Yüzen düğme konum/görünümü footer'daki .fab-stack/.wa-fab stillerinden
+   gelir; burada yalnız panel var. Mantıksal özellikler (RTL-safe),
+   dokunma hedefleri ≥ 48px.
+   ===================================================================== */
+
+.aw {
+    align-items: flex-end;
+}
+
+.aw__panel {
+    inline-size: min(360px, calc(100vw - 2rem));
+    max-block-size: min(560px, calc(100dvh - 7rem));
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(127, 152, 190, 0.3);
+    border-radius: 18px;
+    background: var(--bg-2, #101A2E);
+    color: var(--ink-1, #F0F5FC);
+    box-shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+}
+
+.aw__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    padding: 0.85rem 1rem;
+    background: linear-gradient(135deg, var(--blue, #005BAA), #0a3a68);
+    color: #fff;
+}
+
+.aw__title {
+    font-weight: 700;
+    font-size: 0.98rem;
+}
+
+.aw__close {
+    display: grid;
+    place-items: center;
+    inline-size: 48px;
+    block-size: 48px;
+    margin-block: -0.6rem;
+    margin-inline-end: -0.5rem;
+    border: none;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.aw__close svg { inline-size: 18px; block-size: 18px; }
+
+.aw__close:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: -4px;
+}
+
+.aw__quick {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem 0.35rem;
+}
+
+.aw__quick-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-block-size: 48px;
+    padding: 0.5rem 0.7rem;
+    border: 1px solid rgba(127, 152, 190, 0.35);
+    border-radius: 12px;
+    color: var(--ink-1, #F0F5FC);
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.aw__quick-btn svg { inline-size: 17px; block-size: 17px; flex: none; }
+
+.aw__quick-btn:hover { border-color: var(--blue-bright, #4AA3E6); }
+
+.aw__quick-btn--wa:hover { border-color: #25d366; }
+
+.aw__messages {
+    flex: 1;
+    min-block-size: 130px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 0.85rem 1rem;
+}
+
+.aw__msg {
+    margin: 0;
+    max-inline-size: 88%;
+    padding: 0.6rem 0.85rem;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
+.aw__msg--bot {
+    align-self: flex-start;
+    background: rgba(127, 152, 190, 0.14);
+    border-start-start-radius: 4px;
+}
+
+.aw__msg--user {
+    align-self: flex-end;
+    background: var(--blue, #005BAA);
+    color: #fff;
+    border-start-end-radius: 4px;
+}
+
+.aw__msg--typing { opacity: 0.65; }
+
+.aw__links {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    max-inline-size: 88%;
+}
+
+.aw__link {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid var(--blue-bright, #4AA3E6);
+    border-radius: 10px;
+    color: var(--blue-bright, #4AA3E6);
+    font-size: 0.86rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.aw__link:hover { background: rgba(74, 163, 230, 0.12); }
+
+.aw__form {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.7rem 1rem 0.9rem;
+    border-block-start: 1px solid rgba(127, 152, 190, 0.2);
+}
+
+.aw__hp {
+    position: absolute;
+    inset-inline-start: -9999px;
+    inline-size: 1px;
+    block-size: 1px;
+    opacity: 0;
+}
+
+.aw__input {
+    flex: 1;
+    min-block-size: 48px;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid rgba(127, 152, 190, 0.35);
+    border-radius: 12px;
+    background: var(--bg-1, #0B1322);
+    color: inherit;
+    font: inherit;
+    font-size: 0.92rem;
+}
+
+.aw__input:focus-visible {
+    outline: none;
+    border-color: var(--blue-bright, #4AA3E6);
+    box-shadow: 0 0 0 4px var(--blue-soft, rgba(74, 163, 230, 0.14));
+}
+
+.aw__send {
+    display: grid;
+    place-items: center;
+    flex: 0 0 48px;
+    inline-size: 48px;
+    block-size: 48px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue, #005BAA), var(--blue-bright, #4AA3E6));
+    color: #fff;
+    cursor: pointer;
+}
+
+.aw__send svg { inline-size: 19px; block-size: 19px; }
+
+.aw__send:focus-visible {
+    outline: 2px solid var(--blue-bright, #4AA3E6);
+    outline-offset: 2px;
+}
+
+/* Aydınlık tema: panel yüzeyleri tema token'larını izler */
+:root[data-theme="light"] .aw__panel {
+    background: #fff;
+    color: #10233c;
+    border-color: rgba(16, 35, 60, 0.14);
+}
+
+:root[data-theme="light"] .aw__msg--bot { background: rgba(0, 91, 170, 0.08); }
+:root[data-theme="light"] .aw__quick-btn { color: #10233c; border-color: rgba(16, 35, 60, 0.2); }
+:root[data-theme="light"] .aw__input {
+    background: #f4f7fb;
+    border-color: rgba(16, 35, 60, 0.2);
+}
+
+@media (max-width: 600px) {
+    .aw__panel {
+        inline-size: calc(100vw - 1.6rem);
+    }
+}

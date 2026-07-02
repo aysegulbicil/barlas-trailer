@@ -67,6 +67,8 @@ $asset = static function (string $path): string {
 </head>
 <body class="page page--<?= esc($this->renderSection('bodyClass') ?: 'inner') ?>">
 
+    <a class="skip-link" href="#main-content"><?= esc(lang('Navigation.skip_to_content')) ?></a>
+
     <?= $this->include('partials/header') ?>
 
     <main id="main-content" role="main">
@@ -83,6 +85,7 @@ $asset = static function (string $path): string {
     </script>
     <script src="<?= $asset('assets/js/theme-toggle.js') ?>" defer></script>
     <script src="<?= $asset('assets/js/inner-reveal.js') ?>" defer></script>
+    <script src="<?= $asset('assets/js/voice-mode.js') ?>" defer></script>
 
     <?= $this->renderSection('scripts') ?>
 </body>

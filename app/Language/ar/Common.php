@@ -33,4 +33,9 @@ return [
     'footer_cookies'        => 'سياسة ملفات تعريف الارتباط',
     'footer_kvkk'           => 'حماية البيانات',
     'footer_back_to_top'    => 'إلى الأعلى',
+
+    // ---- Çocuk testi arayüzü (seçenek kartları / asistan / sesli mod) ----
+    'assistant_fab' => 'المساعد',
+    'assistant_title' => 'رئيس المبيعات الرقمي',
+    'assistant_close' => 'إغلاق',
 ];

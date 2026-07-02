@@ -85,6 +85,8 @@ class Blog extends BaseController
      */
     public function detail(string $slug): string
     {
+        $this->cachePage(3600);
+
         $posts = $this->localizedPosts();
         $post  = null;
 

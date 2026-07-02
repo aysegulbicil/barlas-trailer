@@ -61,8 +61,9 @@ $asset = static function (string $path): string {
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
         <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.module.js">
         <?php if ($__isHome): ?>
-            <!-- Statik hero görselini erken indir → hero'nun ilk boyası hızlansın -->
-            <link rel="preload" as="image" href="<?= $asset('assets/images/cfa5531d-3c63-4571-936f-a964650bfef4.png') ?>" fetchpriority="high">
+            <!-- Statik hero görselini erken indir → hero'nun ilk boyası hızlansın.
+                 WebP ~91KB (PNG 1.84MB); URL hero-static.php ile BİREBİR aynı olmalı. -->
+            <link rel="preload" as="image" type="image/webp" href="<?= $asset('assets/images/cfa5531d-3c63-4571-936f-a964650bfef4.webp') ?>" fetchpriority="high">
         <?php else: ?>
             <!-- İletişim sayfası teslimat sahnesinin modeli erken indirilsin:
                  araç + form beraber gelsin diye bekleme kısalır -->
@@ -76,8 +77,9 @@ $asset = static function (string $path): string {
     <link rel="stylesheet" href="<?= $asset('assets/css/navigation.css') ?>">
     <link rel="stylesheet" href="<?= $asset('assets/css/yeni.css') ?>">
     <?php if ($__isHome): ?>
-        <!-- Statik tam ekran sinematik hero (yalnızca ana sayfa) -->
+        <!-- Statik tam ekran sinematik hero + 4 büyük seçenek (yalnızca ana sayfa) -->
         <link rel="stylesheet" href="<?= $asset('assets/css/hero-static.css') ?>">
+        <link rel="stylesheet" href="<?= $asset('assets/css/home-options.css') ?>">
     <?php endif; ?>
     <link rel="stylesheet" href="<?= $asset('assets/css/yeni-footer.css') ?>">
     <link rel="stylesheet" href="<?= $asset('assets/css/yeni-header.css') ?>">
@@ -91,9 +93,13 @@ $asset = static function (string $path): string {
 </head>
 <body>
 
+    <a class="skip-link" href="#main-content"><?= esc(lang('Navigation.skip_to_content')) ?></a>
+
     <?= $this->include('partials/header') ?>
 
+    <div id="main-content">
     <?= $this->renderSection('content') ?>
+    </div>
 
     <?= $this->include('partials/footer') ?>
 
@@ -102,6 +108,7 @@ $asset = static function (string $path): string {
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
     <script src="<?= $asset('assets/js/yeni-app.js') ?>" defer></script>
     <script src="<?= $asset('assets/js/theme-toggle.js') ?>" defer></script>
+    <script src="<?= $asset('assets/js/voice-mode.js') ?>" defer></script>
 
     <!-- 3D: tek bir THREE örneği (ESM) + GLTFLoader. three 0.149 artık global
          "examples/js" sunmuyor; bu yüzden import map ile 'three' eşlenir ve

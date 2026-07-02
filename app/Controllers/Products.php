@@ -25,6 +25,8 @@ class Products extends BaseController
     /** Category index: all 11 main groups. */
     public function index(): string
     {
+        $this->cachePage(3600); // katalog dosya tabanlı; içerik değişince cache süresi dolunca yenilenir
+
         $categories = ProductCatalog::categories();
 
         $totalProducts = 0;
@@ -46,6 +48,8 @@ class Products extends BaseController
     /** Category page: filterable grid of the category's products. */
     public function category(string $slug): string
     {
+        $this->cachePage(3600);
+
         $category = ProductCatalog::category($slug);
         if ($category === null) {
             throw PageNotFoundException::forPageNotFound();
@@ -65,6 +69,8 @@ class Products extends BaseController
     /** Product detail: full technical sheets per model variant. */
     public function detail(string $categorySlug, string $productSlug): string
     {
+        $this->cachePage(3600);
+
         $category = ProductCatalog::category($categorySlug);
         $product  = ProductCatalog::product($categorySlug, $productSlug);
         if ($category === null || $product === null) {

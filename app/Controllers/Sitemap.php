@@ -71,6 +71,10 @@ class Sitemap extends BaseController
             'media'    => null,
             'tools'    => null,
             'quiz'     => null,
+            'faq'      => null,
+            'kvkk'     => null,
+            'privacy'  => null,
+            'cookies'  => null,
             'teklif'   => null,
             'contact'  => null,
         ];

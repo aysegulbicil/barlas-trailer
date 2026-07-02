@@ -226,4 +226,16 @@ return [
             ],
         ],
     ],
+
+    // ---- Çocuk testi arayüzü (seçenek kartları / asistan / sesli mod) ----
+    'options_title' => 'Comment pouvons-nous vous aider ?',
+    'options_lead' => 'Atteignez votre objectif en un geste — produits, devis, bon modèle ou service.',
+    'opt_products_title' => 'Découvrir les produits',
+    'opt_products_desc' => '11 catégories, 76 véhicules : citernes, silos, bennes, porte-engins et plus.',
+    'opt_quote_title' => 'Devis rapide',
+    'opt_quote_desc' => 'Choisissez votre véhicule et recevez un devis en quelques minutes via WhatsApp.',
+    'opt_quiz_title' => 'Quelle semi-remorque me convient ?',
+    'opt_quiz_desc' => 'Un test de deux minutes vous propose le modèle adapté à votre chargement.',
+    'opt_services_title' => 'Service et réparation',
+    'opt_services_desc' => 'Équipe experte en réparation de citernes, silos, frigos et châssis.',
 ];

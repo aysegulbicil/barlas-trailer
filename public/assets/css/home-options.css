@@ -1,0 +1,123 @@
+/* =====================================================================
+   home-options.css — ana sayfa "4 büyük seçenek" bölümü (çocuk testi)
+   Token'lar yeni.css :root'tan; yalnız mantıksal özellikler (RTL-safe);
+   tüm kartlar büyük dokunma hedefi.
+   ===================================================================== */
+
+.options {
+    padding-block: 4.5rem 1.5rem;
+}
+
+.options__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-block-start: 2.2rem;
+}
+
+@media (min-width: 720px) {
+    .options__grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 1200px) {
+    .options__grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.option-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    min-height: 190px;
+    padding: 1.5rem;
+    border: 1px solid var(--line-2, rgba(127, 152, 190, 0.25));
+    border-radius: 18px;
+    background: var(--bg-2, #101A2E);
+    color: var(--ink-1, #F0F5FC);
+    text-decoration: none;
+    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.option-card:hover,
+.option-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: var(--blue-bright, #4AA3E6);
+    box-shadow: 0 18px 40px -22px var(--blue, #005BAA);
+}
+
+.option-card:focus-visible {
+    outline: 2px solid var(--blue-bright, #4AA3E6);
+    outline-offset: 2px;
+}
+
+/* Tek birincil eylem görsel olarak öne çıkar (teklif) */
+.option-card--primary {
+    background: linear-gradient(150deg, var(--blue, #005BAA), #0a3a68 70%);
+    border-color: var(--blue-bright, #4AA3E6);
+}
+
+.option-card__icon {
+    display: inline-grid;
+    place-items: center;
+    inline-size: 52px;
+    block-size: 52px;
+    border-radius: 14px;
+    background: var(--blue-soft, rgba(74, 163, 230, 0.14));
+    color: var(--blue-bright, #4AA3E6);
+}
+
+.option-card--primary .option-card__icon {
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+}
+
+.option-card__icon svg {
+    inline-size: 26px;
+    block-size: 26px;
+}
+
+.option-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.option-card__title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.option-card__desc {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--ink-2, rgba(226, 236, 248, 0.72));
+}
+
+.option-card--primary .option-card__desc {
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.option-card__arrow {
+    margin-block-start: auto;
+    align-self: flex-end;
+    font-size: 1.3rem;
+    color: var(--blue-bright, #4AA3E6);
+    transition: transform 0.22s ease;
+}
+
+.option-card--primary .option-card__arrow { color: #fff; }
+
+.option-card:hover .option-card__arrow {
+    transform: translateX(4px);
+}
+
+/* RTL: ok yönü ve kayma yönü çevrilir */
+[dir="rtl"] .option-card__arrow { transform: scaleX(-1); }
+[dir="rtl"] .option-card:hover .option-card__arrow { transform: scaleX(-1) translateX(4px); }
+
+@media (prefers-reduced-motion: reduce) {
+    .option-card,
+    .option-card__arrow { transition: none; }
+    .option-card:hover { transform: none; }
+}

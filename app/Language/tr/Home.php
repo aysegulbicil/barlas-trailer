@@ -226,4 +226,16 @@ return [
             ],
         ],
     ],
+
+    // ---- Çocuk testi arayüzü (seçenek kartları / asistan / sesli mod) ----
+    'options_title' => 'Size nasıl yardımcı olalım?',
+    'options_lead' => 'Tek dokunuşla hedefinize gidin — ürünler, teklif, doğru model ya da servis.',
+    'opt_products_title' => 'Ürünleri Keşfet',
+    'opt_products_desc' => '11 kategori, 76 araç: tanker, silobas, damper, lowbed ve daha fazlası.',
+    'opt_quote_title' => 'Hızlı Teklif Al',
+    'opt_quote_desc' => 'Aracınızı seçin, WhatsApp üzerinden dakikalar içinde teklif alın.',
+    'opt_quiz_title' => 'Hangi Treyler Bana Uygun?',
+    'opt_quiz_desc' => 'İki dakikalık test, yükünüze en uygun modeli önersin.',
+    'opt_services_title' => 'Servis & Onarım',
+    'opt_services_desc' => 'Tanker, silobas, frigo ve şasi onarımında uzman ekip.',
 ];

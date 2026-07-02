@@ -575,15 +575,16 @@
             });
         }
 
-        /* Yükleme tetiği: hero artık STATİK (3D rekabeti yok) → konvoy modellerini
-           bölümden ~3 ekran önce, yani pratikte SAYFA AÇILIŞINDA indirmeye başla ki
-           kullanıcı aşağı indiğinde konvoy hazır olsun (geç gelmesin). */
+        /* Yükleme tetiği: GERÇEK lazy-load (performans anayasası) — konvoy
+           modelleri (~8MB) bölüme ~1 ekran kala inmeye başlar; açılışta hero
+           ve kritik varlıklarla bant genişliği yarıştırmaz. Kullanıcı normal
+           hızda kaydırdığında modeller yine bölümden önce hazır olur. */
         var loadKicked = false;
         function kickLoad() { if (loadKicked) return; loadKicked = true; startConvoyLoad(); }
         if ('IntersectionObserver' in window) {
             var lio = new IntersectionObserver(function (es) {
                 if (es[0].isIntersecting) { kickLoad(); lio.disconnect(); }
-            }, { rootMargin: '300% 0px' });
+            }, { rootMargin: '100% 0px' });
             lio.observe(stage);
         } else {
             kickLoad();

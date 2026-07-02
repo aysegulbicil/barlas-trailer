@@ -72,7 +72,19 @@ $megaLang = static function (string $slug, string $suffix, string $fallback): st
     <ul class="mega-mlist">
         <li><a class="mega-mlist__link mega-mlist__link--all" href="<?= esc(locale_url('products')) ?>"><?= esc(lang('Navigation.all_products')) ?></a></li>
         <?php foreach ($megaCategories as $cat): ?>
-            <li><a class="mega-mlist__link" href="<?= esc(locale_url('products/' . $cat['slug'])) ?>"><?= esc($megaLang($cat['slug'], '', $cat['name'])) ?></a></li>
+            <li>
+                <a class="mega-mlist__link" href="<?= esc(locale_url('products/' . $cat['slug'])) ?>"><?= esc($megaLang($cat['slug'], '', $cat['name'])) ?></a>
+                <?php // Öne çıkan ürünler: mobilde ürün detayına 3 dokunuş (çocuk testi). ?>
+                <?php $mFeat = ProductCatalog::featured($cat, 2); ?>
+                <?php if ($mFeat !== []): ?>
+                    <div class="mega-mlist__feat">
+                        <?php foreach ($mFeat as $mProd): ?>
+                            <a class="mega-mlist__feat-link"
+                               href="<?= esc(locale_url('products/' . $cat['slug'] . '/' . $mProd['slug'])) ?>"><?= esc($mProd['name']) ?></a>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+            </li>
         <?php endforeach; ?>
     </ul>
 

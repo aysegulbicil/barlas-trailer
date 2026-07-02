@@ -18,7 +18,7 @@
     /* Metin */
     --ink-1: #F0F5FC;
     --ink-2: rgba(226, 236, 248, 0.72);
-    --ink-3: rgba(226, 236, 248, 0.46);
+    --ink-3: rgba(226, 236, 248, 0.62); /* WCAG AA: küçük metinde 4.5:1 üstü */
 
     /* Tek vurgu: Barlas mavisi */
     --blue: #005BAA;
@@ -1011,7 +1011,8 @@ html.has-anim .why__cards > .is-in {
 .console__chip {
     position: relative;
     width: 100%;
-    padding: 0.62rem 2rem 0.62rem 0.95rem;
+    min-height: 48px; /* eldivenli şoför standardı */
+    padding: 0.75rem 2rem 0.75rem 0.95rem;
     border-radius: 12px;
     border: 1px solid var(--line-2);
     background: var(--bg-1);
@@ -1225,9 +1226,9 @@ html.has-anim .why__cards > .is-in {
 .console__send {
     display: grid;
     place-items: center;
-    flex: 0 0 46px;
-    width: 46px;
-    height: 46px;
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--blue), var(--blue-bright));
     color: #fff;

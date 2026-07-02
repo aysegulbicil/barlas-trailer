@@ -17,6 +17,8 @@ class Tools extends BaseController
 {
     public function index(): string
     {
+        $this->cachePage(3600);
+
         $constants = json_decode((string) @file_get_contents(APPPATH . 'Data/tools-constants.json'), true) ?? [];
 
         return view('pages/tools/index', [
@@ -28,6 +30,8 @@ class Tools extends BaseController
 
     public function quiz(): string
     {
+        $this->cachePage(3600);
+
         $tree = json_decode((string) @file_get_contents(APPPATH . 'Data/quiz-tree.json'), true) ?? [];
 
         return view('pages/tools/quiz', [

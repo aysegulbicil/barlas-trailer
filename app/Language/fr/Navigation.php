@@ -14,6 +14,7 @@ return [
     'quick_links'     => 'Liens rapides',
     'tools'           => 'Calculateurs',
     'quiz'            => 'Quelle semi-remorque ?',
+    'faq'             => 'FAQ',
 
     // Accessibility / UI
     'aria_primary'    => 'Menu principal',
@@ -159,4 +160,9 @@ return [
     'srv_axle_repair_desc'             => 'Entretien et réparation des systèmes d\'essieux.',
     'srv_suspension_repair'            => 'Réparation de supports de suspension',
     'srv_suspension_repair_desc'       => 'Réparation des mains et supports de suspension.',
+
+    // ---- Çocuk testi arayüzü (seçenek kartları / asistan / sesli mod) ----
+    'voice_start' => 'Écouter la page',
+    'voice_stop' => 'Arrêter la lecture',
+    'skip_to_content' => 'Aller au contenu',
 ];

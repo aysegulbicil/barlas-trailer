@@ -33,4 +33,9 @@ return [
     'footer_cookies'        => 'Politique des cookies',
     'footer_kvkk'           => 'Protection des données',
     'footer_back_to_top'    => 'Haut de page',
+
+    // ---- Çocuk testi arayüzü (seçenek kartları / asistan / sesli mod) ----
+    'assistant_fab' => 'Assistant',
+    'assistant_title' => 'Chef des ventes numérique',
+    'assistant_close' => 'Fermer',
 ];

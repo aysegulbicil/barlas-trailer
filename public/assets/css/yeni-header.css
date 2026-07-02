@@ -255,12 +255,12 @@
     gap: var(--space-2, 0.5rem);
 }
 
-/* Aydınlık / koyu tema değiştirici düğme */
+/* Aydınlık / koyu tema değiştirici düğme (min 48px dokunma alanı) */
 .theme-toggle {
     display: inline-grid;
     place-items: center;
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     border-radius: var(--radius-sm, 8px);
     color: var(--yh-ink-2);
     transition: color 180ms var(--ease-out, ease-out),
@@ -272,6 +272,12 @@
 
 /* Koyu temada ay, aydınlık temada güneş ikonu gösterilir. */
 .theme-toggle__icon--sun { display: none; }
+
+/* Sesli Site Modu düğmesi — okuma sürerken vurgulu kalır */
+.voice-toggle.is-on {
+    color: var(--yh-blue-bright);
+    background: rgba(74, 163, 230, 0.14);
+}
 .theme-toggle__icon--moon { display: block; }
 :root[data-theme="light"] .theme-toggle__icon--moon { display: none; }
 :root[data-theme="light"] .theme-toggle__icon--sun { display: block; }
