@@ -4,9 +4,9 @@
   "configurations": [
     {
       "name": "barlas",
-      "runtimeExecutable": "php",
-      "runtimeArgs": ["spark", "serve", "--port", "8123"],
-      "port": 8123
+      "runtimeExecutable": "docker",
+      "runtimeArgs": ["compose", "up"],
+      "port": 8080
     }
   ]
 }

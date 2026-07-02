@@ -20,6 +20,9 @@ return [
     'quiz'            => 'Hangi Treyler?',
     'faq'             => 'SSS',
     'games'           => 'Oyunlar',
+    'wiki'            => 'Ansiklopedi',
+    'press'           => 'Basın Odası',
+    'verify'          => 'Şasi Doğrulama',
 
     // Accessibility / UI
     'aria_primary'    => 'Ana menü',
@@ -170,4 +173,10 @@ return [
     'voice_start' => 'Sayfayı sesli dinle',
     'voice_stop' => 'Sesli okumayı durdur',
     'skip_to_content' => 'İçeriğe atla',
+    'listen_start' => 'Bu yazıyı dinle',
+    'listen_stop' => 'Dinlemeyi durdur',
+
+    // Footer bağlantıları — ihracat pazarları (§7.11) + üretim haberleri (§7.6)
+    'markets' => 'İhracat Pazarları',
+    'news' => 'Haberler',
 ];

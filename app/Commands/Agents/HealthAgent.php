@@ -20,7 +20,7 @@ class HealthAgent extends AgentCommand
     /** Konteyner/VPS içinden web sunucusuna doğrudan istek atılır. */
     private const BASE = 'http://127.0.0.1';
 
-    private const PAGES = ['/tr', '/tr/products', '/tr/tools', '/tr/faq', '/tr/games', '/tr/kvkk', '/sitemap.xml', '/robots.txt'];
+    private const PAGES = ['/tr', '/tr/products', '/tr/tools', '/tr/faq', '/tr/games', '/tr/wiki', '/tr/kvkk', '/sitemap.xml', '/robots.txt'];
 
     protected function agentName(): string
     {

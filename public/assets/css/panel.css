@@ -1,0 +1,169 @@
+/* =====================================================================
+   panel.css — Jarvis komuta merkezi (iç araç, bağımsız stil)
+   ===================================================================== */
+
+* { box-sizing: border-box; }
+
+body.panel {
+    margin: 0;
+    min-height: 100vh;
+    background: #0b1322;
+    color: #eef4fc;
+    font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+a { color: #4aa3e6; }
+
+/* ---- üst bar ---- */
+.panel-top {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    padding: 0.7rem 1.2rem;
+    background: #101a2e;
+    border-bottom: 1px solid rgba(127, 152, 190, 0.25);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.panel-top__brand { font-weight: 800; font-size: 1.05rem; }
+.panel-top__brand small { color: #7f98be; font-weight: 600; }
+
+.panel-top__nav {
+    display: flex;
+    gap: 0.2rem;
+    flex-wrap: wrap;
+}
+
+.panel-top__nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 42px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 9px;
+    color: #b8c7dd;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.panel-top__nav a:hover { background: rgba(127, 152, 190, 0.12); color: #fff; }
+.panel-top__nav a.is-active { background: #005baa; color: #fff; }
+
+.panel-top__user {
+    margin-inline-start: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.85rem;
+    color: #7f98be;
+}
+
+.panel-top__logout {
+    padding: 0.4rem 0.9rem;
+    border: 1px solid rgba(127, 152, 190, 0.35);
+    border-radius: 9px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* ---- içerik ---- */
+.panel-main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 1.6rem 1.2rem 3rem;
+}
+
+.panel-h1 { margin: 0 0 1.2rem; font-size: 1.4rem; }
+
+.panel-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 1.6rem;
+}
+
+.panel-card {
+    padding: 0.9rem 1.1rem;
+    border: 1px solid rgba(127, 152, 190, 0.25);
+    border-radius: 14px;
+    background: rgba(127, 152, 190, 0.06);
+    text-decoration: none;
+    color: inherit;
+}
+
+.panel-card__num { display: block; font-size: 1.7rem; font-weight: 800; }
+.panel-card__label { color: #7f98be; font-size: 0.85rem; }
+
+.panel-box {
+    padding: 1.1rem 1.3rem;
+    border: 1px solid rgba(127, 152, 190, 0.25);
+    border-radius: 14px;
+    background: rgba(127, 152, 190, 0.05);
+    margin-bottom: 1.2rem;
+    overflow-x: auto;
+}
+
+.panel-box h2 { margin: 0 0 0.7rem; font-size: 1.05rem; }
+
+.panel-pre {
+    margin: 0;
+    white-space: pre-wrap;
+    font: 0.88rem/1.6 ui-monospace, "Cascadia Mono", Consolas, monospace;
+    color: #d5e2f5;
+}
+
+/* ---- tablolar ---- */
+.panel-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+
+.panel-table th,
+.panel-table td {
+    padding: 0.55rem 0.7rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(127, 152, 190, 0.16);
+    vertical-align: top;
+}
+
+.panel-table th {
+    color: #7f98be;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.panel-empty { color: #7f98be; }
+
+/* ---- butonlar / durum ---- */
+.panel-btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 42px;
+    padding: 0.45rem 1rem;
+    border: 1px solid rgba(127, 152, 190, 0.35);
+    border-radius: 10px;
+    background: transparent;
+    color: #eef4fc;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.panel-btn:hover { border-color: #4aa3e6; }
+
+.panel-btn--danger { border-color: rgba(210, 60, 60, 0.6); color: #ff9d9d; }
+.panel-btn--primary { background: #005baa; border-color: #005baa; color: #fff; }
+
+.panel-badge {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.panel-badge--ok { background: rgba(46, 160, 67, 0.2); color: #6ee08a; }
+.panel-badge--no { background: rgba(210, 60, 60, 0.22); color: #ff9d9d; }
+
+.panel-inline-form { display: inline; }

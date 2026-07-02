@@ -1,0 +1,117 @@
+/* =====================================================================
+   vehicle.css — Araç Kimlik Kartı (/v/{hash}) + Şasi Doğrulama (/verify)
+   Token'lar yeni.css :root'tan; mantıksal özellikler (RTL-safe).
+   ===================================================================== */
+
+.vcard-section { padding-block: 3rem 4.5rem; }
+
+/* ---- kimlik kartı ---- */
+.vcard {
+    max-inline-size: 640px;
+    margin-inline: auto;
+    padding: 1.8rem;
+    border: 1px solid var(--line-2, rgba(127, 152, 190, 0.25));
+    border-radius: 20px;
+    background: var(--bg-2, #101A2E);
+}
+
+.vcard__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1.4rem;
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    background: rgba(46, 160, 67, 0.16);
+    color: #6ee08a;
+    font-weight: 700;
+    font-size: 0.92rem;
+}
+
+.vcard__badge svg { inline-size: 18px; block-size: 18px; }
+
+.vcard__rows { margin: 0; }
+
+.vcard__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.75rem;
+    border-block-end: 1px solid rgba(127, 152, 190, 0.16);
+}
+
+.vcard__row dt { color: var(--ink-3, rgba(226, 236, 248, 0.62)); }
+.vcard__row dd { margin: 0; font-weight: 600; text-align: end; }
+
+.vcard__warranty--active { color: #6ee08a; }
+.vcard__warranty--expired { color: #ffb38a; }
+
+.vcard__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-block-start: 1.5rem;
+}
+
+/* ---- doğrulama formu ---- */
+.verify-form {
+    max-inline-size: 640px;
+    margin-inline: auto;
+}
+
+.verify-form__hp {
+    position: absolute;
+    inset-inline-start: -9999px;
+    inline-size: 1px;
+    block-size: 1px;
+    opacity: 0;
+}
+
+.verify-form__label {
+    display: block;
+    margin-block-end: 0.5rem;
+    font-weight: 600;
+}
+
+.verify-form__row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+.verify-form__input {
+    flex: 1;
+    min-inline-size: 220px;
+    min-block-size: 48px;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid var(--line-2, rgba(127, 152, 190, 0.35));
+    border-radius: 12px;
+    background: var(--bg-1, #0B1322);
+    color: var(--ink-1, #F0F5FC);
+    font: inherit;
+    text-transform: uppercase;
+}
+
+.verify-form__input:focus-visible {
+    outline: none;
+    border-color: var(--blue-bright, #4AA3E6);
+    box-shadow: 0 0 0 4px var(--blue-soft, rgba(74, 163, 230, 0.14));
+}
+
+.verify-result {
+    max-inline-size: 640px;
+    margin: 1.5rem auto 0;
+    padding: 1.4rem 1.6rem;
+    border-radius: 16px;
+    border: 1px solid;
+}
+
+.verify-result h2 { margin: 0 0 0.5rem; font-size: 1.15rem; }
+.verify-result p { margin: 0 0 0.8rem; color: var(--ink-2, rgba(226, 236, 248, 0.72)); }
+
+.verify-result--ok { border-color: rgba(46, 160, 67, 0.5); background: rgba(46, 160, 67, 0.08); }
+.verify-result--warn { border-color: rgba(255, 179, 138, 0.5); background: rgba(255, 179, 138, 0.07); }
+
+.verify-result__facts {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+}
+
+.verify-result__facts li { padding-block: 0.3rem; }

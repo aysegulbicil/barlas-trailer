@@ -32,7 +32,7 @@ abstract class BaseController extends Controller
      *
      * @var list<string>
      */
-    protected $helpers = ['url', 'locale'];
+    protected $helpers = ['url', 'locale', 'auth', 'setting'];
 
     /**
      * @return void

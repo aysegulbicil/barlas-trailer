@@ -1,0 +1,17 @@
+{
+    "_comment": "Ülke/pazar sayfaları kayıt defteri (§7.11). Locale-bağımsız: ülke adları app/Language/{locale}/Markets.php 'country_{slug}' anahtarlarından gelir. categories: products.json kategori slug'ları (o pazar için öne çıkanlar). Gerçek ihracat sayıları geldiğinde her ülkeye 'delivered' benzeri alanlar eklenebilir; sayfa alan yoksa göstermez (yanlış rakam uydurma yasak).",
+    "countries": [
+        { "slug": "germany",      "code": "DE", "region": "europe", "categories": ["curtain", "reefer", "containers", "lowbed"] },
+        { "slug": "france",       "code": "FR", "region": "europe", "categories": ["reefer", "curtain", "tankers", "platform"] },
+        { "slug": "poland",       "code": "PL", "region": "europe", "categories": ["curtain", "reefer", "containers", "dry-cargo"] },
+        { "slug": "romania",      "code": "RO", "region": "europe", "categories": ["tippers", "curtain", "tankers", "trailers"] },
+        { "slug": "bulgaria",     "code": "BG", "region": "europe", "categories": ["tankers", "silos", "tippers", "curtain"] },
+        { "slug": "greece",       "code": "GR", "region": "europe", "categories": ["tankers", "reefer", "platform", "containers"] },
+        { "slug": "russia",       "code": "RU", "region": "cis",    "categories": ["tankers", "silos", "lowbed", "reefer"] },
+        { "slug": "azerbaijan",   "code": "AZ", "region": "cis",    "categories": ["tankers", "silos", "tippers", "lowbed"] },
+        { "slug": "kazakhstan",   "code": "KZ", "region": "cis",    "categories": ["silos", "tankers", "lowbed", "trailers"] },
+        { "slug": "iraq",         "code": "IQ", "region": "mena",   "categories": ["tankers", "tippers", "lowbed", "silos"] },
+        { "slug": "saudi-arabia", "code": "SA", "region": "mena",   "categories": ["tankers", "silos", "lowbed", "platform"] },
+        { "slug": "algeria",      "code": "DZ", "region": "mena",   "categories": ["tippers", "tankers", "silos", "dry-cargo"] }
+    ]
+}

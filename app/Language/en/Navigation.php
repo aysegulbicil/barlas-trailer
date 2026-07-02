@@ -16,6 +16,9 @@ return [
     'quiz'            => 'Which Trailer?',
     'faq'             => 'FAQ',
     'games'           => 'Games',
+    'wiki'            => 'Encyclopedia',
+    'press'           => 'Press Room',
+    'verify'          => 'Chassis Check',
 
     // Accessibility / UI
     'aria_primary'    => 'Main menu',
@@ -166,4 +169,10 @@ return [
     'voice_start' => 'Listen to this page',
     'voice_stop' => 'Stop reading aloud',
     'skip_to_content' => 'Skip to content',
+    'listen_start' => 'Listen to this article',
+    'listen_stop' => 'Stop listening',
+
+    // Footer links — export markets (§7.11) + production news (§7.6)
+    'markets' => 'Export Markets',
+    'news' => 'News',
 ];

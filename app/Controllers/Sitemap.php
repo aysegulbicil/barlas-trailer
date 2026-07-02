@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Libraries\MarkdownContent;
 use App\Libraries\ProductCatalog;
 use CodeIgniter\HTTP\ResponseInterface;
 
@@ -55,6 +56,11 @@ class Sitemap extends BaseController
             . "Allow: /\n\n"
             . "# Çerez kuran dil değiştirme yönlendirmeleri taranmasın\n"
             . "Disallow: /lang/\n\n"
+            . "# Kimlikli dünya (Jarvis paneli) dizine girmez\n"
+            . "Disallow: /panel\n"
+            . "Disallow: /login\n\n"
+            . "# QR araç kimlik kartları keşfedilebilir olmasın (hash gizliliği)\n"
+            . "Disallow: /v/\n\n"
             . 'Sitemap: ' . base_url('sitemap.xml') . "\n";
 
         return $this->response->setContentType('text/plain')->setBody($body);
@@ -71,10 +77,15 @@ class Sitemap extends BaseController
             'media'    => null,
             'tools'    => null,
             'quiz'     => null,
+            'wiki'     => null,
+            'verify'   => null,
+            'press'    => null,
             'faq'      => null,
             'games'        => null,
             'games/tetris' => null,
             'games/daily'  => null,
+            'markets'  => null,
+            'news'     => null,
             'kvkk'     => null,
             'privacy'  => null,
             'cookies'  => null,
@@ -96,6 +107,18 @@ class Sitemap extends BaseController
             foreach ($category['products'] ?? [] as $product) {
                 $paths['products/' . $category['slug'] . '/' . $product['slug']] = null;
             }
+        }
+
+        foreach (MarkdownContent::slugs('wiki') as $slug) {
+            $paths['wiki/' . $slug] = null;
+        }
+
+        foreach (Markets::registry() as $country) {
+            $paths['markets/' . $country['slug']] = null;
+        }
+
+        foreach (MarkdownContent::slugs('news') as $slug) {
+            $paths['news/' . $slug] = null;
         }
 
         return $paths;

@@ -92,8 +92,9 @@ abstract class AgentCommand extends BaseCommand
             @mkdir($dir, 0775, true);
         }
 
+        // uniqid eki: aynı saniyede üretilen alarmlar birbirini ezmesin.
         @file_put_contents(
-            $dir . '/' . date('Ymd-His') . '-' . $this->agentName() . '.json',
+            $dir . '/' . date('Ymd-His') . '-' . $this->agentName() . '-' . substr(uniqid(), -6) . '.json',
             json_encode([
                 'time'    => date('c'),
                 'agent'   => $this->agentName(),

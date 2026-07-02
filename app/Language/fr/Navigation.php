@@ -14,6 +14,9 @@ return [
     'quick_links'     => 'Liens rapides',
     'tools'           => 'Calculateurs',
     'quiz'            => 'Quelle semi-remorque ?',
+    'wiki'            => 'Encyclopédie',
+    'press'           => 'Espace presse',
+    'verify'          => 'Vérification châssis',
     'faq'             => 'FAQ',
     'games'           => 'Jeux',
 
@@ -166,4 +169,10 @@ return [
     'voice_start' => 'Écouter la page',
     'voice_stop' => 'Arrêter la lecture',
     'skip_to_content' => 'Aller au contenu',
+    'listen_start' => 'Écouter cet article',
+    'listen_stop' => 'Arrêter l\'écoute',
+
+    // Liens du pied de page — marchés d'export (§7.11) + actualités production (§7.6)
+    'markets' => 'Marchés d\'export',
+    'news' => 'Actualités',
 ];

@@ -49,6 +49,8 @@ $this->extend('layouts/inner');
             </span>
         </div>
 
+        <?= view('partials/listen-button', ['target' => '.blog-article__content']) ?>
+
         <!-- Article body (trusted developer-authored HTML from language files) -->
         <div class="blog-article__content" data-reveal>
             <?= $post['content'] ?>

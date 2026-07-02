@@ -88,5 +88,5 @@ class Autoload extends AutoloadConfig
      *
      * @var list<string>
      */
-    public $helpers = [];
+    public $helpers = ['auth', 'setting']; // Shield: filtreler controller'dan önce koştuğu için burada
 }
