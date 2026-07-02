@@ -22,6 +22,82 @@ $this->extend('layouts/inner');
 
 <section class="markets-section">
     <div class="container">
+
+        <?php
+        /*
+         * Pazar haritası (§7.12) — dekoratif rota ağı: fabrika (hub)
+         * noktasından her pazara eğri. Ekvirektangüler projeksiyon;
+         * viewBox nokta bulutundan dinamik hesaplanır, yeni ülke
+         * eklenince harita kendini genişletir. Kıta çizimi yok —
+         * footer'daki rota motifiyle aynı soyut dil.
+         */
+        $proj = static fn (float $lat, float $lon): array => [
+            round(($lon + 180) / 360 * 1000, 1),
+            round((90 - $lat) / 180 * 500, 1),
+        ];
+
+        [$hx, $hy] = $proj((float) $hub['lat'], (float) $hub['lon']);
+
+        $dots = [];
+        $minX = $maxX = $hx;
+        $minY = $maxY = $hy;
+
+        foreach ($grouped as $countries) {
+            foreach ($countries as $country) {
+                [$x, $y] = $proj((float) $country['lat'], (float) $country['lon']);
+                $dots[]  = ['x' => $x, 'y' => $y, 'name' => $country['name']];
+                $minX    = min($minX, $x);
+                $maxX    = max($maxX, $x);
+                $minY    = min($minY, $y);
+                $maxY    = max($maxY, $y);
+            }
+        }
+
+        $pad     = 30;
+        $viewBox = sprintf(
+            '%.1f %.1f %.1f %.1f',
+            $minX - $pad,
+            $minY - $pad,
+            max($maxX - $minX + 2 * $pad, 120),
+            max($maxY - $minY + 2 * $pad, 80)
+        );
+        ?>
+        <div class="markets-map" aria-hidden="true" data-reveal>
+            <svg viewBox="<?= esc($viewBox, 'attr') ?>" xmlns="http://www.w3.org/2000/svg" role="presentation" focusable="false">
+                <?php foreach ($dots as $dot): ?>
+                    <path class="markets-map__route"
+                          d="M<?= $hx ?>,<?= $hy ?> Q<?= round(($hx + $dot['x']) / 2, 1) ?>,<?= round(min($hy, $dot['y']) - 16, 1) ?> <?= $dot['x'] ?>,<?= $dot['y'] ?>"
+                          fill="none"></path>
+                <?php endforeach; ?>
+                <?php foreach ($dots as $dot): ?>
+                    <circle class="markets-map__halo" cx="<?= $dot['x'] ?>" cy="<?= $dot['y'] ?>" r="7"></circle>
+                    <circle class="markets-map__dot" cx="<?= $dot['x'] ?>" cy="<?= $dot['y'] ?>" r="3">
+                        <title><?= esc($dot['name']) ?></title>
+                    </circle>
+                <?php endforeach; ?>
+                <circle class="markets-map__hub" cx="<?= $hx ?>" cy="<?= $hy ?>" r="4.5"></circle>
+            </svg>
+        </div>
+
+        <ul class="markets-stats" data-reveal-group>
+            <li class="markets-stats__item">
+                <strong><?= esc((string) $stats['countries']) ?></strong>
+                <span><?= esc(lang('Markets.stats_countries')) ?></span>
+            </li>
+            <li class="markets-stats__item">
+                <strong><?= esc((string) $stats['regions']) ?></strong>
+                <span><?= esc(lang('Markets.stats_regions')) ?></span>
+            </li>
+            <li class="markets-stats__item">
+                <strong><?= esc((string) $stats['categories']) ?></strong>
+                <span><?= esc(lang('Markets.stats_categories')) ?></span>
+            </li>
+            <li class="markets-stats__item">
+                <strong><?= esc((string) $stats['languages']) ?></strong>
+                <span><?= esc(lang('Markets.stats_languages')) ?></span>
+            </li>
+        </ul>
+
         <?php foreach ($grouped as $region => $countries): ?>
             <?php if ($countries === []) { continue; } ?>
             <h2 class="markets-region"><?= esc(lang('Markets.region_' . $region)) ?></h2>

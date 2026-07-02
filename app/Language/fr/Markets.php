@@ -17,6 +17,12 @@ return [
 
     'card_categories' => '%d gammes de produits phares',
 
+    // Compteurs honnêtes (§7.12) — valeurs dérivées de markets.json
+    'stats_countries'  => 'Marchés d\'export',
+    'stats_regions'    => 'Régions',
+    'stats_categories' => 'Gammes de produits',
+    'stats_languages'  => 'Langues du site',
+
     'detail_meta_title'     => '%s — marché d\'export',
     'detail_lead'           => 'De la Türkiye vers le marché %s : fabrication et livraison de semi-remorques prêtes à l\'export, aux normes internationales.',
     'section_products'      => 'Gammes phares pour %s',

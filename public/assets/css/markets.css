@@ -18,6 +18,71 @@
     color: var(--ink-2, rgba(226, 236, 248, 0.72));
 }
 
+/* ---- pazar haritası (dekoratif rota ağı) + dürüst sayaçlar ---- */
+.markets-map {
+    margin-block-end: 1.6rem;
+    padding: 1rem;
+    border: 1px solid var(--line-2, rgba(127, 152, 190, 0.25));
+    border-radius: 18px;
+    background:
+        linear-gradient(var(--line-2, rgba(127, 152, 190, 0.12)) 1px, transparent 1px) 0 0 / 100% 28px,
+        linear-gradient(90deg, var(--line-2, rgba(127, 152, 190, 0.12)) 1px, transparent 1px) 0 0 / 28px 100%,
+        var(--bg-2, #101A2E);
+}
+
+.markets-map svg { display: block; width: 100%; height: auto; }
+
+.markets-map__route {
+    stroke: var(--blue-bright, #4AA3E6);
+    stroke-width: 1;
+    opacity: 0.35;
+}
+
+.markets-map__halo {
+    fill: var(--blue-bright, #4AA3E6);
+    opacity: 0.16;
+}
+
+.markets-map__dot { fill: var(--blue-bright, #4AA3E6); }
+
+.markets-map__hub {
+    fill: var(--ink-1, #F0F5FC);
+    stroke: var(--blue-bright, #4AA3E6);
+    stroke-width: 2;
+}
+
+.markets-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 0 0 1rem;
+    padding: 0;
+    list-style: none;
+}
+
+@media (min-width: 720px) { .markets-stats { grid-template-columns: repeat(4, 1fr); } }
+
+.markets-stats__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--line-2, rgba(127, 152, 190, 0.25));
+    border-radius: 14px;
+    background: var(--bg-2, #101A2E);
+}
+
+.markets-stats__item strong {
+    font-size: 1.6rem;
+    line-height: 1.1;
+    color: var(--blue-bright, #4AA3E6);
+}
+
+.markets-stats__item span {
+    font-size: 0.85rem;
+    color: var(--ink-2, rgba(226, 236, 248, 0.72));
+}
+
 /* ---- ülke / kategori kartları ---- */
 .markets-grid {
     display: grid;

@@ -1,17 +1,18 @@
 {
-    "_comment": "Ülke/pazar sayfaları kayıt defteri (§7.11). Locale-bağımsız: ülke adları app/Language/{locale}/Markets.php 'country_{slug}' anahtarlarından gelir. categories: products.json kategori slug'ları (o pazar için öne çıkanlar). Gerçek ihracat sayıları geldiğinde her ülkeye 'delivered' benzeri alanlar eklenebilir; sayfa alan yoksa göstermez (yanlış rakam uydurma yasak).",
+    "_comment": "Ülke/pazar sayfaları kayıt defteri (§7.11). Locale-bağımsız: ülke adları app/Language/{locale}/Markets.php 'country_{slug}' anahtarlarından gelir. categories: products.json kategori slug'ları (o pazar için öne çıkanlar). lat/lon: harita noktası (başkent civarı, dekoratif). Gerçek ihracat sayıları geldiğinde her ülkeye 'delivered' benzeri alanlar eklenebilir; sayfa alan yoksa göstermez (yanlış rakam uydurma yasak).",
     "countries": [
-        { "slug": "germany",      "code": "DE", "region": "europe", "categories": ["curtain", "reefer", "containers", "lowbed"] },
-        { "slug": "france",       "code": "FR", "region": "europe", "categories": ["reefer", "curtain", "tankers", "platform"] },
-        { "slug": "poland",       "code": "PL", "region": "europe", "categories": ["curtain", "reefer", "containers", "dry-cargo"] },
-        { "slug": "romania",      "code": "RO", "region": "europe", "categories": ["tippers", "curtain", "tankers", "trailers"] },
-        { "slug": "bulgaria",     "code": "BG", "region": "europe", "categories": ["tankers", "silos", "tippers", "curtain"] },
-        { "slug": "greece",       "code": "GR", "region": "europe", "categories": ["tankers", "reefer", "platform", "containers"] },
-        { "slug": "russia",       "code": "RU", "region": "cis",    "categories": ["tankers", "silos", "lowbed", "reefer"] },
-        { "slug": "azerbaijan",   "code": "AZ", "region": "cis",    "categories": ["tankers", "silos", "tippers", "lowbed"] },
-        { "slug": "kazakhstan",   "code": "KZ", "region": "cis",    "categories": ["silos", "tankers", "lowbed", "trailers"] },
-        { "slug": "iraq",         "code": "IQ", "region": "mena",   "categories": ["tankers", "tippers", "lowbed", "silos"] },
-        { "slug": "saudi-arabia", "code": "SA", "region": "mena",   "categories": ["tankers", "silos", "lowbed", "platform"] },
-        { "slug": "algeria",      "code": "DZ", "region": "mena",   "categories": ["tippers", "tankers", "silos", "dry-cargo"] }
-    ]
+        { "slug": "germany",      "code": "DE", "region": "europe", "lat": 52.5, "lon": 13.4, "categories": ["curtain", "reefer", "containers", "lowbed"] },
+        { "slug": "france",       "code": "FR", "region": "europe", "lat": 48.9, "lon": 2.4,  "categories": ["reefer", "curtain", "tankers", "platform"] },
+        { "slug": "poland",       "code": "PL", "region": "europe", "lat": 52.2, "lon": 21.0, "categories": ["curtain", "reefer", "containers", "dry-cargo"] },
+        { "slug": "romania",      "code": "RO", "region": "europe", "lat": 44.4, "lon": 26.1, "categories": ["tippers", "curtain", "tankers", "trailers"] },
+        { "slug": "bulgaria",     "code": "BG", "region": "europe", "lat": 42.7, "lon": 23.3, "categories": ["tankers", "silos", "tippers", "curtain"] },
+        { "slug": "greece",       "code": "GR", "region": "europe", "lat": 38.0, "lon": 23.7, "categories": ["tankers", "reefer", "platform", "containers"] },
+        { "slug": "russia",       "code": "RU", "region": "cis",    "lat": 55.8, "lon": 37.6, "categories": ["tankers", "silos", "lowbed", "reefer"] },
+        { "slug": "azerbaijan",   "code": "AZ", "region": "cis",    "lat": 40.4, "lon": 49.9, "categories": ["tankers", "silos", "tippers", "lowbed"] },
+        { "slug": "kazakhstan",   "code": "KZ", "region": "cis",    "lat": 51.2, "lon": 71.4, "categories": ["silos", "tankers", "lowbed", "trailers"] },
+        { "slug": "iraq",         "code": "IQ", "region": "mena",   "lat": 33.3, "lon": 44.4, "categories": ["tankers", "tippers", "lowbed", "silos"] },
+        { "slug": "saudi-arabia", "code": "SA", "region": "mena",   "lat": 24.7, "lon": 46.7, "categories": ["tankers", "silos", "lowbed", "platform"] },
+        { "slug": "algeria",      "code": "DZ", "region": "mena",   "lat": 36.8, "lon": 3.1,  "categories": ["tippers", "tankers", "silos", "dry-cargo"] }
+    ],
+    "hub": { "lat": 37.9, "lon": 32.5 }
 }

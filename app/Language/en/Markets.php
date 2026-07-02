@@ -17,6 +17,12 @@ return [
 
     'card_categories' => '%d featured product groups',
 
+    // Honest counters (§7.12) — values derived from markets.json
+    'stats_countries'  => 'Export markets',
+    'stats_regions'    => 'Regions',
+    'stats_categories' => 'Product groups',
+    'stats_languages'  => 'Site languages',
+
     'detail_meta_title'     => '%s — Export Market',
     'detail_lead'           => 'From Türkiye to the %s market: export-ready trailer manufacturing and delivery to international standards.',
     'section_products'      => 'Featured product groups for %s',

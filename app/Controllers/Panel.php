@@ -21,7 +21,7 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 class Panel extends BaseController
 {
     /** Kill-switch panosunda yönetilen ajanlar. */
-    private const AGENTS = ['rates', 'health', 'faq-candidates', 'digest', 'reminders', 'content-factory'];
+    private const AGENTS = ['rates', 'health', 'faq-candidates', 'digest', 'reminders', 'content-factory', 'analyst', 'domain-watch'];
 
     public function index(): string
     {

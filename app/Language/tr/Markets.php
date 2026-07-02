@@ -17,6 +17,12 @@ return [
 
     'card_categories' => '%d öne çıkan ürün grubu',
 
+    // Dürüst sayaçlar (§7.12) — değerler markets.json'dan türetilir
+    'stats_countries'  => 'İhracat pazarı',
+    'stats_regions'    => 'Bölge',
+    'stats_categories' => 'Ürün grubu',
+    'stats_languages'  => 'Yayın dili',
+
     'detail_meta_title'     => '%s — İhracat Pazarı',
     'detail_lead'           => 'Türkiye\'den %s pazarına: ihracata hazır, uluslararası standartlarda treyler üretimi ve teslimat.',
     'section_products'      => '%s için öne çıkan ürün grupları',

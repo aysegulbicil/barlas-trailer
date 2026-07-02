@@ -17,6 +17,12 @@ return [
 
     'card_categories' => '%d مجموعات منتجات مميزة',
 
+    // عدّادات صادقة (§7.12) — القيم مشتقة من markets.json
+    'stats_countries'  => 'أسواق التصدير',
+    'stats_regions'    => 'مناطق',
+    'stats_categories' => 'مجموعات المنتجات',
+    'stats_languages'  => 'لغات الموقع',
+
     'detail_meta_title'     => '%s — سوق تصدير',
     'detail_lead'           => 'من تركيا إلى سوق %s: تصنيع وتسليم مقطورات جاهزة للتصدير وفق المعايير الدولية.',
     'section_products'      => 'مجموعات المنتجات المميزة لسوق %s',

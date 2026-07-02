@@ -119,9 +119,14 @@ if (! function_exists('locale_native_name')) {
         $names = [
             'tr' => 'Türkçe',
             'en' => 'English',
+            'de' => 'Deutsch',
             'ru' => 'Русский',
             'ar' => 'العربية',
             'fr' => 'Français',
+            'es' => 'Español',
+            'it' => 'Italiano',
+            'nl' => 'Nederlands',
+            'pl' => 'Polski',
         ];
 
         return $names[$locale] ?? strtoupper($locale);
