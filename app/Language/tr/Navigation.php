@@ -19,6 +19,7 @@ return [
     'tools'           => 'Hesaplayıcılar',
     'quiz'            => 'Hangi Treyler?',
     'faq'             => 'SSS',
+    'games'           => 'Oyunlar',
 
     // Accessibility / UI
     'aria_primary'    => 'Ana menü',

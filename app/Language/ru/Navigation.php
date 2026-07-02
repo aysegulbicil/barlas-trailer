@@ -15,6 +15,7 @@ return [
     'tools'           => 'Калькуляторы',
     'quiz'            => 'Какой полуприцеп?',
     'faq'             => 'Вопросы и ответы',
+    'games'           => 'Игры',
 
     // Accessibility / UI
     'aria_primary'    => 'Главное меню',

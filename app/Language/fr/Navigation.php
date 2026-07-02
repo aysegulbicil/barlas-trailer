@@ -15,6 +15,7 @@ return [
     'tools'           => 'Calculateurs',
     'quiz'            => 'Quelle semi-remorque ?',
     'faq'             => 'FAQ',
+    'games'           => 'Jeux',
 
     // Accessibility / UI
     'aria_primary'    => 'Menu principal',

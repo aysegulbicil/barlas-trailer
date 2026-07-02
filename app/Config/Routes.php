@@ -59,6 +59,11 @@ $routes->group('{locale}', static function (RouteCollection $routes): void {
     $routes->get('quiz', 'Tools::quiz', ['as' => 'quiz']);
     $routes->get('faq', 'Faq::index', ['as' => 'faq']);
 
+    // Bekleme Salonu (§8): oyun merkezi + Treyler Tetris + Günün Sorusu.
+    $routes->get('games', 'Games::index', ['as' => 'games']);
+    $routes->get('games/tetris', 'Games::tetris', ['as' => 'games.tetris']);
+    $routes->get('games/daily', 'Games::daily', ['as' => 'games.daily']);
+
     // Şeffaflık sayfaları (KVKK / gizlilik / çerez) — footer yasal barı.
     $routes->get('kvkk', 'Legal::page/kvkk', ['as' => 'legal.kvkk']);
     $routes->get('privacy', 'Legal::page/privacy', ['as' => 'legal.privacy']);

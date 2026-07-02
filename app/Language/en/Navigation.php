@@ -15,6 +15,7 @@ return [
     'tools'           => 'Calculators',
     'quiz'            => 'Which Trailer?',
     'faq'             => 'FAQ',
+    'games'           => 'Games',
 
     // Accessibility / UI
     'aria_primary'    => 'Main menu',
