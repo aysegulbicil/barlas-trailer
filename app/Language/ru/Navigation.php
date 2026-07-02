@@ -12,6 +12,8 @@ return [
 
     'get_quote'       => 'Запросить цену',
     'quick_links'     => 'Быстрые ссылки',
+    'tools'           => 'Калькуляторы',
+    'quiz'            => 'Какой полуприцеп?',
 
     // Accessibility / UI
     'aria_primary'    => 'Главное меню',
@@ -29,6 +31,7 @@ return [
     'view_category'         => 'Смотреть категорию',
     'models_label'          => 'моделей',
     'mega_services_tagline' => 'Профессиональный сервис и ремонт',
+    'all_services'          => 'Все услуги',
     'service_cta_title'     => 'Нужен ремонт?',
     'service_cta_text'      => 'Наша команда экспертов готова помочь и быстро ответит.',
     'service_cta_button'    => 'Оставить заявку',

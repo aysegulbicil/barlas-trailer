@@ -32,6 +32,12 @@ class Blog extends BaseController
     /** Category keys shown in the sidebar (labels come from Blog.cat_*). */
     private const CATEGORIES = ['industry', 'maintenance', 'safety', 'technology'];
 
+    /** Kayıt defterini dış tüketicilere (ör. Sitemap) açar. */
+    public static function registry(): array
+    {
+        return self::POSTS;
+    }
+
     /**
      * Blog list page with optional search (?q=) and category (?category=) filters.
      */

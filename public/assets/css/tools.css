@@ -1,0 +1,325 @@
+/* =====================================================================
+   tools.css — calculators page + "Which trailer?" quiz
+   Uses existing design tokens; logical properties only (RTL-safe);
+   all interactive targets ≥ 48px (design constitution).
+   ===================================================================== */
+
+.tools-section,
+.quiz-section {
+    padding-block: 3rem 4.5rem;
+}
+
+/* ---------- quick nav ---------- */
+.tools-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-block-end: 2rem;
+}
+
+.tools-nav__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0.55rem 1.1rem;
+    border: 1px solid rgba(127, 152, 190, 0.35);
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink-2, inherit);
+    text-decoration: none;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.tools-nav__link:hover,
+.tools-nav__link:focus-visible {
+    border-color: var(--brand, #005baa);
+    color: var(--ink, inherit);
+}
+
+.tools-nav__link--quiz {
+    border-style: dashed;
+}
+
+/* ---------- calculator cards ---------- */
+.tools-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 992px) {
+    .tools-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.tool-card {
+    border: 1px solid rgba(127, 152, 190, 0.25);
+    border-radius: 18px;
+    padding: 1.6rem;
+    background: rgba(127, 152, 190, 0.06);
+    scroll-margin-block-start: 110px; /* sabit header'ın altına kaymasın */
+}
+
+.tool-card__title {
+    margin: 0 0 0.35rem;
+    font-size: 1.35rem;
+}
+
+.tool-card__desc {
+    margin: 0 0 1.2rem;
+    color: var(--ink-2, inherit);
+    font-size: 0.97rem;
+}
+
+.tool-card__form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem 1rem;
+}
+
+.tool-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+}
+
+.tool-field > span {
+    color: var(--ink-2, inherit);
+    font-weight: 600;
+}
+
+.tool-field input[type="number"],
+.tool-field select {
+    min-height: 48px;
+    padding: 0.55rem 0.8rem;
+    border: 1px solid rgba(127, 152, 190, 0.35);
+    border-radius: 10px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+}
+
+.tool-field input:focus-visible,
+.tool-field select:focus-visible {
+    outline: 2px solid var(--brand, #005baa);
+    outline-offset: 1px;
+}
+
+.tool-field input[readonly] {
+    opacity: 0.6;
+}
+
+.tool-field--check {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 48px;
+}
+
+.tool-field--check input {
+    inline-size: 1.35rem;
+    block-size: 1.35rem;
+}
+
+.tool-card__actions {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-block-start: 0.3rem;
+}
+
+.tool-card__actions .btn {
+    min-height: 48px;
+}
+
+/* ---------- results ---------- */
+.tool-card__results {
+    margin-block-start: 1.3rem;
+    border-block-start: 1px solid rgba(127, 152, 190, 0.25);
+    padding-block-start: 1.1rem;
+}
+
+.tool-card__results-title {
+    margin: 0 0 0.7rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-2, inherit);
+}
+
+.tool-results {
+    margin: 0;
+    display: grid;
+    gap: 0.45rem;
+}
+
+.tool-results__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: baseline;
+}
+
+.tool-results__row dt {
+    font-size: 0.92rem;
+    color: var(--ink-2, inherit);
+}
+
+.tool-results__row dd {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.tool-card__status {
+    margin: 0.9rem 0 0;
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    font-size: 0.92rem;
+}
+
+.tool-card__status.is-ok {
+    background: rgba(46, 160, 67, 0.12);
+    border: 1px solid rgba(46, 160, 67, 0.4);
+}
+
+.tool-card__status.is-warn {
+    background: rgba(210, 60, 60, 0.12);
+    border: 1px solid rgba(210, 60, 60, 0.45);
+}
+
+.tool-card__note {
+    margin: 1.1rem 0 0;
+    font-size: 0.83rem;
+    color: var(--ink-2, inherit);
+}
+
+.tools-disclaimer {
+    margin-block-start: 2rem;
+    font-size: 0.85rem;
+    color: var(--ink-2, inherit);
+    text-align: center;
+}
+
+/* ---------- quiz ---------- */
+.quiz {
+    max-inline-size: 720px;
+    margin-inline: auto;
+    border: 1px solid rgba(127, 152, 190, 0.25);
+    border-radius: 18px;
+    padding: 2rem 1.6rem;
+    background: rgba(127, 152, 190, 0.06);
+}
+
+.quiz__progress {
+    margin: 0 0 0.6rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2, inherit);
+}
+
+.quiz__question {
+    margin: 0 0 1.3rem;
+    font-size: 1.45rem;
+}
+
+.quiz__options {
+    display: grid;
+    gap: 0.7rem;
+}
+
+.quiz__option {
+    min-height: 52px;
+    padding: 0.8rem 1.1rem;
+    border: 1px solid rgba(127, 152, 190, 0.35);
+    border-radius: 12px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-weight: 600;
+    text-align: start;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.quiz__option:hover,
+.quiz__option:focus-visible {
+    border-color: var(--brand, #005baa);
+    background: rgba(0, 91, 170, 0.08);
+}
+
+.quiz__result-eyebrow {
+    margin: 0 0 0.3rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2, inherit);
+}
+
+.quiz__result-name {
+    margin: 0 0 0.7rem;
+    font-size: 1.7rem;
+}
+
+.quiz__reason {
+    margin: 0 0 1.3rem;
+    color: var(--ink-2, inherit);
+}
+
+.quiz__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+
+.quiz__actions .btn {
+    min-height: 48px;
+}
+
+.quiz__alt {
+    margin: 1.1rem 0 0;
+    font-size: 0.92rem;
+    color: var(--ink-2, inherit);
+}
+
+.quiz__share {
+    margin-block-start: 1.2rem;
+    min-height: 48px;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: transparent;
+    color: var(--ink-2, inherit);
+    font: inherit;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.quiz__nav {
+    display: flex;
+    gap: 0.7rem;
+    margin-block-start: 1.4rem;
+}
+
+.quiz__nav .btn {
+    min-height: 48px;
+}
+
+.quiz__tools-link {
+    margin-block-start: 1.6rem;
+    text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tools-nav__link,
+    .quiz__option {
+        transition: none;
+    }
+}

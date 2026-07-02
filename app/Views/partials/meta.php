@@ -14,6 +14,8 @@ $metaDesc    = $metaDescription ?? lang('Common.meta_description');
 $metaImage   = $metaImage   ?? base_url('assets/images/og-default.jpg');
 $currentLoc  = current_locale();
 $canonical   = current_url();
+// Open Graph "tr" değil "tr_TR" bölgeli biçimi bekler.
+$ogLocales   = ['tr' => 'tr_TR', 'en' => 'en_US', 'ru' => 'ru_RU', 'ar' => 'ar_AR', 'fr' => 'fr_FR'];
 ?>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,7 +39,11 @@ $canonical   = current_url();
 <meta property="og:description" content="<?= esc($metaDesc, 'attr') ?>">
 <meta property="og:url" content="<?= esc($canonical, 'attr') ?>">
 <meta property="og:image" content="<?= esc($metaImage, 'attr') ?>">
-<meta property="og:locale" content="<?= esc($currentLoc, 'attr') ?>">
+<meta property="og:locale" content="<?= esc($ogLocales[$currentLoc] ?? $currentLoc, 'attr') ?>">
+<?php foreach (supported_locales() as $loc): ?>
+    <?php if ($loc === $currentLoc) { continue; } ?>
+    <meta property="og:locale:alternate" content="<?= esc($ogLocales[$loc] ?? $loc, 'attr') ?>">
+<?php endforeach; ?>
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">

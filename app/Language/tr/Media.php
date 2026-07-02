@@ -31,6 +31,7 @@ return [
     // Fotoğraflar — boş durum
     'photos_empty_title' => 'Fotoğraflar yakında',
     'photos_empty_text'  => 'Bu alana yakında üretim ve tesis fotoğraflarımız eklenecek.',
+    'sample_note'        => 'Örnek görseller — kendi görsellerinizi ekleyene kadar geçici olarak gösterilir.',
 
     // Videolar — boş / yer tutucu
     'videos_empty_title' => 'Videolar yakında',

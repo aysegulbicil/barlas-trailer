@@ -46,6 +46,7 @@ return [
     'err_email'     => 'Veuillez saisir une adresse e-mail valide.',
     'err_message'   => 'Veuillez écrire votre message (au moins 10 caractères).',
     'err_consent'   => 'Le consentement est requis pour continuer.',
+    'err_throttle'  => 'Trop de tentatives. Veuillez réessayer dans une minute.',
     'form_error'    => 'Il manque quelque chose. Veuillez vérifier les champs en surbrillance.',
     'form_success'  => 'Merci ! Votre message nous est bien parvenu.',
     'success_title' => 'Votre message est sur la route',

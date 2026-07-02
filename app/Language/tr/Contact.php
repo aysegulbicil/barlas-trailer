@@ -48,6 +48,7 @@ return [
     'err_email'     => 'Geçerli bir e-posta adresi girin.',
     'err_message'   => 'Lütfen mesajınızı yazın (en az 10 karakter).',
     'err_consent'   => 'Devam etmek için KVKK onayı gerekir.',
+    'err_throttle'  => 'Çok sık denediniz. Lütfen bir dakika sonra tekrar deneyin.',
     'form_error'    => 'Formda eksik var. Lütfen işaretli alanları kontrol edin.',
     'form_success'  => 'Teşekkürler! Mesajınız bize ulaştı.',
     'success_title' => 'Mesajınız yola çıktı',

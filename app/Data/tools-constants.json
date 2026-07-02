@@ -1,0 +1,47 @@
+{
+    "densities": {
+        "wheat": 780,
+        "flour": 550,
+        "cement": 1250,
+        "water": 1000,
+        "diesel": 835,
+        "gasoline": 745,
+        "milk": 1030,
+        "veg_oil": 920,
+        "lpg": 540
+    },
+    "pallets": {
+        "eur": {
+            "length_m": 1.2,
+            "width_m": 0.8
+        },
+        "ind": {
+            "length_m": 1.2,
+            "width_m": 1
+        }
+    },
+    "presets": {
+        "tent": {
+            "inner_length_m": 13.62,
+            "inner_width_m": 2.48
+        },
+        "frigo": {
+            "inner_length_m": 13.3,
+            "inner_width_m": 2.46
+        }
+    },
+    "limits": {
+        "tridem_kg": 24000,
+        "kingpin_kg": 12000,
+        "gvw_artic_5axle_kg": 40000
+    },
+    "defaults": {
+        "consumption_l100": 32,
+        "fuel_price_tl": 50,
+        "toll_tl": 0,
+        "trailer_empty_kg": 6500,
+        "kingpin_to_axle_m": 7.7,
+        "load_center_m": 3.85,
+        "empty_axle_share": 0.5
+    }
+}

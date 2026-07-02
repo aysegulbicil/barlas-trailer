@@ -1,0 +1,193 @@
+{
+    "start": "q1",
+    "nodes": {
+        "q1": {
+            "q": "q1",
+            "options": [
+                {
+                    "o": "q1_liquid",
+                    "next": "q2a"
+                },
+                {
+                    "o": "q1_powder",
+                    "next": "q2b"
+                },
+                {
+                    "o": "q1_pallet",
+                    "next": "q2c"
+                },
+                {
+                    "o": "q1_cold",
+                    "result": {
+                        "cat": "reefer",
+                        "reason": "r_cold"
+                    }
+                },
+                {
+                    "o": "q1_heavy",
+                    "next": "q2d"
+                },
+                {
+                    "o": "q1_mixed",
+                    "next": "q2e"
+                }
+            ]
+        },
+        "q2a": {
+            "q": "q2a",
+            "options": [
+                {
+                    "o": "q2a_fuel",
+                    "result": {
+                        "cat": "tankers",
+                        "reason": "r_tanker_fuel"
+                    }
+                },
+                {
+                    "o": "q2a_food",
+                    "result": {
+                        "cat": "tankers",
+                        "reason": "r_tanker_food"
+                    }
+                },
+                {
+                    "o": "q2a_bitumen",
+                    "result": {
+                        "cat": "tankers",
+                        "reason": "r_tanker_bitumen"
+                    }
+                },
+                {
+                    "o": "q2a_fertilizer",
+                    "result": {
+                        "cat": "silos",
+                        "alt": "tankers",
+                        "reason": "r_silo_fert"
+                    }
+                }
+            ]
+        },
+        "q2b": {
+            "q": "q2b",
+            "options": [
+                {
+                    "o": "q2b_pneumatic",
+                    "result": {
+                        "cat": "silos",
+                        "alt": "tippers",
+                        "reason": "r_silo"
+                    }
+                },
+                {
+                    "o": "q2b_dump",
+                    "result": {
+                        "cat": "tippers",
+                        "alt": "silos",
+                        "reason": "r_tipper"
+                    }
+                },
+                {
+                    "o": "q2b_feed",
+                    "result": {
+                        "cat": "special",
+                        "alt": "silos",
+                        "reason": "r_feed"
+                    }
+                }
+            ]
+        },
+        "q2c": {
+            "q": "q2c",
+            "options": [
+                {
+                    "o": "q2c_curtain",
+                    "result": {
+                        "cat": "curtain",
+                        "alt": "dry-cargo",
+                        "reason": "r_curtain"
+                    }
+                },
+                {
+                    "o": "q2c_box",
+                    "result": {
+                        "cat": "dry-cargo",
+                        "alt": "curtain",
+                        "reason": "r_box"
+                    }
+                },
+                {
+                    "o": "q2c_open",
+                    "result": {
+                        "cat": "platform",
+                        "alt": "dry-cargo",
+                        "reason": "r_platform"
+                    }
+                }
+            ]
+        },
+        "q2d": {
+            "q": "q2d",
+            "options": [
+                {
+                    "o": "q2d_machine",
+                    "result": {
+                        "cat": "lowbed",
+                        "alt": "platform",
+                        "reason": "r_lowbed"
+                    }
+                },
+                {
+                    "o": "q2d_cars",
+                    "result": {
+                        "cat": "special",
+                        "alt": "lowbed",
+                        "reason": "r_cars"
+                    }
+                },
+                {
+                    "o": "q2d_trucks",
+                    "result": {
+                        "cat": "trailers",
+                        "alt": "lowbed",
+                        "reason": "r_trucks"
+                    }
+                }
+            ]
+        },
+        "q2e": {
+            "q": "q2e",
+            "options": [
+                {
+                    "o": "q2e_container",
+                    "result": {
+                        "cat": "containers",
+                        "reason": "r_container"
+                    }
+                },
+                {
+                    "o": "q2e_farm",
+                    "result": {
+                        "cat": "trailers",
+                        "alt": "tippers",
+                        "reason": "r_farm"
+                    }
+                },
+                {
+                    "o": "q2e_general",
+                    "result": {
+                        "cat": "curtain",
+                        "alt": "dry-cargo",
+                        "reason": "r_general"
+                    }
+                },
+                {
+                    "o": "q2e_special",
+                    "result": {
+                        "cat": "special",
+                        "reason": "r_special"
+                    }
+                }
+            ]
+        }
+    }
+}

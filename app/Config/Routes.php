@@ -4,6 +4,10 @@ use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
 
+// {locale} yalnız App::$supportedLocales ile eşleşsin: /de/... gibi
+// tanımsız önekler TR içerik sunmak yerine 404 versin (duplicate content).
+$routes->useSupportedLocalesOnly(true);
+
 /*
  * --------------------------------------------------------------------
  * Locale switch route (no locale prefix)
@@ -23,6 +27,16 @@ $routes->get('/', 'LanguageController::index');
 
 /*
  * --------------------------------------------------------------------
+ * SEO endpoints (no locale prefix)
+ * --------------------------------------------------------------------
+ * robots.txt statik dosya değil: Sitemap satırının ortamın gerçek
+ * adresini (base_url) taşıması için buradan servis edilir.
+ */
+$routes->get('sitemap.xml', 'Sitemap::index', ['as' => 'sitemap']);
+$routes->get('robots.txt', 'Sitemap::robots');
+
+/*
+ * --------------------------------------------------------------------
  * Localized routes
  * --------------------------------------------------------------------
  * Every public page lives under a /{locale} prefix (e.g. /tr, /en/blog).
@@ -39,6 +53,10 @@ $routes->group('{locale}', static function (RouteCollection $routes): void {
     $routes->get('products/(:segment)', 'Products::category/$1', ['as' => 'products.category']);
     $routes->get('products/(:segment)/(:segment)', 'Products::detail/$1/$2', ['as' => 'products.detail']);
     $routes->get('media', 'Media::index', ['as' => 'media']);
+
+    // Trafik motorları: hesaplayıcılar + "Hangi treyler bana uygun?" testi.
+    $routes->get('tools', 'Tools::index', ['as' => 'tools']);
+    $routes->get('quiz', 'Tools::quiz', ['as' => 'quiz']);
 
     // Teklif (Quote) — ürün-bağlamlı teklif akışı.
     //   teklif                          → ürün seçtirme sayfası (genel butonlar)

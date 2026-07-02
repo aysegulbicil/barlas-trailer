@@ -12,6 +12,8 @@ return [
 
     'get_quote'       => 'Demander un devis',
     'quick_links'     => 'Liens rapides',
+    'tools'           => 'Calculateurs',
+    'quiz'            => 'Quelle semi-remorque ?',
 
     // Accessibility / UI
     'aria_primary'    => 'Menu principal',
@@ -29,6 +31,7 @@ return [
     'view_category'         => 'Voir la catégorie',
     'models_label'          => 'modèles',
     'mega_services_tagline' => 'Services d\'entretien et de réparation spécialisés',
+    'all_services'          => 'Tous les services',
     'service_cta_title'     => 'Besoin d\'une réparation ?',
     'service_cta_text'      => 'Notre équipe d\'experts est prête à intervenir rapidement.',
     'service_cta_button'    => 'Demander un service',

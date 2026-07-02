@@ -36,6 +36,12 @@ class Services extends BaseController
         ['slug' => 'suspension-repair',       'key' => 'suspension_repair',       'image' => 'srv-suspension-repair.jpg',       'icon' => 'M4 17c2-3 4 3 6 0s4 3 6 0 4 3 4 0 M4 7h16'],
     ];
 
+    /** Kayıt defterini dış tüketicilere (ör. Sitemap) açar. */
+    public static function registry(): array
+    {
+        return self::SERVICES;
+    }
+
     /**
      * Services list page: hero + a card grid of every service.
      */

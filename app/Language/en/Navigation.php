@@ -12,6 +12,8 @@ return [
 
     'get_quote'       => 'Get a Quote',
     'quick_links'     => 'Quick Links',
+    'tools'           => 'Calculators',
+    'quiz'            => 'Which Trailer?',
 
     // Accessibility / UI
     'aria_primary'    => 'Main menu',

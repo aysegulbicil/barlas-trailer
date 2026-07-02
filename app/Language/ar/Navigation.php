@@ -12,6 +12,8 @@ return [
 
     'get_quote'       => 'اطلب عرض سعر',
     'quick_links'     => 'روابط سريعة',
+    'tools'           => 'الحاسبات',
+    'quiz'            => 'أي مقطورة تناسبني؟',
 
     // Accessibility / UI
     'aria_primary'    => 'القائمة الرئيسية',

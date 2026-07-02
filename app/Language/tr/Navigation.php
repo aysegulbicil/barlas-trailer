@@ -16,6 +16,8 @@ return [
 
     'get_quote'       => 'Teklif Al',
     'quick_links'     => 'Hızlı Erişim',
+    'tools'           => 'Hesaplayıcılar',
+    'quiz'            => 'Hangi Treyler?',
 
     // Accessibility / UI
     'aria_primary'    => 'Ana menü',

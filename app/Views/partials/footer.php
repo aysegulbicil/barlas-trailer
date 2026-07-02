@@ -13,7 +13,7 @@
  * NOTE: $social URLs and the legal-link hrefs (#) are placeholders —
  * replace them with the brand's real profiles / legal pages.
  */
-$footerLinks = ['home', 'products', 'services', 'blog', 'contact'];
+$footerLinks = ['home', 'products', 'services', 'tools', 'quiz', 'blog', 'contact'];
 
 // Social profiles — replace with the brand's real handles.
 $social = [

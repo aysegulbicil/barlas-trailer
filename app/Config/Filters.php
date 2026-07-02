@@ -75,13 +75,15 @@ class Filters extends BaseFilters
     public array $globals = [
         'before' => [
             'language', // Resolves the active locale from the {locale} URI segment
+            // ai/ask muaf: JSON ucu token taşımaz; kendi origin + throttle
+            // + bal kabı katmanıyla korunur (App\Controllers\Ai).
+            'csrf' => ['except' => ['*/ai/ask']],
             // 'honeypot',
-            // 'csrf',
             // 'invalidchars',
         ],
         'after' => [
+            'secureheaders',
             // 'honeypot',
-            // 'secureheaders',
         ],
     ];
 

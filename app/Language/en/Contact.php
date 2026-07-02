@@ -46,6 +46,7 @@ return [
     'err_email'     => 'Please enter a valid email address.',
     'err_message'   => 'Please write your message (at least 10 characters).',
     'err_consent'   => 'Consent is required to continue.',
+    'err_throttle'  => 'Too many attempts. Please try again in a minute.',
     'form_error'    => 'Something’s missing. Please check the highlighted fields.',
     'form_success'  => 'Thank you! Your message has reached us.',
     'success_title' => 'Your message is on the road',

@@ -47,6 +47,18 @@ class Contact extends BaseController
             return $this->respondOk($wantsJson); // sessizce başarılı görün, at
         }
 
+        // Hız sınırı: IP başına 5 gönderim/dk (Ai::ask ile aynı desen).
+        if (service('throttler')->check(md5('contact-' . $this->request->getIPAddress()), 5, MINUTE) === false) {
+            if ($wantsJson) {
+                return $this->response->setStatusCode(429)->setJSON([
+                    'ok'      => false,
+                    'message' => lang('Contact.err_throttle'),
+                ]);
+            }
+
+            return redirect()->back()->withInput()->with('form_error', lang('Contact.err_throttle'));
+        }
+
         $rules = [
             'name'    => 'required|min_length[2]|max_length[120]',
             'email'   => 'required|valid_email|max_length[180]',

@@ -82,6 +82,9 @@ $asset = static function (string $path): string {
     <link rel="stylesheet" href="<?= $asset('assets/css/yeni-footer.css') ?>">
     <link rel="stylesheet" href="<?= $asset('assets/css/yeni-header.css') ?>">
     <link rel="stylesheet" href="<?= $asset('assets/css/theme-light.css') ?>">
+    <?php if (locale_direction($locale) === 'rtl'): ?>
+        <link rel="stylesheet" href="<?= $asset('assets/css/rtl.css') ?>">
+    <?php endif; ?>
 
     <!-- Sayfaya özel stiller (opsiyonel) -->
     <?= $this->renderSection('styles') ?>
