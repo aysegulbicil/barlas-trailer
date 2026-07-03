@@ -66,6 +66,20 @@ Vagrantfile
 php_errors.log
 
 #-------------------------
+# Runtime / Operations Data
+#-------------------------
+# Sunucuda üretilen operasyon verisi (lead-teklif kayıtları, ajan günlükleri,
+# alarmlar, SQLite) versiyonlanmaz: kişisel veri içerir ve her deploy'da
+# çakışma üretir. Uygulama eksik klasörleri kendisi oluşturur (@mkdir recursive);
+# yalnız db/ klasörünün varlığı SQLite için garanti edilir (.gitkeep).
+/writable/db/*
+!/writable/db/.gitkeep
+/writable/leads/
+/writable/quotes/
+/writable/ai-logs/
+/writable/data/
+
+#-------------------------
 # User Guide Temp Files
 #-------------------------
 /user_guide_src/build/*

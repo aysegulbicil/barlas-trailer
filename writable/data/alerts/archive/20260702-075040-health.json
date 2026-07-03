@@ -1,6 +1,0 @@
-{
-    "time": "2026-07-02T07:50:40+00:00",
-    "agent": "health",
-    "type": "health-check",
-    "message": "\/tr → 404 | \/tr\/products → 404 | \/tr\/tools → 404 | \/sitemap.xml → 404 | \/robots.txt → 404"
-}
