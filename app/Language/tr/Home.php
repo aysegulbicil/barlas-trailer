@@ -238,4 +238,14 @@ return [
     'opt_quiz_desc' => 'İki dakikalık test, yükünüze en uygun modeli önersin.',
     'opt_services_title' => 'Servis & Onarım',
     'opt_services_desc' => 'Tanker, silobas, frigo ve şasi onarımında uzman ekip.',
+
+    // ---- Sinematik katman: rakamlar sahnesi ----
+    'numbers_eyebrow'        => 'Rakamlarla Barlas',
+    'numbers_title'          => 'Üretimden dünya yollarına',
+    'numbers_lead'           => 'Türkiye\'deki üretim üssünden onlarca ülkeye: her rakam yolda kanıtlanır.',
+    'numbers_map_aria'       => 'İhracat haritası: üretim üssünden dış pazarlara uzanan ışık hatları',
+    'numbers_hub_label'      => 'Üretim üssü',
+    'numbers_stat_variants'  => 'Araç varyantı',
+    'numbers_odometer_title' => 'Filonun yıllık yol tahmini',
+    'numbers_odometer_note'  => 'Üretilen araç sayısı ve ortalama yıllık rota uzunluğuna dayalı tahmindir.',
 ];

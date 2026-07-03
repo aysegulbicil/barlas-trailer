@@ -238,4 +238,14 @@ return [
     'opt_quiz_desc' => 'Take the two-minute quiz and get the right model for your cargo.',
     'opt_services_title' => 'Service & Repair',
     'opt_services_desc' => 'Expert team for tanker, silo, reefer and chassis repairs.',
+
+    // ---- Sinematik katman: rakamlar sahnesi ----
+    'numbers_eyebrow'        => 'Barlas in Numbers',
+    'numbers_title'          => 'From production to the world’s roads',
+    'numbers_lead'           => 'From our production base in Türkiye to dozens of countries: every number is proven on the road.',
+    'numbers_map_aria'       => 'Export map: lines of light reaching from the production hub to overseas markets',
+    'numbers_hub_label'      => 'Production hub',
+    'numbers_stat_variants'  => 'Vehicle Variants',
+    'numbers_odometer_title' => 'The fleet’s estimated annual mileage',
+    'numbers_odometer_note'  => 'Estimate based on the number of vehicles produced and the average annual route length.',
 ];

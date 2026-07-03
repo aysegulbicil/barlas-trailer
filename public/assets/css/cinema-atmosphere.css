@@ -1,0 +1,225 @@
+/* =============================================================================
+   cinema-atmosphere.css — atmosfer modülü stilleri (v3.0 §4 + §5 + §2 far)
+   =============================================================================
+   Katmanları cinema-atmosphere.js ekler; bu dosya yalnız görünüm.
+
+   Sabit arka plan katmanları .depth-bg kalıbını AYNEN izler:
+     position:fixed; inset:0; z-index:-1; pointer-events:none
+   Aynı z'deki kardeşlerde boyama sırası = DOM sırası (toz kanvası auroranın
+   ÜSTÜNDE — JS sonra ekler).
+
+   z-index haritası:
+     .cine-aurora / .cine-dust  → -1 (içeriğin altı, .depth-bg gibi)
+     .cine-spot                 →  2 (içerik üstü, header z:1000'in çok altı)
+     .cine-headlights           →  2 (hero pin içi: yarılar 1 < far 2 < metin 3)
+
+   Kurallar: yalnız transform/opacity animasyonu; filter:blur ANİMASYONU yok
+   (yumuşaklık gradyanların içine gömülü). Fiziksel değil MANTIKSAL özellikler
+   (RTL: ar + he) — tek istisna .cine-spot: fare koordinatı fizikseldir,
+   RTL aynası bilinçli olarak uygulanmaz.
+
+   Katman kapıları (cinema-core.js): .cine-off altında cinema.css zaten tüm
+   cine-* animasyonlarını söndürür; JS 'off'ta bu katmanları hiç eklemez.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   A) NEFES ALAN AURORA — 3 dev, önceden-bulanık radyal blob (lacivert →
+   turkuaz → menekşe; --cine-glow / --blue ailesiyle uyumlu). 60–90 sn'lik
+   transform sürüklenmesi. Gece (--cine-night → 1) hafifçe belirginleşip
+   menekşeye soğur — saf CSS, JS yok.
+   --------------------------------------------------------------------------- */
+
+.cine-aurora {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    /* Koyu temada belirgin ama ağırbaşlı; gece çöktükçe tavan ~.5. */
+    opacity: calc(0.36 + var(--cine-night, 0) * 0.14);
+}
+
+.cine-aurora__blob {
+    position: absolute;
+    border-radius: 50%;
+    will-change: transform;
+    /* "Önceden bulanık": yumuşaklık gradyan duraklarında — filter YOK. */
+}
+
+.cine-aurora__blob--a {
+    width: 64vw;
+    height: 64vw;
+    inset-block-start: -18vh;
+    inset-inline-start: -16vw;
+    background: radial-gradient(closest-side,
+        rgba(34, 74, 190, 0.34),
+        rgba(34, 74, 190, 0.12) 45%,
+        transparent 72%);
+    animation: cine-aurora-a 78s ease-in-out infinite alternate;
+}
+
+.cine-aurora__blob--b {
+    width: 52vw;
+    height: 52vw;
+    inset-block-start: 34vh;
+    inset-inline-end: -14vw;
+    background: radial-gradient(closest-side,
+        rgba(45, 196, 205, 0.22),
+        rgba(45, 196, 205, 0.08) 45%,
+        transparent 72%);
+    animation: cine-aurora-b 90s ease-in-out infinite alternate;
+    animation-delay: -30s;
+}
+
+.cine-aurora__blob--c {
+    width: 58vw;
+    height: 58vw;
+    inset-block-end: -24vh;
+    inset-inline-start: 22vw;
+    background: radial-gradient(closest-side,
+        rgba(122, 92, 255, 0.24),
+        rgba(122, 92, 255, 0.09) 45%,
+        transparent 72%);
+    animation: cine-aurora-c 66s ease-in-out infinite alternate;
+    animation-delay: -12s;
+    /* Gece iyice çökünce menekşe ton öne çıkar → palet soğur (saf CSS). */
+    opacity: calc(0.7 + var(--cine-night, 0) * 0.3);
+}
+
+@keyframes cine-aurora-a {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(9vw, 7vh, 0) scale(1.12); }
+    100% { transform: translate3d(-5vw, 12vh, 0) scale(0.94); }
+}
+
+@keyframes cine-aurora-b {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(-11vw, -8vh, 0) scale(1.16); }
+    100% { transform: translate3d(4vw, 6vh, 0) scale(0.92); }
+}
+
+@keyframes cine-aurora-c {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(7vw, -10vh, 0) scale(1.10); }
+    100% { transform: translate3d(-8vw, -3vh, 0) scale(1.04); }
+}
+
+/* Açık tema: çok soluk tutulur (bilinçli tercih — beyaz zeminde renk sisi
+   kir gibi durur; ≤ .15 tavanı korunur, gece kayması iptal). */
+[data-theme="light"] .cine-aurora {
+    opacity: 0.12;
+}
+
+/* Hafif profil: iki blob yeter — kompozit yüzeyi küçült. */
+.cine-lite .cine-aurora__blob--c { display: none; }
+
+/* ---------------------------------------------------------------------------
+   B) PARTİKÜL ALANI (yol tozu) + hız çizgileri kanvası — çizim JS'te,
+   yerleşim burada. Aurora ile aynı sabit kalıp; DOM'da SONRA geldiği için
+   üstünde boyanır.
+   --------------------------------------------------------------------------- */
+
+.cine-dust {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Açık temada soluk mavi zerreler beyaz zeminde çamurlanır → iyice kıs. */
+[data-theme="light"] .cine-dust {
+    opacity: 0.35;
+}
+
+/* ---------------------------------------------------------------------------
+   C) İMLEÇ SPOT IŞIĞI — 520 px önceden-bulanık radyal parlama; screen
+   karışımı yalnız IŞIK EKLER, içeriği örtmez. z:2 → içerik üstü, yapışkan
+   header (z:1000) ve çark imlecinin (.cursor) çok altı.
+   İSTİSNA: fare koordinatı fiziksel olduğundan left/top kullanılır —
+   RTL aynası buraya UYGULANMAZ (bilinçli).
+   --------------------------------------------------------------------------- */
+
+.cine-spot {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 520px;
+    height: 520px;
+    z-index: 2;
+    border-radius: 50%;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    background: radial-gradient(closest-side,
+        rgba(79, 141, 255, 0.16),
+        rgba(79, 141, 255, 0.06) 45%,
+        transparent 72%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    will-change: transform, opacity;
+}
+
+.cine-spot.is-on { opacity: 1; }
+
+/* Açık temada screen karışımı beyaz zeminde görünmez/yanlış — tamamen kapat. */
+[data-theme="light"] .cine-spot { display: none; }
+
+/* ---------------------------------------------------------------------------
+   D) HERO FAR SÜPÜRMESİ — .hs__pin içinde mutlak katman. Hero'nun kendi
+   katman düzenine oturur: yarılar(1) < far(2) < metin overlay(3).
+   İki ışık bandı (--cine-ember sıcaklığı → beyaz çekirdek) ~1.4 sn'de BİR KEZ
+   geçer; .is-play tetikler, .is-done katmanı tamamen uyutur.
+   --------------------------------------------------------------------------- */
+
+.cine-headlights {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.cine-headlights.is-done { visibility: hidden; }
+
+.cine-headlights__beam {
+    position: absolute;
+    inset-block-start: -22%;
+    inset-inline-start: 0;
+    width: 16vw;
+    min-width: 140px;
+    height: 144%;
+    opacity: 0;
+    transform: translate3d(-40vw, 0, 0) skewX(-16deg);
+    mix-blend-mode: screen;
+    /* --cine-ember (#ffb454) kenarlar → beyaz çekirdek. */
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 180, 84, 0.10) 30%,
+        rgba(255, 214, 150, 0.32) 46%,
+        rgba(255, 248, 238, 0.65) 50%,
+        rgba(255, 214, 150, 0.32) 54%,
+        rgba(255, 180, 84, 0.10) 70%,
+        transparent);
+    will-change: transform, opacity;
+}
+
+.cine-headlights.is-play .cine-headlights__beam--a {
+    animation: cine-beam 1.1s cubic-bezier(0.3, 0, 0.2, 1) both;
+}
+
+.cine-headlights.is-play .cine-headlights__beam--b {
+    width: 11vw;
+    min-width: 100px;
+    animation: cine-beam 1.15s cubic-bezier(0.3, 0, 0.2, 1) 0.22s both;
+}
+
+@keyframes cine-beam {
+    0%   { transform: translate3d(-40vw, 0, 0) skewX(-16deg); opacity: 0; }
+    12%  { opacity: 0.9; }
+    82%  { opacity: 0.85; }
+    100% { transform: translate3d(140vw, 0, 0) skewX(-16deg); opacity: 0; }
+}
+
+/* RTL (ar/he): süpürme okuma yönünde geçsin — katmanı aynala. */
+[dir="rtl"] .cine-headlights { transform: scaleX(-1); }

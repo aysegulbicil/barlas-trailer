@@ -38,4 +38,7 @@ return [
     'assistant_fab' => 'Assistant',
     'assistant_title' => 'Digital Sales Chief',
     'assistant_close' => 'Close',
+
+    // ---- Sinematik katman: giriş ----
+    'cine_intro_skip' => 'Skip intro',
 ];

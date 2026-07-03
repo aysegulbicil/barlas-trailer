@@ -38,4 +38,7 @@ return [
     'assistant_fab' => 'Assistente',
     'assistant_title' => 'Capo vendite digitale',
     'assistant_close' => 'Chiudi',
+
+    // ---- Sinematik katman: giriş ----
+    'cine_intro_skip' => 'Salta l\'introduzione',
 ];

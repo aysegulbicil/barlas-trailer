@@ -238,4 +238,14 @@ return [
     'opt_quiz_desc' => 'Fai il quiz di due minuti e ottieni il modello giusto per il tuo carico.',
     'opt_services_title' => 'Assistenza e riparazione',
     'opt_services_desc' => 'Team esperto per riparazioni di cisterne, silo, frigo e telai.',
+
+    // ---- Sinematik katman: rakamlar sahnesi ----
+    'numbers_eyebrow'        => 'Barlas in numeri',
+    'numbers_title'          => 'Dalla produzione alle strade del mondo',
+    'numbers_lead'           => 'Dalla base produttiva in Turchia a decine di Paesi: ogni numero si dimostra sulla strada.',
+    'numbers_map_aria'       => 'Mappa delle esportazioni: linee di luce dalla base produttiva verso i mercati esteri',
+    'numbers_hub_label'      => 'Base produttiva',
+    'numbers_stat_variants'  => 'Varianti di veicolo',
+    'numbers_odometer_title' => 'Stima della percorrenza annua della flotta',
+    'numbers_odometer_note'  => 'Stima basata sul numero di veicoli prodotti e sulla lunghezza media dei percorsi annui.',
 ];

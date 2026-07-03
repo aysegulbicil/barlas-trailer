@@ -238,4 +238,14 @@ return [
     'opt_quiz_desc' => 'Faceți testul de două minute și primiți modelul potrivit pentru marfa dumneavoastră.',
     'opt_services_title' => 'Service și reparații',
     'opt_services_desc' => 'Echipă de specialiști pentru reparații de cisterne, silozuri, frigorifice și șasiuri.',
+
+    // ---- Sinematik katman: rakamlar sahnesi ----
+    'numbers_eyebrow'        => 'Barlas în cifre',
+    'numbers_title'          => 'Din producție pe drumurile lumii',
+    'numbers_lead'           => 'De la baza de producție din Turcia către zeci de țări: fiecare cifră se dovedește pe drum.',
+    'numbers_map_aria'       => 'Harta exporturilor: linii de lumină de la baza de producție spre piețele externe',
+    'numbers_hub_label'      => 'Baza de producție',
+    'numbers_stat_variants'  => 'Variante de vehicule',
+    'numbers_odometer_title' => 'Rulajul anual estimat al flotei',
+    'numbers_odometer_note'  => 'Estimare bazată pe numărul de vehicule produse și pe lungimea medie anuală a rutelor.',
 ];

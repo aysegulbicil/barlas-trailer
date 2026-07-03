@@ -189,6 +189,9 @@ $options = [
     </div>
 </section>
 
+<!-- ===================== RAKAMLARLA BARLAS (istatistik + ihracat ışık haritası + odometre) ===================== -->
+<?= $this->include('pages/home/numbers') ?>
+
 <!-- ===================== REFERANSLAR (oto-kayan bant) ===================== -->
 <section class="refs" id="referanslar">
     <div class="shell">

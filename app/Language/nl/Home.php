@@ -238,4 +238,14 @@ return [
     'opt_quiz_desc' => 'Doe de quiz van twee minuten en krijg het juiste model voor uw lading.',
     'opt_services_title' => 'Service & reparatie',
     'opt_services_desc' => 'Deskundig team voor tanker-, silo-, koel- en chassisreparaties.',
+
+    // ---- Sinematik katman: rakamlar sahnesi ----
+    'numbers_eyebrow'        => 'Barlas in cijfers',
+    'numbers_title'          => 'Van productie naar de wegen van de wereld',
+    'numbers_lead'           => 'Vanuit onze productiebasis in Turkije naar tientallen landen: elk cijfer bewijst zich onderweg.',
+    'numbers_map_aria'       => 'Exportkaart: lichtlijnen van de productiebasis naar buitenlandse markten',
+    'numbers_hub_label'      => 'Productiebasis',
+    'numbers_stat_variants'  => 'Voertuigvarianten',
+    'numbers_odometer_title' => 'Geschatte jaarlijkse kilometrage van de vloot',
+    'numbers_odometer_note'  => 'Schatting op basis van het aantal geproduceerde voertuigen en de gemiddelde jaarlijkse routelengte.',
 ];

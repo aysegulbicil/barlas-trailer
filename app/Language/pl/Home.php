@@ -238,4 +238,14 @@ return [
     'opt_quiz_desc' => 'Rozwiąż dwuminutowy quiz i poznaj właściwy model do swojego ładunku.',
     'opt_services_title' => 'Serwis i naprawa',
     'opt_services_desc' => 'Zespół ekspertów od napraw cystern, silosów, chłodni i podwozi.',
+
+    // ---- Sinematik katman: rakamlar sahnesi ----
+    'numbers_eyebrow'        => 'Barlas w liczbach',
+    'numbers_title'          => 'Z produkcji na drogi świata',
+    'numbers_lead'           => 'Z bazy produkcyjnej w Turcji do dziesiątek krajów: każda liczba sprawdza się w drodze.',
+    'numbers_map_aria'       => 'Mapa eksportu: linie światła biegnące z bazy produkcyjnej na rynki zagraniczne',
+    'numbers_hub_label'      => 'Baza produkcyjna',
+    'numbers_stat_variants'  => 'Wariantów pojazdów',
+    'numbers_odometer_title' => 'Szacowany roczny przebieg floty',
+    'numbers_odometer_note'  => 'Szacunek oparty na liczbie wyprodukowanych pojazdów i średniej rocznej długości tras.',
 ];

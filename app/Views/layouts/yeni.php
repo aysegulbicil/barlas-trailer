@@ -84,6 +84,16 @@ $asset = static function (string $path): string {
     <link rel="stylesheet" href="<?= $asset('assets/css/yeni-footer.css') ?>">
     <link rel="stylesheet" href="<?= $asset('assets/css/yeni-header.css') ?>">
     <link rel="stylesheet" href="<?= $asset('assets/css/theme-light.css') ?>">
+    <!-- Sinematik katman (v3.0): çekirdek token'lar + atmosfer/scroll/mikro
+         efekt stilleri. Davranış cinema-*.js'te; reduced-motion'da tamamen
+         statik kalır (html.cine-off). İntro yalnız ana sayfada yüklenir. -->
+    <link rel="stylesheet" href="<?= $asset('assets/css/cinema.css') ?>">
+    <link rel="stylesheet" href="<?= $asset('assets/css/cinema-atmosphere.css') ?>">
+    <link rel="stylesheet" href="<?= $asset('assets/css/cinema-scroll.css') ?>">
+    <link rel="stylesheet" href="<?= $asset('assets/css/cinema-micro.css') ?>">
+    <?php if ($__isHome): ?>
+        <link rel="stylesheet" href="<?= $asset('assets/css/cinema-intro.css') ?>">
+    <?php endif; ?>
     <?php if (locale_direction($locale) === 'rtl'): ?>
         <link rel="stylesheet" href="<?= $asset('assets/css/rtl.css') ?>">
     <?php endif; ?>
@@ -94,6 +104,13 @@ $asset = static function (string $path): string {
 <!-- Ana sayfada header, koyu hero görselinin üzerine saydam biner
      (yeni-header.css §3). Diğer sayfalar sticky header'la kalır. -->
 <body<?= $__isHome ? ' class="has-hero-header"' : '' ?>>
+
+    <?php if ($__isHome): ?>
+        <!-- Sinematik açılış perdesi: HER ZAMAN gizli render edilir (sayfa
+             önbelleği çereze göre çeşitleyemez); gösterme kararı istemcide
+             (cinema-intro.js + cine_intro oturum çerezi). -->
+        <?= $this->include('partials/cinema-intro') ?>
+    <?php endif; ?>
 
     <a class="skip-link" href="#main-content"><?= esc(lang('Navigation.skip_to_content')) ?></a>
 
@@ -111,6 +128,15 @@ $asset = static function (string $path): string {
     <script src="<?= $asset('assets/js/yeni-app.js') ?>" defer></script>
     <script src="<?= $asset('assets/js/theme-toggle.js') ?>" defer></script>
     <script src="<?= $asset('assets/js/voice-mode.js') ?>" defer></script>
+    <!-- Sinematik katman: çekirdek İLK yüklenmeli (defer sırası korunur) —
+         diğer modüller window.BarlasCinema yoksa sessizce hiçbir şey yapmaz. -->
+    <script src="<?= $asset('assets/js/cinema-core.js') ?>" defer></script>
+    <script src="<?= $asset('assets/js/cinema-atmosphere.js') ?>" defer></script>
+    <script src="<?= $asset('assets/js/cinema-scroll.js') ?>" defer></script>
+    <script src="<?= $asset('assets/js/cinema-micro.js') ?>" defer></script>
+    <?php if ($__isHome): ?>
+        <script src="<?= $asset('assets/js/cinema-intro.js') ?>" defer></script>
+    <?php endif; ?>
 
     <!-- 3D: tek bir THREE örneği (ESM) + GLTFLoader. three 0.149 artık global
          "examples/js" sunmuyor; bu yüzden import map ile 'three' eşlenir ve

@@ -238,4 +238,14 @@ return [
     'opt_quiz_desc' => 'Zwei Minuten Quiz — und das richtige Modell für Ihre Ladung.',
     'opt_services_title' => 'Service & Reparatur',
     'opt_services_desc' => 'Expertenteam für Tanker-, Silo-, Kühl- und Chassis-Reparaturen.',
+
+    // ---- Sinematik katman: rakamlar sahnesi ----
+    'numbers_eyebrow'        => 'Barlas in Zahlen',
+    'numbers_title'          => 'Von der Produktion auf die Straßen der Welt',
+    'numbers_lead'           => 'Vom Produktionsstandort in der Türkei in Dutzende Länder: Jede Zahl beweist sich auf der Straße.',
+    'numbers_map_aria'       => 'Exportkarte: Lichtlinien vom Produktionsstandort zu den Auslandsmärkten',
+    'numbers_hub_label'      => 'Produktionsstandort',
+    'numbers_stat_variants'  => 'Fahrzeugvarianten',
+    'numbers_odometer_title' => 'Geschätzte Jahreslaufleistung der Flotte',
+    'numbers_odometer_note'  => 'Schätzung auf Basis der produzierten Fahrzeuge und der durchschnittlichen jährlichen Routenlänge.',
 ];

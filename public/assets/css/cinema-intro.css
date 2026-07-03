@@ -1,0 +1,516 @@
+/* =============================================================================
+   cinema-intro.css — sinematik açılış perdesi (v3.0 §1)
+   =============================================================================
+   Tüm koreografi TEK sınıfla sürülür: kök öğeye .is-playing gelince
+   animation-delay zinciriyle sahne sırayla oynar. JS yalnızca sınıf ekler,
+   süre tutar, sonda söker — kare kare JS animasyonu YOK.
+
+   Zaman çizelgesi (~3.8 sn görsel):
+     Faz 1  0.0–0.9  siyah + yol belirir, uzak farlar büyüyüp parlar (hafif salınım)
+     Faz 2  0.9–1.9  dorse silüeti kameranın önünden süpürülür, far patlaması kareyi yıkar
+     Faz 3  1.9–3.2  şasi konturu kendini çizer, kaynak noktası ray boyunca gezer,
+                     logo parlak bir pop ile tutuşur (+ kıvılcım patlaması)
+     Faz 4  3.2–3.8  perde soluklaşıp hafifçe büyüyerek hero'ya bırakır
+
+   Kurallar: yalnız transform/opacity animasyonu; RTL için düğme yerleşimi
+   mantıksal (inset-inline-end); reduced-motion / cine-off → sert gizle.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   Perde kökü — sayfa önbelleği yüzünden HTML her zaman gelir; [hidden]
+   varsayılandır, açma kararı istemcidedir (cinema-intro.js).
+   --------------------------------------------------------------------------- */
+
+.cine-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    overflow: hidden;
+    background:
+        radial-gradient(120% 90% at 50% 108%, #0a1526 0%, transparent 55%),
+        #03060d;
+    color: var(--ink-1, #e8eefc);
+    font-family: var(--font-display, 'Sora', sans-serif);
+}
+
+.cine-intro[hidden] {
+    display: none !important;
+}
+
+/* Reduced-motion / cine-off: perde hiç var olmamış gibi davranır. */
+@media (prefers-reduced-motion: reduce) {
+    .cine-intro {
+        display: none !important;
+    }
+}
+
+.cine-off .cine-intro {
+    display: none !important;
+}
+
+/* Perde açıkken sayfa kaydırılamaz (JS <html>'e yazar). */
+html.cine-intro-lock {
+    overflow: hidden;
+}
+
+/* ---------------------------------------------------------------------------
+   Sahne iskeleti — başlangıç durumları (hepsi görünmez; .is-playing açar)
+   --------------------------------------------------------------------------- */
+
+.cine-intro__scene {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+}
+
+/* Ufuk ışıması: yolun bittiği çizgide soğuk mavi sızıntı */
+.cine-intro__horizon {
+    position: absolute;
+    inset-inline: 0;
+    top: 34%;
+    height: 18%;
+    background: radial-gradient(60% 100% at 50% 100%,
+        var(--cine-glow-soft, rgba(79, 141, 255, .18)) 0%,
+        transparent 70%);
+    opacity: 0;
+}
+
+/* Zemin düzlemi: rotateX perspektifi kenar çizgilerini ufka doğru daraltır */
+.cine-intro__ground {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 58%;
+    transform: perspective(430px) rotateX(56deg);
+    transform-origin: 50% 0;
+}
+
+/* Asfalt şeridi: kenarlar = yol çizgileri; içi hafif tonlu */
+.cine-intro__asphalt {
+    position: relative;
+    height: 200%;
+    width: 34%;
+    margin-inline: auto;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(16, 26, 46, .0), rgba(16, 26, 46, .55));
+    border-inline: 3px solid rgba(140, 170, 230, .38);
+}
+
+/* Kesik orta şerit: %200 boy, translateY döngüsüyle kameraya doğru akar */
+.cine-intro__dashes {
+    position: absolute;
+    top: -100%;
+    bottom: 0;
+    left: 50%;
+    width: 7px;
+    margin-left: -3.5px;
+    background: repeating-linear-gradient(180deg,
+        rgba(190, 210, 250, .55) 0 46px,
+        transparent 46px 110px);
+}
+
+/* Farlar: ufkun hemen altında iki nokta */
+.cine-intro__headlight {
+    position: absolute;
+    top: 44%;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff 0%, #dce9ff 35%, rgba(120, 165, 255, .55) 62%, transparent 74%);
+    box-shadow:
+        0 0 18px 6px rgba(190, 214, 255, .55),
+        0 0 46px 18px var(--cine-glow-soft, rgba(79, 141, 255, .18));
+    opacity: 0;
+    transform: scale(.2);
+}
+
+.cine-intro__headlight--left  { left: calc(50% - 22px); }
+.cine-intro__headlight--right { left: calc(50% + 8px); }
+
+/* Far patlaması: dorse geçerken tüm kareyi yıkayan flaş */
+.cine-intro__flare {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    background: radial-gradient(75% 60% at 50% 52%,
+        rgba(235, 243, 255, .95) 0%,
+        rgba(140, 178, 255, .45) 45%,
+        transparent 75%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Dorse silüeti — kamera önü süpürme
+   --------------------------------------------------------------------------- */
+
+.cine-intro__truck {
+    position: absolute;
+    z-index: 3;
+    bottom: 3%;
+    left: 0;
+    width: min(112vw, 1380px);
+    opacity: 0;
+    /* Başlangıç: ekranın sol dışında bekler (süpürme soldan sağa) */
+    transform: translate3d(-130vw, 0, 0);
+    will-change: transform;
+}
+
+.cine-intro__truck-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Silüet: zeminden bir tık koyu gövde + soğuk mavi kenar ışığı */
+.cine-intro__truck-body {
+    fill: #050a14;
+    stroke: rgba(112, 152, 235, .5);
+    stroke-width: 2.5;
+}
+
+.cine-intro__truck-glass {
+    fill: rgba(140, 178, 255, .38);
+}
+
+.cine-intro__truck-wheel {
+    fill: #04080f;
+    stroke: rgba(112, 152, 235, .42);
+    stroke-width: 2.5;
+}
+
+/* Hız çizgileri: silüetin arkasında sönük ışık izleri (bulanıklık yanılsaması) */
+.cine-intro__streak {
+    position: absolute;
+    inset-inline-start: -46%;
+    width: 130%;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, transparent, rgba(150, 185, 255, .5), transparent);
+    opacity: .7;
+}
+
+.cine-intro__streak--a { top: 26%; }
+.cine-intro__streak--b { top: 62%; height: 2px; opacity: .45; }
+
+/* ---------------------------------------------------------------------------
+   Final: şasi çizimi + kaynak kıvılcımı + logo
+   --------------------------------------------------------------------------- */
+
+.cine-intro__finale {
+    position: absolute;
+    z-index: 5;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    row-gap: 10px;
+    pointer-events: none;
+}
+
+.cine-intro__logo-wrap {
+    position: relative;
+    width: min(340px, 62vw);
+}
+
+.cine-intro__logo {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    transform: scale(1.14);
+}
+
+/* Tutuşma flaşı: logonun üzerinde bir anlık beyaz pop */
+.cine-intro__logo-flash {
+    position: absolute;
+    inset: -30%;
+    background: radial-gradient(50% 50% at 50% 50%,
+        rgba(255, 245, 224, .9) 0%,
+        rgba(255, 180, 84, .35) 45%,
+        transparent 72%);
+    opacity: 0;
+}
+
+.cine-intro__chassis-wrap {
+    position: relative;
+    width: min(440px, 74vw);
+}
+
+.cine-intro__chassis {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Kontur: pathLength=1 → dasharray 1, dashoffset 1'den 0'a çizilir */
+.cine-intro__chassis-line {
+    stroke: var(--cine-glow, #4f8dff);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    opacity: 0;
+}
+
+/* Kaynak noktası rayı: %100 genişlik → track'in kendi translateX(%96)'sı
+   noktayı şasinin bir ucundan öbürüne taşır (transform-only marquee hilesi) */
+.cine-intro__spark-track {
+    position: absolute;
+    inset-inline: 0;
+    top: 33%;
+    height: 0;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+}
+
+.cine-intro__spark {
+    position: absolute;
+    inset-inline-start: 0;
+    top: -5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff6e6 0%, var(--cine-ember, #ffb454) 55%, transparent 78%);
+    box-shadow:
+        0 0 12px 4px rgba(255, 180, 84, .8),
+        0 0 34px 12px rgba(255, 180, 84, .35);
+    opacity: 0;
+}
+
+/* Kıvılcım patlaması: --bx/--by yönlerine savrulan parçacıklar */
+.cine-intro__burst {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cine-ember, #ffb454);
+    box-shadow: 0 0 10px 3px rgba(255, 180, 84, .7);
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* ---------------------------------------------------------------------------
+   Atla düğmesi — ilk kareden itibaren görünür, sessiz hayalet stil.
+   RTL: inset-inline-end. Dokunma hedefi ≥ 44px.
+   --------------------------------------------------------------------------- */
+
+.cine-intro__skip {
+    position: absolute;
+    z-index: 10;
+    inset-block-end: max(20px, env(safe-area-inset-bottom, 0px));
+    inset-inline-end: max(22px, env(safe-area-inset-right, 0px));
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px 22px;
+    border: 1px solid rgba(200, 216, 250, .32);
+    border-radius: 999px;
+    background: rgba(7, 13, 23, .45);
+    color: rgba(232, 238, 252, .88);
+    font: 600 .8rem/1 var(--font-display, 'Sora', sans-serif);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color .2s ease, color .2s ease;
+}
+
+.cine-intro__skip:hover {
+    border-color: rgba(200, 216, 250, .65);
+    color: #fff;
+}
+
+.cine-intro__skip:focus-visible {
+    outline: 2px solid var(--cine-glow, #4f8dff);
+    outline-offset: 3px;
+}
+
+/* ===========================================================================
+   KOREOGRAFİ — hepsi .is-playing kapısının ardında
+   =========================================================================== */
+
+/* Faz 1: sahne belirir */
+.cine-intro.is-playing .cine-intro__scene {
+    animation: cineSceneIn .4s ease-out forwards;
+}
+
+.cine-intro.is-playing .cine-intro__horizon {
+    animation: cineHorizonIn .8s ease-out .2s forwards;
+}
+
+.cine-intro.is-playing .cine-intro__dashes {
+    animation: cineDashFlow .5s linear infinite;
+}
+
+.cine-intro.is-playing .cine-intro__headlight {
+    animation: cineHeadlights 1.45s cubic-bezier(.5, .1, .6, 1) .1s forwards;
+}
+
+/* Sağ far bir tık geriden gelsin: minicik faz farkı gerçeklik katar */
+.cine-intro.is-playing .cine-intro__headlight--right {
+    animation-delay: .18s;
+}
+
+/* Faz 2: far patlaması + dorse süpürmesi */
+.cine-intro.is-playing .cine-intro__flare {
+    animation: cineFlare .55s ease-out .95s;
+}
+
+.cine-intro.is-playing .cine-intro__truck {
+    animation: cineTruckSweep 1s cubic-bezier(.55, .05, .45, .95) .95s forwards;
+}
+
+/* Yol finalde sönükleşir, dikkat şasiye geçer */
+.cine-intro.is-playing .cine-intro__ground {
+    animation: cineGroundDim .8s ease 1.9s forwards;
+}
+
+/* Faz 3: şasi çizimi + kaynak + logo */
+.cine-intro.is-playing .cine-intro__chassis-line {
+    animation: cineChassisDraw .9s ease-out 1.9s forwards;
+}
+
+.cine-intro.is-playing .cine-intro__chassis-line--late {
+    animation-delay: 2.15s;
+    animation-duration: .7s;
+}
+
+.cine-intro.is-playing .cine-intro__spark-track {
+    animation: cineSparkTravel 1s linear 1.95s forwards;
+}
+
+.cine-intro.is-playing .cine-intro__spark {
+    animation: cineSparkFlicker 1.1s linear 1.95s forwards;
+}
+
+.cine-intro.is-playing .cine-intro__logo {
+    animation: cineLogoIgnite .55s cubic-bezier(.2, .9, .3, 1.15) 2.7s forwards;
+}
+
+.cine-intro.is-playing .cine-intro__logo-flash {
+    animation: cineLogoFlash .5s ease-out 2.78s;
+}
+
+.cine-intro.is-playing .cine-intro__burst {
+    animation: cineBurst .6s ease-out 2.75s forwards;
+}
+
+/* Faz 4: perde bırakır */
+.cine-intro.is-playing {
+    animation: cineIntroOut .55s ease-in 3.25s forwards;
+}
+
+/* Atla / erken bitiş: hızlı 300 ms kapanış. cineIntroOut listede AYNEN
+   kalır (adı korunan animasyon durumunu korur) → hangi anda gelirse gelsin
+   opacity sıçraması olmaz: cineIntroLeave o anki değerden 0'a iner. */
+.cine-intro.cine-intro--leaving {
+    animation:
+        cineIntroOut .55s ease-in 3.25s forwards,
+        cineIntroLeave .3s ease-out forwards;
+    pointer-events: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Keyframe'ler (yalnız transform + opacity)
+   --------------------------------------------------------------------------- */
+
+@keyframes cineSceneIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes cineHorizonIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Şerit tam bir desen periyodu (110px) kayar → dikişsiz döngü */
+@keyframes cineDashFlow {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(0, 110px, 0); }
+}
+
+/* Farlar: küçücük belirir → salınarak büyür/parlar → flaş anında yıkanıp söner */
+@keyframes cineHeadlights {
+    0%   { opacity: 0;   transform: translate3d(0, 0, 0) scale(.2); }
+    18%  { opacity: .55; transform: translate3d(2px, 0, 0) scale(.5); }
+    42%  { opacity: .8;  transform: translate3d(-3px, 1px, 0) scale(1.1); }
+    64%  { opacity: 1;   transform: translate3d(2px, 2px, 0) scale(1.9); }
+    82%  { opacity: 1;   transform: translate3d(-1px, 3px, 0) scale(2.7); }
+    100% { opacity: 0;   transform: translate3d(0, 4px, 0) scale(3.4); }
+}
+
+@keyframes cineFlare {
+    0%   { opacity: 0; }
+    35%  { opacity: .92; }
+    100% { opacity: 0; }
+}
+
+/* Süpürme: sol dışından sağ dışına; ortada hafif skew = hareket bulanıklığı hissi */
+@keyframes cineTruckSweep {
+    0%   { opacity: 0; transform: translate3d(-130vw, 0, 0) skewX(0deg); }
+    12%  { opacity: 1; }
+    45%  { transform: translate3d(-18vw, 0, 0) skewX(-7deg); }
+    88%  { opacity: 1; }
+    100% { opacity: 0; transform: translate3d(120vw, 0, 0) skewX(0deg); }
+}
+
+@keyframes cineGroundDim {
+    to { opacity: .22; }
+}
+
+@keyframes cineChassisDraw {
+    0%   { opacity: 0; stroke-dashoffset: 1; }
+    8%   { opacity: 1; }
+    100% { opacity: 1; stroke-dashoffset: 0; }
+}
+
+/* Track kendi genişliğinin %96'sı kadar kayar → nokta rayı boydan boya gezer */
+@keyframes cineSparkTravel {
+    from { transform: translate3d(1%, 0, 0); }
+    to   { transform: translate3d(96%, 0, 0); }
+}
+
+/* Kaynak titremesi: düzensiz parlama, sonda logo pop'una teslim olup söner */
+@keyframes cineSparkFlicker {
+    0%   { opacity: 0;   transform: scale(.6); }
+    6%   { opacity: 1;   transform: scale(1.15); }
+    14%  { opacity: .55; transform: scale(.85); }
+    24%  { opacity: 1;   transform: scale(1.3); }
+    36%  { opacity: .7;  transform: scale(.9); }
+    48%  { opacity: 1;   transform: scale(1.2); }
+    62%  { opacity: .6;  transform: scale(.8); }
+    74%  { opacity: 1;   transform: scale(1.35); }
+    86%  { opacity: .9;  transform: scale(1.05); }
+    100% { opacity: 0;   transform: scale(.4); }
+}
+
+@keyframes cineLogoIgnite {
+    0%   { opacity: 0; transform: scale(1.14); }
+    55%  { opacity: 1; }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes cineLogoFlash {
+    0%   { opacity: 0; }
+    25%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes cineBurst {
+    0%   { opacity: 0; transform: translate3d(0, 0, 0) scale(1); }
+    18%  { opacity: 1; }
+    100% { opacity: 0; transform: translate3d(var(--bx, 60px), var(--by, -40px), 0) scale(.15); }
+}
+
+/* Faz 4: doğal bitiş — soluklaş + hafif büyüyerek hero'ya bırak */
+@keyframes cineIntroOut {
+    from { opacity: 1; transform: scale(1); }
+    to   { opacity: 0; transform: scale(1.04); }
+}
+
+/* Atla: hızlı sade kapanış */
+@keyframes cineIntroLeave {
+    to { opacity: 0; }
+}

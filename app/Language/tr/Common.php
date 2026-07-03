@@ -41,4 +41,7 @@ return [
     'assistant_fab' => 'Asistan',
     'assistant_title' => 'Dijital Satış Şefi',
     'assistant_close' => 'Kapat',
+
+    // ---- Sinematik katman: giriş ----
+    'cine_intro_skip' => 'Girişi atla',
 ];

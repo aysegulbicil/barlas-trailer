@@ -38,4 +38,7 @@ return [
     'assistant_fab' => 'Βοηθός',
     'assistant_title' => 'Ψηφιακός Διευθυντής Πωλήσεων',
     'assistant_close' => 'Κλείσιμο',
+
+    // ---- Sinematik katman: giriş ----
+    'cine_intro_skip' => 'Παράλειψη εισαγωγής',
 ];

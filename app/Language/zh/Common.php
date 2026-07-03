@@ -38,4 +38,7 @@ return [
     'assistant_fab' => '智能助手',
     'assistant_title' => '数字销售总监',
     'assistant_close' => '关闭',
+
+    // ---- Sinematik katman: giriş ----
+    'cine_intro_skip' => '跳过片头',
 ];

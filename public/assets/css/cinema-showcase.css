@@ -1,0 +1,337 @@
+/* =============================================================================
+   cinema-showcase.css — "Rakamlarla Barlas" veri vitrini (v3.0 addendum)
+   =============================================================================
+   Bölüm: istatistik ızgarası (.glass-panel kartlar) + ihracat ışık haritası
+   (inline SVG) + odometre (yuvarlanan haneler). Ortak cam panel ve token'lar
+   cinema.css'ten gelir (--cine-glow, --cine-ember, .glass-panel).
+
+   Aşamalı varsayılan (pazarlıksız): bu dosyada TÜM öğeler ÇİZİLİ/GÖRÜNÜR
+   doğar. "Çizilmemiş" durum sınıflarını (.map--prep, .odo--reset ...) yalnız
+   cinema-showcase.js animasyondan hemen önce ekler → JS yok / cine-off iken
+   hiçbir içerik gizli kalmaz.
+
+   RTL (ar + he): fiziksel değil MANTIKSAL özellikler; haritanın kendisi
+   coğrafidir (sarmalayıcı dir="ltr"), hane şeridi de dir="ltr".
+   ========================================================================== */
+
+.numbers {
+    position: relative;
+    padding-block: clamp(4rem, 3rem + 4vw, 7rem);
+
+    /* Bölge vurguları — açık tema aşağıda koyulaştırır. */
+    --num-europe: var(--cine-glow, #4f8dff);
+    --num-cis: #8b7bff;
+    --num-mena: var(--cine-ember, #ffb454);
+}
+
+/* ---------------------------------------------------------------------------
+   1) İstatistik ızgarası
+   --------------------------------------------------------------------------- */
+
+.numbers__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: clamp(0.9rem, 0.6rem + 1vw, 1.4rem);
+    margin-block-end: clamp(1.6rem, 1.2rem + 2vw, 2.6rem);
+}
+
+.numbers__stat {
+    padding: clamp(1.3rem, 1rem + 1.2vw, 1.9rem) clamp(1.1rem, 0.9rem + 1vw, 1.6rem);
+}
+
+.numbers__stat-value {
+    display: flex;
+    align-items: baseline;
+    gap: 0.12em;
+    font-family: var(--font-display, inherit);
+    font-weight: 800;
+    font-size: clamp(2rem, 1.5rem + 2.2vw, 3rem);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: var(--ink-1, #eef3ff);
+    font-variant-numeric: tabular-nums;
+}
+
+.numbers__stat-suffix { color: var(--cine-glow, #4f8dff); font-size: 0.72em; font-weight: 700; }
+
+.numbers__stat-label {
+    margin-block-start: 0.55rem;
+    font-size: 0.92rem;
+    color: var(--ink-2, #9fb0d0);
+    line-height: 1.4;
+}
+
+/* ---------------------------------------------------------------------------
+   2) İhracat ışık haritası
+   --------------------------------------------------------------------------- */
+
+.numbers__map {
+    padding: clamp(0.9rem, 0.6rem + 1.6vw, 1.8rem);
+    margin-block-end: clamp(1.6rem, 1.2rem + 2vw, 2.6rem);
+    overflow: hidden; /* nabız halkaları panelden taşmasın */
+}
+
+.numbers-map { display: block; inline-size: 100%; block-size: auto; }
+
+/* Gratikül: koyu temada soluk mavi toz, açıkta koyu nokta (okunurluk). */
+.numbers-map__grid-dot { fill: rgba(148, 178, 255, 0.16); }
+[data-theme="light"] .numbers-map__grid-dot { fill: rgba(30, 60, 140, 0.16); }
+
+/* Bölge vurgusu — düğüm/çip tek değişkenden beslenir. */
+.numbers-map [data-region="europe"] { --node-color: var(--num-europe); }
+.numbers-map [data-region="cis"]    { --node-color: var(--num-cis); }
+.numbers-map [data-region="mena"]   { --node-color: var(--num-mena); }
+
+/* Yaylar — varsayılan: TAM ÇİZİLİ (dashoffset 0). pathLength=1 sayesinde
+   dasharray 1 = tüm yol. Gradyan stroke'u SVG defs'ten gelir. */
+.numbers-map__arc {
+    stroke-width: 1.7;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+}
+
+/* JS animasyondan hemen önce: çizilmemiş duruma çek (geçişsiz)... */
+.map--prep .numbers-map__arc { stroke-dashoffset: 1; transition: none; }
+
+/* ...sonra sıralı çizim: her yay --arc-i × 90ms gecikmeyle ~700ms'de dolar. */
+.map--draw .numbers-map__arc {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.7s cubic-bezier(0.33, 1, 0.42, 1);
+    transition-delay: calc(var(--arc-i, 0) * 90ms);
+}
+
+/* Lite profil: dash oyunu yok — yaylar/düğümler topluca yumuşak belirir. */
+.map--prep-lite .numbers-map__arc,
+.map--prep-lite .numbers-map__node { opacity: 0; transition: none; }
+.map--fade .numbers-map__arc,
+.map--fade .numbers-map__node { opacity: 1; transition: opacity 0.55s ease-out; }
+
+/* Ülke düğümleri — varsayılan görünür; JS "yakma" (.is-lit) sırası verir. */
+.numbers-map__node-dot {
+    fill: var(--node-color, var(--cine-glow, #4f8dff));
+    stroke: rgba(255, 255, 255, 0.55);
+    stroke-width: 0.8;
+}
+
+.numbers-map__node-pulse {
+    fill: none;
+    stroke: var(--node-color, var(--cine-glow, #4f8dff));
+    stroke-width: 1.2;
+    opacity: 0.5;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+/* ISO kod çipi */
+.numbers-map__chip rect {
+    fill: rgba(9, 14, 36, 0.78);
+    stroke: rgba(148, 178, 255, 0.28);
+    stroke-width: 0.8;
+}
+.numbers-map__chip text {
+    fill: #dbe6ff;
+    font-family: var(--font-display, inherit);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+[data-theme="light"] .numbers-map__chip rect { fill: rgba(255, 255, 255, 0.9); stroke: rgba(30, 60, 140, 0.24); }
+[data-theme="light"] .numbers-map__chip text { fill: #1c2c55; }
+
+/* Full profilde çizim aşaması: düğümler sönük doğar, yay ucu varınca yanar.
+   DİKKAT: çip grubunda transform="translate(...)" NİTELİĞİ var; CSS transform
+   onu ezerdi → çip yalnızca opaklıkla belirir, "pop" hissini nokta verir. */
+.map--prep .numbers-map__node { opacity: 0; }
+.map--prep .numbers-map__node .numbers-map__chip { opacity: 0; }
+.map--prep .numbers-map__node .numbers-map__node-dot { transform: scale(0.5); transform-box: fill-box; transform-origin: center; }
+.map--draw .numbers-map__node.is-lit {
+    opacity: 1;
+    transition: opacity 0.45s ease-out;
+}
+.map--draw .numbers-map__node.is-lit .numbers-map__chip {
+    opacity: 1;
+    transition: opacity 0.55s ease-out 0.12s;
+}
+.map--draw .numbers-map__node.is-lit .numbers-map__node-dot {
+    transform: scale(1);
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 0.5s cubic-bezier(0.34, 1.45, 0.64, 1);
+}
+
+/* Nabız — yalnız tam profil + yanmış düğüm (ucuz: transform/opacity). */
+.cine-full .numbers-map__node.is-lit .numbers-map__node-pulse {
+    animation: num-pulse 2.6s ease-out infinite;
+}
+@keyframes num-pulse {
+    0%   { transform: scale(0.45); opacity: 0.65; }
+    70%  { transform: scale(1.5);  opacity: 0; }
+    100% { transform: scale(1.5);  opacity: 0; }
+}
+
+/* Hub (üretim üssü) */
+.numbers-map__hub-dot  { fill: var(--cine-glow, #4f8dff); stroke: rgba(255, 255, 255, 0.75); stroke-width: 1; }
+.numbers-map__hub-ring {
+    fill: none;
+    stroke: var(--cine-glow, #4f8dff);
+    stroke-width: 1.4;
+    opacity: 0.75;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+.numbers-map__hub-halo {
+    fill: var(--cine-glow-soft, rgba(79, 141, 255, 0.18));
+    transform-box: fill-box;
+    transform-origin: center;
+}
+.numbers-map__hub-label {
+    fill: var(--ink-2, #9fb0d0);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+/* Hub nabzı: lite dahil (tek animasyon, çok ucuz); cine-off'ta aşağıda kapanır. */
+.cine-full .numbers-map__hub-ring,
+.cine-lite .numbers-map__hub-ring {
+    animation: num-hub-pulse 3.2s ease-out infinite;
+}
+@keyframes num-hub-pulse {
+    0%   { transform: scale(0.55); opacity: 0.85; }
+    75%  { transform: scale(1.9);  opacity: 0; }
+    100% { transform: scale(1.9);  opacity: 0; }
+}
+
+/* Açık tema: parıltıyı kıs, çizgileri koyulaştır (okunurluk). */
+[data-theme="light"] .numbers { --num-europe: #2f63d2; --num-cis: #6c5ae0; --num-mena: #c9791a; }
+[data-theme="light"] .numbers-map__grad[data-region="europe"] stop { stop-color: #2f63d2; }
+[data-theme="light"] .numbers-map__grad[data-region="cis"]    stop { stop-color: #6c5ae0; }
+[data-theme="light"] .numbers-map__grad[data-region="mena"]   stop { stop-color: #c9791a; }
+[data-theme="light"] .numbers-map__arc { stroke-width: 1.9; }
+[data-theme="light"] .numbers-map__hub-dot { stroke: rgba(255, 255, 255, 0.95); }
+[data-theme="light"] .numbers-map__hub-label { fill: #45507a; }
+
+/* Koyu temada harita paneli hafif içten parlar (statik gölge — animasyonsuz). */
+.numbers__map {
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.06) inset,
+        0 0 90px rgba(79, 141, 255, 0.07) inset,
+        0 18px 44px rgba(3, 6, 20, 0.35);
+}
+[data-theme="light"] .numbers__map {
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.8) inset,
+        0 14px 34px rgba(24, 44, 110, 0.12);
+}
+
+/* ---------------------------------------------------------------------------
+   3) Odometre — yuvarlanan hane kolonları
+   --------------------------------------------------------------------------- */
+
+.numbers__odometer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    padding: clamp(1.2rem, 1rem + 1.2vw, 1.8rem) clamp(1.2rem, 1rem + 1.4vw, 2rem);
+}
+
+.numbers__odometer-head { max-inline-size: 34ch; }
+
+.numbers__odometer-title {
+    font-family: var(--font-display, inherit);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--ink-1, #eef3ff);
+}
+
+.numbers__odometer-note {
+    margin-block-start: 0.35rem;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: var(--ink-2, #9fb0d0);
+}
+
+.numbers__odometer-display {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+}
+
+.odo {
+    --odo-cell: 1.22em;
+    display: inline-flex;
+    align-items: flex-start;
+    font-family: var(--font-display, inherit);
+    font-weight: 800;
+    font-size: clamp(1.5rem, 1.1rem + 2vw, 2.5rem);
+    letter-spacing: 0.01em;
+    color: var(--ink-1, #eef3ff);
+    font-variant-numeric: tabular-nums;
+    line-height: var(--odo-cell);
+}
+
+.odo__sep { block-size: var(--odo-cell); }
+
+/* Kolon: tek hane yüksekliğinde pencere; makara (reel) içinde 0-9 dizili. */
+.odo__col {
+    display: inline-block;
+    block-size: var(--odo-cell);
+    overflow: hidden;
+}
+
+.odo__reel {
+    display: flex;
+    flex-direction: column;
+    /* Varsayılan: GEÇİŞSİZ, PHP'nin verdiği nihai hanede durur (statik doğru değer). */
+    transform: translateY(calc(var(--d, 0) * var(--odo-cell) * -1));
+}
+
+.odo__reel > span {
+    display: block;
+    block-size: var(--odo-cell);
+    text-align: center;
+}
+
+/* JS aşamaları: sıfırla (anlık) → yuvarlan (uzun) → canlı tık (kısa). */
+.odo--reset .odo__reel { transition: none; }
+.odo--roll  .odo__reel { transition: transform 1.6s cubic-bezier(0.19, 1, 0.22, 1); }
+.odo--live  .odo__reel { transition: transform 0.14s linear; }
+
+.odo__unit {
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cine-glow, #4f8dff);
+}
+[data-theme="light"] .odo__unit { color: #2f63d2; }
+
+/* ---------------------------------------------------------------------------
+   cine-off emniyet kilidi: bu bölümün TÜM animasyon/geçişleri kapanır
+   (JS zaten kurmaz; bu satır CSS keyframe'ler için ikinci kilittir).
+   --------------------------------------------------------------------------- */
+
+.cine-off .numbers *,
+.cine-off .numbers-map * {
+    animation: none !important;
+    transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .numbers *, .numbers-map * { animation: none !important; transition: none !important; }
+}
+
+/* ---------------------------------------------------------------------------
+   Dar ekran: tek kolon ızgara + harita tam genişlik, çipler biraz büyür.
+   --------------------------------------------------------------------------- */
+
+@media (max-width: 820px) {
+    .numbers__stats { grid-template-columns: 1fr; }
+    .numbers__map { padding: 0.7rem; margin-inline: calc(-1 * clamp(0rem, 2vw, 0.6rem)); }
+    .numbers__odometer { flex-direction: column; align-items: flex-start; }
+    .numbers-map__chip text { font-size: 12px; }
+    .numbers-map__hub-label { font-size: 13px; }
+}

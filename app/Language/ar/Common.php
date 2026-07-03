@@ -38,4 +38,7 @@ return [
     'assistant_fab' => 'المساعد',
     'assistant_title' => 'رئيس المبيعات الرقمي',
     'assistant_close' => 'إغلاق',
+
+    // ---- Sinematik katman: giriş ----
+    'cine_intro_skip' => 'تخطي المقدمة',
 ];

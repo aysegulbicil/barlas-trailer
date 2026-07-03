@@ -1,0 +1,207 @@
+/* =============================================================================
+   cinema-scroll.css — kaydırma sineması stilleri (v3.0 addendum §2 + §5)
+   =============================================================================
+   cinema-scroll.js'in ürettiği katmanlar:
+     .cine-nightfall / .cine-vignette → içeriğin ÜSTÜNDE sabit gece perdesi
+                                        (z-index:40; header 100 ve imleç 12000
+                                        çok daha yukarıda kalır)
+     .cine-spine                      → ana sayfa yol çizgisi omurgası
+                                        (#main-content içinde absolute, z:1)
+     .cine-world                      → .depth-bg kalıbında sabit arka dünya
+                                        (fixed, inset:0, z-index:-1; DOM sırası
+                                        gereği .depth-bg'nin üstünde boyanır)
+
+   Tüm hareket transform/opacity; --cine-night'ı cinema-scroll.js yazar.
+   Kapılar: cine-off'ta hiçbir katman yok (JS zaten kurmaz; buradakiler
+   ikinci kilittir). Fiziksel değil MANTIKSAL özellikler (RTL: ar + he).
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   A) GECE PERDESİ — derin lacivert çarpma (multiply) tonu. Opaklık tavanı
+   düşük tutuldu ki metin HER gece değerinde okunur kalsın (koyu .32 / açık
+   .22). Saf CSS: JS yalnız --cine-night değişkenini günceller.
+   --------------------------------------------------------------------------- */
+
+.cine-nightfall {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    pointer-events: none;
+    background: rgb(4, 8, 24);
+    mix-blend-mode: multiply;
+    opacity: calc(var(--cine-night, 0) * 0.32);
+}
+
+/* Açık temada daha nazik: gündüz paleti karanlığa boğulmasın. */
+[data-theme="light"] .cine-nightfall {
+    opacity: calc(var(--cine-night, 0) * 0.22);
+}
+
+/* Soğuk vinyet — yalnız yüksek gece değerlerinde kenarlardan sızar.
+   Negatif calc sonucu spec gereği 0'a kırpılır → ~0.55'e kadar görünmez. */
+.cine-vignette {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 58%, rgba(6, 10, 28, 0.55) 100%);
+    opacity: calc((var(--cine-night, 0) - 0.55) * 0.6);
+}
+
+/* Açık temada vinyet gereksiz gölge yapar → kapalı. */
+[data-theme="light"] .cine-vignette { display: none; }
+
+/* ---------------------------------------------------------------------------
+   B) YOL ÇİZGİSİ OMURGASI — ana sayfada içerik boyunca inen kesikli çizgi.
+   JS yalnız cine-full + body.has-hero-header iken kurar; buradaki kapılar
+   ikinci kilittir. Küçük ekranlarda gizli (kenar boşluğu yok denecek kadar).
+   --------------------------------------------------------------------------- */
+
+.cine-spine-host {
+    position: relative; /* omurganın konum bağlamı (#main-content) */
+}
+
+.cine-spine {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: clamp(12px, 3vw, 44px);
+    width: 28px;
+    z-index: 1;
+    opacity: 0.28;
+    pointer-events: none;
+    color: var(--cine-glow);
+}
+
+.cine-spine__svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+html.cine-lite .cine-spine,
+html.cine-off .cine-spine {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .cine-spine { display: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   C) YAŞAYAN ARKA PLAN DÜNYASI — .depth-bg ile aynı istif kalıbı.
+   Yalnız koyu temada görünür (gece dünyası); açık temada tamamen kapalı.
+   Işık yoğunlukları --cine-night ile çarpılır → gündüz görünmez,
+   geceye inildikçe ufuk ve şehir ışıkları belirir.
+   --------------------------------------------------------------------------- */
+
+.cine-world {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+[data-theme="dark"] .cine-world { display: block; }
+html.cine-off .cine-world { display: none; }
+
+/* Ufuk çizgisi: viewport tabanının %16 üstünde ince soğuk parıltı. */
+.cine-world__horizon {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 16%;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(120, 156, 255, 0.28) 18%,
+        rgba(120, 156, 255, 0.36) 50%,
+        rgba(120, 156, 255, 0.28) 82%,
+        transparent);
+    opacity: calc(var(--cine-night, 0) * 0.5);
+}
+
+/* Uzak şehir ışıkları: kap geceyle açılır, noktalar kendi fazında kırpışır.
+   (Kap opaklığı × nokta animasyonu = çarpımsal sonuç; sayaç ucuz.) */
+.cine-world__lights {
+    position: absolute;
+    inset: 0;
+    opacity: calc(var(--cine-night, 0) * 0.9);
+}
+
+.cine-world__dot {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: #cfe0ff;
+    box-shadow: 0 0 6px 1px rgba(130, 165, 255, 0.55);
+    animation: cine-dot-blink 5s ease-in-out infinite;
+    /* süre/gecikme/konum JS'te satır içi rastgele atanır */
+}
+
+.cine-world__dot--ember {
+    background: var(--cine-ember);
+    box-shadow: 0 0 6px 1px rgba(255, 180, 84, 0.5);
+}
+
+@keyframes cine-dot-blink {
+    0%, 100% { opacity: 0.25; }
+    12%      { opacity: 0.9; }
+    46%      { opacity: 0.45; }
+    72%      { opacity: 0.85; }
+}
+
+/* Tır silueti: ufkun üzerinde 26–40 sn'lik tek geçiş; JS sınıf takar/söker.
+   Opaklık tavanı ≤ .22 ve geceyle ölçeklenir. Hareket yönü fizikseldir
+   (ekranı kat eden araç) — RTL kuralı düzen özellikleri içindir, geçiş
+   yönü zaten her seferinde değişir. */
+.cine-world__truck {
+    position: absolute;
+    bottom: 16%;
+    left: 0;
+    width: 90px;
+    opacity: 0;
+    color: #9db7ff;
+    will-change: transform;
+}
+
+.cine-world__truck svg { display: block; width: 100%; height: auto; }
+
+.cine-world__lamp { fill: var(--cine-ember); }
+
+/* Ters yönde giderken burun gidiş yönüne baksın. */
+.cine-world__truck--flip svg { transform: scaleX(-1); }
+
+.cine-world__truck--go {
+    opacity: calc(0.05 + var(--cine-night, 0) * 0.17); /* tavan ≈ .22 */
+}
+
+.cine-world__truck--ltr,
+.cine-world__truck--rtl {
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    /* animation-duration JS'ten satır içi (26–40 sn) */
+}
+
+.cine-world__truck--ltr { animation-name: cine-truck-ltr; }
+.cine-world__truck--rtl { animation-name: cine-truck-rtl; }
+
+@keyframes cine-truck-ltr {
+    from { transform: translate3d(-120px, 0, 0); }
+    to   { transform: translate3d(calc(100vw + 40px), 0, 0); }
+}
+
+@keyframes cine-truck-rtl {
+    from { transform: translate3d(calc(100vw + 40px), 0, 0); }
+    to   { transform: translate3d(-120px, 0, 0); }
+}
+
+/* Hafif profil: şehir ışıkları kalır, tır yok (JS de kurmaz — ikinci kilit). */
+html.cine-lite .cine-world__truck { display: none; }
+
+/* İkinci emniyet: cine-off'ta perde/vinyet de tamamen kapalı. */
+html.cine-off .cine-nightfall,
+html.cine-off .cine-vignette {
+    display: none;
+}
