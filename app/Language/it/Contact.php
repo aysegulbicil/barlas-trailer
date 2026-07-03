@@ -10,7 +10,7 @@ return [
     // ---- Hero ----
     'eyebrow'   => 'Contatti',
     'title'     => 'Noi portiamo il carico — tu fai il primo passo',
-    'lead'      => 'Un preventivo, una richiesta di assistenza o un progetto su misura: compila il modulo e il nostro team ti risponde in giornata. La nostra cisterna è già in viaggio per ritirare il tuo messaggio.',
+    'lead'      => 'Un preventivo, una richiesta di assistenza o un progetto su misura: compila il modulo e il nostro team ti risponde in giornata. I nostri semirimorchi sono già in viaggio per ritirare il tuo messaggio.',
     'delivered' => 'Caricamento del messaggio',
 
     // ---- Modulo ----

@@ -4,25 +4,15 @@
  * Blog card partial
  *
  * Single post card used on the blog list grid and in the "related posts"
- * section. Deliberately minimal: cover image, publication date, title,
- * excerpt and a read-more link — nothing else.
+ * section. Deliberately minimal and text-only (posts have no cover
+ * images): publication date, title, excerpt and a read-more link.
  *
  * Render with view('partials/blog-card', ['post' => $post]) where $post
- * carries: slug, image, title, excerpt, date, dateFormatted.
+ * carries: slug, title, excerpt, date, dateFormatted.
  */
 $detailUrl = locale_url('blog/' . $post['slug']);
 ?>
 <article class="blog-card">
-    <a class="blog-card__media media-frame" href="<?= esc($detailUrl) ?>"
-       data-img="blog/<?= esc($post['image'], 'attr') ?>" tabindex="-1" aria-hidden="true">
-        <span class="media-frame__placeholder" aria-hidden="true">
-            <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 58h52M18 58V34l14-10 14 10v24M50 58V30h12v28"></path>
-                <path d="M25 58v-9h8v9"></path>
-            </svg>
-        </span>
-    </a>
-
     <div class="blog-card__body">
         <time class="blog-card__date" datetime="<?= esc($post['date'], 'attr') ?>">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

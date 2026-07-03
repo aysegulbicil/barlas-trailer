@@ -15,7 +15,6 @@ return [
     'tools'           => 'Calculateurs',
     'quiz'            => 'Quelle semi-remorque ?',
     'wiki'            => 'Encyclopédie',
-    'press'           => 'Espace presse',
     'verify'          => 'Vérification châssis',
     'faq'             => 'FAQ',
     'games'           => 'Jeux',

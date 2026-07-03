@@ -252,82 +252,9 @@
         });
     }
 
-    /* =========================================================================
-       E) SAYFA GEÇİŞ PERDESİ + KAYNAK YÜKLEYİCİ (yalnız full katman)
-       -------------------------------------------------------------------------
-       Site içi tıklamada perde branda gibi çekilir (~380ms), içinde şasi
-       konturu kendini çizer (kaynak kıvılcımı uçlu), sonra gerçek gezinme.
-       bfcache dönüşünde ve 4sn emniyet zamanında perde zorla gizlenir.
-       İşaretleme statiktir (kullanıcı verisi yok) → innerHTML güvenli.
-       ===================================================================== */
-    function initCurtain() {
-        var NAV_DELAY = 400;  // perde geçişi 380ms — payıyla
-        var SAFETY    = 4000; // gezinme takılırsa perdeyi kaldır
-
-        var curtain = document.createElement('div');
-        curtain.className = 'cine-curtain';
-        curtain.setAttribute('aria-hidden', 'true');
-        curtain.innerHTML =
-            '<div class="cine-curtain__stage">' +
-                '<svg class="cine-weld" viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg" fill="none">' +
-                    // Lowboy şasi konturu: sol rampa → boyun → yatak → arka + alt ray + destek ayağı
-                    '<path class="cine-weld__path" pathLength="1" d="M12 74 H64 L80 56 H206 V74 H248 M248 74 V86 H12 V74 M44 86 V102"/>' +
-                    '<circle class="cine-weld__wheel" pathLength="1" cx="188" cy="96" r="10"/>' +
-                    '<circle class="cine-weld__wheel" pathLength="1" cx="216" cy="96" r="10"/>' +
-                    // Kaynak kıvılcımı — çizim ucunu offset-path ile izler
-                    '<g class="cine-weld__spark">' +
-                        '<circle class="cine-weld__halo" r="6"/>' +
-                        '<circle class="cine-weld__core" r="2.6"/>' +
-                    '</g>' +
-                '</svg>' +
-            '</div>';
-        document.body.appendChild(curtain);
-
-        var busy = false;
-        var safetyTimer = 0;
-
-        function hide() {
-            busy = false;
-            if (safetyTimer) { window.clearTimeout(safetyTimer); safetyTimer = 0; }
-            curtain.classList.remove('is-active');
-        }
-
-        /* bfcache: geri tuşuyla dönen kullanıcı asla takılı perde görmesin */
-        window.addEventListener('pageshow', function () { hide(); });
-
-        document.addEventListener('click', function (e) {
-            if (busy || e.defaultPrevented) return;
-            if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
-
-            var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
-            if (!a) return;
-            if (a.closest('[data-no-curtain]')) return;
-
-            var target = a.getAttribute('target');
-            if (target && target !== '_self') return;      // yeni sekme → perde yok
-            if (a.hasAttribute('download')) return;
-
-            var raw = a.getAttribute('href');
-            if (!raw || raw.charAt(0) === '#') return;      // sayfa içi çıpa
-
-            var url;
-            try { url = new URL(raw, window.location.href); } catch (err) { return; }
-
-            // mailto:, tel:, javascript: vb. protokoller + farklı origin elenir
-            if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
-            if (url.origin !== window.location.origin) return;
-
-            // aynı sayfada yalnız hash değişiyorsa (yumuşak kaydırma) karışma
-            if (url.pathname === window.location.pathname &&
-                url.search === window.location.search && url.hash) return;
-
-            e.preventDefault();
-            busy = true;
-            curtain.classList.add('is-active');
-            window.setTimeout(function () { window.location.assign(url.href); }, NAV_DELAY);
-            safetyTimer = window.setTimeout(hide, SAFETY);
-        });
-    }
+    /* (E) Sayfa geçiş perdesi + kaynak yükleyici KALDIRILDI — 2026-07-03
+       kullanıcı isteği: iç bağlantılarda beliren yükleyici istenmiyor;
+       gezinme artık anında ve native. */
 
     /* =========================================================================
        F) FOOTER PASKALYA YUMURTASI — minik çekici footer'a park eder
@@ -394,7 +321,6 @@
 
         if (C.full) {          // yalnız ince işaretçili masaüstü
             initPointerFx(C);  // mıknatıs + tilt + parlama
-            initCurtain();     // sayfa geçiş perdesi
         }
     }
 

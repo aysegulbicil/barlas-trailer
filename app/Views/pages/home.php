@@ -228,9 +228,12 @@ $options = [
                             $logoSlug = pathinfo($logo, PATHINFO_FILENAME);
                             $logoName = preg_replace('/^\d+[-_]/', '', $logoSlug);
                             $logoName = ucwords(str_replace(['-', '_'], ' ', $logoName));
+                            /* Sürüm parametresi: aynı adla üzerine yazılan logo,
+                               1 yıllık tarayıcı görsel önbelleğine takılmasın. */
+                            $logoVer  = @filemtime(FCPATH . 'assets/images/' . $logo) ?: 1;
                             ?>
                             <li class="refs__logo" data-logo="<?= esc($logoSlug, 'attr') ?>">
-                                <img src="<?= base_url('assets/images/' . $logo) ?>" alt="<?= esc($logoName, 'attr') ?>" loading="lazy" decoding="async">
+                                <img src="<?= base_url('assets/images/' . $logo) ?>?v=<?= esc((string) $logoVer, 'attr') ?>" alt="<?= esc($logoName, 'attr') ?>" loading="lazy" decoding="async">
                             </li>
                         <?php endforeach; endif; ?>
                     <?php endfor; ?>

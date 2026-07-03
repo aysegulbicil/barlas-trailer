@@ -54,4 +54,32 @@ Events::on('pre_system', static function (): void {
             });
         }
     }
+
+    /*
+     * --------------------------------------------------------------------
+     * Referans logo klasörü bekçisi (pre_system → sayfa önbelleğinden ÖNCE)
+     * --------------------------------------------------------------------
+     * public/assets/images/refs/ içindeki her değişiklikte (ekle/sil/yeniden
+     * adlandır/üzerine yaz) sayfa önbelleği otomatik temizlenir → logo bandı
+     * elle "cache:clear" gerektirmeden HEP güncel kalır. Maliyet: istek başına
+     * bir scandir + dosya başına bir stat (≈1 ms). İmza damgası cache
+     * klasörünün DIŞINDA tutulur ki clean() onu silmesin.
+     */
+    if (! is_cli()) {
+        $refsDir = FCPATH . 'assets/images/refs';
+        if (is_dir($refsDir)) {
+            $sig = [];
+            foreach (scandir($refsDir) ?: [] as $f) {
+                if ($f === '.' || $f === '..') continue;
+                $sig[] = $f . ':' . (string) @filemtime($refsDir . DIRECTORY_SEPARATOR . $f);
+            }
+            $signature = md5(implode('|', $sig));
+            $stampFile = WRITEPATH . 'data/refs-dir.stamp';
+            $known     = is_file($stampFile) ? (string) file_get_contents($stampFile) : '';
+            if ($signature !== $known) {
+                try { cache()->clean(); } catch (\Throwable $e) { /* önbellek yoksa sorun değil */ }
+                @file_put_contents($stampFile, $signature);
+            }
+        }
+    }
 });

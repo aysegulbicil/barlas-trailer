@@ -1280,7 +1280,7 @@ html.has-anim .why__cards > .is-in {
    Literal renk olduğu için tema ezmelerinden etkilenmez. */
 .refs__belt {
     overflow: hidden;
-    background: #090F1C;
+    background: #fff;
     /* --hairline (açık tema değeri) koyu bantta görünmüyordu — sabit ton */
     border-block: 1px solid rgba(226, 236, 248, 0.07);
     padding-block: 1.6rem;

@@ -17,7 +17,6 @@ return [
     'faq'             => 'FAQ',
     'games'           => 'Spiele',
     'wiki'            => 'Enzyklopädie',
-    'press'           => 'Presseraum',
     'verify'          => 'Fahrgestell-Prüfung',
 
     // Barrierefreiheit / UI

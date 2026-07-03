@@ -104,8 +104,6 @@ $routes->group('{locale}', static function (RouteCollection $routes): void {
     $routes->get('verify', 'Vehicle::verify', ['as' => 'verify']);
     $routes->post('verify', 'Vehicle::check', ['as' => 'verify.check']);
 
-    // Basın Odası (§7.10): public/assets/brand'dan otomatik derlenen arşiv
-    $routes->get('press', 'Press::index', ['as' => 'press']);
     $routes->get('faq', 'Faq::index', ['as' => 'faq']);
 
     // Bekleme Salonu (§8): oyun merkezi + Treyler Tetris + Günün Sorusu.

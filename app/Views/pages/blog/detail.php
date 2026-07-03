@@ -4,8 +4,8 @@
  * Blog detail page
  *
  * Breadcrumb hero with the post title, publication date + category,
- * large cover image, article body and a 3-card "related posts" section.
- * Deliberately minimal: no author, comments, tags or share buttons.
+ * article body and a 3-card "related posts" section. Text-only posts
+ * (no cover images); no author, comments, tags or share buttons.
  */
 $this->extend('layouts/inner');
 ?>
@@ -37,16 +37,6 @@ $this->extend('layouts/inner');
             <a class="blog-article__category" href="<?= esc(locale_url('blog') . '?category=' . $post['category']) ?>">
                 <?= esc($post['categoryLabel']) ?>
             </a>
-        </div>
-
-        <!-- Large cover image (placeholder until the real photo is added) -->
-        <div class="blog-article__cover media-frame media-frame--tall" data-img="blog/<?= esc($post['image'], 'attr') ?>" data-reveal="zoom">
-            <span class="media-frame__placeholder" aria-hidden="true">
-                <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14 58h52M18 58V34l14-10 14 10v24M50 58V30h12v28"></path>
-                    <path d="M25 58v-9h8v9"></path>
-                </svg>
-            </span>
         </div>
 
         <?= view('partials/listen-button', ['target' => '.blog-article__content']) ?>
@@ -95,7 +85,6 @@ $this->extend('layouts/inner');
     "description": <?= json_encode($post['excerpt'], JSON_UNESCAPED_UNICODE) ?>,
     "datePublished": <?= json_encode($post['date']) ?>,
     "inLanguage": <?= json_encode(current_locale()) ?>,
-    "image": <?= json_encode(base_url('assets/images/blog/' . $post['image'])) ?>,
     "mainEntityOfPage": <?= json_encode(locale_url('blog/' . $post['slug'])) ?>,
     "publisher": {
         "@type": "Organization",

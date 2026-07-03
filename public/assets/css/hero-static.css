@@ -33,6 +33,7 @@
     position: absolute;
     inset: 0;
     z-index: 1;
+    pointer-events: none;   /* salt görsel katman — tıklama arkaya geçer */
 }
 
 /* İki yarı da AYNI görseli tam-kutu kaplar (cover) → birleşince kusursuz tam
@@ -69,6 +70,11 @@
     pointer-events: none;
     text-align: center;
 }
+
+/* Kapı açıldı (JS: .hs--open) → arka katmanın CTA'sı gerçek buton olur;
+   görünmezleşen ön overlay tıklamayı çalmasın diye devre dışı kalır. */
+.hs--open .hs__reveal { pointer-events: auto; }
+.hs--open .hs__inner  { pointer-events: none; }
 
 .hs__reveal-inner {
     max-width: 720px;

@@ -1,7 +1,7 @@
 {
-    "_comment": "Rakamlarla Barlas verisi. years/countries/delivered önceki site metninden (stats.php); gerçek değerler netleşince burayı güncellemek yeter. avgKmPerVehicleYear odometre TAHMİNİ için katsayıdır (uzun yol çekici ortalaması); null yapılırsa odometre gizlenir.",
-    "years": 35,
-    "countries": 40,
-    "delivered": 12000,
-    "avgKmPerVehicleYear": 90000
+    "_comment": "Rakamlarla Barlas — YALNIZCA doğrulanmış kurumsal rakamlar buraya yazılır (2026-07-03: kullanıcı 35 yıl / 40 ülke / 12000 araç değerlerinin GERÇEK OLMADIĞINI bildirdi; hepsi null'landı). null alan hiç gösterilmez; odometre delivered+avgKmPerVehicleYear ister. Bölümün gösterdiği canlı rakamlar (kategori/ürün/varyant/pazar) products.json ve markets.json'dan render sırasında sayılır — buraya yazılmaz.",
+    "years": null,
+    "countries": null,
+    "delivered": null,
+    "avgKmPerVehicleYear": null
 }

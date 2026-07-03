@@ -10,7 +10,7 @@ return [
     // ---- Hero ----
     'eyebrow'   => 'Contact',
     'title'     => 'Wij dragen de lading — u zet de eerste stap',
-    'lead'      => 'Een offerte, een serviceverzoek of een maatwerkproject — vul het formulier in en ons team reageert dezelfde dag. Onze tanker is al onderweg om uw bericht op te halen.',
+    'lead'      => 'Een offerte, een serviceverzoek of een maatwerkproject — vul het formulier in en ons team reageert dezelfde dag. Onze opleggers zijn al onderweg om uw bericht op te halen.',
     'delivered' => 'Uw bericht wordt geladen',
 
     // ---- Formulier ----

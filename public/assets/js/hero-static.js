@@ -35,11 +35,13 @@
         var section = document.querySelector('[data-hero-static]');
         if (!section) return;
 
-        var left    = section.querySelector('[data-hs-left]');
-        var right   = section.querySelector('[data-hs-right]');
-        var overlay = section.querySelector('[data-hs-overlay]');
-        var reveal  = section.querySelector('[data-hs-reveal]');
-        var pinEl   = section.querySelector('[data-hs-pin]') || section;
+        var left      = section.querySelector('[data-hs-left]');
+        var right     = section.querySelector('[data-hs-right]');
+        var overlay   = section.querySelector('[data-hs-overlay]');
+        var reveal    = section.querySelector('[data-hs-reveal]');
+        var revealCta = reveal ? reveal.querySelector('a') : null;
+        var pinEl     = section.querySelector('[data-hs-pin]') || section;
+        var isOpen    = false;
 
         var gsap = window.gsap, ST = window.ScrollTrigger;
 
@@ -66,6 +68,21 @@
                 var r = smooth(0.16, 0.64, p);
                 reveal.style.opacity = r.toFixed(3);
                 reveal.style.transform = 'scale(' + lerp(1.06, 1, r).toFixed(4) + ')';
+
+                /* Kapı yeterince açılınca arka katman GERÇEK olur: CTA tıklanır
+                   ve klavye odağı alır (kapalıyken dekoratif/erişilemez kalır —
+                   üstteki görünmez overlay CTA'sının hedefi çalmaması için
+                   pointer-events geçişi CSS'te .hs--open ile yönetilir). */
+                var open = r > 0.5;
+                if (open !== isOpen) {
+                    isOpen = open;
+                    section.classList.toggle('hs--open', open);
+                    reveal.setAttribute('aria-hidden', open ? 'false' : 'true');
+                    if (revealCta) {
+                        if (open) revealCta.removeAttribute('tabindex');
+                        else revealCta.setAttribute('tabindex', '-1');
+                    }
+                }
             }
         }
 

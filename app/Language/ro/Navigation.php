@@ -17,7 +17,6 @@ return [
     'faq'             => 'Întrebări frecvente',
     'games'           => 'Jocuri',
     'wiki'            => 'Enciclopedie',
-    'press'           => 'Sala de presă',
     'verify'          => 'Verificare șasiu',
 
     // Accessibility / UI

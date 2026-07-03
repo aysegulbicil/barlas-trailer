@@ -21,7 +21,6 @@ return [
     'faq'             => 'SSS',
     'games'           => 'Oyunlar',
     'wiki'            => 'Ansiklopedi',
-    'press'           => 'Basın Odası',
     'verify'          => 'Şasi Doğrulama',
 
     // Accessibility / UI

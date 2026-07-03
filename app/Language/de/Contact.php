@@ -10,7 +10,7 @@ return [
     // ---- Hero ----
     'eyebrow'   => 'Kontakt',
     'title'     => 'Wir tragen die Last — Sie machen den ersten Schritt',
-    'lead'      => 'Ein Angebot, eine Serviceanfrage oder ein Sonderprojekt — füllen Sie das Formular aus und unser Team meldet sich noch am selben Tag. Unser Tanker ist bereits unterwegs, um Ihre Nachricht abzuholen.',
+    'lead'      => 'Ein Angebot, eine Serviceanfrage oder ein Sonderprojekt — füllen Sie das Formular aus und unser Team meldet sich noch am selben Tag. Unsere Auflieger sind bereits unterwegs, um Ihre Nachricht abzuholen.',
     'delivered' => 'Ihre Nachricht wird geladen',
 
     // ---- Formular ----

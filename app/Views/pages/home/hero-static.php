@@ -39,8 +39,9 @@ $heroImg  = base_url($heroRel) . '?v=' . (is_file($heroFile) ? (string) filemtim
                 <span class="hs__reveal-eyebrow"><?= esc(lang('Common.site_name')) ?></span>
                 <h2 class="hs__reveal-title"><?= esc(lang('Home.references_title')) ?></h2>
                 <p class="hs__reveal-sub"><?= esc(lang('Home.why_lead')) ?></p>
-                <!-- Dekoratif "kapı arkası" katmanı (aria-hidden). Odak sırasından
-                     çıkar: tabindex=-1 → gizli/erişilemez linke klavyeyle gidilmez. -->
+                <!-- Kapı arkası CTA: kapalıyken erişilemez (aria-hidden + tabindex=-1),
+                     kapı açılınca JS (hero-static.js .hs--open) gerçek butona çevirir:
+                     tabindex kalkar, pointer-events açılır → ürünlere gider. -->
                 <a class="btn btn--primary btn--lg" tabindex="-1" href="<?= esc(locale_url('products')) ?>">
                     <?= esc(lang('Home.hero_cta_primary')) ?>
                 </a>

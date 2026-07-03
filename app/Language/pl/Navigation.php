@@ -17,7 +17,6 @@ return [
     'faq'             => 'FAQ',
     'games'           => 'Gry',
     'wiki'            => 'Encyklopedia',
-    'press'           => 'Biuro prasowe',
     'verify'          => 'Weryfikacja podwozia',
 
     // Dostępność / UI

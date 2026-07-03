@@ -13,7 +13,7 @@
  * NOTE: $social URLs and the legal-link hrefs (#) are placeholders —
  * replace them with the brand's real profiles / legal pages.
  */
-$footerLinks = ['home', 'products', 'services', 'markets', 'tools', 'quiz', 'wiki', 'faq', 'verify', 'games', 'press', 'news', 'blog', 'contact'];
+$footerLinks = ['home', 'products', 'services', 'markets', 'tools', 'quiz', 'wiki', 'faq', 'verify', 'games', 'news', 'blog', 'contact'];
 
 // Social profiles — replace with the brand's real handles.
 $social = [
@@ -55,7 +55,7 @@ $social = [
             </g>
         </svg>
         <span class="site-footer__glow"></span>
-        <span class="site-footer__wordmark"><?= esc(lang('Common.site_name')) ?></span>
+        <!-- Dev wordmark banner'ı kaldırıldı (2026-07-03, kullanıcı isteği) -->
     </div>
 
     <div class="container site-footer__grid">
@@ -114,15 +114,8 @@ $social = [
             </ul>
         </div>
 
-        <div class="site-footer__col">
-            <h3 class="site-footer__title"><?= esc(lang('Common.footer_products_title')) ?></h3>
-            <ul class="site-footer__list">
-                <li><a href="<?= esc(locale_url('products')) ?>"><?= esc(lang('Home.cat_tankers')) ?></a></li>
-                <li><a href="<?= esc(locale_url('products')) ?>"><?= esc(lang('Home.cat_silos')) ?></a></li>
-                <li><a href="<?= esc(locale_url('products')) ?>"><?= esc(lang('Home.cat_tippers')) ?></a></li>
-                <li><a href="<?= esc(locale_url('products')) ?>"><?= esc(lang('Home.cat_lowbed')) ?></a></li>
-            </ul>
-        </div>
+        <!-- "Ürünlerimiz" sütunu kaldırıldı (2026-07-03, kullanıcı isteği) —
+             kategoriler zaten Hızlı Erişim'deki Ürünler bağlantısından ulaşılır. -->
 
         <div class="site-footer__col">
             <h3 class="site-footer__title"><?= esc(lang('Common.footer_contact_title')) ?></h3>

@@ -17,7 +17,6 @@ return [
     'faq'             => '常见问题',
     'games'           => '小游戏',
     'wiki'            => '百科',
-    'press'           => '新闻中心',
     'verify'          => '底盘查验',
 
     // Accessibility / UI

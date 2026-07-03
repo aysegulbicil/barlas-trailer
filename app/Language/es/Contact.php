@@ -10,7 +10,7 @@ return [
     // ---- Hero ----
     'eyebrow'   => 'Contacto',
     'title'     => 'Nosotros llevamos la carga: tú da el primer paso',
-    'lead'      => 'Un presupuesto, una solicitud de servicio o un proyecto a medida: rellena el formulario y nuestro equipo te responde el mismo día. Nuestra cisterna ya va de camino a recoger tu mensaje.',
+    'lead'      => 'Un presupuesto, una solicitud de servicio o un proyecto a medida: rellena el formulario y nuestro equipo te responde el mismo día. Nuestros semirremolques ya van de camino a recoger tu mensaje.',
     'delivered' => 'Cargando tu mensaje',
 
     // ---- Formulario ----

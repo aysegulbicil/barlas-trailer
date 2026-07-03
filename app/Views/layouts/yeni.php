@@ -93,9 +93,6 @@ $asset = static function (string $path): string {
     <link rel="stylesheet" href="<?= $asset('assets/css/cinema-micro.css') ?>">
     <?php if ($__isHome): ?>
         <link rel="stylesheet" href="<?= $asset('assets/css/cinema-intro.css') ?>">
-        <!-- Blueprint montaj katmanı: yol sahnesi üzerinde kendini çizen
-             teknik resim (barlas:road-progress olayını dinler) -->
-        <link rel="stylesheet" href="<?= $asset('assets/css/cinema-blueprint.css') ?>">
     <?php endif; ?>
     <?php if (locale_direction($locale) === 'rtl'): ?>
         <link rel="stylesheet" href="<?= $asset('assets/css/rtl.css') ?>">
@@ -139,7 +136,6 @@ $asset = static function (string $path): string {
     <script src="<?= $asset('assets/js/cinema-micro.js') ?>" defer></script>
     <?php if ($__isHome): ?>
         <script src="<?= $asset('assets/js/cinema-intro.js') ?>" defer></script>
-        <script src="<?= $asset('assets/js/cinema-blueprint.js') ?>" defer></script>
     <?php endif; ?>
 
     <!-- 3D: tek bir THREE örneği (ESM) + GLTFLoader. three 0.149 artık global

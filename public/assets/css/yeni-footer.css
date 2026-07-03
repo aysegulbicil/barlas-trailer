@@ -140,8 +140,9 @@
     .site-footer__grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 992px) {
-    /* Hızlı erişim 2 alt sütun taşıdığından payı genişletildi */
-    .site-footer__grid { grid-template-columns: 1.5fr 1.5fr 0.9fr 1.3fr; gap: var(--space-7); }
+    /* Hızlı erişim 2 alt sütun taşır; "Ürünlerimiz" sütunu kaldırıldığı için
+       3 sütunlu düzen (marka / hızlı erişim / iletişim). */
+    .site-footer__grid { grid-template-columns: 1.5fr 1.6fr 1.3fr; gap: var(--space-7); }
 }
 
 /* ----------------------------- 4) Brand ----------------------------- */

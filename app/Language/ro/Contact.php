@@ -10,7 +10,7 @@ return [
     // ---- Hero ----
     'eyebrow'   => 'Contact',
     'title'     => 'Noi ducem încărcătura — dumneavoastră faceți primul pas',
-    'lead'      => 'O ofertă, o solicitare de service sau un proiect personalizat — completați formularul, iar echipa noastră vă răspunde în aceeași zi. Cisterna noastră este deja pe drum să vă preia mesajul.',
+    'lead'      => 'O ofertă, o solicitare de service sau un proiect personalizat — completați formularul, iar echipa noastră vă răspunde în aceeași zi. Semiremorcile noastre sunt deja pe drum să vă preia mesajul.',
     'delivered' => 'Mesajul dumneavoastră se încarcă',
 
     // ---- Form ----

@@ -17,7 +17,6 @@ return [
     'faq'             => 'שאלות נפוצות',
     'games'           => 'משחקים',
     'wiki'            => 'אנציקלופדיה',
-    'press'           => 'חדר עיתונות',
     'verify'          => 'בדיקת שלדה',
 
     // Accessibility / UI

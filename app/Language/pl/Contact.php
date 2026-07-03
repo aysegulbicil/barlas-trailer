@@ -10,7 +10,7 @@ return [
     // ---- Hero ----
     'eyebrow'   => 'Kontakt',
     'title'     => 'My wieziemy ładunek — Ty zrób pierwszy krok',
-    'lead'      => 'Wycena, zgłoszenie serwisowe czy projekt specjalny — wypełnij formularz, a nasz zespół odpowie tego samego dnia. Nasza cysterna już jedzie po Twoją wiadomość.',
+    'lead'      => 'Wycena, zgłoszenie serwisowe czy projekt specjalny — wypełnij formularz, a nasz zespół odpowie tego samego dnia. Nasze naczepy już jadą po Twoją wiadomość.',
     'delivered' => 'Ładujemy Twoją wiadomość',
 
     // ---- Formularz ----

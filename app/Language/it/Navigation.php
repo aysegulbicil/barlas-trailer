@@ -17,7 +17,6 @@ return [
     'faq'             => 'FAQ',
     'games'           => 'Giochi',
     'wiki'            => 'Enciclopedia',
-    'press'           => 'Sala stampa',
     'verify'          => 'Verifica telaio',
 
     // Accessibilità / UI

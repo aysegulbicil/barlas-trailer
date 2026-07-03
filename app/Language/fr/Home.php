@@ -240,12 +240,13 @@ return [
     'opt_services_desc' => 'Équipe experte en réparation de citernes, silos, frigos et châssis.',
 
     // ---- Sinematik katman: rakamlar sahnesi ----
-    'numbers_eyebrow'        => 'Barlas en chiffres',
-    'numbers_title'          => 'De la production aux routes du monde',
-    'numbers_lead'           => 'De notre base de production en Turquie vers des dizaines de pays : chaque chiffre fait ses preuves sur la route.',
-    'numbers_map_aria'       => 'Carte des exportations : lignes lumineuses reliant la base de production aux marchés étrangers',
-    'numbers_hub_label'      => 'Base de production',
-    'numbers_stat_variants'  => 'Variantes de véhicules',
-    'numbers_odometer_title' => 'Estimation du kilométrage annuel de la flotte',
-    'numbers_odometer_note'  => 'Estimation fondée sur le nombre de véhicules produits et la longueur moyenne des itinéraires annuels.',
+    'numbers_eyebrow'         => 'Barlas en chiffres',
+    'numbers_title'           => 'De la production aux routes du monde',
+    'numbers_lead'            => 'De notre base de production en Turquie aux routes du monde — chaque chiffre affiché ici est calculé en direct à partir du catalogue et des registres de marchés.',
+    'numbers_map_aria'        => 'Carte des exportations : lignes lumineuses reliant la base de production aux marchés étrangers',
+    'numbers_hub_label'       => 'Base de production',
+    'numbers_stat_variants'   => 'Variantes de véhicules',
+    'numbers_stat_categories' => 'Catégories de produits',
+    'numbers_odometer_title'  => 'Estimation du kilométrage annuel de la flotte',
+    'numbers_odometer_note'   => 'Estimation fondée sur le nombre de véhicules produits et la longueur moyenne des itinéraires annuels.',
 ];

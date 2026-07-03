@@ -12,7 +12,7 @@ return [
     // ---- Hero ----
     'eyebrow'   => 'İletişim',
     'title'     => 'Yükü biz taşırız, ilk adımı siz atın',
-    'lead'      => 'Teklif, servis veya özel proje — formu doldurun, ekibimiz aynı gün dönüş yapsın. Tankerimiz mesajınızı almak için yola çıktı bile.',
+    'lead'      => 'Teklif, servis veya özel proje — formu doldurun, ekibimiz aynı gün dönüş yapsın. Dorselerimiz mesajınızı almak için yola çıktı bile.',
     'delivered' => 'Mesajınız yükleniyor',
 
     // ---- Form ----

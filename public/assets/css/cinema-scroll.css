@@ -32,10 +32,10 @@
     opacity: calc(var(--cine-night, 0) * 0.32);
 }
 
-/* Açık temada daha nazik: gündüz paleti karanlığa boğulmasın. */
-[data-theme="light"] .cine-nightfall {
-    opacity: calc(var(--cine-night, 0) * 0.22);
-}
+/* Açık temada TAMAMEN kapalı: multiply perdesi beyazları kirletip tüm
+   sayfayı soluk gösteriyordu (kullanıcı geri bildirimi). Gündüz→gece
+   karartması yalnızca koyu temanın hikâyesidir. */
+[data-theme="light"] .cine-nightfall { display: none; }
 
 /* Soğuk vinyet — yalnız yüksek gece değerlerinde kenarlardan sızar.
    Negatif calc sonucu spec gereği 0'a kırpılır → ~0.55'e kadar görünmez. */

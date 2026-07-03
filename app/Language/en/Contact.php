@@ -10,7 +10,7 @@ return [
     // ---- Hero ----
     'eyebrow'   => 'Contact',
     'title'     => 'We haul the load — you take the first step',
-    'lead'      => 'A quote, a service request or a custom project — fill in the form and our team gets back to you the same day. Our tanker is already on its way to pick up your message.',
+    'lead'      => 'A quote, a service request or a custom project — fill in the form and our team gets back to you the same day. Our trailers are already on their way to pick up your message.',
     'delivered' => 'Loading your message',
 
     // ---- Form ----

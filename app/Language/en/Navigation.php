@@ -17,7 +17,6 @@ return [
     'faq'             => 'FAQ',
     'games'           => 'Games',
     'wiki'            => 'Encyclopedia',
-    'press'           => 'Press Room',
     'verify'          => 'Chassis Check',
 
     // Accessibility / UI

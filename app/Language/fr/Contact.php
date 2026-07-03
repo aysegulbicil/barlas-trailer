@@ -10,7 +10,7 @@ return [
     // ---- Hero ----
     'eyebrow'   => 'Contact',
     'title'     => 'Nous transportons la charge — faites le premier pas',
-    'lead'      => 'Un devis, une demande d’entretien ou un projet sur mesure — remplissez le formulaire et notre équipe vous répond le jour même. Notre citerne est déjà en route pour récupérer votre message.',
+    'lead'      => 'Un devis, une demande d’entretien ou un projet sur mesure — remplissez le formulaire et notre équipe vous répond le jour même. Nos semi-remorques sont déjà en route pour récupérer votre message.',
     'delivered' => 'Chargement de votre message',
 
     // ---- Form ----

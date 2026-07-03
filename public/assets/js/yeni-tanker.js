@@ -358,20 +358,6 @@
 
     /* ------------------- GLB normalize + konvoy yükleyici ------------- */
 
-    /* Küçük radyal parıltı dokusu — gece far/stop lambası sprite'ları için. */
-    function makeGlowTexture(THREE, inner, outer) {
-        var c = document.createElement('canvas');
-        c.width = c.height = 64;
-        var ctx = c.getContext('2d');
-        var g = ctx.createRadialGradient(32, 32, 2, 32, 32, 30);
-        g.addColorStop(0, inner);
-        g.addColorStop(0.35, inner);
-        g.addColorStop(1, outer);
-        ctx.fillStyle = g;
-        ctx.fillRect(0, 0, 64, 64);
-        return new THREE.CanvasTexture(c);
-    }
-
     /**
      * GLB sahnesini standartlaştır: XZ'de ortala, tabanı y=0'a indir,
      * uzunluğu (X) hedef birime ölçekle, gerekirse Y ekseninde döndür.
@@ -507,7 +493,6 @@
         if (THREE.sRGBEncoding !== undefined) renderer.outputEncoding = THREE.sRGBEncoding;
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.05;
-        renderer.localClippingEnabled = true;      /* maddeleşme süpürmesi (aşağıda) */
         stage.appendChild(renderer.domElement);
         renderer.domElement.style.opacity = '0';   /* araç hazır olunca yumuşakça açılır */
 
@@ -520,10 +505,7 @@
         scene.environment = pmrem.fromEquirectangular(makeStudioEnv(THREE)).texture;
         pmrem.dispose();
 
-        /* Işıklar gündüz/gece geçişinde döngüden sürülür (aşağıda) —
-           bu yüzden hemisfer dahil hepsi referansta tutulur. */
-        var hemi = new THREE.HemisphereLight(0xbfd6ee, 0x0b1220, 0.5);
-        scene.add(hemi);
+        scene.add(new THREE.HemisphereLight(0xbfd6ee, 0x0b1220, 0.5));
         var key = new THREE.DirectionalLight(0xffffff, 1.0);
         key.position.set(5, 8, 6);
         scene.add(key);
@@ -541,53 +523,6 @@
         var vehicleBaseY = -1.0;      /* asfalt ~ y=-1.02; kamyon tabanı oturur */
         var vehicleReady = false;
         var canvasFade = 0;
-
-        /* ---- Gece farları (sinematik katman §2: sayfa dibinde farlar yanar) ----
-           GLB'ler tek mesh olduğundan gerçek lamba yok; konvoy yuvalarının ön/arka
-           uçlarına additive parıltı sprite'ları konur. Opaklıkları döngüde global
-           gündüz/gece değeriyle (BarlasCinema.getNight) sürülür — 0'ken görünmez,
-           sinematik katman yüklü değilse hiç yanmaz (zararsız). */
-        var headMat = new THREE.SpriteMaterial({
-            map: makeGlowTexture(THREE, '#fff6d8', 'rgba(255,214,120,0)'),
-            blending: THREE.AdditiveBlending, transparent: true, opacity: 0, depthWrite: false
-        });
-        var tailMat = new THREE.SpriteMaterial({
-            map: makeGlowTexture(THREE, '#ff5a3c', 'rgba(255,60,40,0)'),
-            blending: THREE.AdditiveBlending, transparent: true, opacity: 0, depthWrite: false
-        });
-        var nightCur = 0;
-        function addLamp(mat, x, y, z, s) {
-            var sp = new THREE.Sprite(mat);
-            sp.position.set(x, y, z);
-            sp.scale.setScalar(s);
-            vehicle.add(sp);
-        }
-
-        /* ---- Maddeleşme: "çizimden gerçeğe" (sinematik katman §2 montaj anlatısı) ----
-           Blueprint katmanı teknik resmi bitirirken (p≈0.45) gerçek gövde önden
-           arkaya doğru klip düzlemiyle "dolar"; öncesinde konvoy yalnız tel kafes
-           hayalet olarak görünür. Tüm durum p'nin saf fonksiyonu (geri sarma doğru).
-           BarlasCinema yüklü değilse süpürme daima tamam (k=1) — davranış eskisi gibi. */
-        var matzPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 1e6);
-        var ghostMat = new THREE.MeshBasicMaterial({
-            color: 0x4f8dff, wireframe: true, transparent: true,
-            opacity: 0, depthWrite: false
-        });
-        var ghosts = [];
-        var matzSpan = { min: -8, max: 8 };
-        function riggMaterialize(holder) {
-            var meshes = [];
-            holder.traverse(function (o) { if (o.isMesh && o.material) meshes.push(o); });
-            meshes.forEach(function (m) {
-                m.material.clippingPlanes = [matzPlane];
-                var gm = new THREE.Mesh(m.geometry, ghostMat);
-                gm.position.copy(m.position);
-                gm.rotation.copy(m.rotation);
-                gm.scale.copy(m.scale);
-                m.parent.add(gm);
-                ghosts.push(gm);
-            });
-        }
 
         var CONVOY = {
             targetLen: 3.6,           /* her aracın dünya-birimi uzunluğu (eşit boy) */
@@ -619,23 +554,7 @@
                 h.position.x = s.fx * CONVOY.gap / 2;   /* ön: - / arka: + (gidiş -X) */
                 h.position.z = s.ln * CONVOY.lane;       /* şerit (orta çizgi dışı) */
                 vehicle.add(h);
-
-                /* Gece lambaları: ön uca çift far, arka uca çift stop parıltısı */
-                var cx = s.fx * CONVOY.gap / 2, cz = s.ln * CONVOY.lane;
-                var half = CONVOY.targetLen / 2;
-                addLamp(headMat, cx - half - 0.06, 0.52, cz - 0.42, 0.55);
-                addLamp(headMat, cx - half - 0.06, 0.52, cz + 0.42, 0.55);
-                addLamp(tailMat, cx + half + 0.04, 0.58, cz - 0.40, 0.42);
-                addLamp(tailMat, cx + half + 0.04, 0.58, cz + 0.40, 0.42);
-
-                /* Maddeleşme donanımı: klip düzlemi + tel kafes hayalet */
-                riggMaterialize(h);
             });
-            var bb = new THREE.Box3().setFromObject(vehicle);
-            if (isFinite(bb.min.x) && isFinite(bb.max.x)) {
-                matzSpan.min = bb.min.x - 0.4;
-                matzSpan.max = bb.max.x + 0.4;
-            }
             vehicleBaseY = CONVOY.baseY;
             vehicleReady = true;
         }
@@ -748,7 +667,7 @@
             onUpdate: function (self) {
                 progress = self.progress;
                 /* Sinematik katman sözleşmesi: bölüm ilerlemesini dışarı yayınla
-                   (blueprint montaj katmanı vb. dinler). Gereksiz olay üretme. */
+                   (arka plandaki kontur yazı katmanı dinler). */
                 if (Math.abs(progress - lastEmit) > 0.002) {
                     lastEmit = progress;
                     section.style.setProperty('--road-p', progress.toFixed(4));
@@ -844,36 +763,6 @@
             /* Süspansiyon esnemesi + hafif yalpa (yaşam belirtisi) */
             vehicle.position.y = vehicleBaseY + Math.sin(t * 9) * 0.012;
             vehicle.rotation.z = Math.sin(t * 6.3) * 0.0035;
-
-            /* Gündüz→gece ruh hali (sinematik katman): --cine-night yükselirken
-               ana ışıklar kısılır, refüj kapakları parlar, farlar/stoplar yanar.
-               BarlasCinema yoksa night=0 kalır ve bu blok hiç iş yapmaz. */
-            var night = window.BarlasCinema ? window.BarlasCinema.getNight() : 0;
-            if (Math.abs(night - nightCur) > 0.002) {
-                nightCur += (night - nightCur) * 0.08;
-                key.intensity  = 1.0 - nightCur * 0.45;
-                hemi.intensity = 0.5 - nightCur * 0.22;
-                rimL.intensity = 0.5 + nightCur * 0.25;
-                capMat.emissiveIntensity = 0.6 + nightCur * 0.9;
-                var lampOn = nightCur < 0.45 ? 0 : Math.min(1, (nightCur - 0.45) / 0.3);
-                headMat.opacity = lampOn * 0.95;
-                tailMat.opacity = lampOn * 0.85;
-            }
-
-            /* Maddeleşme süpürmesi: blueprint bitişiyle senkron (p 0.45→0.68).
-               k=0 → gövde tümüyle klipli, yalnız tel kafes; k=1 → tam gövde. */
-            var k = 1;
-            if (window.BarlasCinema && ghosts.length) {
-                k = progress <= 0.45 ? 0 : (progress >= 0.68 ? 1 : (progress - 0.45) / 0.23);
-                k = k * k * (3 - 2 * k);
-            }
-            matzPlane.constant = matzSpan.min + (matzSpan.max - matzSpan.min) * k;
-            if (ghosts.length) {
-                /* Hayalet: yaklaşırken belirir, gövde doldukça söner */
-                ghostMat.opacity = (1 - k) * 0.32;
-                var gv = ghostMat.opacity > 0.01;
-                for (var gi = 0; gi < ghosts.length; gi++) ghosts[gi].visible = gv;
-            }
 
             /* Araç yüklenince canvas'ı yumuşakça aç (altta statik görsel bekler) */
             if (vehicleReady && canvasFade < 1) {

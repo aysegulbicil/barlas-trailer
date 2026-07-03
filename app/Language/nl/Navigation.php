@@ -17,7 +17,6 @@ return [
     'faq'             => 'FAQ',
     'games'           => 'Spellen',
     'wiki'            => 'Encyclopedie',
-    'press'           => 'Perskamer',
     'verify'          => 'Chassischeck',
 
     // Toegankelijkheid / UI

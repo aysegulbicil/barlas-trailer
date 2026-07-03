@@ -17,7 +17,6 @@ return [
     'faq'             => 'FAQ',
     'games'           => 'Juegos',
     'wiki'            => 'Enciclopedia',
-    'press'           => 'Sala de prensa',
     'verify'          => 'Verificación de chasis',
 
     // Accesibilidad / UI

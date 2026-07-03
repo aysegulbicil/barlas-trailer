@@ -240,12 +240,13 @@ return [
     'opt_services_desc' => '罐车、粉罐车、冷藏车和底盘维修的专业团队。',
 
     // ---- Sinematik katman: rakamlar sahnesi ----
-    'numbers_eyebrow'        => '数说 Barlas',
-    'numbers_title'          => '从生产基地到世界公路',
-    'numbers_lead'           => '从土耳其的生产基地通往数十个国家：每一个数字都在路上得到验证。',
-    'numbers_map_aria'       => '出口地图：从生产基地延伸至海外市场的光线',
-    'numbers_hub_label'      => '生产基地',
-    'numbers_stat_variants'  => '种车型变体',
-    'numbers_odometer_title' => '车队年行驶里程估算',
-    'numbers_odometer_note'  => '基于已生产车辆数量和平均年路线长度的估算。',
+    'numbers_eyebrow'         => '数说 Barlas',
+    'numbers_title'           => '从生产基地到世界公路',
+    'numbers_lead'            => '从土耳其的生产基地驶向世界的道路——这里的每一个数字都依据产品目录和市场记录实时统计。',
+    'numbers_map_aria'        => '出口地图：从生产基地延伸至海外市场的光线',
+    'numbers_hub_label'       => '生产基地',
+    'numbers_stat_variants'   => '种车型变体',
+    'numbers_stat_categories' => '个产品类别',
+    'numbers_odometer_title'  => '车队年行驶里程估算',
+    'numbers_odometer_note'   => '基于已生产车辆数量和平均年路线长度的估算。',
 ];

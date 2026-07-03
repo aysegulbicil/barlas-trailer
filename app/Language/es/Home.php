@@ -240,12 +240,13 @@ return [
     'opt_services_desc' => 'Equipo experto en reparación de cisternas, silos, frigoríficos y chasis.',
 
     // ---- Sinematik katman: rakamlar sahnesi ----
-    'numbers_eyebrow'        => 'Barlas en cifras',
-    'numbers_title'          => 'De la producción a las carreteras del mundo',
-    'numbers_lead'           => 'Desde nuestra base de producción en Turquía hacia decenas de países: cada cifra se demuestra en la carretera.',
-    'numbers_map_aria'       => 'Mapa de exportación: líneas de luz que unen la base de producción con los mercados exteriores',
-    'numbers_hub_label'      => 'Base de producción',
-    'numbers_stat_variants'  => 'Variantes de vehículo',
-    'numbers_odometer_title' => 'Estimación del recorrido anual de la flota',
-    'numbers_odometer_note'  => 'Estimación basada en el número de vehículos producidos y la longitud media de las rutas anuales.',
+    'numbers_eyebrow'         => 'Barlas en cifras',
+    'numbers_title'           => 'De la producción a las carreteras del mundo',
+    'numbers_lead'            => 'Desde nuestra base de producción en Turquía hasta las carreteras del mundo — cada cifra de aquí se cuenta en directo a partir del catálogo y los registros de mercado.',
+    'numbers_map_aria'        => 'Mapa de exportación: líneas de luz que unen la base de producción con los mercados exteriores',
+    'numbers_hub_label'       => 'Base de producción',
+    'numbers_stat_variants'   => 'Variantes de vehículo',
+    'numbers_stat_categories' => 'Categorías de producto',
+    'numbers_odometer_title'  => 'Estimación del recorrido anual de la flota',
+    'numbers_odometer_note'   => 'Estimación basada en el número de vehículos producidos y la longitud media de las rutas anuales.',
 ];

@@ -240,12 +240,13 @@ return [
     'opt_services_desc' => 'צוות מומחים לתיקוני מיכליות, סילו, קירור ושלדות.',
 
     // ---- Sinematik katman: rakamlar sahnesi ----
-    'numbers_eyebrow'        => 'Barlas במספרים',
-    'numbers_title'          => 'מהייצור אל כבישי העולם',
-    'numbers_lead'           => 'מבסיס הייצור בטורקיה לעשרות מדינות: כל מספר מוכיח את עצמו בדרך.',
-    'numbers_map_aria'       => 'מפת יצוא: קווי אור הנמתחים מבסיס הייצור אל שוקי החוץ',
-    'numbers_hub_label'      => 'בסיס הייצור',
-    'numbers_stat_variants'  => 'גרסאות רכב',
-    'numbers_odometer_title' => 'אומדן הנסועה השנתית של הצי',
-    'numbers_odometer_note'  => 'אומדן המבוסס על מספר הרכבים שיוצרו ועל אורך המסלול השנתי הממוצע.',
+    'numbers_eyebrow'         => 'Barlas במספרים',
+    'numbers_title'           => 'מהייצור אל כבישי העולם',
+    'numbers_lead'            => 'מבסיס הייצור בטורקיה אל כבישי העולם — כל מספר כאן נספר בזמן אמת מתוך הקטלוג ורישומי השווקים.',
+    'numbers_map_aria'        => 'מפת יצוא: קווי אור הנמתחים מבסיס הייצור אל שוקי החוץ',
+    'numbers_hub_label'       => 'בסיס הייצור',
+    'numbers_stat_variants'   => 'גרסאות רכב',
+    'numbers_stat_categories' => 'קטגוריות מוצרים',
+    'numbers_odometer_title'  => 'אומדן הנסועה השנתית של הצי',
+    'numbers_odometer_note'   => 'אומדן המבוסס על מספר הרכבים שיוצרו ועל אורך המסלול השנתי הממוצע.',
 ];

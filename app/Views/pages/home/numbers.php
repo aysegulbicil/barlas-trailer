@@ -5,10 +5,11 @@
  * =============================================================================
  * Sinematik veri vitrini (v3.0 addendum). Üç blok:
  *   1) İstatistik ızgarası — data-count sayaçları (motor: yeni-app.js
- *      initCounters). Rakam kaynağı app/Data/numbers.json + products.json'dan
- *      CANLI sayılan varyant adedi. RAKAM UYDURMA YASAK: numbers.json'daki
- *      değerler önceki site metninden (stats.php) gelir; netleşince orayı
- *      güncellemek yeter.
+ *      initCounters). RAKAM UYDURMA YASAK: tüm kartlar products.json ve
+ *      markets.json'dan render sırasında CANLI sayılır. Kurumsal rakamlar
+ *      (yıl/teslimat) yalnızca app/Data/numbers.json'a DOĞRULANMIŞ değer
+ *      girilirse görünür (2026-07-03: eski 35/40/12000 değerleri gerçek
+ *      olmadığı için null'landı — kullanıcı bildirimi).
  *   2) İhracat ışık haritası — inline SVG. Eşdikdörtgen (equirectangular)
  *      projeksiyon: lon∈[-14,78], lat∈[16,62] → viewBox 0 0 920 520. Ülke
  *      düğümleri app/Data/markets.json'dan; hub = Konya. Yaylar hub'dan ülkeye
@@ -35,14 +36,19 @@ $countries = $numbersCfg['countries'] ?? null;
 $delivered = $numbersCfg['delivered'] ?? null;
 $avgKm     = $numbersCfg['avgKmPerVehicleYear'] ?? null;
 
-/* ---------- Veri: products.json → gerçek varyant sayısı ---------- */
-$variantCount = null;
-$productsFile = APPPATH . 'Data/products.json';
+/* ---------- Veri: products.json → CANLI katalog sayıları ---------- */
+$variantCount  = null;
+$productCount  = null;
+$categoryCount = null;
+$productsFile  = APPPATH . 'Data/products.json';
 if (is_file($productsFile)) {
     $catalog = json_decode((string) file_get_contents($productsFile), true);
     if (is_array($catalog['categories'] ?? null)) {
-        $variantCount = 0;
+        $variantCount  = 0;
+        $productCount  = 0;
+        $categoryCount = count($catalog['categories']);
         foreach ($catalog['categories'] as $cat) {
+            $productCount += count($cat['products'] ?? []);
             foreach ($cat['products'] ?? [] as $prod) {
                 $variantCount += count($prod['variants'] ?? []);
             }
@@ -50,18 +56,24 @@ if (is_file($productsFile)) {
     }
 }
 
-/* İstatistik kartları — değeri olmayan kart basılmaz (yanlış rakam uydurma yok). */
-$stats = [];
-if (is_numeric($years))        { $stats[] = ['value' => (int) $years,     'suffix' => '+', 'label' => lang('Home.stat_years')]; }
-if (is_numeric($countries))    { $stats[] = ['value' => (int) $countries, 'suffix' => '+', 'label' => lang('Home.stat_countries')]; }
-if (is_numeric($delivered))    { $stats[] = ['value' => (int) $delivered, 'suffix' => '+', 'label' => lang('Home.stat_delivered')]; }
-if (is_numeric($variantCount)) { $stats[] = ['value' => (int) $variantCount, 'suffix' => '', 'label' => lang('Home.numbers_stat_variants')]; }
-
-/* ---------- Veri: markets.json → harita düğümleri ---------- */
+/* ---------- Veri: markets.json → harita düğümleri + pazar sayısı ---------- */
 $marketsFile = APPPATH . 'Data/markets.json';
 $markets     = is_file($marketsFile) ? (json_decode((string) file_get_contents($marketsFile), true) ?? []) : [];
 $mapNodes    = is_array($markets['countries'] ?? null) ? $markets['countries'] : [];
 $hubGeo      = $markets['hub'] ?? ['lat' => 37.9, 'lon' => 32.5];
+$marketCount = count($mapNodes);
+
+/* İstatistik kartları — HEPSİ sistemden canlı sayılır (products.json +
+   markets.json); değeri olmayan kart basılmaz. numbers.json'daki kurumsal
+   rakamlar (yıl/teslimat...) yalnızca gerçek değerler girilirse eklenir —
+   2026-07-03 itibarıyla hepsi null (önceki 35/40/12000 doğrulanmamıştı). */
+$stats = [];
+if (is_numeric($categoryCount) && $categoryCount > 0) { $stats[] = ['value' => (int) $categoryCount, 'suffix' => '', 'label' => lang('Home.numbers_stat_categories')]; }
+if (is_numeric($productCount)  && $productCount > 0)  { $stats[] = ['value' => (int) $productCount,  'suffix' => '', 'label' => lang('Home.stat_models')]; }
+if (is_numeric($variantCount)  && $variantCount > 0)  { $stats[] = ['value' => (int) $variantCount,  'suffix' => '', 'label' => lang('Home.numbers_stat_variants')]; }
+if ($marketCount > 0)                                 { $stats[] = ['value' => $marketCount,         'suffix' => '', 'label' => lang('Home.stat_countries')]; }
+if (is_numeric($years))     { $stats[] = ['value' => (int) $years,     'suffix' => '+', 'label' => lang('Home.stat_years')]; }
+if (is_numeric($delivered)) { $stats[] = ['value' => (int) $delivered, 'suffix' => '+', 'label' => lang('Home.stat_delivered')]; }
 
 /* Eşdikdörtgen projeksiyon: lon/lat → viewBox koordinatı. */
 $mapW = 920.0;

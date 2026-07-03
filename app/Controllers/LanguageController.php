@@ -79,9 +79,12 @@ class LanguageController extends BaseController
             return $cookie;
         }
 
-        // negotiateLocale = true makes the request negotiate against
-        // supportedLocales using the Accept-Language header.
-        $negotiated = $this->request->getLocale();
+        // Negotiate against the Accept-Language header explicitly: the global
+        // LanguageFilter has already overwritten the request locale with the
+        // default (there is no locale segment on "/"), so getLocale() would
+        // always return "tr" here. negotiate() re-reads the header and falls
+        // back to the first supported locale when nothing matches.
+        $negotiated = $this->request->negotiate('language', $config->supportedLocales);
 
         return in_array($negotiated, $config->supportedLocales, true)
             ? $negotiated

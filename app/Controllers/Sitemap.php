@@ -79,7 +79,6 @@ class Sitemap extends BaseController
             'quiz'     => null,
             'wiki'     => null,
             'verify'   => null,
-            'press'    => null,
             'faq'      => null,
             'games'        => null,
             'games/tetris' => null,
