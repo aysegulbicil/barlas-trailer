@@ -951,5 +951,151 @@ return [
                 <p>Braki naprawiane w pośpiechu przed badaniem to w rzeczywistości zdjęcie luki utrzymaniowej narastającej przez cały rok. Regularne kontrole pośrednie, cyfrowe zapisy serwisowe i systematyczne śledzenie zgłoszeń usterek zamieniają badanie z egzaminu w rutynową weryfikację. Po stronie producenta zaś projekt zapewniający łatwy dostęp do punktów badania — otwierane pokrywy, widoczne strefy podwozia, dostępne złącza testowe hamulców — obniża koszt serwisu przez cały okres eksploatacji pojazdu. Dobrze zaprojektowana naczepa oszczędza czas także na stacji badań.</p>
             ',
         ],
+
+        'smart-tachograph-trailer-data' => [
+            'title'   => 'Dane naczepy w erze inteligentnego tachografu: co jest rejestrowane?',
+            'excerpt' => 'Inteligentny tachograf automatycznie przetwarza dane wykraczające poza czas jazdy — pozycję i operacje; w połączeniu z telematyką naczepy powstaje kompletny cyfrowy zapis kursu.',
+            'content' => '
+                <p>Tachograf przez wiele lat był urządzeniem rejestrującym wyłącznie czas jazdy i odpoczynku. Wraz z generacją inteligentnego tachografu obraz się zmienił: urządzenie automatycznie przetwarza teraz punkty pozycji, przekraczanie granic i operacje załadunku-rozładunku, a jednostki kontrolne mogą uzyskać do tych danych zdalny dostęp. Choć urządzenie mieszka w ciągniku, połowa rejestrowanej operacji odbywa się na naczepie.</p>
+                <h2>Co jest rejestrowane?</h2>
+                <ul>
+                    <li>Zestawienie czasu jazdy, przerw i odpoczynku dopasowane do karty kierowcy</li>
+                    <li>Początkowe, końcowe i pośrednie punkty pozycji kursu oraz przekroczenia granic</li>
+                    <li>Informacje o czasie i lokalizacji operacji załadunku i rozładunku</li>
+                    <li>Krzyżowe dopasowanie zapisów dotyczących kombinacji pojazdu z systemami telematycznymi</li>
+                </ul>
+                <h2>Po połączeniu z telematyką naczepy</h2>
+                <p>Dane tachografu same w sobie opowiadają o kierowcy; telematyka naczepy dodaje historię pojazdu: otwarcia drzwi, zapisy temperatury, obciążenia osi i dane układu hamulcowego. Po połączeniu obu źródeł powstaje kompletny cyfrowy bliźniak kursu — oznacza to dokument obrony w kontroli, narzędzie dowodowe wobec klienta i surowiec do analizy operacyjnej. Zadaniem menedżera floty jest świadome ustalenie uprawnień dostępu i zasad przechowywania tego strumienia danych. <strong>Flota zbierająca dane nie dla kontroli, lecz dla własnej efektywności, wychodzi z tej transformacji z zyskiem.</strong></p>
+            ',
+        ],
+
+        'quiet-trailer-noise-rules' => [
+            'title'   => 'Dostawy nocne i przepisy dotyczące hałasu: projektowanie cichej naczepy',
+            'excerpt' => 'Miasta zachęcają do dostaw nocnych; jednak pojazdy, których hałas drzwi, rampy i agregatu chłodniczego przekracza limity, zostają wykluczone z tej operacji.',
+            'content' => '
+                <p>Europejskie miasta, chcąc odciążyć ruch dzienny, zachęcają do przenoszenia dostaw do sklepów i magazynów na godziny nocne. Operacja nocna ma jednak swoją cenę: obowiązujące w strefach mieszkalnych limity hałasu. Skrzypienie drzwi, kontakt rampy i pomruk agregatu chłodniczego standardowej naczepy łatwo przekraczają te limity; projektowanie cichej naczepy jest kluczem do nocnego okna czasowego.</p>
+                <h2>Skąd bierze się hałas?</h2>
+                <p>W dostawie nocnej najbardziej uciążliwe dźwięki pochodzą nie z jazdy, lecz z momentu postoju: metaliczne uderzenie tylnych drzwi, hydrauliczne i kontaktowe dźwięki windy platformowej, echo kółek wózka paletowego na podłodze oraz nieustanna praca agregatu chłodniczego. Każde z tych źródeł można wyciszyć projektem.</p>
+                <h2>Narzędzia cichego projektu</h2>
+                <ul>
+                    <li>Okucia drzwi z uszczelką tłumiącą, wolno zamykające się, oraz gumowe powierzchnie kontaktowe</li>
+                    <li>Podłoga z powłoką pochłaniającą echo i antypoślizgowa, lecz cicha faktura powierzchni</li>
+                    <li>Agregaty chłodnicze z trybem niskiego hałasu i opcje chłodzenia elektrycznego</li>
+                    <li>Zawieszenie pneumatyczne i połączenia osprzętu z izolacją drgań</li>
+                </ul>
+                <p>W Europie programy certyfikacji cichej dostawy wiążą te środki z mierzalnym standardem; pojazdy certyfikowane zyskują priorytet w zezwoleniach na operacje nocne. Poza wyposażeniem liczy się też operacja: szkolenie kierowcy w zakresie cichej pracy utrzymuje to, co dał projekt. Nocne okno czasowe dla przygotowanych flot oznacza zarówno krótszy czas dostawy, jak i efektywniejsze wykorzystanie pojazdu.</p>
+            ',
+        ],
+
+        'eu-type-approval-trailers' => [
+            'title'   => 'Proces homologacji typu UE: krok po kroku dla producenta naczep',
+            'excerpt' => 'Aby naczepa mogła wyjechać na drogi europejskie, konieczne jest oficjalne potwierdzenie projektu i produkcji; homologacja typu jest systematyczną drogą tej gwarancji.',
+            'content' => '
+                <p>Homologacja typu to udokumentowanie przez uprawnioną jednostkę zgodności danego typu pojazdu z wymaganiami bezpieczeństwa i środowiskowymi. Proces ten, będący warunkiem wstępnym sprzedaży naczep na rynku europejskim, homologuje nie pojedynczy pojazd, lecz typ produktu: każdy pojazd wyprodukowany zgodnie z zatwierdzonym typem może wyjechać na drogę bez odrębnego testowania.</p>
+                <h2>Główne etapy procesu</h2>
+                <ul>
+                    <li><strong>Dokumentacja techniczna:</strong> systematyczne zebranie danych projektowych, raportów obliczeniowych i rysunków</li>
+                    <li><strong>Testy jednostki technicznej:</strong> niezależna weryfikacja hamulców, oświetlenia, elementów sprzęgających i wymogów strukturalnych przez uprawnioną jednostkę</li>
+                    <li><strong>Weryfikacja jednostki homologacyjnej:</strong> ocena wyników testów i dokumentacji oraz wydanie świadectwa homologacji typu</li>
+                    <li><strong>Świadectwo zgodności:</strong> wystawienie dokumentu potwierdzającego zgodność z typem dla każdego wyprodukowanego pojazdu</li>
+                    <li><strong>Zgodność produkcji:</strong> okresowy audyt potwierdzający, że produkcja seryjna nie odbiega od zatwierdzonego typu</li>
+                </ul>
+                <h2>Praktyczne wskazówki dla producenta</h2>
+                <p>Najczęściej lekceważoną częścią procesu jest zarządzanie wariantami: prawidłowe skonfigurowanie liczby osi, długości i kombinacji wyposażenia w strukturze homologacji zapobiega powtarzaniu procesu przy każdym nowym zamówieniu. W produkcji wieloetapowej — takiej jak nadwozie na podwoziu — kluczowe jest udokumentowanie granic odpowiedzialności. Homologacja typu to nie biurokracja, lecz zewnętrzny dowód dyscypliny inżynierskiej; producent z uporządkowaną dokumentacją zarówno przyspiesza proces homologacji, jak i otwiera swojemu produktowi drzwi rynków międzynarodowych.</p>
+            ',
+        ],
+
+        'cbam-steel-trailer-costs' => [
+            'title'   => 'Jak mechanizm dostosowania granic węglowych wpływa na ceny stali? Konsekwencje dla kosztów naczep',
+            'excerpt' => 'Unijny mechanizm dostosowania granic węglowych nakłada na importowaną stal koszt zgodny z emisjami produkcyjnymi; sektor naczep, którego głównym surowcem jest stal, musi uważnie śledzić tę transformację.',
+            'content' => '
+                <p>Unia Europejska uruchamia mechanizm dostosowania granic węglowych, aby zapobiec omijaniu poprzez import kosztu węglowego nakładanego na własny przemysł. Istota mechanizmu jest prosta: produkty węglochłonne wjeżdżające do UE — przede wszystkim stal — ponoszą dodatkowy koszt zależny od emisji wyemitowanych podczas ich produkcji. Ponieważ głównym surowcem naczepy jest stal, regulacja ta bezpośrednio dotyczy rachunku kosztów sektora.</p>
+                <h2>Efekt łańcuchowy</h2>
+                <p>Koszt węglowy przekłada się najpierw na producenta stali, stamtąd na ceny, z cen na koszt naczepy i wreszcie na stawki transportowe. Podczas gdy stal z tras produkcyjnych wysokoemisyjnych drożeje, rośnie konkurencyjność stali niskowęglowej i o wysokim udziale materiału z recyklingu. Producent przebudowujący łańcuch dostaw wzdłuż tej osi może zamienić wahania kosztów w przewagę.</p>
+                <h2>Mapa drogowa dla producenta</h2>
+                <ul>
+                    <li>Rozpocząć już teraz żądanie od dostawców danych o emisji dla poszczególnych produktów</li>
+                    <li>Kwalifikować alternatywy stali niskowęglowej i pochodzącej z pieca elektrycznego łukowego</li>
+                    <li>Zmniejszać zużycie stali na pojazd dzięki inżynierii redukcji masy</li>
+                    <li>Podnosić efektywność materiałową dzięki planowaniu rozkroju i zarządzaniu odpadem</li>
+                </ul>
+                <p>Dane węglowe wchodzą już do technicznej specyfikacji zakupów: w jutrzejszych przetargach obok ceny produktu pytana będzie także wbudowana emisja. Producent znający swój materiał, dokumentujący łańcuch dostaw i przewożący więcej mniejszym nakładem, stanie się nie przegranym, lecz zwycięzcą tej transformacji.</p>
+            ',
+        ],
+
+        'trailer-telematics-guide' => [
+            'title'   => 'Telematyka naczep: zarządzaj niewidoczną połową floty za pomocą danych',
+            'excerpt' => 'Ciągniki od lat wytwarzają dane; tymczasem druga połowa floty — naczepa — w większości przedsiębiorstw wciąż jest martwym punktem. Telematyka zamyka tę lukę.',
+            'content' => '
+                <p>Nowoczesny ciągnik raportuje wszystko, od pozycji po zużycie paliwa; naczepa zaś w większości flot wciąż milczy. Tymczasem ładunek jest na naczepie, temperatura mierzona jest na naczepie, drzwi otwierają się na naczepie. Telematyka naczep zamienia tę niewidoczną połowę floty w podmiot wytwarzający dane.</p>
+                <h2>Jakie dane są zbierane?</h2>
+                <ul>
+                    <li><strong>Pozycja i ruch:</strong> gdzie znajduje się pojazd, jak długo czeka, na jakiej trasie pracuje</li>
+                    <li><strong>Dane układu hamulcowego:</strong> informacje o obciążeniu, prędkości i usterkach z elektronicznego systemu hamulcowego</li>
+                    <li><strong>Ciśnienie w oponach:</strong> ciągłe monitorowanie umożliwiające wczesne wykrycie ryzyka pęknięcia i zużycia</li>
+                    <li><strong>Drzwi i temperatura:</strong> nieprzerwany zapis w łańcuchu chłodniczym, zdarzenia otwarcia drzwi w bezpieczeństwie ładunku</li>
+                    <li><strong>Status połączenia:</strong> automatyczny zapis, który ciągnik jest sprzężony z którą naczepą</li>
+                </ul>
+                <h2>Od danych do decyzji</h2>
+                <p>Wartość telematyki tkwi nie w czujniku, lecz w zamianie danych w decyzję. Analiza czasów oczekiwania, wykrywanie rzadko wykorzystywanych pojazdów, planowanie utrzymania na podstawie rzeczywistych danych użytkowania zamiast kilometrów oraz natychmiastowa informacja o pozycji w razie zaginięcia lub kradzieży to obszary, w których inwestycja się amortyzuje. Krytycznym pytaniem przy wdrożeniu jest nie sprzęt, lecz integracja: dane muszą płynąć do oprogramowania zarządzania flotą i raportów dla klienta. Zacznijcie od małego — wdrożcie pilotaż w segmencie, gdzie wartość jest najbardziej widoczna, takim jak łańcuch chłodniczy czy najbardziej obciążona linia, zmierzcie, a potem rozpowszechniajcie.</p>
+            ',
+        ],
+
+        'reduce-empty-mileage' => [
+            'title'   => 'Sposoby na zmniejszenie pustych kilometrów: giełdy ładunków i optymalizacja tras',
+            'excerpt' => 'Każdy przejechany na pusto kilometr to kilometr palący paliwo, lecz niegenerujący przychodu. Cyfrowe giełdy ładunków i planowanie sieci systematycznie zmniejszają tę stratę.',
+            'content' => '
+                <p>Najstarszą nieefektywnością transportu drogowego jest pusty powrót: każdy kilometr wiozący pojazd pusty z punktu dostawy do bazy lub do kolejnego ładunku zużywa paliwo i czas, lecz nie generuje przychodu. Obniżenie udziału pustych kilometrów to jeden z najbardziej bezpośrednich sposobów zwiększenia rentowności floty — i dziś jest na to więcej narzędzi niż kiedykolwiek.</p>
+                <h2>Cyfrowe giełdy ładunków</h2>
+                <p>Giełdy ładunków to miejsca spotkania pojazdu szukającego ładunku powrotnego z przewoźnikiem szukającym pojazdu. Kluczem właściwego wykorzystania jest planowanie: ładunku powrotnego trzeba szukać nie po opróżnieniu pojazdu, lecz podczas planowania kursu. Floty biorące pod uwagę alternatywne punkty załadunku na trasie i elastyczne okna dostawy czerpią z giełd regularny przychód.</p>
+                <h2>Kroki systematycznego podejścia</h2>
+                <ul>
+                    <li>Mierzyć udział pustych kilometrów w podziale na linie — czego nie da się poprawić, tego nie da się zarządzać</li>
+                    <li>Budować dwukierunkowe umowy liniowe ze stałymi klientami</li>
+                    <li>Łączyć wielopunktowe kursy za pomocą oprogramowania optymalizacji tras</li>
+                    <li>Dobierać typ naczepy odpowiedni do ładunku dwukierunkowego — nadwozie wielofunkcyjne pracuje na dwóch rynkach</li>
+                    <li>Dzielić się ładunkiem poprzez współpracę regionalną i sieci przewoźników</li>
+                </ul>
+                <p>Puste kilometry nigdy nie da się wyzerować; można je jednak trwale obniżyć we flotach, które mierzą, planują i stawiają narzędzia cyfrowe w centrum operacji. Zysk nie jest wyłącznie finansowy: flota o zmniejszonych pustych kilometrach obniża też emisję na przewóz i oferuje klientowi bardziej konkurencyjną cenę.</p>
+            ',
+        ],
+
+        'trailer-pooling-model' => [
+            'title'   => 'Model puli naczep: gospodarka współdzielenia w logistyce',
+            'excerpt' => 'Nie każdy ładunek musi czekać na własną naczepę; floty naczep zarządzane ze wspólnej puli podnoszą wskaźnik wykorzystania i uwalniają kapitał.',
+            'content' => '
+                <p>Przeciętna naczepa znaczną część swojego życia spędza czekając na ładunek lub stojąc zaparkowana. Model puli naczep celuje właśnie w tę bezczynną zdolność: pojazdy zamiast być majątkiem jednego przedsiębiorstwa, są zarządzane z puli, do której dostęp ma wielu użytkowników. Przewoźnik korzysta z tylu naczep, ile potrzebuje, przez tak długo, jak potrzebuje.</p>
+                <h2>Jak działa model?</h2>
+                <p>Operator puli — może nim być firma leasingowa, sieć logistyczna lub duży nadawca ładunku — utrzymuje naczepy o standardowej specyfikacji gotowe w określonych punktach. Ciągnik przyjeżdża, zabiera pełną naczepę, zostawia ją w miejscu docelowym; naczepa tam zostaje sparowana z nowym ładunkiem i nowym ciągnikiem. Pojazd pracuje bez przerwy, kapitał obraca się bez przerwy.</p>
+                <h2>Zyski i warunki</h2>
+                <ul>
+                    <li>Rośnie wskaźnik wykorzystania: ta sama praca transportowa wykonywana jest mniejszą liczbą pojazdów</li>
+                    <li>Uwalnia się kapitał: inwestycja we flotę zamienia się w koszt operacyjny</li>
+                    <li>Wahania popytu równoważą się w skali całej puli, sezonowość jest zarządzana</li>
+                    <li>Warunek: standardowa specyfikacja pojazdu — pula pracuje z naczepami spotykającymi się na wspólnym mianowniku</li>
+                    <li>Warunek: śledzenie telematyczne i jasne protokoły szkód i odpowiedzialności</li>
+                </ul>
+                <p>Z perspektywy producenta model puli podkreśla trwałość i standaryzację: pojazd, który przejdzie przez ręce różnych kierowców i operacji, musi być zaprojektowany z solidnym wyposażeniem i łatwością serwisowania. Gospodarka współdzielenia jest w logistyce trwała; właściwie skonstruowana pula to jeden z rzadkich modeli przynoszących zysk wszystkim stronom jednocześnie.</p>
+            ',
+        ],
+
+        'fleet-replacement-age' => [
+            'title'   => 'Decyzja o odnowieniu floty: obliczenie optymalnego wieku wymiany naczepy',
+            'excerpt' => 'Sprzedaż naczep zbyt wcześnie to marnotrawstwo kapitału, zbyt późno to bagno utrzymania; optymalny wiek wymiany kryje się w punkcie przecięcia dwóch krzywych kosztów.',
+            'content' => '
+                <p>Kiedy należy wymienić naczepę? Flota odpowiadająca na to pytanie „gdy się zepsuje" odkłada decyzję na jej najdroższy moment. Optymalny wiek wymiany to nie przeczucie, lecz obliczenie: znalezienie punktu, w którym roczny koszt posiadania pojazdu jest najniższy, i niedryfowanie poza ten punkt.</p>
+                <h2>Przecięcie dwóch krzywych</h2>
+                <p>Utrata wartości pojazdu jest wysoka w pierwszych latach i z czasem zwalnia; koszt utrzymania i napraw wręcz przeciwnie, przyspiesza z wiekiem. Suma tych dwóch krzywych najpierw spada, osiąga dno, potem znów się wznosi. Optymalny wiek wymiany to właśnie obszar wokół tego dna — przesuwa się w zależności od typu pojazdu, rocznego przebiegu i intensywności operacji.</p>
+                <h2>Pozycje wymagające uwzględnienia w rachunku</h2>
+                <ul>
+                    <li>Przebieg rocznego kosztu utrzymania i napraw w zależności od wieku — z własnych zapisów serwisowych</li>
+                    <li>Ukryty koszt nieplanowanych przestojów: utracony kurs, pojazd zastępczy, utrata klienta</li>
+                    <li>Zależność wartości rynku wtórnego od wieku i stanu; zysk z odpowiedniego momentu sprzedaży</li>
+                    <li>Zysk z paliwa i efektywności nowej technologii pojazdu — rozstęp otwierający się wobec starego pojazdu</li>
+                    <li>Harmonogram regulacji: zmiany w wymogach badań, emisji i wyposażenia</li>
+                </ul>
+                <p>W operacjach ciężkich i ściernych okno przesuwa się do przodu; w liniach lekkich i regularnych rozszerza się. Kluczowe jest podejmowanie decyzji na poziomie pojazdu i na podstawie danych: flota prowadząca regularne zapisy serwisowe nie zgaduje punktu optymalnego, lecz go widzi.</p>
+            ',
+        ],
     ],
 ];

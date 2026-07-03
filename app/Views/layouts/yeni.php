@@ -62,8 +62,8 @@ $asset = static function (string $path): string {
         <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.module.js">
         <?php if ($__isHome): ?>
             <!-- Statik hero görselini erken indir → hero'nun ilk boyası hızlansın.
-                 WebP ~91KB (PNG 1.84MB); URL hero-static.php ile BİREBİR aynı olmalı. -->
-            <link rel="preload" as="image" type="image/webp" href="<?= $asset('assets/images/cfa5531d-3c63-4571-936f-a964650bfef4.webp') ?>" fetchpriority="high">
+                 WebP ~139KB (PNG 2.1MB); URL hero-static.php ile BİREBİR aynı olmalı. -->
+            <link rel="preload" as="image" type="image/webp" href="<?= $asset('assets/images/25a460c4-3549-4d3c-9fcc-3140cf583b67.webp') ?>" fetchpriority="high">
         <?php else: ?>
             <!-- İletişim sayfası teslimat sahnesinin modeli erken indirilsin:
                  araç + form beraber gelsin diye bekleme kısalır -->

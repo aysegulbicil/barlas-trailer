@@ -1749,5 +1749,206 @@ return [
                 <p>Un bon registre de pneus est aussi une archive de la santé du véhicule : les motifs d\'usure racontent la suspension, les pertes de pression racontent les jantes et les valves, la fréquence des dommages raconte les conditions de la ligne. La flotte qui gère le pneu gère en réalité l\'ensemble du véhicule.</p>
             ',
         ],
+
+        'inspection-preparation-checklist' => [
+            'title'   => 'Réussir le contrôle technique périodique du premier coup : liste de contrôle de préparation',
+            'excerpt' => 'Le rendez-vous d\'inspection n\'est pas un examen ; c\'est une simple validation si l\'on s\'y présente préparé. Le coût d\'une contre-visite tient bien plus au jour de trajet perdu qu\'aux frais eux-mêmes.',
+            'content' => '
+                <p>Une remorque recalée au contrôle technique périodique ne peut pas générer de revenu jusqu\'à la contre-visite. Pourtant, l\'ensemble des points examinés à l\'inspection est prévisible ; si le véhicule est contrôlé du même œil avant de se rendre à la station, le résultat ne sera pas une surprise.</p>
+                <h2>Liste de contrôle avant inspection</h2>
+                <ul>
+                    <li><strong>Système de freinage :</strong> épaisseur des garnitures, écoute des fuites d\'air, fonctionnement des feux de stop et extinction du voyant d\'alerte EBS</li>
+                    <li><strong>Éclairage et électricité :</strong> toutes les lampes, réflecteurs et éclairage de plaque ; les verres cassés et les luminaires humides doivent être remplacés</li>
+                    <li><strong>Pneus :</strong> profondeur de sculpture, dommages au flanc, pressions et couple de serrage des écrous ; roue de secours incluse</li>
+                    <li><strong>Suspension et essieu :</strong> surfaces des soufflets, fuite d\'amortisseur, jeu visible et attache rompue</li>
+                    <li><strong>Châssis et carrosserie :</strong> fissures, corrosion avancée, pare-chocs desserré et barrières de protection latérale</li>
+                    <li><strong>King-pin et attelage :</strong> contrôle visuel et, le cas échéant, dernier registre de mesure</li>
+                    <li><strong>Documents :</strong> carte grise, rapport d\'inspection précédent et, le cas échéant, durées de validité de documents complémentaires comme ADR/ATP</li>
+                </ul>
+                <h2>Le grand résultat des petits défauts</h2>
+                <p>Statistiquement, les points les plus fréquemment retenus lors de l\'inspection ne sont pas les plus coûteux : une lampe éteinte, une plaque illisible, un réflecteur manquant. La dernière étape de la préparation consiste donc à faire le tour du véhicule de l\'extérieur avec le regard de la station. Dans les flottes qui rattachent la préparation à l\'inspection au plan de trajet, la contre-visite est l\'exception ; le véhicule se rend à la station pour obtenir une validation, pas pour recevoir une liste de réparations.</p>
+            ',
+        ],
+
+        'tipper-body-type-guide' => [
+            'title'   => 'Guide de choix de la benne : demi-tube, type rocher ou série légère ?',
+            'excerpt' => 'La benne n\'est pas un produit unique, mais une famille ; le bon membre se choisit selon le caractère du matériau transporté et le rythme de l\'exploitation.',
+            'content' => '
+                <p>La première question de l\'acheteur de benne est généralement le volume ; pourtant, le véritable déterminant est la forme et le blindage de la benne. Deux bennes de même volume offrent une durée de vie et un rendement totalement différents selon la charge.</p>
+                <h2>Trois caractères principaux</h2>
+                <ul>
+                    <li><strong>Demi-tube (half-pipe) :</strong> la section arrondie fait glisser la charge sans qu\'elle colle et accélère le déchargement ; sans soudure d\'angle, elle résiste bien à la fatigue. Elle se distingue pour le fraisat d\'asphalte, les déblais humides et les matériaux collants</li>
+                    <li><strong>Type rocher :</strong> tôle d\'usure épaisse, plancher renforcé et structure résistante aux chocs ; c\'est la benne des travaux à gros blocs et charges à choc comme les mines et les carrières. Son prix est un poids à vide élevé</li>
+                    <li><strong>Série légère :</strong> poids à vide réduit grâce à des tôles fines mais à haute résistance ; pour des charges peu abrasives comme le sable, la terre et les produits agricoles, elle transporte davantage de tonnage à chaque trajet</li>
+                </ul>
+                <h2>Comment décider ?</h2>
+                <p>La première question est : quel est le matériau le plus dur qui sera chargé dans la benne ? La benne doit être choisie selon la charge la plus agressive transportée, même occasionnellement ; une série légère chargée de roches grossières use rapidement sa durée de vie. La seconde question est le rythme de l\'exploitation : dans une exploitation de sable effectuant de nombreux trajets par jour, l\'avantage de tonnage de la série légère se traduit directement en revenu, tandis que sur un travail minier à poste unique, la durabilité du type rocher réduit le coût total.</p>
+                <p>Pour les travaux mixtes, il existe aussi un terme moyen : tôle d\'usure épaisse sur le plancher et à l\'arrière, structure légère sur les parois latérales. La bonne benne se choisit non pas dans le catalogue, mais dans votre liste de charges.</p>
+            ',
+        ],
+
+        'tipper-tipping-stability' => [
+            'title'   => 'Prévenir les accidents de renversement de benne : stabilité au moment du levage',
+            'excerpt' => 'Les accidents de benne les plus graves surviennent non pas en marche, mais lorsque la caisse est en l\'air. Ce qui prévient le renversement n\'est pas la chance, mais quelques secondes de discipline avant le déchargement.',
+            'content' => '
+                <p>À mesure que la caisse se relève, le centre de gravité du véhicule se déplace rapidement vers le haut ; une benne complètement relevée est mécaniquement à son instant le plus vulnérable. À ce moment, une petite pente du sol ou l\'adhérence de la charge d\'un seul côté peut suffire à renverser le véhicule.</p>
+                <h2>Causes typiques du renversement</h2>
+                <ul>
+                    <li><strong>Sol en pente ou meuble :</strong> une inclinaison latérale s\'amplifie pendant le levage ; sur sol meuble, l\'affaissement d\'un côté produit le même résultat</li>
+                    <li><strong>Charge collante :</strong> si de la terre humide ou de l\'argile reste suspendue d\'un côté de la benne, le centre de gravité se déplace soudainement latéralement</li>
+                    <li><strong>Désalignement tracteur-remorque :</strong> dans une combinaison en position d\'angle, la force de levage sollicite latéralement le châssis</li>
+                    <li><strong>Vent :</strong> la caisse relevée est une large surface de voile ; le déchargement doit être reporté par vent fort</li>
+                    <li><strong>Oscillation de suspension :</strong> sur suspension pneumatique, sauter la procédure de mode déchargement crée une plateforme instable pendant le levage</li>
+                </ul>
+                <h2>Discipline de déchargement sûr</h2>
+                <p>L\'ordre des règles est établi : le véhicule est aligné sur sol plat et solide, dans le même axe que le tracteur ; si la procédure du fabricant l\'exige, la suspension est mise en mode déchargement ; les verrous de trappe sont ouverts et le levage s\'effectue sous observation continue. Si l\'on sent que la charge ne s\'écoule pas, la caisse n\'est pas relevée davantage — elle est redescendue et le problème est réglé au sol. Secouer le véhicule d\'avant en arrière pour faire tomber la charge est l\'habitude de terrain la plus répandue et la plus dangereuse.</p>
+                <p>Les accidents de renversement se terminent presque toujours par la même phrase : « on a toujours fait comme ça ». L\'exploitation sûre est le nom de la procédure qui empêche cette phrase d\'être prononcée.</p>
+            ',
+        ],
+
+        'lowbed-permit-processes' => [
+            'title'   => 'Processus d\'autorisation dans les opérations de lowbed : feuille de route pour le dépassement de gabarit',
+            'excerpt' => 'Dans le transport lourd et hors gabarit, le trajet le plus long est souvent non pas l\'itinéraire physique mais le processus d\'autorisation ; des documents bien planifiés font gagner à la table les jours qui seraient perdus sur le terrain.',
+            'content' => '
+                <p>Toute charge dépassant les dimensions standards — trop large, trop haute, trop longue ou trop lourde — ne peut prendre la route qu\'avec une autorisation spéciale. La véritable expertise de l\'opérateur de lowbed est de gérer ce processus d\'autorisation aussi professionnellement que le transport lui-même.</p>
+                <h2>Les principales étapes du processus</h2>
+                <ul>
+                    <li><strong>Étude de la charge :</strong> dimensions exactes, poids et centre de gravité de la charge ; calcul du gabarit total avec la combinaison de véhicules</li>
+                    <li><strong>Étude d\'itinéraire :</strong> capacités des ponts, hauteurs des passages inférieurs, carrefours étroits et traversées urbaines ; itinéraire alternatif si nécessaire</li>
+                    <li><strong>Demande d\'autorisation :</strong> demande auprès de l\'autorité routière compétente avec les informations du véhicule, de la charge et de l\'itinéraire ; le délai varie selon le pays et l\'ampleur du dépassement</li>
+                    <li><strong>Plan d\'escorte :</strong> selon le degré de dépassement, véhicule pilote, signalisation et, si nécessaire, escorte officielle</li>
+                    <li><strong>Fenêtre horaire :</strong> sur de nombreux itinéraires, le transport hors gabarit ne peut se faire que dans certaines plages horaires</li>
+                </ul>
+                <h2>Erreurs fréquentes</h2>
+                <p>L\'erreur la plus coûteuse est de s\'écarter de l\'itinéraire autorisé : un raccourci apparemment anodin peut mener à un pont de capacité insuffisante ou à un passage inférieur infranchissable et bloquer le transport pendant des jours. La deuxième erreur est de déclarer des dimensions optimistes ; un écart constaté sur le terrain invalide l\'autorisation. La troisième est de laisser jusqu\'au dernier moment le régime d\'autorisation propre à chaque pays dans les transports transfrontaliers.</p>
+                <p>Les opérateurs expérimentés planifient le processus à l\'envers : l\'autorisation et l\'itinéraire se clarifient d\'abord, la date de chargement est fixée en conséquence. Dans le transport lourd, la précipitation, même dans les documents, est le luxe le plus coûteux — bien plus que sur la route.</p>
+            ',
+        ],
+
+        'extendable-lowbed-wind' => [
+            'title'   => 'Plateformes lowbed extensibles : les transporteurs de l\'ère des éoliennes',
+            'excerpt' => 'À mesure que les pales de turbine et les segments de mât s\'allongent, le transporteur doit aussi s\'allonger avec eux ; le lowbed télescopique est devenu l\'épine dorsale de la logistique des énergies renouvelables.',
+            'content' => '
+                <p>À mesure que l\'énergie éolienne se développe, les composants de turbine grandissent aussi : pales, mâts et nacelles ont largement dépassé les dimensions classiques des remorques. La réponse routière à ces charges réside dans les plateformes lowbed et semi-lowbed dont le châssis peut s\'allonger de manière télescopique.</p>
+                <h2>La logique du châssis télescopique</h2>
+                <p>Le châssis extensible fonctionne par verrouillage progressif de profilés de poutre imbriqués : la plateforme s\'ouvre selon la longueur de la charge ; au retour à vide, elle se replie pour se rapprocher des dimensions normales du véhicule. Ce double caractère est le cœur de l\'opération — la longueur requise est assurée en trajet chargé, tandis que le retour à vide s\'effectue dans les conditions de trafic standard et à moindre coût. Sur les modèles à extension multi-étages, la gestion des câbles et des lignes de frein se résout par des systèmes à enrouleurs à l\'intérieur du châssis.</p>
+                <h2>Les subtilités du transport de pales</h2>
+                <ul>
+                    <li>La pale repose sur des berceaux adaptateurs spéciaux ; aucune charge ponctuelle n\'est imposée sur la surface composite</li>
+                    <li>Le rayon de débattement de la charge longue impose une étude d\'itinéraire dans les virages et les passages de carrefour</li>
+                    <li>L\'oscillation de l\'extrémité de la pale est gérée selon la limite de vitesse et les conditions de vent</li>
+                    <li>En terrain montagneux, des versions d\'adaptateur de pale capables de la redresser entrent en jeu</li>
+                </ul>
+                <p>Lors de l\'évaluation d\'un investissement en lowbed extensible, il faut examiner non seulement la longueur maximale, mais aussi la capacité de manœuvre en position repliée, la sécurité de verrouillage des étages d\'extension et l\'équilibre des charges par essieu à chaque étage. Le calendrier de la transition énergétique se mesure aux turbines installées sur le terrain ; les véhicules qui les transportent fonctionnent grâce à ces détails d\'ingénierie discrets.</p>
+            ',
+        ],
+
+        'silo-discharge-optimisation' => [
+            'title'   => 'Comment raccourcir le temps de déchargement du silo routier : pression, inclinaison et fluidisation',
+            'excerpt' => 'L\'argent d\'un silo routier ne se gagne ni ne se perd sur la route, mais sous le silo ; le temps de déchargement n\'est pas déterminé par le hasard, mais par trois variables ajustables.',
+            'content' => '
+                <p>Dans une exploitation de silo routier, le nombre de trajets quotidiens du véhicule est souvent déterminé non par la route, mais par le temps passé au point de déchargement. Chaque déchargement prolongé signifie un tracteur qui attend, un chauffeur qui attend et un trajet manqué. La bonne nouvelle : le temps de déchargement est une variable largement gérable.</p>
+                <h2>Trois variables principales</h2>
+                <ul>
+                    <li><strong>Gestion de la pression :</strong> l\'équilibre entre la pression de la citerne et le débit de la ligne de produit varie d\'un produit à l\'autre ; augmenter aveuglément la pression n\'accélère pas toujours l\'écoulement, et peut même provoquer un colmatage</li>
+                    <li><strong>Inclinaison et position :</strong> une légère inclinaison arrière du véhicule pendant le déchargement favorise l\'écoulement du produit vers la sortie conique ; sur les silos basculants, le bon usage de l\'angle de levage raccourcit sensiblement la durée</li>
+                    <li><strong>Fluidisation :</strong> les coussins d\'aération au fond de la citerne assouplissent le produit pulvérulent avec de l\'air pour le rendre fluide ; l\'activation des coussins dans l\'ordre prescrit par le fabricant évite le phénomène de voûtage</li>
+                </ul>
+                <h2>Connaître le produit</h2>
+                <p>Ciment, farine, poudre de PVC et produits granulés ont des caractères d\'écoulement totalement différents ; un produit humide impose en outre ses propres règles. Les opérateurs expérimentés enregistrent les combinaisons de pression et de coussins par produit ; ainsi, chaque déchargement n\'est pas un essai, mais une recette répétée.</p>
+                <p>Le dernier maillon est la santé de l\'équipement : des joints usés font perdre de la pression, un coussin percé crée un canal au lieu de fluidiser, un flexible rétréci ralentit l\'ensemble de la ligne. Lorsque le temps de déchargement est mesuré et enregistré régulièrement, un allongement de la durée peut être lu comme un signal de maintenance avant même que la panne ne s\'aggrave.</p>
+            ',
+        ],
+
+        'food-grade-silo-hygiene' => [
+            'title'   => 'Opérations de silo routier de qualité alimentaire : normes d\'hygiène et certifications',
+            'excerpt' => 'Un silo routier transportant farine, sucre ou lait en poudre doit être géré comme une usine alimentaire sur roues ; ici, l\'hygiène n\'est pas un choix mais un billet d\'entrée sur le marché.',
+            'content' => '
+                <p>Dans le transport de qualité alimentaire, la citerne est une surface en contact avec les aliments et doit être gérée avec le même sérieux qu\'une usine alimentaire. Pour l\'opérateur souhaitant travailler dans ce segment, l\'hygiène n\'est pas un concept qui dort dans un classeur de certificat qualité, mais une procédure répétée à chaque trajet.</p>
+                <h2>Les piliers de l\'hygiène</h2>
+                <ul>
+                    <li><strong>Surfaces adaptées :</strong> l\'intérieur de la citerne, les joints et les flexibles en contact avec le produit doivent être en matériau de qualité alimentaire ; une surface lisse empêche l\'adhérence de résidus</li>
+                    <li><strong>Lavage documenté :</strong> lors des changements de produit, la citerne est nettoyée dans une station de lavage agréée et un certificat de lavage est établi ; ce document est une condition préalable dans la plupart des points de chargement</li>
+                    <li><strong>Registre de la charge précédente :</strong> l\'historique des derniers produits transportés est tenu ; de nombreux chargeurs alimentaires ne remplissent pas sans voir la liste des charges précédentes</li>
+                    <li><strong>Scellement :</strong> du remplissage au déchargement, les scellés de trou d\'homme et de vanne prouvent que le produit n\'a subi aucune intervention en cours de route</li>
+                    <li><strong>Flotte dédiée :</strong> la solution la plus propre consiste à séparer totalement les véhicules alimentaires des charges chimiques et minérales</li>
+                </ul>
+                <h2>Le côté certification</h2>
+                <p>Les grands acheteurs de la chaîne d\'approvisionnement alimentaire attendent du transporteur une certification fondée sur un système de management de la sécurité alimentaire ; les programmes de certification d\'hygiène spécifiques aux opérations de transport sont devenus de fait la norme dans ce segment. Autant que le document lui-même, il importe de pouvoir démontrer, lors d\'un audit, un système vivant : les registres de lavage, les listes de charges précédentes et l\'historique de remplacement des joints doivent pouvoir être présentés en quelques minutes.</p>
+                <p>L\'exploitation de qualité alimentaire est exigeante ; mais c\'est précisément cette exigence qui constitue la barrière d\'entrée du segment et la source d\'un fret stable.</p>
+            ',
+        ],
+
+        'multi-size-container-chassis' => [
+            'title'   => 'Polyvalence du châssis porte-conteneurs : conceptions adaptées à différentes longueurs',
+            'excerpt' => 'On ne sait jamais quel conteneur arrivera sur le site portuaire ; le châssis polyvalent est la flexibilité de répondre à chaque combinaison, du 20 pieds au 45 pieds, avec le même véhicule.',
+            'content' => '
+                <p>Le transport de conteneurs est par nature variable : aujourd\'hui un seul 40 pieds, demain deux 20 pieds, après-demain un seul 20 pieds à poids élevé. Un châssis à structure fixe ne répond que partiellement à cette variabilité ; le châssis polyvalent, lui, transporte cette flexibilité de combinaison dans le véhicule lui-même grâce à ses positions de verrouillage et à sa géométrie.</p>
+                <h2>Les solutions assurant la flexibilité</h2>
+                <ul>
+                    <li><strong>Postes de verrouillage multiples :</strong> des groupes de verrous pivotants (twist-lock) repliables rendent possibles, sur le même châssis, les positions pour conteneurs de 20, 30, 40 et 45 pieds</li>
+                    <li><strong>Module arrière extensible :</strong> la section arrière télescopique ouvre la longueur requise pour les conteneurs de 45 pieds et de type tunnel ; elle se replie à vide</li>
+                    <li><strong>Position centrale coulissante :</strong> centrer un conteneur unique de 20 pieds sur le groupe d\'essieux équilibre les charges par essieu ; un déplacement vers la position arrière peut se faire pour l\'approche du quai de déchargement</li>
+                    <li><strong>Compatibilité du tunnel gooseneck (col de cygne) :</strong> permet le transport à hauteur légale des conteneurs high cube</li>
+                </ul>
+                <h2>Points d\'attention au choix</h2>
+                <p>La flexibilité n\'est pas gratuite : chaque mécanisme supplémentaire représente un peu de poids, un peu de poste d\'entretien. La bonne décision doit s\'appuyer sur le mix réel de charges de la flotte — sur une ligne transportant principalement des 40 pieds, les surplus du châssis totalement flexible sont un poids mort transporté ; dans un travail portuaire mixte, ces mêmes caractéristiques éliminent le besoin d\'un second véhicule.</p>
+                <p>Côté mécanique, le point critique est les verrous : les verrous pivotants et de coulissement doivent être régulièrement graissés, les têtes de verrou déformées doivent être remplacées sans attendre. Ces quatre petits verrous qui relient le conteneur au châssis portent sur eux toute la sécurité du transport.</p>
+            ',
+        ],
+
+        'curtainsider-en12642-xl' => [
+            'title'   => 'Certifications d\'arrimage de charge sur les remorques bâchées : que signifie une caisse XL ?',
+            'excerpt' => 'Une bâche ordinaire protège la charge des intempéries ; une caisse certifiée XL, elle, retient la charge. Cette différence change tout, de l\'équipement d\'arrimage à la vitesse d\'exploitation.',
+            'content' => '
+                <p>Sur une remorque bâchée standard, la bâche et la structure de la caisse sont essentiellement une enveloppe ; l\'arrimage de charge repose presque entièrement sur les sangles et les fixations. La caisse de classe XL est le produit d\'une philosophie différente : la carrosserie elle-même — paroi avant, portes arrière, toit et structure bâche-latérale renforcée — est conçue et testée comme un élément de sécurité retenant la charge dans certaines conditions.</p>
+                <h2>Qu\'apporte concrètement la caisse XL ?</h2>
+                <ul>
+                    <li><strong>Moins de travail d\'arrimage :</strong> pour des charges correctement chargées et empilées sans espace, la résistance de la carrosserie peut couvrir une part importante du besoin d\'arrimage</li>
+                    <li><strong>Opération rapide au quai :</strong> la réduction du nombre de sangles au chargement et au déchargement raccourcit le temps passé au quai</li>
+                    <li><strong>Clarté en contrôle :</strong> la plaque de certification sur la caisse fournit un support concret pour l\'évaluation de l\'arrimage de charge lors des contrôles routiers</li>
+                    <li><strong>Préférence du chargeur :</strong> de nombreux grands chargeurs industriels exigent une caisse certifiée dans leurs contrats</li>
+                </ul>
+                <h2>Avertissement critique : le XL n\'est pas magique</h2>
+                <p>Le certificat documente la résistance de la carrosserie, pas le fait que la charge puisse être transportée sans arrimage dans toutes les conditions. La capacité de retenue de la caisse dépend de conditions telles que l\'empilage sans espace de la charge vers l\'avant et les côtés ; si le motif de chargement ne remplit pas ces conditions, les règles d\'arrimage classiques restent pleinement applicables. De plus, des éléments structurels endommagés — bâche déchirée, poutre de toit déformée, serrure de porte défaillante — annulent de fait la validité du certificat sur le terrain, et il faut s\'assurer que la conformité est préservée après réparation.</p>
+                <p>En résumé : la caisse XL, combinée à une bonne culture de chargement, est une caractéristique d\'ingénierie qui vous fait gagner à la fois vitesse et sécurité.</p>
+            ',
+        ],
+
+        'reefer-panel-atp' => [
+            'title'   => 'Technologie des panneaux dans les caisses frigorifiques et certificat ATP',
+            'excerpt' => 'Aussi puissant que soit le groupe frigorifique, l\'élément qui préserve réellement la température est le panneau de la caisse ; le certificat ATP est la preuve internationale de cette protection.',
+            'content' => '
+                <p>Dans le transport frigorifique, l\'attention se porte souvent sur le groupe frigorifique ; pourtant, l\'unité ne fait que récupérer la chaleur perdue. Ce qui détermine la perte elle-même, c\'est la caisse : la qualité d\'isolation des panneaux définit à la fois la consommation d\'énergie du véhicule et l\'éventail de produits qu\'il peut transporter.</p>
+                <h2>L\'anatomie du panneau sandwich</h2>
+                <p>La caisse frigorifique moderne est constituée de panneaux sandwich où une mousse de polyuréthane à haute densité est injectée entre deux couches de surface. Les surfaces sont généralement en polyester renforcé ou en tôle revêtue ; le vrai travail se situe dans le noyau de mousse à cellules fermées. Les détails qui déterminent la qualité du panneau sont invisibles à l\'œil : le remplissage homogène de la mousse, la continuité aux jonctions des panneaux et une conception de fixation ne créant pas de pont thermique. Le sol, lui, est structuré pour ne pas s\'écraser sous la charge et résister au trafic de chariots élévateurs.</p>
+                <h2>Que prouve le certificat ATP ?</h2>
+                <ul>
+                    <li>Il atteste l\'aptitude de la caisse à l\'isolation et à la préservation de la température pour le transport international de denrées périssables</li>
+                    <li>Le véhicule est mesuré dans une station d\'essai agréée et étiqueté selon sa classe</li>
+                    <li>Le certificat est limité dans le temps ; l\'isolation vieillissant, une visite de renouvellement périodique est nécessaire</li>
+                    <li>La plupart des chargeurs alimentaires internationaux ne chargent pas sans certificat valide</li>
+                </ul>
+                <p>La leçon pratique pour l\'opérateur est la suivante : l\'isolation est une caractéristique vivante. Les dommages aux panneaux, l\'usure des joints de porte et les trous non réparés érodent silencieusement l\'isolation ; l\'augmentation du temps de fonctionnement du groupe frigorifique en est la première facture. La flotte qui accorde à la carrosserie autant de soin qu\'au groupe frigorifique s\'épargne des surprises tant sur le carburant que sur le renouvellement du certificat.</p>
+            ',
+        ],
+
+        'platform-project-cargo' => [
+            'title'   => 'Charges de projet sur remorques plateforme : solutions spéciales pour l\'industrie lourde',
+            'excerpt' => 'Transformateur, construction en acier, générateur, corps de presse : le transporteur des charges qui ne rentrent pas au catalogue est la remorque plateforme correctement équipée.',
+            'content' => '
+                <p>La charge de projet est, comme son nom l\'indique, hors norme : chaque transport arrive avec ses propres dimensions, son propre centre de gravité et son propre plan d\'arrimage. La remorque plateforme est le véhicule fondamental de ce monde — sa structure ouverte et plane s\'adapte au chargement à la grue depuis toutes les directions et aux géométries inhabituelles.</p>
+                <h2>Caractéristiques d\'une plateforme adaptée aux charges de projet</h2>
+                <ul>
+                    <li><strong>Châssis et plancher renforcés :</strong> structure renforcée dans les zones de concentration de charges ponctuelles ; résistance du plancher apte à fonctionner avec des plaques de répartition de charge pour les pieds de machines lourdes</li>
+                    <li><strong>Points d\'arrimage à haute capacité :</strong> points marqués selon leur capacité, adaptés aux anneaux de charge lourde et à la fixation par chaîne</li>
+                    <li><strong>Équipement flexible :</strong> ridelles démontables, éléments d\'extension et, si nécessaire, chevalets spéciaux dépassant au-dessus de la charge</li>
+                    <li><strong>Options d\'essieux :</strong> essieu supplémentaire et solutions d\'essieu autobraqué sur les variantes lourdes, gérant à la fois la charge par essieu légale et la manœuvre</li>
+                </ul>
+                <h2>La formule du succès : l\'ingénierie avant le transport</h2>
+                <p>Dans le transport de projet, le travail commence bien avant que la charge ne soit posée sur la plateforme. Le centre de gravité de la charge est déterminé et sa position sur la plateforme est calculée en fonction des charges par essieu ; le plan d\'arrimage est établi selon la masse de la charge et les conditions de frottement ; l\'itinéraire est étudié sous l\'angle du gabarit et des capacités de pont. Le jour du chargement n\'est que le jour où ces calculs sont appliqués.</p>
+                <p>C\'est précisément ce que recherche le client de l\'industrie lourde : une équipe qui gère le transport comme un projet d\'ingénierie, autant que le véhicule lui-même. La remorque plateforme, entre de bonnes mains, est la solution standard pour toute charge qui ne rentre pas dans les catalogues.</p>
+            ',
+        ],
     ],
 ];

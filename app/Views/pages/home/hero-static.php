@@ -4,8 +4,8 @@
  * Home / Statik Sinematik Hero — hazır render görseli + CSS "ikiye ayrılma"
  * =============================================================================
  * 3D YOK. Hero, referans kompozisyonunu içeren TEK bir görseldir
- * (assets/images/cfa5531d...png): kırmızı çekici + mavi açık kasa araç, dikey
- * mavi ışık dikişi ve alt-orta İÇE-AÇILAN neon çukur GÖRSELE GÖMÜLÜDÜR.
+ * (assets/images/25a460c4...png): beyaz çekici + gri silobas (Mucur Beton),
+ * alt-orta İÇE-AÇILAN neon mavi çukur GÖRSELE GÖMÜLÜDÜR.
  *
  * Açılma efekti: görsel iki ÖZDEŞ yarıya (clip-path) bölünür. Dinlenmede yarılar
  * birleşik → tam görsel (dikiş + çukur tam ortada). Scroll'da hero PIN'lenir,
@@ -21,9 +21,9 @@
 // Önbellek kırıcılı URL — layout'taki $asset() preload'u ile BİREBİR eşleşmeli
 // (yoksa preload boşa gider, görsel iki kez inerdi). WebP ~91KB; PNG yalnız
 // WebP dosyası silinirse devreye giren yedektir.
-$heroRel = 'assets/images/cfa5531d-3c63-4571-936f-a964650bfef4.webp';
+$heroRel = 'assets/images/25a460c4-3549-4d3c-9fcc-3140cf583b67.webp';
 if (! is_file(FCPATH . $heroRel)) {
-    $heroRel = 'assets/images/cfa5531d-3c63-4571-936f-a964650bfef4.png';
+    $heroRel = 'assets/images/25a460c4-3549-4d3c-9fcc-3140cf583b67.png';
 }
 $heroFile = FCPATH . $heroRel;
 $heroImg  = base_url($heroRel) . '?v=' . (is_file($heroFile) ? (string) filemtime($heroFile) : '1');
