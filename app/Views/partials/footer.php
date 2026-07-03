@@ -102,7 +102,8 @@ $social = [
 
         <div class="site-footer__col">
             <h3 class="site-footer__title"><?= esc(lang('Navigation.quick_links')) ?></h3>
-            <ul class="site-footer__list">
+            <!-- 14 bağlantı tek sütunda footer'ı aşırı uzatıyordu → 2 sütun -->
+            <ul class="site-footer__list site-footer__list--2col">
                 <?php foreach ($footerLinks as $key): ?>
                     <li>
                         <a href="<?= esc(locale_url($key === 'home' ? '' : $key)) ?>">
@@ -352,7 +353,8 @@ html.nav-locked .fab-stack{
 
 /* Telefon butonu — marka mavisi degrade + mavi nabız halkaları */
 .wa-fab--call .wa-fab__btn{
-    background: radial-gradient(125% 125% at 30% 22%, #6cc0ff 0%, #2f8fe0 45%, #005baa 100%);
+    /* Marka mavisi skalası (yeni.css token'ları) — kopuk ara tonlar kaldırıldı */
+    background: radial-gradient(125% 125% at 30% 22%, var(--blue-sky, #8FD0FF) 0%, var(--blue-bright, #4AA3E6) 45%, var(--blue, #005BAA) 100%);
     box-shadow:
         0 10px 26px rgba(0, 91, 170, .45),
         0 4px 10px rgba(11, 18, 32, .30),

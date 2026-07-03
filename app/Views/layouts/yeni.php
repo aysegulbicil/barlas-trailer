@@ -91,7 +91,9 @@ $asset = static function (string $path): string {
     <!-- Sayfaya özel stiller (opsiyonel) -->
     <?= $this->renderSection('styles') ?>
 </head>
-<body>
+<!-- Ana sayfada header, koyu hero görselinin üzerine saydam biner
+     (yeni-header.css §3). Diğer sayfalar sticky header'la kalır. -->
+<body<?= $__isHome ? ' class="has-hero-header"' : '' ?>>
 
     <a class="skip-link" href="#main-content"><?= esc(lang('Navigation.skip_to_content')) ?></a>
 

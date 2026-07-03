@@ -127,6 +127,11 @@ if (! function_exists('locale_native_name')) {
             'it' => 'Italiano',
             'nl' => 'Nederlands',
             'pl' => 'Polski',
+            'ro' => 'Română',
+            'bg' => 'Български',
+            'el' => 'Ελληνικά',
+            'he' => 'עברית',
+            'zh' => '简体中文',
         ];
 
         return $names[$locale] ?? strtoupper($locale);

@@ -34,7 +34,18 @@
         return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
     }
 
+    var switchTimer = null;
+
     function apply(theme) {
+        /* Renk sıçraması yerine yumuşak geçiş: kısa süreliğine tüm yüzeylerin
+           renk özelliklerini geçişleyen sınıf (theme-light.css sonunda). */
+        root.classList.add('theme-switching');
+        if (switchTimer) window.clearTimeout(switchTimer);
+        switchTimer = window.setTimeout(function () {
+            root.classList.remove('theme-switching');
+            switchTimer = null;
+        }, 420);
+
         root.setAttribute('data-theme', theme);
         syncButtons(theme);
     }

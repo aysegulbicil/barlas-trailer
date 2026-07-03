@@ -21,9 +21,12 @@ $aiExamples = is_array($aiExamples) ? $aiExamples : [];
 
 /* ---------------------------------------------------------------------
    Referans logoları — public/assets/images/refs/ klasörünü otomatik tarar.
-   YENİ LOGO EKLEMEK: temizlenmiş görseli (beyaz/şeffaf zemin) bu klasöre at,
-   adın başına sıra no koy (örn. 08-firma.png). Bant kendiliğinden güncellenir,
-   kod değişikliği gerekmez. Klasör boşsa eski yer tutucu logo gösterilir.
+   YENİ LOGO EKLEMEK: görseli bu klasöre at, adın başına sıra no koy
+   (örn. 08-firma.png). Bant kendiliğinden güncellenir, kod değişmez.
+   Her logo bantta TEK TİP chip üzerinde gösterilir (yeni.css .refs__logo):
+   varsayılan chip BEYAZ; logo açık renkliyse (beyaz/gümüş çizim) dosya
+   adına "-dark" ekle (örn. 08-firma-dark.png) → koyu chip alır.
+   Klasör boşsa eski yer tutucu logo gösterilir.
 --------------------------------------------------------------------- */
 $refLogos = [];
 $refDir   = FCPATH . 'assets/images/refs';

@@ -20,10 +20,16 @@
     --ink-2: rgba(226, 236, 248, 0.72);
     --ink-3: rgba(226, 236, 248, 0.62); /* WCAG AA: küçük metinde 4.5:1 üstü */
 
-    /* Tek vurgu: Barlas mavisi */
-    --blue: #005BAA;
-    --blue-bright: #4AA3E6;
+    /* Tek vurgu: Barlas mavisi — TEK skala, tüm bileşenler buradan okur.
+       (buton, vurgu metni, chat, neon çizgiler aynı aileden ton alır) */
+    --blue-deep: #0A3A68;    /* koyu degrade ucu (kart/panel zeminleri) */
+    --blue-dark: #00467F;    /* basılı durum / degrade koyu ucu */
+    --blue: #005BAA;         /* marka ana mavisi */
+    --blue-hover: #0A6DC4;   /* birincil buton hover */
+    --blue-bright: #4AA3E6;  /* koyu zeminde vurgu / metin mavisi */
+    --blue-sky: #8FD0FF;     /* degrade parlak ucu (neon/başlık) */
     --blue-soft: rgba(74, 163, 230, 0.14);
+    --blue-glow: rgba(74, 163, 230, 0.35);
 
     /* Çizgiler */
     --line: rgba(226, 236, 248, 0.08);
@@ -95,6 +101,9 @@ address { font-style: normal; }
 
 .shell { max-width: var(--shell); margin-inline: auto; padding-inline: var(--pad); }
 
+/* Çapa hedefleri sticky/fixed header'ın altına girmesin */
+main [id] { scroll-margin-block-start: calc(var(--header-offset, 114px) + 12px); }
+
 /* ----------------------------- Butonlar ----------------------------- */
 .btn {
     display: inline-flex;
@@ -121,7 +130,7 @@ address { font-style: normal; }
 @media (hover: hover) and (pointer: fine) {
     /* Premium yükselme: hafif kalkış + maviye çalan yumuşak gölge (saf siyah değil) */
     .btn--primary:hover {
-        background: #0a6dc4;
+        background: var(--blue-hover);
         transform: translateY(-2px);
         box-shadow: 0 16px 30px -16px var(--blue);
     }
@@ -1223,6 +1232,10 @@ html.has-anim .why__cards > .is-in {
     border-color: var(--blue-bright);
     box-shadow: 0 0 0 4px var(--blue-soft);
 }
+/* Dokunmatikte 16px altı giriş metni iOS'ta odakta sayfayı yakınlaştırır */
+@media (pointer: coarse) {
+    .console__form input { font-size: 1rem; }
+}
 .console__send {
     display: grid;
     place-items: center;
@@ -1263,14 +1276,14 @@ html.has-anim .why__cards > .is-in {
 .refs { padding-block: var(--sec-y); }
 .refs .sec-head { margin-block-end: 1.6rem; }
 
-/* Bant zemini sabit lacivert (#181849) — koyu ve aydınlık temada aynı.
-   Literal renk olduğu için tema ezmelerinden etkilenmez. Logolara hiçbir
-   müdahale yok; kaynak neyse öyle gösterilir. */
+/* Bant zemini sabit koyu lacivert — koyu ve aydınlık temada aynı.
+   Literal renk olduğu için tema ezmelerinden etkilenmez. */
 .refs__belt {
     overflow: hidden;
     background: #090F1C;
-    border-block: 1px solid var(--hairline);
-    padding-block: 1.8rem;
+    /* --hairline (açık tema değeri) koyu bantta görünmüyordu — sabit ton */
+    border-block: 1px solid rgba(226, 236, 248, 0.07);
+    padding-block: 1.6rem;
 }
 .refs__belt-track {
     display: flex;
@@ -1288,8 +1301,8 @@ html.has-anim .why__cards > .is-in {
 .refs__belt-group {
     display: flex;
     align-items: center;
-    gap: clamp(2.5rem, 5vw, 5rem);
-    padding-inline-end: clamp(2.5rem, 5vw, 5rem);
+    gap: clamp(1.1rem, 2.2vw, 1.8rem);
+    padding-inline-end: clamp(1.1rem, 2.2vw, 1.8rem);
     margin: 0;
     padding-block: 0;
     list-style: none;
@@ -1300,16 +1313,42 @@ html.has-anim .why__cards > .is-in {
     to   { transform: translateX(-50%); }
 }
 
-/* Logolar karta alınmaz — doğrudan bant zeminine oturur. */
+/* Tek tip logo "chip"i: kaynak logolar karışık formatta (kimi opak beyaz
+   kutulu, kimi şeffaf, boyutlar dengesiz) — hepsine aynı beyaz zemin,
+   aynı yükseklik ve aynı köşe verilerek bant tek düzene oturtulur.
+   Beyaz chip her iki temada da sabittir (bant zemini de sabit koyu). */
 .refs__logo {
     flex: 0 0 auto;
     display: grid;
     place-items: center;
-    opacity: 1;
-    transition: transform var(--t-base) var(--ease-out);
+    min-inline-size: 150px;
+    block-size: 72px;
+    padding-inline: 1.3rem;
+    background: #FFFFFF;
+    border: 1px solid rgba(226, 236, 248, 0.10);
+    border-radius: 14px;
+    transition: transform var(--t-base) var(--ease-out),
+                box-shadow var(--t-base) var(--ease-out);
 }
-.refs__logo:hover { transform: translateY(-2px) scale(1.04); }
-.refs__logo img { height: 36px; width: auto; max-width: 170px; object-fit: contain; display: block; }
+.refs__logo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 32px -18px rgba(0, 0, 0, 0.65);
+}
+.refs__logo img { height: 38px; width: auto; max-width: 160px; object-fit: contain; display: block; }
+
+/* Açık (beyaz/gümüş) çizimli logolar beyaz chipte kaybolur → koyu chip.
+   Kalıcı kural: dosya adı "-dark" içeren her logo koyu chip alır (yeni logo
+   eklerken açık renkliyse adına "-dark" ekle, örn. 16-firma-dark.png).
+   Mevcut sayısal adlardan bilinenler: 11=EVC, 13=Kurşun Grup, 14=Uçan,
+   15=Mücür (siyah kutulu — koyu chipte kutusu kaybolur). */
+.refs__logo[data-logo="11"],
+.refs__logo[data-logo="13"],
+.refs__logo[data-logo="14"],
+.refs__logo[data-logo="15"],
+.refs__logo[data-logo*="-dark"] {
+    background: #111B30;
+    border-color: rgba(226, 236, 248, 0.14);
+}
 
 @media (prefers-reduced-motion: reduce) {
     .refs__belt-track { animation: none; flex-wrap: wrap; width: auto; }

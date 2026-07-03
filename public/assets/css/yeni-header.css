@@ -27,6 +27,7 @@
     --yh-line: rgba(226, 236, 248, 0.08);
     --yh-line-2: rgba(226, 236, 248, 0.16);
     --yh-blue: #005BAA;
+    --yh-blue-dark: #00467F;
     --yh-blue-bright: #4AA3E6;
 }
 
@@ -88,7 +89,7 @@
     width: 2.4rem;
     height: 2.4rem;
     border-radius: 12px;
-    background: linear-gradient(150deg, var(--yh-blue) 0%, #00467f 100%);
+    background: linear-gradient(150deg, var(--yh-blue) 0%, var(--yh-blue-dark) 100%);
     color: #fff;
     font-weight: 800;
 }
@@ -157,6 +158,8 @@
     background: var(--yh-bg-0);
     color: var(--yh-ink-2);
     border-block-end: 1px solid var(--yh-line);
+    transition: background-color 240ms var(--ease-out, ease-out),
+                border-color 240ms var(--ease-out, ease-out);
 }
 .topbar__link { color: var(--yh-ink-2); }
 .topbar__link:hover { color: var(--yh-ink-1); }
@@ -290,7 +293,7 @@
    tonuna çek ve turuncu vurguları maviye çevir. */
 .mega-panel { background-color: var(--yh-bg-1); }
 .mega-srv__cta-btn { background: var(--yh-blue); }
-.mega-srv__cta-btn:hover { background: #00467f; }
+.mega-srv__cta-btn:hover { background: var(--yh-blue-dark); }
 
 /* Hareket azaltma */
 @media (prefers-reduced-motion: reduce) {
@@ -318,4 +321,63 @@
     .topbar__contact { gap: 0.9rem; }
     .topbar__actions { gap: 0.15rem; }
     .lang-switcher__toggle { padding-inline: var(--space-2, 0.5rem); }
+}
+
+/* ------------------------------------------------------------------ */
+/* 3) HERO ÜZERİ SAYDAM HEADER (yalnızca ana sayfa: body.has-hero-header)
+      Header koyu hero görselinin ÜZERİNE biner; en üstteyken tamamen
+      saydamdır (bıçak kesiği yok), scroll başlayınca .is-scrolled ile
+      temaya uygun zeminini geri kazanır. Hero daima koyu olduğundan
+      saydam durumda mürekkep renkleri HER İKİ temada da açık tutulur.  */
+/* ------------------------------------------------------------------ */
+
+body.has-hero-header .site-header {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline: 0;
+}
+
+body.has-hero-header .site-header:not(.is-scrolled) {
+    /* Saydam durumda header "koyu tema" paletiyle davranır (hero koyu):
+       dropdown/mega yüzeyleri dahil — açık temada da okunur kalır. */
+    --yh-bg-0: #070D17;
+    --yh-bg-1: #0B1322;
+    --yh-bg-2: #101A2E;
+    --yh-ink-1: #F0F5FC;
+    --yh-ink-2: rgba(226, 236, 248, 0.78);
+    --yh-ink-3: rgba(226, 236, 248, 0.5);
+    --yh-line: rgba(226, 236, 248, 0.08);
+    --yh-line-2: rgba(226, 236, 248, 0.16);
+    --yh-blue-bright: #4AA3E6;
+}
+
+body.has-hero-header .site-header:not(.is-scrolled) .topbar,
+body.has-hero-header .site-header:not(.is-scrolled) .navbar-main {
+    background: transparent;
+    border-block-end-color: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+/* Saydam durumda menü bağlantıları koyu hero üzerinde daima açık renk */
+body.has-hero-header .site-header:not(.is-scrolled) .nav-menu__link { color: var(--yh-ink-2); }
+body.has-hero-header .site-header:not(.is-scrolled) .nav-menu__link:hover,
+body.has-hero-header .site-header:not(.is-scrolled) .nav-menu__link.is-active,
+body.has-hero-header .site-header:not(.is-scrolled) .nav-menu__item.is-open .nav-menu__link { color: var(--yh-ink-1); }
+
+/* Hover zeminleri: açık temanın koyu-tint hover'ları saydam koyu duruma uymaz */
+body.has-hero-header .site-header:not(.is-scrolled) .theme-toggle:hover,
+body.has-hero-header .site-header:not(.is-scrolled) .lang-switcher__toggle:hover { background: rgba(255, 255, 255, 0.08); }
+body.has-hero-header .site-header:not(.is-scrolled) .lang-switcher__item:hover { background: rgba(255, 255, 255, 0.06); }
+
+/* Açık temada saydam durumdayken beyaz logo görünür (koyu hero üzerinde) */
+body.has-hero-header .site-header:not(.is-scrolled) .brand__img--on-dark { display: block; }
+body.has-hero-header .site-header:not(.is-scrolled) .brand__img--on-light { display: none; }
+
+/* Mobil çekmece açıkken saydamlık iptal: menü zemini okunur kalmalı */
+html.nav-locked body.has-hero-header .site-header .topbar,
+html.nav-locked body.has-hero-header .site-header .navbar-main {
+    background: var(--yh-bg-1);
+    border-block-end-color: var(--yh-line);
 }

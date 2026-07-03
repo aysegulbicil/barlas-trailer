@@ -21,10 +21,55 @@
     var busy     = false;
 
     function setOpen(open) {
+        if (open) removeBubble(true);
         panel.hidden = !open;
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
         if (open && input) input.focus();
     }
+
+    /* ------------------- Karşılama balonu -------------------
+       Panel varsayılan KAPALI başlar (hero'yu örtmez). Sayfa açılışından
+       birkaç saniye sonra FAB'ın yanında küçük bir karşılama balonu çıkar;
+       tıklanınca panel açılır. Oturum başına bir kez gösterilir. Metin,
+       paneldeki mevcut karşılama mesajından alınır (ek çeviri gerekmez). */
+    var bubble = null;
+
+    function removeBubble(instant) {
+        if (!bubble) return;
+        var el = bubble;
+        bubble = null;
+        if (instant) {
+            el.remove();
+            return;
+        }
+        el.classList.add('is-leaving');
+        window.setTimeout(function () { el.remove(); }, 260);
+    }
+
+    function showBubble() {
+        if (!panel.hidden || bubble) return;
+        var first = messages ? messages.querySelector('.aw__msg--bot') : null;
+        var text = first ? first.textContent.trim() : '';
+        if (!text) return;
+        bubble = document.createElement('button');
+        bubble.type = 'button';
+        bubble.className = 'aw__bubble';
+        /* Metin iç span'de: satır sınırı (line-clamp) padding'e taşmadan uygulanır */
+        var span = document.createElement('span');
+        span.className = 'aw__bubble-text';
+        span.textContent = text;
+        bubble.appendChild(span);
+        root.insertBefore(bubble, toggle);
+        bubble.addEventListener('click', function () { setOpen(true); });
+        window.setTimeout(function () { removeBubble(false); }, 12000);
+    }
+
+    try {
+        if (!sessionStorage.getItem('barlas-aw-hello')) {
+            sessionStorage.setItem('barlas-aw-hello', '1');
+            window.setTimeout(showBubble, 3500);
+        }
+    } catch (e) { /* gizli mod: balonu atla */ }
 
     toggle.addEventListener('click', function () { setOpen(panel.hidden); });
     closeBtn.addEventListener('click', function () { setOpen(false); toggle.focus(); });

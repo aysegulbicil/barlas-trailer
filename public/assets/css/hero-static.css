@@ -19,9 +19,9 @@
 .hs__pin {
     position: relative;
     width: 100%;
-    /* Sticky header (topbar 41 + navbar 73 = 114px) altında tam ekran kalsın →
-       araç + çukur + "aşağı kaydırın" tek ekranda görünür (referans gibi). */
-    height: calc(100svh - 114px);
+    /* Header ana sayfada hero ÜZERİNE saydam biner (body.has-hero-header,
+       yeni-header.css §3) → hero gerçek tam ekran. */
+    height: 100svh;
     min-height: 520px;
     overflow: hidden;
     background: #05070d;
@@ -110,7 +110,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;            /* referans: metin alt-solda, koyu zemin üzerinde */
-    padding: calc(var(--header-h, 72px) + 1rem) var(--pad, 1.5rem) clamp(3.5rem, 11vh, 7rem);
+    padding: calc(var(--header-offset, 114px) + 1rem) var(--pad, 1.5rem) clamp(4rem, 10vh, 6.5rem);
     pointer-events: none;
     will-change: opacity, transform;
 }
@@ -150,7 +150,7 @@
     font-size: 0.68rem;
     /* Hero görseli DAİMA koyu → metin temadan bağımsız beyaz (açık temada da görünür). */
     color: rgba(238, 244, 252, 0.82);
-    margin-bottom: 1rem;
+    margin-bottom: 0.9rem;
 }
 
 .hs__eyebrow-dot {
@@ -170,14 +170,14 @@
     font-size: clamp(1.8rem, 1rem + 3vw, 3rem);
     /* Temadan bağımsız beyaz (koyu hero üzerinde daima okunur) */
     color: #F4F8FF;
-    margin: 0 0 1rem;
+    margin: 0 0 1.05rem;
     text-shadow: 0 2px 40px rgba(3, 8, 20, 0.6);
 }
 
 .hs__line { display: block; }
 
 .hs__line--accent {
-    background: linear-gradient(100deg, var(--blue-bright, #4AA3E6), #8fd0ff 60%, var(--blue, #005BAA));
+    background: linear-gradient(100deg, var(--blue-bright, #4AA3E6), var(--blue-sky, #8FD0FF) 60%, var(--blue, #005BAA));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -190,7 +190,7 @@
     color: rgba(233, 240, 250, 0.85);
     font-size: clamp(0.92rem, 0.88rem + 0.32vw, 1.08rem);
     line-height: 1.6;
-    margin: 0 0 1.7rem;
+    margin: 0 0 1.9rem;
     text-shadow: 0 2px 24px rgba(3, 8, 20, 0.6);
 }
 
@@ -204,7 +204,7 @@
 .hs__hint {
     position: absolute;
     left: 50%;
-    bottom: 1.6rem;
+    bottom: 2rem;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
@@ -240,6 +240,30 @@
     animation: hs-arrow 1.9s ease-in-out infinite;
 }
 
+/* --------------------- sinematik giriş (yalnızca .hs--ready) ----------
+   JS motoru çalıştığında (reduced-motion değilse) metin bloğu alttan
+   yumuşakça süzülür. .hs--ready yoksa (no-JS / reduced-motion) hiçbir
+   şey gizlenmez — içerik anında görünür. */
+.hs--ready .hs__eyebrow,
+.hs--ready .hs__title,
+.hs--ready .hs__sub,
+.hs--ready .hs__actions {
+    animation: hs-rise 0.85s cubic-bezier(0.22, 1, 0.32, 1) both;
+}
+.hs--ready .hs__title   { animation-delay: 0.08s; }
+.hs--ready .hs__sub     { animation-delay: 0.16s; }
+.hs--ready .hs__actions { animation-delay: 0.24s; }
+.hs--ready .hs__hint    { animation: hs-fade 0.9s ease 0.8s both; }
+
+@keyframes hs-rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: none; }
+}
+@keyframes hs-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
 /* ------------------------------ animasyonlar --------------------------- */
 @keyframes hs-pulse {
     0%, 100% { box-shadow: 0 0 0 4px rgba(74, 163, 230, 0.20); }
@@ -255,9 +279,12 @@
     /* NOT: background-position DEĞİŞTİRİLMEZ → görselin ortadaki dikişi ve alt
        çukuru %50 bölünme çizgisiyle hizalı kalır (yatay kaydırma dikişi kaçırıp
        "ikiye ayrılma" hizasını bozardı). Dar ekranda araç doğal olarak kırpılır. */
-    .hs__overlay { justify-content: flex-end; padding-bottom: 5.5rem; }
+    .hs__overlay { justify-content: flex-end; padding-bottom: 4.5rem; }
     .hs__sub { margin-bottom: 1.6rem; }
     .hs__actions .btn { flex: 1 1 auto; }
+    /* Dar ekranda CTA tam genişlik olduğundan ortalanmış ipucu butonun
+       üzerine biniyordu — mobilde ipucu gizlenir (kaydırma zaten sezgisel). */
+    .hs__hint { display: none; }
 }
 
 /* =========================== REDUCED MOTION =========================== */

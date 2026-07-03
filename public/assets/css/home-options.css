@@ -5,7 +5,8 @@
    ===================================================================== */
 
 .options {
-    padding-block: 4.5rem 1.5rem;
+    /* Hero ile 3D yol sahnesi arasında dengeli nefes payı (ritim: --sec-y-sm) */
+    padding-block: var(--sec-y-sm, 4.5rem) var(--sec-y-sm, 4.5rem);
 }
 
 .options__grid {
@@ -35,7 +36,9 @@
     background: var(--bg-2, #101A2E);
     color: var(--ink-1, #F0F5FC);
     text-decoration: none;
-    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    transition: transform var(--t-base, 240ms) var(--ease-out, ease),
+                border-color var(--t-base, 240ms) var(--ease-out, ease),
+                box-shadow var(--t-base, 240ms) var(--ease-out, ease);
 }
 
 .option-card:hover,
@@ -52,7 +55,7 @@
 
 /* Tek birincil eylem görsel olarak öne çıkar (teklif) */
 .option-card--primary {
-    background: linear-gradient(150deg, var(--blue, #005BAA), #0a3a68 70%);
+    background: linear-gradient(150deg, var(--blue, #005BAA), var(--blue-deep, #0A3A68) 70%);
     border-color: var(--blue-bright, #4AA3E6);
 }
 
@@ -103,7 +106,7 @@
     align-self: flex-end;
     font-size: 1.3rem;
     color: var(--blue-bright, #4AA3E6);
-    transition: transform 0.22s ease;
+    transition: transform var(--t-base, 240ms) var(--ease-out, ease);
 }
 
 .option-card--primary .option-card__arrow { color: #fff; }

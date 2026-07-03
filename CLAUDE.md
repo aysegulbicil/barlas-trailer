@@ -6,10 +6,10 @@
 - Kullanıcıyla **Türkçe** konuş. Kod, değişken, dosya adı ve commit mesajları **İngilizce**.
 
 ## Çok dillilik (i18n) — en kritik kural
-- 10 dil: **tr (varsayılan), en, de, ru, ar, fr, es, it, nl, pl**. URL öneki ile yönlendirme: `/{locale}/...`. (de/nl/it/pl/es 2026-07-02'de eklendi — kullanıcının dil listesi, PDF'in 13'lü listesi DEĞİL; çeviriler Claude üretimi, ana-dil kontrolü bekliyor.)
+- 15 dil: **tr (varsayılan), en, de, ru, ar, fr, es, it, nl, pl, ro, bg, el, he, zh**. URL öneki ile yönlendirme: `/{locale}/...`. (PDF'in 13 dili + nl/it; RTL = ar **ve he** — `is_rtl()` helper'ı yönetir. Tüm çeviriler Claude üretimi, ana-dil kontrolü bekliyor.)
 - Locale çözümü: `app/Filters/LanguageFilter.php` (URI 1. segment) + `locale` çerezi. Bare `/` → `LanguageController::index`.
 - UI metinleri **yalnızca** CI4 dil dosyalarından gelir: `app/Language/{locale}/*.php` (Ai, Blog, Common, Contact, Faq, Games, Home, Legal, Markets, Media, Navigation, News, Press, Products, Quiz, Quote, Services, Tools, Vehicle, Wiki).
-- **Dosya paritesi zorunlu:** bir dile anahtar eklersen 10 dilin hepsine ekle. (Not: `Validation.php` yalnızca `en`'de — bilinen boşluk. Jarvis paneli görünümleri bilinçli tek dilli Türkçe'dir, parite kuralının kapsamı dışındadır. Wiki/news markdown içerikleri de/nl/it/pl/es'te henüz yok — MarkdownContent tr'ye düşer, sayfalar çalışır; çeviri dosyaları sonradan bırakılabilir.)
+- **Dosya paritesi zorunlu:** bir dile anahtar eklersen 15 dilin hepsine ekle. (Not: `Validation.php` yalnızca `en`'de — bilinen boşluk. Jarvis paneli görünümleri bilinçli tek dilli Türkçe'dir, parite kuralının kapsamı dışındadır. Wiki/news markdown içerikleri yalnız tr/en/ru/ar/fr'de var — diğer 10 dilde MarkdownContent tr'ye düşer, sayfalar çalışır; çeviri dosyaları sonradan bırakılabilir.)
 - Arapça (ar) **RTL**; CSS'te fiziksel değil **mantıksal** özellikler kullan (`margin-inline-start` vb.).
 
 ## Çalıştırma
@@ -30,7 +30,7 @@
 ## Dokunma / dikkat
 - Kullanıcının Codex ile eklediği dosyalar korunacak: `public/assets/js/categories-carousel.js`, `ai-assistant.js` ve benzeri post-phase geliştirmeler — **değiştirme**.
 - `docs/ROADMAP.md` ≈ `PROJECT_STRUCTURE.md` kopyası; gerçek yol haritası değil.
-- Referans logo duvarı tema-duyarlı arka plan kullanır; karışık/opak logolar (4/5/6/15) tema başına bozulur — düzeltme = kaynak görselleri değiştirmek, CSS değil.
+- Referans logo duvarı (2026-07-03): sabit koyu bant + TEK TİP chip sistemi (`yeni.css .refs__logo`). Varsayılan chip beyaz; açık/beyaz çizimli logolar koyu chip alır — yeni logo açık renkliyse dosya adına `-dark` ekle (örn. `16-firma-dark.png`). Mevcut koyu chip'liler: 11 (EVC), 13 (Kurşun Grup), 14 (Uçan), 15 (Mücür).
 
 ## Yapı özeti
 - `app/Controllers/` — Home, Products, Services, Blog, Contact, Quote, Media, Ai, Language, Tools (hesaplayıcılar+quiz), Faq, Games, Legal, Wiki, Press, Markets (ülke sayfaları), News (üretim haberleri), Vehicle (QR kart + şasi doğrulama), Sitemap (sitemap.xml+robots.txt dinamik), Panel (Jarvis).

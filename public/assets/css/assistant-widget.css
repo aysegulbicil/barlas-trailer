@@ -20,6 +20,18 @@
     color: var(--ink-1, #F0F5FC);
     box-shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.55);
     overflow: hidden;
+    /* Panel görünür olduğunda yumuşak açılış (display:none → flex geçişinde oynar) */
+    animation: aw-pop 280ms cubic-bezier(0.22, 1, 0.32, 1) both;
+    transform-origin: 100% 100%;
+}
+
+/* KRİTİK: display:flex, UA'nın [hidden]{display:none} kuralını eziyordu →
+   panel sayfa açılışında açık geliyordu. Varsayılan durum: KAPALI. */
+.aw__panel[hidden] { display: none; }
+
+@keyframes aw-pop {
+    from { opacity: 0; transform: translateY(14px) scale(0.96); }
+    to   { opacity: 1; transform: none; }
 }
 
 .aw__head {
@@ -28,7 +40,7 @@
     justify-content: space-between;
     gap: 0.6rem;
     padding: 0.85rem 1rem;
-    background: linear-gradient(135deg, var(--blue, #005BAA), #0a3a68);
+    background: linear-gradient(135deg, var(--blue, #005BAA), var(--blue-deep, #0A3A68));
     color: #fff;
 }
 
@@ -81,6 +93,13 @@
 }
 
 .aw__quick-btn svg { inline-size: 17px; block-size: 17px; flex: none; }
+
+.aw__quick-btn,
+.aw__link {
+    transition: border-color 240ms cubic-bezier(0.22, 1, 0.32, 1),
+                background-color 240ms cubic-bezier(0.22, 1, 0.32, 1),
+                color 240ms cubic-bezier(0.22, 1, 0.32, 1);
+}
 
 .aw__quick-btn:hover { border-color: var(--blue-bright, #4AA3E6); }
 
@@ -196,11 +215,55 @@
     outline-offset: 2px;
 }
 
+/* --------------------- Karşılama balonu (FAB yanı) --------------------
+   assistant-widget.js sayfa açılışından birkaç saniye sonra gösterir;
+   panel varsayılan kapalı kaldığı için hero'yu örtmez. Tıklanınca panel
+   açılır; oturum başına bir kez görünür. */
+.aw__bubble {
+    max-inline-size: min(240px, calc(100vw - 6.5rem));
+    padding: 0.7rem 0.95rem;
+    border: 1px solid rgba(127, 152, 190, 0.3);
+    border-radius: 14px;
+    border-end-end-radius: 4px;
+    background: var(--bg-2, #101A2E);
+    color: var(--ink-1, #F0F5FC);
+    font-size: 0.88rem;
+    line-height: 1.45;
+    text-align: start;
+    cursor: pointer;
+    box-shadow: 0 18px 44px -16px rgba(0, 0, 0, 0.5);
+    animation: aw-pop 320ms cubic-bezier(0.22, 1, 0.32, 1) both;
+    transform-origin: 100% 100%;
+}
+.aw__bubble.is-leaving { opacity: 0; transform: translateY(8px); transition: opacity 240ms ease, transform 240ms ease; }
+.aw__bubble:focus-visible { outline: 2px solid var(--blue-bright, #4AA3E6); outline-offset: 2px; }
+
+/* En fazla 3 satır (iç span'de: padding alanına satır taşması olmaz) */
+.aw__bubble-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .aw__panel, .aw__bubble { animation: none; }
+    .aw__quick-btn, .aw__link, .aw__bubble.is-leaving { transition: none; }
+}
+
 /* Aydınlık tema: panel yüzeyleri tema token'larını izler */
 :root[data-theme="light"] .aw__panel {
     background: #fff;
     color: #10233c;
     border-color: rgba(16, 35, 60, 0.14);
+}
+
+:root[data-theme="light"] .aw__bubble {
+    background: #fff;
+    color: #10233c;
+    border-color: rgba(16, 35, 60, 0.16);
+    box-shadow: 0 18px 44px -18px rgba(16, 26, 44, 0.35);
 }
 
 :root[data-theme="light"] .aw__msg--bot { background: rgba(0, 91, 170, 0.08); }
@@ -214,4 +277,9 @@
     .aw__panel {
         inline-size: calc(100vw - 1.6rem);
     }
+}
+
+/* Dokunmatikte giriş alanı 16px altı olursa iOS odakta sayfayı yakınlaştırır */
+@media (pointer: coarse) {
+    .aw__input { font-size: 1rem; }
 }

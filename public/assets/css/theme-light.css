@@ -25,10 +25,15 @@
     --ink-2: rgba(20, 31, 50, 0.78);
     --ink-3: rgba(20, 31, 50, 0.54);
 
-    /* Vurgu: Barlas mavisi — aydınlıkta okunur ton */
+    /* Vurgu: Barlas mavisi — aynı skala, aydınlıkta okunur karşılıklar */
+    --blue-deep: #0A3A68;
+    --blue-dark: #00467F;
     --blue: #005BAA;
-    --blue-bright: #0A6DC4;
+    --blue-hover: #004C8F;   /* açık zeminde hover koyulaşır (parlamaz) */
+    --blue-bright: #0A6DC4;  /* açık zeminde vurgu: AA kontrastlı ton */
+    --blue-sky: #4AA3E6;     /* degrade parlak ucu, açıkta bir kademe koyu */
     --blue-soft: rgba(0, 91, 170, 0.10);
+    --blue-glow: rgba(0, 91, 170, 0.25);
 
     /* Çizgiler */
     --line: rgba(16, 26, 44, 0.10);
@@ -132,4 +137,28 @@
     :root[data-theme] .blog-card,
     :root[data-theme] .sidebar-widget,
     :root[data-theme] .site-footer { transition: none; }
+}
+
+/* ------------------- 6) Tema geçişi: tüm yüzeyler yumuşar -------------
+   theme-toggle.js geçiş anında <html>'e .theme-switching ekler (~420ms).
+   Yalnızca o pencerede TÜM elemanların renk özellikleri geçişlenir; kalıcı
+   global transition maliyeti yoktur (hover/transform performansı bozulmaz). */
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+    transition:
+        background-color 360ms var(--ease-out, ease-out),
+        border-color 360ms var(--ease-out, ease-out),
+        color 360ms var(--ease-out, ease-out),
+        fill 360ms var(--ease-out, ease-out),
+        stroke 360ms var(--ease-out, ease-out),
+        box-shadow 360ms var(--ease-out, ease-out) !important;
+    transition-delay: 0s !important;
+}
+@media (prefers-reduced-motion: reduce) {
+    html.theme-switching,
+    html.theme-switching *,
+    html.theme-switching *::before,
+    html.theme-switching *::after { transition: none !important; }
 }
