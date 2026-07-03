@@ -38,7 +38,7 @@ $d = $constants['defaults'] ?? [];
         <div class="tools-grid">
 
             <!-- C1: Yakıt & Navlun -->
-            <article class="tool-card" id="fuel" data-tool="fuel">
+            <article class="tool-card glass-panel" id="fuel" data-tool="fuel">
                 <header class="tool-card__head">
                     <h2 class="tool-card__title"><?= esc(lang('Tools.c1_title')) ?></h2>
                     <p class="tool-card__desc"><?= esc(lang('Tools.c1_desc')) ?></p>
@@ -93,7 +93,7 @@ $d = $constants['defaults'] ?? [];
             </article>
 
             <!-- C2: Palet -->
-            <article class="tool-card" id="pallet" data-tool="pallet">
+            <article class="tool-card glass-panel" id="pallet" data-tool="pallet">
                 <header class="tool-card__head">
                     <h2 class="tool-card__title"><?= esc(lang('Tools.c2_title')) ?></h2>
                     <p class="tool-card__desc"><?= esc(lang('Tools.c2_desc')) ?></p>
@@ -142,7 +142,7 @@ $d = $constants['defaults'] ?? [];
             </article>
 
             <!-- C3: Hacim–Tonaj -->
-            <article class="tool-card" id="volume" data-tool="volume">
+            <article class="tool-card glass-panel" id="volume" data-tool="volume">
                 <header class="tool-card__head">
                     <h2 class="tool-card__title"><?= esc(lang('Tools.c3_title')) ?></h2>
                     <p class="tool-card__desc"><?= esc(lang('Tools.c3_desc')) ?></p>
@@ -202,7 +202,7 @@ $d = $constants['defaults'] ?? [];
             </article>
 
             <!-- C4: Aks yükü -->
-            <article class="tool-card" id="axle" data-tool="axle"
+            <article class="tool-card glass-panel" id="axle" data-tool="axle"
                      data-msg-ok="<?= esc(lang('Tools.c4_ok'), 'attr') ?>"
                      data-msg-warn-axles="<?= esc(lang('Tools.c4_warn_axles'), 'attr') ?>"
                      data-msg-warn-kingpin="<?= esc(lang('Tools.c4_warn_kingpin'), 'attr') ?>">
@@ -261,8 +261,15 @@ $d = $constants['defaults'] ?? [];
 
 <?php $this->section('styles') ?>
 <link rel="stylesheet" href="<?= base_url('assets/css/tools.css') ?>?v=<?= is_file(FCPATH . 'assets/css/tools.css') ? filemtime(FCPATH . 'assets/css/tools.css') : '1' ?>">
+<?php /* Sinematik kaplama: cam panel reçetesi (cinema.css) + hesaplayıcıya özel
+         katman (tools-cinema.css). Sıra önemli: tools.css'ten SONRA gelirler ki
+         .glass-panel kart zeminini, tools-cinema da sonuç panelini ezebilsin. */ ?>
+<link rel="stylesheet" href="<?= base_url('assets/css/cinema.css') ?>?v=<?= is_file(FCPATH . 'assets/css/cinema.css') ? filemtime(FCPATH . 'assets/css/cinema.css') : '1' ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/tools-cinema.css') ?>?v=<?= is_file(FCPATH . 'assets/css/tools-cinema.css') ? filemtime(FCPATH . 'assets/css/tools-cinema.css') : '1' ?>">
 <?php $this->endSection() ?>
 
 <?php $this->section('scripts') ?>
 <script src="<?= base_url('assets/js/tools.js') ?>?v=<?= is_file(FCPATH . 'assets/js/tools.js') ? filemtime(FCPATH . 'assets/js/tools.js') : '1' ?>" defer></script>
+<?php /* Canlı sayaç katmanı — yalnız sunum; tools.js'ten SONRA yüklenir. */ ?>
+<script src="<?= base_url('assets/js/tools-cinema.js') ?>?v=<?= is_file(FCPATH . 'assets/js/tools-cinema.js') ? filemtime(FCPATH . 'assets/js/tools-cinema.js') : '1' ?>" defer></script>
 <?php $this->endSection() ?>

@@ -114,6 +114,11 @@ $options = [
     </div>
 </section>
 
+<!-- ===================== GÜVEN ŞERİDİ (marquee — akan sertifika/ihracat bandı) ===================== -->
+<!-- Editoryal katman buradan yüklenir (cinema-editorial.css/js — bölüm
+     numaratörü "// 01" + yol sahnesi arkasındaki kontur kelime dahil). -->
+<?= $this->include('pages/home/marquee') ?>
+
 <!-- ===================== TANITIM: TANKER YOLDA (pinli 3D sahne — korunur) ===================== -->
 <section class="road" id="tanitim" data-road>
     <div class="road__frame">

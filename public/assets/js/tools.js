@@ -24,7 +24,10 @@
     var nf2 = new Intl.NumberFormat(document.documentElement.lang || 'tr', { maximumFractionDigits: 2 });
 
     function num(form, name) {
-        var el = form.elements[name];
+        /* DİKKAT: form.elements[name] KULLANMA — "length" gibi adlar
+           koleksiyonun kendi özellikleriyle çakışır (sayı döner, alan değil).
+           namedItem her zaman kontrolü verir. */
+        var el = form.elements.namedItem(name);
         if (!el) return NaN;
         var v = parseFloat(String(el.value).replace(',', '.'));
         return isNaN(v) ? NaN : v;
@@ -105,15 +108,21 @@
     function initPallet(card) {
         var form   = card.querySelector('[data-tool-form]');
         var preset = form.elements.preset;
+        /* "length" adı HTMLFormControlsCollection.length ile çakışır:
+           form.elements.length SAYI döner ve strict modda .readOnly ataması
+           TypeError fırlatır (bu da sonraki kartların init'ini kilitliyordu).
+           namedItem ile gerçek alanlar alınır. */
+        var lengthEl = form.elements.namedItem('length');
+        var widthEl  = form.elements.namedItem('width');
 
         function applyPreset() {
             var p = presets[preset.value];
             var custom = !p;
-            form.elements.length.readOnly = !custom;
-            form.elements.width.readOnly  = !custom;
+            lengthEl.readOnly = !custom;
+            widthEl.readOnly  = !custom;
             if (p) {
-                form.elements.length.value = p.inner_length_m;
-                form.elements.width.value  = p.inner_width_m;
+                lengthEl.value = p.inner_length_m;
+                widthEl.value  = p.inner_width_m;
             }
         }
         preset.addEventListener('change', applyPreset);

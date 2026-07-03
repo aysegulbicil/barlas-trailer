@@ -13,6 +13,12 @@ class Home extends BaseController
 {
     public function index(): string
     {
+        // File-based content only (products.json, refs glob, numbers SVG) —
+        // heaviest page on the site, safe to cache: no CSRF token in output
+        // and the intro overlay is deliberately client-side gated (see
+        // partials/cinema-intro.php). Same TTL as sibling controllers.
+        $this->cachePage(3600);
+
         $data = [
             // Page-level SEO overrides (fall back to Common.* defaults if omitted).
             'metaTitle'       => lang('Common.meta_title'),

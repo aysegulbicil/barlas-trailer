@@ -1,0 +1,207 @@
+/* =============================================================================
+   cinema-editorial.css — editoryal katman stilleri (dergi kapağı estetiği)
+   =============================================================================
+   Ödül sitesi dili: numaralı bölümler ("// 01"), akan güven şeridi ve hero
+   nesnesinin arkasında dev kontur kelime. Dört parça:
+
+     1) .cine-chap        — cinema-editorial.js'in her bölüm başlığına enjekte
+                            ettiği "// 01" numaratörü + inline-end'e uzayan
+                            ince çizgi (mutlak konum → düzeni İTMEZ).
+     2) .cine-chap-ghost  — başlığın ARKASINDAKİ dev hayalet rakam; başlık
+                            kutusuna kırpılır, yalnız cine-full'da görünür.
+     3) .marquee          — güven şeridi (pages/home/marquee.php): saf CSS
+                            sonsuz bant, hover'da duraklar.
+     4) .cine-word        — 3D yol sahnesinin ARKASINDAKİ dev kontur kelime
+                            (cinema-editorial.js enjekte eder + sürer).
+
+   Kapılar (cinema-core.js <html>'e yazar): cine-off → hareket yok ama içerik
+   GÖRÜNÜR; cine-lite → yavaş bant, hayalet/kontur yok; cine-full → tam paket.
+   Fiziksel değil MANTIKSAL özellikler (RTL: ar + he); bant yönü ayna
+   keyframe ile döner. Renkler cinema.css + yeni.css token'larından.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   1) Bölüm numaratörü — "// 01" + ince çizgi
+   --------------------------------------------------------------------------- */
+
+.cine-chap-host { position: relative; }
+
+/* Hayalet rakamın z:-1'i başlığın KENDİ bağlamında kalsın (bölüm arka planının
+   arkasına düşmesin). .road__head'e dokunma: onun z-index'i (2) kanvasın
+   üstünde kalmak zorunda — zaten kendi bağlamını kurar. */
+.sec-head.cine-chap-host { z-index: 0; }
+
+.cine-chap {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: -2.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    pointer-events: none;
+    font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cine-glow);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s var(--ease-out, ease-out), transform 0.7s var(--ease-out, ease-out);
+}
+.cine-chap::after {
+    /* İnce çizgi inline-end'e uzar — yön-bağımsız düz ton (RTL güvenli). */
+    content: "";
+    flex: 1 1 auto;
+    block-size: 1px;
+    background: var(--cine-glow-soft, rgba(79, 141, 255, 0.18));
+}
+.cine-chap-host.is-on .cine-chap { opacity: 1; transform: none; }
+
+/* Yol başlığının üst dolgusu büyüktür (header offset) — numaratörü başlık
+   metninin hemen üstüne indir (dolgu − ~2.2rem). */
+.road__head .cine-chap {
+    inset-block-start: calc(var(--header-offset, var(--header-h, 72px)) + 0.3rem);
+}
+
+/* Hareket kapalıyken numaratör STATİK görünür (içerik asla gizli kalmaz).
+   cinema.css'in cine-off emniyet ağı geçişleri zaten öldürür. */
+.cine-off .cine-chap { opacity: 1; transform: none; }
+
+/* ---------------------------------------------------------------------------
+   2) Hayalet rakam — başlık arkasında dev kontur "01" (yalnız cine-full)
+   --------------------------------------------------------------------------- */
+
+.cine-chap-ghost { display: none; }
+
+.cine-full .cine-chap-ghost {
+    /* Kırpıcı sarmalayıcı: dev rakamı başlık ALANINA hapseder, taşırmaz. */
+    display: block;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+.cine-full .cine-chap-ghost b {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: -0.04em;
+    transform: translateY(-50%);
+    font-family: var(--font-display, inherit);
+    font-size: clamp(110px, 13vw, 210px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--ink-1, #e8eefc);
+    opacity: 0;
+    transition: opacity 1.2s var(--ease-out, ease-out) 0.2s;
+}
+.cine-full .cine-chap-host.is-on .cine-chap-ghost b { opacity: 0.06; }
+.cine-full[data-theme="light"] .cine-chap-host.is-on .cine-chap-ghost b,
+[data-theme="light"].cine-full .cine-chap-host.is-on .cine-chap-ghost b { opacity: 0.05; }
+
+/* Yol başlığında içerik kutunun ALT kısmındadır (üst dolgu büyük) —
+   hayaleti başlık/lead hizasına, alta yasla. */
+.cine-full .road__head .cine-chap-ghost b {
+    inset-block-start: auto;
+    inset-block-end: -0.12em;
+    transform: none;
+}
+
+/* ---------------------------------------------------------------------------
+   3) Güven şeridi (marquee) — ITEM ✦ ITEM ✦ ... sonsuz bant
+   --------------------------------------------------------------------------- */
+
+.marquee {
+    position: relative;
+    overflow: hidden;
+    background: transparent; /* sayfa zemininde oturur — koyu bant YOK */
+    border-block: 1px solid var(--line, rgba(148, 178, 255, 0.16));
+    padding-block: 0.95rem;
+    margin-block: clamp(1.4rem, 1rem + 2vw, 2.6rem);
+}
+/* Hafif eğim = enerji (yalnız tam katman; skewY yatay taşma üretmez). */
+.cine-full .marquee { transform: skewY(-1deg); }
+
+.marquee__track {
+    display: flex;
+    width: max-content;
+    animation: cineMarquee 40s linear infinite;
+}
+.marquee:hover .marquee__track { animation-play-state: paused; }
+
+.marquee__group {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.marquee__item {
+    display: inline-flex;
+    align-items: center;
+    gap: clamp(1.1rem, 0.7rem + 1.6vw, 2rem);
+    padding-inline-end: clamp(1.1rem, 0.7rem + 1.6vw, 2rem);
+    white-space: nowrap;
+    font-family: var(--font-display, inherit);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-2, #93a3c4); /* soluk mürekkep — bant bağırmasın */
+}
+.marquee__item--glow { color: var(--cine-glow); } /* her ikinci madde vurgulu */
+.marquee__star {
+    color: var(--cine-glow);
+    opacity: 0.7;
+    font-size: 0.8em;
+}
+
+@keyframes cineMarquee { to { transform: translateX(-50%); } }
+
+/* RTL: bant ayna yönde akar (kopyalı parça +%50 ile yine dikişsizdir). */
+[dir="rtl"] .marquee__track { animation-name: cineMarqueeRtl; }
+@keyframes cineMarqueeRtl { to { transform: translateX(50%); } }
+
+/* Hafif profil: daha yavaş + daha kısa bant. */
+.cine-lite .marquee { padding-block: 0.7rem; }
+.cine-lite .marquee__track { animation-duration: 55s; }
+
+/* Hareket kapalı: bant durur, ilk parça statik okunur. */
+.cine-off .marquee__track { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+    .marquee__track { animation: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   4) Kontur kelime — yol sahnesinin arkasında dev "BARLAS" (yalnız cine-full)
+   --------------------------------------------------------------------------- */
+
+.cine-word { display: none; }
+
+.cine-full .cine-word {
+    /* .road__frame'in İLK çocuğu: kanvas/stage sonradan boyanır → kelime
+       ARKADA kalır. Blueprint katmanı z:2'dir — burada z:0 bölgesindeyiz. */
+    display: block;
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 7%;
+    text-align: center;
+    pointer-events: none;
+    z-index: 0;
+}
+.cine-word__text {
+    display: inline-block;
+    font-family: var(--font-display, inherit);
+    font-size: clamp(120px, 22vw, 340px);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(79, 141, 255, 0.4); /* color-mix bilmeyene yedek */
+    -webkit-text-stroke: 1px color-mix(in srgb, var(--cine-glow) 45%, transparent);
+    opacity: 0; /* JS, --road-p ilerlemesiyle 0→.5→0 sürer */
+    will-change: transform, opacity;
+}

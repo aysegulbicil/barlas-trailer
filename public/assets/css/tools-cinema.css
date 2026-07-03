@@ -1,0 +1,242 @@
+/* =============================================================================
+   tools-cinema.css — hesaplayıcı sayfası "sinematik konfigüratör" kaplaması
+   =============================================================================
+   Yalnız GÖRSEL katman: hesap mantığına dokunmaz (tools.js aynen çalışır).
+   cinema.css bu görünümde tools.css'ten SONRA yüklenir → kartlardaki
+   .glass-panel reçetesi (koyu/açık cam) oradan gelir; bu dosya alan,
+   sonuç paneli, kenar ışını ve sayaç mikro-etkileşimlerini ekler.
+
+   Kenar ışını cinema-micro.css'ten UYARLANDI: oradaki sürüm cinema-core.js'in
+   <html>'e yazdığı .cine-lite/.cine-full kapılarına bağlıdır ve bu sayfanın
+   layout'unda (inner) o çekirdek yüklenmez — burada kendi kendine yeten,
+   prefers-reduced-motion ile kapanan bir kopyası var (--tc-beam adıyla,
+   çakışma olmasın diye).
+
+   Fiziksel değil MANTIKSAL özellikler (RTL: ar + he). İki tema da desteklenir:
+   html[data-theme="dark"] varsayılan, [data-theme="light"] ezmeleri aşağıda.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   Bölüm arka planı — hafif karanlık vinyet + tepeden mavi ışık sızıntısı
+   --------------------------------------------------------------------------- */
+
+.page--tools .tools-section {
+    position: relative;
+    isolation: isolate; /* z-index:-1 pseudo katmanı bölüm içinde kalsın */
+}
+
+.page--tools .tools-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(90rem 42rem at 50% -10rem, rgba(79, 141, 255, 0.10), transparent 62%),
+        radial-gradient(130% 120% at 50% 55%, transparent 52%, rgba(3, 6, 20, 0.45) 100%);
+}
+
+[data-theme="light"] .page--tools .tools-section::before {
+    background:
+        radial-gradient(90rem 42rem at 50% -10rem, rgba(79, 141, 255, 0.08), transparent 62%),
+        radial-gradient(130% 120% at 50% 55%, transparent 60%, rgba(24, 44, 110, 0.07) 100%);
+}
+
+/* ---------------------------------------------------------------------------
+   Hızlı gezinme çipleri — cam dile uyum
+   --------------------------------------------------------------------------- */
+
+.tools-section .tools-nav__link {
+    border-color: rgba(148, 178, 255, 0.22);
+    background: rgba(148, 178, 255, 0.05);
+}
+
+.tools-section .tools-nav__link:hover,
+.tools-section .tools-nav__link:focus-visible {
+    border-color: var(--cine-glow, #4f8dff);
+    box-shadow: 0 0 18px var(--cine-glow-soft, rgba(79, 141, 255, 0.18));
+}
+
+[data-theme="light"] .tools-section .tools-nav__link {
+    border-color: rgba(30, 60, 140, 0.18);
+    background: rgba(255, 255, 255, 0.55);
+}
+
+/* ---------------------------------------------------------------------------
+   Kart yüzeyi — .glass-panel (cinema.css) reçetesinin üstüne ince ayar.
+   tools.css'in düz kart zemini yerine cam panel görünür (yükleme sırası:
+   tools.css → cinema.css → bu dosya).
+   --------------------------------------------------------------------------- */
+
+.tools-section .tool-card {
+    overflow: clip; /* kenar ışını ve cam parlaması köşe yarıçapına saygılı kalsın */
+}
+
+.tools-section .tool-card__title {
+    font-family: var(--font-display, inherit);
+    letter-spacing: 0.01em;
+}
+
+/* ---------------------------------------------------------------------------
+   Form alanları — koyu zeminli girişler, --cine-glow odak halkası
+   --------------------------------------------------------------------------- */
+
+.tools-section .tool-field input[type="number"],
+.tools-section .tool-field select {
+    border-color: rgba(148, 178, 255, 0.22);
+    border-radius: 12px;
+    background: rgba(8, 12, 28, 0.45);
+    color-scheme: dark; /* yerli ok/spinner koyu temaya uysun */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.tools-section .tool-field input[type="number"]:hover,
+.tools-section .tool-field select:hover {
+    border-color: rgba(148, 178, 255, 0.4);
+}
+
+.tools-section .tool-field input:focus-visible,
+.tools-section .tool-field select:focus-visible {
+    outline: 2px solid var(--cine-glow, #4f8dff);
+    outline-offset: 1px;
+    border-color: transparent;
+    box-shadow: 0 0 0 4px var(--cine-glow-soft, rgba(79, 141, 255, 0.18));
+}
+
+.tools-section .tool-field--check input {
+    accent-color: var(--cine-glow, #4f8dff);
+}
+
+[data-theme="light"] .tools-section .tool-field input[type="number"],
+[data-theme="light"] .tools-section .tool-field select {
+    border-color: rgba(30, 60, 140, 0.18);
+    background: rgba(255, 255, 255, 0.75);
+    color-scheme: light;
+}
+
+/* ---------------------------------------------------------------------------
+   SONUÇ PANELİ — yıldız oyuncu: iç cam levha + kenar ışını + parlayan rakamlar
+   --------------------------------------------------------------------------- */
+
+.tools-section .tool-card__results {
+    position: relative;
+    margin-block-start: 1.4rem;
+    padding: 1.05rem 1.2rem 1.2rem;
+    border: 1px solid rgba(148, 178, 255, 0.18);
+    border-radius: 14px;
+    background: linear-gradient(160deg, rgba(79, 141, 255, 0.10), rgba(6, 10, 26, 0.55));
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.05) inset,
+        0 14px 32px rgba(3, 6, 20, 0.35);
+}
+
+[data-theme="light"] .tools-section .tool-card__results {
+    border-color: rgba(30, 60, 140, 0.16);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.85), rgba(226, 236, 255, 0.6));
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.8) inset,
+        0 10px 26px rgba(24, 44, 110, 0.10);
+}
+
+.tools-section .tool-card__results-title {
+    color: var(--cine-glow, #4f8dff);
+    font-weight: 700;
+}
+
+/* Sonuç rakamları: --font-display, iri puntolar, hafif neon nefes */
+.tools-section .tool-results__row dd {
+    font-family: var(--font-display, inherit);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-shadow: 0 0 18px var(--cine-glow-soft, rgba(79, 141, 255, 0.18));
+    transition: color 0.25s ease;
+}
+
+[data-theme="light"] .tools-section .tool-results__row dd {
+    text-shadow: none;
+}
+
+/* Sayaç dönerken rakamlar akkora yaklaşır (tools-cinema.js açıp kapatır) */
+.tools-section .tool-results__row dd.is-counting {
+    color: var(--cine-glow, #4f8dff);
+}
+
+/* -------- Kenar ışını (self-gated border beam — cinema-micro §D uyarlaması)
+   İki katmanlı xor maskesi pseudo-öğeyi 1.5px'lik halkaya indirir; konik
+   gradyandaki ışık @property'li --tc-beam ile döner. @property desteği
+   olmayan tarayıcıda sabit, sakin bir parıltı kalır (zarif düşüş). -------- */
+
+@property --tc-beam {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+.tools-section .tool-card__results::before {
+    content: "";
+    position: absolute;
+    inset: -1px; /* mevcut 1px kenarlığın üstüne otur */
+    z-index: 1;
+    border-radius: inherit;
+    padding: 1.5px; /* iz kalınlığı */
+    pointer-events: none;
+    background: conic-gradient(
+        from var(--tc-beam),
+        transparent 0deg,
+        transparent 296deg,
+        var(--cine-glow-soft, rgba(79, 141, 255, 0.18)) 322deg,
+        var(--cine-glow, #4f8dff) 344deg,
+        rgba(255, 255, 255, 0.85) 352deg,
+        transparent 360deg
+    );
+    /* xor maskesi: yalnız halka (kenar) boyanır, iç tamamen boş kalır */
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 0.9;
+    animation: tc-beam-spin 5.5s linear infinite;
+}
+
+[data-theme="light"] .tools-section .tool-card__results::before {
+    opacity: 0.55; /* açık zeminde daha sessiz */
+}
+
+@keyframes tc-beam-spin {
+    to { --tc-beam: 360deg; }
+}
+
+/* -------- Yeniden hesap nabzı (tools-cinema.js .is-pulse ekler) -------- */
+
+@keyframes tc-pulse {
+    0%   { transform: scale(1); }
+    45%  { transform: scale(1.015); }
+    100% { transform: scale(1); }
+}
+
+.tools-section .tool-card__results.is-pulse {
+    animation: tc-pulse 420ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ---------------------------------------------------------------------------
+   Emniyet ağı: hareket azaltıldıysa ışın, nabız ve geçişler tamamen durur
+   (tools-cinema.js zaten sayaçları kurmaz — bu ikinci kilittir).
+   --------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .tools-section .tool-card__results::before {
+        animation: none;
+    }
+
+    .tools-section .tool-card__results.is-pulse {
+        animation: none;
+    }
+
+    .tools-section .tool-field input[type="number"],
+    .tools-section .tool-field select,
+    .tools-section .tool-results__row dd,
+    .tools-section .tools-nav__link {
+        transition: none;
+    }
+}

@@ -507,6 +507,7 @@
         if (THREE.sRGBEncoding !== undefined) renderer.outputEncoding = THREE.sRGBEncoding;
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.05;
+        renderer.localClippingEnabled = true;      /* maddeleşme süpürmesi (aşağıda) */
         stage.appendChild(renderer.domElement);
         renderer.domElement.style.opacity = '0';   /* araç hazır olunca yumuşakça açılır */
 
@@ -562,6 +563,32 @@
             vehicle.add(sp);
         }
 
+        /* ---- Maddeleşme: "çizimden gerçeğe" (sinematik katman §2 montaj anlatısı) ----
+           Blueprint katmanı teknik resmi bitirirken (p≈0.45) gerçek gövde önden
+           arkaya doğru klip düzlemiyle "dolar"; öncesinde konvoy yalnız tel kafes
+           hayalet olarak görünür. Tüm durum p'nin saf fonksiyonu (geri sarma doğru).
+           BarlasCinema yüklü değilse süpürme daima tamam (k=1) — davranış eskisi gibi. */
+        var matzPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 1e6);
+        var ghostMat = new THREE.MeshBasicMaterial({
+            color: 0x4f8dff, wireframe: true, transparent: true,
+            opacity: 0, depthWrite: false
+        });
+        var ghosts = [];
+        var matzSpan = { min: -8, max: 8 };
+        function riggMaterialize(holder) {
+            var meshes = [];
+            holder.traverse(function (o) { if (o.isMesh && o.material) meshes.push(o); });
+            meshes.forEach(function (m) {
+                m.material.clippingPlanes = [matzPlane];
+                var gm = new THREE.Mesh(m.geometry, ghostMat);
+                gm.position.copy(m.position);
+                gm.rotation.copy(m.rotation);
+                gm.scale.copy(m.scale);
+                m.parent.add(gm);
+                ghosts.push(gm);
+            });
+        }
+
         var CONVOY = {
             targetLen: 3.6,           /* her aracın dünya-birimi uzunluğu (eşit boy) */
             lane: 1.9,                /* şerit ofseti (|z|): orta çizgiden uzaklık */
@@ -600,7 +627,15 @@
                 addLamp(headMat, cx - half - 0.06, 0.52, cz + 0.42, 0.55);
                 addLamp(tailMat, cx + half + 0.04, 0.58, cz - 0.40, 0.42);
                 addLamp(tailMat, cx + half + 0.04, 0.58, cz + 0.40, 0.42);
+
+                /* Maddeleşme donanımı: klip düzlemi + tel kafes hayalet */
+                riggMaterialize(h);
             });
+            var bb = new THREE.Box3().setFromObject(vehicle);
+            if (isFinite(bb.min.x) && isFinite(bb.max.x)) {
+                matzSpan.min = bb.min.x - 0.4;
+                matzSpan.max = bb.max.x + 0.4;
+            }
             vehicleBaseY = CONVOY.baseY;
             vehicleReady = true;
         }
@@ -702,6 +737,7 @@
 
         /* Pin + scrub */
         var progress = 0, lastProgress = 0, active = false;
+        var lastEmit = -1;
         ScrollTrigger.create({
             trigger: section,
             start: 'top top',
@@ -709,7 +745,18 @@
             pin: true,
             anticipatePin: 1,
             scrub: 0.5,
-            onUpdate: function (self) { progress = self.progress; }
+            onUpdate: function (self) {
+                progress = self.progress;
+                /* Sinematik katman sözleşmesi: bölüm ilerlemesini dışarı yayınla
+                   (blueprint montaj katmanı vb. dinler). Gereksiz olay üretme. */
+                if (Math.abs(progress - lastEmit) > 0.002) {
+                    lastEmit = progress;
+                    section.style.setProperty('--road-p', progress.toFixed(4));
+                    section.dispatchEvent(new CustomEvent('barlas:road-progress', {
+                        bubbles: true, detail: { progress: progress }
+                    }));
+                }
+            }
         });
         /* Pin, sayfaya ~1.7 ekranlık boşluk ekler; daha önce kurulmuş
            tetikleyicilerin (galeri, süreç vb.) konumları bunu bilmiyor.
@@ -811,6 +858,21 @@
                 var lampOn = nightCur < 0.45 ? 0 : Math.min(1, (nightCur - 0.45) / 0.3);
                 headMat.opacity = lampOn * 0.95;
                 tailMat.opacity = lampOn * 0.85;
+            }
+
+            /* Maddeleşme süpürmesi: blueprint bitişiyle senkron (p 0.45→0.68).
+               k=0 → gövde tümüyle klipli, yalnız tel kafes; k=1 → tam gövde. */
+            var k = 1;
+            if (window.BarlasCinema && ghosts.length) {
+                k = progress <= 0.45 ? 0 : (progress >= 0.68 ? 1 : (progress - 0.45) / 0.23);
+                k = k * k * (3 - 2 * k);
+            }
+            matzPlane.constant = matzSpan.min + (matzSpan.max - matzSpan.min) * k;
+            if (ghosts.length) {
+                /* Hayalet: yaklaşırken belirir, gövde doldukça söner */
+                ghostMat.opacity = (1 - k) * 0.32;
+                var gv = ghostMat.opacity > 0.01;
+                for (var gi = 0; gi < ghosts.length; gi++) ghosts[gi].visible = gv;
             }
 
             /* Araç yüklenince canvas'ı yumuşakça aç (altta statik görsel bekler) */
