@@ -1,0 +1,43 @@
+# Barlas Trailer — ÜRETİM compose dosyası (VPS)
+#
+# Yereldeki docker-compose.yml'den farkları:
+#   - web portu dışarıya açılmaz; önünde Let's Encrypt'li Caddy proxy durur
+#   - OPcache üretim modu (dosya değişikliği algılama kapalı — deploy sonrası
+#     "restart web" şart, bkz. deploy/opcache-prod.ini)
+#   - Saat dilimi Europe/Istanbul (log/cron zamanları tutarlı olsun)
+#
+# Kullanım (sunucuda, ayrıntı: deploy/DEPLOY.md):
+#   1) deploy/Caddyfile içindeki domaini kendi alan adınla değiştir
+#   2) docker compose -f docker-compose.prod.yml up -d --build
+#   3) Güncelleme: git pull && docker compose -f docker-compose.prod.yml restart web
+services:
+  web:
+    build: .
+    container_name: barlas-apache
+    expose:
+      - "80"
+    volumes:
+      - ./:/var/www/html
+      - ./deploy/opcache-prod.ini:/usr/local/etc/php/conf.d/zz-opcache-prod.ini:ro
+    environment:
+      - CI_ENVIRONMENT=production
+      - TZ=Europe/Istanbul
+    restart: unless-stopped
+
+  proxy:
+    image: caddy:2
+    container_name: barlas-caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - web
+    restart: unless-stopped
+
+volumes:
+  caddy-data:
+  caddy-config:

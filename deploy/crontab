@@ -1,0 +1,28 @@
+# Barlas Trailer — VPS crontab (ajan ordusu + yedek)
+#
+# Kurulum: docker grubundaki kullanıcıyla "crontab -e" deyip bu dosyayı yapıştır.
+# Saatler sunucu YEREL saatidir — önce: sudo timedatectl set-timezone Europe/Istanbul
+# Kill-switch: bir ajanı durdurmak için cron satırını silme; Panel > Ajanlar'dan
+# kapat (writable/data/flags/ bayrağı) — ajan koşar ama işlem yapmadan çıkar.
+#
+# Zamanlamalar ajan docblock'larındaki önerilerdir:
+#   rates          hafta içi 07-19 saat başı (kur verisi)
+#   health         her 30 dakikada (site sağlık kontrolü)
+#   digest         her sabah 06:00 (sabah brifingi)
+#   reminders      her sabah 06:30 (hatırlatmalar)
+#   faq-candidates pazartesi 06:00 (SSS adayları)
+#   analyst        pazartesi 07:00 (haftalık analiz)
+#   content-factory her akşam 18:00 (haber taslakları)
+#   domain-watch   pazar 05:00 (DNS taraması ~9 dk sürer, normaldir)
+
+0 7-19 * * 1-5  docker exec -u www-data barlas-apache php /var/www/html/spark agents:rates
+0,30 * * * *    docker exec -u www-data barlas-apache php /var/www/html/spark agents:health
+0 6 * * *       docker exec -u www-data barlas-apache php /var/www/html/spark agents:digest
+30 6 * * *      docker exec -u www-data barlas-apache php /var/www/html/spark agents:reminders
+0 6 * * 1       docker exec -u www-data barlas-apache php /var/www/html/spark agents:faq-candidates
+0 7 * * 1       docker exec -u www-data barlas-apache php /var/www/html/spark agents:analyst
+0 18 * * *      docker exec -u www-data barlas-apache php /var/www/html/spark agents:content-factory
+0 5 * * 0       docker exec -u www-data barlas-apache php /var/www/html/spark agents:domain-watch
+
+# Günlük yedek: writable/ → /var/backups/barlas (14 gün saklanır)
+30 4 * * *      /opt/barlas-trailer/deploy/backup.sh

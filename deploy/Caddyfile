@@ -1,0 +1,14 @@
+# Barlas Trailer — Caddy reverse proxy (otomatik HTTPS / Let's Encrypt)
+#
+# BARLAS-DOMAIN.com'u kendi alan adınla değiştir (3 yer). Sertifika, DNS
+# A kaydı bu sunucuyu gösterdiği anda otomatik alınır ve yenilenir —
+# başka hiçbir şey yapman gerekmez.
+
+BARLAS-DOMAIN.com {
+	encode zstd gzip
+	reverse_proxy web:80
+}
+
+www.BARLAS-DOMAIN.com {
+	redir https://BARLAS-DOMAIN.com{uri} permanent
+}
