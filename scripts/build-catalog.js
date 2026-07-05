@@ -1,12 +1,15 @@
 // Barlas Trailer product catalog generator
-// Reads app/Data/products.json + product images, emits catalog.html (A4 print-ready).
+// Reads app/Data/products.json + product images, emits catalog{-en}.html (A4 print-ready).
 //
 // Usage:
-//   node scripts/build-catalog.js [outDir]     (outDir defaults to os tmpdir)
+//   node scripts/build-catalog.js [outDir] [locale]   (outDir defaults to os tmpdir; locale tr|en, default tr)
 // Then print to PDF with headless Chrome:
 //   chrome --headless=new --disable-gpu --no-pdf-header-footer --virtual-time-budget=30000 \
-//     --print-to-pdf="<outDir>/catalog.pdf" "file:///<outDir>/catalog.html"
-// Published copy lives at public/downloads/barlas-urun-katalogu-2026.pdf
+//     --print-to-pdf="<outDir>/catalog.pdf" "file:///<outDir>/catalog{-en}.html"
+// Published copies live at public/downloads/barlas-urun-katalogu-2026.pdf (tr)
+// and public/downloads/barlas-product-catalog-2026-en.pdf (en).
+// EN product content comes from app/Data/products.en.json (translation overlay,
+// primary-variant specs only — merged over products.json by slug).
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
@@ -14,11 +17,35 @@ const os = require('os');
 const ROOT = path.resolve(__dirname, '..').replace(/\\/g, '/');
 const IMG = ROOT + '/public/assets/images/products';
 const LOGO = 'file:///' + ROOT + '/public/assets/images/logo.png';
-const OUT = path.join(process.argv[2] || os.tmpdir(), 'catalog.html');
+const LOCALE = (process.argv[3] || 'tr').toLowerCase();
+const OUT = path.join(process.argv[2] || os.tmpdir(), LOCALE === 'tr' ? 'catalog.html' : `catalog-${LOCALE}.html`);
 
 const data = JSON.parse(fs.readFileSync(ROOT + '/app/Data/products.json', 'utf8'));
 
-const CAT_DESC = {
+// Apply translation overlay (names, model names, primary-variant specs) by slug.
+if (LOCALE !== 'tr') {
+  const overlay = JSON.parse(fs.readFileSync(ROOT + `/app/Data/products.${LOCALE}.json`, 'utf8'));
+  const oCats = Object.fromEntries(overlay.categories.map(c => [c.slug, c]));
+  for (const c of data.categories) {
+    const oc = oCats[c.slug];
+    if (!oc) continue;
+    c.name = oc.name || c.name;
+    const oProds = Object.fromEntries(oc.products.map(p => [p.slug, p]));
+    for (const p of c.products) {
+      const op = oProds[p.slug];
+      if (!op) continue;
+      p.name = op.name || p.name;
+      (p.variants || []).forEach((v, i) => {
+        const ov = op.variants && op.variants[i];
+        if (!ov || ov.slug !== v.slug) return;
+        v.model = ov.model || v.model;
+        if (i === 0 && ov.specs) v.specs = ov.specs;
+      });
+    }
+  }
+}
+
+const CAT_DESC_TR = {
   tankers: 'Akaryakıttan gıdaya, kimyasaldan LPG’ye: alüminyum, çelik ve paslanmaz gövdeli, ADR uyumlu tanker ailesi.',
   silos: 'Toz ve granül yükler için damperli, V ve W tipi, vakumlu silobas çözümleri.',
   tippers: 'Hafriyattan kaya tipine; inşaat, madencilik ve tarım için yüksek mukavemetli damper gövdeleri.',
@@ -31,6 +58,81 @@ const CAT_DESC = {
   trailers: 'Tarım ve sanayi taşımacılığı için akslı ve dingilli römork çözümleri.',
   special: 'Arazözden oto taşıyıcıya: göreve özel mühendislik isteyen üstyapılar.',
 };
+const CAT_DESC_EN = {
+  tankers: 'From fuel to foodstuffs, chemicals to LPG: ADR-compliant tankers with aluminium, steel and stainless steel bodies.',
+  silos: 'Tipping, V-type, W-type and vacuum silo trailers for powder and granular loads.',
+  tippers: 'High-strength tipper bodies for construction, mining and agriculture — from grain to rock-type.',
+  curtain: 'Curtainsider, tarpaulin and swap body trailers for fast loading and unloading.',
+  reefer: 'Insulated refrigerated bodies for every link of the cold chain.',
+  'dry-cargo': 'Steel box, dropside and coil carrier solutions for general cargo.',
+  containers: 'Fixed, telescopic, tipping and in-port container chassis family.',
+  lowbed: 'Fixed, extendable and hydraulically steered lowbeds for machinery and project cargo.',
+  platform: 'Coil carrier and standard flatbeds for long and wide loads.',
+  trailers: 'Axled drawbar trailer solutions for agriculture and industry.',
+  special: 'Purpose-engineered bodies, from water tenders to car carriers.',
+};
+const CAT_DESC = LOCALE === 'tr' ? CAT_DESC_TR : CAT_DESC_EN;
+
+// UI strings per locale
+const STR_TR = {
+  htmlLang: 'tr',
+  docTitle: 'Barlas Trailer — Ürün Kataloğu 2026',
+  run: 'BARLAS TRAILER — ÜRÜN KATALOĞU',
+  coverEyebrow: 'TREYLER · TANKER · ÖZEL ÜSTYAPI',
+  coverTitle: 'ÜRÜN<br>KATALOĞU',
+  coverLead: 'ADR uyumlu tankerlerden silobaslara, damperlerden low-bed ve özel üstyapılara — mühendislik odaklı üretimin tam envanteri.',
+  statCats: 'Kategori', statProds: 'Ürün', statModels: 'Model', statExport: 'İhracat Ülkesi',
+  introEyebrow: 'Hakkımızda',
+  introTitle: 'Endüstriyel taşımanın her alanında,<br>mühendislik odaklı üretim.',
+  introLead: 'Modern üretim tesisimizde ADR ve uluslararası güvenlik standartlarında tanker, silobas, lowbed ve özel üstyapılar tasarlıyor ve imal ediyoruz. Her araç, mühendislik hassasiyeti ve uzun ömür için üretilir.',
+  badges: ['ADR Sertifikalı Üretim', 'ISO 9001 Kalite', 'TSE Belgeli', '1988’den Beri Üretim', 'Tam Garanti &amp; Servis'],
+  howTitle: 'Bu katalog nasıl okunur?',
+  how: n => [
+    `Ürünler <b>${n} kategori</b> altında, <b>1.1’den ${n}.x’e</b> numaralandırılmıştır; içindekiler bölümünden numarayla ulaşabilirsiniz.`,
+    'Her ürün sayfasında görsel, model seçenekleri ve temel modelin teknik özellikleri yer alır.',
+    'Birden fazla modeli olan ürünlerde özellikler <b>temel model</b> üzerinden verilmiştir; diğer modellerin detayları için satış ekibimizle görüşünüz.',
+    'Tüm üretim, sipariş konfigürasyonuna göre uyarlanır — ölçü ve donanımlar ihtiyacınıza göre revize edilebilir.',
+  ],
+  phone: 'Telefon', email: 'E-posta', address: 'Adres', web: 'Web',
+  addressText: 'Fevziçakmak Mah. Şehit Hamdi Karagöz Cad. No: 4s Karatay / Konya',
+  tocEyebrow: 'BARLAS TRAILER · 2026', tocTitle: 'İçindekiler',
+  divMeta: (p, m) => `${p} ürün · ${m} model`,
+  models: n => `Modeller (${n})`,
+  modelsNote: m => `Aşağıdaki teknik özellikler <strong>${m}</strong> modeline aittir; diğer modeller için teklif isteyiniz.`,
+  backTitle: 'Yük ne olursa olsun,<br>taşıyacak aracı üretiriz.',
+  backFacility: 'Üretim Tesisi &amp; Showroom',
+  backNote: 'Bu katalogdaki tüm teknik bilgiler bilgilendirme amaçlıdır; üretim, sipariş anındaki konfigürasyona göre yapılır. © 2026 Barlas Trailer',
+};
+const STR_EN = {
+  htmlLang: 'en',
+  docTitle: 'Barlas Trailer — Product Catalog 2026',
+  run: 'BARLAS TRAILER — PRODUCT CATALOG',
+  coverEyebrow: 'TRAILERS · TANKERS · SPECIAL BODIES',
+  coverTitle: 'PRODUCT<br>CATALOG',
+  coverLead: 'From ADR-compliant tankers to silo trailers, tippers, lowbeds and special bodies — the full inventory of engineering-driven manufacturing.',
+  statCats: 'Categories', statProds: 'Products', statModels: 'Models', statExport: 'Export Countries',
+  introEyebrow: 'About Us',
+  introTitle: 'Engineering-driven manufacturing<br>for every field of industrial transport.',
+  introLead: 'At our modern production facility we design and build tankers, silo trailers, lowbeds and special bodies to ADR and international safety standards. Every vehicle is built with engineering precision for a long service life.',
+  badges: ['ADR-Certified Production', 'ISO 9001 Quality', 'TSE Certified', 'Manufacturing Since 1988', 'Full Warranty &amp; Service'],
+  howTitle: 'How to read this catalog',
+  how: n => [
+    `Products are numbered <b>1.1 through ${n}.x</b> under <b>${n} categories</b>; use the contents section to navigate by number.`,
+    'Each product page shows a photo, the available models and the technical specifications of the base model.',
+    'For products with multiple models, specifications refer to the <b>base model</b>; please contact our sales team for the other models.',
+    'All production is tailored to the order configuration — dimensions and equipment can be revised to your needs.',
+  ],
+  phone: 'Phone', email: 'E-mail', address: 'Address', web: 'Web',
+  addressText: 'Fevziçakmak Mah. Şehit Hamdi Karagöz Cad. No: 4s Karatay / Konya, Türkiye',
+  tocEyebrow: 'BARLAS TRAILER · 2026', tocTitle: 'Contents',
+  divMeta: (p, m) => `${p} products · ${m} models`,
+  models: n => `Models (${n})`,
+  modelsNote: m => `Technical specifications below refer to the <strong>${m}</strong> model; please request a quote for the other models.`,
+  backTitle: 'Whatever the load,<br>we build the vehicle that carries it.',
+  backFacility: 'Production Facility &amp; Showroom',
+  backNote: 'All technical information in this catalog is provided for reference; production follows the configuration agreed at the time of order. © 2026 Barlas Trailer',
+};
+const S = LOCALE === 'tr' ? STR_TR : STR_EN;
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const norm = s => String(s).toLocaleLowerCase('tr').replace(/[^a-zçğıöşü0-9]+/g, '');
@@ -91,14 +193,14 @@ function productSection(cat, catIdx, p) {
   const primary = variants[0] || { specs: [] };
   const multi = variants.length > 1;
   const chips = multi
-    ? '<div class="models"><span class="models__t">Modeller (' + variants.length + ')</span>'
+    ? '<div class="models"><span class="models__t">' + S.models(variants.length) + '</span>'
       + variants.map(v => '<span class="chip">' + esc(v.model) + '</span>').join('')
       + '</div>'
-      + '<p class="models__note">Aşağıdaki teknik özellikler <strong>' + esc(primary.model) + '</strong> modeline aittir; diğer modeller için teklif isteyiniz.</p>'
+      + '<p class="models__note">' + S.modelsNote(esc(primary.model)) + '</p>'
     : '';
   return `
 <section class="product">
-  <div class="run">BARLAS TRAILER — ÜRÜN KATALOĞU</div>
+  <div class="run">${S.run}</div>
   <header class="p-head">
     <div>
       <div class="eyebrow">${String(catIdx).padStart(2, '0')} · ${esc(cat.name)}</div>
@@ -123,7 +225,7 @@ function dividerSection(cat, idx) {
     <div>
       <h2>${esc(cat.name)}</h2>
       <p class="divider__desc">${esc(CAT_DESC[cat.slug] || '')}</p>
-      <p class="divider__meta">${prods.length} ürün · ${prods.reduce((n, p) => n + (p.variants || []).length, 0)} model</p>
+      <p class="divider__meta">${S.divMeta(prods.length, prods.reduce((n, p) => n + (p.variants || []).length, 0))}</p>
     </div>
   </div>
   <div class="divider__imgs">
@@ -142,7 +244,7 @@ const totV = cats.reduce((n, c) => n + c.products.reduce((m, p) => m + (p.varian
 
 const toc = `
 <section class="toc">
-  <div class="toc__head"><div class="eyebrow">BARLAS TRAILER · 2026</div><h2>İçindekiler</h2></div>
+  <div class="toc__head"><div class="eyebrow">${S.tocEyebrow}</div><h2>${S.tocTitle}</h2></div>
   <div class="toc__grid">
     ${cats.map((c, i) => `
     <div class="toc__cat">
@@ -159,54 +261,51 @@ const cover = `
     <div class="cover__year">2026</div>
   </div>
   <div class="cover__title">
-    <div class="eyebrow eyebrow--light">Treyler · Tanker · Özel Üstyapı</div>
-    <h1>ÜRÜN<br>KATALOĞU</h1>
-    <p>ADR uyumlu tankerlerden silobaslara, damperlerden low-bed ve özel üstyapılara — mühendislik odaklı üretimin tam envanteri.</p>
+    <div class="eyebrow eyebrow--light">${S.coverEyebrow}</div>
+    <h1>${S.coverTitle}</h1>
+    <p>${S.coverLead}</p>
   </div>
   <div class="cover__img"><img src="file:///${IMG}/tankers-akaryakit-yakit-tankeri.jpg" alt=""></div>
   <div class="cover__stats">
-    <div><b>${cats.length}</b><span>Kategori</span></div>
-    <div><b>${totP}</b><span>Ürün</span></div>
-    <div><b>${totV}</b><span>Model</span></div>
-    <div><b>40+</b><span>İhracat Ülkesi</span></div>
+    <div><b>${cats.length}</b><span>${S.statCats}</span></div>
+    <div><b>${totP}</b><span>${S.statProds}</span></div>
+    <div><b>${totV}</b><span>${S.statModels}</span></div>
+    <div><b>40+</b><span>${S.statExport}</span></div>
   </div>
 </section>`;
 
 const intro = `
 <section class="sheet intro">
-  <div class="eyebrow">Hakkımızda</div>
-  <h2>Endüstriyel taşımanın her alanında,<br>mühendislik odaklı üretim.</h2>
-  <p class="intro__lead">Modern üretim tesisimizde ADR ve uluslararası güvenlik standartlarında tanker, silobas, lowbed ve özel üstyapılar tasarlıyor ve imal ediyoruz. Her araç, mühendislik hassasiyeti ve uzun ömür için üretilir.</p>
+  <div class="eyebrow">${S.introEyebrow}</div>
+  <h2>${S.introTitle}</h2>
+  <p class="intro__lead">${S.introLead}</p>
   <div class="intro__badges">
-    <span>ADR Sertifikalı Üretim</span><span>ISO 9001 Kalite</span><span>TSE Belgeli</span><span>1988’den Beri Üretim</span><span>Tam Garanti &amp; Servis</span>
+    ${S.badges.map(b => '<span>' + b + '</span>').join('')}
   </div>
   <div class="intro__how">
-    <h3>Bu katalog nasıl okunur?</h3>
+    <h3>${S.howTitle}</h3>
     <ul>
-      <li>Ürünler <b>${cats.length} kategori</b> altında, <b>1.1’den ${cats.length}.x’e</b> numaralandırılmıştır; içindekiler bölümünden numarayla ulaşabilirsiniz.</li>
-      <li>Her ürün sayfasında görsel, model seçenekleri ve temel modelin teknik özellikleri yer alır.</li>
-      <li>Birden fazla modeli olan ürünlerde özellikler <b>temel model</b> üzerinden verilmiştir; diğer modellerin detayları için satış ekibimizle görüşünüz.</li>
-      <li>Tüm üretim, sipariş konfigürasyonuna göre uyarlanır — ölçü ve donanımlar ihtiyacınıza göre revize edilebilir.</li>
+      ${S.how(cats.length).map(li => '<li>' + li + '</li>').join('\n      ')}
     </ul>
   </div>
   <div class="intro__contact">
-    <div><b>Telefon</b>0 552 500 20 00</div>
-    <div><b>E-posta</b>info@barlastrailer.com</div>
-    <div><b>Adres</b>Fevziçakmak Mah. Şehit Hamdi Karagöz Cad. No: 4s Karatay / Konya</div>
+    <div><b>${S.phone}</b>0 552 500 20 00</div>
+    <div><b>${S.email}</b>info@barlastrailer.com</div>
+    <div><b>${S.address}</b>${S.addressText}</div>
   </div>
 </section>`;
 
 const back = `
 <section class="sheet back">
   <div class="logochip logochip--lg"><img src="${LOGO}" alt="Barlas Trailer"></div>
-  <h2>Yük ne olursa olsun,<br>taşıyacak aracı üretiriz.</h2>
+  <h2>${S.backTitle}</h2>
   <div class="back__grid">
-    <div><b>Telefon</b><span>0 552 500 20 00</span></div>
-    <div><b>E-posta</b><span>info@barlastrailer.com</span></div>
-    <div><b>Web</b><span>www.barlastrailer.com</span></div>
-    <div><b>Üretim Tesisi &amp; Showroom</b><span>Fevziçakmak Mah. Şehit Hamdi Karagöz Cad. No: 4s Karatay / Konya</span></div>
+    <div><b>${S.phone}</b><span>0 552 500 20 00</span></div>
+    <div><b>${S.email}</b><span>info@barlastrailer.com</span></div>
+    <div><b>${S.web}</b><span>www.barlastrailer.com</span></div>
+    <div><b>${S.backFacility}</b><span>${S.addressText}</span></div>
   </div>
-  <p class="back__note">Bu katalogdaki tüm teknik bilgiler bilgilendirme amaçlıdır; üretim, sipariş anındaki konfigürasyona göre yapılır. © 2026 Barlas Trailer</p>
+  <p class="back__note">${S.backNote}</p>
 </section>`;
 
 let body = cover + intro + toc;
@@ -324,7 +423,7 @@ h1,h2,h3,h4,.p-no,.divider__no,.cover__year{font-family:Bahnschrift,'Segoe UI',A
 `;
 
 const html = `<!doctype html>
-<html lang="tr"><head><meta charset="utf-8"><title>Barlas Trailer — Ürün Kataloğu 2026</title>
+<html lang="${S.htmlLang}"><head><meta charset="utf-8"><title>${S.docTitle}</title>
 <style>${css}</style></head><body>${body}</body></html>`;
 
 fs.writeFileSync(OUT, html, 'utf8');

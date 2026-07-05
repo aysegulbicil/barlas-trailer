@@ -15,6 +15,11 @@
  */
 $footerLinks = ['home', 'products', 'services', 'markets', 'tools', 'quiz', 'wiki', 'faq', 'verify', 'games', 'news', 'blog', 'contact'];
 
+// Catalog PDF: Turkish original for tr, English edition for all other locales.
+$catalogPdf = current_locale() === 'tr'
+    ? 'downloads/barlas-urun-katalogu-2026.pdf'
+    : 'downloads/barlas-product-catalog-2026-en.pdf';
+
 // Social profiles — replace with the brand's real handles.
 $social = [
     'linkedin'  => 'https://www.linkedin.com/company/barlastrailer/',
@@ -154,7 +159,7 @@ $social = [
                             <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path>
                         </svg>
                     </span>
-                    <a href="<?= esc(base_url('downloads/barlas-urun-katalogu-2026.pdf'), 'attr') ?>" download><?= esc(lang('Common.footer_catalog')) ?></a>
+                    <a href="<?= esc(base_url($catalogPdf), 'attr') ?>" download><?= esc(lang('Common.footer_catalog')) ?></a>
                 </p>
             </address>
         </div>
