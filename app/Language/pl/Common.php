@@ -21,6 +21,7 @@ return [
     'footer_about'          => 'Przemysłowe rozwiązania naczep i cystern, projektowane z myślą o trwałości, bezpieczeństwie i osiągach — zbudowane na najtrudniejsze drogi.',
     'footer_products_title' => 'Produkty',
     'footer_contact_title'  => 'Kontakt',
+    'footer_catalog'  => 'Katalog produktów (PDF)',
     'footer_slogan'         => 'Niezawodne rozwiązania na długie trasy.',
     'rights_reserved'       => 'Wszelkie prawa zastrzeżone.',
 

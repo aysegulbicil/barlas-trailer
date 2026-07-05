@@ -146,6 +146,16 @@ $social = [
                     </span>
                     <a href="mailto:<?= esc(lang('Common.email'), 'attr') ?>"><?= esc(lang('Common.email')) ?></a>
                 </p>
+                <p class="site-footer__contact-item">
+                    <span class="site-footer__contact-ic" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3v10"></path>
+                            <path d="m8 9 4 4 4-4"></path>
+                            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path>
+                        </svg>
+                    </span>
+                    <a href="<?= esc(base_url('downloads/barlas-urun-katalogu-2026.pdf'), 'attr') ?>" download><?= esc(lang('Common.footer_catalog')) ?></a>
+                </p>
             </address>
         </div>
     </div>

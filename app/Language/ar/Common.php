@@ -21,6 +21,8 @@ return [
     'footer_about'          => 'حلول مقطورات وصهاريج صناعية مصمّمة لتحقيق المتانة والأمان والأداء العالي على أصعب الطرقات.',
     'footer_products_title' => 'المنتجات',
     'footer_contact_title'  => 'تواصل معنا',
+
+    'footer_catalog'  => 'كتالوج المنتجات (PDF)',
     'footer_slogan'         => 'حلول موثوقة للمسافات الطويلة.',
     'rights_reserved'       => 'جميع الحقوق محفوظة.',
 

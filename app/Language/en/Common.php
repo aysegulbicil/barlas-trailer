@@ -21,6 +21,8 @@ return [
     'footer_about'          => 'Industrial trailer and tanker solutions engineered for durability, safety and performance — built to perform on the toughest roads.',
     'footer_products_title' => 'Products',
     'footer_contact_title'  => 'Contact',
+
+    'footer_catalog'  => 'Product Catalog (PDF)',
     'footer_slogan'         => 'Reliable solutions for the long haul.',
     'rights_reserved'       => 'All rights reserved.',
 

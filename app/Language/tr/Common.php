@@ -24,6 +24,8 @@ return [
     'footer_about'          => 'Yüksek mühendislik kalitesiyle tasarlanan endüstriyel treyler ve tanker çözümleri. Dayanıklılık, güvenlik ve performans bir arada.',
     'footer_products_title' => 'Ürünler',
     'footer_contact_title'  => 'İletişim',
+
+    'footer_catalog'  => 'Ürün Kataloğu (PDF)',
     'footer_slogan'         => 'Güçlü yollarda, güvenilir çözümler.',
     'rights_reserved'       => 'Tüm hakları saklıdır.',
 

@@ -21,6 +21,7 @@ return [
     'footer_about'          => 'Industrielle Trailer- und Tankauflieger-Lösungen, konstruiert für Langlebigkeit, Sicherheit und Leistung — gebaut für die härtesten Straßen.',
     'footer_products_title' => 'Produkte',
     'footer_contact_title'  => 'Kontakt',
+    'footer_catalog'  => 'Produktkatalog (PDF)',
     'footer_slogan'         => 'Zuverlässige Lösungen für die lange Strecke.',
     'rights_reserved'       => 'Alle Rechte vorbehalten.',
 

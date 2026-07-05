@@ -21,6 +21,7 @@ return [
     'footer_about'          => 'Industriële trailer- en tankoplossingen, ontworpen voor duurzaamheid, veiligheid en prestaties — gebouwd voor de zwaarste wegen.',
     'footer_products_title' => 'Producten',
     'footer_contact_title'  => 'Contact',
+    'footer_catalog'  => 'Productcatalogus (PDF)',
     'footer_slogan'         => 'Betrouwbare oplossingen voor de lange afstand.',
     'rights_reserved'       => 'Alle rechten voorbehouden.',
 

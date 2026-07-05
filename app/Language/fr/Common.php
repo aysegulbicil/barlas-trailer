@@ -21,6 +21,8 @@ return [
     'footer_about'          => 'Des solutions de remorques et citernes industrielles conçues pour la durabilité, la sécurité et la performance sur les routes les plus exigeantes.',
     'footer_products_title' => 'Produits',
     'footer_contact_title'  => 'Contact',
+
+    'footer_catalog'  => 'Catalogue produits (PDF)',
     'footer_slogan'         => 'Des solutions fiables pour le long terme.',
     'rights_reserved'       => 'Tous droits réservés.',
 

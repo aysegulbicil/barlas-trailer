@@ -21,6 +21,7 @@ return [
     'footer_about'          => 'Soluciones industriales de semirremolques y cisternas, diseñadas para durabilidad, seguridad y rendimiento: construidas para las carreteras más duras.',
     'footer_products_title' => 'Productos',
     'footer_contact_title'  => 'Contacto',
+    'footer_catalog'  => 'Catálogo de productos (PDF)',
     'footer_slogan'         => 'Soluciones fiables para la larga distancia.',
     'rights_reserved'       => 'Todos los derechos reservados.',
 

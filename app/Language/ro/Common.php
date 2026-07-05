@@ -21,6 +21,7 @@ return [
     'footer_about'          => 'Soluții industriale de semiremorci și cisterne proiectate pentru durabilitate, siguranță și performanță — construite să reziste pe cele mai grele drumuri.',
     'footer_products_title' => 'Produse',
     'footer_contact_title'  => 'Contact',
+    'footer_catalog'  => 'Catalog de produse (PDF)',
     'footer_slogan'         => 'Soluții de încredere pentru drumul lung.',
     'rights_reserved'       => 'Toate drepturile rezervate.',
 

@@ -21,6 +21,7 @@ return [
     'footer_about'          => '以耐用性、安全性和高性能为设计目标的工业半挂车与罐车解决方案——为最严酷的道路而生。',
     'footer_products_title' => '产品',
     'footer_contact_title'  => '联系方式',
+    'footer_catalog'  => '产品目录（PDF）',
     'footer_slogan'         => '值得长途信赖的可靠解决方案。',
     'rights_reserved'       => '版权所有。',
 

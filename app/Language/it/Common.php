@@ -21,6 +21,7 @@ return [
     'footer_about'          => 'Soluzioni industriali per rimorchi e cisterne, progettate per durata, sicurezza e prestazioni — costruite per le strade più difficili.',
     'footer_products_title' => 'Prodotti',
     'footer_contact_title'  => 'Contatti',
+    'footer_catalog'  => 'Catalogo prodotti (PDF)',
     'footer_slogan'         => 'Soluzioni affidabili per le lunghe percorrenze.',
     'rights_reserved'       => 'Tutti i diritti riservati.',
 
