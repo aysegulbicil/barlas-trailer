@@ -77,50 +77,70 @@ $jsVer  = is_file(FCPATH . 'assets/js/contact-foreman.js') ? filemtime(FCPATH . 
                  değiştirirsen ikisini birlikte güncelle. Reduced-motion'da statik poz. -->
             <aside class="contact-hero__stage" data-foreman-stage aria-hidden="true">
                 <!-- viewBox karaktere kırpık (çizim koordinatları 360x440 uzayında
-                     kalır — JS pivotları değişmez); karakter sütunu doldurur -->
-                <svg class="contact-foreman" data-foreman viewBox="56 84 280 340" focusable="false" aria-hidden="true">
+                     kalır); pivotlar JS'teki svgOrigin'lerle eşleşir: kalça (156,258),
+                     boyun (151,152), omuz (140,184), dirsek (177,207). Uzuvlar çift
+                     katman çizilir: altta kalın kontur (fm-*-line), üstte tulum dolgusu
+                     (fm-*-fill) → dolgulu şekil + kontur etkisi tek polyline'la. -->
+                <svg class="contact-foreman" data-foreman viewBox="40 78 300 348" focusable="false" aria-hidden="true">
                     <!-- zemin + gölge + blueprint süsleri -->
                     <ellipse class="fm-shadow" cx="176" cy="407" rx="118" ry="9"/>
-                    <path class="fm-ground" d="M24 404 H336"/>
-                    <path class="fm-deco" d="M312 84 v16 M304 92 h16"/>
-                    <path class="fm-deco" d="M44 130 v12 M38 136 h12"/>
+                    <path class="fm-ground" d="M44 404 H336"/>
+                    <path class="fm-deco" d="M312 92 v16 M304 100 h16"/>
+                    <path class="fm-deco" d="M52 130 v12 M46 136 h12"/>
                     <path class="fm-deco fm-deco--arc" d="M258 374 A100 100 0 0 0 304 296"/>
 
                     <g data-fm-root>
-                        <!-- bacaklar (statik; gövde kalçadan döner) -->
-                        <path class="fm-limb" d="M150 256 L112 330 L94 394"/>
-                        <path class="fm-boot" d="M86 398 H126"/>
-                        <path class="fm-limb" d="M162 258 L198 326 L212 394"/>
-                        <path class="fm-boot" d="M204 398 H248"/>
+                        <!-- bacaklar: tulum paçaları (statik; gövde kalçadan döner) -->
+                        <path class="fm-leg-line" d="M150 254 L118 320 L102 384"/>
+                        <path class="fm-leg-fill" d="M150 254 L118 320 L102 384"/>
+                        <path class="fm-boot" d="M114 376 L119 393 Q120 400 112 400 L84 400 Q77 399 79 392 Q82 382 93 377 Q104 372 114 376 Z"/>
+                        <path class="fm-leg-line" d="M162 256 L200 318 L214 376"/>
+                        <path class="fm-leg-fill" d="M162 256 L200 318 L214 376"/>
+                        <path class="fm-boot" d="M204 371 L200 393 Q199 399 208 399 L238 399 Q246 399 244 391 L241 380 Q238 372 228 371 Z"/>
 
-                        <!-- gövde: kalça pivotu (156,258) -->
+                        <!-- gövde: yakalı tulum, kalça pivotu (156,258) -->
                         <g data-fm-hips>
-                            <path class="fm-body" d="M146 260 L118 178 Q114 165 125 162 L152 156 Q163 154 165 165 L177 250 Q178 259 169 260 Z"/>
-                            <path class="fm-detail" d="M130 176 L143 222"/>
-                            <rect class="fm-detail" x="139" y="204" width="15" height="17" rx="2" transform="rotate(8 146 212)"/>
-                            <path class="fm-detail" d="M148 244 L176 242"/>
+                            <!-- ARKA kol gövdeden ÖNCE çizilir (torsonun arkasında kalır);
+                                 JS ön/arka kol gruplarını birlikte döndürür -->
+                            <g data-fm-arm-b>
+                                <path class="fm-arm-soft" d="M137 179 L173 201"/>
+                                <g data-fm-fore-b>
+                                    <path class="fm-arm-soft" d="M173 201 L215 219"/>
+                                    <circle class="fm-glove fm-glove--back" cx="218" cy="220" r="7"/>
+                                </g>
+                            </g>
+                            <path class="fm-body" d="M138 262 L120 186 Q116 170 130 166 L142 163 L144 150 Q152 146 160 148 L158 161 Q166 160 170 168 L180 254 Q181 262 172 263 L146 264 Q138 264 138 262 Z"/>
+                            <path class="fm-detail" d="M133 172 L146 226 M158 166 L167 224"/>
+                            <rect class="fm-pocket" x="143" y="208" width="17" height="18" rx="3" transform="rotate(7 151 217)"/>
+                            <path class="fm-detail" d="M140 246 L179 244"/>
 
-                            <!-- baş: boyun pivotu (137,161) -->
+                            <!-- baş: kulak + bıyık + baret; boyun pivotu (151,152) -->
                             <g data-fm-head>
-                                <circle class="fm-headc" cx="143" cy="134" r="20"/>
-                                <circle class="fm-eye" cx="152" cy="131" r="2.2"/>
-                                <path class="fm-detail" d="M162 136 l6 5"/>
-                                <path class="fm-helmet" d="M121 128 A22 22 0 0 1 163 121 L165 127 L121 133 Z"/>
-                                <path class="fm-helmet-brim" d="M160 124 L178 129"/>
+                                <circle class="fm-ear" cx="137" cy="129" r="5.5"/>
+                                <circle class="fm-headc" cx="152" cy="126" r="23"/>
+                                <circle class="fm-eye" cx="163" cy="119" r="2.8"/>
+                                <path class="fm-brow" d="M158 111 L168 112"/>
+                                <path class="fm-nose" d="M175 117 q7 5 -1 10"/>
+                                <path class="fm-mous" d="M161 134 q9 7 16 -1"/>
+                                <path class="fm-helmet" d="M130 118 A26 26 0 0 1 174 110 L175 117 L131 125 Z"/>
+                                <path class="fm-helmet-brim" d="M171 112 L193 118 Q196 122 190 123 L170 119 Z"/>
                             </g>
 
-                            <!-- kollar: omuz pivotu (134,186); önkollar: dirsek pivotu (172,206) -->
+                            <!-- kollar: omuz pivotu (140,184); önkollar: dirsek pivotu (177,207).
+                                 Omuz/dirsek kapakları eklem dönüşünde boşluk görünmesin diye. -->
                             <g data-fm-arms>
-                                <path class="fm-limb fm-limb--back" d="M133 182 L171 203"/>
-                                <path class="fm-limb" d="M136 189 L174 210"/>
                                 <g data-fm-fores>
-                                    <path class="fm-limb fm-limb--back" d="M171 203 L213 221"/>
-                                    <path class="fm-limb" d="M174 210 L217 229"/>
-                                    <circle class="fm-hand fm-hand--back" cx="215" cy="221" r="6.6"/>
-                                    <circle class="fm-hand" cx="220" cy="229" r="7.2"/>
+                                    <path class="fm-arm-line" d="M178 212 L221 229"/>
+                                    <path class="fm-arm-fill" d="M178 212 L221 229"/>
+                                    <circle class="fm-glove" cx="216" cy="235" r="4.5"/>
+                                    <circle class="fm-glove" cx="223" cy="230" r="8"/>
                                     <!-- halatın el ucu (JS rect ile okur; görünmez) -->
-                                    <circle data-hand-anchor cx="218" cy="226" r="1" fill="none" stroke="none"/>
+                                    <circle data-hand-anchor cx="222" cy="228" r="1" fill="none" stroke="none"/>
                                 </g>
+                                <path class="fm-arm-line" d="M142 190 L179 212"/>
+                                <path class="fm-arm-fill" d="M142 190 L179 212"/>
+                                <circle class="fm-elbow" cx="178" cy="211" r="5.5"/>
+                                <circle class="fm-shoulder" cx="142" cy="189" r="6.5"/>
                             </g>
                         </g>
                     </g>

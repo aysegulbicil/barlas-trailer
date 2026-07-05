@@ -84,17 +84,25 @@
         var root = foreman.querySelector('[data-fm-root]');
         var hips = foreman.querySelector('[data-fm-hips]');
         var head = foreman.querySelector('[data-fm-head]');
-        var arms = foreman.querySelector('[data-fm-arms]');
-        var fores = foreman.querySelector('[data-fm-fores]');
-        if (!ropePath || !hand || !root || !hips || !head || !arms || !fores) { revealConvoy(); return; }
+        var armF = foreman.querySelector('[data-fm-arms]');
+        var foreF = foreman.querySelector('[data-fm-fores]');
+        var armB = foreman.querySelector('[data-fm-arm-b]');   // torsonun arkasındaki kol
+        var foreB = foreman.querySelector('[data-fm-fore-b]');
+        if (!ropePath || !hand || !root || !hips || !head || !armF || !foreF) { revealConvoy(); return; }
 
-        /* Eklem pivotları — SVG (viewBox 0 0 360 440) koordinatlarıyla eşleşir.
+        /* Eklem pivotları — çizim koordinatlarıyla (360x440 uzayı) eşleşir.
            svgOrigin local user-space'te yorumlanır: üst grup dönünce alt pivot
-           onunla birlikte taşınır (omuz gövdeye yapışık kalır). */
-        gsap.set(hips,  { svgOrigin: '156 258' });
-        gsap.set(head,  { svgOrigin: '137 161' });
-        gsap.set(arms,  { svgOrigin: '134 186' });
-        gsap.set(fores, { svgOrigin: '172 206' });
+           onunla birlikte taşınır (omuz gövdeye yapışık kalır). Ön/arka kol ayrı
+           gruplardır (arka kol gövdenin altında çizilir); aynı tween ikisini
+           kendi pivotu etrafında birlikte döndürür. */
+        gsap.set(hips, { svgOrigin: '156 258' });
+        gsap.set(head, { svgOrigin: '151 152' });
+        gsap.set(armF, { svgOrigin: '140 184' });
+        gsap.set(foreF, { svgOrigin: '177 207' });
+        if (armB) gsap.set(armB, { svgOrigin: '137 180' });
+        if (foreB) gsap.set(foreB, { svgOrigin: '174 202' });
+        var arms = armB ? [armB, armF] : [armF];
+        var fores = foreB ? [foreB, foreF] : [foreF];
 
         /* Form fiziksel sağdan çekilir; RTL'de düzen aynalanır (usta sağda,
            form soldan gelir) → ofset işareti ters çevrilir. Usta SVG'si CSS'te
