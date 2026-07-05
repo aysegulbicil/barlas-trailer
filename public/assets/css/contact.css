@@ -1,8 +1,9 @@
 /* =====================================================================
    contact.css — İletişim sayfası (layouts/yeni.php)
 
-   Sol: büyük prosedürel 3D TIR sahnesi (canvas) + SVG yedeği — formu
-   "getirir". Sağ: cam panelli form. Altta: iletişim kartları ve harita.
+   Sol: line-art SVG usta — halata asıla asıla formu sahneye çeker
+   (contact-foreman.js sürer). Sağ: cam panelli form. Altta: iletişim
+   kartları ve harita. 3D/WebGL bağımlılığı yok; sahne mobilde de açık.
 
    Yalnızca yeni.css + theme-light.css token'larını kullanır; koyu/aydınlık
    temada otomatik uyumlu. Hareket: yalnızca transform/opacity. RTL güvenli.
@@ -45,60 +46,62 @@
 
 .contact-hero__inner { position: relative; }
 
-/* Konvoy: TIR sahnesi + çeki demiri + form, tek parça (sağdan sürülür) */
+/* Konvoy: usta sahnesi + halat katmanı + form, tek koordinat uzayı
+   (halat uçları bu kutuya göre hesaplanır — contact-foreman.js) */
 .contact-convoy {
+    position: relative;
     display: grid;
     gap: clamp(1.25rem, 0.6rem + 2vw, 2.6rem);
     align-items: center;
-    will-change: transform;
 }
 @media (min-width: 992px) {
     /* Geniş form (≈1000px) için konvoy, standart shell'den biraz taşar ve
-       ortada durur; tanker ile form yan yana dengeli kalır. */
+       ortada durur; usta ile form yan yana dengeli kalır. */
     .contact-hero__inner { max-width: min(1720px, 94vw); }
     .contact-convoy {
-        grid-template-columns: minmax(0, 0.5fr) auto minmax(0, 1fr);
+        grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
         justify-content: center;
     }
 }
-/* Mobilde: önce form, sonra (statik) TIR; çeki demiri gizli */
+/* Mobilde: usta üstte küçük, form altta (çekiş mobilde de oynar; halat
+   rect tabanlı çizildiği için açılı iner — kod farkı yok) */
 @media (max-width: 991px) {
     .contact-convoy      { grid-template-columns: 1fr; }
-    .contact-hero__main  { order: 1; max-width: 1000px; margin-inline: auto; width: 100%; }
-    .contact-hitch       { display: none; }
-    .contact-hero__stage { order: 2; }
+    .contact-hero__stage { order: 1; }
+    .contact-hero__main  { order: 2; max-width: 1000px; margin-inline: auto; width: 100%; }
 }
 
-/* ----------------------- Çeki demiri (hitch) ----------------------- */
-.contact-hitch {
-    position: relative;
-    align-self: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 54px;
-    height: 24px;
-    transform-origin: 0% 50%;
-    transition: opacity 0.5s var(--ease-out);
+/* ------------------------ Halat + çekme kulpu ----------------------- */
+/* Konvoyu kaplayan çizim katmanı; path'i JS her karede günceller.
+   Başta görünmez — yalnızca çekiş sırasında GSAP açar. */
+.contact-rope {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
 }
-.contact-hitch__beam {
-    flex: 1 1 auto;
-    height: 6px;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--blue), var(--blue-bright));
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 6px 16px -8px var(--blue-soft);
+.contact-rope path {
+    stroke: var(--blue-bright);
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-dasharray: 1 7;      /* örgü halat hissi: sık noktalı çizgi */
+    filter: drop-shadow(0 2px 6px var(--blue-soft));
 }
-.contact-hitch__ring {
-    flex: none;
-    width: 13px;
-    height: 13px;
+
+/* Formun sol kenarındaki çekme kulpu (halatın form ucu) */
+.contact-form__lug {
+    position: absolute;
+    inset-inline-start: -8px;
+    inset-block-start: 38%;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    border: 3px solid var(--blue-bright);
+    border: 3.5px solid var(--blue-bright);
     background: var(--bg-1);
+    box-shadow: 0 4px 12px -4px var(--blue-soft);
 }
-.contact-hitch__ring--truck { margin-inline-end: -3px; }
-.contact-hitch__ring--form  { margin-inline-start: -3px; }
-.contact-hero__stage.is-done ~ .contact-hitch { opacity: 0; }
 
 /* --------------------------- Hero başlık ---------------------------- */
 .contact-eyebrow {
@@ -148,9 +151,9 @@
         -webkit-backdrop-filter: blur(14px) saturate(1.1);
         backdrop-filter: blur(14px) saturate(1.1);
     }
-    /* Başlangıç takılması: konvoy translateX ile sürülürken cam blur HER KAREDE
-       yeniden rasterize edilir → jank. Drive-in boyunca blur'u kapat (JS is-driving
-       ekler); araç durunca geri açılır. Görsel fark fark edilmez, akıcılık büyük. */
+    /* Akıcılık: form translateX ile çekilirken cam blur HER KAREDE yeniden
+       rasterize edilir → jank. Çekiş boyunca blur'u kapat (JS is-driving ekler);
+       form oturunca geri açılır. Görsel fark fark edilmez, akıcılık büyük. */
     .contact-convoy.is-driving .contact-form {
         -webkit-backdrop-filter: none;
         backdrop-filter: none;
@@ -337,54 +340,69 @@
 .contact-form__success-text { color: var(--ink-2); max-width: 38ch; }
 @keyframes ctPop { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
 
-/* ---------------------------- 3D SAHNE ------------------------------ */
+/* --------------------------- USTA SAHNESİ ---------------------------- */
 .contact-hero__stage {
     position: relative;
-    min-height: clamp(300px, 50vw, 600px);
+    min-height: clamp(220px, 40vw, 560px);
     border-radius: var(--radius);
-}
-.contact-stage__mount { position: absolute; inset: 0; }
-.contact-stage__mount canvas { width: 100% !important; height: 100% !important; display: block; }
-
-/* NOT: SVG placeholder/yedeği (.contact-stage__fallback) tamamen KALDIRILDI
-   (kullanıcı isteği): başta görsel yok. 3D teslimat aktif değilse sahne hiç
-   gösterilmez (aşağıdaki "html:not(.contact-deliver)" kuralı), bu yüzden boş
-   sahne kutusu da kalmaz — yalnızca form görünür. */
-
-.contact-stage__cap {
-    position: absolute;
-    inset-block-end: clamp(0.5rem, 2vw, 1.4rem);
-    inset-inline-start: clamp(0.5rem, 2vw, 1.2rem);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0.9rem;
-    border-radius: var(--pill);
-    background: color-mix(in srgb, var(--bg-1) 80%, transparent);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    border: 1px solid var(--line-2);
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--ink-2);
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity var(--t-base) var(--ease-out), transform var(--t-base) var(--ease-out);
-}
-.contact-hero__stage.is-arrived .contact-stage__cap { opacity: 1; transform: none; }
-.contact-stage__cap-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent);
-    animation: ctPing 1.8s var(--ease-out) infinite;
-}
-@keyframes ctPing {
-    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); }
-    70%, 100% { box-shadow: 0 0 0 10px transparent; }
+    display: grid;
+    place-items: end center;      /* usta zemin çizgisiyle alta oturur */
 }
 
-/* Gönderim sonrası onay (TIR yola çıkınca stage'de belirir) */
+/* Line-art usta: tema token'larından türeyen çizgi renkleri. Eklem
+   dönüşleri GSAP'tan (inline transform) gelir; burada yalnız görünüm. */
+.contact-foreman {
+    --fm-line:   color-mix(in srgb, var(--ink-1) 84%, transparent);
+    --fm-soft:   color-mix(in srgb, var(--ink-1) 46%, transparent);
+    --fm-accent: var(--blue-bright);
+    width: 100%;
+    height: auto;
+    max-width: 460px;
+    max-height: 540px;
+    display: block;
+    transition: opacity 0.5s var(--ease-out);
+}
+/* RTL: usta aynalanır (varsayılan çizim sağa/forma bakar; RTL'de form solda).
+   GSAP yalnız İÇ gruplara dokunur → kök SVG'deki CSS transform'la çakışmaz. */
+[dir="rtl"] .contact-foreman { transform: scaleX(-1); }
+
+.contact-foreman .fm-shadow { fill: color-mix(in srgb, var(--ink-1) 9%, transparent); }
+.contact-foreman .fm-ground { stroke: var(--line-2); stroke-width: 2; fill: none; }
+.contact-foreman .fm-deco   { stroke: var(--fm-soft); stroke-width: 1.6; fill: none; opacity: 0.5; }
+.contact-foreman .fm-deco--arc { stroke-dasharray: 5 7; }
+.contact-foreman .fm-limb {
+    stroke: var(--fm-line);
+    stroke-width: 7;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.contact-foreman .fm-limb--back { stroke: var(--fm-soft); }
+.contact-foreman .fm-boot { stroke: var(--fm-line); stroke-width: 10; fill: none; stroke-linecap: round; }
+.contact-foreman .fm-body {
+    stroke: var(--fm-line);
+    stroke-width: 3;
+    stroke-linejoin: round;
+    fill: color-mix(in srgb, var(--blue) 16%, transparent);
+}
+.contact-foreman .fm-detail { stroke: var(--fm-soft); stroke-width: 2; fill: none; stroke-linecap: round; }
+.contact-foreman .fm-headc { stroke: var(--fm-line); stroke-width: 3; fill: none; }
+.contact-foreman .fm-eye { fill: var(--fm-line); }
+.contact-foreman .fm-helmet {
+    stroke: var(--fm-accent);
+    stroke-width: 3;
+    stroke-linejoin: round;
+    fill: color-mix(in srgb, var(--blue-bright) 22%, transparent);
+}
+.contact-foreman .fm-helmet-brim { stroke: var(--fm-accent); stroke-width: 4; stroke-linecap: round; fill: none; }
+.contact-foreman .fm-hand {
+    fill: color-mix(in srgb, var(--blue-bright) 30%, var(--bg-1));
+    stroke: var(--fm-line);
+    stroke-width: 2.5;
+}
+.contact-foreman .fm-hand--back { stroke: var(--fm-soft); }
+
+/* Gönderim sonrası onay (usta selam verince stage'de belirir) */
 .contact-stage__done {
     position: absolute;
     inset: 0;
@@ -401,7 +419,8 @@
     transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
 }
 .contact-hero__stage.is-done .contact-stage__done { opacity: 1; transform: none; }
-.contact-hero__stage.is-done .contact-stage__cap { opacity: 0; }
+/* Onay kartı görünürken usta silüete düşer (kart öne çıksın) */
+.contact-hero__stage.is-done .contact-foreman { opacity: 0.16; }
 .contact-stage__done-ic {
     width: 76px; height: 76px;
     display: grid;
@@ -416,15 +435,12 @@
 .contact-stage__done-text { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; color: var(--ink-1); max-width: 22ch; }
 
 @media (max-width: 991px) {
-    .contact-stage__cap { display: none; }
-    /* Hitch mobilde gizli. NOT: bu kural, temel ".contact-hitch{display:flex}"
-       kuralından SONRA gelmeli; yukarıdaki erken media-query (satır ~68) kaynak
-       sırasında temel kuraldan önce olduğu için eziliyordu. Burada kesin gizlenir. */
-    .contact-hitch { display: none; }
-    /* Mobilde TIR sahnesi (3D yok + SVG yedeği) HİÇ gösterilmesin (kullanıcı
-       isteği): sadece form kalır. Temel ".contact-hero__stage" kuralından
-       sonra geldiği için kesin gizlenir. */
-    .contact-hero__stage { display: none; }
+    /* Mobilde usta form üstünde küçük bir sahnede oynar (SVG+GSAP hafif —
+       3D'nin aksine mobilde de açık); halat açılı olarak aşağıdaki forma iner. */
+    .contact-hero__stage { min-height: 0; }
+    .contact-foreman { max-width: 300px; max-height: 300px; }
+    .contact-stage__done-ic { width: 56px; height: 56px; }
+    .contact-stage__done-ic svg { width: 26px; height: 26px; }
 }
 
 /* ---------------------- İLETİŞİM BİLGİLERİ -------------------------- */
@@ -510,16 +526,6 @@ a.contact-card:hover {
 @media (max-width: 700px) { .contact-map__frame { aspect-ratio: 4 / 3; } }
 
 /* --------------------------- Giriş hareketi ------------------------- */
-/* Konvoy (TIR + çeki demiri + form) teslimat yolundayken sağ dışta bekler;
-   JS onu içeri sürer. JS yoksa/başarısızsa güvenlik zamanlayıcısı yerine
-   oturtur. Teslimat aktif değilse (mobil / WebGL yok / reduced-motion)
-   konvoy normal/sabit görünür. */
-/* Teslimat artık YERİNDE kurgulanır: konvoy ekran dışına İTİLMEZ (başlık + form
-   baştan görünür → boş ekran yok). TIR canvas'ı yüklenince JS ile belirip
-   süspansiyonla oturur, çeki demiri gerilir, form hafifçe yerine yükselir.
-   (Eski "translateX(62vw)" tüm konvoyu dışarı itip model yüklenene kadar bomboş
-   ekran bırakıyordu — kullanıcı bunu bildirdi.) Bu yüzden burada konvoya hiçbir
-   başlangıç ofseti uygulanmaz; giriş tamamen JS'te (startDriveIn). */
 html.contact-anim .contact-hero__intro .contact-hero__title,
 html.contact-anim .contact-hero__intro .contact-hero__lead { animation: ctLift 640ms var(--ease-out) both; }
 html.contact-anim .contact-hero__intro .contact-hero__lead { animation-delay: 90ms; }
@@ -528,15 +534,14 @@ html.contact-anim .contact-hero__intro .contact-hero__lead { animation-delay: 90
     to { opacity: 1; transform: none; }
 }
 
-/* TESLİMAT (3D) AKTİF: form, TIR ile BİRLİKTE sağdan kayarak "teslim" edilir.
-   - Yalnızca html.contact-deliver'da (masaüstü + WebGL + hareket) gizli başlar.
-     Mobil / reduced-motion / WebGL yok / JS yok → bu kural uygulanmaz, form
-     normal ve sabit görünür (form HER ZAMAN kullanılabilir kalır).
-   - JS startDriveIn'de .is-delivered ekleyince form yerine kayar (TIR girişiyle
-     senkron); .is-driving sürdükçe cam blur kapalı (yukarıda) → akıcı, jank yok.
-   - GÜVENLİK: JS startDriveIn'i geç tetiklerse (yavaş model) ya da hiç yüklenmezse
-     ctFormSafety en geç ~1.2 sn'de formu yine açar → form uzun süre gizli/boş kalmaz
-     (yavaş ağda bile en fazla 1.2 sn'lik bir bekleme). */
+/* ÇEKİŞ AKTİF (html.contact-deliver — hareket açık, JS var):
+   - Form gizli + hafif sağda başlar; GSAP (contact-foreman.js) is-pulled
+     ekleyip formu ekran dışından adım adım çeker (inline transform).
+   - GÜVENLİK: GSAP/CDN gelmezse ctFormSafety en geç ~1.2 sn'de formu açar
+     → form asla uzun süre gizli kalmaz. is-pulled bu animasyonu kapatır;
+     fill'li CSS animasyonu inline stili ezeceği için bu şart.
+   - Reduced-motion / JS yok → contact-deliver hiç eklenmez; form normal ve
+     sabit görünür (form HER ZAMAN kullanılabilir kalır). */
 html.contact-deliver .contact-convoy .contact-form {
     opacity: 0;
     transform: translateX(46px);
@@ -544,34 +549,18 @@ html.contact-deliver .contact-convoy .contact-form {
     animation: ctFormSafety 1ms linear 1.2s forwards;
 }
 @keyframes ctFormSafety { to { opacity: 1; transform: none; } }
-html.contact-deliver .contact-convoy.is-delivered .contact-form {
-    opacity: 1;
-    transform: none;
-    animation: none;
-    /* TIR girişiyle TAM aynı anda başlasın (gecikme yok → "araç formu çekiyor") */
-    transition: opacity 0.7s var(--ease-out), transform 0.9s var(--ease-out);
-    /* Giriş bitince GPU katmanını bırak (will-change kalıcı kalmasın). */
-    will-change: auto;
+html.contact-deliver .contact-convoy.is-pulled .contact-form {
+    animation: none;   /* kontrol GSAP'ta: opacity/transform inline gelir */
 }
 
-/* 3D teslimat aktif DEĞİLSE (mobil / WebGL yok / reduced-motion / JS yok):
-   placeholder kaldırıldığı için boş TIR sahnesi gösterilmez — sahne + çeki demiri
-   gizlenir, konvoy tek sütuna iner, yalnızca form kalır. (contact-deliver, <head>
-   içindeki satır içi script ile ilk boyamadan önce eklenir → FOUC yok.) */
-html:not(.contact-deliver) .contact-hero__stage,
-html:not(.contact-deliver) .contact-hitch { display: none; }
-html:not(.contact-deliver) .contact-convoy { grid-template-columns: 1fr; }
-html:not(.contact-deliver) .contact-hero__main { max-width: 1000px; margin-inline: auto; width: 100%; }
+/* Çekiş aktif DEĞİLSE (reduced-motion / JS yok): usta statik pozda görünür
+   kalır (anlamlı bir illüstrasyon), yalnız halat çizilmez. (contact-deliver,
+   <head> içindeki satır içi script ile ilk boyamadan önce eklenir → FOUC yok.) */
+html:not(.contact-deliver) .contact-rope { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
     html.contact-anim .contact-hero__intro .contact-hero__title,
     html.contact-anim .contact-hero__intro .contact-hero__lead { animation: none; }
-    .contact-form__success-ic, .contact-stage__cap-dot, .contact-stage__done-ic { animation: none; }
-    .contact-stage__cap, .contact-stage__done, .contact-form.is-sending .contact-form__inner { transition: none; }
+    .contact-form__success-ic, .contact-stage__done-ic { animation: none; }
+    .contact-stage__done, .contact-form.is-sending .contact-form__inner { transition: none; }
 }
-
-/* =====================================================================
-   3D TIR sahnesi GERİ AÇILDI: sahne + çeki demiri yeniden görünür; konvoy
-   yukarıdaki iki sütunlu (stage | hitch | form) düzeniyle çalışır. Eski
-   "display:none" gizleme bloğu kaldırıldı (süspansiyonlu teslimat geri geldi).
-   ===================================================================== */

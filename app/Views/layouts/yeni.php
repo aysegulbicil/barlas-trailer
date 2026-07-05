@@ -64,11 +64,10 @@ $asset = static function (string $path): string {
             <!-- Statik hero görselini erken indir → hero'nun ilk boyası hızlansın.
                  WebP ~139KB (PNG 2.1MB); URL hero-static.php ile BİREBİR aynı olmalı. -->
             <link rel="preload" as="image" type="image/webp" href="<?= $asset('assets/images/25a460c4-3549-4d3c-9fcc-3140cf583b67.webp') ?>" fetchpriority="high">
-        <?php else: ?>
-            <!-- İletişim sayfası teslimat sahnesinin modeli erken indirilsin:
-                 araç + form beraber gelsin diye bekleme kısalır -->
-            <link rel="preload" as="fetch" crossorigin href="<?= $asset('assets/models/tanker-1.glb') ?>">
         <?php endif; ?>
+        <!-- NOT: iletişim sayfasının tanker-1.glb preload'u kaldırıldı — sahne
+             artık 3D değil, SVG usta (contact-foreman.js); GLB gerekmiyor.
+             preconnect iletişimde kalır (GSAP aynı CDN'den geliyor). -->
     <?php endif; ?>
 
     <!-- Ortak header: eski tasarımın token + menü/mega stilleri,
@@ -177,8 +176,8 @@ $asset = static function (string $path): string {
         // kullanmaz. Aktif ana sayfa hero'su artık statik görsel olduğundan bu
         // model reachable değildir (indirilmez).
         window.__BARLAS_HERO_MODEL = '<?= $asset('assets/models/tanker-3.glb') ?>';
-        // İletişim sayfası 3D sahnesinde sergilenen model: tanker-1.glb
-        window.__BARLAS_CONTACT_MODEL = '<?= $asset('assets/models/tanker-1.glb') ?>';
+        // NOT: __BARLAS_CONTACT_MODEL kaldırıldı — iletişim sahnesi artık 3D değil,
+        // SVG usta + GSAP (contact-foreman.js) ile çalışır.
         (function () {
             function boot() {
                 var s = document.createElement('script');

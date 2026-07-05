@@ -3,14 +3,16 @@
 /**
  * İletişim sayfası — yeni arayüz (layouts/yeni.php).
  *
- * Sol: prosedürel 3D TIR sahnesi (büyük) — çekici + tanker sağdan girer,
- * tekerlek döner, süspansiyonla yaylanarak park eder ve sağdaki formu
- * "getirir/teslim eder" (form baştan sabit değildir, TIR varınca belirir).
- * Form gönderilince TIR yükü alıp yola çıkar, sahnede "yola çıktı" onayı belirir.
+ * Sol: line-art SVG usta — halata asıla asıla sağdaki formu sahneye çeker
+ * (form gizli başlar, her asılışta bir adım yaklaşır, oturunca usta halatı
+ * bırakıp doğrulur). Form gönderilince usta kolunu kaldırıp selam verir,
+ * sahnede onay belirir. Halat, ustanın eli ile formun kulpu arasında JS'te
+ * her karede çizilir (contact-foreman.js) — mobil ve RTL'de de çalışır.
  * Sağ: cam panelli iletişim formu (gerçek POST → Contact::submit).
  * Altta: telefon / e-posta / adres kartları ve harita.
  *
- * WebGL/JS yoksa veya reduced-motion'da SVG yedeği görünür, form sabit kalır.
+ * Reduced-motion / JS yok → usta statik pozda durur, halat çizilmez, form
+ * sabit görünür (contact-deliver eklenmez). 3D/WebGL bağımlılığı KALDIRILDI.
  * Tüm metinler dil dosyalarından (Contact.* / Common.*), bağlantılar locale_url().
  */
 $this->extend('layouts/yeni');
@@ -35,29 +37,22 @@ $mapLink   = 'https://maps.app.goo.gl/kC6t9j8MRdYTsojn7';
 
 /* Sayfaya özel asset sürümleri (layout'taki $asset kapanışı burada yok) */
 $cssVer = is_file(FCPATH . 'assets/css/contact.css') ? filemtime(FCPATH . 'assets/css/contact.css') : '1';
-$jsVer  = is_file(FCPATH . 'assets/js/contact-tanker.js') ? filemtime(FCPATH . 'assets/js/contact-tanker.js') : '1';
+$jsVer  = is_file(FCPATH . 'assets/js/contact-foreman.js') ? filemtime(FCPATH . 'assets/js/contact-foreman.js') : '1';
 ?>
 
 <?= $this->section('styles') ?>
 <link rel="stylesheet" href="<?= base_url('assets/css/contact.css') ?>?v=<?= $cssVer ?>">
-<!-- Girişte titreme olmasın: hareket açıksa anim sınıfını, 3D teslimat
-     koşulları varsa (geniş ekran + WebGL) deliver sınıfını boyamadan önce ekle. -->
+<!-- Girişte titreme olmasın: hareket açıksa anim + deliver sınıflarını
+     boyamadan önce ekle. Usta sahnesi SVG+GSAP olduğundan WebGL/genişlik
+     şartı yok — mobil dahil; yalnız reduced-motion'da kapalı (form sabit). -->
 <script>
     (function () {
         try {
             var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (!rm) document.documentElement.classList.add('contact-anim');
-            function wgl() {
-                try {
-                    var c = document.createElement('canvas');
-                    return !!(window.WebGLRenderingContext &&
-                        (c.getContext('webgl') || c.getContext('experimental-webgl')));
-                } catch (e) { return false; }
+            if (!rm) {
+                document.documentElement.classList.add('contact-anim');
+                document.documentElement.classList.add('contact-deliver');
             }
-            // 3D teslimat sahnesi: yalnızca MASAÜSTÜ (≥992px) + hareket açık + WebGL.
-            // Mobilde 3D YOK → contact-deliver eklenmez, konvoy normal akar ve SVG
-            // tanker yedeği görünür (form sabit/normal). reduced-motion'da da kapalı.
-            if (!rm && wgl() && window.innerWidth >= 992) document.documentElement.classList.add('contact-deliver');
         } catch (e) {}
     })();
 </script>
@@ -76,14 +71,62 @@ $jsVer  = is_file(FCPATH . 'assets/js/contact-tanker.js') ? filemtime(FCPATH . '
         <div class="shell contact-hero__inner">
           <div class="contact-convoy" data-convoy>
 
-            <!-- Sol: büyük 3D TIR sahnesi (formu çekip getirir). Placeholder/SVG
-                 yedeği KALDIRILDI (kullanıcı isteği): başta görsel yok; 3D teslimat
-                 aktif değilse (mobil / WebGL yok / reduced-motion) sahne hiç
-                 gösterilmez (contact.css'teki html:not(.contact-deliver) kuralı). -->
-            <aside class="contact-hero__stage" data-contact-stage aria-hidden="true">
-                <div class="contact-stage__mount" data-stage-mount></div>
+            <!-- Sol: line-art usta (halatla formu çeker). Eklemli gruplar
+                 (data-fm-*) contact-foreman.js'teki GSAP rig'i tarafından döndürülür;
+                 pivotlar JS'teki svgOrigin değerleriyle eşleşir — koordinat
+                 değiştirirsen ikisini birlikte güncelle. Reduced-motion'da statik poz. -->
+            <aside class="contact-hero__stage" data-foreman-stage aria-hidden="true">
+                <!-- viewBox karaktere kırpık (çizim koordinatları 360x440 uzayında
+                     kalır — JS pivotları değişmez); karakter sütunu doldurur -->
+                <svg class="contact-foreman" data-foreman viewBox="56 84 280 340" focusable="false" aria-hidden="true">
+                    <!-- zemin + gölge + blueprint süsleri -->
+                    <ellipse class="fm-shadow" cx="176" cy="407" rx="118" ry="9"/>
+                    <path class="fm-ground" d="M24 404 H336"/>
+                    <path class="fm-deco" d="M312 84 v16 M304 92 h16"/>
+                    <path class="fm-deco" d="M44 130 v12 M38 136 h12"/>
+                    <path class="fm-deco fm-deco--arc" d="M258 374 A100 100 0 0 0 304 296"/>
 
-                <!-- Gönderim sonrası: TIR yola çıkınca beliren onay -->
+                    <g data-fm-root>
+                        <!-- bacaklar (statik; gövde kalçadan döner) -->
+                        <path class="fm-limb" d="M150 256 L112 330 L94 394"/>
+                        <path class="fm-boot" d="M86 398 H126"/>
+                        <path class="fm-limb" d="M162 258 L198 326 L212 394"/>
+                        <path class="fm-boot" d="M204 398 H248"/>
+
+                        <!-- gövde: kalça pivotu (156,258) -->
+                        <g data-fm-hips>
+                            <path class="fm-body" d="M146 260 L118 178 Q114 165 125 162 L152 156 Q163 154 165 165 L177 250 Q178 259 169 260 Z"/>
+                            <path class="fm-detail" d="M130 176 L143 222"/>
+                            <rect class="fm-detail" x="139" y="204" width="15" height="17" rx="2" transform="rotate(8 146 212)"/>
+                            <path class="fm-detail" d="M148 244 L176 242"/>
+
+                            <!-- baş: boyun pivotu (137,161) -->
+                            <g data-fm-head>
+                                <circle class="fm-headc" cx="143" cy="134" r="20"/>
+                                <circle class="fm-eye" cx="152" cy="131" r="2.2"/>
+                                <path class="fm-detail" d="M162 136 l6 5"/>
+                                <path class="fm-helmet" d="M121 128 A22 22 0 0 1 163 121 L165 127 L121 133 Z"/>
+                                <path class="fm-helmet-brim" d="M160 124 L178 129"/>
+                            </g>
+
+                            <!-- kollar: omuz pivotu (134,186); önkollar: dirsek pivotu (172,206) -->
+                            <g data-fm-arms>
+                                <path class="fm-limb fm-limb--back" d="M133 182 L171 203"/>
+                                <path class="fm-limb" d="M136 189 L174 210"/>
+                                <g data-fm-fores>
+                                    <path class="fm-limb fm-limb--back" d="M171 203 L213 221"/>
+                                    <path class="fm-limb" d="M174 210 L217 229"/>
+                                    <circle class="fm-hand fm-hand--back" cx="215" cy="221" r="6.6"/>
+                                    <circle class="fm-hand" cx="220" cy="229" r="7.2"/>
+                                    <!-- halatın el ucu (JS rect ile okur; görünmez) -->
+                                    <circle data-hand-anchor cx="218" cy="226" r="1" fill="none" stroke="none"/>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+
+                <!-- Gönderim sonrası: usta selam verince beliren onay -->
                 <div class="contact-stage__done" data-stage-done aria-hidden="true">
                     <span class="contact-stage__done-ic">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
@@ -92,12 +135,11 @@ $jsVer  = is_file(FCPATH . 'assets/js/contact-tanker.js') ? filemtime(FCPATH . '
                 </div>
             </aside>
 
-            <!-- Çeki demiri: tankerin arkasını forma bağlar (konvoy hissi) -->
-            <div class="contact-hitch" data-hitch aria-hidden="true">
-                <span class="contact-hitch__ring contact-hitch__ring--truck"></span>
-                <span class="contact-hitch__beam"></span>
-                <span class="contact-hitch__ring contact-hitch__ring--form"></span>
-            </div>
+            <!-- Halat: ustanın eli ile formun kulpu arasında JS'te çizilir
+                 (konvoyu kaplayan katman; viewBox her karede px'e eşitlenir) -->
+            <svg class="contact-rope" data-rope aria-hidden="true" focusable="false" preserveAspectRatio="none" viewBox="0 0 100 100">
+                <path d="M0 0" fill="none"/>
+            </svg>
 
             <!-- Sağ: başlık + form (çekilen yük) -->
             <div class="contact-hero__main">
@@ -121,6 +163,9 @@ $jsVer  = is_file(FCPATH . 'assets/js/contact-tanker.js') ? filemtime(FCPATH . '
                       data-msg-generic="<?= esc(lang('Contact.form_error'), 'attr') ?>"
                       novalidate>
                     <?= csrf_field() ?>
+
+                    <!-- Çekme kulpu: halatın form ucu (JS rect ile okur) -->
+                    <span class="contact-form__lug" data-form-lug aria-hidden="true"></span>
 
                     <div class="contact-form__inner">
                         <div class="contact-form__head">
@@ -299,5 +344,5 @@ $jsVer  = is_file(FCPATH . 'assets/js/contact-tanker.js') ? filemtime(FCPATH . '
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<script src="<?= base_url('assets/js/contact-tanker.js') ?>?v=<?= $jsVer ?>" defer></script>
+<script src="<?= base_url('assets/js/contact-foreman.js') ?>?v=<?= $jsVer ?>" defer></script>
 <?= $this->endSection() ?>
