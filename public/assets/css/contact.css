@@ -82,15 +82,22 @@
     pointer-events: none;
     opacity: 0;
 }
-.contact-rope path {
-    stroke: var(--blue-bright);
-    stroke-width: 3.5;
-    stroke-linecap: round;
-    stroke-dasharray: 1 7;      /* örgü halat hissi: sık noktalı çizgi */
-    filter: drop-shadow(0 2px 6px var(--blue-soft));
+/* Katmanlı halat: koyu kenevir çekirdeği + açık parlama şeridi + lif
+   kesikleri (örgü dokusu). Kalınlıklar JS'ten sürülür (gerginlikte halat
+   incelir — esneme hissi); burada yalnız renkler. Eski drop-shadow filtresi
+   kaldırıldı: path her karede yeniden çiziliyor, filtre kare başı pahalıydı. */
+.contact-rope path { fill: none; stroke-linecap: round; }
+.contact-rope .rope-core  { stroke: color-mix(in srgb, #8a6136 84%, var(--bg-1)); }
+.contact-rope .rope-sheen { stroke: color-mix(in srgb, #ecc98f 78%, var(--bg-1)); opacity: 0.85; }
+.contact-rope .rope-fiber { stroke: color-mix(in srgb, #3a2a14 60%, transparent); stroke-dasharray: 7 11; opacity: 0.5; }
+.contact-rope .rope-knot  {
+    fill: color-mix(in srgb, #8a6136 84%, var(--bg-1));
+    stroke: color-mix(in srgb, var(--ink-1) 65%, transparent);
+    stroke-width: 2;
 }
 
-/* Formun sol kenarındaki çekme kulpu (halatın form ucu) */
+/* Formun sol kenarındaki çekme kulpu (halatın form ucu). Ortası şeffaf:
+   halatın düğümü halkanın içinden görünür → "gerçekten bağlı" hissi. */
 .contact-form__lug {
     position: absolute;
     inset-inline-start: -8px;
@@ -98,8 +105,8 @@
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    border: 3.5px solid var(--blue-bright);
-    background: var(--bg-1);
+    border: 3.5px solid color-mix(in srgb, var(--ink-1) 42%, var(--blue-bright));
+    background: transparent;
     box-shadow: 0 4px 12px -4px var(--blue-soft);
 }
 

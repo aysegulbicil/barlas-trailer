@@ -164,9 +164,15 @@ $jsVer  = is_file(FCPATH . 'assets/js/contact-foreman.js') ? filemtime(FCPATH . 
                                 <path class="fm-face-line" d="M138.3 128.4 Q140.8 130 139 133"/>
                                 <path class="fm-hair" d="M143.5 115.5 L148 116.3 L146.2 127 Q143.6 126 143 122 Z"/>
                                 <path class="fm-hair" d="M152.5 109.5 L168.5 112 Q171.5 112.8 170.8 116.8 L152 113.8 Q149.5 112.8 152.5 109.5 Z"/>
-                                <ellipse class="fm-eye-w" cx="162" cy="120.5" rx="5" ry="5.6"/>
-                                <circle class="fm-eye-p" cx="163.8" cy="121" r="2.3"/>
-                                <circle class="fm-eye-g" cx="162.5" cy="118.8" r="1"/>
+                                <!-- göz: grup kırpma için (JS scaleY), göz bebeği
+                                     grubu hover bakışı için ayrı kayar -->
+                                <g data-fm-eye>
+                                    <ellipse class="fm-eye-w" cx="162" cy="120.5" rx="5" ry="5.6"/>
+                                    <g data-fm-pupil>
+                                        <circle class="fm-eye-p" cx="163.8" cy="121" r="2.3"/>
+                                        <circle class="fm-eye-g" cx="162.5" cy="118.8" r="1"/>
+                                    </g>
+                                </g>
                                 <path class="fm-mouth" d="M158.5 141.5 Q164.5 150.5 172 140.5 Q169.5 149.5 162.5 148.5 Q159 146.5 158.5 141.5 Z"/>
                                 <path class="fm-teeth" d="M160.3 142.1 Q165 147 170.2 140.9 L169.5 139.4 Q164.8 144.4 161.5 140.6 Z"/>
                                 <path class="fm-hair" d="M172.5 132.5 Q173.5 130 170.5 129.5 Q162.5 127.6 157 129.9 Q154 131.5 155.2 133.9 Q156.8 136.3 162 136 Q168.8 135.6 172.5 132.5 Z"/>
@@ -215,9 +221,16 @@ $jsVer  = is_file(FCPATH . 'assets/js/contact-foreman.js') ? filemtime(FCPATH . 
             </aside>
 
             <!-- Halat: ustanın eli ile formun kulpu arasında JS'te çizilir
-                 (konvoyu kaplayan katman; viewBox her karede px'e eşitlenir) -->
+                 (konvoyu kaplayan katman; viewBox her karede px'e eşitlenir).
+                 Üç katman aynı path'i paylaşır: çekirdek + parlama + lif
+                 kesikleri (örgü dokusu); kalınlıkları gerginliğe göre JS sürer.
+                 Sıra JS'teki baseW dizisiyle eşleşir: core, sheen, fiber. -->
             <svg class="contact-rope" data-rope aria-hidden="true" focusable="false" preserveAspectRatio="none" viewBox="0 0 100 100">
-                <path d="M0 0" fill="none"/>
+                <path class="rope-core" d="M0 0" fill="none"/>
+                <path class="rope-sheen" d="M0 0" fill="none"/>
+                <path class="rope-fiber" d="M0 0" fill="none"/>
+                <!-- düğüm: halatın kulba bağlandığı uç (her karede kulba oturur) -->
+                <circle class="rope-knot" data-rope-knot cx="-20" cy="-20" r="4.4"/>
             </svg>
 
             <!-- Sağ: başlık + form (çekilen yük) -->

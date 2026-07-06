@@ -65,7 +65,9 @@
     });
 
     /* ===================================================================
-       USTA SAHNESİ: halat çekişi → form teslimi → idle → selam
+       USTA SAHNESİ: beklenti → gerilim → asılışlar → teslim → canlı idle
+       Tüm süre/easing/poz değerleri TUNE'dadır (magic number yok) — sahne
+       oradan ayarlanır. Yalnız transform+opacity anime edilir (layout yok).
        =================================================================== */
 
     function initCrewScene() {
@@ -81,16 +83,66 @@
         if (!convoyEl || !stage || !foreman || !rope || !form || !lug) { revealConvoy(); return; }
         if (!gsap) { revealConvoy(); return; }
 
-        var ropePath = rope.querySelector('path');
+        var ropeLayers = rope.querySelectorAll('path');
+        var knot = rope.querySelector('[data-rope-knot]');
         var hand = foreman.querySelector('[data-hand-anchor]');
         var root = foreman.querySelector('[data-fm-root]');
         var hips = foreman.querySelector('[data-fm-hips]');
         var head = foreman.querySelector('[data-fm-head]');
+        var eye = foreman.querySelector('[data-fm-eye]');
+        var pupil = foreman.querySelector('[data-fm-pupil]');
         var armF = foreman.querySelector('[data-fm-arms]');
         var foreF = foreman.querySelector('[data-fm-fores]');
         var armB = foreman.querySelector('[data-fm-arm-b]');   // torsonun arkasındaki kol
         var foreB = foreman.querySelector('[data-fm-fore-b]');
-        if (!ropePath || !hand || !root || !hips || !head || !armF || !foreF) { revealConvoy(); return; }
+        if (!ropeLayers.length || !hand || !root || !hips || !head || !armF || !foreF) { revealConvoy(); return; }
+
+        /* ---------------- TUNE: sahnenin tek ayar tablosu ----------------
+           t: süreler (sn) · ease: GSAP easing'leri · pose: eklem açıları (°)
+           rope: halat fiziği (px) · Mobil: aynı koreografi, bir asılış az +
+           genel tempo hızlı (timeline.timeScale) → kısa ve hafif sürüm. */
+        var MOBILE = window.matchMedia('(max-width: 991px)').matches;
+        var TUNE = {
+            speed: MOBILE ? 1.3 : 1,
+            steps: MOBILE
+                ? [{ to: 0.44, slip: 0.02 }, { to: 0, slip: 0 }]
+                : [{ to: 0.56, slip: 0.025 }, { to: 0.22, slip: 0.02 }, { to: 0, slip: 0 }],
+            rope: {
+                slack: 46, taut: 4, rest: 34, release: 44,   // sarkma (px)
+                preTension: 14,                              // gerilim anı sarkması
+                coreW: 4.2, sheenW: 1.6, fiberW: 4.2,        // katman kalınlıkları (px)
+                tenseScale: 0.78,                            // tam gerginlikte incelme (esneme hissi)
+                knotR: 4.4
+            },
+            pose: {
+                reach:  { hips: -3,  head: 3,  arm: -22, fore: 17 },   // uzanma
+                brace:  { hips: -5.5, head: 4.5, arm: -25, fore: 19 }, // beklenti: geriye yaslan, omuz gerilir
+                yank:   { hips: -16, head: -5, arm: 11,  fore: -9, dip: 3.5 },
+                rest:   { hips: 0,  head: 0,  arm: 30,  fore: 14 },
+                salute: { hips: 3,  head: -7, arm: -68, fore: -26 },
+                glance: { head: 3.4, pupilX: 1.1, pupilY: 0.3 },
+                breatheScale: 1.008, swayDeg: -1.5, bobDeg: 1.2,
+                squint: 0.55, trembleDeg: 0.7
+            },
+            t: {
+                ropeIn: 0.32, reach: 0.34, brace: 0.3, tension: 0.26, tremble: 0.08,
+                yank: 0.5, yankFast: 0.42, formLag: 0.14, formStep: 0.55, formLast: 0.72,
+                slip: 0.16, microBack: 0.12, microSettle: 0.24,
+                release: 0.9, ropeOut: 0.35, settle: 0.65,
+                breathe: 2.1, sway: 1.9, bob: 2.3,
+                blinkClose: 0.07, blinkOpen: 0.11, blinkMin: 2.4, blinkMax: 5.4,
+                glance: 0.45, saluteArm: 0.5, saluteBody: 0.4, done: 0.85
+            },
+            ease: {
+                reach: 'power2.inOut', tension: 'power1.inOut',
+                yank: 'power3.in', body: 'power2.inOut',
+                formStep: 'power3.out', formLast: 'back.out(1.55)',
+                micro: 'power2.out', release: 'elastic.out(1, 0.45)',
+                settle: 'power3.out', idle: 'sine.inOut',
+                glance: 'power2.out', salute: 'back.out(1.7)', blink: 'power2.in'
+            },
+            formTilt: 0.5    // uçuş sırasında momentum eğimi (derece)
+        };
 
         /* Eklem pivotları — çizim koordinatlarıyla (360x440 uzayı) eşleşir.
            svgOrigin local user-space'te yorumlanır: üst grup dönünce alt pivot
@@ -103,8 +155,11 @@
         gsap.set(foreF, { svgOrigin: '177 207' });
         if (armB) gsap.set(armB, { svgOrigin: '137 180' });
         if (foreB) gsap.set(foreB, { svgOrigin: '174 202' });
+        if (eye) gsap.set(eye, { svgOrigin: '162 121' });
         var arms = armB ? [armB, armF] : [armF];
         var fores = foreB ? [foreB, foreF] : [foreF];
+
+        var phase = 'boot';   // boot | pulling | idle | saluting
 
         /* Form fiziksel sağdan çekilir; RTL'de düzen aynalanır (usta sağda,
            form soldan gelir) → ofset işareti ters çevrilir. Usta SVG'si CSS'te
@@ -118,8 +173,15 @@
             return isRTL ? -base : base;
         }
 
-        var state = { sag: 34 };   // halat sarkması (px); gergin ≈ 5, gevşek ≈ 46
+        /* ------------------------- HALAT ---------------------------------
+           Üç katman aynı quadratic path'i paylaşır: koyu çekirdek + açık
+           parlama + lif kesikleri (örgü dokusu). state.tension 0→1 arasında
+           kalınlığı inceltir (halatın esneyip gerilme hissi); sag sarkmadır.
+           Uçlar her karede elin ve kulpun gerçek rect'lerinden okunur → halat
+           forma "gerçekten bağlı" (knot dairesi kulpun üstünde durur). */
+        var state = { sag: TUNE.rope.rest, tension: 0 };
         var ropeOn = false;
+        var baseW = [TUNE.rope.coreW, TUNE.rope.sheenW, TUNE.rope.fiberW];
 
         function drawRope() {
             if (!ropeOn) return;
@@ -131,83 +193,182 @@
             var x1 = h.left + h.width / 2 - cr.left, y1 = h.top + h.height / 2 - cr.top;
             var x2 = l.left + l.width / 2 - cr.left, y2 = l.top + l.height / 2 - cr.top;
             var mx = (x1 + x2) / 2, my = (y1 + y2) / 2 + state.sag;
-            ropePath.setAttribute('d',
-                'M' + x1.toFixed(1) + ' ' + y1.toFixed(1) +
-                ' Q' + mx.toFixed(1) + ' ' + my.toFixed(1) +
-                ' ' + x2.toFixed(1) + ' ' + y2.toFixed(1));
+            var d = 'M' + x1.toFixed(1) + ' ' + y1.toFixed(1) +
+                    ' Q' + mx.toFixed(1) + ' ' + my.toFixed(1) +
+                    ' ' + x2.toFixed(1) + ' ' + y2.toFixed(1);
+            var thin = 1 - (1 - TUNE.rope.tenseScale) * state.tension;
+            for (var i = 0; i < ropeLayers.length; i++) {
+                ropeLayers[i].setAttribute('d', d);
+                ropeLayers[i].style.strokeWidth = (baseW[i] * thin).toFixed(2) + 'px';
+            }
+            if (knot) {
+                knot.setAttribute('cx', x2.toFixed(1));
+                knot.setAttribute('cy', y2.toFixed(1));
+                knot.setAttribute('r', (TUNE.rope.knotR * (0.9 + 0.1 * thin)).toFixed(2));
+            }
         }
 
+        /* ------------------- CANLILIK: idle / göz / bakış ----------------
+           Karakter hiç donmaz: nefes (gövde ölçeği), salınım (kalça), kafa
+           salınımı idle'da; göz kırpma HER fazda koşar (rastgele aralık).
+           eyeBase: efor sırasında göz kısılır — kırpma o tabana geri açılır. */
         var idleTweens = [];
+        var headIdle = null;
+        var eyeBase = 1;
+
+        function startHeadIdle() {
+            headIdle = gsap.to(head, {
+                rotation: TUNE.pose.bobDeg, duration: TUNE.t.bob,
+                yoyo: true, repeat: -1, ease: TUNE.ease.idle, delay: 0.3
+            });
+            idleTweens.push(headIdle);
+        }
         function startIdle() {
-            idleTweens.push(gsap.to(hips, { rotation: -1.5, duration: 1.9, yoyo: true, repeat: -1, ease: 'sine.inOut' }));
-            idleTweens.push(gsap.to(head, { rotation: 1.2, duration: 2.3, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 0.3 }));
+            phase = 'idle';
+            idleTweens.push(gsap.to(hips, {
+                rotation: TUNE.pose.swayDeg, duration: TUNE.t.sway,
+                yoyo: true, repeat: -1, ease: TUNE.ease.idle
+            }));
+            idleTweens.push(gsap.to(hips, {
+                scaleY: TUNE.pose.breatheScale, duration: TUNE.t.breathe,
+                yoyo: true, repeat: -1, ease: TUNE.ease.idle
+            }));
+            startHeadIdle();
+        }
+        function stopIdle() {
+            idleTweens.forEach(function (t) { t.kill(); });
+            idleTweens.length = 0;
+            headIdle = null;
+            gsap.set(hips, { scaleY: 1 });
         }
 
+        function squint(on) {
+            if (!eye) return;
+            eyeBase = on ? TUNE.pose.squint : 1;
+            gsap.to(eye, { scaleY: eyeBase, duration: TUNE.t.blinkOpen, ease: TUNE.ease.micro, overwrite: 'auto' });
+        }
+        function blink() {
+            if (eye) {
+                var b = gsap.timeline({ onComplete: scheduleBlink });
+                b.to(eye, { scaleY: 0.08, duration: TUNE.t.blinkClose, ease: TUNE.ease.blink });
+                b.to(eye, { scaleY: eyeBase, duration: TUNE.t.blinkOpen, ease: TUNE.ease.micro });
+            }
+        }
+        function scheduleBlink() {
+            gsap.delayedCall(gsap.utils.random(TUNE.t.blinkMin, TUNE.t.blinkMax), blink);
+        }
+        scheduleBlink();
+
+        /* Hover bakışı: imleç formdayken usta o yana süzülür (yalnız gerçek
+           hover'lı cihazlarda ve yalnız idle'da — çekişe karışmaz). */
+        if (window.matchMedia('(hover: hover)').matches) {
+            form.addEventListener('mouseenter', function () {
+                if (phase !== 'idle') return;
+                if (headIdle) { headIdle.kill(); headIdle = null; }
+                gsap.to(head, { rotation: TUNE.pose.glance.head, duration: TUNE.t.glance, ease: TUNE.ease.glance, overwrite: 'auto' });
+                if (pupil) gsap.to(pupil, { x: TUNE.pose.glance.pupilX, y: TUNE.pose.glance.pupilY, duration: TUNE.t.glance, ease: TUNE.ease.glance });
+            });
+            form.addEventListener('mouseleave', function () {
+                if (pupil) gsap.to(pupil, { x: 0, y: 0, duration: TUNE.t.glance, ease: TUNE.ease.glance });
+                if (phase !== 'idle') return;
+                gsap.to(head, {
+                    rotation: 0, duration: TUNE.t.glance, ease: TUNE.ease.glance, overwrite: 'auto',
+                    onComplete: function () { if (phase === 'idle' && !headIdle) startHeadIdle(); }
+                });
+            });
+        }
+
+        /* --------------------------- ÇEKİŞ -------------------------------
+           Beklenti (yaslan + omuz gerilir + halat gerilir + titreme) →
+           asılışlar (ağırlık aktarımı; form gecikmeli ivmelenir, asılış
+           sonunda minik kaçırma) → teslim (overshoot + 2-3px geri oturma,
+           halat elastik boşalır) → idle. */
         var pullTl = null;     // aktif çekiş timeline'ı; koşarken yeni çekiş başlatılmaz
         function startPull() {
             if (pullTl && pullTl.isActive()) return;
             convoyRevealed = true;                   // güvenlik zamanlayıcısı devreye girmesin
+            phase = 'pulling';
             var OFF = offscreenX();
+            var P = TUNE.pose, T = TUNE.t, E = TUNE.ease;
 
             /* is-pulled: CSS'teki gizli-başlangıç + ctFormSafety animasyonunu kapatır
                (form artık GSAP'ın inline transform'uyla sürülür). is-driving: form
                transform'u sürerken cam blur'u kapatır (contact.css) → jank yok. */
             convoyEl.classList.add('is-pulled');
             convoyEl.classList.add('is-driving');
-            gsap.set(form, { x: OFF, opacity: 1 });
+            gsap.set(form, { x: OFF, opacity: 1, rotation: 0 });
             gsap.set(rope, { opacity: 0 });
+            state.sag = TUNE.rope.slack;
+            state.tension = 0;
             ropeOn = true;
             gsap.ticker.add(drawRope);
 
-            var tl = pullTl = gsap.timeline({ defaults: { ease: 'power2.inOut' } });
+            var tl = pullTl = gsap.timeline({ defaults: { ease: E.body } });
+            tl.timeScale(TUNE.speed);
 
-            /* Usta halatı omzuna alır, halat belirir */
-            tl.to(rope, { opacity: 1, duration: 0.35 }, 0);
+            /* BEKLENTİ: halat görünür, usta kavrayıp geriye yaslanır, omuzlar
+               gerilir, halat toplanır (sarkma düşer) ve efor titremesi gelir. */
+            tl.to(rope, { opacity: 1, duration: T.ropeIn }, 0);
+            tl.to(hips,  { rotation: P.brace.hips, duration: T.brace, ease: E.reach }, T.ropeIn * 0.4);
+            tl.to(head,  { rotation: P.brace.head, duration: T.brace, ease: E.reach }, '<');
+            tl.to(arms,  { rotation: P.brace.arm,  duration: T.brace, ease: E.reach }, '<');
+            tl.to(fores, { rotation: P.brace.fore, duration: T.brace, ease: E.reach }, '<');
+            tl.add(function () { squint(true); }, '>-0.05');
+            tl.to(state, { sag: TUNE.rope.preTension, tension: 0.55, duration: T.tension, ease: E.tension }, '>');
+            tl.to(hips,  { rotation: '+=' + P.trembleDeg, duration: T.tremble, yoyo: true, repeat: 3, ease: E.idle }, '<');
 
-            /* Bir asılış: uzan (gövde dikleşir, kollar öne, halat gevşer) →
-               çek (gövde geriye yatar, kollar kapanır, halat gerilir, form bir
-               adım gelir; asılış biterken halat "kaçırır" → form minik geri kayar). */
-            function heave(targetX, slip, last) {
-                // uzan
-                tl.to(hips,  { rotation: -3,  duration: 0.34 }, '>');
-                tl.to(arms,  { rotation: -20, duration: 0.34 }, '<');
-                tl.to(fores, { rotation: 16,  duration: 0.34 }, '<');
-                tl.to(head,  { rotation: 3,   duration: 0.34 }, '<');
-                tl.to(state, { sag: 46, duration: 0.34 }, '<');
-                // asıl
-                tl.to(hips,  { rotation: -16, duration: 0.5, ease: 'power2.in' }, '>');
-                tl.to(arms,  { rotation: 11,  duration: 0.5, ease: 'power2.in' }, '<');
-                tl.to(fores, { rotation: -9,  duration: 0.5, ease: 'power2.in' }, '<');
-                tl.to(head,  { rotation: -5,  duration: 0.5 }, '<');
-                tl.to(root,  { y: 3, duration: 0.5 }, '<');
-                tl.to(state, { sag: 5, duration: 0.3 }, '<');
-                // form adımı (çekişle hafif gecikmeli — halat önce gerilir)
+            /* Bir asılış: uzan (gövde toparlanır, halat gevşer) → asıl (gövde
+               geriye devrilir, ağırlık merkezi düşer, halat gerilir; form
+               gecikmeyle ivmelenir — kuvvet halattan geçiyor hissi). */
+            function heave(stepIdx, targetX, slip, last) {
+                if (stepIdx > 0) {   // ilk asılış beklenti pozundan başlar
+                    tl.to(hips,  { rotation: P.reach.hips, duration: T.reach, ease: E.reach }, '>');
+                    tl.to(arms,  { rotation: P.reach.arm,  duration: T.reach, ease: E.reach }, '<');
+                    tl.to(fores, { rotation: P.reach.fore, duration: T.reach, ease: E.reach }, '<');
+                    tl.to(head,  { rotation: P.reach.head, duration: T.reach, ease: E.reach }, '<');
+                    tl.to(state, { sag: TUNE.rope.slack, tension: 0.2, duration: T.reach, ease: E.tension }, '<');
+                }
+                var yankDur = last ? T.yank : T.yankFast;
+                tl.to(hips,  { rotation: P.yank.hips, duration: yankDur, ease: E.yank }, '>');
+                tl.to(arms,  { rotation: P.yank.arm,  duration: yankDur, ease: E.yank }, '<');
+                tl.to(fores, { rotation: P.yank.fore, duration: yankDur, ease: E.yank }, '<');
+                tl.to(head,  { rotation: P.yank.head, duration: yankDur }, '<');
+                tl.to(root,  { y: P.yank.dip, duration: yankDur }, '<');
+                tl.to(state, { sag: TUNE.rope.taut, tension: 1, duration: yankDur * 0.6, ease: E.yank }, '<');
+                // form: halat gerildikten SONRA harekete geçer; uçuşta minik
+                // momentum eğimi alır, son adımda overshoot ile oturur
                 tl.to(form, {
                     x: targetX,
-                    duration: last ? 0.7 : 0.55,
-                    ease: last ? 'back.out(1.3)' : 'power3.out'
-                }, '<0.14');
+                    rotation: last ? 0 : (isRTL ? TUNE.formTilt : -TUNE.formTilt),
+                    duration: last ? T.formLast : T.formStep,
+                    ease: last ? E.formLast : E.formStep
+                }, '<' + T.formLag);
                 if (!last) {
-                    tl.to(root, { y: 0, duration: 0.3 }, '>-0.1');
-                    if (slip) tl.to(form, { x: '+=' + slip, duration: 0.16, ease: 'power1.out' }, '>-0.05');
+                    tl.to(root, { y: 0, duration: T.reach, ease: E.settle }, '>-0.1');
+                    tl.to(state, { tension: 0.35, duration: T.reach, ease: E.tension }, '<');
+                    if (slip) tl.to(form, { x: '+=' + slip, duration: T.slip, ease: 'power1.out' }, '>-0.05');
                 }
             }
 
-            heave(OFF * 0.56, OFF * 0.025, false);
-            heave(OFF * 0.22, OFF * 0.02, false);
-            heave(0, 0, true);
+            TUNE.steps.forEach(function (s, i) {
+                heave(i, OFF * s.to, OFF * s.slip, i === TUNE.steps.length - 1);
+            });
 
-            /* Form oturdu: usta halatı bırakır (gevşer + kaybolur), doğrulur */
-            tl.to(state, { sag: 44, duration: 0.3, ease: 'power1.in' }, '>');
-            tl.to(rope, { opacity: 0, duration: 0.3 }, '<');
-            tl.add(function () { ropeOn = false; gsap.ticker.remove(drawRope); });
+            /* TESLİM: form 2-3px geri sekip oturur (fizik); usta halatı
+               bırakır — halat elastik boşalır, sönerken de "boing" hissi. */
+            var dir = isRTL ? -1 : 1;
+            tl.to(form, { x: dir * 2.5, rotation: 0, duration: T.microBack, ease: 'power1.out' }, '>');
+            tl.to(form, { x: 0, duration: T.microSettle, ease: E.micro }, '>');
+            tl.to(state, { sag: TUNE.rope.release, tension: 0, duration: T.release, ease: E.release }, '<-0.1');
+            tl.to(rope, { opacity: 0, duration: T.ropeOut }, '<0.25');
+            tl.add(function () { ropeOn = false; gsap.ticker.remove(drawRope); squint(false); });
             /* Dinlenme pozu: eller gövdenin önünde, uyluk hizasında — 46°'de
                kollar gövde konturuyla üst üste binip kayboluyordu, 30° açık kalır */
-            tl.to(hips,  { rotation: 0,  duration: 0.65, ease: 'power3.out' }, '<0.1');
-            tl.to(arms,  { rotation: 30, duration: 0.65, ease: 'power3.out' }, '<');
-            tl.to(fores, { rotation: 14, duration: 0.65, ease: 'power3.out' }, '<');
-            tl.to(head,  { rotation: 0,  duration: 0.65 }, '<');
-            tl.to(root,  { y: 0, duration: 0.65 }, '<');
+            tl.to(hips,  { rotation: P.rest.hips, duration: T.settle, ease: E.settle }, '<0.1');
+            tl.to(arms,  { rotation: P.rest.arm,  duration: T.settle, ease: E.settle }, '<');
+            tl.to(fores, { rotation: P.rest.fore, duration: T.settle, ease: E.settle }, '<');
+            tl.to(head,  { rotation: P.rest.head, duration: T.settle }, '<');
+            tl.to(root,  { y: 0, duration: T.settle }, '<');
             tl.add(function () {
                 convoyEl.classList.remove('is-driving');   // form durdu → cam blur geri
                 startIdle();
@@ -220,30 +381,34 @@
            (kart görünürken usta CSS ile silüete düşer — contact.css is-done).
            once DEĞİL: "yeni mesaj" akışında her gönderimde tekrar selam verir. */
         document.addEventListener('contact:sent', function () {
-            idleTweens.forEach(function (t) { t.kill(); });
-            idleTweens.length = 0;
+            phase = 'saluting';
+            stopIdle();
+            var P = TUNE.pose, T = TUNE.t, E = TUNE.ease;
             var t2 = gsap.timeline();
-            t2.to(arms,  { rotation: -68, duration: 0.5, ease: 'back.out(1.7)' }, 0);
-            t2.to(fores, { rotation: -26, duration: 0.5, ease: 'back.out(1.7)' }, 0.05);
-            t2.to(head,  { rotation: -7, duration: 0.4, ease: 'power2.out' }, 0.1);
-            t2.to(hips,  { rotation: 3,  duration: 0.4, ease: 'power2.out' }, 0);
-            gsap.delayedCall(0.85, function () { stage.classList.add('is-done'); });
+            t2.to(arms,  { rotation: P.salute.arm,  duration: T.saluteArm, ease: E.salute }, 0);
+            t2.to(fores, { rotation: P.salute.fore, duration: T.saluteArm, ease: E.salute }, 0.05);
+            t2.to(head,  { rotation: P.salute.head, duration: T.saluteBody, ease: E.glance }, 0.1);
+            t2.to(hips,  { rotation: P.salute.hips, duration: T.saluteBody, ease: E.glance }, 0);
+            gsap.delayedCall(T.done, function () { stage.classList.add('is-done'); });
         });
 
         /* "Yeni mesaj gönder": sahneyi başa sar, formu yeniden çektir.
            (Buton yalnız gönderim sonrası görünür → çekiş sırasında gelmez;
            yine de isActive() koruması çifte tetiği yutar.) */
         function resetScene() {
-            idleTweens.forEach(function (t) { t.kill(); });
-            idleTweens.length = 0;
+            stopIdle();
             if (pullTl) { pullTl.kill(); pullTl = null; }
-            gsap.killTweensOf(arms.concat(fores, [hips, head, root, state]));
+            gsap.killTweensOf(arms.concat(fores, [hips, head, root, form, state]));
+            if (pupil) gsap.set(pupil, { x: 0, y: 0 });
+            squint(false);
             ropeOn = false;
             gsap.ticker.remove(drawRope);
             gsap.set(rope, { opacity: 0 });
             stage.classList.remove('is-done');
             gsap.set(arms.concat(fores, [hips, head]), { rotation: 0 });
+            gsap.set(hips, { scaleY: 1 });
             gsap.set(root, { y: 0 });
+            gsap.set(form, { rotation: 0 });
         }
 
         document.addEventListener('contact:reset', function () {
