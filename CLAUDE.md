@@ -30,7 +30,7 @@
 - Bu uygulamaların arayüzleri bilinçli **tek dilli Türkçe** (Jarvis paneli gibi) — 15 dil parite kuralının kapsamı dışındadır.
 
 ## İçerik modeli
-- Ürünler: `app/Data/products.json` — **11 kategori / 76 ürün / 136 varyant** (tek doğruluk kaynağı; menü buradan üretilir, kırık link yoktur). Blog: front-matter'lı Markdown (Phase 2, henüz yok — metinler dil dosyalarında).
+- Ürünler: `app/Data/products.json` — **11 kategori / 76 ürün / 136 varyant** (tek doğruluk kaynağı; menü buradan üretilir, kırık link yoktur). **Katalog i18n (2026-07-06):** `products.{locale}.json` overlay'leri slug bazında ad/model (+varsa spec) çevirisi bindirir (`ProductCatalog::localize()`); eksik her parça tr'ye düşer. en overlay'i spec'li (ana varyantlar), diğer 13 dil yalnız ad katmanı. Slug'lar tüm dillerde AYNI kalır — asla çevirme. Blog: front-matter'lı Markdown (Phase 2, henüz yok — metinler dil dosyalarında).
 - Markdown içerik motoru (`app/Libraries/MarkdownContent.php`): `app/Data/content/{wiki,news}/{locale}/{slug}.md` — slug tüm dillerde aynı, çeviri yoksa tr'ye düşer. Ülke sayfaları kayıt defteri: `app/Data/markets.json` (adlar `Markets.php` dil dosyalarında).
 - **İçerik Fabrikası (§7.6):** yeni araç kaydı → `agents:content-factory` taslak üretir (`writable/data/content/drafts/`) → Panel > İçerik'ten onay → `app/Data/content/news/tr/{slug}.md` yayınlanır (+`cache()->clean()`). v1 şablon tabanlı; AI API bağlanınca yalnız `buildDraft()` değişir.
 - Konfigüratör/kur verisi: `writable/data/rates.json` (agents:rates yazar). Operasyon akışları JSONL: `writable/{leads,quotes,ai-logs}/` + `writable/data/{agents,alerts,briefings}/`.

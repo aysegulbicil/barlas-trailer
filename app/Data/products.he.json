@@ -1,0 +1,663 @@
+{
+ "generated_from": "products.json (Claude he name-layer translation, names only)",
+ "categories": [
+  {
+   "slug": "tankers",
+   "name": "מיכליות",
+   "products": [
+    {
+     "slug": "akaryakit-yakit-tankeri",
+     "name": "מיכלית דלק / תזקיקים",
+     "variants": [
+      {"slug": "adr-aluminyum-yakit-tankeri", "model": "מיכלית דלק מאלומיניום ADR"},
+      {"slug": "yakit-tankeri", "model": "מיכלית דלק"},
+      {"slug": "adr-li-aluminyum-akaryakit-tankeri", "model": "מיכלית תזקיקים מאלומיניום ADR"},
+      {"slug": "celik-akaryakit-tankeri", "model": "מיכלית תזקיקים מפלדה"},
+      {"slug": "akaryakit-tankeri", "model": "מיכלית תזקיקים"}
+     ]
+    },
+    {
+     "slug": "asfalt-bitum-tankeri",
+     "name": "מיכלית אספלט / ביטומן",
+     "variants": [
+      {"slug": "izoleli-asfalt-bitum-tankeri", "model": "מיכלית אספלט-ביטומן מבודדת"},
+      {"slug": "bitum-tanker-semi-treyler", "model": "סמיטריילר מיכלית ביטומן"},
+      {"slug": "bitum-tankeri", "model": "מיכלית ביטומן"}
+     ]
+    },
+    {
+     "slug": "celik-tanker",
+     "name": "מיכלית פלדה",
+     "variants": [
+      {"slug": "adr-celik-tanker", "model": "מיכלית פלדה ADR"},
+      {"slug": "celik-tanker", "model": "מיכלית פלדה"}
+     ]
+    },
+    {
+     "slug": "deveboynu-tanker",
+     "name": "מיכלית צוואר ברבור",
+     "variants": [
+      {"slug": "deveboynu-tanker-semi-treyler", "model": "סמיטריילר מיכלית צוואר ברבור"}
+     ]
+    },
+    {
+     "slug": "eliptik-tanker",
+     "name": "מיכלית אליפטית",
+     "variants": [
+      {"slug": "eliptik-tanker-kamyon-ustu", "model": "מיכלית אליפטית על משאית"},
+      {"slug": "eliptik-tanker-semi-treyler", "model": "סמיטריילר מיכלית אליפטית"}
+     ]
+    },
+    {
+     "slug": "gida-tankeri",
+     "name": "מיכלית מזון",
+     "variants": [
+      {"slug": "gida-tankeri-kamyon-ustu", "model": "מיכלית מזון על משאית"},
+      {"slug": "gida-tankeri-semi-treyler", "model": "סמיטריילר מיכלית מזון"},
+      {"slug": "krom-gida-tankeri", "model": "מיכלית מזון נירוסטה"},
+      {"slug": "paslanmaz-tanker-gida", "model": "מיכלית נירוסטה - מזון"}
+     ]
+    },
+    {
+     "slug": "izolasyonlu-tanker",
+     "name": "מיכלית מבודדת",
+     "variants": [
+      {"slug": "izolasyonlu-tanker-semi-treyler", "model": "סמיטריילר מיכלית מבודדת"}
+     ]
+    },
+    {
+     "slug": "kimyasal-tanker",
+     "name": "מיכלית כימיקלים",
+     "variants": [
+      {"slug": "kimyasal-tanker-kamyon-ustu", "model": "מיכלית כימיקלים על משאית"},
+      {"slug": "kimyasal-tanker-semi-treyler", "model": "סמיטריילר מיכלית כימיקלים"},
+      {"slug": "kimyasal-tankeri", "model": "מיכלית כימיקלים"}
+     ]
+    },
+    {
+     "slug": "konik-tanker",
+     "name": "מיכלית קונית",
+     "variants": [
+      {"slug": "konik-tanker-semi-treyler", "model": "סמיטריילר מיכלית קונית"}
+     ]
+    },
+    {
+     "slug": "krom-asit-tankeri",
+     "name": "מיכלית חומצה מנירוסטה",
+     "variants": [
+      {"slug": "krom-asit-tankeri", "model": "מיכלית חומצה מנירוסטה"}
+     ]
+    },
+    {
+     "slug": "krom-izoleli-tanker",
+     "name": "מיכלית נירוסטה מבודדת",
+     "variants": [
+      {"slug": "krom-izoleli-tanker", "model": "מיכלית נירוסטה מבודדת"}
+     ]
+    },
+    {
+     "slug": "lpg-tankeri",
+     "name": "מיכלית LPG",
+     "variants": [
+      {"slug": "lpg-tanker", "model": "מיכלית LPG"},
+      {"slug": "lpg-tankeri-kamyon-ustu", "model": "מיכלית LPG על משאית"},
+      {"slug": "lpg-tankeri-semi-treyler", "model": "סמיטריילר מיכלית LPG"}
+     ]
+    },
+    {
+     "slug": "paslanmaz-celik-tanker-tehlikeli-madde",
+     "name": "מיכלית נירוסטה - חומרים מסוכנים",
+     "variants": [
+      {"slug": "paslanmaz-tanker-tehlikeli-madde", "model": "מיכלית נירוסטה - חומרים מסוכנים"}
+     ]
+    },
+    {
+     "slug": "paslanmaz-celik-tanker-tehlikesiz-madde",
+     "name": "מיכלית נירוסטה - חומרים לא מסוכנים",
+     "variants": [
+      {"slug": "paslanmaz-tanker-tehlikesiz-madde", "model": "מיכלית נירוסטה - חומרים לא מסוכנים"}
+     ]
+    },
+    {
+     "slug": "silindirik-tanker",
+     "name": "מיכלית גלילית",
+     "variants": [
+      {"slug": "silindirik-tanker-kamyon-ustu", "model": "מיכלית גלילית על משאית"},
+      {"slug": "silindirik-tanker-semi-treyler", "model": "סמיטריילר מיכלית גלילית"}
+     ]
+    },
+    {
+     "slug": "su-tankeri",
+     "name": "מיכלית מים",
+     "variants": [
+      {"slug": "su-tankeri-semi-treyler", "model": "סמיטריילר מיכלית מים"}
+     ]
+    },
+    {
+     "slug": "sut-tankeri-sasisi",
+     "name": "שלדת מיכלית חלב",
+     "variants": [
+      {"slug": "sut-tankeri-sasesi", "model": "שלדת מיכלית חלב"}
+     ]
+    },
+    {
+     "slug": "vakum-tanker",
+     "name": "מיכלית ואקום",
+     "variants": [
+      {"slug": "vakum-tanker-semi-treyler", "model": "סמיטריילר מיכלית ואקום"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "silos",
+   "name": "מיכליות צובר",
+   "products": [
+    {
+     "slug": "damperli-silobas",
+     "name": "מיכלית צובר רכינה",
+     "variants": [
+      {"slug": "damperli-silobas-tanker", "model": "מיכלית צובר רכינה"},
+      {"slug": "damper-tipi-silobas", "model": "מיכלית צובר מסוג רכינה"},
+      {"slug": "damperli-silobas-semi-treyler", "model": "סמיטריילר צובר רכינה"},
+      {"slug": "damperli-silo", "model": "סילו רכין"}
+     ]
+    },
+    {
+     "slug": "sivi-gubre-silobasi",
+     "name": "מיכלית דשן נוזלי",
+     "variants": [
+      {"slug": "sivi-gubre-silobas", "model": "מיכלית דשן נוזלי"}
+     ]
+    },
+    {
+     "slug": "un-ve-gida-silobasi",
+     "name": "מיכלית צובר קמח ומזון",
+     "variants": [
+      {"slug": "un-silobasi", "model": "מיכלית צובר קמח"}
+     ]
+    },
+    {
+     "slug": "v-tipi-bugday-silobasi",
+     "name": "מיכלית צובר חיטה מסוג V",
+     "variants": [
+      {"slug": "v-tipi-bugday-silobasi", "model": "מיכלית צובר חיטה מסוג V"}
+     ]
+    },
+    {
+     "slug": "v-tipi-silobas",
+     "name": "מיכלית צובר מסוג V",
+     "variants": [
+      {"slug": "v-tipi-silobas", "model": "מיכלית צובר מסוג V"},
+      {"slug": "v-tipi-celik-cimento-silobasi", "model": "מיכלית צובר מלט מפלדה מסוג V"},
+      {"slug": "v-tipi-yatay-silobas-semi-treyler", "model": "סמיטריילר צובר אופקי מסוג V"}
+     ]
+    },
+    {
+     "slug": "v-tipi-un-ve-gida-silobasi",
+     "name": "מיכלית צובר קמח ומזון מסוג V",
+     "variants": [
+      {"slug": "v-tipi-silobas-tanker", "model": "מיכלית צובר מסוג V"},
+      {"slug": "v-tipi-un-ve-gida-silobasi", "model": "מיכלית צובר קמח ומזון מסוג V"}
+     ]
+    },
+    {
+     "slug": "vakumlu-silobas",
+     "name": "מיכלית צובר ואקום",
+     "variants": [
+      {"slug": "vakum-silobas", "model": "מיכלית צובר ואקום"}
+     ]
+    },
+    {
+     "slug": "w-tipi-milenyum-silobas",
+     "name": "מיכלית צובר מסוג W (מילניום)",
+     "variants": [
+      {"slug": "w-tipi-silobas-dorse", "model": "סמיטריילר צובר מסוג W"},
+      {"slug": "w-tipi-milenyum-silobas", "model": "מיכלית צובר מסוג W (מילניום)"},
+      {"slug": "w-tipi-aluminyum-silobas", "model": "מיכלית צובר מאלומיניום מסוג W"},
+      {"slug": "w-tipi-celik-silobas", "model": "מיכלית צובר מפלדה מסוג W"},
+      {"slug": "w-tipi-yatay-silobas-semi-treyler", "model": "סמיטריילר צובר אופקי מסוג W"},
+      {"slug": "milenyum-silobas", "model": "מיכלית צובר מילניום"}
+     ]
+    },
+    {
+     "slug": "yem-silobasi",
+     "name": "מיכלית צובר מספוא",
+     "variants": [
+      {"slug": "dorse-uzeri-yem-silobasi", "model": "צובר מספוא על סמיטריילר"},
+      {"slug": "kamyon-uzeri-yem-silobasi", "model": "צובר מספוא על משאית"},
+      {"slug": "romork-uzeri-yem-silobasi", "model": "צובר מספוא על גרור"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "tippers",
+   "name": "רכינות",
+   "products": [
+    {
+     "slug": "akordiyon-hububat-tipi-damper",
+     "name": "רכינת דגנים מסוג אקורדיון",
+     "variants": [
+      {"slug": "akordiyon-hububat-tipi-damper", "model": "רכינת דגנים מסוג אקורדיון"}
+     ]
+    },
+    {
+     "slug": "havuz-kuvet-damper",
+     "name": "רכינת חצי צינור / אמבטיה",
+     "variants": [
+      {"slug": "havuz-damper", "model": "רכינת חצי צינור"},
+      {"slug": "18m3-havuz-damper", "model": "רכינת חצי צינור 18 מ״ק"},
+      {"slug": "30m3-havuz-damper", "model": "רכינת חצי צינור 30 מ״ק"},
+      {"slug": "kuvet-havuz-damper", "model": "רכינת אמבטיה (חצי צינור)"}
+     ]
+    },
+    {
+     "slug": "kamyon-ustu-damper",
+     "name": "רכינה על משאית",
+     "variants": [
+      {"slug": "kamyon-ustu-damper", "model": "רכינה על משאית"}
+     ]
+    },
+    {
+     "slug": "kapakli-damper",
+     "name": "רכינה עם דפנות",
+     "variants": [
+      {"slug": "8-30-kapakli-damper", "model": "רכינה עם דפנות 8.30"},
+      {"slug": "yana-acilir-kapakli-damper", "model": "רכינה עם דפנות נפתחות לצד"},
+      {"slug": "8-60-kapakli-damper", "model": "רכינה עם דפנות 8.60"},
+      {"slug": "kapakli-damper", "model": "רכינה עם דפנות"}
+     ]
+    },
+    {
+     "slug": "kaya-tipi-damper",
+     "name": "רכינה מסוג סלעים",
+     "variants": [
+      {"slug": "kaya-damper", "model": "רכינת סלעים"},
+      {"slug": "kaya-tipi-damper", "model": "רכינה מסוג סלעים"}
+     ]
+    },
+    {
+     "slug": "multi-sistem-damper",
+     "name": "רכינה רב-מערכתית",
+     "variants": [
+      {"slug": "multi-sistem-damper-semi-treyler", "model": "סמיטריילר רכינה רב-מערכתית"}
+     ]
+    },
+    {
+     "slug": "panel-tip-damper",
+     "name": "רכינה מסוג פאנל",
+     "variants": [
+      {"slug": "panel-tip-damper-semi-treyler", "model": "סמיטריילר רכינה מסוג פאנל"}
+     ]
+    },
+    {
+     "slug": "yana-devirmeli-damper",
+     "name": "רכינה צדדית",
+     "variants": [
+      {"slug": "yana-devirmeli-damper", "model": "רכינה צדדית"}
+     ]
+    },
+    {
+     "slug": "yarim-boru-damper",
+     "name": "רכינת חצי צינור",
+     "variants": [
+      {"slug": "yarim-boru-damper-semi-treyler", "model": "סמיטריילר רכינת חצי צינור"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "curtain",
+   "name": "וילונות וברזנט",
+   "products": [
+    {
+     "slug": "multi-ride",
+     "name": "Multi Ride",
+     "variants": [
+      {"slug": "multi-ride-t-scs-ng-mr-90-12-27", "model": "Multi Ride (T.SCS NG MR / 90 - 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "perdeli-swap-body",
+     "name": "מרכב מתחלף עם וילונות",
+     "variants": [
+      {"slug": "perdeli-swap-body", "model": "מרכב מתחלף עם וילונות"}
+     ]
+    },
+    {
+     "slug": "perdeli-ve-tenteli",
+     "name": "וילונות וברזנט",
+     "variants": [
+      {"slug": "t-scl-x-150-12-27", "model": "T.SCL X+ / 150 - 12 / 27"},
+      {"slug": "t-scl-m-150-12-27", "model": "T.SCL M / 150 - 12 / 27"},
+      {"slug": "t-scs-ng-m-90-12-27", "model": "T.SCS NG M / 90 - 12 / 27"},
+      {"slug": "t-scs-ng-x-90-12-27", "model": "T.SCS NG X+ / 90 - 12 / 27"},
+      {"slug": "t-scd-m-90-12-27", "model": "T.SCD M / 90 - 12 / 27"},
+      {"slug": "t-scd-x-90-12-27", "model": "T.SCD X+ / 90 - 12 / 27"},
+      {"slug": "t-scc-m-125-12-27", "model": "T.SCC M / 125 - 12 / 27"},
+      {"slug": "t-scc-x-125-12-27", "model": "T.SCC X+ / 125 - 12 / 27"}
+     ]
+    },
+    {
+     "slug": "tenteli-hafif",
+     "name": "ברזנט קל",
+     "variants": [
+      {"slug": "tenteli-hafif", "model": "ברזנט קל"}
+     ]
+    },
+    {
+     "slug": "tenteli-standart",
+     "name": "ברזנט סטנדרטי",
+     "variants": [
+      {"slug": "tenteli-standart", "model": "ברזנט סטנדרטי"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "reefer",
+   "name": "מובילי קירור",
+   "products": [
+    {
+     "slug": "frigorifik",
+     "name": "סמיטריילר קירור",
+     "variants": [
+      {"slug": "t-sri-c-10-12-27", "model": "T.SRI C / 10 - 12 / 27"},
+      {"slug": "t-sri-f-10-12-27", "model": "T.SRI F / 10 - 12 / 27"},
+      {"slug": "t-sri-p-10-12-27", "model": "T.SRI P / 10 - 12 / 27"},
+      {"slug": "t-sri-fp-10-12-27", "model": "T.SRI FP / 10 - 12 / 27"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "dry-cargo",
+   "name": "מטען יבש וארגזים",
+   "products": [
+    {
+     "slug": "kapali-kasa-celik-kargo-tasiyici",
+     "name": "מוביל מטען עם ארגז פלדה סגור",
+     "variants": [
+      {"slug": "kapali-kasa-celik-kargo-tasiyici", "model": "מוביל מטען עם ארגז פלדה סגור"}
+     ]
+    },
+    {
+     "slug": "kuru-yuk-sac-kasa",
+     "name": "מטען יבש - ארגז פח",
+     "variants": [
+      {"slug": "kuru-yuk-sac-kasa", "model": "מטען יבש - ארגז פח"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-aluminyum-kapak",
+     "name": "מטען יבש - דפנות אלומיניום",
+     "variants": [
+      {"slug": "kuruyuk-aluminyum-kapak", "model": "מטען יבש - דפנות אלומיניום"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-light-kapak",
+     "name": "מטען יבש - דפנות קלות",
+     "variants": [
+      {"slug": "kuruyuk-light-kapak", "model": "מטען יבש - דפנות קלות"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-rulo-tasiyici",
+     "name": "מטען יבש - מוביל סלילים",
+     "variants": [
+      {"slug": "kuruyuk-rulo-tasiyici", "model": "מטען יבש - מוביל סלילים"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "containers",
+   "name": "מובילי מכולות",
+   "products": [
+    {
+     "slug": "damperli-konteyner-tasiyici",
+     "name": "מוביל מכולות רכין",
+     "variants": [
+      {"slug": "damperli-konteyner-tasiyici", "model": "מוביל מכולות רכין"}
+     ]
+    },
+    {
+     "slug": "high-cube-konteyner-tasiyici",
+     "name": "מוביל מכולות High Cube",
+     "variants": [
+      {"slug": "high-cube-konteyner-tasiyici", "model": "מוביל מכולות High Cube"}
+     ]
+    },
+    {
+     "slug": "konteyner-tasiyici",
+     "name": "מוביל מכולות",
+     "variants": [
+      {"slug": "konteyner-tasiyici", "model": "מוביל מכולות"}
+     ]
+    },
+    {
+     "slug": "liman-ici-konteyner-tasiyici",
+     "name": "מוביל מכולות פנים-נמלי",
+     "variants": [
+      {"slug": "liman-ici-konteyner-tasiyici", "model": "מוביל מכולות פנים-נמלי"}
+     ]
+    },
+    {
+     "slug": "sabit-konteyner-tasiyici",
+     "name": "מוביל מכולות קבוע",
+     "variants": [
+      {"slug": "sabit-konteyner-tasiyici-t-shg-s-40-12-27", "model": "מוביל מכולות קבוע (T.SHG S / 40 - 12 / 27)"},
+      {"slug": "sabit-konteyner-tasiyici", "model": "מוביל מכולות קבוע"},
+      {"slug": "sabit-konteyner-tasiyici-t-shf-t-20-12-27", "model": "מוביל מכולות קבוע (T.SHF T / 20 - 12 / 27)"},
+      {"slug": "sabit-konteyner-tasiyici-t-shg-l-45-15-27", "model": "מוביל מכולות קבוע (T.SHG L / 45 - 15 / 27)"}
+     ]
+    },
+    {
+     "slug": "standart-konteyner-tasiyici",
+     "name": "מוביל מכולות סטנדרטי",
+     "variants": [
+      {"slug": "standart-konteyner-tasiyici", "model": "מוביל מכולות סטנדרטי"}
+     ]
+    },
+    {
+     "slug": "teleskopik-konteyner-tasiyici",
+     "name": "מוביל מכולות טלסקופי",
+     "variants": [
+      {"slug": "teleskopik-konteyner-tasiyici", "model": "מוביל מכולות טלסקופי"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-avh-45-12-27", "model": "מוביל מכולות טלסקופי (T.SHG AVH / 45 - 12 / 27)"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-ah-45-12-27", "model": "מוביל מכולות טלסקופי (T.SHG AH / 45 - 12 / 27)"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-amh-40-12-27", "model": "מוביל מכולות טלסקופי (T.SHG AMH / 40 - 12 / 27)"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lowbed",
+   "name": "לואו-בד ומשא כבד",
+   "products": [
+    {
+     "slug": "havuz-tip-lowbed",
+     "name": "לואו-בד עם משטח שקוע",
+     "variants": [
+      {"slug": "havuz-tip-lowbed", "model": "לואו-בד עם משטח שקוע"}
+     ]
+    },
+    {
+     "slug": "hidrolik-dumenlenir-low-bed",
+     "name": "לואו-בד עם היגוי הידראולי",
+     "variants": [
+      {"slug": "hidrolik-dumenlenir-low-bed", "model": "לואו-בד עם היגוי הידראולי"}
+     ]
+    },
+    {
+     "slug": "onden-yuklemeli-lowbed",
+     "name": "לואו-בד בטעינה קדמית",
+     "variants": [
+      {"slug": "onden-yuklemeli-lowbed", "model": "לואו-בד בטעינה קדמית"}
+     ]
+    },
+    {
+     "slug": "sabit-low-bed",
+     "name": "לואו-בד קבוע",
+     "variants": [
+      {"slug": "sabit-low-bed", "model": "לואו-בד קבוע"}
+     ]
+    },
+    {
+     "slug": "standart-dingilli-lowbed",
+     "name": "לואו-בד עם סרנים סטנדרטיים",
+     "variants": [
+      {"slug": "3-dingilli-lowbed", "model": "לואו-בד 3 סרנים"},
+      {"slug": "4-dingilli-lowbed", "model": "לואו-בד 4 סרנים"},
+      {"slug": "5-dingilli-lowbed", "model": "לואו-בד 5 סרנים"},
+      {"slug": "6-dingilli-lowbed", "model": "לואו-בד 6 סרנים"}
+     ]
+    },
+    {
+     "slug": "uzar-low-bed",
+     "name": "לואו-בד מתארך",
+     "variants": [
+      {"slug": "uzar-low-bed", "model": "לואו-בד מתארך"}
+     ]
+    },
+    {
+     "slug": "yana-genisletilebilir-uzamali-lowbed",
+     "name": "לואו-בד מתארך עם הרחבה לצדדים",
+     "variants": [
+      {"slug": "yana-genisletilebilir-uzamali-lowbed", "model": "לואו-בד מתארך עם הרחבה לצדדים"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "platform",
+   "name": "פלטפורמה / משטח שטוח",
+   "products": [
+    {
+     "slug": "rulo-tasiyici-flatbed",
+     "name": "משטח שטוח להובלת סלילים",
+     "variants": [
+      {"slug": "rulo-tasiyici-flatbed", "model": "משטח שטוח להובלת סלילים"}
+     ]
+    },
+    {
+     "slug": "standart-flatbed",
+     "name": "משטח שטוח סטנדרטי",
+     "variants": [
+      {"slug": "standart-flatbed", "model": "משטח שטוח סטנדרטי"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "trailers",
+   "name": "גרורים",
+   "products": [
+    {
+     "slug": "aksli-romork",
+     "name": "גרור",
+     "variants": [
+      {"slug": "2-aksli-romork", "model": "גרור 2 סרנים"},
+      {"slug": "3-aksli-romork", "model": "גרור 3 סרנים"},
+      {"slug": "4-aksli-romork", "model": "גרור 4 סרנים"}
+     ]
+    },
+    {
+     "slug": "dingilli-kamyon-tasiyici",
+     "name": "מוביל משאיות",
+     "variants": [
+      {"slug": "2-dingilli-kamyon-tasiyici", "model": "מוביל משאיות 2 סרנים"},
+      {"slug": "3-dingilli-kamyon-tasiyici", "model": "מוביל משאיות 3 סרנים"}
+     ]
+    },
+    {
+     "slug": "tarim-romork-dorse-treyler",
+     "name": "גרור / סמיטריילר חקלאי",
+     "variants": [
+      {"slug": "tarim-romork-dorse-treyler", "model": "גרור / סמיטריילר חקלאי"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "special",
+   "name": "מוצרים מיוחדים נוספים",
+   "products": [
+    {
+     "slug": "oto-tasiyici-dorse",
+     "name": "סמיטריילר מוביל רכב",
+     "variants": [
+      {"slug": "oto-tasiyici-dorse", "model": "סמיטריילר מוביל רכב"}
+     ]
+    },
+    {
+     "slug": "arazoz",
+     "name": "מיכלית השקיה וכיבוי",
+     "variants": [
+      {"slug": "arazoz", "model": "מיכלית השקיה וכיבוי"}
+     ]
+    },
+    {
+     "slug": "canli-hayvan-tasiyici",
+     "name": "מוביל בעלי חיים",
+     "variants": [
+      {"slug": "canli-hayvan-tasiyici", "model": "מוביל בעלי חיים"}
+     ]
+    },
+    {
+     "slug": "cop-toplama",
+     "name": "איסוף אשפה",
+     "variants": [
+      {"slug": "cop-toplama", "model": "איסוף אשפה"}
+     ]
+    },
+    {
+     "slug": "dokme-yem-tasiyici",
+     "name": "מוביל מספוא בתפזורת",
+     "variants": [
+      {"slug": "dokme-yem-tasiyici-semi-treyler", "model": "סמיטריילר מוביל מספוא בתפזורת"}
+     ]
+    },
+    {
+     "slug": "ikiz-kat-standart",
+     "name": "דו-קומתי סטנדרטי",
+     "variants": [
+      {"slug": "ikiz-kat-standart-vetd-ply-td-15-18", "model": "דו-קומתי סטנדרטי (VETD PLY TD 15 / 18)"},
+      {"slug": "ikiz-kat-standart-vetd-ply-12-27", "model": "דו-קומתי סטנדרטי (VETD PLY 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "intermodal-kutu",
+     "name": "ארגז אינטרמודלי",
+     "variants": [
+      {"slug": "intermodal-kutu-ttg-tal-12-27", "model": "ארגז אינטרמודלי (TTG TAL 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "kutuk-tomruk-tasimaciligi",
+     "name": "הובלת בולי עץ",
+     "variants": [
+      {"slug": "kutuk-tomruk-tasimaciligi", "model": "הובלת בולי עץ"}
+     ]
+    },
+    {
+     "slug": "mikser",
+     "name": "מערבל בטון",
+     "variants": [
+      {"slug": "mikser-semi-treyler", "model": "סמיטריילר מערבל בטון"}
+     ]
+    },
+    {
+     "slug": "tekstil-kutu",
+     "name": "ארגז טקסטיל",
+     "variants": [
+      {"slug": "tekstil-kutu-tgg-tal-12-27", "model": "ארגז טקסטיל (TGG TAL 12 / 27)"},
+      {"slug": "tekstil-kutu-tgm-tal-12-27", "model": "ארגז טקסטיל (TGM TAL 12 / 27)"}
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,663 @@
+{
+ "generated_from": "products.json (Claude fr name-layer translation, names only)",
+ "categories": [
+  {
+   "slug": "tankers",
+   "name": "Citernes",
+   "products": [
+    {
+     "slug": "akaryakit-yakit-tankeri",
+     "name": "Citerne à hydrocarbures / carburant",
+     "variants": [
+      {"slug": "adr-aluminyum-yakit-tankeri", "model": "Citerne à carburant en aluminium ADR"},
+      {"slug": "yakit-tankeri", "model": "Citerne à carburant"},
+      {"slug": "adr-li-aluminyum-akaryakit-tankeri", "model": "Citerne à hydrocarbures en aluminium ADR"},
+      {"slug": "celik-akaryakit-tankeri", "model": "Citerne à hydrocarbures en acier"},
+      {"slug": "akaryakit-tankeri", "model": "Citerne à hydrocarbures"}
+     ]
+    },
+    {
+     "slug": "asfalt-bitum-tankeri",
+     "name": "Citerne à asphalte / bitume",
+     "variants": [
+      {"slug": "izoleli-asfalt-bitum-tankeri", "model": "Citerne asphalte-bitume calorifugée"},
+      {"slug": "bitum-tanker-semi-treyler", "model": "Semi-remorque citerne à bitume"},
+      {"slug": "bitum-tankeri", "model": "Citerne à bitume"}
+     ]
+    },
+    {
+     "slug": "celik-tanker",
+     "name": "Citerne en acier",
+     "variants": [
+      {"slug": "adr-celik-tanker", "model": "Citerne en acier ADR"},
+      {"slug": "celik-tanker", "model": "Citerne en acier"}
+     ]
+    },
+    {
+     "slug": "deveboynu-tanker",
+     "name": "Citerne col de cygne",
+     "variants": [
+      {"slug": "deveboynu-tanker-semi-treyler", "model": "Semi-remorque citerne col de cygne"}
+     ]
+    },
+    {
+     "slug": "eliptik-tanker",
+     "name": "Citerne elliptique",
+     "variants": [
+      {"slug": "eliptik-tanker-kamyon-ustu", "model": "Citerne elliptique sur porteur"},
+      {"slug": "eliptik-tanker-semi-treyler", "model": "Semi-remorque citerne elliptique"}
+     ]
+    },
+    {
+     "slug": "gida-tankeri",
+     "name": "Citerne alimentaire",
+     "variants": [
+      {"slug": "gida-tankeri-kamyon-ustu", "model": "Citerne alimentaire sur porteur"},
+      {"slug": "gida-tankeri-semi-treyler", "model": "Semi-remorque citerne alimentaire"},
+      {"slug": "krom-gida-tankeri", "model": "Citerne alimentaire en inox"},
+      {"slug": "paslanmaz-tanker-gida", "model": "Citerne inox - alimentaire"}
+     ]
+    },
+    {
+     "slug": "izolasyonlu-tanker",
+     "name": "Citerne calorifugée",
+     "variants": [
+      {"slug": "izolasyonlu-tanker-semi-treyler", "model": "Semi-remorque citerne calorifugée"}
+     ]
+    },
+    {
+     "slug": "kimyasal-tanker",
+     "name": "Citerne chimique",
+     "variants": [
+      {"slug": "kimyasal-tanker-kamyon-ustu", "model": "Citerne chimique sur porteur"},
+      {"slug": "kimyasal-tanker-semi-treyler", "model": "Semi-remorque citerne chimique"},
+      {"slug": "kimyasal-tankeri", "model": "Citerne pour produits chimiques"}
+     ]
+    },
+    {
+     "slug": "konik-tanker",
+     "name": "Citerne conique",
+     "variants": [
+      {"slug": "konik-tanker-semi-treyler", "model": "Semi-remorque citerne conique"}
+     ]
+    },
+    {
+     "slug": "krom-asit-tankeri",
+     "name": "Citerne à acide en inox",
+     "variants": [
+      {"slug": "krom-asit-tankeri", "model": "Citerne à acide en inox"}
+     ]
+    },
+    {
+     "slug": "krom-izoleli-tanker",
+     "name": "Citerne inox calorifugée",
+     "variants": [
+      {"slug": "krom-izoleli-tanker", "model": "Citerne inox calorifugée"}
+     ]
+    },
+    {
+     "slug": "lpg-tankeri",
+     "name": "Citerne GPL",
+     "variants": [
+      {"slug": "lpg-tanker", "model": "Citerne GPL"},
+      {"slug": "lpg-tankeri-kamyon-ustu", "model": "Citerne GPL sur porteur"},
+      {"slug": "lpg-tankeri-semi-treyler", "model": "Semi-remorque citerne GPL"}
+     ]
+    },
+    {
+     "slug": "paslanmaz-celik-tanker-tehlikeli-madde",
+     "name": "Citerne en acier inoxydable - matières dangereuses",
+     "variants": [
+      {"slug": "paslanmaz-tanker-tehlikeli-madde", "model": "Citerne inox - matières dangereuses"}
+     ]
+    },
+    {
+     "slug": "paslanmaz-celik-tanker-tehlikesiz-madde",
+     "name": "Citerne en acier inoxydable - matières non dangereuses",
+     "variants": [
+      {"slug": "paslanmaz-tanker-tehlikesiz-madde", "model": "Citerne inox - matières non dangereuses"}
+     ]
+    },
+    {
+     "slug": "silindirik-tanker",
+     "name": "Citerne cylindrique",
+     "variants": [
+      {"slug": "silindirik-tanker-kamyon-ustu", "model": "Citerne cylindrique sur porteur"},
+      {"slug": "silindirik-tanker-semi-treyler", "model": "Semi-remorque citerne cylindrique"}
+     ]
+    },
+    {
+     "slug": "su-tankeri",
+     "name": "Citerne à eau",
+     "variants": [
+      {"slug": "su-tankeri-semi-treyler", "model": "Semi-remorque citerne à eau"}
+     ]
+    },
+    {
+     "slug": "sut-tankeri-sasisi",
+     "name": "Châssis de citerne à lait",
+     "variants": [
+      {"slug": "sut-tankeri-sasesi", "model": "Châssis de citerne à lait"}
+     ]
+    },
+    {
+     "slug": "vakum-tanker",
+     "name": "Citerne à vide",
+     "variants": [
+      {"slug": "vakum-tanker-semi-treyler", "model": "Semi-remorque citerne à vide"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "silos",
+   "name": "Citernes pulvérulentes",
+   "products": [
+    {
+     "slug": "damperli-silobas",
+     "name": "Citerne pulvérulente basculante",
+     "variants": [
+      {"slug": "damperli-silobas-tanker", "model": "Citerne silo basculante"},
+      {"slug": "damper-tipi-silobas", "model": "Citerne pulvérulente type benne"},
+      {"slug": "damperli-silobas-semi-treyler", "model": "Semi-remorque citerne pulvérulente basculante"},
+      {"slug": "damperli-silo", "model": "Silo basculant"}
+     ]
+    },
+    {
+     "slug": "sivi-gubre-silobasi",
+     "name": "Citerne à engrais liquide",
+     "variants": [
+      {"slug": "sivi-gubre-silobas", "model": "Citerne à engrais liquide"}
+     ]
+    },
+    {
+     "slug": "un-ve-gida-silobasi",
+     "name": "Citerne pulvérulente farine et denrées alimentaires",
+     "variants": [
+      {"slug": "un-silobasi", "model": "Citerne pulvérulente à farine"}
+     ]
+    },
+    {
+     "slug": "v-tipi-bugday-silobasi",
+     "name": "Citerne pulvérulente à blé type V",
+     "variants": [
+      {"slug": "v-tipi-bugday-silobasi", "model": "Citerne pulvérulente à blé type V"}
+     ]
+    },
+    {
+     "slug": "v-tipi-silobas",
+     "name": "Citerne pulvérulente type V",
+     "variants": [
+      {"slug": "v-tipi-silobas", "model": "Citerne pulvérulente type V"},
+      {"slug": "v-tipi-celik-cimento-silobasi", "model": "Citerne à ciment en acier type V"},
+      {"slug": "v-tipi-yatay-silobas-semi-treyler", "model": "Semi-remorque citerne pulvérulente horizontale type V"}
+     ]
+    },
+    {
+     "slug": "v-tipi-un-ve-gida-silobasi",
+     "name": "Citerne pulvérulente farine et denrées type V",
+     "variants": [
+      {"slug": "v-tipi-silobas-tanker", "model": "Citerne silo type V"},
+      {"slug": "v-tipi-un-ve-gida-silobasi", "model": "Citerne pulvérulente farine et denrées type V"}
+     ]
+    },
+    {
+     "slug": "vakumlu-silobas",
+     "name": "Citerne pulvérulente à vide",
+     "variants": [
+      {"slug": "vakum-silobas", "model": "Citerne pulvérulente à vide"}
+     ]
+    },
+    {
+     "slug": "w-tipi-milenyum-silobas",
+     "name": "Citerne pulvérulente type W (Millennium)",
+     "variants": [
+      {"slug": "w-tipi-silobas-dorse", "model": "Semi-remorque citerne pulvérulente type W"},
+      {"slug": "w-tipi-milenyum-silobas", "model": "Citerne pulvérulente type W (Millennium)"},
+      {"slug": "w-tipi-aluminyum-silobas", "model": "Citerne pulvérulente type W en aluminium"},
+      {"slug": "w-tipi-celik-silobas", "model": "Citerne pulvérulente type W en acier"},
+      {"slug": "w-tipi-yatay-silobas-semi-treyler", "model": "Semi-remorque citerne pulvérulente horizontale type W"},
+      {"slug": "milenyum-silobas", "model": "Citerne pulvérulente Millennium"}
+     ]
+    },
+    {
+     "slug": "yem-silobasi",
+     "name": "Silo à aliments du bétail",
+     "variants": [
+      {"slug": "dorse-uzeri-yem-silobasi", "model": "Silo à aliments sur semi-remorque"},
+      {"slug": "kamyon-uzeri-yem-silobasi", "model": "Silo à aliments sur porteur"},
+      {"slug": "romork-uzeri-yem-silobasi", "model": "Silo à aliments sur remorque"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "tippers",
+   "name": "Bennes",
+   "products": [
+    {
+     "slug": "akordiyon-hububat-tipi-damper",
+     "name": "Benne céréalière type accordéon",
+     "variants": [
+      {"slug": "akordiyon-hububat-tipi-damper", "model": "Benne céréalière type accordéon"}
+     ]
+    },
+    {
+     "slug": "havuz-kuvet-damper",
+     "name": "Benne demi-ronde",
+     "variants": [
+      {"slug": "havuz-damper", "model": "Benne demi-ronde"},
+      {"slug": "18m3-havuz-damper", "model": "Benne demi-ronde 18 m³"},
+      {"slug": "30m3-havuz-damper", "model": "Benne demi-ronde 30 m³"},
+      {"slug": "kuvet-havuz-damper", "model": "Benne cuve (demi-ronde)"}
+     ]
+    },
+    {
+     "slug": "kamyon-ustu-damper",
+     "name": "Benne sur porteur",
+     "variants": [
+      {"slug": "kamyon-ustu-damper", "model": "Benne sur porteur"}
+     ]
+    },
+    {
+     "slug": "kapakli-damper",
+     "name": "Benne à ridelles",
+     "variants": [
+      {"slug": "8-30-kapakli-damper", "model": "Benne à ridelles 8.30"},
+      {"slug": "yana-acilir-kapakli-damper", "model": "Benne à ridelles ouvrantes latérales"},
+      {"slug": "8-60-kapakli-damper", "model": "Benne à ridelles 8.60"},
+      {"slug": "kapakli-damper", "model": "Benne à ridelles"}
+     ]
+    },
+    {
+     "slug": "kaya-tipi-damper",
+     "name": "Benne à roches",
+     "variants": [
+      {"slug": "kaya-damper", "model": "Benne à roches"},
+      {"slug": "kaya-tipi-damper", "model": "Benne de type roche"}
+     ]
+    },
+    {
+     "slug": "multi-sistem-damper",
+     "name": "Benne multi-système",
+     "variants": [
+      {"slug": "multi-sistem-damper-semi-treyler", "model": "Semi-remorque benne multi-système"}
+     ]
+    },
+    {
+     "slug": "panel-tip-damper",
+     "name": "Benne à panneaux",
+     "variants": [
+      {"slug": "panel-tip-damper-semi-treyler", "model": "Semi-remorque benne à panneaux"}
+     ]
+    },
+    {
+     "slug": "yana-devirmeli-damper",
+     "name": "Benne basculante latérale",
+     "variants": [
+      {"slug": "yana-devirmeli-damper", "model": "Benne basculante latérale"}
+     ]
+    },
+    {
+     "slug": "yarim-boru-damper",
+     "name": "Benne half-pipe",
+     "variants": [
+      {"slug": "yarim-boru-damper-semi-treyler", "model": "Semi-remorque benne half-pipe"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "curtain",
+   "name": "Rideaux coulissants et bâchés",
+   "products": [
+    {
+     "slug": "multi-ride",
+     "name": "Multi Ride",
+     "variants": [
+      {"slug": "multi-ride-t-scs-ng-mr-90-12-27", "model": "Multi Ride (T.SCS NG MR / 90 - 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "perdeli-swap-body",
+     "name": "Caisse mobile à rideaux coulissants",
+     "variants": [
+      {"slug": "perdeli-swap-body", "model": "Caisse mobile à rideaux coulissants"}
+     ]
+    },
+    {
+     "slug": "perdeli-ve-tenteli",
+     "name": "Rideau coulissant et bâché",
+     "variants": [
+      {"slug": "t-scl-x-150-12-27", "model": "T.SCL X+ / 150 - 12 / 27"},
+      {"slug": "t-scl-m-150-12-27", "model": "T.SCL M / 150 - 12 / 27"},
+      {"slug": "t-scs-ng-m-90-12-27", "model": "T.SCS NG M / 90 - 12 / 27"},
+      {"slug": "t-scs-ng-x-90-12-27", "model": "T.SCS NG X+ / 90 - 12 / 27"},
+      {"slug": "t-scd-m-90-12-27", "model": "T.SCD M / 90 - 12 / 27"},
+      {"slug": "t-scd-x-90-12-27", "model": "T.SCD X+ / 90 - 12 / 27"},
+      {"slug": "t-scc-m-125-12-27", "model": "T.SCC M / 125 - 12 / 27"},
+      {"slug": "t-scc-x-125-12-27", "model": "T.SCC X+ / 125 - 12 / 27"}
+     ]
+    },
+    {
+     "slug": "tenteli-hafif",
+     "name": "Bâché léger",
+     "variants": [
+      {"slug": "tenteli-hafif", "model": "Bâché léger"}
+     ]
+    },
+    {
+     "slug": "tenteli-standart",
+     "name": "Bâché standard",
+     "variants": [
+      {"slug": "tenteli-standart", "model": "Bâché standard"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "reefer",
+   "name": "Frigorifiques",
+   "products": [
+    {
+     "slug": "frigorifik",
+     "name": "Semi-remorque frigorifique",
+     "variants": [
+      {"slug": "t-sri-c-10-12-27", "model": "T.SRI C / 10 - 12 / 27"},
+      {"slug": "t-sri-f-10-12-27", "model": "T.SRI F / 10 - 12 / 27"},
+      {"slug": "t-sri-p-10-12-27", "model": "T.SRI P / 10 - 12 / 27"},
+      {"slug": "t-sri-fp-10-12-27", "model": "T.SRI FP / 10 - 12 / 27"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "dry-cargo",
+   "name": "Fret sec et caisses",
+   "products": [
+    {
+     "slug": "kapali-kasa-celik-kargo-tasiyici",
+     "name": "Fourgon cargo en acier (caisse fermée)",
+     "variants": [
+      {"slug": "kapali-kasa-celik-kargo-tasiyici", "model": "Fourgon cargo en acier (caisse fermée)"}
+     ]
+    },
+    {
+     "slug": "kuru-yuk-sac-kasa",
+     "name": "Fret sec - caisse en tôle",
+     "variants": [
+      {"slug": "kuru-yuk-sac-kasa", "model": "Fret sec - caisse en tôle"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-aluminyum-kapak",
+     "name": "Fret sec à ridelles aluminium",
+     "variants": [
+      {"slug": "kuruyuk-aluminyum-kapak", "model": "Fret sec à ridelles aluminium"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-light-kapak",
+     "name": "Fret sec à ridelles light",
+     "variants": [
+      {"slug": "kuruyuk-light-kapak", "model": "Fret sec à ridelles light"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-rulo-tasiyici",
+     "name": "Fret sec porte-bobines",
+     "variants": [
+      {"slug": "kuruyuk-rulo-tasiyici", "model": "Fret sec porte-bobines"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "containers",
+   "name": "Porte-conteneurs",
+   "products": [
+    {
+     "slug": "damperli-konteyner-tasiyici",
+     "name": "Porte-conteneurs basculant",
+     "variants": [
+      {"slug": "damperli-konteyner-tasiyici", "model": "Porte-conteneurs basculant"}
+     ]
+    },
+    {
+     "slug": "high-cube-konteyner-tasiyici",
+     "name": "Porte-conteneurs High Cube",
+     "variants": [
+      {"slug": "high-cube-konteyner-tasiyici", "model": "Porte-conteneurs High Cube"}
+     ]
+    },
+    {
+     "slug": "konteyner-tasiyici",
+     "name": "Porte-conteneurs",
+     "variants": [
+      {"slug": "konteyner-tasiyici", "model": "Porte-conteneurs"}
+     ]
+    },
+    {
+     "slug": "liman-ici-konteyner-tasiyici",
+     "name": "Porte-conteneurs portuaire (terminal)",
+     "variants": [
+      {"slug": "liman-ici-konteyner-tasiyici", "model": "Porte-conteneurs portuaire (terminal)"}
+     ]
+    },
+    {
+     "slug": "sabit-konteyner-tasiyici",
+     "name": "Porte-conteneurs fixe",
+     "variants": [
+      {"slug": "sabit-konteyner-tasiyici-t-shg-s-40-12-27", "model": "Porte-conteneurs fixe (T.SHG S / 40 - 12 / 27)"},
+      {"slug": "sabit-konteyner-tasiyici", "model": "Porte-conteneurs fixe"},
+      {"slug": "sabit-konteyner-tasiyici-t-shf-t-20-12-27", "model": "Porte-conteneurs fixe (T.SHF T / 20 - 12 / 27)"},
+      {"slug": "sabit-konteyner-tasiyici-t-shg-l-45-15-27", "model": "Porte-conteneurs fixe (T.SHG L / 45 - 15 / 27)"}
+     ]
+    },
+    {
+     "slug": "standart-konteyner-tasiyici",
+     "name": "Porte-conteneurs standard",
+     "variants": [
+      {"slug": "standart-konteyner-tasiyici", "model": "Porte-conteneurs standard"}
+     ]
+    },
+    {
+     "slug": "teleskopik-konteyner-tasiyici",
+     "name": "Porte-conteneurs télescopique",
+     "variants": [
+      {"slug": "teleskopik-konteyner-tasiyici", "model": "Porte-conteneurs télescopique"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-avh-45-12-27", "model": "Porte-conteneurs télescopique (T.SHG AVH / 45 - 12 / 27)"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-ah-45-12-27", "model": "Porte-conteneurs télescopique (T.SHG AH / 45 - 12 / 27)"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-amh-40-12-27", "model": "Porte-conteneurs télescopique (T.SHG AMH / 40 - 12 / 27)"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lowbed",
+   "name": "Porte-engins et charges lourdes",
+   "products": [
+    {
+     "slug": "havuz-tip-lowbed",
+     "name": "Porte-engins surbaissé à fosse",
+     "variants": [
+      {"slug": "havuz-tip-lowbed", "model": "Porte-engins surbaissé à fosse"}
+     ]
+    },
+    {
+     "slug": "hidrolik-dumenlenir-low-bed",
+     "name": "Porte-engins surbaissé à direction hydraulique",
+     "variants": [
+      {"slug": "hidrolik-dumenlenir-low-bed", "model": "Porte-engins surbaissé à direction hydraulique"}
+     ]
+    },
+    {
+     "slug": "onden-yuklemeli-lowbed",
+     "name": "Porte-engins surbaissé à chargement frontal",
+     "variants": [
+      {"slug": "onden-yuklemeli-lowbed", "model": "Porte-engins surbaissé à chargement frontal"}
+     ]
+    },
+    {
+     "slug": "sabit-low-bed",
+     "name": "Porte-engins surbaissé fixe",
+     "variants": [
+      {"slug": "sabit-low-bed", "model": "Porte-engins surbaissé fixe"}
+     ]
+    },
+    {
+     "slug": "standart-dingilli-lowbed",
+     "name": "Porte-engins surbaissé à essieux standard",
+     "variants": [
+      {"slug": "3-dingilli-lowbed", "model": "Porte-engins surbaissé 3 essieux"},
+      {"slug": "4-dingilli-lowbed", "model": "Porte-engins surbaissé 4 essieux"},
+      {"slug": "5-dingilli-lowbed", "model": "Porte-engins surbaissé 5 essieux"},
+      {"slug": "6-dingilli-lowbed", "model": "Porte-engins surbaissé 6 essieux"}
+     ]
+    },
+    {
+     "slug": "uzar-low-bed",
+     "name": "Porte-engins surbaissé extensible",
+     "variants": [
+      {"slug": "uzar-low-bed", "model": "Porte-engins surbaissé extensible"}
+     ]
+    },
+    {
+     "slug": "yana-genisletilebilir-uzamali-lowbed",
+     "name": "Porte-engins surbaissé extensible et élargissable",
+     "variants": [
+      {"slug": "yana-genisletilebilir-uzamali-lowbed", "model": "Porte-engins surbaissé extensible et élargissable"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "platform",
+   "name": "Plateaux",
+   "products": [
+    {
+     "slug": "rulo-tasiyici-flatbed",
+     "name": "Plateau porte-bobines",
+     "variants": [
+      {"slug": "rulo-tasiyici-flatbed", "model": "Plateau porte-bobines"}
+     ]
+    },
+    {
+     "slug": "standart-flatbed",
+     "name": "Plateau standard",
+     "variants": [
+      {"slug": "standart-flatbed", "model": "Plateau standard"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "trailers",
+   "name": "Remorques",
+   "products": [
+    {
+     "slug": "aksli-romork",
+     "name": "Remorque à essieux",
+     "variants": [
+      {"slug": "2-aksli-romork", "model": "Remorque 2 essieux"},
+      {"slug": "3-aksli-romork", "model": "Remorque 3 essieux"},
+      {"slug": "4-aksli-romork", "model": "Remorque 4 essieux"}
+     ]
+    },
+    {
+     "slug": "dingilli-kamyon-tasiyici",
+     "name": "Porte-camions à essieux",
+     "variants": [
+      {"slug": "2-dingilli-kamyon-tasiyici", "model": "Porte-camions 2 essieux"},
+      {"slug": "3-dingilli-kamyon-tasiyici", "model": "Porte-camions 3 essieux"}
+     ]
+    },
+    {
+     "slug": "tarim-romork-dorse-treyler",
+     "name": "Remorque / semi-remorque agricole",
+     "variants": [
+      {"slug": "tarim-romork-dorse-treyler", "model": "Remorque / semi-remorque agricole"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "special",
+   "name": "Autres produits spéciaux",
+   "products": [
+    {
+     "slug": "oto-tasiyici-dorse",
+     "name": "Semi-remorque porte-voitures",
+     "variants": [
+      {"slug": "oto-tasiyici-dorse", "model": "Semi-remorque porte-voitures"}
+     ]
+    },
+    {
+     "slug": "arazoz",
+     "name": "Camion-citerne d'arrosage / incendie",
+     "variants": [
+      {"slug": "arazoz", "model": "Camion-citerne d'arrosage / incendie"}
+     ]
+    },
+    {
+     "slug": "canli-hayvan-tasiyici",
+     "name": "Bétaillère",
+     "variants": [
+      {"slug": "canli-hayvan-tasiyici", "model": "Bétaillère"}
+     ]
+    },
+    {
+     "slug": "cop-toplama",
+     "name": "Collecte des déchets",
+     "variants": [
+      {"slug": "cop-toplama", "model": "Collecte des déchets"}
+     ]
+    },
+    {
+     "slug": "dokme-yem-tasiyici",
+     "name": "Transporteur d'aliments en vrac",
+     "variants": [
+      {"slug": "dokme-yem-tasiyici-semi-treyler", "model": "Semi-remorque aliments du bétail en vrac"}
+     ]
+    },
+    {
+     "slug": "ikiz-kat-standart",
+     "name": "Double plancher standard",
+     "variants": [
+      {"slug": "ikiz-kat-standart-vetd-ply-td-15-18", "model": "Double plancher standard (VETD PLY TD 15 / 18)"},
+      {"slug": "ikiz-kat-standart-vetd-ply-12-27", "model": "Double plancher standard (VETD PLY 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "intermodal-kutu",
+     "name": "Caisse intermodale",
+     "variants": [
+      {"slug": "intermodal-kutu-ttg-tal-12-27", "model": "Caisse intermodale (TTG TAL 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "kutuk-tomruk-tasimaciligi",
+     "name": "Transport de grumes",
+     "variants": [
+      {"slug": "kutuk-tomruk-tasimaciligi", "model": "Transport de grumes"}
+     ]
+    },
+    {
+     "slug": "mikser",
+     "name": "Malaxeur",
+     "variants": [
+      {"slug": "mikser-semi-treyler", "model": "Semi-remorque malaxeur"}
+     ]
+    },
+    {
+     "slug": "tekstil-kutu",
+     "name": "Caisse textile",
+     "variants": [
+      {"slug": "tekstil-kutu-tgg-tal-12-27", "model": "Caisse textile (TGG TAL 12 / 27)"},
+      {"slug": "tekstil-kutu-tgm-tal-12-27", "model": "Caisse textile (TGM TAL 12 / 27)"}
+     ]
+    }
+   ]
+  }
+ ]
+}

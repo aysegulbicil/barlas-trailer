@@ -1,0 +1,663 @@
+{
+ "generated_from": "products.json (Claude ru name-layer translation, names only)",
+ "categories": [
+  {
+   "slug": "tankers",
+   "name": "Цистерны",
+   "products": [
+    {
+     "slug": "akaryakit-yakit-tankeri",
+     "name": "Цистерна для нефтепродуктов / топлива",
+     "variants": [
+      {"slug": "adr-aluminyum-yakit-tankeri", "model": "Алюминиевая топливная цистерна ADR"},
+      {"slug": "yakit-tankeri", "model": "Топливная цистерна"},
+      {"slug": "adr-li-aluminyum-akaryakit-tankeri", "model": "Алюминиевая цистерна ADR для нефтепродуктов"},
+      {"slug": "celik-akaryakit-tankeri", "model": "Стальная цистерна для нефтепродуктов"},
+      {"slug": "akaryakit-tankeri", "model": "Цистерна для нефтепродуктов"}
+     ]
+    },
+    {
+     "slug": "asfalt-bitum-tankeri",
+     "name": "Цистерна для асфальта / битума",
+     "variants": [
+      {"slug": "izoleli-asfalt-bitum-tankeri", "model": "Термоизолированная асфальто-битумная цистерна"},
+      {"slug": "bitum-tanker-semi-treyler", "model": "Полуприцеп-битумовоз"},
+      {"slug": "bitum-tankeri", "model": "Цистерна для битума"}
+     ]
+    },
+    {
+     "slug": "celik-tanker",
+     "name": "Стальная цистерна",
+     "variants": [
+      {"slug": "adr-celik-tanker", "model": "Стальная цистерна ADR"},
+      {"slug": "celik-tanker", "model": "Стальная цистерна"}
+     ]
+    },
+    {
+     "slug": "deveboynu-tanker",
+     "name": "Цистерна с гусиной шеей",
+     "variants": [
+      {"slug": "deveboynu-tanker-semi-treyler", "model": "Полуприцеп-цистерна с гусиной шеей"}
+     ]
+    },
+    {
+     "slug": "eliptik-tanker",
+     "name": "Эллиптическая цистерна",
+     "variants": [
+      {"slug": "eliptik-tanker-kamyon-ustu", "model": "Эллиптическая автоцистерна"},
+      {"slug": "eliptik-tanker-semi-treyler", "model": "Эллиптический полуприцеп-цистерна"}
+     ]
+    },
+    {
+     "slug": "gida-tankeri",
+     "name": "Пищевая цистерна",
+     "variants": [
+      {"slug": "gida-tankeri-kamyon-ustu", "model": "Пищевая автоцистерна"},
+      {"slug": "gida-tankeri-semi-treyler", "model": "Пищевой полуприцеп-цистерна"},
+      {"slug": "krom-gida-tankeri", "model": "Пищевая цистерна из нержавеющей стали"},
+      {"slug": "paslanmaz-tanker-gida", "model": "Цистерна из нержавеющей стали - пищевая"}
+     ]
+    },
+    {
+     "slug": "izolasyonlu-tanker",
+     "name": "Термоизолированная цистерна",
+     "variants": [
+      {"slug": "izolasyonlu-tanker-semi-treyler", "model": "Термоизолированный полуприцеп-цистерна"}
+     ]
+    },
+    {
+     "slug": "kimyasal-tanker",
+     "name": "Химическая цистерна",
+     "variants": [
+      {"slug": "kimyasal-tanker-kamyon-ustu", "model": "Химическая автоцистерна"},
+      {"slug": "kimyasal-tanker-semi-treyler", "model": "Химический полуприцеп-цистерна"},
+      {"slug": "kimyasal-tankeri", "model": "Химическая цистерна"}
+     ]
+    },
+    {
+     "slug": "konik-tanker",
+     "name": "Коническая цистерна",
+     "variants": [
+      {"slug": "konik-tanker-semi-treyler", "model": "Конический полуприцеп-цистерна"}
+     ]
+    },
+    {
+     "slug": "krom-asit-tankeri",
+     "name": "Кислотная цистерна из нержавеющей стали",
+     "variants": [
+      {"slug": "krom-asit-tankeri", "model": "Кислотная цистерна из нержавеющей стали"}
+     ]
+    },
+    {
+     "slug": "krom-izoleli-tanker",
+     "name": "Термоизолированная цистерна из нержавеющей стали",
+     "variants": [
+      {"slug": "krom-izoleli-tanker", "model": "Термоизолированная цистерна из нержавеющей стали"}
+     ]
+    },
+    {
+     "slug": "lpg-tankeri",
+     "name": "Цистерна LPG (СУГ)",
+     "variants": [
+      {"slug": "lpg-tanker", "model": "Цистерна LPG"},
+      {"slug": "lpg-tankeri-kamyon-ustu", "model": "Автоцистерна LPG"},
+      {"slug": "lpg-tankeri-semi-treyler", "model": "Полуприцеп-цистерна LPG"}
+     ]
+    },
+    {
+     "slug": "paslanmaz-celik-tanker-tehlikeli-madde",
+     "name": "Цистерна из нержавеющей стали - опасные грузы",
+     "variants": [
+      {"slug": "paslanmaz-tanker-tehlikeli-madde", "model": "Цистерна из нержавеющей стали - опасные грузы"}
+     ]
+    },
+    {
+     "slug": "paslanmaz-celik-tanker-tehlikesiz-madde",
+     "name": "Цистерна из нержавеющей стали - неопасные грузы",
+     "variants": [
+      {"slug": "paslanmaz-tanker-tehlikesiz-madde", "model": "Цистерна из нержавеющей стали - неопасные грузы"}
+     ]
+    },
+    {
+     "slug": "silindirik-tanker",
+     "name": "Цилиндрическая цистерна",
+     "variants": [
+      {"slug": "silindirik-tanker-kamyon-ustu", "model": "Цилиндрическая автоцистерна"},
+      {"slug": "silindirik-tanker-semi-treyler", "model": "Цилиндрический полуприцеп-цистерна"}
+     ]
+    },
+    {
+     "slug": "su-tankeri",
+     "name": "Цистерна для воды",
+     "variants": [
+      {"slug": "su-tankeri-semi-treyler", "model": "Полуприцеп-цистерна для воды"}
+     ]
+    },
+    {
+     "slug": "sut-tankeri-sasisi",
+     "name": "Шасси молоковоза",
+     "variants": [
+      {"slug": "sut-tankeri-sasesi", "model": "Шасси молоковоза"}
+     ]
+    },
+    {
+     "slug": "vakum-tanker",
+     "name": "Вакуумная цистерна",
+     "variants": [
+      {"slug": "vakum-tanker-semi-treyler", "model": "Вакуумный полуприцеп-цистерна"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "silos",
+   "name": "Силобасы",
+   "products": [
+    {
+     "slug": "damperli-silobas",
+     "name": "Самосвальный силобас",
+     "variants": [
+      {"slug": "damperli-silobas-tanker", "model": "Самосвальный силобас-цистерна"},
+      {"slug": "damper-tipi-silobas", "model": "Силобас самосвального типа"},
+      {"slug": "damperli-silobas-semi-treyler", "model": "Самосвальный полуприцеп-силобас"},
+      {"slug": "damperli-silo", "model": "Самосвальный силос"}
+     ]
+    },
+    {
+     "slug": "sivi-gubre-silobasi",
+     "name": "Силобас для жидких удобрений",
+     "variants": [
+      {"slug": "sivi-gubre-silobas", "model": "Силобас для жидких удобрений"}
+     ]
+    },
+    {
+     "slug": "un-ve-gida-silobasi",
+     "name": "Силобас для муки и пищевых продуктов",
+     "variants": [
+      {"slug": "un-silobasi", "model": "Силобас-муковоз"}
+     ]
+    },
+    {
+     "slug": "v-tipi-bugday-silobasi",
+     "name": "Силобас V-типа для пшеницы",
+     "variants": [
+      {"slug": "v-tipi-bugday-silobasi", "model": "Силобас V-типа для пшеницы"}
+     ]
+    },
+    {
+     "slug": "v-tipi-silobas",
+     "name": "Силобас V-типа",
+     "variants": [
+      {"slug": "v-tipi-silobas", "model": "Силобас V-типа"},
+      {"slug": "v-tipi-celik-cimento-silobasi", "model": "Стальной цементовоз V-типа"},
+      {"slug": "v-tipi-yatay-silobas-semi-treyler", "model": "Горизонтальный полуприцеп-силобас V-типа"}
+     ]
+    },
+    {
+     "slug": "v-tipi-un-ve-gida-silobasi",
+     "name": "Силобас V-типа для муки и пищевых продуктов",
+     "variants": [
+      {"slug": "v-tipi-silobas-tanker", "model": "Силобас-цистерна V-типа"},
+      {"slug": "v-tipi-un-ve-gida-silobasi", "model": "Силобас V-типа для муки и пищевых продуктов"}
+     ]
+    },
+    {
+     "slug": "vakumlu-silobas",
+     "name": "Вакуумный силобас",
+     "variants": [
+      {"slug": "vakum-silobas", "model": "Вакуумный силобас"}
+     ]
+    },
+    {
+     "slug": "w-tipi-milenyum-silobas",
+     "name": "Силобас W-типа (Миллениум)",
+     "variants": [
+      {"slug": "w-tipi-silobas-dorse", "model": "Полуприцеп-силобас W-типа"},
+      {"slug": "w-tipi-milenyum-silobas", "model": "Силобас W-типа (Миллениум)"},
+      {"slug": "w-tipi-aluminyum-silobas", "model": "Алюминиевый силобас W-типа"},
+      {"slug": "w-tipi-celik-silobas", "model": "Стальной силобас W-типа"},
+      {"slug": "w-tipi-yatay-silobas-semi-treyler", "model": "Горизонтальный полуприцеп-силобас W-типа"},
+      {"slug": "milenyum-silobas", "model": "Силобас Миллениум"}
+     ]
+    },
+    {
+     "slug": "yem-silobasi",
+     "name": "Силос для кормов",
+     "variants": [
+      {"slug": "dorse-uzeri-yem-silobasi", "model": "Силос для кормов на полуприцепе"},
+      {"slug": "kamyon-uzeri-yem-silobasi", "model": "Силос для кормов на шасси грузовика"},
+      {"slug": "romork-uzeri-yem-silobasi", "model": "Силос для кормов на прицепе"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "tippers",
+   "name": "Самосвалы",
+   "products": [
+    {
+     "slug": "akordiyon-hububat-tipi-damper",
+     "name": "Зерновой самосвал аккордеонного типа",
+     "variants": [
+      {"slug": "akordiyon-hububat-tipi-damper", "model": "Зерновой самосвал аккордеонного типа"}
+     ]
+    },
+    {
+     "slug": "havuz-kuvet-damper",
+     "name": "Самосвал ванного типа",
+     "variants": [
+      {"slug": "havuz-damper", "model": "Самосвал ванного типа"},
+      {"slug": "18m3-havuz-damper", "model": "Самосвал ванного типа 18 м³"},
+      {"slug": "30m3-havuz-damper", "model": "Самосвал ванного типа 30 м³"},
+      {"slug": "kuvet-havuz-damper", "model": "Самосвал с кузовом-ванной"}
+     ]
+    },
+    {
+     "slug": "kamyon-ustu-damper",
+     "name": "Самосвальная надстройка на шасси",
+     "variants": [
+      {"slug": "kamyon-ustu-damper", "model": "Самосвальная надстройка на шасси"}
+     ]
+    },
+    {
+     "slug": "kapakli-damper",
+     "name": "Самосвал с бортами",
+     "variants": [
+      {"slug": "8-30-kapakli-damper", "model": "Самосвал с бортами 8.30"},
+      {"slug": "yana-acilir-kapakli-damper", "model": "Самосвал с откидными боковыми бортами"},
+      {"slug": "8-60-kapakli-damper", "model": "Самосвал с бортами 8.60"},
+      {"slug": "kapakli-damper", "model": "Самосвал с бортами"}
+     ]
+    },
+    {
+     "slug": "kaya-tipi-damper",
+     "name": "Самосвал скального типа",
+     "variants": [
+      {"slug": "kaya-damper", "model": "Скальный самосвал"},
+      {"slug": "kaya-tipi-damper", "model": "Самосвал скального типа"}
+     ]
+    },
+    {
+     "slug": "multi-sistem-damper",
+     "name": "Мультисистемный самосвал",
+     "variants": [
+      {"slug": "multi-sistem-damper-semi-treyler", "model": "Мультисистемный полуприцеп-самосвал"}
+     ]
+    },
+    {
+     "slug": "panel-tip-damper",
+     "name": "Самосвал панельного типа",
+     "variants": [
+      {"slug": "panel-tip-damper-semi-treyler", "model": "Полуприцеп-самосвал панельного типа"}
+     ]
+    },
+    {
+     "slug": "yana-devirmeli-damper",
+     "name": "Самосвал с боковой разгрузкой",
+     "variants": [
+      {"slug": "yana-devirmeli-damper", "model": "Самосвал с боковой разгрузкой"}
+     ]
+    },
+    {
+     "slug": "yarim-boru-damper",
+     "name": "Самосвал типа Half-Pipe",
+     "variants": [
+      {"slug": "yarim-boru-damper-semi-treyler", "model": "Полуприцеп-самосвал типа Half-Pipe"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "curtain",
+   "name": "Шторные и тентованные полуприцепы",
+   "products": [
+    {
+     "slug": "multi-ride",
+     "name": "Multi Ride",
+     "variants": [
+      {"slug": "multi-ride-t-scs-ng-mr-90-12-27", "model": "Multi Ride (T.SCS NG MR / 90 - 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "perdeli-swap-body",
+     "name": "Шторный съемный кузов (Swap Body)",
+     "variants": [
+      {"slug": "perdeli-swap-body", "model": "Шторный съемный кузов (Swap Body)"}
+     ]
+    },
+    {
+     "slug": "perdeli-ve-tenteli",
+     "name": "Шторный и тентованный полуприцеп",
+     "variants": [
+      {"slug": "t-scl-x-150-12-27", "model": "T.SCL X+ / 150 - 12 / 27"},
+      {"slug": "t-scl-m-150-12-27", "model": "T.SCL M / 150 - 12 / 27"},
+      {"slug": "t-scs-ng-m-90-12-27", "model": "T.SCS NG M / 90 - 12 / 27"},
+      {"slug": "t-scs-ng-x-90-12-27", "model": "T.SCS NG X+ / 90 - 12 / 27"},
+      {"slug": "t-scd-m-90-12-27", "model": "T.SCD M / 90 - 12 / 27"},
+      {"slug": "t-scd-x-90-12-27", "model": "T.SCD X+ / 90 - 12 / 27"},
+      {"slug": "t-scc-m-125-12-27", "model": "T.SCC M / 125 - 12 / 27"},
+      {"slug": "t-scc-x-125-12-27", "model": "T.SCC X+ / 125 - 12 / 27"}
+     ]
+    },
+    {
+     "slug": "tenteli-hafif",
+     "name": "Облегченный тентованный полуприцеп",
+     "variants": [
+      {"slug": "tenteli-hafif", "model": "Облегченный тентованный полуприцеп"}
+     ]
+    },
+    {
+     "slug": "tenteli-standart",
+     "name": "Стандартный тентованный полуприцеп",
+     "variants": [
+      {"slug": "tenteli-standart", "model": "Стандартный тентованный полуприцеп"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "reefer",
+   "name": "Рефрижераторы",
+   "products": [
+    {
+     "slug": "frigorifik",
+     "name": "Рефрижератор",
+     "variants": [
+      {"slug": "t-sri-c-10-12-27", "model": "T.SRI C / 10 - 12 / 27"},
+      {"slug": "t-sri-f-10-12-27", "model": "T.SRI F / 10 - 12 / 27"},
+      {"slug": "t-sri-p-10-12-27", "model": "T.SRI P / 10 - 12 / 27"},
+      {"slug": "t-sri-fp-10-12-27", "model": "T.SRI FP / 10 - 12 / 27"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "dry-cargo",
+   "name": "Сухогрузные полуприцепы и кузова",
+   "products": [
+    {
+     "slug": "kapali-kasa-celik-kargo-tasiyici",
+     "name": "Стальной грузовой фургон (закрытый кузов)",
+     "variants": [
+      {"slug": "kapali-kasa-celik-kargo-tasiyici", "model": "Стальной грузовой фургон (закрытый кузов)"}
+     ]
+    },
+    {
+     "slug": "kuru-yuk-sac-kasa",
+     "name": "Сухогрузный стальной кузов",
+     "variants": [
+      {"slug": "kuru-yuk-sac-kasa", "model": "Сухогрузный стальной кузов"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-aluminyum-kapak",
+     "name": "Сухогрузный кузов с алюминиевыми бортами",
+     "variants": [
+      {"slug": "kuruyuk-aluminyum-kapak", "model": "Сухогрузный кузов с алюминиевыми бортами"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-light-kapak",
+     "name": "Сухогрузный кузов с бортами Light",
+     "variants": [
+      {"slug": "kuruyuk-light-kapak", "model": "Сухогрузный кузов с бортами Light"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-rulo-tasiyici",
+     "name": "Сухогрузный рулоновоз",
+     "variants": [
+      {"slug": "kuruyuk-rulo-tasiyici", "model": "Сухогрузный рулоновоз"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "containers",
+   "name": "Контейнеровозы",
+   "products": [
+    {
+     "slug": "damperli-konteyner-tasiyici",
+     "name": "Самосвальный контейнеровоз",
+     "variants": [
+      {"slug": "damperli-konteyner-tasiyici", "model": "Самосвальный контейнеровоз"}
+     ]
+    },
+    {
+     "slug": "high-cube-konteyner-tasiyici",
+     "name": "Контейнеровоз High Cube",
+     "variants": [
+      {"slug": "high-cube-konteyner-tasiyici", "model": "Контейнеровоз High Cube"}
+     ]
+    },
+    {
+     "slug": "konteyner-tasiyici",
+     "name": "Контейнеровоз",
+     "variants": [
+      {"slug": "konteyner-tasiyici", "model": "Контейнеровоз"}
+     ]
+    },
+    {
+     "slug": "liman-ici-konteyner-tasiyici",
+     "name": "Портовый (терминальный) контейнеровоз",
+     "variants": [
+      {"slug": "liman-ici-konteyner-tasiyici", "model": "Портовый (терминальный) контейнеровоз"}
+     ]
+    },
+    {
+     "slug": "sabit-konteyner-tasiyici",
+     "name": "Нераздвижной контейнеровоз",
+     "variants": [
+      {"slug": "sabit-konteyner-tasiyici-t-shg-s-40-12-27", "model": "Нераздвижной контейнеровоз (T.SHG S / 40 - 12 / 27)"},
+      {"slug": "sabit-konteyner-tasiyici", "model": "Нераздвижной контейнеровоз"},
+      {"slug": "sabit-konteyner-tasiyici-t-shf-t-20-12-27", "model": "Нераздвижной контейнеровоз (T.SHF T / 20 - 12 / 27)"},
+      {"slug": "sabit-konteyner-tasiyici-t-shg-l-45-15-27", "model": "Нераздвижной контейнеровоз (T.SHG L / 45 - 15 / 27)"}
+     ]
+    },
+    {
+     "slug": "standart-konteyner-tasiyici",
+     "name": "Стандартный контейнеровоз",
+     "variants": [
+      {"slug": "standart-konteyner-tasiyici", "model": "Стандартный контейнеровоз"}
+     ]
+    },
+    {
+     "slug": "teleskopik-konteyner-tasiyici",
+     "name": "Раздвижной контейнеровоз",
+     "variants": [
+      {"slug": "teleskopik-konteyner-tasiyici", "model": "Раздвижной контейнеровоз"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-avh-45-12-27", "model": "Раздвижной контейнеровоз (T.SHG AVH / 45 - 12 / 27)"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-ah-45-12-27", "model": "Раздвижной контейнеровоз (T.SHG AH / 45 - 12 / 27)"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-amh-40-12-27", "model": "Раздвижной контейнеровоз (T.SHG AMH / 40 - 12 / 27)"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lowbed",
+   "name": "Низкорамные полуприцепы (тралы)",
+   "products": [
+    {
+     "slug": "havuz-tip-lowbed",
+     "name": "Низкорамный трал ванного типа",
+     "variants": [
+      {"slug": "havuz-tip-lowbed", "model": "Низкорамный трал ванного типа"}
+     ]
+    },
+    {
+     "slug": "hidrolik-dumenlenir-low-bed",
+     "name": "Низкорамный трал с гидравлическим подруливанием",
+     "variants": [
+      {"slug": "hidrolik-dumenlenir-low-bed", "model": "Низкорамный трал с гидравлическим подруливанием"}
+     ]
+    },
+    {
+     "slug": "onden-yuklemeli-lowbed",
+     "name": "Низкорамный трал с передней погрузкой",
+     "variants": [
+      {"slug": "onden-yuklemeli-lowbed", "model": "Низкорамный трал с передней погрузкой"}
+     ]
+    },
+    {
+     "slug": "sabit-low-bed",
+     "name": "Нераздвижной низкорамный трал",
+     "variants": [
+      {"slug": "sabit-low-bed", "model": "Нераздвижной низкорамный трал"}
+     ]
+    },
+    {
+     "slug": "standart-dingilli-lowbed",
+     "name": "Низкорамный трал со стандартными осями",
+     "variants": [
+      {"slug": "3-dingilli-lowbed", "model": "3-осный низкорамный трал"},
+      {"slug": "4-dingilli-lowbed", "model": "4-осный низкорамный трал"},
+      {"slug": "5-dingilli-lowbed", "model": "5-осный низкорамный трал"},
+      {"slug": "6-dingilli-lowbed", "model": "6-осный низкорамный трал"}
+     ]
+    },
+    {
+     "slug": "uzar-low-bed",
+     "name": "Раздвижной низкорамный трал",
+     "variants": [
+      {"slug": "uzar-low-bed", "model": "Раздвижной низкорамный трал"}
+     ]
+    },
+    {
+     "slug": "yana-genisletilebilir-uzamali-lowbed",
+     "name": "Раздвижной низкорамный трал с боковыми уширителями",
+     "variants": [
+      {"slug": "yana-genisletilebilir-uzamali-lowbed", "model": "Раздвижной низкорамный трал с боковыми уширителями"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "platform",
+   "name": "Платформы",
+   "products": [
+    {
+     "slug": "rulo-tasiyici-flatbed",
+     "name": "Платформа-рулоновоз",
+     "variants": [
+      {"slug": "rulo-tasiyici-flatbed", "model": "Платформа-рулоновоз"}
+     ]
+    },
+    {
+     "slug": "standart-flatbed",
+     "name": "Стандартная платформа",
+     "variants": [
+      {"slug": "standart-flatbed", "model": "Стандартная платформа"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "trailers",
+   "name": "Прицепы",
+   "products": [
+    {
+     "slug": "aksli-romork",
+     "name": "Многоосный прицеп",
+     "variants": [
+      {"slug": "2-aksli-romork", "model": "2-осный прицеп"},
+      {"slug": "3-aksli-romork", "model": "3-осный прицеп"},
+      {"slug": "4-aksli-romork", "model": "4-осный прицеп"}
+     ]
+    },
+    {
+     "slug": "dingilli-kamyon-tasiyici",
+     "name": "Прицеп для перевозки грузовиков",
+     "variants": [
+      {"slug": "2-dingilli-kamyon-tasiyici", "model": "2-осный прицеп для перевозки грузовиков"},
+      {"slug": "3-dingilli-kamyon-tasiyici", "model": "3-осный прицеп для перевозки грузовиков"}
+     ]
+    },
+    {
+     "slug": "tarim-romork-dorse-treyler",
+     "name": "Сельскохозяйственный прицеп / полуприцеп",
+     "variants": [
+      {"slug": "tarim-romork-dorse-treyler", "model": "Сельскохозяйственный прицеп / полуприцеп"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "special",
+   "name": "Прочая специальная продукция",
+   "products": [
+    {
+     "slug": "oto-tasiyici-dorse",
+     "name": "Полуприцеп-автовоз",
+     "variants": [
+      {"slug": "oto-tasiyici-dorse", "model": "Полуприцеп-автовоз"}
+     ]
+    },
+    {
+     "slug": "arazoz",
+     "name": "Поливальная / пожарная автоцистерна",
+     "variants": [
+      {"slug": "arazoz", "model": "Поливальная / пожарная автоцистерна"}
+     ]
+    },
+    {
+     "slug": "canli-hayvan-tasiyici",
+     "name": "Скотовоз",
+     "variants": [
+      {"slug": "canli-hayvan-tasiyici", "model": "Скотовоз"}
+     ]
+    },
+    {
+     "slug": "cop-toplama",
+     "name": "Мусоровоз",
+     "variants": [
+      {"slug": "cop-toplama", "model": "Мусоровоз"}
+     ]
+    },
+    {
+     "slug": "dokme-yem-tasiyici",
+     "name": "Кормовоз для сыпучих кормов",
+     "variants": [
+      {"slug": "dokme-yem-tasiyici-semi-treyler", "model": "Полуприцеп-кормовоз"}
+     ]
+    },
+    {
+     "slug": "ikiz-kat-standart",
+     "name": "Двухъярусный стандарт",
+     "variants": [
+      {"slug": "ikiz-kat-standart-vetd-ply-td-15-18", "model": "Двухъярусный стандарт (VETD PLY TD 15 / 18)"},
+      {"slug": "ikiz-kat-standart-vetd-ply-12-27", "model": "Двухъярусный стандарт (VETD PLY 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "intermodal-kutu",
+     "name": "Интермодальный кузов",
+     "variants": [
+      {"slug": "intermodal-kutu-ttg-tal-12-27", "model": "Интермодальный кузов (TTG TAL 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "kutuk-tomruk-tasimaciligi",
+     "name": "Лесовоз (перевозка бревен)",
+     "variants": [
+      {"slug": "kutuk-tomruk-tasimaciligi", "model": "Лесовоз (перевозка бревен)"}
+     ]
+    },
+    {
+     "slug": "mikser",
+     "name": "Бетоносмеситель (миксер)",
+     "variants": [
+      {"slug": "mikser-semi-treyler", "model": "Полуприцеп-бетоносмеситель"}
+     ]
+    },
+    {
+     "slug": "tekstil-kutu",
+     "name": "Текстильный кузов",
+     "variants": [
+      {"slug": "tekstil-kutu-tgg-tal-12-27", "model": "Текстильный кузов (TGG TAL 12 / 27)"},
+      {"slug": "tekstil-kutu-tgm-tal-12-27", "model": "Текстильный кузов (TGM TAL 12 / 27)"}
+     ]
+    }
+   ]
+  }
+ ]
+}

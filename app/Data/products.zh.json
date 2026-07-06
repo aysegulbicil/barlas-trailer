@@ -1,0 +1,663 @@
+{
+ "generated_from": "products.json (Claude zh name-layer translation, names only)",
+ "categories": [
+  {
+   "slug": "tankers",
+   "name": "罐车",
+   "products": [
+    {
+     "slug": "akaryakit-yakit-tankeri",
+     "name": "成品油/燃油罐车",
+     "variants": [
+      {"slug": "adr-aluminyum-yakit-tankeri", "model": "ADR铝合金燃油罐车"},
+      {"slug": "yakit-tankeri", "model": "燃油罐车"},
+      {"slug": "adr-li-aluminyum-akaryakit-tankeri", "model": "ADR铝合金成品油罐车"},
+      {"slug": "celik-akaryakit-tankeri", "model": "钢制成品油罐车"},
+      {"slug": "akaryakit-tankeri", "model": "成品油罐车"}
+     ]
+    },
+    {
+     "slug": "asfalt-bitum-tankeri",
+     "name": "沥青罐车",
+     "variants": [
+      {"slug": "izoleli-asfalt-bitum-tankeri", "model": "保温沥青罐车"},
+      {"slug": "bitum-tanker-semi-treyler", "model": "沥青罐式半挂车"},
+      {"slug": "bitum-tankeri", "model": "沥青罐车"}
+     ]
+    },
+    {
+     "slug": "celik-tanker",
+     "name": "钢制罐车",
+     "variants": [
+      {"slug": "adr-celik-tanker", "model": "ADR钢制罐车"},
+      {"slug": "celik-tanker", "model": "钢制罐车"}
+     ]
+    },
+    {
+     "slug": "deveboynu-tanker",
+     "name": "鹅颈式罐车",
+     "variants": [
+      {"slug": "deveboynu-tanker-semi-treyler", "model": "鹅颈罐式半挂车"}
+     ]
+    },
+    {
+     "slug": "eliptik-tanker",
+     "name": "椭圆罐车",
+     "variants": [
+      {"slug": "eliptik-tanker-kamyon-ustu", "model": "车载式椭圆罐车"},
+      {"slug": "eliptik-tanker-semi-treyler", "model": "椭圆罐式半挂车"}
+     ]
+    },
+    {
+     "slug": "gida-tankeri",
+     "name": "食品罐车",
+     "variants": [
+      {"slug": "gida-tankeri-kamyon-ustu", "model": "车载式食品罐车"},
+      {"slug": "gida-tankeri-semi-treyler", "model": "食品罐式半挂车"},
+      {"slug": "krom-gida-tankeri", "model": "不锈钢食品罐车"},
+      {"slug": "paslanmaz-tanker-gida", "model": "食品级不锈钢罐车"}
+     ]
+    },
+    {
+     "slug": "izolasyonlu-tanker",
+     "name": "保温罐车",
+     "variants": [
+      {"slug": "izolasyonlu-tanker-semi-treyler", "model": "保温罐式半挂车"}
+     ]
+    },
+    {
+     "slug": "kimyasal-tanker",
+     "name": "化工罐车",
+     "variants": [
+      {"slug": "kimyasal-tanker-kamyon-ustu", "model": "车载式化工罐车"},
+      {"slug": "kimyasal-tanker-semi-treyler", "model": "化工罐式半挂车"},
+      {"slug": "kimyasal-tankeri", "model": "化工罐车"}
+     ]
+    },
+    {
+     "slug": "konik-tanker",
+     "name": "锥形罐车",
+     "variants": [
+      {"slug": "konik-tanker-semi-treyler", "model": "锥形罐式半挂车"}
+     ]
+    },
+    {
+     "slug": "krom-asit-tankeri",
+     "name": "不锈钢酸液罐车",
+     "variants": [
+      {"slug": "krom-asit-tankeri", "model": "不锈钢酸液罐车"}
+     ]
+    },
+    {
+     "slug": "krom-izoleli-tanker",
+     "name": "不锈钢保温罐车",
+     "variants": [
+      {"slug": "krom-izoleli-tanker", "model": "不锈钢保温罐车"}
+     ]
+    },
+    {
+     "slug": "lpg-tankeri",
+     "name": "LPG罐车",
+     "variants": [
+      {"slug": "lpg-tanker", "model": "LPG罐车"},
+      {"slug": "lpg-tankeri-kamyon-ustu", "model": "车载式LPG罐车"},
+      {"slug": "lpg-tankeri-semi-treyler", "model": "LPG罐式半挂车"}
+     ]
+    },
+    {
+     "slug": "paslanmaz-celik-tanker-tehlikeli-madde",
+     "name": "不锈钢罐车（危险品）",
+     "variants": [
+      {"slug": "paslanmaz-tanker-tehlikeli-madde", "model": "不锈钢罐车（危险品）"}
+     ]
+    },
+    {
+     "slug": "paslanmaz-celik-tanker-tehlikesiz-madde",
+     "name": "不锈钢罐车（非危险品）",
+     "variants": [
+      {"slug": "paslanmaz-tanker-tehlikesiz-madde", "model": "不锈钢罐车（非危险品）"}
+     ]
+    },
+    {
+     "slug": "silindirik-tanker",
+     "name": "圆筒罐车",
+     "variants": [
+      {"slug": "silindirik-tanker-kamyon-ustu", "model": "车载式圆筒罐车"},
+      {"slug": "silindirik-tanker-semi-treyler", "model": "圆筒罐式半挂车"}
+     ]
+    },
+    {
+     "slug": "su-tankeri",
+     "name": "水罐车",
+     "variants": [
+      {"slug": "su-tankeri-semi-treyler", "model": "水罐半挂车"}
+     ]
+    },
+    {
+     "slug": "sut-tankeri-sasisi",
+     "name": "奶罐车底盘",
+     "variants": [
+      {"slug": "sut-tankeri-sasesi", "model": "奶罐车底盘"}
+     ]
+    },
+    {
+     "slug": "vakum-tanker",
+     "name": "真空罐车",
+     "variants": [
+      {"slug": "vakum-tanker-semi-treyler", "model": "真空罐式半挂车"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "silos",
+   "name": "粉罐车",
+   "products": [
+    {
+     "slug": "damperli-silobas",
+     "name": "自卸式粉罐车",
+     "variants": [
+      {"slug": "damperli-silobas-tanker", "model": "自卸式粉罐车"},
+      {"slug": "damper-tipi-silobas", "model": "自卸型粉罐车"},
+      {"slug": "damperli-silobas-semi-treyler", "model": "自卸式粉罐半挂车"},
+      {"slug": "damperli-silo", "model": "自卸式粉罐"}
+     ]
+    },
+    {
+     "slug": "sivi-gubre-silobasi",
+     "name": "液体肥料罐车",
+     "variants": [
+      {"slug": "sivi-gubre-silobas", "model": "液体肥料罐车"}
+     ]
+    },
+    {
+     "slug": "un-ve-gida-silobasi",
+     "name": "面粉及食品粉罐车",
+     "variants": [
+      {"slug": "un-silobasi", "model": "散装面粉罐车"}
+     ]
+    },
+    {
+     "slug": "v-tipi-bugday-silobasi",
+     "name": "V型小麦散装罐车",
+     "variants": [
+      {"slug": "v-tipi-bugday-silobasi", "model": "V型小麦散装罐车"}
+     ]
+    },
+    {
+     "slug": "v-tipi-silobas",
+     "name": "V型粉罐车",
+     "variants": [
+      {"slug": "v-tipi-silobas", "model": "V型粉罐车"},
+      {"slug": "v-tipi-celik-cimento-silobasi", "model": "V型钢制水泥罐车"},
+      {"slug": "v-tipi-yatay-silobas-semi-treyler", "model": "V型卧式粉罐半挂车"}
+     ]
+    },
+    {
+     "slug": "v-tipi-un-ve-gida-silobasi",
+     "name": "V型面粉及食品粉罐车",
+     "variants": [
+      {"slug": "v-tipi-silobas-tanker", "model": "V型粉罐车"},
+      {"slug": "v-tipi-un-ve-gida-silobasi", "model": "V型面粉及食品粉罐车"}
+     ]
+    },
+    {
+     "slug": "vakumlu-silobas",
+     "name": "真空粉罐车",
+     "variants": [
+      {"slug": "vakum-silobas", "model": "真空粉罐车"}
+     ]
+    },
+    {
+     "slug": "w-tipi-milenyum-silobas",
+     "name": "W型（千禧型）粉罐车",
+     "variants": [
+      {"slug": "w-tipi-silobas-dorse", "model": "W型粉罐半挂车"},
+      {"slug": "w-tipi-milenyum-silobas", "model": "W型（千禧型）粉罐车"},
+      {"slug": "w-tipi-aluminyum-silobas", "model": "W型铝合金粉罐车"},
+      {"slug": "w-tipi-celik-silobas", "model": "W型钢制粉罐车"},
+      {"slug": "w-tipi-yatay-silobas-semi-treyler", "model": "W型卧式粉罐半挂车"},
+      {"slug": "milenyum-silobas", "model": "千禧型粉罐车"}
+     ]
+    },
+    {
+     "slug": "yem-silobasi",
+     "name": "饲料罐车",
+     "variants": [
+      {"slug": "dorse-uzeri-yem-silobasi", "model": "半挂式饲料罐车"},
+      {"slug": "kamyon-uzeri-yem-silobasi", "model": "车载式饲料罐车"},
+      {"slug": "romork-uzeri-yem-silobasi", "model": "全挂式饲料罐车"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "tippers",
+   "name": "自卸车",
+   "products": [
+    {
+     "slug": "akordiyon-hububat-tipi-damper",
+     "name": "手风琴式谷物自卸车",
+     "variants": [
+      {"slug": "akordiyon-hububat-tipi-damper", "model": "手风琴式谷物自卸车"}
+     ]
+    },
+    {
+     "slug": "havuz-kuvet-damper",
+     "name": "U型/浴盆式自卸车",
+     "variants": [
+      {"slug": "havuz-damper", "model": "U型自卸车"},
+      {"slug": "18m3-havuz-damper", "model": "18立方米U型自卸车"},
+      {"slug": "30m3-havuz-damper", "model": "30立方米U型自卸车"},
+      {"slug": "kuvet-havuz-damper", "model": "浴盆式（U型）自卸车"}
+     ]
+    },
+    {
+     "slug": "kamyon-ustu-damper",
+     "name": "车载式自卸车",
+     "variants": [
+      {"slug": "kamyon-ustu-damper", "model": "车载式自卸车"}
+     ]
+    },
+    {
+     "slug": "kapakli-damper",
+     "name": "栏板自卸车",
+     "variants": [
+      {"slug": "8-30-kapakli-damper", "model": "8.30栏板自卸车"},
+      {"slug": "yana-acilir-kapakli-damper", "model": "侧开栏板自卸车"},
+      {"slug": "8-60-kapakli-damper", "model": "8.60栏板自卸车"},
+      {"slug": "kapakli-damper", "model": "栏板自卸车"}
+     ]
+    },
+    {
+     "slug": "kaya-tipi-damper",
+     "name": "岩石型自卸车",
+     "variants": [
+      {"slug": "kaya-damper", "model": "岩石自卸车"},
+      {"slug": "kaya-tipi-damper", "model": "岩石型自卸车"}
+     ]
+    },
+    {
+     "slug": "multi-sistem-damper",
+     "name": "多系统自卸车",
+     "variants": [
+      {"slug": "multi-sistem-damper-semi-treyler", "model": "多系统自卸半挂车"}
+     ]
+    },
+    {
+     "slug": "panel-tip-damper",
+     "name": "板式自卸车",
+     "variants": [
+      {"slug": "panel-tip-damper-semi-treyler", "model": "板式自卸半挂车"}
+     ]
+    },
+    {
+     "slug": "yana-devirmeli-damper",
+     "name": "侧翻自卸车",
+     "variants": [
+      {"slug": "yana-devirmeli-damper", "model": "侧翻自卸车"}
+     ]
+    },
+    {
+     "slug": "yarim-boru-damper",
+     "name": "半管式自卸车",
+     "variants": [
+      {"slug": "yarim-boru-damper-semi-treyler", "model": "半管式自卸半挂车"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "curtain",
+   "name": "侧帘与篷布半挂车",
+   "products": [
+    {
+     "slug": "multi-ride",
+     "name": "Multi Ride",
+     "variants": [
+      {"slug": "multi-ride-t-scs-ng-mr-90-12-27", "model": "Multi Ride (T.SCS NG MR / 90 - 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "perdeli-swap-body",
+     "name": "侧帘交换箱体",
+     "variants": [
+      {"slug": "perdeli-swap-body", "model": "侧帘交换箱体"}
+     ]
+    },
+    {
+     "slug": "perdeli-ve-tenteli",
+     "name": "侧帘与篷布半挂车",
+     "variants": [
+      {"slug": "t-scl-x-150-12-27", "model": "T.SCL X+ / 150 - 12 / 27"},
+      {"slug": "t-scl-m-150-12-27", "model": "T.SCL M / 150 - 12 / 27"},
+      {"slug": "t-scs-ng-m-90-12-27", "model": "T.SCS NG M / 90 - 12 / 27"},
+      {"slug": "t-scs-ng-x-90-12-27", "model": "T.SCS NG X+ / 90 - 12 / 27"},
+      {"slug": "t-scd-m-90-12-27", "model": "T.SCD M / 90 - 12 / 27"},
+      {"slug": "t-scd-x-90-12-27", "model": "T.SCD X+ / 90 - 12 / 27"},
+      {"slug": "t-scc-m-125-12-27", "model": "T.SCC M / 125 - 12 / 27"},
+      {"slug": "t-scc-x-125-12-27", "model": "T.SCC X+ / 125 - 12 / 27"}
+     ]
+    },
+    {
+     "slug": "tenteli-hafif",
+     "name": "轻型篷布半挂车",
+     "variants": [
+      {"slug": "tenteli-hafif", "model": "轻型篷布半挂车"}
+     ]
+    },
+    {
+     "slug": "tenteli-standart",
+     "name": "标准篷布半挂车",
+     "variants": [
+      {"slug": "tenteli-standart", "model": "标准篷布半挂车"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "reefer",
+   "name": "冷藏半挂车",
+   "products": [
+    {
+     "slug": "frigorifik",
+     "name": "冷藏半挂车",
+     "variants": [
+      {"slug": "t-sri-c-10-12-27", "model": "T.SRI C / 10 - 12 / 27"},
+      {"slug": "t-sri-f-10-12-27", "model": "T.SRI F / 10 - 12 / 27"},
+      {"slug": "t-sri-p-10-12-27", "model": "T.SRI P / 10 - 12 / 27"},
+      {"slug": "t-sri-fp-10-12-27", "model": "T.SRI FP / 10 - 12 / 27"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "dry-cargo",
+   "name": "干货与厢式车",
+   "products": [
+    {
+     "slug": "kapali-kasa-celik-kargo-tasiyici",
+     "name": "封闭式钢制货物运输车",
+     "variants": [
+      {"slug": "kapali-kasa-celik-kargo-tasiyici", "model": "封闭式钢制货物运输车"}
+     ]
+    },
+    {
+     "slug": "kuru-yuk-sac-kasa",
+     "name": "干货钢板厢体",
+     "variants": [
+      {"slug": "kuru-yuk-sac-kasa", "model": "干货钢板厢体"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-aluminyum-kapak",
+     "name": "干货铝合金栏板",
+     "variants": [
+      {"slug": "kuruyuk-aluminyum-kapak", "model": "干货铝合金栏板"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-light-kapak",
+     "name": "干货轻型栏板",
+     "variants": [
+      {"slug": "kuruyuk-light-kapak", "model": "干货轻型栏板"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-rulo-tasiyici",
+     "name": "干货卷材运输车",
+     "variants": [
+      {"slug": "kuruyuk-rulo-tasiyici", "model": "干货卷材运输车"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "containers",
+   "name": "集装箱运输车",
+   "products": [
+    {
+     "slug": "damperli-konteyner-tasiyici",
+     "name": "自卸式集装箱运输车",
+     "variants": [
+      {"slug": "damperli-konteyner-tasiyici", "model": "自卸式集装箱运输车"}
+     ]
+    },
+    {
+     "slug": "high-cube-konteyner-tasiyici",
+     "name": "高柜集装箱运输车",
+     "variants": [
+      {"slug": "high-cube-konteyner-tasiyici", "model": "高柜集装箱运输车"}
+     ]
+    },
+    {
+     "slug": "konteyner-tasiyici",
+     "name": "集装箱运输车",
+     "variants": [
+      {"slug": "konteyner-tasiyici", "model": "集装箱运输车"}
+     ]
+    },
+    {
+     "slug": "liman-ici-konteyner-tasiyici",
+     "name": "港内集装箱运输车",
+     "variants": [
+      {"slug": "liman-ici-konteyner-tasiyici", "model": "港内集装箱运输车"}
+     ]
+    },
+    {
+     "slug": "sabit-konteyner-tasiyici",
+     "name": "固定式集装箱运输车",
+     "variants": [
+      {"slug": "sabit-konteyner-tasiyici-t-shg-s-40-12-27", "model": "固定式集装箱运输车（T.SHG S / 40 - 12 / 27）"},
+      {"slug": "sabit-konteyner-tasiyici", "model": "固定式集装箱运输车"},
+      {"slug": "sabit-konteyner-tasiyici-t-shf-t-20-12-27", "model": "固定式集装箱运输车（T.SHF T / 20 - 12 / 27）"},
+      {"slug": "sabit-konteyner-tasiyici-t-shg-l-45-15-27", "model": "固定式集装箱运输车（T.SHG L / 45 - 15 / 27）"}
+     ]
+    },
+    {
+     "slug": "standart-konteyner-tasiyici",
+     "name": "标准集装箱运输车",
+     "variants": [
+      {"slug": "standart-konteyner-tasiyici", "model": "标准集装箱运输车"}
+     ]
+    },
+    {
+     "slug": "teleskopik-konteyner-tasiyici",
+     "name": "伸缩式集装箱运输车",
+     "variants": [
+      {"slug": "teleskopik-konteyner-tasiyici", "model": "伸缩式集装箱运输车"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-avh-45-12-27", "model": "伸缩式集装箱运输车（T.SHG AVH / 45 - 12 / 27）"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-ah-45-12-27", "model": "伸缩式集装箱运输车（T.SHG AH / 45 - 12 / 27）"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-amh-40-12-27", "model": "伸缩式集装箱运输车（T.SHG AMH / 40 - 12 / 27）"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lowbed",
+   "name": "低平板与重载运输",
+   "products": [
+    {
+     "slug": "havuz-tip-lowbed",
+     "name": "凹式低平板半挂车",
+     "variants": [
+      {"slug": "havuz-tip-lowbed", "model": "凹式低平板半挂车"}
+     ]
+    },
+    {
+     "slug": "hidrolik-dumenlenir-low-bed",
+     "name": "液压转向低平板半挂车",
+     "variants": [
+      {"slug": "hidrolik-dumenlenir-low-bed", "model": "液压转向低平板半挂车"}
+     ]
+    },
+    {
+     "slug": "onden-yuklemeli-lowbed",
+     "name": "前装式低平板半挂车",
+     "variants": [
+      {"slug": "onden-yuklemeli-lowbed", "model": "前装式低平板半挂车"}
+     ]
+    },
+    {
+     "slug": "sabit-low-bed",
+     "name": "固定式低平板半挂车",
+     "variants": [
+      {"slug": "sabit-low-bed", "model": "固定式低平板半挂车"}
+     ]
+    },
+    {
+     "slug": "standart-dingilli-lowbed",
+     "name": "标准轴低平板半挂车",
+     "variants": [
+      {"slug": "3-dingilli-lowbed", "model": "三轴低平板半挂车"},
+      {"slug": "4-dingilli-lowbed", "model": "四轴低平板半挂车"},
+      {"slug": "5-dingilli-lowbed", "model": "五轴低平板半挂车"},
+      {"slug": "6-dingilli-lowbed", "model": "六轴低平板半挂车"}
+     ]
+    },
+    {
+     "slug": "uzar-low-bed",
+     "name": "伸缩式低平板半挂车",
+     "variants": [
+      {"slug": "uzar-low-bed", "model": "伸缩式低平板半挂车"}
+     ]
+    },
+    {
+     "slug": "yana-genisletilebilir-uzamali-lowbed",
+     "name": "侧向加宽伸缩式低平板半挂车",
+     "variants": [
+      {"slug": "yana-genisletilebilir-uzamali-lowbed", "model": "侧向加宽伸缩式低平板半挂车"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "platform",
+   "name": "平板半挂车",
+   "products": [
+    {
+     "slug": "rulo-tasiyici-flatbed",
+     "name": "卷材运输平板半挂车",
+     "variants": [
+      {"slug": "rulo-tasiyici-flatbed", "model": "卷材运输平板半挂车"}
+     ]
+    },
+    {
+     "slug": "standart-flatbed",
+     "name": "标准平板半挂车",
+     "variants": [
+      {"slug": "standart-flatbed", "model": "标准平板半挂车"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "trailers",
+   "name": "全挂车",
+   "products": [
+    {
+     "slug": "aksli-romork",
+     "name": "全挂车",
+     "variants": [
+      {"slug": "2-aksli-romork", "model": "两轴全挂车"},
+      {"slug": "3-aksli-romork", "model": "三轴全挂车"},
+      {"slug": "4-aksli-romork", "model": "四轴全挂车"}
+     ]
+    },
+    {
+     "slug": "dingilli-kamyon-tasiyici",
+     "name": "卡车运输挂车",
+     "variants": [
+      {"slug": "2-dingilli-kamyon-tasiyici", "model": "两轴卡车运输挂车"},
+      {"slug": "3-dingilli-kamyon-tasiyici", "model": "三轴卡车运输挂车"}
+     ]
+    },
+    {
+     "slug": "tarim-romork-dorse-treyler",
+     "name": "农用全挂/半挂车",
+     "variants": [
+      {"slug": "tarim-romork-dorse-treyler", "model": "农用全挂/半挂车"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "special",
+   "name": "其他特种产品",
+   "products": [
+    {
+     "slug": "oto-tasiyici-dorse",
+     "name": "轿车运输半挂车",
+     "variants": [
+      {"slug": "oto-tasiyici-dorse", "model": "轿车运输半挂车"}
+     ]
+    },
+    {
+     "slug": "arazoz",
+     "name": "洒水消防车",
+     "variants": [
+      {"slug": "arazoz", "model": "洒水消防车"}
+     ]
+    },
+    {
+     "slug": "canli-hayvan-tasiyici",
+     "name": "活畜运输车",
+     "variants": [
+      {"slug": "canli-hayvan-tasiyici", "model": "活畜运输车"}
+     ]
+    },
+    {
+     "slug": "cop-toplama",
+     "name": "垃圾收集车",
+     "variants": [
+      {"slug": "cop-toplama", "model": "垃圾收集车"}
+     ]
+    },
+    {
+     "slug": "dokme-yem-tasiyici",
+     "name": "散装饲料运输车",
+     "variants": [
+      {"slug": "dokme-yem-tasiyici-semi-treyler", "model": "散装饲料运输半挂车"}
+     ]
+    },
+    {
+     "slug": "ikiz-kat-standart",
+     "name": "双层标准型",
+     "variants": [
+      {"slug": "ikiz-kat-standart-vetd-ply-td-15-18", "model": "双层标准型（VETD PLY TD 15 / 18）"},
+      {"slug": "ikiz-kat-standart-vetd-ply-12-27", "model": "双层标准型（VETD PLY 12 / 27）"}
+     ]
+    },
+    {
+     "slug": "intermodal-kutu",
+     "name": "多式联运箱体",
+     "variants": [
+      {"slug": "intermodal-kutu-ttg-tal-12-27", "model": "多式联运箱体（TTG TAL 12 / 27）"}
+     ]
+    },
+    {
+     "slug": "kutuk-tomruk-tasimaciligi",
+     "name": "原木运输",
+     "variants": [
+      {"slug": "kutuk-tomruk-tasimaciligi", "model": "原木运输"}
+     ]
+    },
+    {
+     "slug": "mikser",
+     "name": "混凝土搅拌车",
+     "variants": [
+      {"slug": "mikser-semi-treyler", "model": "混凝土搅拌半挂车"}
+     ]
+    },
+    {
+     "slug": "tekstil-kutu",
+     "name": "纺织品箱体",
+     "variants": [
+      {"slug": "tekstil-kutu-tgg-tal-12-27", "model": "纺织品箱体（TGG TAL 12 / 27）"},
+      {"slug": "tekstil-kutu-tgm-tal-12-27", "model": "纺织品箱体（TGM TAL 12 / 27）"}
+     ]
+    }
+   ]
+  }
+ ]
+}

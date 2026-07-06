@@ -1,0 +1,663 @@
+{
+ "generated_from": "products.json (Claude nl name-layer translation, names only)",
+ "categories": [
+  {
+   "slug": "tankers",
+   "name": "Tankopleggers",
+   "products": [
+    {
+     "slug": "akaryakit-yakit-tankeri",
+     "name": "Tanker voor brandstoffen en minerale oliën",
+     "variants": [
+      {"slug": "adr-aluminyum-yakit-tankeri", "model": "ADR aluminium brandstoftanker"},
+      {"slug": "yakit-tankeri", "model": "Brandstoftanker"},
+      {"slug": "adr-li-aluminyum-akaryakit-tankeri", "model": "ADR aluminium tanker voor minerale oliën"},
+      {"slug": "celik-akaryakit-tankeri", "model": "Stalen tanker voor minerale oliën"},
+      {"slug": "akaryakit-tankeri", "model": "Tanker voor minerale oliën"}
+     ]
+    },
+    {
+     "slug": "asfalt-bitum-tankeri",
+     "name": "Asfalt- / bitumentanker",
+     "variants": [
+      {"slug": "izoleli-asfalt-bitum-tankeri", "model": "Geïsoleerde asfalt-bitumentanker"},
+      {"slug": "bitum-tanker-semi-treyler", "model": "Bitumentankoplegger"},
+      {"slug": "bitum-tankeri", "model": "Bitumentanker"}
+     ]
+    },
+    {
+     "slug": "celik-tanker",
+     "name": "Stalen tanker",
+     "variants": [
+      {"slug": "adr-celik-tanker", "model": "ADR stalen tanker"},
+      {"slug": "celik-tanker", "model": "Stalen tanker"}
+     ]
+    },
+    {
+     "slug": "deveboynu-tanker",
+     "name": "Zwanenhalstanker",
+     "variants": [
+      {"slug": "deveboynu-tanker-semi-treyler", "model": "Zwanenhalstankoplegger"}
+     ]
+    },
+    {
+     "slug": "eliptik-tanker",
+     "name": "Elliptische tanker",
+     "variants": [
+      {"slug": "eliptik-tanker-kamyon-ustu", "model": "Elliptische tanker op vrachtwagen"},
+      {"slug": "eliptik-tanker-semi-treyler", "model": "Elliptische tankoplegger"}
+     ]
+    },
+    {
+     "slug": "gida-tankeri",
+     "name": "Levensmiddelentanker",
+     "variants": [
+      {"slug": "gida-tankeri-kamyon-ustu", "model": "Levensmiddelentanker op vrachtwagen"},
+      {"slug": "gida-tankeri-semi-treyler", "model": "Levensmiddelentankoplegger"},
+      {"slug": "krom-gida-tankeri", "model": "Chroomstalen levensmiddelentanker"},
+      {"slug": "paslanmaz-tanker-gida", "model": "RVS tanker - levensmiddelen"}
+     ]
+    },
+    {
+     "slug": "izolasyonlu-tanker",
+     "name": "Geïsoleerde tanker",
+     "variants": [
+      {"slug": "izolasyonlu-tanker-semi-treyler", "model": "Geïsoleerde tankoplegger"}
+     ]
+    },
+    {
+     "slug": "kimyasal-tanker",
+     "name": "Chemicaliëntanker",
+     "variants": [
+      {"slug": "kimyasal-tanker-kamyon-ustu", "model": "Chemicaliëntanker op vrachtwagen"},
+      {"slug": "kimyasal-tanker-semi-treyler", "model": "Chemicaliëntankoplegger"},
+      {"slug": "kimyasal-tankeri", "model": "Chemicaliëntanker"}
+     ]
+    },
+    {
+     "slug": "konik-tanker",
+     "name": "Conische tanker",
+     "variants": [
+      {"slug": "konik-tanker-semi-treyler", "model": "Conische tankoplegger"}
+     ]
+    },
+    {
+     "slug": "krom-asit-tankeri",
+     "name": "RVS zuurtanker",
+     "variants": [
+      {"slug": "krom-asit-tankeri", "model": "RVS zuurtanker"}
+     ]
+    },
+    {
+     "slug": "krom-izoleli-tanker",
+     "name": "RVS geïsoleerde tanker",
+     "variants": [
+      {"slug": "krom-izoleli-tanker", "model": "RVS geïsoleerde tanker"}
+     ]
+    },
+    {
+     "slug": "lpg-tankeri",
+     "name": "LPG-tanker",
+     "variants": [
+      {"slug": "lpg-tanker", "model": "LPG-tanker"},
+      {"slug": "lpg-tankeri-kamyon-ustu", "model": "LPG-tanker op vrachtwagen"},
+      {"slug": "lpg-tankeri-semi-treyler", "model": "LPG-tankoplegger"}
+     ]
+    },
+    {
+     "slug": "paslanmaz-celik-tanker-tehlikeli-madde",
+     "name": "RVS tanker - gevaarlijke stoffen",
+     "variants": [
+      {"slug": "paslanmaz-tanker-tehlikeli-madde", "model": "RVS tanker - gevaarlijke stoffen"}
+     ]
+    },
+    {
+     "slug": "paslanmaz-celik-tanker-tehlikesiz-madde",
+     "name": "RVS tanker - ongevaarlijke stoffen",
+     "variants": [
+      {"slug": "paslanmaz-tanker-tehlikesiz-madde", "model": "RVS tanker - ongevaarlijke stoffen"}
+     ]
+    },
+    {
+     "slug": "silindirik-tanker",
+     "name": "Cilindrische tanker",
+     "variants": [
+      {"slug": "silindirik-tanker-kamyon-ustu", "model": "Cilindrische tanker op vrachtwagen"},
+      {"slug": "silindirik-tanker-semi-treyler", "model": "Cilindrische tankoplegger"}
+     ]
+    },
+    {
+     "slug": "su-tankeri",
+     "name": "Watertanker",
+     "variants": [
+      {"slug": "su-tankeri-semi-treyler", "model": "Watertankoplegger"}
+     ]
+    },
+    {
+     "slug": "sut-tankeri-sasisi",
+     "name": "Melktankchassis",
+     "variants": [
+      {"slug": "sut-tankeri-sasesi", "model": "Melktankchassis"}
+     ]
+    },
+    {
+     "slug": "vakum-tanker",
+     "name": "Vacuümtanker",
+     "variants": [
+      {"slug": "vakum-tanker-semi-treyler", "model": "Vacuümtankoplegger"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "silos",
+   "name": "Silo-opleggers",
+   "products": [
+    {
+     "slug": "damperli-silobas",
+     "name": "Kippende silo-oplegger",
+     "variants": [
+      {"slug": "damperli-silobas-tanker", "model": "Kippende silotanker"},
+      {"slug": "damper-tipi-silobas", "model": "Kiptype silo-oplegger"},
+      {"slug": "damperli-silobas-semi-treyler", "model": "Kipsilo-oplegger"},
+      {"slug": "damperli-silo", "model": "Kipsilo"}
+     ]
+    },
+    {
+     "slug": "sivi-gubre-silobasi",
+     "name": "Silo-oplegger voor vloeibare meststof",
+     "variants": [
+      {"slug": "sivi-gubre-silobas", "model": "Silo-oplegger voor vloeibare meststof"}
+     ]
+    },
+    {
+     "slug": "un-ve-gida-silobasi",
+     "name": "Meel- en levensmiddelensilo-oplegger",
+     "variants": [
+      {"slug": "un-silobasi", "model": "Meelsilo-oplegger"}
+     ]
+    },
+    {
+     "slug": "v-tipi-bugday-silobasi",
+     "name": "V-type tarwesilo-oplegger",
+     "variants": [
+      {"slug": "v-tipi-bugday-silobasi", "model": "V-type tarwesilo-oplegger"}
+     ]
+    },
+    {
+     "slug": "v-tipi-silobas",
+     "name": "V-type silo-oplegger",
+     "variants": [
+      {"slug": "v-tipi-silobas", "model": "V-type silo-oplegger"},
+      {"slug": "v-tipi-celik-cimento-silobasi", "model": "V-type stalen cementsilo-oplegger"},
+      {"slug": "v-tipi-yatay-silobas-semi-treyler", "model": "V-type horizontale silo-oplegger"}
+     ]
+    },
+    {
+     "slug": "v-tipi-un-ve-gida-silobasi",
+     "name": "V-type meel- en levensmiddelensilo-oplegger",
+     "variants": [
+      {"slug": "v-tipi-silobas-tanker", "model": "V-type silotanker"},
+      {"slug": "v-tipi-un-ve-gida-silobasi", "model": "V-type meel- en levensmiddelensilo-oplegger"}
+     ]
+    },
+    {
+     "slug": "vakumlu-silobas",
+     "name": "Vacuümsilo-oplegger",
+     "variants": [
+      {"slug": "vakum-silobas", "model": "Vacuümsilo-oplegger"}
+     ]
+    },
+    {
+     "slug": "w-tipi-milenyum-silobas",
+     "name": "W-type (Millennium) silo-oplegger",
+     "variants": [
+      {"slug": "w-tipi-silobas-dorse", "model": "W-type silo-oplegger"},
+      {"slug": "w-tipi-milenyum-silobas", "model": "W-type (Millennium) silo-oplegger"},
+      {"slug": "w-tipi-aluminyum-silobas", "model": "W-type aluminium silo-oplegger"},
+      {"slug": "w-tipi-celik-silobas", "model": "W-type stalen silo-oplegger"},
+      {"slug": "w-tipi-yatay-silobas-semi-treyler", "model": "W-type horizontale silo-oplegger"},
+      {"slug": "milenyum-silobas", "model": "Millennium silo-oplegger"}
+     ]
+    },
+    {
+     "slug": "yem-silobasi",
+     "name": "Veevoedersilo-oplegger",
+     "variants": [
+      {"slug": "dorse-uzeri-yem-silobasi", "model": "Veevoedersilo op oplegger"},
+      {"slug": "kamyon-uzeri-yem-silobasi", "model": "Veevoedersilo op vrachtwagen"},
+      {"slug": "romork-uzeri-yem-silobasi", "model": "Veevoedersilo op aanhangwagen"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "tippers",
+   "name": "Kippers",
+   "products": [
+    {
+     "slug": "akordiyon-hububat-tipi-damper",
+     "name": "Accordeon-graankipper",
+     "variants": [
+      {"slug": "akordiyon-hububat-tipi-damper", "model": "Accordeon-graankipper"}
+     ]
+    },
+    {
+     "slug": "havuz-kuvet-damper",
+     "name": "Halfpipe- / kuipkipper",
+     "variants": [
+      {"slug": "havuz-damper", "model": "Halfpipe-kipper"},
+      {"slug": "18m3-havuz-damper", "model": "18m³ halfpipe-kipper"},
+      {"slug": "30m3-havuz-damper", "model": "30m³ halfpipe-kipper"},
+      {"slug": "kuvet-havuz-damper", "model": "Kuipkipper (halfpipe)"}
+     ]
+    },
+    {
+     "slug": "kamyon-ustu-damper",
+     "name": "Kipper op vrachtwagen",
+     "variants": [
+      {"slug": "kamyon-ustu-damper", "model": "Kipper op vrachtwagen"}
+     ]
+    },
+    {
+     "slug": "kapakli-damper",
+     "name": "Kipper met zij- en achterborden",
+     "variants": [
+      {"slug": "8-30-kapakli-damper", "model": "8.30 kipper met zij- en achterborden"},
+      {"slug": "yana-acilir-kapakli-damper", "model": "Kipper met zijwaarts openende borden"},
+      {"slug": "8-60-kapakli-damper", "model": "8.60 kipper met zij- en achterborden"},
+      {"slug": "kapakli-damper", "model": "Kipper met zij- en achterborden"}
+     ]
+    },
+    {
+     "slug": "kaya-tipi-damper",
+     "name": "Rock-type kipper",
+     "variants": [
+      {"slug": "kaya-damper", "model": "Rock-kipper"},
+      {"slug": "kaya-tipi-damper", "model": "Rock-type kipper"}
+     ]
+    },
+    {
+     "slug": "multi-sistem-damper",
+     "name": "Multisysteem-kipper",
+     "variants": [
+      {"slug": "multi-sistem-damper-semi-treyler", "model": "Multisysteem-kipoplegger"}
+     ]
+    },
+    {
+     "slug": "panel-tip-damper",
+     "name": "Paneeltype kipper",
+     "variants": [
+      {"slug": "panel-tip-damper-semi-treyler", "model": "Paneeltype kipoplegger"}
+     ]
+    },
+    {
+     "slug": "yana-devirmeli-damper",
+     "name": "Zijkipper",
+     "variants": [
+      {"slug": "yana-devirmeli-damper", "model": "Zijkipper"}
+     ]
+    },
+    {
+     "slug": "yarim-boru-damper",
+     "name": "Halfpipe-kipper",
+     "variants": [
+      {"slug": "yarim-boru-damper-semi-treyler", "model": "Halfpipe-kipoplegger"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "curtain",
+   "name": "Schuifzeil- en huifopleggers",
+   "products": [
+    {
+     "slug": "multi-ride",
+     "name": "Multi Ride",
+     "variants": [
+      {"slug": "multi-ride-t-scs-ng-mr-90-12-27", "model": "Multi Ride (T.SCS NG MR / 90 - 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "perdeli-swap-body",
+     "name": "Schuifzeil-wissellaadbak",
+     "variants": [
+      {"slug": "perdeli-swap-body", "model": "Schuifzeil-wissellaadbak"}
+     ]
+    },
+    {
+     "slug": "perdeli-ve-tenteli",
+     "name": "Schuifzeil en huif",
+     "variants": [
+      {"slug": "t-scl-x-150-12-27", "model": "T.SCL X+ / 150 - 12 / 27"},
+      {"slug": "t-scl-m-150-12-27", "model": "T.SCL M / 150 - 12 / 27"},
+      {"slug": "t-scs-ng-m-90-12-27", "model": "T.SCS NG M / 90 - 12 / 27"},
+      {"slug": "t-scs-ng-x-90-12-27", "model": "T.SCS NG X+ / 90 - 12 / 27"},
+      {"slug": "t-scd-m-90-12-27", "model": "T.SCD M / 90 - 12 / 27"},
+      {"slug": "t-scd-x-90-12-27", "model": "T.SCD X+ / 90 - 12 / 27"},
+      {"slug": "t-scc-m-125-12-27", "model": "T.SCC M / 125 - 12 / 27"},
+      {"slug": "t-scc-x-125-12-27", "model": "T.SCC X+ / 125 - 12 / 27"}
+     ]
+    },
+    {
+     "slug": "tenteli-hafif",
+     "name": "Lichte huifoplegger",
+     "variants": [
+      {"slug": "tenteli-hafif", "model": "Lichte huifoplegger"}
+     ]
+    },
+    {
+     "slug": "tenteli-standart",
+     "name": "Standaard huifoplegger",
+     "variants": [
+      {"slug": "tenteli-standart", "model": "Standaard huifoplegger"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "reefer",
+   "name": "Koelopleggers",
+   "products": [
+    {
+     "slug": "frigorifik",
+     "name": "Koeloplegger",
+     "variants": [
+      {"slug": "t-sri-c-10-12-27", "model": "T.SRI C / 10 - 12 / 27"},
+      {"slug": "t-sri-f-10-12-27", "model": "T.SRI F / 10 - 12 / 27"},
+      {"slug": "t-sri-p-10-12-27", "model": "T.SRI P / 10 - 12 / 27"},
+      {"slug": "t-sri-fp-10-12-27", "model": "T.SRI FP / 10 - 12 / 27"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "dry-cargo",
+   "name": "Droge lading en laadbakken",
+   "products": [
+    {
+     "slug": "kapali-kasa-celik-kargo-tasiyici",
+     "name": "Gesloten stalen laadbak",
+     "variants": [
+      {"slug": "kapali-kasa-celik-kargo-tasiyici", "model": "Gesloten stalen laadbak"}
+     ]
+    },
+    {
+     "slug": "kuru-yuk-sac-kasa",
+     "name": "Droge lading - stalen laadbak",
+     "variants": [
+      {"slug": "kuru-yuk-sac-kasa", "model": "Droge lading - stalen laadbak"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-aluminyum-kapak",
+     "name": "Droge lading - aluminium borden",
+     "variants": [
+      {"slug": "kuruyuk-aluminyum-kapak", "model": "Droge lading - aluminium borden"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-light-kapak",
+     "name": "Droge lading - lichte borden",
+     "variants": [
+      {"slug": "kuruyuk-light-kapak", "model": "Droge lading - lichte borden"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-rulo-tasiyici",
+     "name": "Droge lading - coildrager",
+     "variants": [
+      {"slug": "kuruyuk-rulo-tasiyici", "model": "Droge lading - coildrager"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "containers",
+   "name": "Containerchassis",
+   "products": [
+    {
+     "slug": "damperli-konteyner-tasiyici",
+     "name": "Kippend containerchassis",
+     "variants": [
+      {"slug": "damperli-konteyner-tasiyici", "model": "Kippend containerchassis"}
+     ]
+    },
+    {
+     "slug": "high-cube-konteyner-tasiyici",
+     "name": "High Cube containerchassis",
+     "variants": [
+      {"slug": "high-cube-konteyner-tasiyici", "model": "High Cube containerchassis"}
+     ]
+    },
+    {
+     "slug": "konteyner-tasiyici",
+     "name": "Containerchassis",
+     "variants": [
+      {"slug": "konteyner-tasiyici", "model": "Containerchassis"}
+     ]
+    },
+    {
+     "slug": "liman-ici-konteyner-tasiyici",
+     "name": "Containerchassis voor terminalgebruik",
+     "variants": [
+      {"slug": "liman-ici-konteyner-tasiyici", "model": "Containerchassis voor terminalgebruik"}
+     ]
+    },
+    {
+     "slug": "sabit-konteyner-tasiyici",
+     "name": "Vast containerchassis",
+     "variants": [
+      {"slug": "sabit-konteyner-tasiyici-t-shg-s-40-12-27", "model": "Vast containerchassis (T.SHG S / 40 - 12 / 27)"},
+      {"slug": "sabit-konteyner-tasiyici", "model": "Vast containerchassis"},
+      {"slug": "sabit-konteyner-tasiyici-t-shf-t-20-12-27", "model": "Vast containerchassis (T.SHF T / 20 - 12 / 27)"},
+      {"slug": "sabit-konteyner-tasiyici-t-shg-l-45-15-27", "model": "Vast containerchassis (T.SHG L / 45 - 15 / 27)"}
+     ]
+    },
+    {
+     "slug": "standart-konteyner-tasiyici",
+     "name": "Standaard containerchassis",
+     "variants": [
+      {"slug": "standart-konteyner-tasiyici", "model": "Standaard containerchassis"}
+     ]
+    },
+    {
+     "slug": "teleskopik-konteyner-tasiyici",
+     "name": "Telescopisch containerchassis",
+     "variants": [
+      {"slug": "teleskopik-konteyner-tasiyici", "model": "Telescopisch containerchassis"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-avh-45-12-27", "model": "Telescopisch containerchassis (T.SHG AVH / 45 - 12 / 27)"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-ah-45-12-27", "model": "Telescopisch containerchassis (T.SHG AH / 45 - 12 / 27)"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-amh-40-12-27", "model": "Telescopisch containerchassis (T.SHG AMH / 40 - 12 / 27)"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lowbed",
+   "name": "Diepladers en zwaar transport",
+   "products": [
+    {
+     "slug": "havuz-tip-lowbed",
+     "name": "Dieplader met verdiept bed",
+     "variants": [
+      {"slug": "havuz-tip-lowbed", "model": "Dieplader met verdiept bed"}
+     ]
+    },
+    {
+     "slug": "hidrolik-dumenlenir-low-bed",
+     "name": "Hydraulisch gestuurde dieplader",
+     "variants": [
+      {"slug": "hidrolik-dumenlenir-low-bed", "model": "Hydraulisch gestuurde dieplader"}
+     ]
+    },
+    {
+     "slug": "onden-yuklemeli-lowbed",
+     "name": "Dieplader met laden aan de voorzijde",
+     "variants": [
+      {"slug": "onden-yuklemeli-lowbed", "model": "Dieplader met laden aan de voorzijde"}
+     ]
+    },
+    {
+     "slug": "sabit-low-bed",
+     "name": "Vaste dieplader",
+     "variants": [
+      {"slug": "sabit-low-bed", "model": "Vaste dieplader"}
+     ]
+    },
+    {
+     "slug": "standart-dingilli-lowbed",
+     "name": "Dieplader met standaardassen",
+     "variants": [
+      {"slug": "3-dingilli-lowbed", "model": "3-assige dieplader"},
+      {"slug": "4-dingilli-lowbed", "model": "4-assige dieplader"},
+      {"slug": "5-dingilli-lowbed", "model": "5-assige dieplader"},
+      {"slug": "6-dingilli-lowbed", "model": "6-assige dieplader"}
+     ]
+    },
+    {
+     "slug": "uzar-low-bed",
+     "name": "Uitschuifbare dieplader",
+     "variants": [
+      {"slug": "uzar-low-bed", "model": "Uitschuifbare dieplader"}
+     ]
+    },
+    {
+     "slug": "yana-genisletilebilir-uzamali-lowbed",
+     "name": "Uitschuifbare dieplader met zijdelingse verbreding",
+     "variants": [
+      {"slug": "yana-genisletilebilir-uzamali-lowbed", "model": "Uitschuifbare dieplader met zijdelingse verbreding"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "platform",
+   "name": "Plateauopleggers",
+   "products": [
+    {
+     "slug": "rulo-tasiyici-flatbed",
+     "name": "Coil-plateauoplegger",
+     "variants": [
+      {"slug": "rulo-tasiyici-flatbed", "model": "Coil-plateauoplegger"}
+     ]
+    },
+    {
+     "slug": "standart-flatbed",
+     "name": "Standaard plateauoplegger",
+     "variants": [
+      {"slug": "standart-flatbed", "model": "Standaard plateauoplegger"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "trailers",
+   "name": "Aanhangwagens",
+   "products": [
+    {
+     "slug": "aksli-romork",
+     "name": "Meerassige aanhangwagen",
+     "variants": [
+      {"slug": "2-aksli-romork", "model": "2-assige aanhangwagen"},
+      {"slug": "3-aksli-romork", "model": "3-assige aanhangwagen"},
+      {"slug": "4-aksli-romork", "model": "4-assige aanhangwagen"}
+     ]
+    },
+    {
+     "slug": "dingilli-kamyon-tasiyici",
+     "name": "Meerassige vrachtwagentransporter",
+     "variants": [
+      {"slug": "2-dingilli-kamyon-tasiyici", "model": "2-assige vrachtwagentransporter"},
+      {"slug": "3-dingilli-kamyon-tasiyici", "model": "3-assige vrachtwagentransporter"}
+     ]
+    },
+    {
+     "slug": "tarim-romork-dorse-treyler",
+     "name": "Landbouwaanhangwagen / oplegger",
+     "variants": [
+      {"slug": "tarim-romork-dorse-treyler", "model": "Landbouwaanhangwagen / oplegger"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "special",
+   "name": "Overige speciale producten",
+   "products": [
+    {
+     "slug": "oto-tasiyici-dorse",
+     "name": "Autotransportoplegger",
+     "variants": [
+      {"slug": "oto-tasiyici-dorse", "model": "Autotransportoplegger"}
+     ]
+    },
+    {
+     "slug": "arazoz",
+     "name": "Sproei- en bluswagen",
+     "variants": [
+      {"slug": "arazoz", "model": "Sproei- en bluswagen"}
+     ]
+    },
+    {
+     "slug": "canli-hayvan-tasiyici",
+     "name": "Veetransporter",
+     "variants": [
+      {"slug": "canli-hayvan-tasiyici", "model": "Veetransporter"}
+     ]
+    },
+    {
+     "slug": "cop-toplama",
+     "name": "Afvalinzameling",
+     "variants": [
+      {"slug": "cop-toplama", "model": "Afvalinzameling"}
+     ]
+    },
+    {
+     "slug": "dokme-yem-tasiyici",
+     "name": "Bulkveevoedertransporter",
+     "variants": [
+      {"slug": "dokme-yem-tasiyici-semi-treyler", "model": "Bulkveevoederoplegger"}
+     ]
+    },
+    {
+     "slug": "ikiz-kat-standart",
+     "name": "Dubbeldeks standaard",
+     "variants": [
+      {"slug": "ikiz-kat-standart-vetd-ply-td-15-18", "model": "Dubbeldeks standaard (VETD PLY TD 15 / 18)"},
+      {"slug": "ikiz-kat-standart-vetd-ply-12-27", "model": "Dubbeldeks standaard (VETD PLY 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "intermodal-kutu",
+     "name": "Intermodale laadbak",
+     "variants": [
+      {"slug": "intermodal-kutu-ttg-tal-12-27", "model": "Intermodale laadbak (TTG TAL 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "kutuk-tomruk-tasimaciligi",
+     "name": "Hout- en boomstamtransport",
+     "variants": [
+      {"slug": "kutuk-tomruk-tasimaciligi", "model": "Hout- en boomstamtransport"}
+     ]
+    },
+    {
+     "slug": "mikser",
+     "name": "Betonmixer",
+     "variants": [
+      {"slug": "mikser-semi-treyler", "model": "Betonmixeroplegger"}
+     ]
+    },
+    {
+     "slug": "tekstil-kutu",
+     "name": "Textielbox",
+     "variants": [
+      {"slug": "tekstil-kutu-tgg-tal-12-27", "model": "Textielbox (TGG TAL 12 / 27)"},
+      {"slug": "tekstil-kutu-tgm-tal-12-27", "model": "Textielbox (TGM TAL 12 / 27)"}
+     ]
+    }
+   ]
+  }
+ ]
+}

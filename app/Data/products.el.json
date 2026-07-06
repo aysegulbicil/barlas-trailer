@@ -1,0 +1,315 @@
+{
+ "generated_from": "products.json (Claude el name-layer translation, names only)",
+ "categories": [
+  {"slug": "tankers", "name": "Βυτιοφόρα", "products": [
+   {"slug": "akaryakit-yakit-tankeri", "name": "Βυτιοφόρο πετρελαιοειδών / καυσίμων", "variants": [
+    {"slug": "adr-aluminyum-yakit-tankeri", "model": "Βυτιοφόρο καυσίμων αλουμινίου ADR"},
+    {"slug": "yakit-tankeri", "model": "Βυτιοφόρο καυσίμων"},
+    {"slug": "adr-li-aluminyum-akaryakit-tankeri", "model": "Βυτιοφόρο πετρελαιοειδών αλουμινίου ADR"},
+    {"slug": "celik-akaryakit-tankeri", "model": "Χαλύβδινο βυτιοφόρο πετρελαιοειδών"},
+    {"slug": "akaryakit-tankeri", "model": "Βυτιοφόρο πετρελαιοειδών"}
+   ]},
+   {"slug": "asfalt-bitum-tankeri", "name": "Βυτιοφόρο ασφάλτου / βίτουμεν", "variants": [
+    {"slug": "izoleli-asfalt-bitum-tankeri", "model": "Μονωμένο βυτιοφόρο ασφάλτου-βίτουμεν"},
+    {"slug": "bitum-tanker-semi-treyler", "model": "Βυτιοφόρο ημιρυμουλκούμενο βίτουμεν"},
+    {"slug": "bitum-tankeri", "model": "Βυτιοφόρο βίτουμεν"}
+   ]},
+   {"slug": "celik-tanker", "name": "Χαλύβδινο βυτιοφόρο", "variants": [
+    {"slug": "adr-celik-tanker", "model": "Χαλύβδινο βυτιοφόρο ADR"},
+    {"slug": "celik-tanker", "model": "Χαλύβδινο βυτιοφόρο"}
+   ]},
+   {"slug": "deveboynu-tanker", "name": "Βυτιοφόρο τύπου λαιμού κύκνου", "variants": [
+    {"slug": "deveboynu-tanker-semi-treyler", "model": "Βυτιοφόρο ημιρυμουλκούμενο τύπου λαιμού κύκνου"}
+   ]},
+   {"slug": "eliptik-tanker", "name": "Ελλειπτικό βυτιοφόρο", "variants": [
+    {"slug": "eliptik-tanker-kamyon-ustu", "model": "Ελλειπτικό βυτίο επί φορτηγού"},
+    {"slug": "eliptik-tanker-semi-treyler", "model": "Ελλειπτικό βυτιοφόρο ημιρυμουλκούμενο"}
+   ]},
+   {"slug": "gida-tankeri", "name": "Βυτιοφόρο τροφίμων", "variants": [
+    {"slug": "gida-tankeri-kamyon-ustu", "model": "Βυτίο τροφίμων επί φορτηγού"},
+    {"slug": "gida-tankeri-semi-treyler", "model": "Βυτιοφόρο ημιρυμουλκούμενο τροφίμων"},
+    {"slug": "krom-gida-tankeri", "model": "Βυτιοφόρο τροφίμων inox"},
+    {"slug": "paslanmaz-tanker-gida", "model": "Ανοξείδωτο βυτιοφόρο – τρόφιμα"}
+   ]},
+   {"slug": "izolasyonlu-tanker", "name": "Μονωμένο βυτιοφόρο", "variants": [
+    {"slug": "izolasyonlu-tanker-semi-treyler", "model": "Μονωμένο βυτιοφόρο ημιρυμουλκούμενο"}
+   ]},
+   {"slug": "kimyasal-tanker", "name": "Βυτιοφόρο χημικών", "variants": [
+    {"slug": "kimyasal-tanker-kamyon-ustu", "model": "Βυτίο χημικών επί φορτηγού"},
+    {"slug": "kimyasal-tanker-semi-treyler", "model": "Βυτιοφόρο ημιρυμουλκούμενο χημικών"},
+    {"slug": "kimyasal-tankeri", "model": "Βυτιοφόρο χημικών"}
+   ]},
+   {"slug": "konik-tanker", "name": "Κωνικό βυτιοφόρο", "variants": [
+    {"slug": "konik-tanker-semi-treyler", "model": "Κωνικό βυτιοφόρο ημιρυμουλκούμενο"}
+   ]},
+   {"slug": "krom-asit-tankeri", "name": "Ανοξείδωτο βυτιοφόρο οξέων", "variants": [
+    {"slug": "krom-asit-tankeri", "model": "Ανοξείδωτο βυτιοφόρο οξέων"}
+   ]},
+   {"slug": "krom-izoleli-tanker", "name": "Ανοξείδωτο μονωμένο βυτιοφόρο", "variants": [
+    {"slug": "krom-izoleli-tanker", "model": "Ανοξείδωτο μονωμένο βυτιοφόρο"}
+   ]},
+   {"slug": "lpg-tankeri", "name": "Βυτιοφόρο LPG", "variants": [
+    {"slug": "lpg-tanker", "model": "Βυτιοφόρο LPG"},
+    {"slug": "lpg-tankeri-kamyon-ustu", "model": "Βυτίο LPG επί φορτηγού"},
+    {"slug": "lpg-tankeri-semi-treyler", "model": "Βυτιοφόρο ημιρυμουλκούμενο LPG"}
+   ]},
+   {"slug": "paslanmaz-celik-tanker-tehlikeli-madde", "name": "Ανοξείδωτο βυτιοφόρο – επικίνδυνα φορτία", "variants": [
+    {"slug": "paslanmaz-tanker-tehlikeli-madde", "model": "Ανοξείδωτο βυτιοφόρο – επικίνδυνα φορτία"}
+   ]},
+   {"slug": "paslanmaz-celik-tanker-tehlikesiz-madde", "name": "Ανοξείδωτο βυτιοφόρο – μη επικίνδυνα φορτία", "variants": [
+    {"slug": "paslanmaz-tanker-tehlikesiz-madde", "model": "Ανοξείδωτο βυτιοφόρο – μη επικίνδυνα φορτία"}
+   ]},
+   {"slug": "silindirik-tanker", "name": "Κυλινδρικό βυτιοφόρο", "variants": [
+    {"slug": "silindirik-tanker-kamyon-ustu", "model": "Κυλινδρικό βυτίο επί φορτηγού"},
+    {"slug": "silindirik-tanker-semi-treyler", "model": "Κυλινδρικό βυτιοφόρο ημιρυμουλκούμενο"}
+   ]},
+   {"slug": "su-tankeri", "name": "Βυτιοφόρο νερού", "variants": [
+    {"slug": "su-tankeri-semi-treyler", "model": "Βυτιοφόρο ημιρυμουλκούμενο νερού"}
+   ]},
+   {"slug": "sut-tankeri-sasisi", "name": "Σασί βυτιοφόρου γάλακτος", "variants": [
+    {"slug": "sut-tankeri-sasesi", "model": "Σασί βυτιοφόρου γάλακτος"}
+   ]},
+   {"slug": "vakum-tanker", "name": "Βυτιοφόρο κενού", "variants": [
+    {"slug": "vakum-tanker-semi-treyler", "model": "Βυτιοφόρο ημιρυμουλκούμενο κενού"}
+   ]}
+  ]},
+  {"slug": "silos", "name": "Σιλοφόρα", "products": [
+   {"slug": "damperli-silobas", "name": "Ανατρεπόμενο σιλοφόρο", "variants": [
+    {"slug": "damperli-silobas-tanker", "model": "Ανατρεπόμενο σιλοφόρο βυτίο"},
+    {"slug": "damper-tipi-silobas", "model": "Σιλοφόρο ανατρεπόμενου τύπου"},
+    {"slug": "damperli-silobas-semi-treyler", "model": "Ανατρεπόμενο σιλοφόρο ημιρυμουλκούμενο"},
+    {"slug": "damperli-silo", "model": "Ανατρεπόμενο σιλό"}
+   ]},
+   {"slug": "sivi-gubre-silobasi", "name": "Σιλοφόρο υγρών λιπασμάτων", "variants": [
+    {"slug": "sivi-gubre-silobas", "model": "Σιλοφόρο υγρών λιπασμάτων"}
+   ]},
+   {"slug": "un-ve-gida-silobasi", "name": "Σιλοφόρο αλεύρου και τροφίμων", "variants": [
+    {"slug": "un-silobasi", "model": "Σιλοφόρο αλεύρου"}
+   ]},
+   {"slug": "v-tipi-bugday-silobasi", "name": "Σιλοφόρο τύπου V για σιτάρι", "variants": [
+    {"slug": "v-tipi-bugday-silobasi", "model": "Σιλοφόρο τύπου V για σιτάρι"}
+   ]},
+   {"slug": "v-tipi-silobas", "name": "Σιλοφόρο τύπου V", "variants": [
+    {"slug": "v-tipi-silobas", "model": "Σιλοφόρο τύπου V"},
+    {"slug": "v-tipi-celik-cimento-silobasi", "model": "Χαλύβδινο σιλοφόρο τσιμέντου τύπου V"},
+    {"slug": "v-tipi-yatay-silobas-semi-treyler", "model": "Οριζόντιο σιλοφόρο ημιρυμουλκούμενο τύπου V"}
+   ]},
+   {"slug": "v-tipi-un-ve-gida-silobasi", "name": "Σιλοφόρο τύπου V για αλεύρι και τρόφιμα", "variants": [
+    {"slug": "v-tipi-silobas-tanker", "model": "Σιλοφόρο βυτίο τύπου V"},
+    {"slug": "v-tipi-un-ve-gida-silobasi", "model": "Σιλοφόρο τύπου V για αλεύρι και τρόφιμα"}
+   ]},
+   {"slug": "vakumlu-silobas", "name": "Σιλοφόρο κενού", "variants": [
+    {"slug": "vakum-silobas", "model": "Σιλοφόρο κενού"}
+   ]},
+   {"slug": "w-tipi-milenyum-silobas", "name": "Σιλοφόρο τύπου W (Millennium)", "variants": [
+    {"slug": "w-tipi-silobas-dorse", "model": "Σιλοφόρο ημιρυμουλκούμενο τύπου W"},
+    {"slug": "w-tipi-milenyum-silobas", "model": "Σιλοφόρο τύπου W (Millennium)"},
+    {"slug": "w-tipi-aluminyum-silobas", "model": "Αλουμινένιο σιλοφόρο τύπου W"},
+    {"slug": "w-tipi-celik-silobas", "model": "Χαλύβδινο σιλοφόρο τύπου W"},
+    {"slug": "w-tipi-yatay-silobas-semi-treyler", "model": "Οριζόντιο σιλοφόρο ημιρυμουλκούμενο τύπου W"},
+    {"slug": "milenyum-silobas", "model": "Σιλοφόρο Millennium"}
+   ]},
+   {"slug": "yem-silobasi", "name": "Σιλοφόρο ζωοτροφών", "variants": [
+    {"slug": "dorse-uzeri-yem-silobasi", "model": "Σιλό ζωοτροφών επί ημιρυμουλκούμενου"},
+    {"slug": "kamyon-uzeri-yem-silobasi", "model": "Σιλό ζωοτροφών επί φορτηγού"},
+    {"slug": "romork-uzeri-yem-silobasi", "model": "Σιλό ζωοτροφών επί ρυμουλκούμενου"}
+   ]}
+  ]},
+  {"slug": "tippers", "name": "Ανατρεπόμενα", "products": [
+   {"slug": "akordiyon-hububat-tipi-damper", "name": "Ανατρεπόμενο τύπου ακορντεόν για σιτηρά", "variants": [
+    {"slug": "akordiyon-hububat-tipi-damper", "model": "Ανατρεπόμενο τύπου ακορντεόν για σιτηρά"}
+   ]},
+   {"slug": "havuz-kuvet-damper", "name": "Ανατρεπόμενο τύπου σκάφης / μπανιέρας", "variants": [
+    {"slug": "havuz-damper", "model": "Ανατρεπόμενο τύπου σκάφης"},
+    {"slug": "18m3-havuz-damper", "model": "Ανατρεπόμενο τύπου σκάφης 18 m³"},
+    {"slug": "30m3-havuz-damper", "model": "Ανατρεπόμενο τύπου σκάφης 30 m³"},
+    {"slug": "kuvet-havuz-damper", "model": "Ανατρεπόμενο τύπου μπανιέρας (σκάφης)"}
+   ]},
+   {"slug": "kamyon-ustu-damper", "name": "Ανατρεπόμενο επί φορτηγού", "variants": [
+    {"slug": "kamyon-ustu-damper", "model": "Ανατρεπόμενο επί φορτηγού"}
+   ]},
+   {"slug": "kapakli-damper", "name": "Ανατρεπόμενο με παραπέτα", "variants": [
+    {"slug": "8-30-kapakli-damper", "model": "Ανατρεπόμενο με παραπέτα 8.30"},
+    {"slug": "yana-acilir-kapakli-damper", "model": "Ανατρεπόμενο με πλαϊνά ανοιγόμενα παραπέτα"},
+    {"slug": "8-60-kapakli-damper", "model": "Ανατρεπόμενο με παραπέτα 8.60"},
+    {"slug": "kapakli-damper", "model": "Ανατρεπόμενο με παραπέτα"}
+   ]},
+   {"slug": "kaya-tipi-damper", "name": "Ανατρεπόμενο τύπου λατομείου", "variants": [
+    {"slug": "kaya-damper", "model": "Ανατρεπόμενο λατομείου"},
+    {"slug": "kaya-tipi-damper", "model": "Ανατρεπόμενο τύπου λατομείου"}
+   ]},
+   {"slug": "multi-sistem-damper", "name": "Ανατρεπόμενο πολλαπλών συστημάτων", "variants": [
+    {"slug": "multi-sistem-damper-semi-treyler", "model": "Ανατρεπόμενο ημιρυμουλκούμενο πολλαπλών συστημάτων"}
+   ]},
+   {"slug": "panel-tip-damper", "name": "Ανατρεπόμενο τύπου πάνελ", "variants": [
+    {"slug": "panel-tip-damper-semi-treyler", "model": "Ανατρεπόμενο ημιρυμουλκούμενο τύπου πάνελ"}
+   ]},
+   {"slug": "yana-devirmeli-damper", "name": "Ανατρεπόμενο πλευρικής ανατροπής", "variants": [
+    {"slug": "yana-devirmeli-damper", "model": "Ανατρεπόμενο πλευρικής ανατροπής"}
+   ]},
+   {"slug": "yarim-boru-damper", "name": "Ανατρεπόμενο τύπου half-pipe", "variants": [
+    {"slug": "yarim-boru-damper-semi-treyler", "model": "Ανατρεπόμενο ημιρυμουλκούμενο τύπου half-pipe"}
+   ]}
+  ]},
+  {"slug": "curtain", "name": "Με κουρτίνα και μουσαμά", "products": [
+   {"slug": "multi-ride", "name": "Multi Ride", "variants": [
+    {"slug": "multi-ride-t-scs-ng-mr-90-12-27", "model": "Multi Ride (T.SCS NG MR / 90 - 12 / 27)"}
+   ]},
+   {"slug": "perdeli-swap-body", "name": "Swap Body με κουρτίνα", "variants": [
+    {"slug": "perdeli-swap-body", "model": "Swap Body με κουρτίνα"}
+   ]},
+   {"slug": "perdeli-ve-tenteli", "name": "Με κουρτίνα και μουσαμά", "variants": [
+    {"slug": "t-scl-x-150-12-27", "model": "T.SCL X+ / 150 - 12 / 27"},
+    {"slug": "t-scl-m-150-12-27", "model": "T.SCL M / 150 - 12 / 27"},
+    {"slug": "t-scs-ng-m-90-12-27", "model": "T.SCS NG M / 90 - 12 / 27"},
+    {"slug": "t-scs-ng-x-90-12-27", "model": "T.SCS NG X+ / 90 - 12 / 27"},
+    {"slug": "t-scd-m-90-12-27", "model": "T.SCD M / 90 - 12 / 27"},
+    {"slug": "t-scd-x-90-12-27", "model": "T.SCD X+ / 90 - 12 / 27"},
+    {"slug": "t-scc-m-125-12-27", "model": "T.SCC M / 125 - 12 / 27"},
+    {"slug": "t-scc-x-125-12-27", "model": "T.SCC X+ / 125 - 12 / 27"}
+   ]},
+   {"slug": "tenteli-hafif", "name": "Ελαφρύ με μουσαμά", "variants": [
+    {"slug": "tenteli-hafif", "model": "Ελαφρύ με μουσαμά"}
+   ]},
+   {"slug": "tenteli-standart", "name": "Στάνταρ με μουσαμά", "variants": [
+    {"slug": "tenteli-standart", "model": "Στάνταρ με μουσαμά"}
+   ]}
+  ]},
+  {"slug": "reefer", "name": "Ψυγεία", "products": [
+   {"slug": "frigorifik", "name": "Ψυγείο ημιρυμουλκούμενο", "variants": [
+    {"slug": "t-sri-c-10-12-27", "model": "T.SRI C / 10 - 12 / 27"},
+    {"slug": "t-sri-f-10-12-27", "model": "T.SRI F / 10 - 12 / 27"},
+    {"slug": "t-sri-p-10-12-27", "model": "T.SRI P / 10 - 12 / 27"},
+    {"slug": "t-sri-fp-10-12-27", "model": "T.SRI FP / 10 - 12 / 27"}
+   ]}
+  ]},
+  {"slug": "dry-cargo", "name": "Ξηρού φορτίου και κιβωτάμαξες", "products": [
+   {"slug": "kapali-kasa-celik-kargo-tasiyici", "name": "Κλειστή χαλύβδινη κιβωτάμαξα μεταφοράς φορτίων", "variants": [
+    {"slug": "kapali-kasa-celik-kargo-tasiyici", "model": "Κλειστή χαλύβδινη κιβωτάμαξα μεταφοράς φορτίων"}
+   ]},
+   {"slug": "kuru-yuk-sac-kasa", "name": "Ξηρού φορτίου – χαλύβδινη καρότσα", "variants": [
+    {"slug": "kuru-yuk-sac-kasa", "model": "Ξηρού φορτίου – χαλύβδινη καρότσα"}
+   ]},
+   {"slug": "kuruyuk-aluminyum-kapak", "name": "Ξηρού φορτίου με παραπέτα αλουμινίου", "variants": [
+    {"slug": "kuruyuk-aluminyum-kapak", "model": "Ξηρού φορτίου με παραπέτα αλουμινίου"}
+   ]},
+   {"slug": "kuruyuk-light-kapak", "name": "Ξηρού φορτίου με παραπέτα light", "variants": [
+    {"slug": "kuruyuk-light-kapak", "model": "Ξηρού φορτίου με παραπέτα light"}
+   ]},
+   {"slug": "kuruyuk-rulo-tasiyici", "name": "Ξηρού φορτίου για μεταφορά ρολών", "variants": [
+    {"slug": "kuruyuk-rulo-tasiyici", "model": "Ξηρού φορτίου για μεταφορά ρολών"}
+   ]}
+  ]},
+  {"slug": "containers", "name": "Μεταφορείς εμπορευματοκιβωτίων", "products": [
+   {"slug": "damperli-konteyner-tasiyici", "name": "Ανατρεπόμενος μεταφορέας εμπορευματοκιβωτίων", "variants": [
+    {"slug": "damperli-konteyner-tasiyici", "model": "Ανατρεπόμενος μεταφορέας εμπορευματοκιβωτίων"}
+   ]},
+   {"slug": "high-cube-konteyner-tasiyici", "name": "Μεταφορέας εμπορευματοκιβωτίων High Cube", "variants": [
+    {"slug": "high-cube-konteyner-tasiyici", "model": "Μεταφορέας εμπορευματοκιβωτίων High Cube"}
+   ]},
+   {"slug": "konteyner-tasiyici", "name": "Μεταφορέας εμπορευματοκιβωτίων", "variants": [
+    {"slug": "konteyner-tasiyici", "model": "Μεταφορέας εμπορευματοκιβωτίων"}
+   ]},
+   {"slug": "liman-ici-konteyner-tasiyici", "name": "Λιμενικός (τερματικός) μεταφορέας εμπορευματοκιβωτίων", "variants": [
+    {"slug": "liman-ici-konteyner-tasiyici", "model": "Λιμενικός (τερματικός) μεταφορέας εμπορευματοκιβωτίων"}
+   ]},
+   {"slug": "sabit-konteyner-tasiyici", "name": "Σταθερός μεταφορέας εμπορευματοκιβωτίων", "variants": [
+    {"slug": "sabit-konteyner-tasiyici-t-shg-s-40-12-27", "model": "Σταθερός μεταφορέας εμπορευματοκιβωτίων (T.SHG S / 40 - 12 / 27)"},
+    {"slug": "sabit-konteyner-tasiyici", "model": "Σταθερός μεταφορέας εμπορευματοκιβωτίων"},
+    {"slug": "sabit-konteyner-tasiyici-t-shf-t-20-12-27", "model": "Σταθερός μεταφορέας εμπορευματοκιβωτίων (T.SHF T / 20 - 12 / 27)"},
+    {"slug": "sabit-konteyner-tasiyici-t-shg-l-45-15-27", "model": "Σταθερός μεταφορέας εμπορευματοκιβωτίων (T.SHG L / 45 - 15 / 27)"}
+   ]},
+   {"slug": "standart-konteyner-tasiyici", "name": "Στάνταρ μεταφορέας εμπορευματοκιβωτίων", "variants": [
+    {"slug": "standart-konteyner-tasiyici", "model": "Στάνταρ μεταφορέας εμπορευματοκιβωτίων"}
+   ]},
+   {"slug": "teleskopik-konteyner-tasiyici", "name": "Τηλεσκοπικός μεταφορέας εμπορευματοκιβωτίων", "variants": [
+    {"slug": "teleskopik-konteyner-tasiyici", "model": "Τηλεσκοπικός μεταφορέας εμπορευματοκιβωτίων"},
+    {"slug": "teleskopik-konteyner-tasiyici-t-shg-avh-45-12-27", "model": "Τηλεσκοπικός μεταφορέας εμπορευματοκιβωτίων (T.SHG AVH / 45 - 12 / 27)"},
+    {"slug": "teleskopik-konteyner-tasiyici-t-shg-ah-45-12-27", "model": "Τηλεσκοπικός μεταφορέας εμπορευματοκιβωτίων (T.SHG AH / 45 - 12 / 27)"},
+    {"slug": "teleskopik-konteyner-tasiyici-t-shg-amh-40-12-27", "model": "Τηλεσκοπικός μεταφορέας εμπορευματοκιβωτίων (T.SHG AMH / 40 - 12 / 27)"}
+   ]}
+  ]},
+  {"slug": "lowbed", "name": "Low-Bed και βαρέα φορτία", "products": [
+   {"slug": "havuz-tip-lowbed", "name": "Low-Bed τύπου σκάφης", "variants": [
+    {"slug": "havuz-tip-lowbed", "model": "Low-Bed τύπου σκάφης"}
+   ]},
+   {"slug": "hidrolik-dumenlenir-low-bed", "name": "Low-Bed με υδραυλική διεύθυνση", "variants": [
+    {"slug": "hidrolik-dumenlenir-low-bed", "model": "Low-Bed με υδραυλική διεύθυνση"}
+   ]},
+   {"slug": "onden-yuklemeli-lowbed", "name": "Low-Bed εμπρόσθιας φόρτωσης", "variants": [
+    {"slug": "onden-yuklemeli-lowbed", "model": "Low-Bed εμπρόσθιας φόρτωσης"}
+   ]},
+   {"slug": "sabit-low-bed", "name": "Σταθερό Low-Bed", "variants": [
+    {"slug": "sabit-low-bed", "model": "Σταθερό Low-Bed"}
+   ]},
+   {"slug": "standart-dingilli-lowbed", "name": "Low-Bed με στάνταρ άξονες", "variants": [
+    {"slug": "3-dingilli-lowbed", "model": "Low-Bed 3 αξόνων"},
+    {"slug": "4-dingilli-lowbed", "model": "Low-Bed 4 αξόνων"},
+    {"slug": "5-dingilli-lowbed", "model": "Low-Bed 5 αξόνων"},
+    {"slug": "6-dingilli-lowbed", "model": "Low-Bed 6 αξόνων"}
+   ]},
+   {"slug": "uzar-low-bed", "name": "Επεκτεινόμενο Low-Bed", "variants": [
+    {"slug": "uzar-low-bed", "model": "Επεκτεινόμενο Low-Bed"}
+   ]},
+   {"slug": "yana-genisletilebilir-uzamali-lowbed", "name": "Επεκτεινόμενο Low-Bed με πλευρική διαπλάτυνση", "variants": [
+    {"slug": "yana-genisletilebilir-uzamali-lowbed", "model": "Επεκτεινόμενο Low-Bed με πλευρική διαπλάτυνση"}
+   ]}
+  ]},
+  {"slug": "platform", "name": "Πλατφόρμες", "products": [
+   {"slug": "rulo-tasiyici-flatbed", "name": "Πλατφόρμα μεταφοράς ρολών", "variants": [
+    {"slug": "rulo-tasiyici-flatbed", "model": "Πλατφόρμα μεταφοράς ρολών"}
+   ]},
+   {"slug": "standart-flatbed", "name": "Στάνταρ πλατφόρμα", "variants": [
+    {"slug": "standart-flatbed", "model": "Στάνταρ πλατφόρμα"}
+   ]}
+  ]},
+  {"slug": "trailers", "name": "Ρυμουλκούμενα", "products": [
+   {"slug": "aksli-romork", "name": "Ρυμουλκούμενο με άξονες", "variants": [
+    {"slug": "2-aksli-romork", "model": "Ρυμουλκούμενο 2 αξόνων"},
+    {"slug": "3-aksli-romork", "model": "Ρυμουλκούμενο 3 αξόνων"},
+    {"slug": "4-aksli-romork", "model": "Ρυμουλκούμενο 4 αξόνων"}
+   ]},
+   {"slug": "dingilli-kamyon-tasiyici", "name": "Ρυμουλκούμενο μεταφοράς φορτηγών", "variants": [
+    {"slug": "2-dingilli-kamyon-tasiyici", "model": "Ρυμουλκούμενο μεταφοράς φορτηγών 2 αξόνων"},
+    {"slug": "3-dingilli-kamyon-tasiyici", "model": "Ρυμουλκούμενο μεταφοράς φορτηγών 3 αξόνων"}
+   ]},
+   {"slug": "tarim-romork-dorse-treyler", "name": "Αγροτικό ρυμουλκούμενο / ημιρυμουλκούμενο", "variants": [
+    {"slug": "tarim-romork-dorse-treyler", "model": "Αγροτικό ρυμουλκούμενο / ημιρυμουλκούμενο"}
+   ]}
+  ]},
+  {"slug": "special", "name": "Άλλα ειδικά προϊόντα", "products": [
+   {"slug": "oto-tasiyici-dorse", "name": "Ημιρυμουλκούμενο μεταφοράς αυτοκινήτων", "variants": [
+    {"slug": "oto-tasiyici-dorse", "model": "Ημιρυμουλκούμενο μεταφοράς αυτοκινήτων"}
+   ]},
+   {"slug": "arazoz", "name": "Υδροφόρα", "variants": [
+    {"slug": "arazoz", "model": "Υδροφόρα"}
+   ]},
+   {"slug": "canli-hayvan-tasiyici", "name": "Μεταφορέας ζώντων ζώων", "variants": [
+    {"slug": "canli-hayvan-tasiyici", "model": "Μεταφορέας ζώντων ζώων"}
+   ]},
+   {"slug": "cop-toplama", "name": "Αποκομιδή απορριμμάτων", "variants": [
+    {"slug": "cop-toplama", "model": "Αποκομιδή απορριμμάτων"}
+   ]},
+   {"slug": "dokme-yem-tasiyici", "name": "Μεταφορέας χύδην ζωοτροφών", "variants": [
+    {"slug": "dokme-yem-tasiyici-semi-treyler", "model": "Ημιρυμουλκούμενο μεταφοράς χύδην ζωοτροφών"}
+   ]},
+   {"slug": "ikiz-kat-standart", "name": "Διώροφο στάνταρ", "variants": [
+    {"slug": "ikiz-kat-standart-vetd-ply-td-15-18", "model": "Διώροφο στάνταρ (VETD PLY TD 15 / 18)"},
+    {"slug": "ikiz-kat-standart-vetd-ply-12-27", "model": "Διώροφο στάνταρ (VETD PLY 12 / 27)"}
+   ]},
+   {"slug": "intermodal-kutu", "name": "Κιβώτιο Intermodal", "variants": [
+    {"slug": "intermodal-kutu-ttg-tal-12-27", "model": "Κιβώτιο Intermodal (TTG TAL 12 / 27)"}
+   ]},
+   {"slug": "kutuk-tomruk-tasimaciligi", "name": "Μεταφορά κορμών ξυλείας", "variants": [
+    {"slug": "kutuk-tomruk-tasimaciligi", "model": "Μεταφορά κορμών ξυλείας"}
+   ]},
+   {"slug": "mikser", "name": "Μπετονιέρα", "variants": [
+    {"slug": "mikser-semi-treyler", "model": "Ημιρυμουλκούμενη μπετονιέρα"}
+   ]},
+   {"slug": "tekstil-kutu", "name": "Κιβώτιο υφασμάτων", "variants": [
+    {"slug": "tekstil-kutu-tgg-tal-12-27", "model": "Κιβώτιο υφασμάτων (TGG TAL 12 / 27)"},
+    {"slug": "tekstil-kutu-tgm-tal-12-27", "model": "Κιβώτιο υφασμάτων (TGM TAL 12 / 27)"}
+   ]}
+  ]}
+ ]
+}

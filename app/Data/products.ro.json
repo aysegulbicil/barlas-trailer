@@ -1,0 +1,663 @@
+{
+ "generated_from": "products.json (Claude ro name-layer translation, names only)",
+ "categories": [
+  {
+   "slug": "tankers",
+   "name": "Cisterne",
+   "products": [
+    {
+     "slug": "akaryakit-yakit-tankeri",
+     "name": "Cisternă pentru carburanți / combustibil",
+     "variants": [
+      {"slug": "adr-aluminyum-yakit-tankeri", "model": "Cisternă de combustibil din aluminiu ADR"},
+      {"slug": "yakit-tankeri", "model": "Cisternă de combustibil"},
+      {"slug": "adr-li-aluminyum-akaryakit-tankeri", "model": "Cisternă de carburanți din aluminiu ADR"},
+      {"slug": "celik-akaryakit-tankeri", "model": "Cisternă de carburanți din oțel"},
+      {"slug": "akaryakit-tankeri", "model": "Cisternă de carburanți"}
+     ]
+    },
+    {
+     "slug": "asfalt-bitum-tankeri",
+     "name": "Cisternă pentru asfalt / bitum",
+     "variants": [
+      {"slug": "izoleli-asfalt-bitum-tankeri", "model": "Cisternă izolată pentru asfalt și bitum"},
+      {"slug": "bitum-tanker-semi-treyler", "model": "Semiremorcă cisternă pentru bitum"},
+      {"slug": "bitum-tankeri", "model": "Cisternă pentru bitum"}
+     ]
+    },
+    {
+     "slug": "celik-tanker",
+     "name": "Cisternă din oțel",
+     "variants": [
+      {"slug": "adr-celik-tanker", "model": "Cisternă din oțel ADR"},
+      {"slug": "celik-tanker", "model": "Cisternă din oțel"}
+     ]
+    },
+    {
+     "slug": "deveboynu-tanker",
+     "name": "Cisternă cu gât de lebădă",
+     "variants": [
+      {"slug": "deveboynu-tanker-semi-treyler", "model": "Semiremorcă cisternă cu gât de lebădă"}
+     ]
+    },
+    {
+     "slug": "eliptik-tanker",
+     "name": "Cisternă eliptică",
+     "variants": [
+      {"slug": "eliptik-tanker-kamyon-ustu", "model": "Cisternă eliptică pe camion"},
+      {"slug": "eliptik-tanker-semi-treyler", "model": "Semiremorcă cisternă eliptică"}
+     ]
+    },
+    {
+     "slug": "gida-tankeri",
+     "name": "Cisternă alimentară",
+     "variants": [
+      {"slug": "gida-tankeri-kamyon-ustu", "model": "Cisternă alimentară pe camion"},
+      {"slug": "gida-tankeri-semi-treyler", "model": "Semiremorcă cisternă alimentară"},
+      {"slug": "krom-gida-tankeri", "model": "Cisternă alimentară cromată"},
+      {"slug": "paslanmaz-tanker-gida", "model": "Cisternă inox - alimentară"}
+     ]
+    },
+    {
+     "slug": "izolasyonlu-tanker",
+     "name": "Cisternă izolată",
+     "variants": [
+      {"slug": "izolasyonlu-tanker-semi-treyler", "model": "Semiremorcă cisternă izolată"}
+     ]
+    },
+    {
+     "slug": "kimyasal-tanker",
+     "name": "Cisternă chimică",
+     "variants": [
+      {"slug": "kimyasal-tanker-kamyon-ustu", "model": "Cisternă chimică pe camion"},
+      {"slug": "kimyasal-tanker-semi-treyler", "model": "Semiremorcă cisternă chimică"},
+      {"slug": "kimyasal-tankeri", "model": "Cisternă chimică"}
+     ]
+    },
+    {
+     "slug": "konik-tanker",
+     "name": "Cisternă conică",
+     "variants": [
+      {"slug": "konik-tanker-semi-treyler", "model": "Semiremorcă cisternă conică"}
+     ]
+    },
+    {
+     "slug": "krom-asit-tankeri",
+     "name": "Cisternă inox pentru acizi",
+     "variants": [
+      {"slug": "krom-asit-tankeri", "model": "Cisternă inox pentru acizi"}
+     ]
+    },
+    {
+     "slug": "krom-izoleli-tanker",
+     "name": "Cisternă inox izolată",
+     "variants": [
+      {"slug": "krom-izoleli-tanker", "model": "Cisternă inox izolată"}
+     ]
+    },
+    {
+     "slug": "lpg-tankeri",
+     "name": "Cisternă GPL",
+     "variants": [
+      {"slug": "lpg-tanker", "model": "Cisternă GPL"},
+      {"slug": "lpg-tankeri-kamyon-ustu", "model": "Cisternă GPL pe camion"},
+      {"slug": "lpg-tankeri-semi-treyler", "model": "Semiremorcă cisternă GPL"}
+     ]
+    },
+    {
+     "slug": "paslanmaz-celik-tanker-tehlikeli-madde",
+     "name": "Cisternă din inox - mărfuri periculoase",
+     "variants": [
+      {"slug": "paslanmaz-tanker-tehlikeli-madde", "model": "Cisternă inox - mărfuri periculoase"}
+     ]
+    },
+    {
+     "slug": "paslanmaz-celik-tanker-tehlikesiz-madde",
+     "name": "Cisternă din inox - mărfuri nepericuloase",
+     "variants": [
+      {"slug": "paslanmaz-tanker-tehlikesiz-madde", "model": "Cisternă inox - mărfuri nepericuloase"}
+     ]
+    },
+    {
+     "slug": "silindirik-tanker",
+     "name": "Cisternă cilindrică",
+     "variants": [
+      {"slug": "silindirik-tanker-kamyon-ustu", "model": "Cisternă cilindrică pe camion"},
+      {"slug": "silindirik-tanker-semi-treyler", "model": "Semiremorcă cisternă cilindrică"}
+     ]
+    },
+    {
+     "slug": "su-tankeri",
+     "name": "Cisternă de apă",
+     "variants": [
+      {"slug": "su-tankeri-semi-treyler", "model": "Semiremorcă cisternă de apă"}
+     ]
+    },
+    {
+     "slug": "sut-tankeri-sasisi",
+     "name": "Șasiu pentru cisternă de lapte",
+     "variants": [
+      {"slug": "sut-tankeri-sasesi", "model": "Șasiu pentru cisternă de lapte"}
+     ]
+    },
+    {
+     "slug": "vakum-tanker",
+     "name": "Cisternă vidanjă",
+     "variants": [
+      {"slug": "vakum-tanker-semi-treyler", "model": "Semiremorcă cisternă vidanjă"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "silos",
+   "name": "Semiremorci siloz",
+   "products": [
+    {
+     "slug": "damperli-silobas",
+     "name": "Siloz basculant",
+     "variants": [
+      {"slug": "damperli-silobas-tanker", "model": "Cisternă siloz basculantă"},
+      {"slug": "damper-tipi-silobas", "model": "Siloz tip basculant"},
+      {"slug": "damperli-silobas-semi-treyler", "model": "Semiremorcă siloz basculant"},
+      {"slug": "damperli-silo", "model": "Siloz basculant"}
+     ]
+    },
+    {
+     "slug": "sivi-gubre-silobasi",
+     "name": "Siloz pentru îngrășăminte lichide",
+     "variants": [
+      {"slug": "sivi-gubre-silobas", "model": "Siloz pentru îngrășăminte lichide"}
+     ]
+    },
+    {
+     "slug": "un-ve-gida-silobasi",
+     "name": "Siloz pentru făină și alimente",
+     "variants": [
+      {"slug": "un-silobasi", "model": "Siloz pentru făină"}
+     ]
+    },
+    {
+     "slug": "v-tipi-bugday-silobasi",
+     "name": "Siloz tip V pentru grâu",
+     "variants": [
+      {"slug": "v-tipi-bugday-silobasi", "model": "Siloz tip V pentru grâu"}
+     ]
+    },
+    {
+     "slug": "v-tipi-silobas",
+     "name": "Siloz tip V",
+     "variants": [
+      {"slug": "v-tipi-silobas", "model": "Siloz tip V"},
+      {"slug": "v-tipi-celik-cimento-silobasi", "model": "Siloz tip V din oțel pentru ciment"},
+      {"slug": "v-tipi-yatay-silobas-semi-treyler", "model": "Semiremorcă siloz orizontal tip V"}
+     ]
+    },
+    {
+     "slug": "v-tipi-un-ve-gida-silobasi",
+     "name": "Siloz tip V pentru făină și alimente",
+     "variants": [
+      {"slug": "v-tipi-silobas-tanker", "model": "Cisternă siloz tip V"},
+      {"slug": "v-tipi-un-ve-gida-silobasi", "model": "Siloz tip V pentru făină și alimente"}
+     ]
+    },
+    {
+     "slug": "vakumlu-silobas",
+     "name": "Siloz cu vacuum",
+     "variants": [
+      {"slug": "vakum-silobas", "model": "Siloz cu vacuum"}
+     ]
+    },
+    {
+     "slug": "w-tipi-milenyum-silobas",
+     "name": "Siloz tip W (Millennium)",
+     "variants": [
+      {"slug": "w-tipi-silobas-dorse", "model": "Semiremorcă siloz tip W"},
+      {"slug": "w-tipi-milenyum-silobas", "model": "Siloz tip W (Millennium)"},
+      {"slug": "w-tipi-aluminyum-silobas", "model": "Siloz tip W din aluminiu"},
+      {"slug": "w-tipi-celik-silobas", "model": "Siloz tip W din oțel"},
+      {"slug": "w-tipi-yatay-silobas-semi-treyler", "model": "Semiremorcă siloz orizontal tip W"},
+      {"slug": "milenyum-silobas", "model": "Siloz Millennium"}
+     ]
+    },
+    {
+     "slug": "yem-silobasi",
+     "name": "Siloz pentru furaje",
+     "variants": [
+      {"slug": "dorse-uzeri-yem-silobasi", "model": "Siloz de furaje pe semiremorcă"},
+      {"slug": "kamyon-uzeri-yem-silobasi", "model": "Siloz de furaje pe camion"},
+      {"slug": "romork-uzeri-yem-silobasi", "model": "Siloz de furaje pe remorcă"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "tippers",
+   "name": "Basculante",
+   "products": [
+    {
+     "slug": "akordiyon-hububat-tipi-damper",
+     "name": "Basculantă tip acordeon pentru cereale",
+     "variants": [
+      {"slug": "akordiyon-hububat-tipi-damper", "model": "Basculantă tip acordeon pentru cereale"}
+     ]
+    },
+    {
+     "slug": "havuz-kuvet-damper",
+     "name": "Basculantă half-pipe / cuvă",
+     "variants": [
+      {"slug": "havuz-damper", "model": "Basculantă half-pipe"},
+      {"slug": "18m3-havuz-damper", "model": "Basculantă half-pipe 18m³"},
+      {"slug": "30m3-havuz-damper", "model": "Basculantă half-pipe 30m³"},
+      {"slug": "kuvet-havuz-damper", "model": "Basculantă cuvă (half-pipe)"}
+     ]
+    },
+    {
+     "slug": "kamyon-ustu-damper",
+     "name": "Basculantă pe camion",
+     "variants": [
+      {"slug": "kamyon-ustu-damper", "model": "Basculantă pe camion"}
+     ]
+    },
+    {
+     "slug": "kapakli-damper",
+     "name": "Basculantă cu obloane",
+     "variants": [
+      {"slug": "8-30-kapakli-damper", "model": "Basculantă cu obloane 8.30"},
+      {"slug": "yana-acilir-kapakli-damper", "model": "Basculantă cu obloane cu deschidere laterală"},
+      {"slug": "8-60-kapakli-damper", "model": "Basculantă cu obloane 8.60"},
+      {"slug": "kapakli-damper", "model": "Basculantă cu obloane"}
+     ]
+    },
+    {
+     "slug": "kaya-tipi-damper",
+     "name": "Basculantă tip rocă",
+     "variants": [
+      {"slug": "kaya-damper", "model": "Basculantă de rocă"},
+      {"slug": "kaya-tipi-damper", "model": "Basculantă tip rocă"}
+     ]
+    },
+    {
+     "slug": "multi-sistem-damper",
+     "name": "Basculantă multisistem",
+     "variants": [
+      {"slug": "multi-sistem-damper-semi-treyler", "model": "Semiremorcă basculantă multisistem"}
+     ]
+    },
+    {
+     "slug": "panel-tip-damper",
+     "name": "Basculantă tip panou",
+     "variants": [
+      {"slug": "panel-tip-damper-semi-treyler", "model": "Semiremorcă basculantă tip panou"}
+     ]
+    },
+    {
+     "slug": "yana-devirmeli-damper",
+     "name": "Basculantă cu descărcare laterală",
+     "variants": [
+      {"slug": "yana-devirmeli-damper", "model": "Basculantă cu descărcare laterală"}
+     ]
+    },
+    {
+     "slug": "yarim-boru-damper",
+     "name": "Basculantă half-pipe",
+     "variants": [
+      {"slug": "yarim-boru-damper-semi-treyler", "model": "Semiremorcă basculantă half-pipe"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "curtain",
+   "name": "Semiremorci cu perdele și prelată",
+   "products": [
+    {
+     "slug": "multi-ride",
+     "name": "Multi Ride",
+     "variants": [
+      {"slug": "multi-ride-t-scs-ng-mr-90-12-27", "model": "Multi Ride (T.SCS NG MR / 90 - 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "perdeli-swap-body",
+     "name": "Cutie mobilă cu perdea",
+     "variants": [
+      {"slug": "perdeli-swap-body", "model": "Cutie mobilă cu perdea"}
+     ]
+    },
+    {
+     "slug": "perdeli-ve-tenteli",
+     "name": "Semiremorcă cu perdea și prelată",
+     "variants": [
+      {"slug": "t-scl-x-150-12-27", "model": "T.SCL X+ / 150 - 12 / 27"},
+      {"slug": "t-scl-m-150-12-27", "model": "T.SCL M / 150 - 12 / 27"},
+      {"slug": "t-scs-ng-m-90-12-27", "model": "T.SCS NG M / 90 - 12 / 27"},
+      {"slug": "t-scs-ng-x-90-12-27", "model": "T.SCS NG X+ / 90 - 12 / 27"},
+      {"slug": "t-scd-m-90-12-27", "model": "T.SCD M / 90 - 12 / 27"},
+      {"slug": "t-scd-x-90-12-27", "model": "T.SCD X+ / 90 - 12 / 27"},
+      {"slug": "t-scc-m-125-12-27", "model": "T.SCC M / 125 - 12 / 27"},
+      {"slug": "t-scc-x-125-12-27", "model": "T.SCC X+ / 125 - 12 / 27"}
+     ]
+    },
+    {
+     "slug": "tenteli-hafif",
+     "name": "Semiremorcă cu prelată ușoară",
+     "variants": [
+      {"slug": "tenteli-hafif", "model": "Semiremorcă cu prelată ușoară"}
+     ]
+    },
+    {
+     "slug": "tenteli-standart",
+     "name": "Semiremorcă cu prelată standard",
+     "variants": [
+      {"slug": "tenteli-standart", "model": "Semiremorcă cu prelată standard"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "reefer",
+   "name": "Frigorifice",
+   "products": [
+    {
+     "slug": "frigorifik",
+     "name": "Semiremorcă frigorifică",
+     "variants": [
+      {"slug": "t-sri-c-10-12-27", "model": "T.SRI C / 10 - 12 / 27"},
+      {"slug": "t-sri-f-10-12-27", "model": "T.SRI F / 10 - 12 / 27"},
+      {"slug": "t-sri-p-10-12-27", "model": "T.SRI P / 10 - 12 / 27"},
+      {"slug": "t-sri-fp-10-12-27", "model": "T.SRI FP / 10 - 12 / 27"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "dry-cargo",
+   "name": "Marfă uscată și caroserii cutie",
+   "products": [
+    {
+     "slug": "kapali-kasa-celik-kargo-tasiyici",
+     "name": "Caroserie închisă din oțel pentru marfă",
+     "variants": [
+      {"slug": "kapali-kasa-celik-kargo-tasiyici", "model": "Caroserie închisă din oțel pentru marfă"}
+     ]
+    },
+    {
+     "slug": "kuru-yuk-sac-kasa",
+     "name": "Marfă uscată - cutie din oțel",
+     "variants": [
+      {"slug": "kuru-yuk-sac-kasa", "model": "Marfă uscată - cutie din oțel"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-aluminyum-kapak",
+     "name": "Marfă uscată - obloane din aluminiu",
+     "variants": [
+      {"slug": "kuruyuk-aluminyum-kapak", "model": "Marfă uscată - obloane din aluminiu"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-light-kapak",
+     "name": "Marfă uscată - obloane light",
+     "variants": [
+      {"slug": "kuruyuk-light-kapak", "model": "Marfă uscată - obloane light"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-rulo-tasiyici",
+     "name": "Marfă uscată - transportor de rulouri",
+     "variants": [
+      {"slug": "kuruyuk-rulo-tasiyici", "model": "Marfă uscată - transportor de rulouri"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "containers",
+   "name": "Port-containere",
+   "products": [
+    {
+     "slug": "damperli-konteyner-tasiyici",
+     "name": "Port-container basculant",
+     "variants": [
+      {"slug": "damperli-konteyner-tasiyici", "model": "Port-container basculant"}
+     ]
+    },
+    {
+     "slug": "high-cube-konteyner-tasiyici",
+     "name": "Port-container High Cube",
+     "variants": [
+      {"slug": "high-cube-konteyner-tasiyici", "model": "Port-container High Cube"}
+     ]
+    },
+    {
+     "slug": "konteyner-tasiyici",
+     "name": "Port-container",
+     "variants": [
+      {"slug": "konteyner-tasiyici", "model": "Port-container"}
+     ]
+    },
+    {
+     "slug": "liman-ici-konteyner-tasiyici",
+     "name": "Port-container de terminal portuar",
+     "variants": [
+      {"slug": "liman-ici-konteyner-tasiyici", "model": "Port-container de terminal portuar"}
+     ]
+    },
+    {
+     "slug": "sabit-konteyner-tasiyici",
+     "name": "Port-container fix",
+     "variants": [
+      {"slug": "sabit-konteyner-tasiyici-t-shg-s-40-12-27", "model": "Port-container fix (T.SHG S / 40 - 12 / 27)"},
+      {"slug": "sabit-konteyner-tasiyici", "model": "Port-container fix"},
+      {"slug": "sabit-konteyner-tasiyici-t-shf-t-20-12-27", "model": "Port-container fix (T.SHF T / 20 - 12 / 27)"},
+      {"slug": "sabit-konteyner-tasiyici-t-shg-l-45-15-27", "model": "Port-container fix (T.SHG L / 45 - 15 / 27)"}
+     ]
+    },
+    {
+     "slug": "standart-konteyner-tasiyici",
+     "name": "Port-container standard",
+     "variants": [
+      {"slug": "standart-konteyner-tasiyici", "model": "Port-container standard"}
+     ]
+    },
+    {
+     "slug": "teleskopik-konteyner-tasiyici",
+     "name": "Port-container telescopic",
+     "variants": [
+      {"slug": "teleskopik-konteyner-tasiyici", "model": "Port-container telescopic"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-avh-45-12-27", "model": "Port-container telescopic (T.SHG AVH / 45 - 12 / 27)"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-ah-45-12-27", "model": "Port-container telescopic (T.SHG AH / 45 - 12 / 27)"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-amh-40-12-27", "model": "Port-container telescopic (T.SHG AMH / 40 - 12 / 27)"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lowbed",
+   "name": "Lowbed și transport greu",
+   "products": [
+    {
+     "slug": "havuz-tip-lowbed",
+     "name": "Lowbed tip cuvă",
+     "variants": [
+      {"slug": "havuz-tip-lowbed", "model": "Lowbed tip cuvă"}
+     ]
+    },
+    {
+     "slug": "hidrolik-dumenlenir-low-bed",
+     "name": "Lowbed cu direcție hidraulică",
+     "variants": [
+      {"slug": "hidrolik-dumenlenir-low-bed", "model": "Lowbed cu direcție hidraulică"}
+     ]
+    },
+    {
+     "slug": "onden-yuklemeli-lowbed",
+     "name": "Lowbed cu încărcare frontală",
+     "variants": [
+      {"slug": "onden-yuklemeli-lowbed", "model": "Lowbed cu încărcare frontală"}
+     ]
+    },
+    {
+     "slug": "sabit-low-bed",
+     "name": "Lowbed fix",
+     "variants": [
+      {"slug": "sabit-low-bed", "model": "Lowbed fix"}
+     ]
+    },
+    {
+     "slug": "standart-dingilli-lowbed",
+     "name": "Lowbed cu axe standard",
+     "variants": [
+      {"slug": "3-dingilli-lowbed", "model": "Lowbed cu 3 axe"},
+      {"slug": "4-dingilli-lowbed", "model": "Lowbed cu 4 axe"},
+      {"slug": "5-dingilli-lowbed", "model": "Lowbed cu 5 axe"},
+      {"slug": "6-dingilli-lowbed", "model": "Lowbed cu 6 axe"}
+     ]
+    },
+    {
+     "slug": "uzar-low-bed",
+     "name": "Lowbed extensibil",
+     "variants": [
+      {"slug": "uzar-low-bed", "model": "Lowbed extensibil"}
+     ]
+    },
+    {
+     "slug": "yana-genisletilebilir-uzamali-lowbed",
+     "name": "Lowbed extensibil cu lățire laterală",
+     "variants": [
+      {"slug": "yana-genisletilebilir-uzamali-lowbed", "model": "Lowbed extensibil cu lățire laterală"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "platform",
+   "name": "Platforme",
+   "products": [
+    {
+     "slug": "rulo-tasiyici-flatbed",
+     "name": "Platformă pentru transport rulouri",
+     "variants": [
+      {"slug": "rulo-tasiyici-flatbed", "model": "Platformă pentru transport rulouri"}
+     ]
+    },
+    {
+     "slug": "standart-flatbed",
+     "name": "Platformă standard",
+     "variants": [
+      {"slug": "standart-flatbed", "model": "Platformă standard"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "trailers",
+   "name": "Remorci",
+   "products": [
+    {
+     "slug": "aksli-romork",
+     "name": "Remorcă cu mai multe axe",
+     "variants": [
+      {"slug": "2-aksli-romork", "model": "Remorcă cu 2 axe"},
+      {"slug": "3-aksli-romork", "model": "Remorcă cu 3 axe"},
+      {"slug": "4-aksli-romork", "model": "Remorcă cu 4 axe"}
+     ]
+    },
+    {
+     "slug": "dingilli-kamyon-tasiyici",
+     "name": "Transportor de camioane cu mai multe axe",
+     "variants": [
+      {"slug": "2-dingilli-kamyon-tasiyici", "model": "Transportor de camioane cu 2 axe"},
+      {"slug": "3-dingilli-kamyon-tasiyici", "model": "Transportor de camioane cu 3 axe"}
+     ]
+    },
+    {
+     "slug": "tarim-romork-dorse-treyler",
+     "name": "Remorcă agricolă / semiremorcă",
+     "variants": [
+      {"slug": "tarim-romork-dorse-treyler", "model": "Remorcă agricolă / semiremorcă"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "special",
+   "name": "Alte produse speciale",
+   "products": [
+    {
+     "slug": "oto-tasiyici-dorse",
+     "name": "Semiremorcă pentru transport auto",
+     "variants": [
+      {"slug": "oto-tasiyici-dorse", "model": "Semiremorcă pentru transport auto"}
+     ]
+    },
+    {
+     "slug": "arazoz",
+     "name": "Autostropitoare (apă / incendiu)",
+     "variants": [
+      {"slug": "arazoz", "model": "Autostropitoare (apă / incendiu)"}
+     ]
+    },
+    {
+     "slug": "canli-hayvan-tasiyici",
+     "name": "Transportor de animale vii",
+     "variants": [
+      {"slug": "canli-hayvan-tasiyici", "model": "Transportor de animale vii"}
+     ]
+    },
+    {
+     "slug": "cop-toplama",
+     "name": "Colectare deșeuri",
+     "variants": [
+      {"slug": "cop-toplama", "model": "Colectare deșeuri"}
+     ]
+    },
+    {
+     "slug": "dokme-yem-tasiyici",
+     "name": "Transportor de furaje în vrac",
+     "variants": [
+      {"slug": "dokme-yem-tasiyici-semi-treyler", "model": "Semiremorcă pentru furaje în vrac"}
+     ]
+    },
+    {
+     "slug": "ikiz-kat-standart",
+     "name": "Dublu etaj standard",
+     "variants": [
+      {"slug": "ikiz-kat-standart-vetd-ply-td-15-18", "model": "Dublu etaj standard (VETD PLY TD 15 / 18)"},
+      {"slug": "ikiz-kat-standart-vetd-ply-12-27", "model": "Dublu etaj standard (VETD PLY 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "intermodal-kutu",
+     "name": "Cutie intermodală",
+     "variants": [
+      {"slug": "intermodal-kutu-ttg-tal-12-27", "model": "Cutie intermodală (TTG TAL 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "kutuk-tomruk-tasimaciligi",
+     "name": "Transport bușteni",
+     "variants": [
+      {"slug": "kutuk-tomruk-tasimaciligi", "model": "Transport bușteni"}
+     ]
+    },
+    {
+     "slug": "mikser",
+     "name": "Betonieră",
+     "variants": [
+      {"slug": "mikser-semi-treyler", "model": "Semiremorcă betonieră"}
+     ]
+    },
+    {
+     "slug": "tekstil-kutu",
+     "name": "Cutie pentru textile",
+     "variants": [
+      {"slug": "tekstil-kutu-tgg-tal-12-27", "model": "Cutie pentru textile (TGG TAL 12 / 27)"},
+      {"slug": "tekstil-kutu-tgm-tal-12-27", "model": "Cutie pentru textile (TGM TAL 12 / 27)"}
+     ]
+    }
+   ]
+  }
+ ]
+}

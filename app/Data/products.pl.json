@@ -1,0 +1,663 @@
+{
+ "generated_from": "products.json (Claude pl name-layer translation, names only)",
+ "categories": [
+  {
+   "slug": "tankers",
+   "name": "Cysterny",
+   "products": [
+    {
+     "slug": "akaryakit-yakit-tankeri",
+     "name": "Cysterna paliwowa",
+     "variants": [
+      {"slug": "adr-aluminyum-yakit-tankeri", "model": "Aluminiowa cysterna paliwowa ADR"},
+      {"slug": "yakit-tankeri", "model": "Cysterna paliwowa"},
+      {"slug": "adr-li-aluminyum-akaryakit-tankeri", "model": "Aluminiowa cysterna ADR na paliwa płynne"},
+      {"slug": "celik-akaryakit-tankeri", "model": "Stalowa cysterna na paliwa płynne"},
+      {"slug": "akaryakit-tankeri", "model": "Cysterna na paliwa płynne"}
+     ]
+    },
+    {
+     "slug": "asfalt-bitum-tankeri",
+     "name": "Cysterna do asfaltu / bitumu",
+     "variants": [
+      {"slug": "izoleli-asfalt-bitum-tankeri", "model": "Izolowana cysterna do asfaltu i bitumu"},
+      {"slug": "bitum-tanker-semi-treyler", "model": "Naczepa cysterna do bitumu"},
+      {"slug": "bitum-tankeri", "model": "Cysterna do bitumu"}
+     ]
+    },
+    {
+     "slug": "celik-tanker",
+     "name": "Cysterna stalowa",
+     "variants": [
+      {"slug": "adr-celik-tanker", "model": "Stalowa cysterna ADR"},
+      {"slug": "celik-tanker", "model": "Cysterna stalowa"}
+     ]
+    },
+    {
+     "slug": "deveboynu-tanker",
+     "name": "Cysterna typu gęsia szyja",
+     "variants": [
+      {"slug": "deveboynu-tanker-semi-treyler", "model": "Naczepa cysterna typu gęsia szyja"}
+     ]
+    },
+    {
+     "slug": "eliptik-tanker",
+     "name": "Cysterna eliptyczna",
+     "variants": [
+      {"slug": "eliptik-tanker-kamyon-ustu", "model": "Cysterna eliptyczna na podwoziu ciężarówki"},
+      {"slug": "eliptik-tanker-semi-treyler", "model": "Naczepa cysterna eliptyczna"}
+     ]
+    },
+    {
+     "slug": "gida-tankeri",
+     "name": "Cysterna spożywcza",
+     "variants": [
+      {"slug": "gida-tankeri-kamyon-ustu", "model": "Cysterna spożywcza na podwoziu ciężarówki"},
+      {"slug": "gida-tankeri-semi-treyler", "model": "Naczepa cysterna spożywcza"},
+      {"slug": "krom-gida-tankeri", "model": "Chromowa cysterna spożywcza"},
+      {"slug": "paslanmaz-tanker-gida", "model": "Cysterna nierdzewna - spożywcza"}
+     ]
+    },
+    {
+     "slug": "izolasyonlu-tanker",
+     "name": "Cysterna izolowana",
+     "variants": [
+      {"slug": "izolasyonlu-tanker-semi-treyler", "model": "Naczepa cysterna izolowana"}
+     ]
+    },
+    {
+     "slug": "kimyasal-tanker",
+     "name": "Cysterna chemiczna",
+     "variants": [
+      {"slug": "kimyasal-tanker-kamyon-ustu", "model": "Cysterna chemiczna na podwoziu ciężarówki"},
+      {"slug": "kimyasal-tanker-semi-treyler", "model": "Naczepa cysterna chemiczna"},
+      {"slug": "kimyasal-tankeri", "model": "Cysterna chemiczna"}
+     ]
+    },
+    {
+     "slug": "konik-tanker",
+     "name": "Cysterna stożkowa",
+     "variants": [
+      {"slug": "konik-tanker-semi-treyler", "model": "Naczepa cysterna stożkowa"}
+     ]
+    },
+    {
+     "slug": "krom-asit-tankeri",
+     "name": "Nierdzewna cysterna do kwasów",
+     "variants": [
+      {"slug": "krom-asit-tankeri", "model": "Nierdzewna cysterna do kwasów"}
+     ]
+    },
+    {
+     "slug": "krom-izoleli-tanker",
+     "name": "Nierdzewna cysterna izolowana",
+     "variants": [
+      {"slug": "krom-izoleli-tanker", "model": "Nierdzewna cysterna izolowana"}
+     ]
+    },
+    {
+     "slug": "lpg-tankeri",
+     "name": "Cysterna LPG",
+     "variants": [
+      {"slug": "lpg-tanker", "model": "Cysterna LPG"},
+      {"slug": "lpg-tankeri-kamyon-ustu", "model": "Cysterna LPG na podwoziu ciężarówki"},
+      {"slug": "lpg-tankeri-semi-treyler", "model": "Naczepa cysterna LPG"}
+     ]
+    },
+    {
+     "slug": "paslanmaz-celik-tanker-tehlikeli-madde",
+     "name": "Cysterna ze stali nierdzewnej - materiały niebezpieczne",
+     "variants": [
+      {"slug": "paslanmaz-tanker-tehlikeli-madde", "model": "Cysterna nierdzewna - materiały niebezpieczne"}
+     ]
+    },
+    {
+     "slug": "paslanmaz-celik-tanker-tehlikesiz-madde",
+     "name": "Cysterna ze stali nierdzewnej - materiały bezpieczne",
+     "variants": [
+      {"slug": "paslanmaz-tanker-tehlikesiz-madde", "model": "Cysterna nierdzewna - materiały bezpieczne"}
+     ]
+    },
+    {
+     "slug": "silindirik-tanker",
+     "name": "Cysterna cylindryczna",
+     "variants": [
+      {"slug": "silindirik-tanker-kamyon-ustu", "model": "Cysterna cylindryczna na podwoziu ciężarówki"},
+      {"slug": "silindirik-tanker-semi-treyler", "model": "Naczepa cysterna cylindryczna"}
+     ]
+    },
+    {
+     "slug": "su-tankeri",
+     "name": "Cysterna na wodę",
+     "variants": [
+      {"slug": "su-tankeri-semi-treyler", "model": "Naczepa cysterna na wodę"}
+     ]
+    },
+    {
+     "slug": "sut-tankeri-sasisi",
+     "name": "Podwozie cysterny do mleka",
+     "variants": [
+      {"slug": "sut-tankeri-sasesi", "model": "Podwozie cysterny do mleka"}
+     ]
+    },
+    {
+     "slug": "vakum-tanker",
+     "name": "Cysterna podciśnieniowa",
+     "variants": [
+      {"slug": "vakum-tanker-semi-treyler", "model": "Naczepa cysterna podciśnieniowa"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "silos",
+   "name": "Silosy",
+   "products": [
+    {
+     "slug": "damperli-silobas",
+     "name": "Silos wywrotny",
+     "variants": [
+      {"slug": "damperli-silobas-tanker", "model": "Cysterna silosowa wywrotna"},
+      {"slug": "damper-tipi-silobas", "model": "Silos typu wywrotnego"},
+      {"slug": "damperli-silobas-semi-treyler", "model": "Naczepa silos wywrotny"},
+      {"slug": "damperli-silo", "model": "Silos wywrotny"}
+     ]
+    },
+    {
+     "slug": "sivi-gubre-silobasi",
+     "name": "Silos do nawozów płynnych",
+     "variants": [
+      {"slug": "sivi-gubre-silobas", "model": "Silos do nawozów płynnych"}
+     ]
+    },
+    {
+     "slug": "un-ve-gida-silobasi",
+     "name": "Silos do mąki i żywności",
+     "variants": [
+      {"slug": "un-silobasi", "model": "Silos do mąki"}
+     ]
+    },
+    {
+     "slug": "v-tipi-bugday-silobasi",
+     "name": "Silos typu V do pszenicy",
+     "variants": [
+      {"slug": "v-tipi-bugday-silobasi", "model": "Silos typu V do pszenicy"}
+     ]
+    },
+    {
+     "slug": "v-tipi-silobas",
+     "name": "Silos typu V",
+     "variants": [
+      {"slug": "v-tipi-silobas", "model": "Silos typu V"},
+      {"slug": "v-tipi-celik-cimento-silobasi", "model": "Stalowy silos typu V do cementu"},
+      {"slug": "v-tipi-yatay-silobas-semi-treyler", "model": "Pozioma naczepa silos typu V"}
+     ]
+    },
+    {
+     "slug": "v-tipi-un-ve-gida-silobasi",
+     "name": "Silos typu V do mąki i żywności",
+     "variants": [
+      {"slug": "v-tipi-silobas-tanker", "model": "Cysterna silosowa typu V"},
+      {"slug": "v-tipi-un-ve-gida-silobasi", "model": "Silos typu V do mąki i żywności"}
+     ]
+    },
+    {
+     "slug": "vakumlu-silobas",
+     "name": "Silos podciśnieniowy",
+     "variants": [
+      {"slug": "vakum-silobas", "model": "Silos podciśnieniowy"}
+     ]
+    },
+    {
+     "slug": "w-tipi-milenyum-silobas",
+     "name": "Silos typu W (Millennium)",
+     "variants": [
+      {"slug": "w-tipi-silobas-dorse", "model": "Naczepa silos typu W"},
+      {"slug": "w-tipi-milenyum-silobas", "model": "Silos typu W (Millennium)"},
+      {"slug": "w-tipi-aluminyum-silobas", "model": "Aluminiowy silos typu W"},
+      {"slug": "w-tipi-celik-silobas", "model": "Stalowy silos typu W"},
+      {"slug": "w-tipi-yatay-silobas-semi-treyler", "model": "Pozioma naczepa silos typu W"},
+      {"slug": "milenyum-silobas", "model": "Silos Millennium"}
+     ]
+    },
+    {
+     "slug": "yem-silobasi",
+     "name": "Silos paszowy",
+     "variants": [
+      {"slug": "dorse-uzeri-yem-silobasi", "model": "Silos paszowy na naczepie"},
+      {"slug": "kamyon-uzeri-yem-silobasi", "model": "Silos paszowy na podwoziu ciężarówki"},
+      {"slug": "romork-uzeri-yem-silobasi", "model": "Silos paszowy na przyczepie"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "tippers",
+   "name": "Wywrotki",
+   "products": [
+    {
+     "slug": "akordiyon-hububat-tipi-damper",
+     "name": "Wywrotka harmonijkowa do zboża",
+     "variants": [
+      {"slug": "akordiyon-hububat-tipi-damper", "model": "Wywrotka harmonijkowa do zboża"}
+     ]
+    },
+    {
+     "slug": "havuz-kuvet-damper",
+     "name": "Wywrotka typu half-pipe / wanna",
+     "variants": [
+      {"slug": "havuz-damper", "model": "Wywrotka half-pipe"},
+      {"slug": "18m3-havuz-damper", "model": "Wywrotka half-pipe 18m³"},
+      {"slug": "30m3-havuz-damper", "model": "Wywrotka half-pipe 30m³"},
+      {"slug": "kuvet-havuz-damper", "model": "Wywrotka wannowa (half-pipe)"}
+     ]
+    },
+    {
+     "slug": "kamyon-ustu-damper",
+     "name": "Wywrotka na podwoziu ciężarówki",
+     "variants": [
+      {"slug": "kamyon-ustu-damper", "model": "Wywrotka na podwoziu ciężarówki"}
+     ]
+    },
+    {
+     "slug": "kapakli-damper",
+     "name": "Wywrotka z burtami",
+     "variants": [
+      {"slug": "8-30-kapakli-damper", "model": "Wywrotka z burtami 8.30"},
+      {"slug": "yana-acilir-kapakli-damper", "model": "Wywrotka z burtami otwieranymi na bok"},
+      {"slug": "8-60-kapakli-damper", "model": "Wywrotka z burtami 8.60"},
+      {"slug": "kapakli-damper", "model": "Wywrotka z burtami"}
+     ]
+    },
+    {
+     "slug": "kaya-tipi-damper",
+     "name": "Wywrotka typu skalnego",
+     "variants": [
+      {"slug": "kaya-damper", "model": "Wywrotka skalna"},
+      {"slug": "kaya-tipi-damper", "model": "Wywrotka typu skalnego"}
+     ]
+    },
+    {
+     "slug": "multi-sistem-damper",
+     "name": "Wywrotka wielosystemowa",
+     "variants": [
+      {"slug": "multi-sistem-damper-semi-treyler", "model": "Naczepa wywrotka wielosystemowa"}
+     ]
+    },
+    {
+     "slug": "panel-tip-damper",
+     "name": "Wywrotka panelowa",
+     "variants": [
+      {"slug": "panel-tip-damper-semi-treyler", "model": "Naczepa wywrotka panelowa"}
+     ]
+    },
+    {
+     "slug": "yana-devirmeli-damper",
+     "name": "Wywrotka boczna",
+     "variants": [
+      {"slug": "yana-devirmeli-damper", "model": "Wywrotka boczna"}
+     ]
+    },
+    {
+     "slug": "yarim-boru-damper",
+     "name": "Wywrotka half-pipe",
+     "variants": [
+      {"slug": "yarim-boru-damper-semi-treyler", "model": "Naczepa wywrotka half-pipe"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "curtain",
+   "name": "Naczepy kurtynowe i plandekowe",
+   "products": [
+    {
+     "slug": "multi-ride",
+     "name": "Multi Ride",
+     "variants": [
+      {"slug": "multi-ride-t-scs-ng-mr-90-12-27", "model": "Multi Ride (T.SCS NG MR / 90 - 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "perdeli-swap-body",
+     "name": "Nadwozie wymienne kurtynowe",
+     "variants": [
+      {"slug": "perdeli-swap-body", "model": "Nadwozie wymienne kurtynowe"}
+     ]
+    },
+    {
+     "slug": "perdeli-ve-tenteli",
+     "name": "Naczepa kurtynowa i plandekowa",
+     "variants": [
+      {"slug": "t-scl-x-150-12-27", "model": "T.SCL X+ / 150 - 12 / 27"},
+      {"slug": "t-scl-m-150-12-27", "model": "T.SCL M / 150 - 12 / 27"},
+      {"slug": "t-scs-ng-m-90-12-27", "model": "T.SCS NG M / 90 - 12 / 27"},
+      {"slug": "t-scs-ng-x-90-12-27", "model": "T.SCS NG X+ / 90 - 12 / 27"},
+      {"slug": "t-scd-m-90-12-27", "model": "T.SCD M / 90 - 12 / 27"},
+      {"slug": "t-scd-x-90-12-27", "model": "T.SCD X+ / 90 - 12 / 27"},
+      {"slug": "t-scc-m-125-12-27", "model": "T.SCC M / 125 - 12 / 27"},
+      {"slug": "t-scc-x-125-12-27", "model": "T.SCC X+ / 125 - 12 / 27"}
+     ]
+    },
+    {
+     "slug": "tenteli-hafif",
+     "name": "Lekka naczepa plandekowa",
+     "variants": [
+      {"slug": "tenteli-hafif", "model": "Lekka naczepa plandekowa"}
+     ]
+    },
+    {
+     "slug": "tenteli-standart",
+     "name": "Standardowa naczepa plandekowa",
+     "variants": [
+      {"slug": "tenteli-standart", "model": "Standardowa naczepa plandekowa"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "reefer",
+   "name": "Chłodnie",
+   "products": [
+    {
+     "slug": "frigorifik",
+     "name": "Naczepa chłodnia",
+     "variants": [
+      {"slug": "t-sri-c-10-12-27", "model": "T.SRI C / 10 - 12 / 27"},
+      {"slug": "t-sri-f-10-12-27", "model": "T.SRI F / 10 - 12 / 27"},
+      {"slug": "t-sri-p-10-12-27", "model": "T.SRI P / 10 - 12 / 27"},
+      {"slug": "t-sri-fp-10-12-27", "model": "T.SRI FP / 10 - 12 / 27"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "dry-cargo",
+   "name": "Ładunki suche i zabudowy skrzyniowe",
+   "products": [
+    {
+     "slug": "kapali-kasa-celik-kargo-tasiyici",
+     "name": "Zamknięta stalowa skrzynia cargo",
+     "variants": [
+      {"slug": "kapali-kasa-celik-kargo-tasiyici", "model": "Zamknięta stalowa skrzynia cargo"}
+     ]
+    },
+    {
+     "slug": "kuru-yuk-sac-kasa",
+     "name": "Ładunki suche - skrzynia stalowa",
+     "variants": [
+      {"slug": "kuru-yuk-sac-kasa", "model": "Ładunki suche - skrzynia stalowa"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-aluminyum-kapak",
+     "name": "Ładunki suche - burty aluminiowe",
+     "variants": [
+      {"slug": "kuruyuk-aluminyum-kapak", "model": "Ładunki suche - burty aluminiowe"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-light-kapak",
+     "name": "Ładunki suche - burty lekkie",
+     "variants": [
+      {"slug": "kuruyuk-light-kapak", "model": "Ładunki suche - burty lekkie"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-rulo-tasiyici",
+     "name": "Ładunki suche - transporter kręgów",
+     "variants": [
+      {"slug": "kuruyuk-rulo-tasiyici", "model": "Ładunki suche - transporter kręgów"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "containers",
+   "name": "Naczepy podkontenerowe",
+   "products": [
+    {
+     "slug": "damperli-konteyner-tasiyici",
+     "name": "Naczepa podkontenerowa wywrotna",
+     "variants": [
+      {"slug": "damperli-konteyner-tasiyici", "model": "Naczepa podkontenerowa wywrotna"}
+     ]
+    },
+    {
+     "slug": "high-cube-konteyner-tasiyici",
+     "name": "Naczepa podkontenerowa High Cube",
+     "variants": [
+      {"slug": "high-cube-konteyner-tasiyici", "model": "Naczepa podkontenerowa High Cube"}
+     ]
+    },
+    {
+     "slug": "konteyner-tasiyici",
+     "name": "Naczepa podkontenerowa",
+     "variants": [
+      {"slug": "konteyner-tasiyici", "model": "Naczepa podkontenerowa"}
+     ]
+    },
+    {
+     "slug": "liman-ici-konteyner-tasiyici",
+     "name": "Naczepa podkontenerowa terminalowa (portowa)",
+     "variants": [
+      {"slug": "liman-ici-konteyner-tasiyici", "model": "Naczepa podkontenerowa terminalowa (portowa)"}
+     ]
+    },
+    {
+     "slug": "sabit-konteyner-tasiyici",
+     "name": "Stała naczepa podkontenerowa",
+     "variants": [
+      {"slug": "sabit-konteyner-tasiyici-t-shg-s-40-12-27", "model": "Stała naczepa podkontenerowa (T.SHG S / 40 - 12 / 27)"},
+      {"slug": "sabit-konteyner-tasiyici", "model": "Stała naczepa podkontenerowa"},
+      {"slug": "sabit-konteyner-tasiyici-t-shf-t-20-12-27", "model": "Stała naczepa podkontenerowa (T.SHF T / 20 - 12 / 27)"},
+      {"slug": "sabit-konteyner-tasiyici-t-shg-l-45-15-27", "model": "Stała naczepa podkontenerowa (T.SHG L / 45 - 15 / 27)"}
+     ]
+    },
+    {
+     "slug": "standart-konteyner-tasiyici",
+     "name": "Standardowa naczepa podkontenerowa",
+     "variants": [
+      {"slug": "standart-konteyner-tasiyici", "model": "Standardowa naczepa podkontenerowa"}
+     ]
+    },
+    {
+     "slug": "teleskopik-konteyner-tasiyici",
+     "name": "Teleskopowa naczepa podkontenerowa",
+     "variants": [
+      {"slug": "teleskopik-konteyner-tasiyici", "model": "Teleskopowa naczepa podkontenerowa"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-avh-45-12-27", "model": "Teleskopowa naczepa podkontenerowa (T.SHG AVH / 45 - 12 / 27)"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-ah-45-12-27", "model": "Teleskopowa naczepa podkontenerowa (T.SHG AH / 45 - 12 / 27)"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-amh-40-12-27", "model": "Teleskopowa naczepa podkontenerowa (T.SHG AMH / 40 - 12 / 27)"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lowbed",
+   "name": "Naczepy niskopodwoziowe i transport ciężki",
+   "products": [
+    {
+     "slug": "havuz-tip-lowbed",
+     "name": "Naczepa niskopodwoziowa z zagłębieniem",
+     "variants": [
+      {"slug": "havuz-tip-lowbed", "model": "Naczepa niskopodwoziowa z zagłębieniem"}
+     ]
+    },
+    {
+     "slug": "hidrolik-dumenlenir-low-bed",
+     "name": "Naczepa niskopodwoziowa sterowana hydraulicznie",
+     "variants": [
+      {"slug": "hidrolik-dumenlenir-low-bed", "model": "Naczepa niskopodwoziowa sterowana hydraulicznie"}
+     ]
+    },
+    {
+     "slug": "onden-yuklemeli-lowbed",
+     "name": "Naczepa niskopodwoziowa ładowana od przodu",
+     "variants": [
+      {"slug": "onden-yuklemeli-lowbed", "model": "Naczepa niskopodwoziowa ładowana od przodu"}
+     ]
+    },
+    {
+     "slug": "sabit-low-bed",
+     "name": "Stała naczepa niskopodwoziowa",
+     "variants": [
+      {"slug": "sabit-low-bed", "model": "Stała naczepa niskopodwoziowa"}
+     ]
+    },
+    {
+     "slug": "standart-dingilli-lowbed",
+     "name": "Naczepa niskopodwoziowa ze standardowymi osiami",
+     "variants": [
+      {"slug": "3-dingilli-lowbed", "model": "3-osiowa naczepa niskopodwoziowa"},
+      {"slug": "4-dingilli-lowbed", "model": "4-osiowa naczepa niskopodwoziowa"},
+      {"slug": "5-dingilli-lowbed", "model": "5-osiowa naczepa niskopodwoziowa"},
+      {"slug": "6-dingilli-lowbed", "model": "6-osiowa naczepa niskopodwoziowa"}
+     ]
+    },
+    {
+     "slug": "uzar-low-bed",
+     "name": "Rozsuwana naczepa niskopodwoziowa",
+     "variants": [
+      {"slug": "uzar-low-bed", "model": "Rozsuwana naczepa niskopodwoziowa"}
+     ]
+    },
+    {
+     "slug": "yana-genisletilebilir-uzamali-lowbed",
+     "name": "Rozsuwana naczepa niskopodwoziowa poszerzana na boki",
+     "variants": [
+      {"slug": "yana-genisletilebilir-uzamali-lowbed", "model": "Rozsuwana naczepa niskopodwoziowa poszerzana na boki"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "platform",
+   "name": "Platformy",
+   "products": [
+    {
+     "slug": "rulo-tasiyici-flatbed",
+     "name": "Platforma do przewozu kręgów",
+     "variants": [
+      {"slug": "rulo-tasiyici-flatbed", "model": "Platforma do przewozu kręgów"}
+     ]
+    },
+    {
+     "slug": "standart-flatbed",
+     "name": "Platforma standardowa",
+     "variants": [
+      {"slug": "standart-flatbed", "model": "Platforma standardowa"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "trailers",
+   "name": "Przyczepy",
+   "products": [
+    {
+     "slug": "aksli-romork",
+     "name": "Przyczepa wieloosiowa",
+     "variants": [
+      {"slug": "2-aksli-romork", "model": "Przyczepa 2-osiowa"},
+      {"slug": "3-aksli-romork", "model": "Przyczepa 3-osiowa"},
+      {"slug": "4-aksli-romork", "model": "Przyczepa 4-osiowa"}
+     ]
+    },
+    {
+     "slug": "dingilli-kamyon-tasiyici",
+     "name": "Wieloosiowa przyczepa do przewozu ciężarówek",
+     "variants": [
+      {"slug": "2-dingilli-kamyon-tasiyici", "model": "2-osiowa przyczepa do przewozu ciężarówek"},
+      {"slug": "3-dingilli-kamyon-tasiyici", "model": "3-osiowa przyczepa do przewozu ciężarówek"}
+     ]
+    },
+    {
+     "slug": "tarim-romork-dorse-treyler",
+     "name": "Przyczepa rolnicza / naczepa",
+     "variants": [
+      {"slug": "tarim-romork-dorse-treyler", "model": "Przyczepa rolnicza / naczepa"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "special",
+   "name": "Pozostałe produkty specjalne",
+   "products": [
+    {
+     "slug": "oto-tasiyici-dorse",
+     "name": "Naczepa do przewozu samochodów",
+     "variants": [
+      {"slug": "oto-tasiyici-dorse", "model": "Naczepa do przewozu samochodów"}
+     ]
+    },
+    {
+     "slug": "arazoz",
+     "name": "Polewaczka (pojazd wodno-gaśniczy)",
+     "variants": [
+      {"slug": "arazoz", "model": "Polewaczka (pojazd wodno-gaśniczy)"}
+     ]
+    },
+    {
+     "slug": "canli-hayvan-tasiyici",
+     "name": "Naczepa do przewozu żywych zwierząt",
+     "variants": [
+      {"slug": "canli-hayvan-tasiyici", "model": "Naczepa do przewozu żywych zwierząt"}
+     ]
+    },
+    {
+     "slug": "cop-toplama",
+     "name": "Zbiórka odpadów",
+     "variants": [
+      {"slug": "cop-toplama", "model": "Zbiórka odpadów"}
+     ]
+    },
+    {
+     "slug": "dokme-yem-tasiyici",
+     "name": "Paszowóz",
+     "variants": [
+      {"slug": "dokme-yem-tasiyici-semi-treyler", "model": "Naczepa paszowóz"}
+     ]
+    },
+    {
+     "slug": "ikiz-kat-standart",
+     "name": "Standard dwupokładowy",
+     "variants": [
+      {"slug": "ikiz-kat-standart-vetd-ply-td-15-18", "model": "Standard dwupokładowy (VETD PLY TD 15 / 18)"},
+      {"slug": "ikiz-kat-standart-vetd-ply-12-27", "model": "Standard dwupokładowy (VETD PLY 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "intermodal-kutu",
+     "name": "Skrzynia intermodalna",
+     "variants": [
+      {"slug": "intermodal-kutu-ttg-tal-12-27", "model": "Skrzynia intermodalna (TTG TAL 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "kutuk-tomruk-tasimaciligi",
+     "name": "Transport kłód i dłużycy",
+     "variants": [
+      {"slug": "kutuk-tomruk-tasimaciligi", "model": "Transport kłód i dłużycy"}
+     ]
+    },
+    {
+     "slug": "mikser",
+     "name": "Betonomieszarka",
+     "variants": [
+      {"slug": "mikser-semi-treyler", "model": "Naczepa betonomieszarka"}
+     ]
+    },
+    {
+     "slug": "tekstil-kutu",
+     "name": "Skrzynia tekstylna",
+     "variants": [
+      {"slug": "tekstil-kutu-tgg-tal-12-27", "model": "Skrzynia tekstylna (TGG TAL 12 / 27)"},
+      {"slug": "tekstil-kutu-tgm-tal-12-27", "model": "Skrzynia tekstylna (TGM TAL 12 / 27)"}
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,663 @@
+{
+ "generated_from": "products.json (Claude ar name-layer translation, names only)",
+ "categories": [
+  {
+   "slug": "tankers",
+   "name": "الصهاريج",
+   "products": [
+    {
+     "slug": "akaryakit-yakit-tankeri",
+     "name": "صهريج محروقات / وقود",
+     "variants": [
+      {"slug": "adr-aluminyum-yakit-tankeri", "model": "صهريج وقود ألمنيوم ADR"},
+      {"slug": "yakit-tankeri", "model": "صهريج وقود"},
+      {"slug": "adr-li-aluminyum-akaryakit-tankeri", "model": "صهريج محروقات ألمنيوم بمواصفات ADR"},
+      {"slug": "celik-akaryakit-tankeri", "model": "صهريج محروقات فولاذي"},
+      {"slug": "akaryakit-tankeri", "model": "صهريج محروقات"}
+     ]
+    },
+    {
+     "slug": "asfalt-bitum-tankeri",
+     "name": "صهريج أسفلت / بيتومين",
+     "variants": [
+      {"slug": "izoleli-asfalt-bitum-tankeri", "model": "صهريج أسفلت وبيتومين معزول"},
+      {"slug": "bitum-tanker-semi-treyler", "model": "نصف مقطورة صهريج بيتومين"},
+      {"slug": "bitum-tankeri", "model": "صهريج بيتومين"}
+     ]
+    },
+    {
+     "slug": "celik-tanker",
+     "name": "صهريج فولاذي",
+     "variants": [
+      {"slug": "adr-celik-tanker", "model": "صهريج فولاذي ADR"},
+      {"slug": "celik-tanker", "model": "صهريج فولاذي"}
+     ]
+    },
+    {
+     "slug": "deveboynu-tanker",
+     "name": "صهريج بعنق الإوزة",
+     "variants": [
+      {"slug": "deveboynu-tanker-semi-treyler", "model": "نصف مقطورة صهريج بعنق الإوزة"}
+     ]
+    },
+    {
+     "slug": "eliptik-tanker",
+     "name": "صهريج بيضاوي",
+     "variants": [
+      {"slug": "eliptik-tanker-kamyon-ustu", "model": "صهريج بيضاوي محمول على شاحنة"},
+      {"slug": "eliptik-tanker-semi-treyler", "model": "نصف مقطورة صهريج بيضاوي"}
+     ]
+    },
+    {
+     "slug": "gida-tankeri",
+     "name": "صهريج مواد غذائية",
+     "variants": [
+      {"slug": "gida-tankeri-kamyon-ustu", "model": "صهريج مواد غذائية محمول على شاحنة"},
+      {"slug": "gida-tankeri-semi-treyler", "model": "نصف مقطورة صهريج مواد غذائية"},
+      {"slug": "krom-gida-tankeri", "model": "صهريج كروم للمواد الغذائية"},
+      {"slug": "paslanmaz-tanker-gida", "model": "صهريج من الفولاذ المقاوم للصدأ - مواد غذائية"}
+     ]
+    },
+    {
+     "slug": "izolasyonlu-tanker",
+     "name": "صهريج معزول",
+     "variants": [
+      {"slug": "izolasyonlu-tanker-semi-treyler", "model": "نصف مقطورة صهريج معزول"}
+     ]
+    },
+    {
+     "slug": "kimyasal-tanker",
+     "name": "صهريج مواد كيميائية",
+     "variants": [
+      {"slug": "kimyasal-tanker-kamyon-ustu", "model": "صهريج مواد كيميائية محمول على شاحنة"},
+      {"slug": "kimyasal-tanker-semi-treyler", "model": "نصف مقطورة صهريج مواد كيميائية"},
+      {"slug": "kimyasal-tankeri", "model": "صهريج مواد كيميائية"}
+     ]
+    },
+    {
+     "slug": "konik-tanker",
+     "name": "صهريج مخروطي",
+     "variants": [
+      {"slug": "konik-tanker-semi-treyler", "model": "نصف مقطورة صهريج مخروطي"}
+     ]
+    },
+    {
+     "slug": "krom-asit-tankeri",
+     "name": "صهريج كروم للأحماض",
+     "variants": [
+      {"slug": "krom-asit-tankeri", "model": "صهريج كروم للأحماض"}
+     ]
+    },
+    {
+     "slug": "krom-izoleli-tanker",
+     "name": "صهريج كروم معزول",
+     "variants": [
+      {"slug": "krom-izoleli-tanker", "model": "صهريج كروم معزول"}
+     ]
+    },
+    {
+     "slug": "lpg-tankeri",
+     "name": "صهريج غاز البترول المسال (LPG)",
+     "variants": [
+      {"slug": "lpg-tanker", "model": "صهريج LPG"},
+      {"slug": "lpg-tankeri-kamyon-ustu", "model": "صهريج LPG محمول على شاحنة"},
+      {"slug": "lpg-tankeri-semi-treyler", "model": "نصف مقطورة صهريج LPG"}
+     ]
+    },
+    {
+     "slug": "paslanmaz-celik-tanker-tehlikeli-madde",
+     "name": "صهريج من الفولاذ المقاوم للصدأ - مواد خطرة",
+     "variants": [
+      {"slug": "paslanmaz-tanker-tehlikeli-madde", "model": "صهريج من الفولاذ المقاوم للصدأ - مواد خطرة"}
+     ]
+    },
+    {
+     "slug": "paslanmaz-celik-tanker-tehlikesiz-madde",
+     "name": "صهريج من الفولاذ المقاوم للصدأ - مواد غير خطرة",
+     "variants": [
+      {"slug": "paslanmaz-tanker-tehlikesiz-madde", "model": "صهريج من الفولاذ المقاوم للصدأ - مواد غير خطرة"}
+     ]
+    },
+    {
+     "slug": "silindirik-tanker",
+     "name": "صهريج أسطواني",
+     "variants": [
+      {"slug": "silindirik-tanker-kamyon-ustu", "model": "صهريج أسطواني محمول على شاحنة"},
+      {"slug": "silindirik-tanker-semi-treyler", "model": "نصف مقطورة صهريج أسطواني"}
+     ]
+    },
+    {
+     "slug": "su-tankeri",
+     "name": "صهريج مياه",
+     "variants": [
+      {"slug": "su-tankeri-semi-treyler", "model": "نصف مقطورة صهريج مياه"}
+     ]
+    },
+    {
+     "slug": "sut-tankeri-sasisi",
+     "name": "شاسيه صهريج حليب",
+     "variants": [
+      {"slug": "sut-tankeri-sasesi", "model": "شاسيه صهريج حليب"}
+     ]
+    },
+    {
+     "slug": "vakum-tanker",
+     "name": "صهريج شفط",
+     "variants": [
+      {"slug": "vakum-tanker-semi-treyler", "model": "نصف مقطورة صهريج شفط"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "silos",
+   "name": "صهاريج المواد السائبة (سيلو)",
+   "products": [
+    {
+     "slug": "damperli-silobas",
+     "name": "سيلو قلاب",
+     "variants": [
+      {"slug": "damperli-silobas-tanker", "model": "صهريج سيلو قلاب"},
+      {"slug": "damper-tipi-silobas", "model": "سيلو من النوع القلاب"},
+      {"slug": "damperli-silobas-semi-treyler", "model": "نصف مقطورة سيلو قلاب"},
+      {"slug": "damperli-silo", "model": "سيلو قلاب"}
+     ]
+    },
+    {
+     "slug": "sivi-gubre-silobasi",
+     "name": "سيلو أسمدة سائلة",
+     "variants": [
+      {"slug": "sivi-gubre-silobas", "model": "سيلو أسمدة سائلة"}
+     ]
+    },
+    {
+     "slug": "un-ve-gida-silobasi",
+     "name": "سيلو دقيق ومواد غذائية",
+     "variants": [
+      {"slug": "un-silobasi", "model": "سيلو دقيق"}
+     ]
+    },
+    {
+     "slug": "v-tipi-bugday-silobasi",
+     "name": "سيلو قمح نوع V",
+     "variants": [
+      {"slug": "v-tipi-bugday-silobasi", "model": "سيلو قمح نوع V"}
+     ]
+    },
+    {
+     "slug": "v-tipi-silobas",
+     "name": "سيلو نوع V",
+     "variants": [
+      {"slug": "v-tipi-silobas", "model": "سيلو نوع V"},
+      {"slug": "v-tipi-celik-cimento-silobasi", "model": "سيلو إسمنت فولاذي نوع V"},
+      {"slug": "v-tipi-yatay-silobas-semi-treyler", "model": "نصف مقطورة سيلو أفقي نوع V"}
+     ]
+    },
+    {
+     "slug": "v-tipi-un-ve-gida-silobasi",
+     "name": "سيلو دقيق ومواد غذائية نوع V",
+     "variants": [
+      {"slug": "v-tipi-silobas-tanker", "model": "صهريج سيلو نوع V"},
+      {"slug": "v-tipi-un-ve-gida-silobasi", "model": "سيلو دقيق ومواد غذائية نوع V"}
+     ]
+    },
+    {
+     "slug": "vakumlu-silobas",
+     "name": "سيلو شفط",
+     "variants": [
+      {"slug": "vakum-silobas", "model": "سيلو شفط"}
+     ]
+    },
+    {
+     "slug": "w-tipi-milenyum-silobas",
+     "name": "سيلو نوع W (ميلينيوم)",
+     "variants": [
+      {"slug": "w-tipi-silobas-dorse", "model": "نصف مقطورة سيلو نوع W"},
+      {"slug": "w-tipi-milenyum-silobas", "model": "سيلو نوع W (ميلينيوم)"},
+      {"slug": "w-tipi-aluminyum-silobas", "model": "سيلو ألمنيوم نوع W"},
+      {"slug": "w-tipi-celik-silobas", "model": "سيلو فولاذي نوع W"},
+      {"slug": "w-tipi-yatay-silobas-semi-treyler", "model": "نصف مقطورة سيلو أفقي نوع W"},
+      {"slug": "milenyum-silobas", "model": "سيلو ميلينيوم"}
+     ]
+    },
+    {
+     "slug": "yem-silobasi",
+     "name": "سيلو أعلاف",
+     "variants": [
+      {"slug": "dorse-uzeri-yem-silobasi", "model": "سيلو أعلاف على نصف مقطورة"},
+      {"slug": "kamyon-uzeri-yem-silobasi", "model": "سيلو أعلاف على شاحنة"},
+      {"slug": "romork-uzeri-yem-silobasi", "model": "سيلو أعلاف على مقطورة"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "tippers",
+   "name": "القلابات",
+   "products": [
+    {
+     "slug": "akordiyon-hububat-tipi-damper",
+     "name": "قلاب حبوب نوع أكورديون",
+     "variants": [
+      {"slug": "akordiyon-hububat-tipi-damper", "model": "قلاب حبوب نوع أكورديون"}
+     ]
+    },
+    {
+     "slug": "havuz-kuvet-damper",
+     "name": "قلاب حوضي (بانيو)",
+     "variants": [
+      {"slug": "havuz-damper", "model": "قلاب حوضي"},
+      {"slug": "18m3-havuz-damper", "model": "قلاب حوضي 18 م³"},
+      {"slug": "30m3-havuz-damper", "model": "قلاب حوضي 30 م³"},
+      {"slug": "kuvet-havuz-damper", "model": "قلاب بانيو (حوضي)"}
+     ]
+    },
+    {
+     "slug": "kamyon-ustu-damper",
+     "name": "قلاب محمول على شاحنة",
+     "variants": [
+      {"slug": "kamyon-ustu-damper", "model": "قلاب محمول على شاحنة"}
+     ]
+    },
+    {
+     "slug": "kapakli-damper",
+     "name": "قلاب بأبواب جانبية",
+     "variants": [
+      {"slug": "8-30-kapakli-damper", "model": "قلاب بأبواب جانبية 8.30"},
+      {"slug": "yana-acilir-kapakli-damper", "model": "قلاب بأبواب تفتح جانبياً"},
+      {"slug": "8-60-kapakli-damper", "model": "قلاب بأبواب جانبية 8.60"},
+      {"slug": "kapakli-damper", "model": "قلاب بأبواب جانبية"}
+     ]
+    },
+    {
+     "slug": "kaya-tipi-damper",
+     "name": "قلاب من النوع الصخري",
+     "variants": [
+      {"slug": "kaya-damper", "model": "قلاب صخري"},
+      {"slug": "kaya-tipi-damper", "model": "قلاب من النوع الصخري"}
+     ]
+    },
+    {
+     "slug": "multi-sistem-damper",
+     "name": "قلاب متعدد الأنظمة",
+     "variants": [
+      {"slug": "multi-sistem-damper-semi-treyler", "model": "نصف مقطورة قلاب متعدد الأنظمة"}
+     ]
+    },
+    {
+     "slug": "panel-tip-damper",
+     "name": "قلاب نوع بانل",
+     "variants": [
+      {"slug": "panel-tip-damper-semi-treyler", "model": "نصف مقطورة قلاب نوع بانل"}
+     ]
+    },
+    {
+     "slug": "yana-devirmeli-damper",
+     "name": "قلاب بتفريغ جانبي",
+     "variants": [
+      {"slug": "yana-devirmeli-damper", "model": "قلاب بتفريغ جانبي"}
+     ]
+    },
+    {
+     "slug": "yarim-boru-damper",
+     "name": "قلاب نصف أنبوبي",
+     "variants": [
+      {"slug": "yarim-boru-damper-semi-treyler", "model": "نصف مقطورة قلاب نصف أنبوبي"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "curtain",
+   "name": "الستائرية والمغطاة بالمشمع",
+   "products": [
+    {
+     "slug": "multi-ride",
+     "name": "Multi Ride",
+     "variants": [
+      {"slug": "multi-ride-t-scs-ng-mr-90-12-27", "model": "Multi Ride (T.SCS NG MR / 90 - 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "perdeli-swap-body",
+     "name": "صندوق تبادلي ستائري (Swap Body)",
+     "variants": [
+      {"slug": "perdeli-swap-body", "model": "صندوق تبادلي ستائري (Swap Body)"}
+     ]
+    },
+    {
+     "slug": "perdeli-ve-tenteli",
+     "name": "ستائرية ومغطاة بالمشمع",
+     "variants": [
+      {"slug": "t-scl-x-150-12-27", "model": "T.SCL X+ / 150 - 12 / 27"},
+      {"slug": "t-scl-m-150-12-27", "model": "T.SCL M / 150 - 12 / 27"},
+      {"slug": "t-scs-ng-m-90-12-27", "model": "T.SCS NG M / 90 - 12 / 27"},
+      {"slug": "t-scs-ng-x-90-12-27", "model": "T.SCS NG X+ / 90 - 12 / 27"},
+      {"slug": "t-scd-m-90-12-27", "model": "T.SCD M / 90 - 12 / 27"},
+      {"slug": "t-scd-x-90-12-27", "model": "T.SCD X+ / 90 - 12 / 27"},
+      {"slug": "t-scc-m-125-12-27", "model": "T.SCC M / 125 - 12 / 27"},
+      {"slug": "t-scc-x-125-12-27", "model": "T.SCC X+ / 125 - 12 / 27"}
+     ]
+    },
+    {
+     "slug": "tenteli-hafif",
+     "name": "مشمع خفيف",
+     "variants": [
+      {"slug": "tenteli-hafif", "model": "مشمع خفيف"}
+     ]
+    },
+    {
+     "slug": "tenteli-standart",
+     "name": "مشمع قياسي",
+     "variants": [
+      {"slug": "tenteli-standart", "model": "مشمع قياسي"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "reefer",
+   "name": "المبردات",
+   "products": [
+    {
+     "slug": "frigorifik",
+     "name": "نصف مقطورة مبردة",
+     "variants": [
+      {"slug": "t-sri-c-10-12-27", "model": "T.SRI C / 10 - 12 / 27"},
+      {"slug": "t-sri-f-10-12-27", "model": "T.SRI F / 10 - 12 / 27"},
+      {"slug": "t-sri-p-10-12-27", "model": "T.SRI P / 10 - 12 / 27"},
+      {"slug": "t-sri-fp-10-12-27", "model": "T.SRI FP / 10 - 12 / 27"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "dry-cargo",
+   "name": "البضائع الجافة والصناديق",
+   "products": [
+    {
+     "slug": "kapali-kasa-celik-kargo-tasiyici",
+     "name": "ناقلة بضائع بصندوق فولاذي مغلق",
+     "variants": [
+      {"slug": "kapali-kasa-celik-kargo-tasiyici", "model": "ناقلة بضائع بصندوق فولاذي مغلق"}
+     ]
+    },
+    {
+     "slug": "kuru-yuk-sac-kasa",
+     "name": "بضائع جافة - صندوق صاج",
+     "variants": [
+      {"slug": "kuru-yuk-sac-kasa", "model": "بضائع جافة - صندوق صاج"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-aluminyum-kapak",
+     "name": "بضائع جافة بأبواب ألمنيوم",
+     "variants": [
+      {"slug": "kuruyuk-aluminyum-kapak", "model": "بضائع جافة بأبواب ألمنيوم"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-light-kapak",
+     "name": "بضائع جافة بأبواب خفيفة (Light)",
+     "variants": [
+      {"slug": "kuruyuk-light-kapak", "model": "بضائع جافة بأبواب خفيفة (Light)"}
+     ]
+    },
+    {
+     "slug": "kuruyuk-rulo-tasiyici",
+     "name": "بضائع جافة - ناقلة لفائف",
+     "variants": [
+      {"slug": "kuruyuk-rulo-tasiyici", "model": "بضائع جافة - ناقلة لفائف"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "containers",
+   "name": "ناقلات الحاويات",
+   "products": [
+    {
+     "slug": "damperli-konteyner-tasiyici",
+     "name": "ناقلة حاويات قلابة",
+     "variants": [
+      {"slug": "damperli-konteyner-tasiyici", "model": "ناقلة حاويات قلابة"}
+     ]
+    },
+    {
+     "slug": "high-cube-konteyner-tasiyici",
+     "name": "ناقلة حاويات High Cube",
+     "variants": [
+      {"slug": "high-cube-konteyner-tasiyici", "model": "ناقلة حاويات High Cube"}
+     ]
+    },
+    {
+     "slug": "konteyner-tasiyici",
+     "name": "ناقلة حاويات",
+     "variants": [
+      {"slug": "konteyner-tasiyici", "model": "ناقلة حاويات"}
+     ]
+    },
+    {
+     "slug": "liman-ici-konteyner-tasiyici",
+     "name": "ناقلة حاويات داخل الموانئ",
+     "variants": [
+      {"slug": "liman-ici-konteyner-tasiyici", "model": "ناقلة حاويات داخل الموانئ"}
+     ]
+    },
+    {
+     "slug": "sabit-konteyner-tasiyici",
+     "name": "ناقلة حاويات ثابتة",
+     "variants": [
+      {"slug": "sabit-konteyner-tasiyici-t-shg-s-40-12-27", "model": "ناقلة حاويات ثابتة (T.SHG S / 40 - 12 / 27)"},
+      {"slug": "sabit-konteyner-tasiyici", "model": "ناقلة حاويات ثابتة"},
+      {"slug": "sabit-konteyner-tasiyici-t-shf-t-20-12-27", "model": "ناقلة حاويات ثابتة (T.SHF T / 20 - 12 / 27)"},
+      {"slug": "sabit-konteyner-tasiyici-t-shg-l-45-15-27", "model": "ناقلة حاويات ثابتة (T.SHG L / 45 - 15 / 27)"}
+     ]
+    },
+    {
+     "slug": "standart-konteyner-tasiyici",
+     "name": "ناقلة حاويات قياسية",
+     "variants": [
+      {"slug": "standart-konteyner-tasiyici", "model": "ناقلة حاويات قياسية"}
+     ]
+    },
+    {
+     "slug": "teleskopik-konteyner-tasiyici",
+     "name": "ناقلة حاويات تلسكوبية",
+     "variants": [
+      {"slug": "teleskopik-konteyner-tasiyici", "model": "ناقلة حاويات تلسكوبية"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-avh-45-12-27", "model": "ناقلة حاويات تلسكوبية (T.SHG AVH / 45 - 12 / 27)"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-ah-45-12-27", "model": "ناقلة حاويات تلسكوبية (T.SHG AH / 45 - 12 / 27)"},
+      {"slug": "teleskopik-konteyner-tasiyici-t-shg-amh-40-12-27", "model": "ناقلة حاويات تلسكوبية (T.SHG AMH / 40 - 12 / 27)"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lowbed",
+   "name": "اللوبد والحمولات الثقيلة",
+   "products": [
+    {
+     "slug": "havuz-tip-lowbed",
+     "name": "لوبد حوضي",
+     "variants": [
+      {"slug": "havuz-tip-lowbed", "model": "لوبد حوضي"}
+     ]
+    },
+    {
+     "slug": "hidrolik-dumenlenir-low-bed",
+     "name": "لوبد بتوجيه هيدروليكي",
+     "variants": [
+      {"slug": "hidrolik-dumenlenir-low-bed", "model": "لوبد بتوجيه هيدروليكي"}
+     ]
+    },
+    {
+     "slug": "onden-yuklemeli-lowbed",
+     "name": "لوبد بتحميل أمامي",
+     "variants": [
+      {"slug": "onden-yuklemeli-lowbed", "model": "لوبد بتحميل أمامي"}
+     ]
+    },
+    {
+     "slug": "sabit-low-bed",
+     "name": "لوبد ثابت",
+     "variants": [
+      {"slug": "sabit-low-bed", "model": "لوبد ثابت"}
+     ]
+    },
+    {
+     "slug": "standart-dingilli-lowbed",
+     "name": "لوبد بمحاور قياسية",
+     "variants": [
+      {"slug": "3-dingilli-lowbed", "model": "لوبد ذو 3 محاور"},
+      {"slug": "4-dingilli-lowbed", "model": "لوبد ذو 4 محاور"},
+      {"slug": "5-dingilli-lowbed", "model": "لوبد ذو 5 محاور"},
+      {"slug": "6-dingilli-lowbed", "model": "لوبد ذو 6 محاور"}
+     ]
+    },
+    {
+     "slug": "uzar-low-bed",
+     "name": "لوبد قابل للتمديد",
+     "variants": [
+      {"slug": "uzar-low-bed", "model": "لوبد قابل للتمديد"}
+     ]
+    },
+    {
+     "slug": "yana-genisletilebilir-uzamali-lowbed",
+     "name": "لوبد قابل للتمديد والتوسيع الجانبي",
+     "variants": [
+      {"slug": "yana-genisletilebilir-uzamali-lowbed", "model": "لوبد قابل للتمديد والتوسيع الجانبي"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "platform",
+   "name": "المسطحات",
+   "products": [
+    {
+     "slug": "rulo-tasiyici-flatbed",
+     "name": "مسطحة ناقلة لفائف",
+     "variants": [
+      {"slug": "rulo-tasiyici-flatbed", "model": "مسطحة ناقلة لفائف"}
+     ]
+    },
+    {
+     "slug": "standart-flatbed",
+     "name": "مسطحة قياسية",
+     "variants": [
+      {"slug": "standart-flatbed", "model": "مسطحة قياسية"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "trailers",
+   "name": "المقطورات",
+   "products": [
+    {
+     "slug": "aksli-romork",
+     "name": "مقطورة متعددة المحاور",
+     "variants": [
+      {"slug": "2-aksli-romork", "model": "مقطورة ذات محورين"},
+      {"slug": "3-aksli-romork", "model": "مقطورة ذات 3 محاور"},
+      {"slug": "4-aksli-romork", "model": "مقطورة ذات 4 محاور"}
+     ]
+    },
+    {
+     "slug": "dingilli-kamyon-tasiyici",
+     "name": "ناقلة شاحنات",
+     "variants": [
+      {"slug": "2-dingilli-kamyon-tasiyici", "model": "ناقلة شاحنات ذات محورين"},
+      {"slug": "3-dingilli-kamyon-tasiyici", "model": "ناقلة شاحنات ذات 3 محاور"}
+     ]
+    },
+    {
+     "slug": "tarim-romork-dorse-treyler",
+     "name": "مقطورة / نصف مقطورة زراعية",
+     "variants": [
+      {"slug": "tarim-romork-dorse-treyler", "model": "مقطورة / نصف مقطورة زراعية"}
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "special",
+   "name": "منتجات خاصة أخرى",
+   "products": [
+    {
+     "slug": "oto-tasiyici-dorse",
+     "name": "نصف مقطورة ناقلة سيارات",
+     "variants": [
+      {"slug": "oto-tasiyici-dorse", "model": "نصف مقطورة ناقلة سيارات"}
+     ]
+    },
+    {
+     "slug": "arazoz",
+     "name": "شاحنة رش مياه / إطفاء",
+     "variants": [
+      {"slug": "arazoz", "model": "شاحنة رش مياه / إطفاء"}
+     ]
+    },
+    {
+     "slug": "canli-hayvan-tasiyici",
+     "name": "ناقلة مواشي",
+     "variants": [
+      {"slug": "canli-hayvan-tasiyici", "model": "ناقلة مواشي"}
+     ]
+    },
+    {
+     "slug": "cop-toplama",
+     "name": "مركبة جمع النفايات",
+     "variants": [
+      {"slug": "cop-toplama", "model": "مركبة جمع النفايات"}
+     ]
+    },
+    {
+     "slug": "dokme-yem-tasiyici",
+     "name": "ناقلة أعلاف سائبة",
+     "variants": [
+      {"slug": "dokme-yem-tasiyici-semi-treyler", "model": "نصف مقطورة ناقلة أعلاف سائبة"}
+     ]
+    },
+    {
+     "slug": "ikiz-kat-standart",
+     "name": "ذو طابقين قياسي",
+     "variants": [
+      {"slug": "ikiz-kat-standart-vetd-ply-td-15-18", "model": "ذو طابقين قياسي (VETD PLY TD 15 / 18)"},
+      {"slug": "ikiz-kat-standart-vetd-ply-12-27", "model": "ذو طابقين قياسي (VETD PLY 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "intermodal-kutu",
+     "name": "صندوق إنترمودال",
+     "variants": [
+      {"slug": "intermodal-kutu-ttg-tal-12-27", "model": "صندوق إنترمودال (TTG TAL 12 / 27)"}
+     ]
+    },
+    {
+     "slug": "kutuk-tomruk-tasimaciligi",
+     "name": "نقل الجذوع والأخشاب",
+     "variants": [
+      {"slug": "kutuk-tomruk-tasimaciligi", "model": "نقل الجذوع والأخشاب"}
+     ]
+    },
+    {
+     "slug": "mikser",
+     "name": "خلاطة خرسانة",
+     "variants": [
+      {"slug": "mikser-semi-treyler", "model": "نصف مقطورة خلاطة خرسانة"}
+     ]
+    },
+    {
+     "slug": "tekstil-kutu",
+     "name": "صندوق منسوجات",
+     "variants": [
+      {"slug": "tekstil-kutu-tgg-tal-12-27", "model": "صندوق منسوجات (TGG TAL 12 / 27)"},
+      {"slug": "tekstil-kutu-tgm-tal-12-27", "model": "صندوق منسوجات (TGM TAL 12 / 27)"}
+     ]
+    }
+   ]
+  }
+ ]
+}

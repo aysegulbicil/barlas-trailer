@@ -7,8 +7,8 @@ namespace App\Libraries;
  *
  * File-based product catalogue (no database). The data lives in
  * app/Data/products.json and is generated from the master document
- * "TUM_URUNLER_HIYERARSIK_KATALOG" — 11 main categories, 95 products and
- * 181 model variants with their complete technical sheets.
+ * "TUM_URUNLER_HIYERARSIK_KATALOG" — 11 main categories, 76 products and
+ * 136 model variants with their complete technical sheets.
  *
  * All products are presented as Barlas products: the source document's
  * reference manufacturers are scrubbed at generation time and never
@@ -20,6 +20,17 @@ namespace App\Libraries;
  * chrome is fully localized while the technical content stays exactly
  * as published in the source catalogue.
  *
+ * LOCALIZATION — Turkish base + per-locale overlays. products.json is
+ * the Turkish master; an optional app/Data/products.{locale}.json
+ * overlay carries translated category/product names, variant model
+ * names and (optionally) translated spec lines. Overlays are merged by
+ * slug — slugs are identical across locales (same rule as wiki/news
+ * content), so URLs never change. Anything missing from an overlay
+ * (a product, a variant's specs, aliases) silently falls back to the
+ * Turkish master, mirroring the MarkdownContent tr-fallback policy.
+ * Aliases from overlays are ADDED to the Turkish ones (they feed the
+ * AI assistant's matcher, so both languages keep working).
+ *
  * Spec block types inside each variant's "specs" list (order preserved):
  *   h  = explicit group heading from the source document
  *   g  = inferred group title (short label line in the source)
@@ -28,19 +39,115 @@ namespace App\Libraries;
  */
 final class ProductCatalog
 {
-    private static ?array $data = null;
+    /** @var array<string, array> per-locale memoized catalogue */
+    private static array $data = [];
 
-    /** Loads and memoizes the catalogue for the current request. */
-    private static function data(): array
+    /** Loads and memoizes the catalogue for the given/request locale. */
+    private static function data(?string $locale = null): array
     {
-        if (self::$data === null) {
-            $file = APPPATH . 'Data/products.json';
-            $json = is_file($file) ? file_get_contents($file) : '';
-            $data = json_decode($json ?: '{}', true);
-            self::$data = is_array($data) ? $data : ['categories' => []];
+        $locale ??= self::requestLocale();
+
+        if (! isset(self::$data[$locale])) {
+            $base = self::readJson(APPPATH . 'Data/products.json');
+
+            if ($locale !== 'tr') {
+                $overlay = self::readJson(APPPATH . 'Data/products.' . $locale . '.json');
+                if ($overlay !== []) {
+                    $base = self::localize($base, $overlay);
+                }
+            }
+
+            self::$data[$locale] = $base === [] ? ['categories' => []] : $base;
         }
 
-        return self::$data;
+        return self::$data[$locale];
+    }
+
+    /** Current request locale; safe under CLI (spark) where there is none. */
+    private static function requestLocale(): string
+    {
+        $request = service('request');
+
+        return method_exists($request, 'getLocale')
+            ? $request->getLocale()
+            : (config('App')->defaultLocale ?? 'tr');
+    }
+
+    private static function readJson(string $file): array
+    {
+        $json = is_file($file) ? file_get_contents($file) : '';
+        $data = json_decode($json ?: '{}', true);
+
+        return is_array($data) ? $data : [];
+    }
+
+    /**
+     * Merges a translation overlay onto the Turkish master by slug.
+     * Overlay entries may carry: category name, product name/aliases,
+     * variant model and specs. Missing pieces keep the Turkish text.
+     */
+    private static function localize(array $base, array $overlay): array
+    {
+        // NOTE: by-ref foreach must run on the variable itself — a
+        // `$x ?? []` expression iterates a silent temporary copy and
+        // every write is lost. Guard with is_array() instead.
+        if (! is_array($base['categories'] ?? null)) {
+            return $base;
+        }
+
+        $oCats = array_column($overlay['categories'] ?? [], null, 'slug');
+
+        foreach ($base['categories'] as &$cat) {
+            $oCat = $oCats[$cat['slug']] ?? null;
+            if ($oCat === null) {
+                continue;
+            }
+            if (! empty($oCat['name'])) {
+                $cat['name'] = $oCat['name'];
+            }
+            if (! is_array($cat['products'] ?? null)) {
+                continue;
+            }
+
+            $oProds = array_column($oCat['products'] ?? [], null, 'slug');
+            foreach ($cat['products'] as &$prod) {
+                $oProd = $oProds[$prod['slug']] ?? null;
+                if ($oProd === null) {
+                    continue;
+                }
+                if (! empty($oProd['name'])) {
+                    $prod['name'] = $oProd['name'];
+                }
+                if (! empty($oProd['aliases'])) {
+                    $prod['aliases'] = array_values(array_unique(array_merge(
+                        (array) ($prod['aliases'] ?? []),
+                        (array) $oProd['aliases'],
+                    )));
+                }
+                if (! is_array($prod['variants'] ?? null)) {
+                    continue;
+                }
+
+                $oVars = array_column($oProd['variants'] ?? [], null, 'slug');
+                foreach ($prod['variants'] as &$var) {
+                    $oVar = $oVars[$var['slug']] ?? null;
+                    if ($oVar === null) {
+                        continue;
+                    }
+                    if (! empty($oVar['model'])) {
+                        $var['model'] = $oVar['model'];
+                    }
+                    if (! empty($oVar['specs'])) {
+                        $var['specs'] = $oVar['specs'];
+                    }
+                }
+                unset($var);
+            }
+            unset($prod);
+        }
+        unset($cat);
+
+        return $base;
     }
 
     /** @return list<array<string, mixed>> all 11 categories in catalogue order */
@@ -237,18 +344,30 @@ final class ProductCatalog
         return ['title' => $section['title'], 'merged' => false, 'blocks' => $blocks];
     }
 
-    /** Title/key keywords routing content into the three master groups. */
+    /**
+     * Title/key keywords routing content into the three master groups.
+     * Turkish (master) + English (products.en.json overlay specs); other
+     * locales keep Turkish specs for now, so no further words needed.
+     */
     private const DIM_WORDS = [
         'ölçü', 'olcu', 'boyut', 'genişlik', 'genislik', 'yükseklik', 'yukseklik',
         'uzunluk', 'dingil mesafe', 'king-pin', 'king pin', 'kingpin', 'ağırlık',
         'agirlik', 'çap', 'cap (', '5.teker', 'teker yüksekliği', 'mesafesi',
+        'dimension', 'width', 'height', 'length', 'axle spread', 'axle spacing',
+        'wheelbase', 'weight', 'diameter', 'distance', 'fifth wheel',
     ];
-    private const CAP_WORDS = ['kapasite', 'hacim', 'bölme', 'bolme', 'tonaj'];
+    private const CAP_WORDS = [
+        'kapasite', 'hacim', 'bölme', 'bolme', 'tonaj',
+        'capacity', 'volume', 'compartment', 'tonnage', 'payload',
+    ];
 
     /** Generic titles that would only duplicate the master heading. */
     private const GENERIC_TITLES = [
         'teknik özellikler', 'teknik bilgi', 'teknik bilgiler', 'teknik ölçüler',
         'ölçüler', 'kapasite', 'genel', 'genel özellikler',
+        'technical specifications', 'technical data', 'technical details',
+        'technical dimensions', 'dimensions', 'capacity', 'general',
+        'general features',
     ];
 
     private static function classify(string $text): string
