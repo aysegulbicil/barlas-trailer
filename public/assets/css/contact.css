@@ -623,6 +623,9 @@ html.contact-deliver .contact-convoy.is-pulled .contact-form {
    kalır (anlamlı bir illüstrasyon), yalnız halat çizilmez. (contact-deliver,
    <head> içindeki satır içi script ile ilk boyamadan önce eklenir → FOUC yok.) */
 html:not(.contact-deliver) .contact-rope { display: none; }
+/* Halat yoksa formdaki çekme kulpu da anlamsız — mobil, reduced-motion ve
+   JS'siz durumların hepsini tek kural kapsar (sınıf yalnız masaüstünde eklenir). */
+html:not(.contact-deliver) .contact-form__lug { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
     html.contact-anim .contact-hero__intro .contact-hero__title,
