@@ -101,6 +101,11 @@
 :root[data-theme="light"] .road__cap {
     background: rgba(255, 255, 255, 0.82);
 }
+/* Referans logo bandı: koyu temada koyu lacivert (yeni.css), açıkta beyaz. */
+:root[data-theme="light"] .refs__belt {
+    background: #FFFFFF;
+    border-color: var(--line);
+}
 @media (prefers-reduced-transparency: reduce) {
     :root[data-theme="light"] .road__cap { background: var(--bg-1); }
 }

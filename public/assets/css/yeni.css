@@ -1276,11 +1276,11 @@ html.has-anim .why__cards > .is-in {
 .refs { padding-block: var(--sec-y); }
 .refs .sec-head { margin-block-end: 1.6rem; }
 
-/* Bant zemini sabit koyu lacivert — koyu ve aydınlık temada aynı.
-   Literal renk olduğu için tema ezmelerinden etkilenmez. */
+/* Bant zemini koyu temada koyu lacivert; açık temada theme-light.css
+   beyaza ezer (.refs__belt ezmesi, bölüm 4). */
 .refs__belt {
     overflow: hidden;
-    background: #fff;
+    background: #181849;
     /* --hairline (açık tema değeri) koyu bantta görünmüyordu — sabit ton */
     border-block: 1px solid rgba(226, 236, 248, 0.07);
     padding-block: 1.6rem;
@@ -1313,42 +1313,18 @@ html.has-anim .why__cards > .is-in {
     to   { transform: translateX(-50%); }
 }
 
-/* Tek tip logo "chip"i: kaynak logolar karışık formatta (kimi opak beyaz
-   kutulu, kimi şeffaf, boyutlar dengesiz) — hepsine aynı beyaz zemin,
-   aynı yükseklik ve aynı köşe verilerek bant tek düzene oturtulur.
-   Beyaz chip her iki temada da sabittir (bant zemini de sabit koyu). */
+/* Logolar chip/kutu OLMADAN doğrudan bant üzerinde durur (kullanıcı
+   tercihi 2026-07-06 — önceki tek tip chip sistemi kaldırıldı).
+   Kaynak logolar karışık formatta: opak beyaz kutulu olanlar kendi
+   zeminiyle görünür; nihai cila = kaynak görselleri şeffaflaştırmak. */
 .refs__logo {
     flex: 0 0 auto;
     display: grid;
     place-items: center;
-    min-inline-size: 150px;
-    block-size: 72px;
-    padding-inline: 1.3rem;
-    background: #FFFFFF;
-    border: 1px solid rgba(226, 236, 248, 0.10);
-    border-radius: 14px;
-    transition: transform var(--t-base) var(--ease-out),
-                box-shadow var(--t-base) var(--ease-out);
+    transition: transform var(--t-base) var(--ease-out);
 }
-.refs__logo:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 16px 32px -18px rgba(0, 0, 0, 0.65);
-}
+.refs__logo:hover { transform: translateY(-3px); }
 .refs__logo img { height: 38px; width: auto; max-width: 160px; object-fit: contain; display: block; }
-
-/* Açık (beyaz/gümüş) çizimli logolar beyaz chipte kaybolur → koyu chip.
-   Kalıcı kural: dosya adı "-dark" içeren her logo koyu chip alır (yeni logo
-   eklerken açık renkliyse adına "-dark" ekle, örn. 16-firma-dark.png).
-   Mevcut sayısal adlardan bilinenler: 11=EVC, 13=Kurşun Grup, 14=Uçan,
-   15=Mücür (siyah kutulu — koyu chipte kutusu kaybolur). */
-.refs__logo[data-logo="11"],
-.refs__logo[data-logo="13"],
-.refs__logo[data-logo="14"],
-.refs__logo[data-logo="15"],
-.refs__logo[data-logo*="-dark"] {
-    background: #111B30;
-    border-color: rgba(226, 236, 248, 0.14);
-}
 
 @media (prefers-reduced-motion: reduce) {
     .refs__belt-track { animation: none; flex-wrap: wrap; width: auto; }

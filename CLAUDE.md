@@ -38,7 +38,7 @@
 ## Dokunma / dikkat
 - Kullanıcının Codex ile eklediği dosyalar korunacak: `public/assets/js/categories-carousel.js`, `ai-assistant.js` ve benzeri post-phase geliştirmeler — **değiştirme**.
 - `docs/ROADMAP.md` ≈ `PROJECT_STRUCTURE.md` kopyası; gerçek yol haritası değil.
-- Referans logo duvarı (2026-07-03): sabit koyu bant + TEK TİP chip sistemi (`yeni.css .refs__logo`). Varsayılan chip beyaz; açık/beyaz çizimli logolar koyu chip alır — yeni logo açık renkliyse dosya adına `-dark` ekle (örn. `16-firma-dark.png`). Mevcut koyu chip'liler: 11 (EVC), 13 (Kurşun Grup), 14 (Uçan), 15 (Mücür).
+- Referans logo duvarı (2026-07-06): bant tema duyarlı — koyu temada `#181849` (`yeni.css .refs__belt`), açık temada beyaz (`theme-light.css` ezmesi). Chip/kutu YOK — logolar doğrudan bant üzerinde (kullanıcı tercihi; eski tek tip chip sistemi ve `-dark` konvansiyonu kaldırıldı). Opak beyaz kutulu kaynak logolar kendi zeminiyle görünür; nihai cila = kaynak görselleri şeffaflaştırmak.
 
 ## Yapı özeti
 - `app/Controllers/` — Home, Products, Services, Blog, Contact, Quote, Media, Ai, Language, Tools (hesaplayıcılar+quiz), Faq, Games, Legal, Wiki, Press, Markets (ülke sayfaları), News (üretim haberleri), Vehicle (QR kart + şasi doğrulama), Sitemap (sitemap.xml+robots.txt dinamik), Panel (Jarvis).
