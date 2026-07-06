@@ -37,16 +37,21 @@ RUN sed -ri 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-availabl
       > /etc/apache2/conf-available/zz-barlas.conf \
  && a2enconf zz-barlas
 
-# OPcache — geliştirici dostu: değişen PHP dosyaları en geç 2 sn'de algılanır,
-# ama derlenmiş bytecode bellekte tutulur (her istekte yeniden derleme yok).
-# Üretimde maksimum hız için validate_timestamps=0 yapıp imajı yeniden başlatın.
+# OPcache — Windows bind-mount'ta her stat ~1-2 ms sürer (native'in ~100
+# katı); revalidate_freq=2 bu yüzden HER isteğe ~500 stat'lık vergi
+# bindiriyordu (ölçüldü: sayfa başına ~700 ms). 60 sn'lik pencere + realpath
+# önbelleği bu vergiyi keser; PHP kodu değişiklikleri en geç 60 sn'de (veya
+# `docker exec barlas-apache apachectl -k graceful` ile anında) görünür.
+# Üretimde (native fs) maksimum hız için validate_timestamps=0 yapılabilir.
 RUN { \
       echo 'opcache.enable=1'; \
       echo 'opcache.memory_consumption=192'; \
       echo 'opcache.interned_strings_buffer=16'; \
       echo 'opcache.max_accelerated_files=20000'; \
       echo 'opcache.validate_timestamps=1'; \
-      echo 'opcache.revalidate_freq=2'; \
+      echo 'opcache.revalidate_freq=60'; \
+      echo 'realpath_cache_size=4096K'; \
+      echo 'realpath_cache_ttl=600'; \
     } > /usr/local/etc/php/conf.d/zz-opcache.ini
 
 # Gömülü uygulama limitleri: teklif kaydetme gövdesi data-URI görseller

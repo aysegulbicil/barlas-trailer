@@ -18,6 +18,13 @@ services:
     volumes:
       # Proje canlı bağlanır; kod/varlık düzenlemeleri anında yansır.
       - ./:/var/www/html
+      # Perf (Windows bind-mount): vendor/ neredeyse hiç değişmez ama CI4
+      # boot'unun dosya erişimlerinin çoğu buradadır; bind mount üzerinde
+      # her stat ~1-2 ms sürüp sayfa başına ~1 sn'ye mal oluyordu (ölçüldü).
+      # Named volume (native disk) bind'ın üzerine biner → boot ~3x hızlı.
+      # İLK KURULUM + her composer güncellemesinden sonra volume'u doldur:
+      #   docker cp vendor/. barlas-apache:/var/www/html/vendor/
+      - vendor-data:/var/www/html/vendor
       # Gömülü uygulamalar (apps/): Alias + giriş kapısı tanımları.
       - ./deploy/apache-apps.conf:/etc/apache2/conf-enabled/zz-apps.conf:ro
     environment:
@@ -57,3 +64,6 @@ services:
 
 volumes:
   db-data:
+  # vendor/ kopyası (perf): kaynak doğruluk hâlâ host'taki vendor/ klasörüdür;
+  # composer değişikliğinden sonra "docker cp vendor/. barlas-apache:/var/www/html/vendor/"
+  vendor-data:

@@ -34,7 +34,7 @@ class Media extends BaseController
     private const BEFORE_AFTER = 'before-after';
 
     /** Yer tutucu video kartlarında küçük resim olarak kullanılacak görseller. */
-    private const FALLBACK_VIDEO_THUMBS = ['hero-2.png', 'hero-3.png', 'hero-1.png'];
+    private const FALLBACK_VIDEO_THUMBS = ['hero-2.webp', 'hero-3.webp'];
 
     public function index(): string
     {

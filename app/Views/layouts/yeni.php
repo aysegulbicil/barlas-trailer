@@ -59,15 +59,15 @@ $asset = static function (string $path): string {
     ?>
     <?php if ($__isHome || $__isContact): ?>
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-        <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.module.js">
         <?php if ($__isHome): ?>
+            <!-- Three.js yalnız ana sayfada gerekir (yol konvoyu sahnesi). -->
+            <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.module.js">
             <!-- Statik hero görselini erken indir → hero'nun ilk boyası hızlansın.
                  WebP ~139KB (PNG 2.1MB); URL hero-static.php ile BİREBİR aynı olmalı. -->
             <link rel="preload" as="image" type="image/webp" href="<?= $asset('assets/images/25a460c4-3549-4d3c-9fcc-3140cf583b67.webp') ?>" fetchpriority="high">
         <?php endif; ?>
-        <!-- NOT: iletişim sayfasının tanker-1.glb preload'u kaldırıldı — sahne
-             artık 3D değil, SVG usta (contact-foreman.js); GLB gerekmiyor.
-             preconnect iletişimde kalır (GSAP aynı CDN'den geliyor). -->
+        <!-- NOT: iletişim sahnesi 3D değil, SVG usta (contact-foreman.js);
+             THREE/GLB gerekmiyor. preconnect iletişimde kalır (GSAP aynı CDN'den). -->
     <?php endif; ?>
 
     <!-- Ortak header: eski tasarımın token + menü/mega stilleri,
@@ -137,9 +137,12 @@ $asset = static function (string $path): string {
         <script src="<?= $asset('assets/js/cinema-intro.js') ?>" defer></script>
     <?php endif; ?>
 
+    <?php if ($__isHome): ?>
     <!-- 3D: tek bir THREE örneği (ESM) + GLTFLoader. three 0.149 artık global
          "examples/js" sunmuyor; bu yüzden import map ile 'three' eşlenir ve
-         GLTFLoader aynı örneği kullanır. Hazır olunca yeni-tanker.js yüklenir. -->
+         GLTFLoader aynı örneği kullanır. Hazır olunca yeni-tanker.js yüklenir.
+         YALNIZ ana sayfada: 3D sahneler (konvoy) sadece burada var — iletişim
+         dahil diğer sayfalar THREE indirmesin (~640KB modül + parse). -->
     <script type="importmap">
     {
       "imports": {
@@ -183,13 +186,11 @@ $asset = static function (string $path): string {
                 var s = document.createElement('script');
                 s.src = '<?= $asset('assets/js/yeni-tanker.js') ?>';
                 document.body.appendChild(s);
-                <?php if ($__isHome): ?>
-                /* Statik sinematik hero motoru (yalnızca ana sayfa). Görsel "ikiye
-                   ayrılma" için yalnızca GSAP + ScrollTrigger (defer) gerekir; 3D yok. */
+                /* Statik sinematik hero motoru. Görsel "ikiye ayrılma" için
+                   yalnızca GSAP + ScrollTrigger (defer) gerekir; 3D yok. */
                 var hs = document.createElement('script');
                 hs.src = '<?= $asset('assets/js/hero-static.js') ?>';
                 document.body.appendChild(hs);
-                <?php endif; ?>
             }
             // gsap/ScrollTrigger defer scriptleri DOMContentLoaded'a kadar yüklenir;
             // yeni-tanker.js'i o aşamada enjekte et ki yol sahnesi (scrub) çalışsın.
@@ -200,6 +201,7 @@ $asset = static function (string $path): string {
             }
         })();
     </script>
+    <?php endif; ?>
 
     <!-- Ortak header davranışı: mobil çekmece, mega menüler, dil seçici,
          scrolled durumu (eski tasarımla aynı modül — tek kaynak) -->

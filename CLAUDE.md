@@ -14,8 +14,9 @@
 
 ## Çalıştırma
 - Site compose-yönetimli `barlas-apache` konteyneriyle (Apache + mod_php, gzip + cache) **:8080**'de sunuluyor; `docker compose up -d` güvenlidir. (Eski elle başlatılan `barlas-trailer` konteyneri emekli.)
+- **Perf düzeni (2026-07-06, Windows bind-mount stat vergisine karşı; sayfa üretimi ~3 sn → ~0.2 sn — bozma):** `vendor/` named volume'da (`vendor-data`, bind'ın üzerine biner) — **composer install/update'ten sonra `docker cp vendor/. barlas-apache:/var/www/html/vendor/` şart**, yoksa konteyner eski vendor'la koşar. OPcache `revalidate_freq=60` (Dockerfile): PHP değişikliği en geç 60 sn'de görünür; anında görmek için `docker exec barlas-apache apachectl -k graceful`. CSS/JS/görsel statiktir, bundan etkilenmez.
 - Spark komutlarını **www-data ile** çalıştır: `docker exec -u www-data barlas-apache php /var/www/html/spark ...` — root ile çalıştırılırsa oluşan dosyalara Apache yazamaz (SQLite "readonly database" hatası yaşandı).
-- ⚠️ Konteynere elle kurulan araçlar (composer, unzip, cwebp) **yeniden oluşturmada silinir** — kalıcı gereken araç Dockerfile'a eklenmeli; vendor/ bind-mount'ta olduğu için paketler kalır.
+- ⚠️ Konteynere elle kurulan araçlar (composer, unzip, cwebp) **yeniden oluşturmada silinir** — kalıcı gereken araç Dockerfile'a eklenmeli. (vendor/ artık named volume'da; rebuild'de kalır ama `docker compose down -v` volume'u siler → tekrar `docker cp` gerekir.)
 - Sayfa önbelleği aktif (`cachePage`): view/controller değişikliği görünmüyorsa `spark cache:clear`.
 - Ajanlar: `spark agents:{rates,health,digest,faq-candidates,reminders,content-factory,analyst,domain-watch}` — kill-switch bayrağı `writable/data/flags/` (panel > Ajanlar'dan da yönetilir); VPS'te cron'a bağlanacak (docblock'larda hazır). Not: domain-watch DNS taraması konteynerde ~9 dk sürer (NXDOMAIN zaman aşımı) — haftalık cron'da sorun değil.
 - Jarvis paneli: `/panel` (Shield `session` filtresi + superadmin grubu). Kayıt/magic-link kapalı; kullanıcı yalnız `spark panel:admin <email> <parola>` ile açılır. Shield yüzünden `Security::$csrfProtection = 'session'` zorunlu; `auth`+`setting` helper'ları Autoload'da (filtreler controller'dan önce koşar).
