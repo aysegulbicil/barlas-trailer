@@ -6,7 +6,8 @@
  * Sol: çizgi film stili SVG usta maskotu — halata asıla asıla sağdaki formu çeker
  * (form gizli başlar, her asılışta bir adım yaklaşır, oturunca usta halatı
  * bırakıp doğrulur). Form gönderilince usta kolunu kaldırıp selam verir,
- * sahnede onay belirir. Halat, ustanın eli ile formun kulpu arasında JS'te
+ * sahnede onay belirir; "yeni mesaj"da sahne başa sarar ve usta formu
+ * yeniden çeker. Halat, ustanın eli ile formun kulpu arasında JS'te
  * her karede çizilir (contact-foreman.js) — mobil ve RTL'de de çalışır.
  * Sağ: cam panelli iletişim formu (gerçek POST → Contact::submit).
  * Altta: telefon / e-posta / adres kartları ve harita.

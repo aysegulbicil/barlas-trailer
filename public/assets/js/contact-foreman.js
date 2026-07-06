@@ -6,6 +6,8 @@
  *    Form gizli başlar; her asılışta bir adım yaklaşır, yerine oturunca usta
  *    halatı bırakıp doğrulur ve nefes alma (idle) döngüsüne geçer. Form
  *    gönderilince usta kolunu kaldırıp selam verir, sahnede onay belirir.
+ *    "Yeni mesaj"la form sıfırlanınca sahne başa sarar ve usta formu YENİDEN
+ *    çeker (contact:reset dinlenir; teslimatta contact:delivered yayınlanır).
  * 2) Halat: ustanın eli ([data-hand-anchor]) ile formun kulpu ([data-form-lug])
  *    arasında her karede yeniden çizilir (getBoundingClientRect tabanlı) —
  *    masaüstü/mobil/RTL düzenlerinde aynı kod çalışır; gerginlik state.sag ile
@@ -106,12 +108,15 @@
 
         /* Form fiziksel sağdan çekilir; RTL'de düzen aynalanır (usta sağda,
            form soldan gelir) → ofset işareti ters çevrilir. Usta SVG'si CSS'te
-           scaleX(-1) ile aynalanır (contact.css [dir=rtl] kuralı). */
+           scaleX(-1) ile aynalanır (contact.css [dir=rtl] kuralı). Her çekişte
+           yeniden hesaplanır: tekrar oynatmada pencere boyutu değişmiş olabilir. */
         var isRTL = (document.documentElement.getAttribute('dir') === 'rtl');
-        var vw = window.innerWidth;
-        var base = vw < 992 ? Math.round(vw * 0.72)
-                            : Math.max(380, Math.min(760, Math.round(vw * 0.55)));
-        var OFF = isRTL ? -base : base;
+        function offscreenX() {
+            var vw = window.innerWidth;
+            var base = vw < 992 ? Math.round(vw * 0.72)
+                                : Math.max(380, Math.min(760, Math.round(vw * 0.55)));
+            return isRTL ? -base : base;
+        }
 
         var state = { sag: 34 };   // halat sarkması (px); gergin ≈ 5, gevşek ≈ 46
         var ropeOn = false;
@@ -138,11 +143,11 @@
             idleTweens.push(gsap.to(head, { rotation: 1.2, duration: 2.3, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 0.3 }));
         }
 
-        var started = false;
+        var pullTl = null;     // aktif çekiş timeline'ı; koşarken yeni çekiş başlatılmaz
         function startPull() {
-            if (started) return;
-            started = true;
+            if (pullTl && pullTl.isActive()) return;
             convoyRevealed = true;                   // güvenlik zamanlayıcısı devreye girmesin
+            var OFF = offscreenX();
 
             /* is-pulled: CSS'teki gizli-başlangıç + ctFormSafety animasyonunu kapatır
                (form artık GSAP'ın inline transform'uyla sürülür). is-driving: form
@@ -154,7 +159,7 @@
             ropeOn = true;
             gsap.ticker.add(drawRope);
 
-            var tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } });
+            var tl = pullTl = gsap.timeline({ defaults: { ease: 'power2.inOut' } });
 
             /* Usta halatı omzuna alır, halat belirir */
             tl.to(rope, { opacity: 1, duration: 0.35 }, 0);
@@ -206,20 +211,45 @@
             tl.add(function () {
                 convoyEl.classList.remove('is-driving');   // form durdu → cam blur geri
                 startIdle();
+                // Form yerine oturdu (ilk geliş VE tekrarlar) — dinleyen varsa odaklanır
+                document.dispatchEvent(new CustomEvent('contact:delivered'));
             });
         }
 
         /* Gönderildi: usta kolunu kaldırıp selam verir, onay kartı belirir
-           (kart görünürken usta CSS ile silüete düşer — contact.css is-done). */
+           (kart görünürken usta CSS ile silüete düşer — contact.css is-done).
+           once DEĞİL: "yeni mesaj" akışında her gönderimde tekrar selam verir. */
         document.addEventListener('contact:sent', function () {
             idleTweens.forEach(function (t) { t.kill(); });
+            idleTweens.length = 0;
             var t2 = gsap.timeline();
             t2.to(arms,  { rotation: -68, duration: 0.5, ease: 'back.out(1.7)' }, 0);
             t2.to(fores, { rotation: -26, duration: 0.5, ease: 'back.out(1.7)' }, 0.05);
             t2.to(head,  { rotation: -7, duration: 0.4, ease: 'power2.out' }, 0.1);
             t2.to(hips,  { rotation: 3,  duration: 0.4, ease: 'power2.out' }, 0);
             gsap.delayedCall(0.85, function () { stage.classList.add('is-done'); });
-        }, { once: true });
+        });
+
+        /* "Yeni mesaj gönder": sahneyi başa sar, formu yeniden çektir.
+           (Buton yalnız gönderim sonrası görünür → çekiş sırasında gelmez;
+           yine de isActive() koruması çifte tetiği yutar.) */
+        function resetScene() {
+            idleTweens.forEach(function (t) { t.kill(); });
+            idleTweens.length = 0;
+            if (pullTl) { pullTl.kill(); pullTl = null; }
+            gsap.killTweensOf(arms.concat(fores, [hips, head, root, state]));
+            ropeOn = false;
+            gsap.ticker.remove(drawRope);
+            gsap.set(rope, { opacity: 0 });
+            stage.classList.remove('is-done');
+            gsap.set(arms.concat(fores, [hips, head]), { rotation: 0 });
+            gsap.set(root, { y: 0 });
+        }
+
+        document.addEventListener('contact:reset', function () {
+            resetScene();
+            startPull();
+        });
 
         /* Başlat: sahne görünür olunca (hero sayfa başında → pratikte hemen). */
         if ('IntersectionObserver' in window) {
@@ -346,14 +376,42 @@
         });
 
         var resetBtn = form.querySelector('[data-reset]');
+        var focusAfterDeliver = false;
+
+        function focusName() {
+            var n = el('name');
+            if (!n || !n.focus) return;
+            try { n.focus({ preventScroll: true }); } catch (e) { try { n.focus(); } catch (e2) {} }
+        }
+
+        /* Usta formu yeniden çektiyse imleç, form yerine OTURUNCA ada gider
+           (uçuştaki gizli inputa odaklanmak kaydırma/titreme yapardı). */
+        document.addEventListener('contact:delivered', function () {
+            if (!focusAfterDeliver) return;
+            focusAfterDeliver = false;
+            focusName();
+        });
+
         if (resetBtn) {
             resetBtn.addEventListener('click', function () {
                 form.classList.remove('is-sent');
                 form.reset();
                 clearErrs();
                 if (statusEl) statusEl.textContent = '';
-                var n = el('name');
-                if (n && n.focus) { try { n.focus(); } catch (e) {} }
+                if (document.documentElement.classList.contains('contact-deliver')) {
+                    /* Hareket açık: sahne başa sarar, usta formu yeniden çeker.
+                       Sahne kurulamamışsa (dinleyici yok) teslimat olayı gelmez —
+                       güvenlik zamanlayıcısı odağı yine de teslim eder. */
+                    focusAfterDeliver = true;
+                    document.dispatchEvent(new CustomEvent('contact:reset'));
+                    window.setTimeout(function () {
+                        if (!focusAfterDeliver) return;
+                        focusAfterDeliver = false;
+                        focusName();
+                    }, 6500);
+                } else {
+                    focusName();
+                }
             });
         }
     }
