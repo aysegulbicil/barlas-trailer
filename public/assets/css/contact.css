@@ -97,7 +97,10 @@
 }
 
 /* Formun sol kenarındaki çekme kulpu (halatın form ucu). Ortası şeffaf:
-   halatın düğümü halkanın içinden görünür → "gerçekten bağlı" hissi. */
+   halatın düğümü halkanın içinden görünür → "gerçekten bağlı" hissi.
+   Varsayılan görünmez — yalnız halat sahnedeyken JS (contact-foreman.js)
+   opacity'yi halatla birlikte açıp kapatır; çekiş bitince iz bırakmaz.
+   (Konum/ölçü sabit kalır: halat ucu rect'i her karede buradan okunur.) */
 .contact-form__lug {
     position: absolute;
     inset-inline-start: -8px;
@@ -108,6 +111,7 @@
     border: 3.5px solid color-mix(in srgb, var(--ink-1) 42%, var(--blue-bright));
     background: transparent;
     box-shadow: 0 4px 12px -4px var(--blue-soft);
+    opacity: 0;
 }
 
 /* --------------------------- Hero başlık ---------------------------- */

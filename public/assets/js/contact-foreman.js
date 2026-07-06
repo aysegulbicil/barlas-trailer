@@ -296,7 +296,7 @@
             convoyEl.classList.add('is-pulled');
             convoyEl.classList.add('is-driving');
             gsap.set(form, { x: OFF, opacity: 1, rotation: 0 });
-            gsap.set(rope, { opacity: 0 });
+            gsap.set([rope, lug], { opacity: 0 });
             state.sag = TUNE.rope.slack;
             state.tension = 0;
             ropeOn = true;
@@ -304,9 +304,10 @@
 
             var tl = pullTl = gsap.timeline({ defaults: { ease: E.body } });
 
-            /* BEKLENTİ: halat görünür, usta kavrayıp geriye yaslanır, omuzlar
-               gerilir, halat toplanır (sarkma düşer) ve efor titremesi gelir. */
-            tl.to(rope, { opacity: 1, duration: T.ropeIn }, 0);
+            /* BEKLENTİ: halat + form kulpu birlikte görünür (kulp yalnız halat
+               sahnedeyken var), usta kavrayıp geriye yaslanır, omuzlar gerilir,
+               halat toplanır (sarkma düşer) ve efor titremesi gelir. */
+            tl.to([rope, lug], { opacity: 1, duration: T.ropeIn }, 0);
             tl.to(hips,  { rotation: P.brace.hips, duration: T.brace, ease: E.reach }, T.ropeIn * 0.4);
             tl.to(head,  { rotation: P.brace.head, duration: T.brace, ease: E.reach }, '<');
             tl.to(arms,  { rotation: P.brace.arm,  duration: T.brace, ease: E.reach }, '<');
@@ -358,7 +359,7 @@
             tl.to(form, { x: dir * 2.5, rotation: 0, duration: T.microBack, ease: 'power1.out' }, '>');
             tl.to(form, { x: 0, duration: T.microSettle, ease: E.micro }, '>');
             tl.to(state, { sag: TUNE.rope.release, tension: 0, duration: T.release, ease: E.release }, '<-0.1');
-            tl.to(rope, { opacity: 0, duration: T.ropeOut }, '<0.25');
+            tl.to([rope, lug], { opacity: 0, duration: T.ropeOut }, '<0.25');
             tl.add(function () { ropeOn = false; gsap.ticker.remove(drawRope); squint(false); });
             /* Dinlenme pozu: eller gövdenin önünde, uyluk hizasında — 46°'de
                kollar gövde konturuyla üst üste binip kayboluyordu, 30° açık kalır */
@@ -396,12 +397,12 @@
         function resetScene() {
             stopIdle();
             if (pullTl) { pullTl.kill(); pullTl = null; }
-            gsap.killTweensOf(arms.concat(fores, [hips, head, root, form, state]));
+            gsap.killTweensOf(arms.concat(fores, [hips, head, root, form, state, lug]));
             if (pupil) gsap.set(pupil, { x: 0, y: 0 });
             squint(false);
             ropeOn = false;
             gsap.ticker.remove(drawRope);
-            gsap.set(rope, { opacity: 0 });
+            gsap.set([rope, lug], { opacity: 0 });
             stage.classList.remove('is-done');
             gsap.set(arms.concat(fores, [hips, head]), { rotation: 0 });
             gsap.set(hips, { scaleY: 1 });

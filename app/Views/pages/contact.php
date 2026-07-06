@@ -261,7 +261,8 @@ $jsVer  = is_file(FCPATH . 'assets/js/contact-foreman.js') ? filemtime(FCPATH . 
                       novalidate>
                     <?= csrf_field() ?>
 
-                    <!-- Çekme kulpu: halatın form ucu (JS rect ile okur) -->
+                    <!-- Çekme kulpu: halatın form ucu (JS rect ile okur). Görünürlüğü
+                         halatla senkron: çekiş dışında görünmez (CSS opacity 0). -->
                     <span class="contact-form__lug" data-form-lug aria-hidden="true"></span>
 
                     <div class="contact-form__inner">
