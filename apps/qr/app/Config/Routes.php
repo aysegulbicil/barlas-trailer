@@ -12,6 +12,7 @@ $routes->get('display/(:num)/(:segment)', 'Display::screen/$1/$2');
 $routes->get('login', 'Auth::login');
 $routes->post('login', 'Auth::attemptLogin');
 $routes->get('logout', 'Auth::logout');
+$routes->get('sso', 'Sso::enter'); // ortak giriş kapısından (hub) tokenli otomatik giriş
 
 $routes->group('', ['filter' => 'auth'], static function (RouteCollection $routes) {
     $routes->get('dashboard', 'Dashboard::index');

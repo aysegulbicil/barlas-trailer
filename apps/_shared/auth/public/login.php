@@ -21,6 +21,9 @@ function apps_next(?string $next): string
         || str_starts_with($next, '//') || str_contains($next, '\\')) {
         return '';
     }
+    if ($next === '/apps-auth/go-qr.php') { // hub'ın QR köprüsü — girişten sonra kaldığın yerden
+        return $next;
+    }
     foreach (['/qr', '/fatura', '/teklif'] as $prefix) {
         if ($next === $prefix || $next === $prefix . '/' || str_starts_with($next, $prefix . '/')) {
             return $next;
@@ -97,7 +100,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && empty($_SESSION['apps_us
         session_regenerate_id(true);
         $_SESSION['apps_user'] = strtolower(trim((string) $_POST['email']));
         @unlink(apps_ratelimit_path());
-        header('Location: ' . ($next !== '' ? $next : '/apps-auth/login.php'), true, 302);
+        header('Location: ' . ($next !== '' ? $next : '/apps-auth/'), true, 302);
         exit;
     } else {
         usleep(350000);
@@ -106,10 +109,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && empty($_SESSION['apps_us
     }
 }
 
-$user = $_SESSION['apps_user'] ?? '';
-// Girişliyken login'e gelinirse ve geçerli bir next varsa direkt oraya geç.
-if ($user !== '' && $next !== '') {
-    header('Location: ' . $next, true, 302);
+// Girişliyken login'in işi yok: next varsa oraya, yoksa kart hub'ına geç.
+if (!empty($_SESSION['apps_user'])) {
+    header('Location: ' . ($next !== '' ? $next : '/apps-auth/'), true, 302);
     exit;
 }
 ?>
@@ -152,30 +154,12 @@ if ($user !== '' && $next !== '') {
     margin-top: 14px; padding: 10px 12px; border-radius: 10px; font-size: 13px;
     background: rgba(220, 38, 38, .12); border: 1px solid rgba(248, 113, 113, .35); color: #fca5a5;
   }
-  .hub a {
-    display: block; margin-top: 10px; padding: 12px 14px; border-radius: 10px;
-    background: rgba(37, 99, 235, .12); border: 1px solid rgba(96, 165, 250, .3);
-    color: #bfdbfe; text-decoration: none; font-weight: 600;
-  }
-  .hub a:hover { background: rgba(37, 99, 235, .25); }
-  .out { margin-top: 18px; font-size: 13px; text-align: center; }
-  .out a { color: #94a3c8; }
 </style>
 </head>
 <body>
 <div class="card">
-<?php if ($user !== ''): ?>
-  <h1>İç Araçlar</h1>
-  <p class="sub"><?= htmlspecialchars($user, ENT_QUOTES) ?> olarak girişlisin.</p>
-  <nav class="hub">
-    <a href="/fatura/">📄 Fatura Takip</a>
-    <a href="/teklif/">📋 Teklif Sistemi</a>
-    <a href="/qr/">🕘 QR Personel (kendi girişi vardır)</a>
-  </nav>
-  <p class="out"><a href="/apps-auth/logout.php">Çıkış yap</a></p>
-<?php else: ?>
   <h1>İç Araçlar Girişi</h1>
-  <p class="sub">Fatura ve Teklif sistemleri için panel hesabınla gir.</p>
+  <p class="sub">QR, Teklif ve Fatura sistemleri için panel hesabınla gir.</p>
   <form method="post" action="/apps-auth/login.php">
     <input type="hidden" name="csrf" value="<?= htmlspecialchars($_SESSION['apps_csrf'], ENT_QUOTES) ?>">
     <input type="hidden" name="next" value="<?= htmlspecialchars($next, ENT_QUOTES) ?>">
@@ -186,7 +170,6 @@ if ($user !== '' && $next !== '') {
     <button type="submit">Giriş yap</button>
     <?php if ($error !== ''): ?><div class="err"><?= htmlspecialchars($error, ENT_QUOTES) ?></div><?php endif; ?>
   </form>
-<?php endif; ?>
 </div>
 </body>
 </html>
