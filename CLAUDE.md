@@ -21,6 +21,14 @@
 - Jarvis paneli: `/panel` (Shield `session` filtresi + superadmin grubu). Kayıt/magic-link kapalı; kullanıcı yalnız `spark panel:admin <email> <parola>` ile açılır. Shield yüzünden `Security::$csrfProtection = 'session'` zorunlu; `auth`+`setting` helper'ları Autoload'da (filtreler controller'dan önce koşar).
 - Testler: `composer test` (PHPUnit).
 
+## Gömülü uygulamalar (apps/) — 2026-07-05
+- Üç bağımsız iç araç repoya gömülü, aynı Apache'den Alias ile sunulur (`deploy/apache-apps.conf` → compose mount; istekler ana CI4'e hiç girmez): **`/qr`** = `apps/qr` (ikinci bir CI4 4.7 uygulaması, personel/QR yoklama, **kendi girişi var**, MySQLi), **`/fatura`** = `apps/fatura` (saf PHP fatura takip, PDO), **`/teklif`** = `apps/teklif` (saf PHP+JS teklif üretici, DB'siz — JSON + `offers/` klasörleri).
+- **Ortak giriş kapısı:** fatura+teklif `apps/_shared/auth/guard.php` (Apache `auto_prepend_file`) ile korunur; giriş `/apps-auth/login.php` — kimlik kaynağı **panelle aynı Shield kullanıcısı** (barlas.sqlite, düz PDO+password_verify). Teklif'in statik dosyaları (offers/ müşteri verisi!) `apps/teklif/gate.php` üzerinden servis edilir. `/qr/q/{kod}` bilinçli girişsizdir (QR okutma).
+- **Veritabanı:** `barlas-db` (mariadb:11) konteyneri, DB'ler `qr_sistemi` + `fatura_takip`, kullanıcı `apps` (parola compose `${APPS_DB_PASSWORD:-apps_pass}`; ilk kurulum `deploy/db-init/01-init.sh`). Ana site SQLite'ta kalır; kamusal sayfalara MariaDB sorgusu da SOKMA.
+- **Çerez izolasyonu:** ana site `ci_session`, qr `qr_session` (path `/qr`, `apps/qr/.env`), kapı `BARLASAPPS` — üçü aynı hostta çakışmadan yaşar. qr'ın `.env`'i git'te YOK; şablon `apps/qr/env.embedded.example`.
+- qr spark: `docker exec -u www-data barlas-apache php /var/www/html/apps/qr/spark ...`; qr composer ayrı proje (`docker run --rm -v "$PWD/apps/qr":/app composer:2 install`). Teklif PDF'i konteynerdeki Google Chrome ile üretilir (`_common.php` Linux dalı; Debian'ın chromium paketi WSL2/Docker'da çöküyor, Chrome .deb kullanıldı) — Windows/XAMPP dalı korunmuştur.
+- Bu uygulamaların arayüzleri bilinçli **tek dilli Türkçe** (Jarvis paneli gibi) — 15 dil parite kuralının kapsamı dışındadır.
+
 ## İçerik modeli
 - Ürünler: `app/Data/products.json` — **11 kategori / 76 ürün / 136 varyant** (tek doğruluk kaynağı; menü buradan üretilir, kırık link yoktur). Blog: front-matter'lı Markdown (Phase 2, henüz yok — metinler dil dosyalarında).
 - Markdown içerik motoru (`app/Libraries/MarkdownContent.php`): `app/Data/content/{wiki,news}/{locale}/{slug}.md` — slug tüm dillerde aynı, çeviri yoksa tr'ye düşer. Ülke sayfaları kayıt defteri: `app/Data/markets.json` (adlar `Markets.php` dil dosyalarında).

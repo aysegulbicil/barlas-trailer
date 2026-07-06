@@ -1,0 +1,815 @@
+{
+  "source": "products.json",
+  "categories": [
+    {
+      "slug": "tankers",
+      "name": "Tanker",
+      "products": [
+        {
+          "no": "1.1",
+          "name": "Akaryakıt / Yakıt Tankeri",
+          "slug": "akaryakit-yakit-tankeri",
+          "image": "images/tankers-akaryakit-yakit-tankeri.jpg",
+          "variants": [
+            "ADR Alüminyum Yakıt Tankeri",
+            "Yakıt Tankeri",
+            "ADR'li Alüminyum Akaryakıt Tankeri",
+            "Çelik Akaryakıt Tankeri",
+            "Akaryakıt Tankeri"
+          ]
+        },
+        {
+          "no": "1.2",
+          "name": "Asfalt / Bitüm Tankeri",
+          "slug": "asfalt-bitum-tankeri",
+          "image": "images/tankers-asfalt-bitum-tankeri.jpg",
+          "variants": [
+            "İzoleli Asfalt-Bitüm Tankeri",
+            "Bitüm Tanker Semi Treyler",
+            "Bitüm Tankeri"
+          ]
+        },
+        {
+          "no": "1.3",
+          "name": "Çelik Tanker",
+          "slug": "celik-tanker",
+          "image": "images/tankers-celik-tanker.jpg",
+          "variants": [
+            "ADR Çelik Tanker",
+            "Çelik Tanker"
+          ]
+        },
+        {
+          "no": "1.4",
+          "name": "Deveboynu Tanker",
+          "slug": "deveboynu-tanker",
+          "image": "images/tankers-deveboynu-tanker.jpg",
+          "variants": [
+            "Deveboynu Tanker Semi Treyler"
+          ]
+        },
+        {
+          "no": "1.5",
+          "name": "Eliptik Tanker",
+          "slug": "eliptik-tanker",
+          "image": "images/tankers-eliptik-tanker.jpg",
+          "variants": [
+            "Eliptik Tanker Kamyon Üstü",
+            "Eliptik Tanker Semi Treyler"
+          ]
+        },
+        {
+          "no": "1.6",
+          "name": "Gıda Tankeri",
+          "slug": "gida-tankeri",
+          "image": "images/tankers-gida-tankeri.jpg",
+          "variants": [
+            "Gıda Tankeri Kamyon Üstü",
+            "Gıda Tankeri Semi Treyler",
+            "Krom Gıda Tankeri",
+            "Paslanmaz Tanker - Gıda"
+          ]
+        },
+        {
+          "no": "1.7",
+          "name": "İzolasyonlu Tanker",
+          "slug": "izolasyonlu-tanker",
+          "image": "images/tankers-izolasyonlu-tanker.jpg",
+          "variants": [
+            "İzolasyonlu Tanker Semi Treyler"
+          ]
+        },
+        {
+          "no": "1.8",
+          "name": "Kimyasal Tanker",
+          "slug": "kimyasal-tanker",
+          "image": "images/tankers-kimyasal-tanker.jpg",
+          "variants": [
+            "Kimyasal Tanker Kamyon Üstü",
+            "Kimyasal Tanker Semi Treyler",
+            "Kimyasal Tankeri"
+          ]
+        },
+        {
+          "no": "1.9",
+          "name": "Konik Tanker",
+          "slug": "konik-tanker",
+          "image": "images/tankers-konik-tanker.jpg",
+          "variants": [
+            "Konik Tanker Semi Treyler"
+          ]
+        },
+        {
+          "no": "1.10",
+          "name": "Krom Asit Tankeri",
+          "slug": "krom-asit-tankeri",
+          "image": "images/tankers-krom-asit-tankeri.jpg",
+          "variants": [
+            "Krom Asit Tankeri"
+          ]
+        },
+        {
+          "no": "1.11",
+          "name": "Krom İzoleli Tanker",
+          "slug": "krom-izoleli-tanker",
+          "image": "images/tankers-krom-izoleli-tanker.jpg",
+          "variants": [
+            "Krom İzoleli Tanker"
+          ]
+        },
+        {
+          "no": "1.12",
+          "name": "LPG Tankeri",
+          "slug": "lpg-tankeri",
+          "image": "images/tankers-lpg-tankeri.jpg",
+          "variants": [
+            "LPG Tanker",
+            "LPG Tankeri Kamyon Üstü",
+            "LPG Tankeri Semi Treyler"
+          ]
+        },
+        {
+          "no": "1.13",
+          "name": "Paslanmaz Çelik Tanker - Tehlikeli Madde",
+          "slug": "paslanmaz-celik-tanker-tehlikeli-madde",
+          "image": "images/tankers-paslanmaz-celik-tanker-tehlikeli-madde.jpg",
+          "variants": [
+            "Paslanmaz Tanker - Tehlikeli Madde"
+          ]
+        },
+        {
+          "no": "1.14",
+          "name": "Paslanmaz Çelik Tanker - Tehlikesiz Madde",
+          "slug": "paslanmaz-celik-tanker-tehlikesiz-madde",
+          "image": "images/tankers-paslanmaz-celik-tanker-tehlikesiz-madde.jpg",
+          "variants": [
+            "Paslanmaz Tanker - Tehlikesiz Madde"
+          ]
+        },
+        {
+          "no": "1.16",
+          "name": "Silindirik Tanker",
+          "slug": "silindirik-tanker",
+          "image": "images/tankers-silindirik-tanker.jpg",
+          "variants": [
+            "Silindirik Tanker Kamyon Üstü",
+            "Silindirik Tanker Semi Treyler"
+          ]
+        },
+        {
+          "no": "1.17",
+          "name": "Su Tankeri",
+          "slug": "su-tankeri",
+          "image": "images/tankers-su-tankeri.jpg",
+          "variants": [
+            "Su Tankeri Semi Treyler"
+          ]
+        },
+        {
+          "no": "1.18",
+          "name": "Süt Tankeri Şasisi",
+          "slug": "sut-tankeri-sasisi",
+          "image": "images/tankers-sut-tankeri-sasisi.jpg",
+          "variants": [
+            "Süt Tankeri Şasesi"
+          ]
+        },
+        {
+          "no": "1.19",
+          "name": "Vakum Tanker",
+          "slug": "vakum-tanker",
+          "image": "images/tankers-vakum-tanker.jpg",
+          "variants": [
+            "Vakum Tanker Semi Treyler"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "silos",
+      "name": "Silobas",
+      "products": [
+        {
+          "no": "2.1",
+          "name": "Damperli Silobas",
+          "slug": "damperli-silobas",
+          "image": "images/silos-damperli-silobas.jpg",
+          "variants": [
+            "Damperli Silobas Tanker",
+            "Damper Tipi Silobas",
+            "Damperli Silobas Semi Treyler",
+            "Damperli Silo"
+          ]
+        },
+        {
+          "no": "2.3",
+          "name": "Sıvı Gübre Silobası",
+          "slug": "sivi-gubre-silobasi",
+          "image": "images/silos-sivi-gubre-silobasi.jpg",
+          "variants": [
+            "Sıvı Gübre Silobas"
+          ]
+        },
+        {
+          "no": "2.4",
+          "name": "Un ve Gıda Silobası",
+          "slug": "un-ve-gida-silobasi",
+          "image": "images/silos-un-ve-gida-silobasi.jpg",
+          "variants": [
+            "Un Silobası"
+          ]
+        },
+        {
+          "no": "2.5",
+          "name": "V Tipi Buğday Silobası",
+          "slug": "v-tipi-bugday-silobasi",
+          "image": "images/silos-v-tipi-bugday-silobasi.jpg",
+          "variants": [
+            "V Tipi Buğday Silobası"
+          ]
+        },
+        {
+          "no": "2.6",
+          "name": "V Tipi Silobas",
+          "slug": "v-tipi-silobas",
+          "image": "images/silos-v-tipi-silobas.jpg",
+          "variants": [
+            "V-Tipi Silobas",
+            "V Tipi Çelik Çimento Silobası",
+            "V Tipi Yatay Silobas Semi Treyler"
+          ]
+        },
+        {
+          "no": "2.7",
+          "name": "V Tipi Un ve Gıda Silobası",
+          "slug": "v-tipi-un-ve-gida-silobasi",
+          "image": "images/silos-v-tipi-un-ve-gida-silobasi.jpg",
+          "variants": [
+            "V Tipi Silobas Tanker",
+            "V Tipi Un ve Gıda Silobası"
+          ]
+        },
+        {
+          "no": "2.8",
+          "name": "Vakumlu Silobas",
+          "slug": "vakumlu-silobas",
+          "image": "images/silos-vakumlu-silobas.jpg",
+          "variants": [
+            "Vakum Silobas"
+          ]
+        },
+        {
+          "no": "2.9",
+          "name": "W Tipi (Milenyum) Silobas",
+          "slug": "w-tipi-milenyum-silobas",
+          "image": "images/silos-w-tipi-milenyum-silobas.jpg",
+          "variants": [
+            "W Tipi Silobas Dorse",
+            "W-Tipi (Milenyum) Silobas",
+            "W Tipi Alüminyum Silobas",
+            "W Tipi Çelik Silobas",
+            "W Tipi Yatay Silobas Semi Treyler",
+            "Milenyum Silobas"
+          ]
+        },
+        {
+          "no": "2.10",
+          "name": "Yem Silobası",
+          "slug": "yem-silobasi",
+          "image": "images/silos-yem-silobasi.jpg",
+          "variants": [
+            "Dorse Üzeri Yem Silobası",
+            "Kamyon Üzeri Yem Silobası",
+            "Römork Üzeri Yem Silobası"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "tippers",
+      "name": "Damper",
+      "products": [
+        {
+          "no": "3.1",
+          "name": "Akordiyon Hububat Tipi Damper",
+          "slug": "akordiyon-hububat-tipi-damper",
+          "image": "images/tippers-akordiyon-hububat-tipi-damper.jpg",
+          "variants": [
+            "Akordiyon Hububat Tipi Damper"
+          ]
+        },
+        {
+          "no": "3.3",
+          "name": "Havuz / Küvet Damper",
+          "slug": "havuz-kuvet-damper",
+          "image": "images/tippers-havuz-kuvet-damper.jpg",
+          "variants": [
+            "Havuz Damper",
+            "18m³ Havuz Damper",
+            "30m³ Havuz Damper",
+            "Küvet (Havuz) Damper"
+          ]
+        },
+        {
+          "no": "3.5",
+          "name": "Kamyon Üstü Damper",
+          "slug": "kamyon-ustu-damper",
+          "image": "images/tippers-kamyon-ustu-damper.jpg",
+          "variants": [
+            "Kamyon Üstü Damper"
+          ]
+        },
+        {
+          "no": "3.6",
+          "name": "Kapaklı Damper",
+          "slug": "kapakli-damper",
+          "image": "images/tippers-kapakli-damper.jpg",
+          "variants": [
+            "8.30 Kapaklı Damper",
+            "Yana Açılır Kapaklı Damper",
+            "8.60 Kapaklı Damper",
+            "Kapaklı Damper"
+          ]
+        },
+        {
+          "no": "3.7",
+          "name": "Kaya Tipi Damper",
+          "slug": "kaya-tipi-damper",
+          "image": "images/tippers-kaya-tipi-damper.jpg",
+          "variants": [
+            "Kaya Damper",
+            "Kaya Tipi Damper"
+          ]
+        },
+        {
+          "no": "3.8",
+          "name": "Multi Sistem Damper",
+          "slug": "multi-sistem-damper",
+          "image": "images/tippers-multi-sistem-damper.jpg",
+          "variants": [
+            "Multi Sistem Damper Semi Treyler"
+          ]
+        },
+        {
+          "no": "3.9",
+          "name": "Panel Tip Damper",
+          "slug": "panel-tip-damper",
+          "image": "images/tippers-panel-tip-damper.jpg",
+          "variants": [
+            "Panel Tip Damper Semi Treyler"
+          ]
+        },
+        {
+          "no": "3.10",
+          "name": "Yana Devirmeli Damper",
+          "slug": "yana-devirmeli-damper",
+          "image": "images/tippers-yana-devirmeli-damper.jpg",
+          "variants": [
+            "Yana Devirmeli Damper"
+          ]
+        },
+        {
+          "no": "3.11",
+          "name": "Yarım Boru Damper",
+          "slug": "yarim-boru-damper",
+          "image": "images/tippers-yarim-boru-damper.jpg",
+          "variants": [
+            "Yarım Boru Damper Semi Treyler"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "curtain",
+      "name": "Perdeli ve Tenteli",
+      "products": [
+        {
+          "no": "4.1",
+          "name": "Multi Ride",
+          "slug": "multi-ride",
+          "image": "images/curtain-multi-ride.jpg",
+          "variants": [
+            "Multi Ride (T.SCS NG MR / 90 - 12 / 27)"
+          ]
+        },
+        {
+          "no": "4.2",
+          "name": "Perdeli Swap Body",
+          "slug": "perdeli-swap-body",
+          "image": "images/curtain-perdeli-swap-body.jpg",
+          "variants": [
+            "Perdeli Swap Body"
+          ]
+        },
+        {
+          "no": "4.3",
+          "name": "Perdeli ve Tenteli",
+          "slug": "perdeli-ve-tenteli",
+          "image": "images/curtain-perdeli-ve-tenteli.jpg",
+          "variants": [
+            "T.SCL X+ / 150 - 12 / 27",
+            "T.SCL M / 150 - 12 / 27",
+            "T.SCS NG M / 90 - 12 / 27",
+            "T.SCS NG X+ / 90 - 12 / 27",
+            "T.SCD M / 90 - 12 / 27",
+            "T.SCD X+ / 90 - 12 / 27",
+            "T.SCC M / 125 - 12 / 27",
+            "T.SCC X+ / 125 - 12 / 27"
+          ]
+        },
+        {
+          "no": "4.5",
+          "name": "Tenteli Hafif",
+          "slug": "tenteli-hafif",
+          "image": "images/curtain-tenteli-hafif.jpg",
+          "variants": [
+            "Tenteli Hafif"
+          ]
+        },
+        {
+          "no": "4.6",
+          "name": "Tenteli Standart",
+          "slug": "tenteli-standart",
+          "image": "images/curtain-tenteli-standart.jpg",
+          "variants": [
+            "Tenteli Standart"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "reefer",
+      "name": "Frigorifik",
+      "products": [
+        {
+          "no": "5.1",
+          "name": "Frigorifik",
+          "slug": "frigorifik",
+          "image": "images/reefer-frigorifik.jpg",
+          "variants": [
+            "T.SRI C / 10 - 12 / 27",
+            "T.SRI F / 10 - 12 / 27",
+            "T.SRI P / 10 - 12 / 27",
+            "T.SRI FP / 10 - 12 / 27"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "dry-cargo",
+      "name": "Kuru Yük ve Kasa",
+      "products": [
+        {
+          "no": "6.1",
+          "name": "Kapalı Kasa Çelik Kargo Taşıyıcı",
+          "slug": "kapali-kasa-celik-kargo-tasiyici",
+          "image": "images/dry-cargo-kapali-kasa-celik-kargo-tasiyici.jpg",
+          "variants": [
+            "Kapalı Kasa Çelik Kargo Taşıyıcı"
+          ]
+        },
+        {
+          "no": "6.2",
+          "name": "Kuru Yük-Saç Kasa",
+          "slug": "kuru-yuk-sac-kasa",
+          "image": "images/dry-cargo-kuru-yuk-sac-kasa.jpg",
+          "variants": [
+            "Kuru Yük-Saç Kasa"
+          ]
+        },
+        {
+          "no": "6.4",
+          "name": "Kuruyük Alüminyum Kapak",
+          "slug": "kuruyuk-aluminyum-kapak",
+          "image": "images/dry-cargo-kuruyuk-aluminyum-kapak.jpg",
+          "variants": [
+            "Kuruyük Alüminyum Kapak"
+          ]
+        },
+        {
+          "no": "6.5",
+          "name": "Kuruyük Light Kapak",
+          "slug": "kuruyuk-light-kapak",
+          "image": "images/dry-cargo-kuruyuk-light-kapak.jpg",
+          "variants": [
+            "Kuruyük Light Kapak"
+          ]
+        },
+        {
+          "no": "6.6",
+          "name": "Kuruyük Rulo Taşıyıcı",
+          "slug": "kuruyuk-rulo-tasiyici",
+          "image": "images/dry-cargo-kuruyuk-rulo-tasiyici.jpg",
+          "variants": [
+            "Kuruyük Rulo Taşıyıcı"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "containers",
+      "name": "Konteyner Taşıyıcı",
+      "products": [
+        {
+          "no": "7.1",
+          "name": "Damperli Konteyner Taşıyıcı",
+          "slug": "damperli-konteyner-tasiyici",
+          "image": "images/containers-damperli-konteyner-tasiyici.jpg",
+          "variants": [
+            "Damperli Konteyner Taşıyıcı"
+          ]
+        },
+        {
+          "no": "7.2",
+          "name": "High Cube Konteyner Taşıyıcı",
+          "slug": "high-cube-konteyner-tasiyici",
+          "image": "images/containers-high-cube-konteyner-tasiyici.jpg",
+          "variants": [
+            "High Cube Konteyner Taşıyıcı"
+          ]
+        },
+        {
+          "no": "7.3",
+          "name": "Konteyner Taşıyıcı",
+          "slug": "konteyner-tasiyici",
+          "image": "images/containers-konteyner-tasiyici.jpg",
+          "variants": [
+            "Konteyner Taşıyıcı"
+          ]
+        },
+        {
+          "no": "7.4",
+          "name": "Liman İçi Konteyner Taşıyıcı",
+          "slug": "liman-ici-konteyner-tasiyici",
+          "image": "images/containers-liman-ici-konteyner-tasiyici.jpg",
+          "variants": [
+            "Liman İçi Konteyner Taşıyıcı"
+          ]
+        },
+        {
+          "no": "7.5",
+          "name": "Sabit Konteyner Taşıyıcı",
+          "slug": "sabit-konteyner-tasiyici",
+          "image": "images/containers-sabit-konteyner-tasiyici.jpg",
+          "variants": [
+            "Sabit Konteyner Taşıyıcı (T.SHG S / 40 - 12 / 27)",
+            "Sabit Konteyner Taşıyıcı",
+            "Sabit Konteyner Taşıyıcı (T.SHF T / 20 - 12 / 27)",
+            "Sabit Konteyner Taşıyıcı (T.SHG L / 45 - 15 / 27)"
+          ]
+        },
+        {
+          "no": "7.6",
+          "name": "Standart Konteyner Taşıyıcı",
+          "slug": "standart-konteyner-tasiyici",
+          "image": "images/containers-standart-konteyner-tasiyici.jpg",
+          "variants": [
+            "Standart Konteyner Taşıyıcı"
+          ]
+        },
+        {
+          "no": "7.7",
+          "name": "Teleskopik Konteyner Taşıyıcı",
+          "slug": "teleskopik-konteyner-tasiyici",
+          "image": "images/containers-teleskopik-konteyner-tasiyici.jpg",
+          "variants": [
+            "Teleskopik Konteyner Taşıyıcı",
+            "Teleskopik Konteyner Taşıyıcı (T.SHG AVH / 45 - 12 / 27)",
+            "Teleskopik Konteyner Taşıyıcı (T.SHG AH / 45 - 12 / 27)",
+            "Teleskopik Konteyner Taşıyıcı (T.SHG AMH / 40 - 12 / 27)"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "lowbed",
+      "name": "Low-Bed ve Ağır Yük",
+      "products": [
+        {
+          "no": "8.1",
+          "name": "Havuz Tip Lowbed",
+          "slug": "havuz-tip-lowbed",
+          "image": "images/lowbed-havuz-tip-lowbed.jpg",
+          "variants": [
+            "Havuz Tip Lowbed"
+          ]
+        },
+        {
+          "no": "8.2",
+          "name": "Hidrolik Dümenlenir Low-Bed",
+          "slug": "hidrolik-dumenlenir-low-bed",
+          "image": "images/lowbed-hidrolik-dumenlenir-low-bed.jpg",
+          "variants": [
+            "Hidrolik Dümenlenir Low-Bed"
+          ]
+        },
+        {
+          "no": "8.5",
+          "name": "Önden Yüklemeli Lowbed",
+          "slug": "onden-yuklemeli-lowbed",
+          "image": "images/lowbed-onden-yuklemeli-lowbed.jpg",
+          "variants": [
+            "Önden Yüklemeli Lowbed"
+          ]
+        },
+        {
+          "no": "8.6",
+          "name": "Sabit Low-Bed",
+          "slug": "sabit-low-bed",
+          "image": "images/lowbed-sabit-low-bed.jpg",
+          "variants": [
+            "Sabit Low-Bed"
+          ]
+        },
+        {
+          "no": "8.7",
+          "name": "Standart Dingilli Lowbed",
+          "slug": "standart-dingilli-lowbed",
+          "image": "images/lowbed-standart-dingilli-lowbed.jpg",
+          "variants": [
+            "3 Dingilli Lowbed",
+            "4 Dingilli Lowbed",
+            "5 Dingilli Lowbed",
+            "6 Dingilli Lowbed"
+          ]
+        },
+        {
+          "no": "8.8",
+          "name": "Uzar Low-Bed",
+          "slug": "uzar-low-bed",
+          "image": "images/lowbed-uzar-low-bed.jpg",
+          "variants": [
+            "Uzar Low-Bed"
+          ]
+        },
+        {
+          "no": "8.9",
+          "name": "Yana Genişletilebilir Uzamalı Lowbed",
+          "slug": "yana-genisletilebilir-uzamali-lowbed",
+          "image": "images/lowbed-yana-genisletilebilir-uzamali-lowbed.jpg",
+          "variants": [
+            "Yana Genişletilebilir Uzamalı Lowbed"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "platform",
+      "name": "Platform",
+      "products": [
+        {
+          "no": "9.3",
+          "name": "Rulo Taşıyıcı Flatbed",
+          "slug": "rulo-tasiyici-flatbed",
+          "image": "images/platform-rulo-tasiyici-flatbed.jpg",
+          "variants": [
+            "Rulo Taşıyıcı Flatbed"
+          ]
+        },
+        {
+          "no": "9.4",
+          "name": "Standart Flatbed",
+          "slug": "standart-flatbed",
+          "image": "images/platform-standart-flatbed.jpg",
+          "variants": [
+            "Standart Flatbed"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "trailers",
+      "name": "Römork",
+      "products": [
+        {
+          "no": "10.1",
+          "name": "Akslı Römork",
+          "slug": "aksli-romork",
+          "image": "images/trailers-aksli-romork.jpg",
+          "variants": [
+            "2 Akslı Römork",
+            "3 Akslı Römork",
+            "4 Akslı Römork"
+          ]
+        },
+        {
+          "no": "10.2",
+          "name": "Dingilli Kamyon Taşıyıcı",
+          "slug": "dingilli-kamyon-tasiyici",
+          "image": "images/trailers-dingilli-kamyon-tasiyici.jpg",
+          "variants": [
+            "2 Dingilli Kamyon Taşıyıcı",
+            "3 Dingilli Kamyon Taşıyıcı"
+          ]
+        },
+        {
+          "no": "10.3",
+          "name": "Tarım Römork Dorse Treyler",
+          "slug": "tarim-romork-dorse-treyler",
+          "image": "images/trailers-tarim-romork-dorse-treyler.jpg",
+          "variants": [
+            "Tarım Römork Dorse Treyler"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "special",
+      "name": "Diğer Özel Ürünler",
+      "products": [
+        {
+          "no": "11.11",
+          "name": "Oto Taşıyıcı Dorse",
+          "slug": "oto-tasiyici-dorse",
+          "image": "images/special-oto-tasiyici-dorse.jpg",
+          "variants": [
+            "Oto Taşıyıcı Dorse"
+          ]
+        },
+        {
+          "no": "11.1",
+          "name": "Arazöz",
+          "slug": "arazoz",
+          "image": "images/special-arazoz.jpg",
+          "variants": [
+            "Arazöz"
+          ]
+        },
+        {
+          "no": "11.2",
+          "name": "Canlı Hayvan Taşıyıcı",
+          "slug": "canli-hayvan-tasiyici",
+          "image": "images/special-canli-hayvan-tasiyici.jpg",
+          "variants": [
+            "Canlı Hayvan Taşıyıcı"
+          ]
+        },
+        {
+          "no": "11.4",
+          "name": "Çöp Toplama",
+          "slug": "cop-toplama",
+          "image": "images/special-cop-toplama.jpg",
+          "variants": [
+            "Çöp Toplama"
+          ]
+        },
+        {
+          "no": "11.6",
+          "name": "Dökme Yem Taşıyıcı",
+          "slug": "dokme-yem-tasiyici",
+          "image": "images/special-dokme-yem-tasiyici.jpg",
+          "variants": [
+            "Dökme Yem Taşıyıcı Semi Treyler"
+          ]
+        },
+        {
+          "no": "11.7",
+          "name": "İkiz Kat Standart",
+          "slug": "ikiz-kat-standart",
+          "image": "images/special-ikiz-kat-standart.jpg",
+          "variants": [
+            "İkiz Kat Standart (VETD PLY TD 15 / 18)",
+            "İkiz Kat Standart (VETD PLY 12 / 27)"
+          ]
+        },
+        {
+          "no": "11.8",
+          "name": "Intermodal Kutu",
+          "slug": "intermodal-kutu",
+          "image": "images/special-intermodal-kutu.jpg",
+          "variants": [
+            "Intermodal Kutu (TTG TAL 12 / 27)"
+          ]
+        },
+        {
+          "no": "11.9",
+          "name": "Kütük Tomruk Taşımacılığı",
+          "slug": "kutuk-tomruk-tasimaciligi",
+          "image": "images/special-kutuk-tomruk-tasimaciligi.jpg",
+          "variants": [
+            "Kütük Tomruk Taşımacılığı"
+          ]
+        },
+        {
+          "no": "11.10",
+          "name": "Mikser",
+          "slug": "mikser",
+          "image": "images/special-mikser.jpg",
+          "variants": [
+            "Mikser Semi Treyler"
+          ]
+        },
+        {
+          "no": "11.14",
+          "name": "Tekstil Kutu",
+          "slug": "tekstil-kutu",
+          "image": "images/special-tekstil-kutu.jpg",
+          "variants": [
+            "Tekstil Kutu (TGG TAL 12 / 27)",
+            "Tekstil Kutu (TGM TAL 12 / 27)"
+          ]
+        }
+      ]
+    }
+  ]
+}

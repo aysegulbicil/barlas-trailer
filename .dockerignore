@@ -11,3 +11,10 @@ writable/cache/*
 writable/debugbar/*
 writable/logs/*
 writable/session/*
+apps/qr/vendor
+apps/qr/writable/cache/*
+apps/qr/writable/debugbar/*
+apps/qr/writable/logs/*
+apps/qr/writable/session/*
+apps/teklif/offers/*
+apps/teklif/images

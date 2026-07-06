@@ -1,0 +1,6 @@
+# Çalışma zamanı verisi: kaydedilen teklifler + numara sayacı.
+# counter.json sıfırlanırsa yeni teklif numaraları eski klasörlerin
+# üzerine yazar — deploy'da canlı kopyası taşınmalı (bkz. DEPLOY.md).
+/offers/*
+!/offers/.gitkeep
+/data/counter.json

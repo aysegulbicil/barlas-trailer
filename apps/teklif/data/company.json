@@ -1,0 +1,17 @@
+{
+  "_note": "Company info shown in PDF footer. Replace [..] placeholders with real values.",
+  "name": "BARLAS TANKER",
+  "full_name": "[Resmî Firma Ünvanı]",
+  "slogan": "Ağır Vasıta & Treyler Üretimi",
+  "address": "[Adres / Şehir]",
+  "phone": "[Telefon]",
+  "phone2": "",
+  "email": "[E-posta]",
+  "web": "www.barlastanker.com",
+  "iban": "[IBAN]",
+  "bank": "[Banka Adı]",
+  "tax_office": "[Vergi Dairesi]",
+  "tax_no": "[Vergi No]",
+  "vat_rate": 20,
+  "offer_no_prefix": "TKL"
+}

@@ -61,6 +61,11 @@ class Sitemap extends BaseController
             . "Disallow: /login\n\n"
             . "# QR araç kimlik kartları keşfedilebilir olmasın (hash gizliliği)\n"
             . "Disallow: /v/\n\n"
+            . "# Gömülü iç araçlar (apps/) dizine girmez\n"
+            . "Disallow: /qr\n"
+            . "Disallow: /fatura\n"
+            . "Disallow: /teklif\n"
+            . "Disallow: /apps-auth\n\n"
             . 'Sitemap: ' . base_url('sitemap.xml') . "\n";
 
         return $this->response->setContentType('text/plain')->setBody($body);

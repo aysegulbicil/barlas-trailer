@@ -13,10 +13,17 @@
 # kez derleyip belleğe alır.
 FROM php:8.3-apache
 
-# CI4 için gerekli eklentiler (intl = i18n zorunlu, mbstring) + opcache
+# CI4 için gerekli eklentiler (intl = i18n zorunlu, mbstring) + opcache.
+# mysqli + pdo_mysql: gömülü uygulamalar (apps/qr MySQLi, apps/fatura PDO)
+# MariaDB servisine bağlanır. google-chrome-stable: apps/teklif'in sunucuda
+# PDF üretimi — Debian trixie'nin "chromium" paketi WSL2/Docker'da SIGTRAP
+# ile çöküyor (denendi, 2026-07); Google'ın .deb'i sorunsuz.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        libicu-dev libonig-dev \
-    && docker-php-ext-install -j"$(nproc)" intl mbstring opcache \
+        libicu-dev libonig-dev wget fonts-liberation \
+    && wget -q -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && apt-get install -y --no-install-recommends /tmp/chrome.deb \
+    && rm /tmp/chrome.deb \
+    && docker-php-ext-install -j"$(nproc)" intl mbstring opcache mysqli pdo_mysql \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # .htaccess kurallarının uygulanması için gereken Apache modülleri:
@@ -41,5 +48,13 @@ RUN { \
       echo 'opcache.validate_timestamps=1'; \
       echo 'opcache.revalidate_freq=2'; \
     } > /usr/local/etc/php/conf.d/zz-opcache.ini
+
+# Gömülü uygulama limitleri: teklif kaydetme gövdesi data-URI görseller
+# içerebilir (PHP varsayılanı 8M yetmez), qr toplu personel içe aktarımı da
+# aynı limite takılıyordu.
+RUN { \
+      echo 'upload_max_filesize=32M'; \
+      echo 'post_max_size=32M'; \
+    } > /usr/local/etc/php/conf.d/zz-apps.ini
 
 WORKDIR /var/www/html

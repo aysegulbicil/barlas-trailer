@@ -1,0 +1,197 @@
+/* ===== Barlas Teklif Sistemi — Styles ===== */
+:root{
+  --blue:#005BAA;          /* corporate blue */
+  --blue-2:#0A6DC4;
+  --blue-3:#00467f;
+  --blue-bg:#eef5fc;
+  --text:#1f2a3a;
+  --muted:#5a6b80;
+  --line:#e6ebf2;
+  --bg:#eef1f6;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--text);font-size:14px}
+
+/* ---- TOP BAR ---- */
+.topbar{height:56px;background:#fff;border-bottom:1px solid #e2e8f1;display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:sticky;top:0;z-index:20}
+.brand{display:flex;align-items:center;gap:10px}
+.topbar-logo{height:30px}
+.brand-text{font-weight:700;color:var(--blue);font-size:16px}
+.topbar-actions{display:flex;gap:8px}
+
+/* ---- BUTTONS ---- */
+.btn{border:none;border-radius:8px;padding:9px 14px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:var(--blue-3)}
+.btn-ghost{background:#f1f5fa;color:#33425a}
+.btn-ghost:hover{background:#e4ecf5}
+.btn-mini{background:#eef2f8;color:#3d4d63;padding:5px 10px;border-radius:6px;font-size:12px;border:none;cursor:pointer}
+.btn-mini:hover{background:#e0e8f3}
+
+/* ---- LAYOUT ---- */
+.layout{display:grid;grid-template-columns:450px 1fr;height:calc(100vh - 56px)}
+.layout[hidden]{display:none}   /* hidden özniteliği grid'i ezsin (görünüm geçişi için) */
+.form-pane{overflow-y:auto;padding:16px;border-right:1px solid #e2e8f1;background:#f7f9fc}
+.preview-pane{display:flex;flex-direction:column;min-width:0}
+.preview-bar{height:42px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#fff;border-bottom:1px solid #e2e8f1;font-size:13px;color:var(--muted);font-weight:600}
+.preview-note{font-weight:400;color:#9aa8ba}
+.preview-canvas{flex:1;overflow:auto;background:#d9e0ea;padding:24px;display:flex;justify-content:center;align-items:flex-start}
+
+/* ---- CARDS / FORM ---- */
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:14px}
+.card-title{margin:0 0 10px;font-size:13px;font-weight:700;color:var(--blue)}
+.card-title-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.card-title-row .card-title{margin:0}
+.field{margin-bottom:10px}
+.field:last-child{margin-bottom:0}
+label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+input,select,textarea{width:100%;padding:8px 10px;border:1px solid #d4dce8;border-radius:7px;font-size:13px;font-family:inherit;background:#fff;color:var(--text)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,91,170,.12)}
+textarea{resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hint{font-size:11.5px;color:#8896a8;margin:8px 0 0}
+
+/* ---- SPEC ROWS ---- */
+.specs{display:flex;flex-direction:column;gap:6px}
+.spec-row{display:grid;grid-template-columns:130px 1fr 30px;gap:6px;align-items:start}
+.spec-row input{font-weight:600;font-size:12px}
+.spec-row textarea{min-height:36px;font-size:12px}
+.spec-del{background:#fdecec;color:#c0392b;border:none;border-radius:6px;cursor:pointer;font-size:14px;height:36px}
+.spec-del:hover{background:#f8d7d7}
+
+/* ---- IMAGE ---- */
+.image-box{height:130px;border:1px dashed #cfd8e6;border-radius:8px;display:flex;align-items:center;justify-content:center;background:#fafcff;overflow:hidden}
+.image-box img{max-width:100%;max-height:100%;object-fit:contain}
+.image-empty{color:#9fb0c4;font-size:13px}
+.image-tools{display:flex;gap:8px;margin-top:8px}
+
+/* ---- PRICE SUMMARY ---- */
+.price-summary{background:#f3f7fc;border-radius:8px;padding:10px 12px;margin:10px 0;font-size:13px}
+.price-summary>div{display:flex;justify-content:space-between;padding:3px 0;color:var(--muted)}
+.price-summary .highlight{font-size:15px;color:var(--blue);border-top:1px solid #dde7f2;margin-top:4px;padding-top:6px;font-weight:700}
+.price-summary .highlight b{color:var(--blue)}
+
+/* ---- SECTION HEAD (Ürünler) ---- */
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:2px 2px 10px}
+.section-title{margin:0;font-size:14px;font-weight:700;color:var(--blue)}
+.btn-add{padding:7px 12px}
+
+/* ---- PRODUCT BLOCK ---- */
+.item-card{position:relative}
+.item-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.item-title{margin:0;font-size:14px;font-weight:700;color:var(--blue)}
+.item-sub{margin:0;font-size:12px;font-weight:700;color:var(--muted)}
+.item-del{background:#fdecec;color:#c0392b}
+.item-del:hover{background:#f8d7d7}
+.item-price{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+
+/* ---- HISTORY PAGE ---- */
+.history-page{max-width:920px;margin:0 auto;padding:28px 22px;min-height:calc(100vh - 56px)}
+.history-page[hidden]{display:none}
+.history-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:20px}
+.history-title{margin:0;color:var(--blue);font-size:22px}
+.history-sub{margin:5px 0 0;color:var(--muted);font-size:13px}
+.history-list{display:flex;flex-direction:column;gap:10px}
+.history-item{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.history-item .hi-info{display:flex;flex-direction:column;gap:3px;min-width:0}
+.history-item .hi-info b{color:var(--text);font-size:14px}
+.history-item .hi-info span{color:var(--muted);font-size:12px}
+.history-item .hi-tools{display:flex;gap:6px;flex-shrink:0}
+.history-empty{text-align:center;color:#9fb0c4;padding:40px}
+.history-hidden-bar{font-size:12px;color:var(--muted);margin:0 2px 6px}
+.linklike{background:none;border:none;padding:0;color:var(--blue);cursor:pointer;font:inherit;text-decoration:underline}
+.linklike:hover{color:var(--blue-3)}
+a.btn-mini{display:inline-flex;align-items:center;text-decoration:none}
+.btn-danger{background:#fdecec;color:#c0392b}
+.btn-danger:hover{background:#f8d7d7}
+
+/* ---- TOAST ---- */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#10243a;color:#fff;padding:12px 18px;border-radius:10px;font-size:13px;z-index:60;box-shadow:0 8px 30px rgba(0,0,0,.25);max-width:90vw}
+.toast.ok{background:#0e7a4f}
+.toast.err{background:#b02a2a}
+
+/* ===== A4 DOCUMENT (preview + print) ===== */
+.doc{width:210mm;padding:14mm;background:#fff;color:#1a2433;position:relative;
+  font:11pt/1.45 'Segoe UI',Arial,sans-serif;box-shadow:0 4px 24px rgba(20,40,70,.18);
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.doc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.doc-logo{height:60px;max-width:62mm;object-fit:contain}
+.doc-head-right{text-align:right}
+.doc-title{font-size:21pt;font-weight:800;color:var(--blue);letter-spacing:.5px;line-height:1}
+.doc-meta{font-size:9.5pt;color:#5a6b80;margin-top:8px;line-height:1.5}
+.doc-meta b{color:#33425a}
+.accent-rule{height:3px;background:linear-gradient(90deg,var(--blue),var(--blue-2));margin:12px 0 14px;border-radius:2px}
+.sec-label{font-size:10pt;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.6px;margin:16px 0 7px}
+.customer{font-size:10pt;color:#33425a;line-height:1.5}
+.customer b{color:#1a2433}
+.subject-card{background:var(--blue-bg);border-left:4px solid var(--blue);padding:10px 14px;border-radius:6px;font-weight:600;font-size:10.5pt}
+.doc-image{text-align:center;margin-top:4px}
+.doc-image img{max-width:100%;max-height:68mm;object-fit:contain;border:1px solid var(--line);border-radius:8px}
+table.spec{width:100%;border-collapse:collapse;font-size:9.5pt;margin-top:2px}
+table.spec th{width:34%;text-align:left;vertical-align:top;background:var(--blue-bg);color:var(--blue-3);font-weight:700;padding:7px 10px;border:1px solid var(--line)}
+table.spec td{vertical-align:top;padding:7px 10px;border:1px solid var(--line);white-space:pre-line}
+table.spec tr:nth-child(even) th{background:#e6f0fa}
+table.spec tr:nth-child(even) td{background:#f7fafe}
+.price-card{border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:2px}
+.price-card .row{display:flex;justify-content:space-between;padding:9px 14px;font-size:10pt}
+.price-card .row+.row{border-top:1px solid #eef2f7}
+.price-card .row.total{background:var(--blue);color:#fff;font-weight:800;font-size:12pt}
+.price-card .row.total span{color:#fff}
+.price-card .row.subtotal{background:var(--blue-bg);font-weight:700;color:var(--blue-3)}
+.price-card .row.subtotal span{color:var(--blue-3)}
+/* multi-product document */
+.item-heading{font-size:12pt;font-weight:800;color:var(--blue-3);margin:18px 0 2px;padding-bottom:5px;border-bottom:2px solid var(--blue-bg)}
+.item-divider{border-top:1px dashed var(--line);margin:16px 0 2px}
+.doc-foot{margin-top:20px;padding-top:10px;border-top:1px solid var(--line);font-size:8pt;color:#6b7a90;display:flex;justify-content:space-between;gap:12px;line-height:1.5}
+.watermark{position:absolute;top:42%;left:0;right:0;text-align:center;transform:rotate(-28deg);font-size:42pt;color:rgba(0,91,170,.06);font-weight:800;pointer-events:none;letter-spacing:2px}
+
+/* standalone offer.html: belge içeriğe göre, temiz beyaz zemin */
+body.standalone{background:#fff;margin:0;padding:0}
+.standalone .doc{margin:0 auto;box-shadow:none}
+
+/* ===== KOYU TEMA (tam koyu zemin) ===== */
+.doc.theme-dark{background:#0f1c2e;color:#e6edf6}
+.theme-dark .doc-logo{background:#fff;padding:5px 8px;border-radius:6px}
+.theme-dark .doc-title{color:#7db9f0}
+.theme-dark .doc-meta{color:#9fb3cc}
+.theme-dark .doc-meta b{color:#d4e2f2}
+.theme-dark .accent-rule{background:linear-gradient(90deg,#2f6db0,#7db9f0)}
+.theme-dark .sec-label{color:#7db9f0}
+.theme-dark .customer{color:#cdddf0}
+.theme-dark .customer b{color:#fff}
+.theme-dark .subject-card{background:#16263c;border-left-color:#7db9f0;color:#eaf1fa}
+.theme-dark .item-heading{color:#9ecbf5;border-bottom-color:#26384f}
+.theme-dark .item-divider{border-top-color:#26384f}
+.theme-dark .doc-image img{border-color:#2a3d56}
+.theme-dark table.spec th{background:#16263c;color:#9ecbf5;border-color:#26384f}
+.theme-dark table.spec td{border-color:#26384f;color:#e6edf6}
+.theme-dark table.spec tr:nth-child(even) th{background:#1a2c44}
+.theme-dark table.spec tr:nth-child(even) td{background:#13233a}
+.theme-dark .price-card{border-color:#26384f}
+.theme-dark .price-card .row+.row{border-top-color:#22344c}
+.theme-dark .price-card .row.subtotal{background:#16263c;color:#9ecbf5}
+.theme-dark .price-card .row.subtotal span{color:#9ecbf5}
+.theme-dark .price-card .row.total{background:#2f6db0;color:#fff}
+.theme-dark .price-card .row.total span{color:#fff}
+.theme-dark .doc-foot{border-top-color:#26384f;color:#8ea3bd}
+.theme-dark .watermark{color:rgba(125,185,240,.07)}
+
+/* yeni eklenen ürün bloğunu vurgula */
+.item-flash{animation:itemFlash 1.3s ease}
+@keyframes itemFlash{
+  0%{box-shadow:0 0 0 3px rgba(0,91,170,.55)}
+  70%{box-shadow:0 0 0 3px rgba(0,91,170,.32)}
+  100%{box-shadow:0 0 0 3px rgba(0,91,170,0)}
+}
+
+/* ---- PRINT ---- */
+.print-only{display:none}
+@media print{
+  .no-print{display:none !important}
+  .topbar,.preview-bar,.form-pane{display:none !important}
+  .layout{display:block;height:auto}
+  .preview-pane{display:block}
+  .preview-canvas{padding:0;background:none;overflow:visible;display:block}
+  .doc{box-shadow:none;margin:0;min-height:296mm}
+  @page{size:A4;margin:0}
+}

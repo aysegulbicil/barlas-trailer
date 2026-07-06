@@ -1,0 +1,8 @@
+# Statik dosyalar (ui/, data/, images/, offers/) gate.php üzerinden servis
+# edilir — offers/ müşteri verisi içerir, oturumsuz erişilmemeli. .php
+# istekleri zaten guard.php prepend'i ile korunur (deploy/apache-apps.conf).
+Options -Indexes
+RewriteEngine On
+RewriteBase /teklif/
+RewriteCond %{REQUEST_URI} !\.php$ [NC]
+RewriteRule ^(.*)$ gate.php?p=$1 [L,QSA]

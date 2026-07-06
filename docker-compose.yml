@@ -18,8 +18,42 @@ services:
     volumes:
       # Proje canlı bağlanır; kod/varlık düzenlemeleri anında yansır.
       - ./:/var/www/html
+      # Gömülü uygulamalar (apps/): Alias + giriş kapısı tanımları.
+      - ./deploy/apache-apps.conf:/etc/apache2/conf-enabled/zz-apps.conf:ro
     environment:
       # .env yoksa CI4 zaten "production" olur. Geliştirirken ayrıntılı
       # hata ekranı isterseniz "development" yapın.
       - CI_ENVIRONMENT=production
+      # apps/fatura bağlantısı (özel adlar bilinçli: CI4 dotenv anahtarları
+      # buraya KONMAZ — iki CI4 uygulaması birbirinin config'ini ezer).
+      - FATURA_DB_HOST=db
+      - FATURA_DB_NAME=fatura_takip
+      - FATURA_DB_USER=apps
+      - FATURA_DB_PASS=${APPS_DB_PASSWORD:-apps_pass}
+    depends_on:
+      - db
     restart: unless-stopped
+
+  # Gömülü uygulamaların (apps/qr MySQLi + apps/fatura PDO) veritabanı.
+  # Ana site SQLite'ta kalır; web bilerek db SAĞLIĞINA bağlanmaz — db çökse
+  # de site ayakta kalır. İlk boş açılışta deploy/db-init/ koşar (iki DB +
+  # 'apps' kullanıcısı). Veri db-data volume'ünde yaşar, git'te değildir.
+  db:
+    image: mariadb:11
+    container_name: barlas-db
+    environment:
+      - MARIADB_ROOT_PASSWORD=${APPS_DB_ROOT_PASSWORD:-root_pass}
+      - APPS_DB_PASSWORD=${APPS_DB_PASSWORD:-apps_pass}
+      - TZ=Europe/Istanbul
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./deploy/db-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+volumes:
+  db-data:

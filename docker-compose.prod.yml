@@ -19,9 +19,38 @@ services:
     volumes:
       - ./:/var/www/html
       - ./deploy/opcache-prod.ini:/usr/local/etc/php/conf.d/zz-opcache-prod.ini:ro
+      # Gömülü uygulamalar (apps/): Alias + giriş kapısı tanımları.
+      - ./deploy/apache-apps.conf:/etc/apache2/conf-enabled/zz-apps.conf:ro
     environment:
       - CI_ENVIRONMENT=production
       - TZ=Europe/Istanbul
+      # apps/fatura bağlantısı; parolalar kök .env'den gelir (APPS_DB_* satırları).
+      - FATURA_DB_HOST=db
+      - FATURA_DB_NAME=fatura_takip
+      - FATURA_DB_USER=apps
+      - FATURA_DB_PASS=${APPS_DB_PASSWORD:-apps_pass}
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  # Gömülü uygulama veritabanı (apps/qr + apps/fatura). Dışarıya port AÇMAZ;
+  # yalnız compose ağında web'den erişilir. Web bilerek db sağlığına
+  # bağlanmaz — db çökse de ana site (SQLite) ayakta kalır.
+  db:
+    image: mariadb:11
+    container_name: barlas-db
+    environment:
+      - MARIADB_ROOT_PASSWORD=${APPS_DB_ROOT_PASSWORD:-root_pass}
+      - APPS_DB_PASSWORD=${APPS_DB_PASSWORD:-apps_pass}
+      - TZ=Europe/Istanbul
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./deploy/db-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
     restart: unless-stopped
 
   proxy:
@@ -41,3 +70,4 @@ services:
 volumes:
   caddy-data:
   caddy-config:
+  db-data:
