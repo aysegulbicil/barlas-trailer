@@ -10,12 +10,14 @@
  *    çeker (contact:reset dinlenir; teslimatta contact:delivered yayınlanır).
  * 2) Halat: ustanın eli ([data-hand-anchor]) ile formun kulpu ([data-form-lug])
  *    arasında her karede yeniden çizilir (getBoundingClientRect tabanlı) —
- *    masaüstü/mobil/RTL düzenlerinde aynı kod çalışır; gerginlik state.sag ile
+ *    LTR/RTL düzenlerinde aynı kod çalışır; gerginlik state.sag ile
  *    tween'lenir (gergin = düz, gevşek = sarkık quadratic).
  * 3) Form (sağ): gerçek POST (Contact::submit) — fetch ile gönderilir.
  *
- * Aşamalı geliştirme: reduced-motion'da html'e contact-deliver eklenmez →
- * usta statik pozda durur, halat çizilmez, form sabit görünür. GSAP yoksa
+ * Aşamalı geliştirme: sahne yalnız masaüstünde (≥992px) koşar — mobilde
+ * contact-deliver eklenmez, usta CSS ile gizlidir, form doğrudan görünür.
+ * Reduced-motion'da da contact-deliver eklenmez → usta (masaüstünde)
+ * statik pozda durur, halat çizilmez, form sabit görünür. GSAP yoksa
  * güvenlik zamanlayıcısı + CSS (ctFormSafety) formu yine yerine koyar.
  * fetch yoksa form klasik POST ile çalışır (sunucu redirect + flashdata).
  */
@@ -72,6 +74,9 @@
 
     function initCrewScene() {
         if (!document.documentElement.classList.contains('contact-deliver')) return;
+        /* Mobilde sahne yok: head script contact-deliver'ı yalnız ≥992px'te
+           ekler, CSS sahneyi gizler. Bu kapı sıra dışı durumlara emniyettir. */
+        if (window.matchMedia('(max-width: 991px)').matches) { revealConvoy(); return; }
 
         var gsap = window.gsap;
         var convoyEl = document.querySelector('[data-convoy]');
@@ -99,14 +104,10 @@
 
         /* ---------------- TUNE: sahnenin tek ayar tablosu ----------------
            t: süreler (sn) · ease: GSAP easing'leri · pose: eklem açıları (°)
-           rope: halat fiziği (px) · Mobil: aynı koreografi, bir asılış az +
-           genel tempo hızlı (timeline.timeScale) → kısa ve hafif sürüm. */
-        var MOBILE = window.matchMedia('(max-width: 991px)').matches;
+           rope: halat fiziği (px). Sahne yalnız masaüstünde koşar (mobilde
+           usta gizli, form doğrudan görünür). */
         var TUNE = {
-            speed: MOBILE ? 1.3 : 1,
-            steps: MOBILE
-                ? [{ to: 0.44, slip: 0.02 }, { to: 0, slip: 0 }]
-                : [{ to: 0.56, slip: 0.025 }, { to: 0.22, slip: 0.02 }, { to: 0, slip: 0 }],
+            steps: [{ to: 0.56, slip: 0.025 }, { to: 0.22, slip: 0.02 }, { to: 0, slip: 0 }],
             rope: {
                 slack: 46, taut: 4, rest: 34, release: 44,   // sarkma (px)
                 preTension: 14,                              // gerilim anı sarkması
@@ -167,9 +168,7 @@
            yeniden hesaplanır: tekrar oynatmada pencere boyutu değişmiş olabilir. */
         var isRTL = (document.documentElement.getAttribute('dir') === 'rtl');
         function offscreenX() {
-            var vw = window.innerWidth;
-            var base = vw < 992 ? Math.round(vw * 0.72)
-                                : Math.max(380, Math.min(760, Math.round(vw * 0.55)));
+            var base = Math.max(380, Math.min(760, Math.round(window.innerWidth * 0.55)));
             return isRTL ? -base : base;
         }
 
@@ -304,7 +303,6 @@
             gsap.ticker.add(drawRope);
 
             var tl = pullTl = gsap.timeline({ defaults: { ease: E.body } });
-            tl.timeScale(TUNE.speed);
 
             /* BEKLENTİ: halat görünür, usta kavrayıp geriye yaslanır, omuzlar
                gerilir, halat toplanır (sarkma düşer) ve efor titremesi gelir. */

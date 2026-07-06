@@ -12,8 +12,10 @@
  * Sağ: cam panelli iletişim formu (gerçek POST → Contact::submit).
  * Altta: telefon / e-posta / adres kartları ve harita.
  *
- * Reduced-motion / JS yok → usta statik pozda durur, halat çizilmez, form
- * sabit görünür (contact-deliver eklenmez). 3D/WebGL bağımlılığı KALDIRILDI.
+ * Mobilde (<992px) usta sahnesi tamamen gizlidir ve form doğrudan görünür
+ * (contact-deliver yalnız masaüstünde eklenir). Reduced-motion / JS yok →
+ * usta statik pozda durur, halat çizilmez, form sabit görünür
+ * (contact-deliver eklenmez). 3D/WebGL bağımlılığı KALDIRILDI.
  * Tüm metinler dil dosyalarından (Contact.* / Common.*), bağlantılar locale_url().
  */
 $this->extend('layouts/yeni');
@@ -43,16 +45,19 @@ $jsVer  = is_file(FCPATH . 'assets/js/contact-foreman.js') ? filemtime(FCPATH . 
 
 <?= $this->section('styles') ?>
 <link rel="stylesheet" href="<?= base_url('assets/css/contact.css') ?>?v=<?= $cssVer ?>">
-<!-- Girişte titreme olmasın: hareket açıksa anim + deliver sınıflarını
-     boyamadan önce ekle. Usta sahnesi SVG+GSAP olduğundan WebGL/genişlik
-     şartı yok — mobil dahil; yalnız reduced-motion'da kapalı (form sabit). -->
+<!-- Girişte titreme olmasın: hareket açıksa sınıfları boyamadan önce ekle.
+     contact-anim: başlık girişleri (mobil dahil). contact-deliver: usta
+     çekiş sahnesi — YALNIZ masaüstü (≥992px); mobilde usta gizlidir ve
+     form doğrudan görünür. Reduced-motion'da ikisi de kapalı (form sabit). -->
 <script>
     (function () {
         try {
             var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             if (!rm) {
                 document.documentElement.classList.add('contact-anim');
-                document.documentElement.classList.add('contact-deliver');
+                if (window.matchMedia('(min-width: 992px)').matches) {
+                    document.documentElement.classList.add('contact-deliver');
+                }
             }
         } catch (e) {}
     })();

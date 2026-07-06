@@ -503,12 +503,10 @@
 .contact-stage__done-text { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; color: var(--ink-1); max-width: 22ch; }
 
 @media (max-width: 991px) {
-    /* Mobilde usta form üstünde küçük bir sahnede oynar (SVG+GSAP hafif —
-       3D'nin aksine mobilde de açık); halat açılı olarak aşağıdaki forma iner. */
-    .contact-hero__stage { min-height: 0; }
-    .contact-foreman { max-width: 300px; max-height: 300px; }
-    .contact-stage__done-ic { width: 56px; height: 56px; }
-    .contact-stage__done-ic svg { width: 26px; height: 26px; }
+    /* Mobil: usta sahnesi tamamen gizli — form doğrudan görünür (head
+       script contact-deliver'ı mobilde eklemez → çekiş/halat hiç kurulmaz).
+       Gönderim onayı formun kendi başarı panelinden gelir. */
+    .contact-hero__stage { display: none; }
 }
 
 /* ---------------------- İLETİŞİM BİLGİLERİ -------------------------- */
