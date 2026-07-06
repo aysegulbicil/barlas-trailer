@@ -349,17 +349,35 @@
     place-items: end center;      /* usta zemin çizgisiyle alta oturur */
 }
 
-/* Line-art usta: tema token'larından türeyen renkler (iki temada da çalışır).
-   Eklem dönüşleri GSAP'tan (inline transform) gelir; burada yalnız görünüm.
-   Uzuvlar çift katman: fm-*-line (kalın kontur) + fm-*-fill (tulum dolgusu). */
+/* Barlas usta maskotu: dolgulu çizgi film stili (kalın tema konturu +
+   cel-shading). Renk token'ları tema değişkenlerinden türetilir → iki temada
+   da çalışır; maskot kimliği (turuncu baret/eldiven, ten, bot) sabit renk
+   çapalarıyla korunur. Eklem dönüşleri GSAP'tan (inline transform) gelir.
+   Kol/bacak boruları: kontur (.fm-lnk) + kumaş/ten dolgusu aynı polyline
+   üzerinde; stroke-width çizimde (attribute) tutulur, burada yalnız renk. */
 .contact-foreman {
-    --fm-line:   color-mix(in srgb, var(--ink-1) 84%, transparent);
-    --fm-soft:   color-mix(in srgb, var(--ink-1) 46%, transparent);
-    --fm-accent: var(--blue-bright);
-    --fm-suit:   color-mix(in srgb, var(--blue) 45%, var(--bg-1));
-    --fm-skin:   color-mix(in srgb, var(--ink-1) 7%, var(--bg-1));
-    --fm-glove:  color-mix(in srgb, var(--accent, #f59e0b) 68%, var(--bg-1));
-    --fm-seam:   color-mix(in srgb, var(--bg-0) 80%, transparent);
+    --fm-line:      color-mix(in srgb, var(--ink-1) 88%, transparent);
+    --fm-soft:      color-mix(in srgb, var(--ink-1) 44%, transparent);
+    --fm-suit:      color-mix(in srgb, var(--blue) 62%, var(--bg-1));
+    --fm-suit-2:    color-mix(in srgb, #06325e 52%, var(--fm-suit));
+    --fm-suit-hi:   color-mix(in srgb, #9ec9ef 42%, var(--fm-suit));
+    --fm-shirt:     color-mix(in srgb, #f5f8fc 82%, var(--fm-suit));
+    --fm-skin:      color-mix(in srgb, #f0b083 90%, var(--bg-1));
+    --fm-skin-2:    color-mix(in srgb, #cf8b57 82%, var(--bg-1));
+    --fm-hair:      #57402e;
+    --fm-hair-line: #2b1f15;
+    --fm-mouth:     #4a1d16;
+    --fm-helmet:    color-mix(in srgb, var(--accent, #f59e0b) 86%, var(--bg-1));
+    --fm-helmet-2:  color-mix(in srgb, #a85f04 62%, var(--fm-helmet));
+    --fm-glove:     color-mix(in srgb, var(--accent, #f59e0b) 88%, var(--bg-1));
+    --fm-glove-2:   color-mix(in srgb, #8f4e04 55%, var(--fm-glove));
+    --fm-boot:      #242e40;
+    --fm-boot-2:    #151c2b;
+    --fm-boot-hi:   #47546e;
+    --fm-belt:      #2a3348;
+    --fm-metal:     color-mix(in srgb, var(--ink-1) 30%, var(--bg-1));
+    --fm-shade:     rgba(9, 20, 38, 0.14);
+    --fm-white-hi:  rgba(255, 255, 255, 0.45);
     width: 100%;
     height: auto;
     max-width: 460px;
@@ -370,54 +388,79 @@
 /* RTL: usta aynalanır (varsayılan çizim sağa/forma bakar; RTL'de form solda).
    GSAP yalnız İÇ gruplara dokunur → kök SVG'deki CSS transform'la çakışmaz. */
 [dir="rtl"] .contact-foreman { transform: scaleX(-1); }
+/* Ayna, göğüs armasındaki "B" harfini ters çevirirdi — harfi kendi kutusu
+   içinde geri aynalayarak okunur tut (fill-box: SVG element bazlı origin). */
+[dir="rtl"] .contact-foreman .fm-patch-b {
+    transform: scaleX(-1);
+    transform-box: fill-box;
+    transform-origin: center;
+}
 
 .contact-foreman .fm-shadow { fill: color-mix(in srgb, var(--ink-1) 9%, transparent); }
 .contact-foreman .fm-ground { stroke: var(--line-2); stroke-width: 2; fill: none; }
 .contact-foreman .fm-deco   { stroke: var(--fm-soft); stroke-width: 1.6; fill: none; opacity: 0.5; }
 .contact-foreman .fm-deco--arc { stroke-dasharray: 5 7; }
 
-/* Bacak/kol boruları: kontur + dolgu aynı polyline üzerinde */
-.contact-foreman .fm-leg-line,
-.contact-foreman .fm-arm-line,
-.contact-foreman .fm-leg-fill,
-.contact-foreman .fm-arm-fill,
-.contact-foreman .fm-arm-soft { fill: none; stroke-linecap: round; stroke-linejoin: round; }
-.contact-foreman .fm-leg-line { stroke: var(--fm-line); stroke-width: 19; }
-.contact-foreman .fm-leg-fill { stroke: var(--fm-suit); stroke-width: 14; }
-.contact-foreman .fm-arm-line { stroke: var(--fm-line); stroke-width: 16; }
-.contact-foreman .fm-arm-fill { stroke: var(--fm-suit); stroke-width: 11; }
-.contact-foreman .fm-arm-soft { stroke: var(--fm-soft); stroke-width: 12; }
-.contact-foreman .fm-elbow,
-.contact-foreman .fm-shoulder { fill: var(--fm-suit); }
+/* İskelet boruları: renk sınıfı + elemandaki stroke-width birlikte çalışır */
+.contact-foreman .fm-lnk,
+.contact-foreman .fm-tube-suit,
+.contact-foreman .fm-tube-suit2,
+.contact-foreman .fm-tube-skin,
+.contact-foreman .fm-tube-skin2,
+.contact-foreman .fm-tube-metal { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.contact-foreman .fm-lnk        { stroke: var(--fm-line); }
+.contact-foreman .fm-lnk--soft  { stroke: var(--fm-soft); }
+.contact-foreman .fm-tube-suit  { stroke: var(--fm-suit); }
+.contact-foreman .fm-tube-suit2 { stroke: var(--fm-suit-2); }
+.contact-foreman .fm-tube-skin  { stroke: var(--fm-skin); }
+.contact-foreman .fm-tube-skin2 { stroke: var(--fm-skin-2); }
+.contact-foreman .fm-tube-metal { stroke: var(--fm-metal); }
+.contact-foreman .fm-tube-skin-bulge { fill: var(--fm-skin); }
+
+/* Tulum: pantolon + önlük + askı + kemer */
+.contact-foreman .fm-pant     { fill: var(--fm-suit); stroke: var(--fm-line); stroke-width: 3; stroke-linejoin: round; }
+.contact-foreman .fm-torso    { fill: var(--fm-shirt); stroke: var(--fm-line); stroke-width: 3; stroke-linejoin: round; }
+.contact-foreman .fm-bib      { fill: var(--fm-suit); }
+.contact-foreman .fm-bib-seam { stroke: var(--fm-line); stroke-width: 2.4; fill: none; stroke-linecap: round; }
+.contact-foreman .fm-belt     { fill: var(--fm-belt); stroke: var(--fm-line); stroke-width: 2.2; stroke-linejoin: round; }
+.contact-foreman .fm-metal    { fill: var(--fm-metal); stroke: var(--fm-line); stroke-width: 2; }
+.contact-foreman .fm-patch    { fill: var(--fm-shirt); stroke: var(--fm-line); stroke-width: 2.2; }
+.contact-foreman .fm-patch-b  { stroke: var(--fm-line); stroke-width: 2.2; fill: none; stroke-linecap: round; }
+.contact-foreman .fm-cuffband { fill: var(--fm-suit-2); stroke: var(--fm-line); stroke-width: 2.4; stroke-linejoin: round; }
+.contact-foreman .fm-seam-hi  { stroke: var(--fm-suit-hi); stroke-width: 2.2; fill: none; stroke-linecap: round; }
+.contact-foreman .fm-crease   { stroke: var(--fm-suit-2); stroke-width: 2.2; fill: none; stroke-linecap: round; }
+.contact-foreman .fm-rollcuff { fill: var(--fm-suit-hi); stroke: var(--fm-line); stroke-width: 2.4; }
+.contact-foreman .fm-cap-fill { fill: var(--fm-suit); }
+.contact-foreman .fm-cap-seam { stroke: var(--fm-line); stroke-width: 2.6; fill: none; stroke-linecap: round; }
+
+/* Cel-shading katmanları */
+.contact-foreman .fm-shade  { fill: var(--fm-shade); }
+.contact-foreman .fm-hilite { stroke: var(--fm-white-hi); fill: none; stroke-linecap: round; }
 
 /* Botlar: iki temada da koyu iş botu (sabit lacivert + tema konturu) */
-.contact-foreman .fm-boot { fill: #232c3d; stroke: var(--fm-line); stroke-width: 2.5; stroke-linejoin: round; }
+.contact-foreman .fm-boot      { fill: var(--fm-boot); stroke: var(--fm-line); stroke-width: 2.6; stroke-linejoin: round; }
+.contact-foreman .fm-sole      { fill: var(--fm-boot-2); stroke: var(--fm-line); stroke-width: 2.2; stroke-linejoin: round; }
+.contact-foreman .fm-boot-line { stroke: var(--fm-boot-hi); stroke-width: 2.2; fill: none; stroke-linecap: round; }
 
-.contact-foreman .fm-body { fill: var(--fm-suit); stroke: var(--fm-line); stroke-width: 3; stroke-linejoin: round; }
-.contact-foreman .fm-detail { stroke: var(--fm-seam); stroke-width: 2.5; fill: none; stroke-linecap: round; }
-.contact-foreman .fm-pocket { fill: none; stroke: var(--fm-seam); stroke-width: 2; }
+/* Baş: ten + saç/bıyık (sabit koyu — iki temada da tenin üstünde okunur) */
+.contact-foreman .fm-skin      { fill: var(--fm-skin); stroke: var(--fm-line); stroke-width: 2.8; stroke-linejoin: round; }
+.contact-foreman .fm-face-line { stroke: var(--fm-line); stroke-width: 1.8; fill: none; stroke-linecap: round; }
+.contact-foreman .fm-hair      { fill: var(--fm-hair); stroke: var(--fm-hair-line); stroke-width: 1.6; stroke-linejoin: round; }
+.contact-foreman .fm-eye-w     { fill: #fff; stroke: var(--fm-hair-line); stroke-width: 1.8; }
+.contact-foreman .fm-eye-p     { fill: var(--fm-hair-line); }
+.contact-foreman .fm-eye-g     { fill: #fff; }
+.contact-foreman .fm-mouth     { fill: var(--fm-mouth); stroke: var(--fm-hair-line); stroke-width: 1.6; stroke-linejoin: round; }
+.contact-foreman .fm-teeth     { fill: #fff; }
 
-.contact-foreman .fm-headc { fill: var(--fm-skin); stroke: var(--fm-line); stroke-width: 3; }
-.contact-foreman .fm-ear { fill: var(--fm-skin); stroke: var(--fm-line); stroke-width: 2.5; }
-.contact-foreman .fm-eye { fill: var(--fm-line); }
-.contact-foreman .fm-brow,
-.contact-foreman .fm-nose { stroke: var(--fm-line); stroke-width: 2.5; fill: none; stroke-linecap: round; }
-.contact-foreman .fm-mous { stroke: var(--fm-line); stroke-width: 3.5; fill: none; stroke-linecap: round; }
+/* Baret: turuncu güvenlik bareti (kubbe + alt bant + ön siper) */
+.contact-foreman .fm-helmet      { fill: var(--fm-helmet); stroke: var(--fm-line); stroke-width: 3; stroke-linejoin: round; }
+.contact-foreman .fm-helmet--brim{ stroke-width: 2.5; }
+.contact-foreman .fm-helmet-2    { fill: var(--fm-helmet-2); }
+.contact-foreman .fm-helmet-line { stroke: var(--fm-helmet-2); stroke-width: 2.6; fill: none; stroke-linecap: round; }
 
-.contact-foreman .fm-helmet {
-    stroke: var(--fm-accent);
-    stroke-width: 3;
-    stroke-linejoin: round;
-    fill: color-mix(in srgb, var(--blue-bright) 34%, var(--bg-1));
-}
-.contact-foreman .fm-helmet-brim {
-    stroke: var(--fm-accent);
-    stroke-width: 2.5;
-    stroke-linejoin: round;
-    fill: color-mix(in srgb, var(--blue-bright) 40%, var(--bg-1));
-}
-
-.contact-foreman .fm-glove { fill: var(--fm-glove); stroke: var(--fm-line); stroke-width: 2.5; }
+/* Eldivenler: turuncu iş eldiveni (bilek körüğü + yumruk + başparmak) */
+.contact-foreman .fm-glove   { fill: var(--fm-glove); stroke: var(--fm-line); stroke-width: 2.6; }
+.contact-foreman .fm-glove-2 { fill: var(--fm-glove-2); stroke: var(--fm-line); stroke-width: 2.4; stroke-linejoin: round; }
 .contact-foreman .fm-glove--back { stroke: var(--fm-soft); }
 
 /* Gönderim sonrası onay (usta selam verince stage'de belirir) */

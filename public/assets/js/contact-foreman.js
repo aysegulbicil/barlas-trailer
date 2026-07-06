@@ -1,7 +1,7 @@
 /**
  * contact-foreman.js — İletişim sayfası etkileşimi
  *
- * 1) Usta sahnesi (sol): line-art SVG usta (eklemli: kalça/baş/omuz/dirsek
+ * 1) Usta sahnesi (sol): çizgi film stili SVG usta maskotu (eklemli: kalça/baş/omuz/dirsek
  *    grupları) halata asıla asıla sağdaki iletişim formunu sahneye çeker.
  *    Form gizli başlar; her asılışta bir adım yaklaşır, yerine oturunca usta
  *    halatı bırakıp doğrulur ve nefes alma (idle) döngüsüne geçer. Form
