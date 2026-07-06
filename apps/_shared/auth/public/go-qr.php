@@ -12,7 +12,7 @@ require __DIR__ . '/../session.php';
 require __DIR__ . '/../sso.php';
 
 if (empty($_SESSION['apps_user'])) {
-    header('Location: /apps-auth/login.php?next=' . rawurlencode('/apps-auth/go-qr.php'), true, 302);
+    header('Location: /patron/login.php?next=' . rawurlencode('/patron/go-qr.php'), true, 302);
     exit;
 }
 

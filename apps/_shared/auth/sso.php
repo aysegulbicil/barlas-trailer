@@ -3,7 +3,7 @@
 /**
  * Gömülü uygulamalar arası tek-giriş (SSO) token yardımcıları.
  *
- * Hub'daki QR kartı /apps-auth/go-qr.php'ye gider; orada BARLASAPPS oturumu
+ * Hub'daki QR kartı /patron/go-qr.php'ye gider; orada BARLASAPPS oturumu
  * doğrulanıp bu dosyayla kısa ömürlü imzalı bir token üretilir ve /qr/sso'ya
  * yönlenilir. QR tarafındaki Sso controller'ı AYNI dosyayı require ederek
  * token'ı doğrular ve kendi oturumunu açar. Anahtar writable/data altında

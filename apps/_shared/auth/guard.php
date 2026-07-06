@@ -4,7 +4,7 @@
  * Gömülü uygulama giriş bekçisi — deploy/apache-apps.conf içindeki
  * php_admin_value auto_prepend_file hedefi. /fatura ve /teklif altındaki
  * HER .php isteğinden önce koşar (teklif'in statik dosyaları da gate.php
- * üzerinden geçtiği için bu kapsamdadır). /apps-auth bu kapsamın dışındadır.
+ * üzerinden geçtiği için bu kapsamdadır). /patron bu kapsamın dışındadır.
  */
 
 declare(strict_types=1);
@@ -37,5 +37,5 @@ if ($wantsJson) {
     exit;
 }
 
-header('Location: /apps-auth/login.php?next=' . rawurlencode($uri), true, 302);
+header('Location: /patron/login.php?next=' . rawurlencode($uri), true, 302);
 exit;

@@ -6,7 +6,7 @@ use App\Models\UserModel;
 
 /**
  * Ortak giriş kapısından (hub) gelen tek-giriş noktası.
- * /apps-auth/go-qr.php kısa ömürlü imzalı bir token ile buraya yönlendirir;
+ * /patron/go-qr.php kısa ömürlü imzalı bir token ile buraya yönlendirir;
  * token apps/_shared/auth/sso.php ile doğrulanır ve QR oturumu açılır.
  * QR'ın kendi /login ekranı yedek kapı olarak aynen çalışmaya devam eder.
  */

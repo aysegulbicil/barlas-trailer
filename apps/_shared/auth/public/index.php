@@ -2,7 +2,7 @@
 
 /**
  * İç Araçlar hub'ı — girişten sonra açılan üç kartlı seçim ekranı.
- * QR kartı /apps-auth/go-qr.php köprüsüyle QR oturumunu otomatik açar;
+ * QR kartı /patron/go-qr.php köprüsüyle QR oturumunu otomatik açar;
  * Teklif ve Fatura zaten BARLASAPPS bekçisinin arkasındadır.
  */
 
@@ -12,7 +12,7 @@ require __DIR__ . '/../session.php';
 
 $user = (string) ($_SESSION['apps_user'] ?? '');
 if ($user === '') {
-    header('Location: /apps-auth/login.php', true, 302);
+    header('Location: /patron/login.php', true, 302);
     exit;
 }
 ?>
@@ -181,7 +181,7 @@ if ($user === '') {
   <div class="brand"><b>BARLAS</b><span>İç Araçlar</span></div>
   <div class="who">
     <span class="mail"><?= htmlspecialchars($user, ENT_QUOTES) ?></span>
-    <a href="/apps-auth/logout.php">Çıkış</a>
+    <a href="/patron/logout.php">Çıkış</a>
   </div>
 </header>
 
@@ -192,7 +192,7 @@ if ($user === '') {
   </div>
 
   <nav class="deck" id="deck">
-    <a class="card" href="/apps-auth/go-qr.php" style="--ac:#2dd4bf">
+    <a class="card" href="/patron/go-qr.php" style="--ac:#2dd4bf">
       <div class="card-inner">
         <div class="icon-wrap"><i class="icon-halo"></i>
           <span class="icon">

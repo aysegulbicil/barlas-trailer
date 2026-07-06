@@ -13,5 +13,5 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     session_destroy();
 }
 
-header('Location: /apps-auth/login.php', true, 302);
+header('Location: /patron/login.php', true, 302);
 exit;

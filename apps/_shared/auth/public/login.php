@@ -21,7 +21,7 @@ function apps_next(?string $next): string
         || str_starts_with($next, '//') || str_contains($next, '\\')) {
         return '';
     }
-    if ($next === '/apps-auth/go-qr.php') { // hub'ın QR köprüsü — girişten sonra kaldığın yerden
+    if ($next === '/patron/go-qr.php') { // hub'ın QR köprüsü — girişten sonra kaldığın yerden
         return $next;
     }
     foreach (['/qr', '/fatura', '/teklif'] as $prefix) {
@@ -100,7 +100,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && empty($_SESSION['apps_us
         session_regenerate_id(true);
         $_SESSION['apps_user'] = strtolower(trim((string) $_POST['email']));
         @unlink(apps_ratelimit_path());
-        header('Location: ' . ($next !== '' ? $next : '/apps-auth/'), true, 302);
+        header('Location: ' . ($next !== '' ? $next : '/patron/'), true, 302);
         exit;
     } else {
         usleep(350000);
@@ -111,7 +111,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && empty($_SESSION['apps_us
 
 // Girişliyken login'in işi yok: next varsa oraya, yoksa kart hub'ına geç.
 if (!empty($_SESSION['apps_user'])) {
-    header('Location: ' . ($next !== '' ? $next : '/apps-auth/'), true, 302);
+    header('Location: ' . ($next !== '' ? $next : '/patron/'), true, 302);
     exit;
 }
 ?>
@@ -160,7 +160,7 @@ if (!empty($_SESSION['apps_user'])) {
 <div class="card">
   <h1>İç Araçlar Girişi</h1>
   <p class="sub">QR, Teklif ve Fatura sistemleri için panel hesabınla gir.</p>
-  <form method="post" action="/apps-auth/login.php">
+  <form method="post" action="/patron/login.php">
     <input type="hidden" name="csrf" value="<?= htmlspecialchars($_SESSION['apps_csrf'], ENT_QUOTES) ?>">
     <input type="hidden" name="next" value="<?= htmlspecialchars($next, ENT_QUOTES) ?>">
     <label for="email">E-posta</label>
