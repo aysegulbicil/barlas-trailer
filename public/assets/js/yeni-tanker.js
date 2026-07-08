@@ -47,9 +47,27 @@
         if (s) s.classList.add('is-static');
     }
 
+    /* Yol(konvoy) sahnesi 3B çalışamadığında statik yedeği göster. Aksi halde
+       .road__fallback VARSAYILAN GİZLİ (başta hero-2.webp flaş'ı olmaz; konvoy
+       yumuşakça belirir). tshow/revealTshowStatic ile aynı desen. */
+    function showRoadStatic() {
+        var r = document.querySelector('[data-road]');
+        if (r) { r.classList.remove('road--3d'); r.classList.add('road--static'); }
+    }
+
+    /* initRoad'ı güvenle çağırır: WebGL/GLB init hatasında statik yedeğe düşer. */
+    function tryInitRoad(road) {
+        try {
+            initRoad(road);
+        } catch (err) {
+            showRoadStatic();
+            if (window.console && console.error) console.error('[barlas-3d]', err);
+        }
+    }
+
     onReady(function () {
         window.setTimeout(function () {
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { revealTshowStatic(); return; }
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { revealTshowStatic(); showRoadStatic(); return; }
             // Not: 3D artık mobilde de çalışır (kullanıcı isteği). Eskiden
             // "window.innerWidth < 992" ile mobilde kapatılıyordu; kaldırıldı.
             // Yine de WebGL yoksa aşağıdaki kontrol statik yedeğe düşer.
@@ -57,6 +75,7 @@
             if (!window.THREE || !webglOk()) {
                 showStaticFallback();
                 revealTshowStatic();
+                showRoadStatic();
                 return;
             }
 
@@ -73,17 +92,20 @@
             /* Perf: yol(konvoy) sahnesini SAYFA AÇILIŞINDA değil, bölüm
                yaklaşınca kur. Böylece hero ile yol sahnesi aynı anda
                başlamaz (sıralı aktivasyon); açılış yükü tek sahneye iner.
-               Kurulana kadar .road:not(.road--3d) statik yedeği gösterir. */
+               .road__fallback varsayılan gizli; 3B kurulamazsa showRoadStatic()
+               yedeği açar (sayfa açılışında flaş yok). */
             var road = document.querySelector('[data-road]');
             if (road && window.gsap && window.ScrollTrigger) {
                 if ('IntersectionObserver' in window) {
                     var roadIO = new IntersectionObserver(function (es) {
-                        if (es[0].isIntersecting) { roadIO.disconnect(); initRoad(road); }
+                        if (es[0].isIntersecting) { roadIO.disconnect(); tryInitRoad(road); }
                     }, { rootMargin: '300% 0px' });
                     roadIO.observe(road);
                 } else {
-                    initRoad(road);
+                    tryInitRoad(road);
                 }
+            } else if (road) {
+                showRoadStatic();   /* gsap/ScrollTrigger yok → 3B yok → statik yedek */
             }
 
             /* Tanker sergisi (spatial showcase) 3D sahnesi: hero ile aynı GLB

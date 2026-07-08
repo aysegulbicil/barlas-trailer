@@ -281,7 +281,7 @@ function initChipPreview(cat) {
 
     const img = layer.querySelector('.mega-preview__img');
     const name = layer.querySelector('.mega-preview__name');
-    const loaded = new Map(); // src -> true (ok) | false (missing)
+    const loaded = new Map(); // jpg key -> painted url ('' = missing)
     let current = '';
     let hideTimer = 0;
 
@@ -289,13 +289,17 @@ function initChipPreview(cat) {
         if (!DESKTOP_MQ.matches) return;
         clearTimeout(hideTimer);
 
-        const src = `${assetsBase}/${chip.dataset.chipImg}`;
-        current = src;
+        // data-chip-img is the .jpg path; prefer the smaller .webp when it
+        // exists — exactly like the product pages (products.js) — so the menu
+        // preview always matches the image shown on the product detail page.
+        const jpg = `${assetsBase}/${chip.dataset.chipImg}`;
+        const webp = jpg.replace(/\.(jpe?g|png)$/i, '.webp');
+        current = jpg; // token identifying the active chip request
         name.textContent = chip.dataset.chipName ?? chip.textContent.trim();
 
-        const paint = (ok) => {
-            if (current !== src) return; // pointer already moved on
-            img.style.backgroundImage = ok ? `url("${src}")` : '';
+        const paint = (painted) => {
+            if (current !== jpg) return; // pointer already moved on
+            img.style.backgroundImage = painted ? `url("${painted}")` : '';
             media.classList.add('is-preview');
             if (!reduce) {
                 // Restart the reveal so quick chip-to-chip moves still animate.
@@ -305,14 +309,20 @@ function initChipPreview(cat) {
             }
         };
 
-        if (loaded.has(src)) {
-            paint(loaded.get(src));
+        if (loaded.has(jpg)) {
+            paint(loaded.get(jpg));
             return;
         }
-        const probe = new Image();
-        probe.onload = () => { loaded.set(src, true); paint(true); };
-        probe.onerror = () => { loaded.set(src, false); paint(false); };
-        probe.src = src;
+        // Probe .webp first, fall back to .jpg, then to the blueprint.
+        const tryWebp = new Image();
+        tryWebp.onload = () => { loaded.set(jpg, webp); paint(webp); };
+        tryWebp.onerror = () => {
+            const tryJpg = new Image();
+            tryJpg.onload = () => { loaded.set(jpg, jpg); paint(jpg); };
+            tryJpg.onerror = () => { loaded.set(jpg, ''); paint(''); };
+            tryJpg.src = jpg;
+        };
+        tryWebp.src = webp;
     };
 
     const hide = () => {

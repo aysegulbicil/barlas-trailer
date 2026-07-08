@@ -1119,5 +1119,838 @@ return [
                 <p>La operación debe adaptarse al invierno tanto como el equipamiento: los planes de viaje deben incluir un margen por condiciones meteorológicas, los conductores deben recibir formación sobre colocación de cadenas y rampas heladas, y deben definirse de antemano rutas alternativas para las líneas críticas. El ritmo se mantiene también a mitad de temporada: los lavados intermedios en zonas saladas y las purgas del tanque de aire se fijan como rutina. <strong>La flota que pasa el invierno sin contratiempos es el resultado no de la suerte, sino de una preparación calendarizada.</strong></p>
             ',
         ],
+
+        'bottom-loading-vapor-recovery' => [
+            'title'   => 'Sistemas de Carga por el Fondo: Velocidad, Seguridad y Recuperación de Vapores',
+            'excerpt' => 'La carga por el fondo, que no hace subir a nadie a la parte superior de la cisterna y envía el vapor no a la atmósfera sino a la línea de recuperación, se ha convertido en el estándar de la logística moderna de combustibles.',
+            'content' => '
+                <p>En la carga superior tradicional, el operario sube a la parte superior de la cisterna, abre la tapa y el líquido se vierte en el tanque desde arriba. En la carga por el fondo, en cambio, la conexión se realiza mediante acoples secos de bloqueo situados en el nivel inferior del tanque; el líquido entra en el tanque desde abajo, de forma controlada. Esta simple diferencia cambia radicalmente el panorama de seguridad y eficiencia.</p>
+                <h2>Las Tres Ganancias de la Carga por el Fondo</h2>
+                <ul>
+                    <li><strong>Seguridad:</strong> El operario no sube a la parte superior del tanque; el riesgo de trabajo en altura desaparece. Como el líquido entra sin salpicar, se reduce la generación de carga estática y la formación de vapores</li>
+                    <li><strong>Velocidad:</strong> Varios compartimentos pueden conectarse y cargarse simultáneamente; se acorta el tiempo en la isla de carga y el vehículo vuelve antes a operación</li>
+                    <li><strong>Medio ambiente:</strong> El vapor que se desplaza del tanque durante la carga no va a la atmósfera, sino a la línea de recuperación de vapores; se reduce tanto la pérdida de producto como la emisión</li>
+                </ul>
+                <h2>¿Cómo Funciona la Recuperación de Vapores?</h2>
+                <p>Al entrar el líquido en el tanque, desplaza la mezcla de vapor y aire que hay dentro. En la cisterna de carga por el fondo, esta mezcla se recoge mediante el canal de vapor situado en la parte superior del tanque y se envía a través de un acople independiente a la unidad de recuperación de la terminal; allí el vapor se convierte de nuevo en líquido. La misma línea, en la entrega a la estación, funciona esta vez en sentido inverso: el vapor que sale del tanque de la estación se recoge en la cisterna.</p>
+                <p>La columna vertebral de seguridad del sistema la forman los sensores de sobrellenado y la verificación de puesta a tierra: el sensor vigila el límite de llenado de cada compartimento y, si se supera, la terminal corta automáticamente la carga. Una cisterna de carga por el fondo bien diseñada es uno de los pocos ejemplos de ingeniería en los que la velocidad no se roba a la seguridad.</p>
+            ',
+        ],
+
+        'lpg-pressure-tanker-design' => [
+            'title'   => 'Diferencias de Diseño en Cisternas de GLP y Gas a Presión',
+            'excerpt' => 'La cisterna de combustible transporta líquido, la cisterna de GLP transporta también presión: el cuerpo ya no es un recipiente, sino un equipo a presión que trabaja bajo presión interna continua.',
+            'content' => '
+                <p>Vistos desde fuera, dos cilindros se parecen; pero la cisterna de combustible y la de GLP son vehículos de mundos de ingeniería diferentes. La diferencia puede resumirse en una frase: el combustible es líquido a presión atmosférica, mientras que el GLP solo permanece líquido bajo presión. Por eso el cuerpo no es un recipiente, sino un equipo a presión.</p>
+                <h2>Reflejos de la Presión en el Diseño</h2>
+                <ul>
+                    <li><strong>Espesor y material:</strong> La presión interna continua exige acero de pared gruesa y certificado como recipiente a presión; la finura del cuerpo de aluminio de combustible no es válida aquí</li>
+                    <li><strong>Sección y extremos:</strong> La presión obliga a una sección circular; los extremos del tanque se cierran no con tapas planas, sino con formas abombadas</li>
+                    <li><strong>Sin compartimentos:</strong> Frente a la estructura multicompartimentada de la cisterna de combustible, el tanque a presión suele ser de un solo volumen; los rompeolas internos gestionan el oleaje</li>
+                    <li><strong>Equipamiento de seguridad:</strong> Las válvulas de alivio de presión, las válvulas de corte por exceso de flujo y las válvulas de fondo de seguridad intrínseca con cierre remoto son el seguro del sistema</li>
+                </ul>
+                <h2>Hábitos Operativos que se Diferencian</h2>
+                <p>Como el volumen del gas a presión varía notablemente con la temperatura, el tanque nunca se llena por completo; en cada carga se deja el volumen de seguridad en el que se expandirá el líquido al calentarse. Mantener el cuerpo de color claro frente a la insolación y las superficies reflectantes son medidas simples pero eficaces que evitan un aumento innecesario de la presión interna. Durante la transferencia, el control de fugas en las conexiones se realiza con detector, con una disciplina más estricta que la inspección visual del combustible.</p>
+                <p>Resumen: diseñar una cisterna de GLP no es añadir presión a un vehículo que transporta líquido; es trasladar la ingeniería de recipientes a presión al chasis.</p>
+            ',
+        ],
+
+        'chemical-tanker-compatibility' => [
+            'title'   => 'Compatibilidad de Producto en Cisternas Químicas y Prevención de Contaminación Cruzada',
+            'excerpt' => 'En el transporte químico hay dos preguntas de compatibilidad distintas: ¿es el producto compatible con el material del tanque, y es compatible con los restos de la carga anterior? Ninguna de las dos admite descuido.',
+            'content' => '
+                <p>En la operación de cisternas químicas, la seguridad se construye sobre dos ejes. El primero es la compatibilidad de materiales: el producto transportado debe ser químicamente compatible con la pared del tanque, las juntas, las válvulas y la bomba. El segundo es la compatibilidad producto-producto: la nueva carga no debe reaccionar peligrosamente con el residuo de la carga anterior ni contaminarse en términos de calidad.</p>
+                <h2>Compatibilidad de Materiales: Empieza con una Lista</h2>
+                <p>Cada cisterna tiene una lista de productos que define qué sustancias puede transportar, y esa lista no es una sugerencia sino un límite. Mientras el acero inoxidable transporta una amplia gama de químicos, algunos productos agresivos requieren un tanque revestido de caucho o polímero; el eslabón más débil que suele olvidarse son las juntas y las mangueras. Aunque el cuerpo resista, un material de junta incorrecto se hincha, se endurece y empieza a filtrar en cuestión de días.</p>
+                <h2>Disciplina Contra la Contaminación Cruzada</h2>
+                <ul>
+                    <li>Registro del historial de carga: se documentan los últimos productos transportados por el tanque; entre ciertos pares de productos se exige una carga intermedia obligatoria o un lavado especial</li>
+                    <li>Lavado homologado: en el cambio de producto, la limpieza se realiza en una estación autorizada y con un procedimiento adecuado al producto; el certificado de lavado es el documento del viaje</li>
+                    <li>Caza de volumen muerto: el residuo que queda en el cuerpo de la bomba, los huecos de las válvulas y el fondo de las tuberías es la fuente de contaminación más frecuente</li>
+                    <li>Dedicación a un solo producto: en los químicos más peligrosos, la solución más segura es dedicar el tanque a un único producto</li>
+                </ul>
+                <p>Por el lado del fabricante, la lucha contra la contaminación cruzada empieza en el diseño: pendiente que garantiza el drenaje completo, disposición de válvulas sin volumen muerto y calidad de superficie interior limpiable. El tanque que se limpia con facilidad es, a la vez, el tanque más seguro y el que más viajes realiza.</p>
+            ',
+        ],
+
+        'adr-driver-training' => [
+            'title'   => 'Formación y Certificación del Conductor ADR: Hoja de Ruta para Operadores',
+            'excerpt' => 'Ponerse al volante de un vehículo que transporta mercancías peligrosas exige formación y certificación especiales; un calendario de formación bien planificado es la condición previa para que la flota funcione sin interrupciones.',
+            'content' => '
+                <p>En la normativa ADR, tanto el vehículo y el tanque como la persona están certificados: el conductor que transporta mercancías peligrosas no puede ponerse al volante sin completar la formación especial y certificarse mediante examen. Desde la óptica del operador, esto no es un trámite, sino un recurso que debe planificarse; un conductor con el certificado caducado significa un vehículo menos en la flota ese día.</p>
+                <h2>Los Niveles de la Formación</h2>
+                <ul>
+                    <li><strong>Formación básica:</strong> Es el terreno común de todos los conductores ADR; aquí se aprenden las clases de peligro, el etiquetado, la documentación, el comportamiento en emergencias y la primera lucha contra incendios</li>
+                    <li><strong>Formación de especialización en cisternas:</strong> Es un módulo adicional para conductores que transportarán en cisterna; se trata el efecto del oleaje del líquido en la dinámica de conducción, la seguridad de carga y descarga, y el equipamiento del tanque</li>
+                    <li><strong>Especializaciones de clase:</strong> Clases especiales como explosivos y radiactivos requieren formación de especialización aparte</li>
+                    <li><strong>Formación de renovación:</strong> El certificado está sujeto a plazo; la formación y el examen de renovación deben completarse antes de que expire</li>
+                </ul>
+                <h2>Recomendaciones de Planificación para el Operador</h2>
+                <p>En las flotas bien gestionadas, el seguimiento de certificados no se deja en manos de las personas; las fechas de validez de los certificados de los conductores se controlan en un calendario centralizado y las formaciones de renovación se ubican en los periodos de baja temporada. Es igualmente crítico no dejar la formación en el aula: la práctica sobre el vehículo, el trabajo de escenarios con los productos propios de la empresa y los simulacros de incidentes convierten el certificado en competencia real. No debe olvidarse: el certificado ADR es el umbral mínimo; la operación segura se construye con la cultura de formación que la empresa coloca por encima de ese umbral.</p>
+            ',
+        ],
+
+        'tanker-safety-culture' => [
+            'title'   => 'Lecciones de los Accidentes con Cisternas: ¿Cómo se Construye una Cultura de Seguridad?',
+            'excerpt' => 'Los informes de los grandes accidentes siempre cuentan el mismo patrón: no un único error, sino una cadena de pequeños descuidos. La cultura de seguridad es la forma de organización que rompe esa cadena en el primer eslabón.',
+            'content' => '
+                <p>Los análisis de los incidentes graves en operaciones con cisternas se parecen sorprendentemente entre sí: rara vez hay un único error grande. Con más frecuencia se observa una cadena de pequeños descuidos: un control omitido, una no conformidad silenciada, una manguera desgastada pero no sustituida. La cultura de seguridad es el sistema que hace de romper esa cadena en el primer eslabón tarea de todos.</p>
+                <h2>Lecciones Recurrentes</h2>
+                <ul>
+                    <li>Los incidentes de casi-accidente son el ensayo gratuito del accidente del futuro; cada casi-accidente no reportado es una lección perdida</li>
+                    <li>El procedimiento y la práctica de campo se distancian con el tiempo; sin que nadie lo note, los atajos se convierten en norma</li>
+                    <li>El equipo rara vez falla de repente; la mayoría de las averías son el resultado de síntomas ignorados durante meses</li>
+                    <li>La presión de tiempo es el mayor enemigo de las decisiones de seguridad; la carga y descarga apresuradas son una línea de producción de riesgo</li>
+                </ul>
+                <h2>Las Cuatro Piedras que Construyen la Cultura</h2>
+                <p><strong>Aprendizaje, no castigo:</strong> Si se castiga al empleado que informa de un error, el reporte se detiene; los informes de incidentes deben leerse no para buscar culpables, sino para reparar el sistema. <strong>Liderazgo visible:</strong> Si el directivo se pone el casco en el terreno y comprueba la pinza de puesta a tierra, las normas dejan de ser papel y se convierten en comportamiento. <strong>Autoridad de parada:</strong> Todos, incluido el operario más junior, deben poder detener sin necesidad de justificarse una operación que consideren insegura. <strong>Actualización continua:</strong> La formación no es puntual sino rítmica; los simulacros y las charlas de campo convierten el conocimiento en reflejo.</p>
+                <p>Nuestra contribución como fabricante también empieza en el diseño: una parada de emergencia bien ubicada, un punto de puesta a tierra accesible y un equipamiento que dificulta el mal uso son el socio metálico de la cultura de seguridad.</p>
+            ',
+        ],
+
+        'what-is-truck-platooning' => [
+            'title'   => '¿Qué es el Platooning de Camiones? La Economía de Combustible de la Conducción en Convoy',
+            'excerpt' => 'Que los camiones conectados electrónicamente circulen en convoy con distancias cortas promete un ahorro de combustible medible al reducir la resistencia aerodinámica.',
+            'content' => '
+                <p>El platooning de camiones consiste en que dos o más vehículos pesados se emparejen electrónicamente mediante comunicación entre vehículos y circulen en convoy con una separación muy inferior a la distancia de seguimiento normal. El vehículo delantero transmite instantáneamente al convoy sus decisiones de aceleración y frenado; como los vehículos traseros reaccionan en un tiempo mucho más corto que el reflejo humano, la distancia corta se vuelve segura.</p>
+                <h2>¿De Dónde Viene el Ahorro de Combustible?</h2>
+                <p>A las velocidades de larga distancia, una parte importante de la energía consumida se destina a la resistencia aerodinámica. En el convoy, el vehículo trasero circula en la estela de baja presión que abre el delantero y la resistencia que encuentra se reduce notablemente; el vehículo delantero también obtiene parte del beneficio de la recuperación de la estela trasera. La literatura sobre aerodinámica de vehículos pesados considera el platooning como una opción operativa de reducción de resistencia que complementa equipos como los faldones laterales y los sistemas traseros.</p>
+                <h2>Los Componentes del Sistema</h2>
+                <ul>
+                    <li>Comunicación inalámbrica de vehículo a vehículo y comando de frenado sincronizado</li>
+                    <li>Control de crucero adaptativo y control de distancia basado en radar</li>
+                    <li>Asistencia de seguimiento de carril y datos de posición de alta resolución</li>
+                    <li>Capa de software que gestiona los procedimientos de formación, incorporación y separación del convoy</li>
+                </ul>
+                <p>El lado del semirremolque no es el socio pasivo de esta ecuación: la velocidad de respuesta del sistema de frenos, la limpieza del equipo aerodinámico y la precisión de los datos de carga de eje afectan directamente tanto a la seguridad como a la ganancia del convoy. A medida que el platooning se generalice, el concepto de semirremolque listo para convoy entrará entre los criterios de compra.</p>
+                <h2>Referencias</h2>
+                <ul>
+                    <li>Van Raemdonck, G. M. R. &amp; Urila, I. (2019). A Study in Options to Improve Aerodynamic Profile of Heavy-Duty Vehicles in Europe. <em>Sustainability</em>, 11(19), 5519. DOI: 10.3390/su11195519</li>
+                </ul>
+            ',
+        ],
+
+        'platooning-fuel-data' => [
+            'title'   => 'Ahorro de Combustible con Platooning: ¿Qué Cambia la Distancia Entre Vehículos?',
+            'excerpt' => 'La variable principal que determina la magnitud de la ganancia del convoy es la distancia entre vehículos; sin embargo, la separación más corta no siempre es la más eficiente.',
+            'content' => '
+                <p>La pregunta que más se hace en los debates sobre platooning es esta: ¿cuánto deben acercarse los vehículos entre sí? Desde el punto de vista aerodinámico, la respuesta parece simple: cuanto más corta es la distancia, más fuerte es la estela en la que circula el vehículo trasero y mayor es la ganancia de resistencia. Sin embargo, en la operación real la ecuación es mucho más compleja.</p>
+                <h2>Las Dos Caras de la Distancia</h2>
+                <p>En distancias muy cortas, el aire de refrigeración del motor del vehículo trasero se reduce, el campo de visión de los sensores se estrecha y el margen de seguridad en los escenarios de frenado se adelgaza. A medida que la distancia se alarga, estos riesgos retroceden; pero se facilita que otros vehículos se intercalen (cut-in), y cada separación anula la ganancia del convoy hasta que se reconstituye. Por eso, en la práctica, el objetivo no es una cifra ideal única, sino una banda de distancia dinámica gestionada según la vía, el tráfico y las condiciones meteorológicas.</p>
+                <h2>Otras Variables que Afectan a la Ganancia</h2>
+                <ul>
+                    <li>Velocidad de crucero: como la resistencia aerodinámica crece con el cuadrado de la velocidad, la ganancia es significativa a alta velocidad</li>
+                    <li>Longitud del convoy: los vehículos centrales reciben la mayor parte del efecto bidireccional</li>
+                    <li>Geometría del vehículo: las combinaciones de caja, cisterna y lowbed producen perfiles de estela diferentes</li>
+                    <li>Viento cruzado: desplaza la estela hacia un lado y erosiona la ganancia</li>
+                </ul>
+                <p>El resumen honesto es este: la ganancia del platooning es real y medible; pero no existe una cifra de catálogo. La lección que la literatura aerodinámica da para el equipamiento del vehículo también es válida aquí: la decisión debe basarse en datos recopilados en condiciones similares a su propia ruta y perfil de velocidad.</p>
+                <h2>Referencias</h2>
+                <ul>
+                    <li>Van Raemdonck, G. M. R. &amp; Urila, I. (2019). A Study in Options to Improve Aerodynamic Profile of Heavy-Duty Vehicles in Europe. <em>Sustainability</em>, 11(19), 5519. DOI: 10.3390/su11195519</li>
+                </ul>
+            ',
+        ],
+
+        'autonomous-ready-trailer' => [
+            'title'   => 'Semirremolque Listo para Tractoras Autónomas: Requisitos de Sensores e Infraestructura',
+            'excerpt' => 'La tractora autónoma también debe percibir y gestionar el semirremolque que engancha detrás. La preparación del semirremolque para este mundo depende de varias decisiones de infraestructura críticas.',
+            'content' => '
+                <p>El debate sobre la conducción autónoma suele girar en torno a la tractora; sin embargo, el lado que transporta la carga y aloja una parte importante de los ejes y de la fuerza de frenado es el semirremolque. En un escenario en el que el conductor queda fuera de la ecuación, la tractora no puede comprobar visualmente el estado del semirremolque; debe recibir toda la información como datos.</p>
+                <h2>¿Qué Espera la Tractora Autónoma del Semirremolque?</h2>
+                <p>Los cálculos de trayectoria y frenado del sistema autónomo deben alimentarse con datos en tiempo real del semirremolque: cargas de eje, estado de las pastillas de freno, presión de neumáticos, posiciones de puertas y válvulas. Además, la geometría total del vehículo —longitud, distancia al king-pin, estimación del centro de gravedad— debe comunicarse de forma fiable al sistema, porque el plan de maniobra se construye sobre esos valores.</p>
+                <h2>Lista de Verificación de Preparación</h2>
+                <ul>
+                    <li><strong>Sistema de frenado electrónico:</strong> un EBS actualizado capaz de responder a comandos de frenado rápidos y graduables</li>
+                    <li><strong>Interfaz de datos:</strong> comunicación estandarizada y de alta fiabilidad en la línea tractora-semirremolque</li>
+                    <li><strong>Infraestructura de montaje de sensores:</strong> preparación de línea de alimentación y datos para cámara/radar en las zonas trasera y laterales</li>
+                    <li><strong>Unidad telemática:</strong> hardware que transmite sin interrupción los datos de mantenimiento y posición al sistema de flota</li>
+                    <li><strong>Iluminación y señalización calibrables:</strong> superficies adecuadas para la percepción de otros vehículos autónomos</li>
+                </ul>
+                <p>La mayoría de estos elementos ya generan valor hoy: los datos del EBS alimentan la planificación del mantenimiento, la telemática alimenta la eficiencia de la flota. La transición autónoma no ocurrirá de la noche a la mañana; pero el semirremolque adquirido hoy permanecerá en servicio durante diez años. Construir la infraestructura desde ahora es asegurar el vehículo para el futuro.</p>
+            ',
+        ],
+
+        'trailer-perception-sensors' => [
+            'title'   => 'Cámaras y Radares: El Auge de los Sistemas de Percepción en los Semirremolques',
+            'excerpt' => 'Los sensores de percepción se trasladan de la cabina a los semirremolques: como la mayor parte de los puntos ciegos se extiende a lo largo del semirremolque, el ojo también debe estar allí.',
+            'content' => '
+                <p>Los puntos ciegos más peligrosos de una combinación tractora-semirremolque no están en la cabina, sino alrededor del semirremolque: el carril que se extiende a lo largo del lateral derecho del vehículo, la zona de maniobra trasera y el área que queda en el interior en los giros. Colocar los sensores solo en la cabina significa dejar sin visión el cuerpo más largo.</p>
+                <h2>¿Qué Sensor, Dónde, en el Semirremolque?</h2>
+                <p>Los radares y cámaras colocados en la superficie lateral alimentan los asistentes de cambio de carril y de giro; especialmente en la detección de ciclistas y peatones, cubren la zona que el sensor de la cabina no puede ver. Las cámaras traseras y los sensores ultrasónicos hacen segura la aproximación a la rampa y la maniobra de marcha atrás. Las cámaras dentro de la caja, por su parte, generan datos operativos como el desplazamiento de la carga y el seguimiento de la ocupación.</p>
+                <h2>Realidades de Ingeniería</h2>
+                <ul>
+                    <li>El entorno del semirremolque es exigente: vibración, barro, sal y agua de lavado obligan a una carcasa resistente</li>
+                    <li>La detección de suciedad y el calentamiento en las superficies de lente y radar son condición previa para la operación invernal</li>
+                    <li>El sensor debe recalibrarse tras la reparación de la caja o el repintado</li>
+                    <li>Cada vez que cambia la tractora, el sistema debe poder emparejarse con vehículos de diferentes marcas</li>
+                </ul>
+                <p>Este equipamiento, instalado hoy con fines de asistencia al conductor, es la fuente de datos de los sistemas autónomos del mañana. El semirremolque con percepción ya no es una caja pasiva, sino la mitad de la combinación que ve y reporta; para los gestores de flota es también una inversión concreta que reduce los costes de accidentes.</p>
+            ',
+        ],
+
+        'autonomous-yard-operations' => [
+            'title'   => 'Maniobra sin Conductor en el Patio de Almacén: Operaciones de Patio Autónomas',
+            'excerpt' => 'El primer terreno de trabajo real del vehículo pesado autónomo no es la autopista, sino el patio de almacén: la baja velocidad, la propiedad privada y las rutas repetitivas hacen la tecnología aplicable desde hoy.',
+            'content' => '
+                <p>Mientras el transporte de larga distancia totalmente autónomo todavía madura, hay un ámbito en el que la tecnología ya genera valor económico hoy: los patios de almacén y terminal cerrados. La operación de patio —llevar el semirremolque cargado a la rampa, trasladar el vacío al área de aparcamiento— es un trabajo de baja velocidad, repetitivo y fuera de la vía pública; es el punto de partida ideal para los sistemas autónomos.</p>
+                <h2>¿Por Qué Primero el Patio?</h2>
+                <p>Las incertidumbres de la vía pública —peatones, tráfico, condiciones meteorológicas, responsabilidad legal— se reducen al mínimo en el patio. Las rutas están mapeadas, la velocidad es baja, el software de gestión del patio ya sabe qué semirremolque debe ir a qué rampa. La tractora de patio autónoma recibe esta instrucción directamente del sistema y sigue trabajando incluso cuando termina el turno del operario humano.</p>
+                <h2>Requisitos del Lado del Semirremolque</h2>
+                <ul>
+                    <li>King-pin de altura estándar apto para conexión automática y zona de conexión limpia</li>
+                    <li>Compatibilidad de las líneas de aire y eléctricas con sistemas de acoplamiento automático</li>
+                    <li>Infraestructura de marcado o etiquetado para la lectura remota de la identidad del vehículo</li>
+                    <li>Patas de apoyo con accionamiento eléctrico o control automático</li>
+                </ul>
+                <p>Cada lección aprendida de la operación de patio —fiabilidad del acoplamiento, mantenimiento de sensores, calidad de los datos del semirremolque— también sienta las bases de los sistemas autónomos que saldrán a la vía pública. El patio de almacén es, en este sentido, un laboratorio; el operador que elige su semirremolque compatible con este laboratorio empieza también preparado para el siguiente paso.</p>
+            ',
+        ],
+
+        'ebs-autonomous-braking' => [
+            'title'   => 'Sistemas de Frenado Electrónico y Conducción Autónoma: La Infraestructura del Lado del Semirremolque',
+            'excerpt' => 'El pilar fundamental de la conducción autónoma en el semirremolque es el EBS: sin un sistema de frenado que ejecute el comando en milisegundos y reporte su estado, la ecuación de la autonomía no puede construirse.',
+            'content' => '
+                <p>La capacidad más crítica de un vehículo autónomo no es acelerar, sino poder detenerse. Por muy inteligente que sea la tractora, la mayor parte de la fuerza de frenado proviene de los ejes del semirremolque; por eso la infraestructura fundamental de la conducción autónoma del lado del semirremolque es el sistema de frenado electrónico (EBS).</p>
+                <h2>De lo Neumático a lo Electrónico</h2>
+                <p>En el freno neumático clásico, el comando se transmite mediante el avance de la presión de aire a lo largo de la línea, y el retraso es físico. En el EBS, la demanda de frenado llega instantáneamente a todos los moduladores mediante señal eléctrica; el aire se usa solo para aplicar la fuerza. El tiempo de respuesta reducido hace fiable el cálculo de distancia de frenado del sistema autónomo; la distribución de presión con detección de carga, por su parte, mantiene la estabilidad enviando fuerza a cada eje en proporción a la carga que soporta.</p>
+                <h2>Capacidades que se Extienden Hacia la Autonomía</h2>
+                <ul>
+                    <li>Intervención automática de la función de prevención de vuelco en escenarios de curva</li>
+                    <li>Reporte en tiempo real del desgaste de las pastillas y la temperatura de frenado</li>
+                    <li>Transmisión continua de los datos de carga de eje a la tractora</li>
+                    <li>Comportamiento de respaldo gradual y predecible en caso de avería</li>
+                </ul>
+                <p>En el escenario autónomo, el sistema de frenado no solo ejecuta comandos; también declara continuamente su propio estado de salud. Como desaparece la sensación que el conductor recibe del pedal, la autosupervisión del sistema es obligatoria. Las flotas que hoy toman en serio el mantenimiento del EBS y monitorizan los datos de frenado con telemática ya han establecido la disciplina de datos de la operación autónoma del mañana.</p>
+            ',
+        ],
+
+        'v2v-truck-trailer-communication' => [
+            'title'   => 'El Puente de Datos Entre la Tractora y el Semirremolque: Comunicación de Vehículo a Vehículo',
+            'excerpt' => 'La quinta rueda ya no es solo una conexión mecánica; se está convirtiendo en el puente de un tráfico de datos cada vez mayor entre la tractora y el semirremolque.',
+            'content' => '
+                <p>Durante muchos años, la comunicación entre la tractora y el semirremolque se limitó a unas pocas líneas: aire de frenado, iluminación y datos básicos de frenado. En la era del semirremolque inteligente, el volumen de información que atraviesa este puente crece rápidamente; porque el semirremolque es ahora, por sí mismo, una fuente de datos con sus sensores, cámaras y unidades de control.</p>
+                <h2>¿Qué Pasa por el Puente?</h2>
+                <ul>
+                    <li><strong>Datos de frenado y estabilidad:</strong> estado del EBS, intervenciones de prevención de vuelco, desgaste de pastillas</li>
+                    <li><strong>Información de carga:</strong> cargas de eje, estimación del centro de gravedad, alertas de desplazamiento de carga</li>
+                    <li><strong>Datos de neumáticos:</strong> valores de presión y temperatura, detección de fugas lentas</li>
+                    <li><strong>Estado de la carrocería:</strong> posiciones de puertas, rampa y válvulas, parámetros de la unidad de refrigeración</li>
+                    <li><strong>Flujo de imagen:</strong> traslado de las cámaras traseras y laterales a la pantalla de la cabina</li>
+                </ul>
+                <h2>La Necesidad del Mañana: Ancho de Banda y Confianza</h2>
+                <p>El flujo de imagen y los datos de sensores están forzando la capacidad de las líneas de datos clásicas; por eso el sector se está orientando hacia arquitecturas de mayor ancho de banda y basadas en red entre tractora y semirremolque. En el escenario autónomo, este puente no es una comodidad sino un componente de seguridad: el comportamiento del sistema ante un corte de datos debe estar predefinido, y la conexión debe establecerse con autenticación en cada acoplamiento. El emparejamiento sin problemas de tractoras y semirremolques de distintas marcas solo es posible mediante la estandarización. Preguntar por la actualidad de la interfaz de datos al elegir un semirremolque es ya tan natural como preguntar por el freno y el eje.</p>
+            ',
+        ],
+
+        'hub-to-hub-autonomous' => [
+            'title'   => 'Modelo de Transporte Autónomo Hub-to-Hub: Primeros Escenarios de Aplicación',
+            'excerpt' => 'La primera forma comercial de la autonomía total no será puerta a puerta, sino el modelo hub-to-hub que opera entre centros de transferencia al borde de la autopista.',
+            'content' => '
+                <p>Las tareas más difíciles del vehículo pesado autónomo son las maniobras urbanas, las rampas estrechas y la última milla impredecible. El modelo hub-to-hub resuelve esta dificultad con una elegante división del trabajo: los conductores humanos llevan la carga desde la ciudad hasta el centro de transferencia (hub) al borde de la autopista; la tractora autónoma asume el tramo largo y monótono de autopista entre dos hubs; en el hub de llegada, la carga vuelve a entregarse a un conductor humano.</p>
+                <h2>¿Por Qué Tiene Sentido el Modelo?</h2>
+                <p>La autopista es el entorno más predecible para los sistemas autónomos: no hay cruces, no hay peatones, la disciplina de carril es alta. La autonomización del tramo largo aumenta la tasa de utilización del vehículo porque no está sujeta a los tiempos de descanso del conductor; los conductores humanos, por su parte, trabajan en turnos cortos y regulares cerca de casa. En mercados con escasez de conductores, esta es una forma realista de ampliar la capacidad.</p>
+                <h2>Requisitos del Lado del Semirremolque y la Operación</h2>
+                <ul>
+                    <li>Compatibilidad de acoplamiento automático para un cambio rápido y estandarizado de semirremolque en los patios del hub</li>
+                    <li>Datos de frenado, neumáticos y carga monitorizables a distancia en el tramo autónomo</li>
+                    <li>Estaciones de control para inspección y limpieza de sensores en los puntos de transferencia</li>
+                    <li>Apoyo del centro de operaciones con flujo de datos meteorológicos y viales a lo largo de la ruta</li>
+                </ul>
+                <p>Las primeras aplicaciones comienzan en rutas fijas, con condiciones meteorológicas limitadas y con un conductor de seguridad a bordo; a medida que el modelo madure, el alcance se ampliará. Los operadores que diseñan sus semirremolques para generar datos y ser transferibles serán el primer eslabón que se conecte a esta cadena.</p>
+            ',
+        ],
+
+        'autonomous-liability-insurance' => [
+            'title'   => 'Responsabilidad y Seguro en el Vehículo Pesado Autónomo: Panorama Jurídico',
+            'excerpt' => '¿A quién pasa la responsabilidad cuando el conductor queda fuera de la ecuación? La mayor pregunta pendiente del transporte autónomo no es técnica, sino jurídica y actuarial.',
+            'content' => '
+                <p>A medida que madura la tecnología del vehículo pesado autónomo, el centro de gravedad del debate se desplaza de la ingeniería al derecho. El derecho de tráfico clásico construye la responsabilidad en gran medida sobre el comportamiento del conductor; en un escenario en el que el conductor no existe o es solo un supervisor, ese terreno debe redefinirse.</p>
+                <h2>Las Nuevas Direcciones de la Responsabilidad</h2>
+                <p>La tendencia general es un desplazamiento de la responsabilidad por culpa hacia la responsabilidad de producto y de operador: un error del sistema autónomo puede señalar al fabricante y al proveedor de software, una avería derivada de un mantenimiento descuidado al operador de la flota, y los problemas de origen en la infraestructura al gestor de la vía. Distintos países trasladan esta distribución a la normativa a ritmos diferentes; en el transporte internacional, esta diversidad es una capa de riesgo adicional que los operadores deben gestionar.</p>
+                <h2>El Valor Creciente de los Datos</h2>
+                <ul>
+                    <li>Los registradores de eventos, al documentar el instante del accidente segundo a segundo, se convierten en la prueba fundamental del análisis de culpa</li>
+                    <li>Los registros de mantenimiento y datos de frenado del semirremolque son la prueba del deber de diligencia del operador</li>
+                    <li>La tarificación de seguros evoluciona desde el historial del conductor hacia la calidad de los datos del sistema y de la flota</li>
+                    <li>Los contratos de intercambio de datos son el nuevo terreno del triángulo fabricante-operador-asegurador</li>
+                </ul>
+                <p>La lección práctica que se extrae hoy de este panorama es clara: gana quien lleva registros. El operador que documenta el mantenimiento del semirremolque y archiva regularmente los datos de telemática entra, tanto en el futuro mundo autónomo como en los expedientes de siniestros de hoy, con el conjunto de pruebas más sólido. Hasta que el derecho se aclare, el seguro más firme es la disciplina de datos.</p>
+            ',
+        ],
+
+        'adas-to-full-autonomy' => [
+            'title'   => 'De los Sistemas de Asistencia al Conductor a la Autonomía Total: Hoja de Ruta de Transición Gradual',
+            'excerpt' => 'La autonomía no es un interruptor, sino una escalera: los asistentes de frenado y de carril de hoy son los primeros peldaños que conducen al transporte totalmente autónomo.',
+            'content' => '
+                <p>Las noticias sobre camiones autónomos suelen dar la impresión de una revolución que llegará de la noche a la mañana; la realidad sobre el terreno es, en cambio, una evolución gradual. Las clasificaciones internacionales dividen la automatización de la conducción en peldaños que van desde la conducción sin asistencia hasta el nivel en el que el ser humano queda completamente fuera, y cada peldaño se construye sobre el hardware del anterior.</p>
+                <h2>¿Dónde Estamos Hoy?</h2>
+                <p>En los vehículos pesados modernos, el asistente de frenado de emergencia, el control de crucero adaptativo y los sistemas de seguimiento de carril son ya equipamiento habitual. Estos sistemas no sustituyen al conductor; pero trasladan al vehículo todos los componentes de la autonomía mediante sensores de percepción, infraestructura de frenado electrónico y software de decisión. En el peldaño superior, estos componentes empiezan a asumir la conducción en entornos definidos como la autopista; el conductor se retira al papel de supervisor.</p>
+                <h2>Los Hitos de la Transición</h2>
+                <ul>
+                    <li>Estandarización de los sistemas de asistencia en toda la flota y disciplina de recopilación de datos</li>
+                    <li>Maduración de la maniobra sin conductor en operaciones de patio y terminal cerradas</li>
+                    <li>Circulación autónoma supervisada en tramos de autopista y pilotos hub-to-hub</li>
+                    <li>Que la normativa, el seguro y la infraestructura permitan la autonomía total en corredores definidos</li>
+                </ul>
+                <p>El semirremolque está en escena en cada peldaño de esta escalera: la respuesta de frenado, la infraestructura de sensores y la calidad de los datos son la condición previa para pasar al peldaño superior. La estrategia inteligente para el gestor de flota no es esperar la revolución, sino asegurar que cada vehículo adquirido hoy llegue con el equipamiento que apoyará el siguiente peldaño.</p>
+            ',
+        ],
+
+        'circular-economy-heavy-vehicles' => [
+            'title'   => 'Economía Circular en el Vehículo Pesado: Desmontaje, Refabricación y Recuperación',
+            'excerpt' => 'El modelo de usar y tirar también está agotando su plazo en el vehículo pesado: los vehículos desmontables, refabricables y recuperables benefician tanto al medio ambiente como al balance.',
+            'content' => '
+                <p>El modelo lineal clásico era simple: producir, usar, desguazar. La economía circular cierra esa cadena: el vehículo que llega al final de su vida económica se desmonta, sus componentes valiosos entran en refabricación, su material se recupera y el ciclo comienza de nuevo. El vehículo pesado, que alberga toneladas de acero, aluminio y componentes cualificados, es uno de los ámbitos de aplicación más eficientes de este modelo.</p>
+                <h2>Tres Eslabones: Desmontaje, Refabricación, Recuperación</h2>
+                <p>El desmontaje sistemático trata el vehículo no como un montón de chatarra, sino como una biblioteca de componentes: los ejes, componentes de frenado y elementos de suspensión se separan y se clasifican según su estado. La refabricación (remanufacturing) lleva los componentes adecuados a un ajuste de fábrica como nuevo. La masa restante se recupera por material; el acero y el aluminio se convierten en nuevos productos sin pérdida de propiedades. Los estudios académicos sobre el sector muestran que esta cadena genera un retorno no solo ambiental, sino directamente económico.</p>
+                <h2>La Lección que Vuelve a la Mesa de Diseño</h2>
+                <ul>
+                    <li>Se prefieren las uniones atornilladas y modulares frente al encolado y las estructuras mixtas</li>
+                    <li>Se reduce la diversidad de materiales; los módulos de un solo material facilitan la separación</li>
+                    <li>Los datos de identidad e historial de los componentes son la base de la decisión de segunda vida</li>
+                    <li>El manual de desmontaje forma ya parte de la documentación del producto</li>
+                </ul>
+                <p>El vehículo desmontable es el vehículo que conserva su valor; el diseño circular no es un coste, sino una inversión en el valor de fin de vida del vehículo.</p>
+                <h2>Referencias</h2>
+                <ul>
+                    <li>Saidani, M., Yannou, B., Leroy, Y. &amp; Cluzel, F. (2020). Dismantling, remanufacturing and recovering heavy vehicles in a circular economy. <em>Resources, Conservation and Recycling</em>, 156, 104684. DOI: 10.1016/j.resconrec.2020.104684</li>
+                </ul>
+            ',
+        ],
+
+        'trailer-remanufacturing' => [
+            'title'   => 'Refabricación en Semirremolques: La Economía de la Segunda Vida',
+            'excerpt' => 'La refabricación lleva a los semirremolques usados más allá de la reparación: el vehículo y los componentes que vuelven al estándar de fábrica ganan una segunda vida económica.',
+            'content' => '
+                <p>La reparación pone en marcha la pieza averiada; la renovación refresca el aspecto del vehículo. La refabricación (remanufacturing), en cambio, va más allá de ambas: el vehículo o componente se desmonta por completo en un entorno de fábrica, cada pieza se mide, las desgastadas se sustituyen y el producto se vuelve a montar y probar según un estándar definido. El resultado no es de segunda mano; es el comienzo de una segunda vida.</p>
+                <h2>¿Por Qué el Semirremolque es un Candidato Ideal?</h2>
+                <p>La estructura principal del semirremolque —chasis, conexiones de eje, esqueleto de la carrocería— se diseña con un mantenimiento adecuado para superar la vida útil del primer usuario. El lado que más se desgasta suele ser el de los componentes periféricos: frenos, elementos de suspensión, instalación eléctrica, suelo y puertas. Los estudios académicos sobre el sector del vehículo pesado muestran que esta estructura es extraordinariamente adecuada para la economía del desmontaje y la refabricación: un núcleo de alto valor y larga vida, componentes periféricos estandarizados y sustituibles.</p>
+                <h2>La Economía de la Segunda Vida</h2>
+                <ul>
+                    <li>El vehículo refabricado se incorpora a la flota a un coste notablemente menor que el vehículo nuevo</li>
+                    <li>El chasis y la carrocería con el carbono incorporado ya pagado reparten ligero ese coste en su segunda vida</li>
+                    <li>Cuando el proceso de refabricación se certifica con pruebas y garantía, desaparece la incertidumbre del vehículo de segunda mano</li>
+                    <li>Al tener un peso importante de mano de obra local, alimenta el empleo y la red de servicio</li>
+                </ul>
+                <p>En la estrategia de flota, la refabricación no es alternativa a la nueva inversión sino su complemento: vehículo nuevo para las líneas de alta intensidad, vehículo refabricado para trabajos predecibles; esta es precisamente la distribución eficiente del capital.</p>
+                <h2>Referencias</h2>
+                <ul>
+                    <li>Saidani, M., Yannou, B., Leroy, Y. &amp; Cluzel, F. (2020). Dismantling, remanufacturing and recovering heavy vehicles in a circular economy. <em>Resources, Conservation and Recycling</em>, 156, 104684. DOI: 10.1016/j.resconrec.2020.104684</li>
+                </ul>
+            ',
+        ],
+
+        'trailer-lifecycle-assessment' => [
+            'title'   => 'Análisis del Ciclo de Vida: La Huella de Carbono Real de un Semirremolque',
+            'excerpt' => 'La historia de carbono de un semirremolque empieza en la fábrica pero no termina ahí: la huella real es la suma de todo el ciclo, desde la materia prima hasta el desguace.',
+            'content' => '
+                <p>El debate sobre el carbono suele centrarse en el tubo de escape; sin embargo, el semirremolque en sí mismo no quema combustible. Para ver su historia de carbono se necesita un análisis del ciclo de vida (ACV): un método sistemático que registra en la misma cuenta las emisiones de todas las etapas, desde la producción de materia prima hasta la fabricación, desde la vida útil hasta el fin de vida.</p>
+                <h2>Las Etapas del Ciclo</h2>
+                <ul>
+                    <li><strong>Materia prima:</strong> la intensidad de carbono de la producción de acero y aluminio; el insumo reciclado reduce notablemente esta partida</li>
+                    <li><strong>Fabricación:</strong> el consumo energético del corte, la soldadura, la pintura y el montaje</li>
+                    <li><strong>Uso:</strong> la parte del peso y la aerodinámica del semirremolque que se refleja en el consumo de combustible de la tractora</li>
+                    <li><strong>Fin de vida:</strong> el efecto neto del desmontaje, la recuperación y la eliminación</li>
+                </ul>
+                <h2>El Platillo Pesado de la Balanza: La Fase de Uso</h2>
+                <p>A lo largo de una vida de cientos de miles de kilómetros, el peso y la resistencia aerodinámica del semirremolque acompañan a cada litro que quema la tractora; por eso la fase de uso es, con diferencia, la partida más grande de la huella total. Este hecho afecta directamente a las decisiones de diseño: asumir algo de emisión adicional en la producción para aligerar el vehículo se recupera con creces y rápidamente gracias a la ganancia en la fase de uso. La misma lógica se aplica a la durabilidad: el vehículo que alarga su vida útil reparte su carbono incorporado entre más kilómetros.</p>
+                <p>El ACV no es una etiqueta de marketing sino una herramienta de decisión: muestra en la misma balanza el coste y la ganancia reales de cada elección, desde la selección de materiales hasta el paquete aerodinámico. Para las flotas con objetivos de carbono, la elección del semirremolque empieza ya por leer esa balanza.</p>
+            ',
+        ],
+
+        'recycled-steel-trailers' => [
+            'title'   => 'Fabricación de Semirremolques con Acero Reciclado: ¿Es Injustificada la Preocupación por la Calidad?',
+            'excerpt' => 'El acero es uno de los pocos materiales que puede reciclarse infinitas veces sin pérdida de propiedades; el lugar del acero de origen de chatarra en los semirremolques no es una cuestión de calidad, sino de especificación.',
+            'content' => '
+                <p>Al hablar de material reciclado, lo primero que viene a la mente es la pérdida de cualidad: las fibras del papel se acortan, las cadenas del plástico se degradan. El acero es la excepción a esta regla. En el proceso de fusión, el material se descompone en sus átomos, y el acero que vuelve a solidificarse, cuando se ajusta correctamente su composición química, es indistinguible del de producción primaria. El acero de horno de arco eléctrico con alta proporción de chatarra se usa desde hace décadas en puentes, edificios y chasis de vehículos.</p>
+                <h2>¿Cómo se Garantiza la Calidad?</h2>
+                <p>Para el fabricante de semirremolques, el criterio no es el origen del acero, sino su certificado. El certificado de ensayo de material documenta el límite elástico, los valores de tenacidad y el análisis químico; el acero que cumple esos valores es material del mismo estándar, sea de origen reciclado o no. El punto que requiere atención es el control de los elementos traza (por ejemplo, el cobre) en el insumo de chatarra; los fabricantes cualificados gestionan esto con disciplina de separación y mezcla de chatarra.</p>
+                <h2>Beneficios para la Flota y el Fabricante</h2>
+                <ul>
+                    <li>Carbono incorporado notablemente menor: contribución directa a los informes de emisiones del cliente</li>
+                    <li>Las mismas propiedades mecánicas, los mismos procedimientos de soldadura y mecanizado</li>
+                    <li>Insumo de material documentable que aporta puntos en los criterios de licitación verde</li>
+                    <li>Participación en la economía circular al apoyar la cadena de valor de la chatarra</li>
+                </ul>
+                <p>Respuesta corta: sí, la preocupación es en gran medida injustificada. La pregunta correcta no es "¿es reciclado?", sino "¿cumple y documenta la especificación?"; mientras se mantenga la disciplina de ingeniería, el acero de bajo carbono es una elección tanto segura como estratégica para el semirremolque.</p>
+            ',
+        ],
+
+        'green-supply-chain-tenders' => [
+            'title'   => 'Cadena de Suministro Verde: Criterios de Carbono en las Licitaciones de Transporte',
+            'excerpt' => 'Los grandes cargadores trasladan sus objetivos de emisiones a la cadena de suministro: junto al precio y el plazo, ahora se añade una columna de carbono en las licitaciones de transporte.',
+            'content' => '
+                <p>Los fabricantes y minoristas con compromisos corporativos de carbono saben que una parte importante de sus propias emisiones proviene de los servicios que compran, empezando por el transporte. El resultado es un cambio silencioso pero duradero en las licitaciones de transporte: junto a las columnas de precio y plazo en la tabla de ofertas, se ha añadido una columna de carbono.</p>
+                <h2>¿Qué se Pregunta en las Licitaciones?</h2>
+                <p>Los cargadores ya piden datos de emisiones por transporte: la edad media de la flota, la clase de emisión de los vehículos, el seguimiento del consumo de combustible y el porcentaje de kilómetros en vacío se han convertido en preguntas estándar. En algunas licitaciones también se puntúan el uso de equipamiento aerodinámico, el porcentaje de semirremolques ligeros y el plan de combustibles alternativos; el transportista que no puede aportar datos puede quedar fuera de la lista corta aunque su precio sea competitivo.</p>
+                <h2>Pasos de Preparación para el Transportista</h2>
+                <ul>
+                    <li>Establecer un sistema de registro simple pero consistente que reúna los datos de combustible y kilómetros por vehículo</li>
+                    <li>Calcular la emisión por viaje y tenerla lista para los informes del cliente</li>
+                    <li>Reservar espacio en el plan de renovación de flota para el aligeramiento y el paquete aerodinámico</li>
+                    <li>Documentar las prácticas de ruta y emparejamiento de carga que reducen los kilómetros en vacío</li>
+                </ul>
+                <p>La elección del semirremolque es el héroe invisible de esta ecuación: un semirremolque ligero y aerodinámico significa menos combustible y menor emisión en cada viaje; esto se escribe directamente en la columna de carbono de la tabla de licitación. La cadena de suministro verde es una tendencia duradera, y para el transportista que se prepara con antelación no es un coste, sino una oportunidad de diferenciación frente a la competencia.</p>
+            ',
+        ],
+
+        'end-of-life-trailer-recovery' => [
+            'title'   => 'Fin de Vida del Semirremolque: No es Chatarra, es Recurso',
+            'excerpt' => 'Un semirremolque que ha agotado su vida económica significa toneladas de material cualificado y componentes reutilizables; la diferencia está en si lo ve como un montón o como un inventario.',
+            'content' => '
+                <p>El destino clásico de un semirremolque retirado del servicio es conocido: espera en un rincón, y después el chatarrero a cambio del recibo de la báscula. Sin embargo, ese mismo vehículo, visto con una mirada sistemática, es un inventario de componentes formado por ejes, componentes de frenado, elementos de suspensión y llantas, además de toneladas de acero y aluminio. Los estudios académicos sobre el desmontaje y la recuperación de vehículos pesados muestran que la evaluación planificada de este inventario genera un valor notablemente mayor que el desguace en bloque.</p>
+                <h2>El Proceso Planificado de Fin de Vida</h2>
+                <ul>
+                    <li><strong>Evaluación:</strong> determinación del estado del vehículo componente a componente y extracción del potencial de segunda vida</li>
+                    <li><strong>Desmontaje:</strong> separación sin daños y clasificación de las piezas reutilizables</li>
+                    <li><strong>Descontaminación:</strong> eliminación conforme a normativa de aceites, líquidos de frenos y materiales peligrosos</li>
+                    <li><strong>Separación de materiales:</strong> orientación del acero, aluminio, caucho y plástico hacia flujos separados</li>
+                </ul>
+                <h2>¿Dónde está Oculto el Valor?</h2>
+                <p>Un eje o componente de frenado en estado utilizable vuelve al mercado de recambios a un precio muchas veces superior al valor del material. El metal limpio separado alcanza un precio mayor que la chatarra mezclada. En carrocerías especiales como las cisternas, el certificado de descontaminación es la condición previa de cada paso siguiente, y cuando se hace correctamente, el aluminio de la carrocería es una de las partidas de recuperación más valiosas. El fin de vida no es el último coste del vehículo, sino su último ingreso, siempre que se planifique.</p>
+                <h2>Referencias</h2>
+                <ul>
+                    <li>Saidani, M., Yannou, B., Leroy, Y. &amp; Cluzel, F. (2020). Dismantling, remanufacturing and recovering heavy vehicles in a circular economy. <em>Resources, Conservation and Recycling</em>, 156, 104684. DOI: 10.1016/j.resconrec.2020.104684</li>
+                </ul>
+            ',
+        ],
+
+        'bio-based-materials-trailers' => [
+            'title'   => 'Materiales Biobasados y Reciclados: Nuevas Opciones en las Superficies Interiores del Semirremolque',
+            'excerpt' => 'El chasis puede seguir siendo de acero; pero en el suelo, el revestimiento de paredes y el equipamiento interior, los materiales biobasados y reciclados ganan terreno silenciosamente.',
+            'content' => '
+                <p>En la estructura portante del semirremolque, las opciones de material están limitadas por los requisitos de resistencia; en las superficies interiores, en cambio, el diseñador tiene mucha más libertad. El revestimiento del suelo, los paneles de pared, el interior de las puertas y las piezas de accesorios se están convirtiendo en las zonas por donde las familias de materiales de bajo carbono entran por primera vez en los semirremolques.</p>
+                <h2>¿Qué Materiales son Candidatos?</h2>
+                <ul>
+                    <li><strong>Suelos certificados de madera y a base de bambú:</strong> revestimientos de resistencia probada, suministrados con certificado de gestión forestal sostenible</li>
+                    <li><strong>Compuestos reforzados con fibra natural:</strong> placas ligeras donde la fibra de lino y cáñamo se combina con resina, aptas para paneles interiores y aplicaciones de cubierta</li>
+                    <li><strong>Paneles de plástico reciclado:</strong> superficies de protección de pared resistentes a impactos, lavables y de nuevo reciclables al final de su vida</li>
+                    <li><strong>Resinas biobasadas:</strong> alternativas de origen vegetal a los aglutinantes derivados del petróleo</li>
+                </ul>
+                <h2>El Filtro de la Ingeniería</h2>
+                <p>El material de superficie interior también está sujeto a una especificación seria: dureza de suelo que resista la rueda de la carretilla elevadora, carga de tracción del gancho de la correa de amarre, contacto con humedad y químicos, y capacidad de limpieza en cargas que requieren higiene. Los nuevos materiales solo son adorno de folleto si no pasan este filtro; cuando lo pasan, aportan al vehículo tanto un carbono incorporado bajo como, en la mayoría de los casos, una ventaja de peso. El enfoque correcto es gradual: primero validación en campo en superficies de bajo riesgo, después ampliación del alcance. El material sostenible es realmente sostenible cuando demuestra su afirmación sobre el terreno.</p>
+            ',
+        ],
+
+        'carbon-reporting-fleets' => [
+            'title'   => 'Informes de Carbono para Flotas: Guía de los Alcances 1-2-3',
+            'excerpt' => 'Los tres alcances de la contabilidad del carbono parecen burocráticos a primera vista; sin embargo, para el gestor de flota, cada uno corresponde a una fuente de datos concreta.',
+            'content' => '
+                <p>El lenguaje común de la contabilidad corporativa del carbono divide las emisiones en tres alcances. Este marco puede parecer diseñado para grandes empresas industriales, pero al aplicarlo a la flota de transporte se vuelve sorprendentemente concreto: cada alcance corresponde a un dato que la flota ya lleva o puede llevar fácilmente.</p>
+                <h2>La Correspondencia de los Tres Alcances en la Flota</h2>
+                <ul>
+                    <li><strong>Alcance 1 — emisiones directas:</strong> el combustible que queman sus vehículos; el consumo propio de combustible de la empresa incluyendo la calefacción del depósito</li>
+                    <li><strong>Alcance 2 — energía comprada:</strong> la electricidad usada en las instalaciones y, si existe, en la carga de equipos eléctricos</li>
+                    <li><strong>Alcance 3 — cadena de valor:</strong> los viajes de los transportistas subcontratados, las emisiones de producción de los vehículos y semirremolques comprados, el transporte de los empleados</li>
+                </ul>
+                <h2>¿Por Dónde Empezar?</h2>
+                <p>El primer alcance es el más fácil y la partida más grande: las facturas de combustible y los registros de kilómetros ya están disponibles; lo que suele faltar es solo la consolidación regular. El segundo alcance se resuelve con la factura eléctrica. El tercer alcance requiere paciencia: los datos de subcontratistas se completan con el tiempo añadiendo una cláusula de reporte a los contratos, y las emisiones de producción de vehículos pidiendo datos de ciclo de vida al proveedor.</p>
+                <p>El punto crítico es este: el alcance 3 de su cliente es su alcance 1. Los cargadores dependen de sus datos de combustible para sus propios informes; el transportista que ofrece estos datos de forma regular y fiable convierte la carga del reporte en ventaja competitiva. El informe de carbono no es una tarea tediosa, sino el espejo de eficiencia de la flota: quien mide bien también ve dónde mejorar.</p>
+            ',
+        ],
+
+        'low-emission-coatings' => [
+            'title'   => 'Pinturas al Agua y Recubrimiento en Polvo: Reducción de Emisiones en la Producción',
+            'excerpt' => 'La cabina de pintura es uno de los puntos de emisión más intensos de la fábrica de semirremolques; los sistemas al agua y el recubrimiento en polvo están cambiando este panorama de forma duradera.',
+            'content' => '
+                <p>En el mapa de emisiones de carbono y químicas de la producción de semirremolques, la cabina de pintura ocupa un lugar especial: las pinturas clásicas al disolvente liberan compuestos orgánicos volátiles (COV) a la atmósfera durante el secado. La normativa ambiental cada vez más estricta y los objetivos corporativos de sostenibilidad orientan al sector hacia dos alternativas probadas: los sistemas de pintura al agua y el recubrimiento en polvo.</p>
+                <h2>Sistemas al Agua</h2>
+                <p>En las pinturas al agua, la mayor parte del disolvente es agua en lugar de disolvente orgánico; la emisión de COV cae notablemente. Los acabados al agua modernos compiten con sus equivalentes al disolvente en cuanto a cobertura y resistencia. La transición requiere inversión: la cabina de aplicación necesita control de humedad y temperatura, el perfil de secado es diferente y el equipo de pistola debe ser resistente a la corrosión; pero son cuestiones de ingeniería conocidas y resueltas.</p>
+                <h2>Las Ventajas del Recubrimiento en Polvo</h2>
+                <ul>
+                    <li>No contiene disolvente; la emisión de COV es prácticamente nula</li>
+                    <li>El exceso de polvo recogido en la cabina se reutiliza; la merma se reduce al mínimo</li>
+                    <li>La superficie horneada adquiere alta resistencia al impacto y a la proyección de piedras</li>
+                    <li>Se aplica en serie en la producción por piezas, como ejes, llantas y componentes del chasis</li>
+                </ul>
+                <p>En la práctica, ambas tecnologías se complementan: recubrimiento en polvo en los componentes que caben en el horno, acabado al agua sobre imprimación de base cincada en las grandes superficies de carrocería y chasis. El resultado no es solo ambiental: mejora la salud de los trabajadores, se reduce el riesgo de cumplimiento normativo y surge una reducción de emisiones concreta que puede escribirse en el informe de cadena de suministro del cliente.</p>
+            ',
+        ],
+
+        'sustainability-certifications' => [
+            'title'   => 'Certificaciones de Sostenibilidad: La Ventaja Competitiva del Transportista',
+            'excerpt' => 'A medida que se multiplican las afirmaciones verdes, habla el certificado: las certificaciones de sostenibilidad convierten el rendimiento ambiental del transportista en prueba sobre la mesa de licitación.',
+            'content' => '
+                <p>Todo transportista dice ahora ser verde; la pregunta de los cargadores, en cambio, ha cambiado: ¿tiene usted pruebas? Las certificaciones de sostenibilidad entran en juego precisamente en este punto: un rendimiento ambiental verificado por un ojo independiente convierte la frase de marketing en puntuación de licitación.</p>
+                <h2>¿Qué Certificados Destacan?</h2>
+                <ul>
+                    <li><strong>Sistema de gestión ambiental (ISO 14001):</strong> el documento básico de que la empresa gestiona sistemáticamente sus impactos ambientales; se está convirtiendo en condición previa en la mayoría de las licitaciones corporativas</li>
+                    <li><strong>Gestión energética (ISO 50001):</strong> la prueba de que el consumo de combustible y energía se mide y mejora continuamente</li>
+                    <li><strong>Calificaciones de sostenibilidad de proveedores:</strong> plataformas de puntuación integradas en los sistemas de compra de los grandes cargadores</li>
+                    <li><strong>Verificación de informes de emisiones:</strong> que los datos de carbono declarados pasen una auditoría independiente</li>
+                </ul>
+                <h2>Que el Certificado no se Quede en el Papel</h2>
+                <p>El valor del certificado proviene de la realidad del sistema que hay detrás. En una empresa que monitoriza el consumo de combustible por vehículo, forma a sus conductores en conducción eficiente y renueva su flota con semirremolques ligeros y aerodinámicos, la certificación es una consecuencia natural; en el caso contrario, es un escaparate que se agrieta en las auditorías anuales. El orden inteligente es: primero infraestructura de datos, después mejora, por último certificado.</p>
+                <p>El lado del retorno es claro: el transportista certificado suma puntos en los criterios de licitación verde, permanece en el grupo de proveedores de los clientes corporativos y se posiciona por delante de sus competidores a medida que se endurece la normativa de carbono. El certificado de sostenibilidad no es una partida de gasto; es la llave de puertas que no se cierran.</p>
+            ',
+        ],
+
+        'predictive-maintenance-trailers' => [
+            'title'   => 'Mantenimiento Predictivo: El Semirremolque que Avisa Antes de la Avería',
+            'excerpt' => 'La telemática y la tecnología de sensores están convirtiendo el mantenimiento del semirremolque de algo basado en el calendario a algo basado en el estado; la avería ya no se detecta en la carretera, sino en la pantalla.',
+            'content' => '
+                <p>El enfoque clásico de mantenimiento mira al calendario: engrasar a tal kilometraje, sustituir en tal mes. El mantenimiento predictivo, en cambio, mira al propio vehículo. Los sensores del semirremolque recogen continuamente datos como la temperatura del cojinete, la presión de los neumáticos, el espesor de las pastillas de freno y el comportamiento de la suspensión, y señalan la desviación de la normalidad antes de que la avería crezca.</p>
+                <h2>¿Qué Datos se Monitorizan?</h2>
+                <ul>
+                    <li><strong>Temperatura del cubo y del cojinete:</strong> El sobrecalentamiento es el aviso más temprano de un daño en el cojinete</li>
+                    <li><strong>Presión y temperatura de los neumáticos (TPMS):</strong> Las fugas lentas se detectan antes de convertirse en un reventón</li>
+                    <li><strong>Sensores de desgaste de freno:</strong> La estimación de vida de las pastillas hace planificable la cita de servicio</li>
+                    <li><strong>Registros de eventos del EBS:</strong> Las intervenciones del ABS y los datos de distribución de carga entran en el análisis de tendencias</li>
+                    <li><strong>Kilometraje y perfil de uso:</strong> Los intervalos de mantenimiento se flexibilizan según la condición de uso real</li>
+                </ul>
+                <h2>¿Qué Aporta a la Flota?</h2>
+                <p>La mayor ganancia es que la parada imprevista se convierte en servicio planificado. Un semirremolque averiado en ruta hace esperar a la tractora, al conductor y a toda la carga, y genera costes de rescate y retraso. La misma avería, leída semanas antes en los datos, se programa en una ventana en la que el vehículo ya está inactivo. La segunda ganancia está en las piezas: la pieza en buen estado no se sustituye porque haya llegado la fecha del calendario, y la que realmente agota su vida se renueva antes de llegar al límite.</p>
+                <p>La transición al mantenimiento predictivo no requiere una gran inversión; una infraestructura telemática que lea los datos del TPMS y del EBS ya existe en la mayoría de los semirremolques modernos. La verdadera diferencia surge con una cultura de mantenimiento que monitoriza estos datos regularmente y los convierte en acción.</p>
+            ',
+        ],
+
+        'brake-wear-mistakes' => [
+            'title'   => 'Vida de las Pastillas y Discos de Freno: Errores Comunes que Aceleran el Desgaste',
+            'excerpt' => 'La pastilla y el disco son piezas de larga duración cuando se usan correctamente; lo que acorta su vida no suele ser la propia pieza, sino los descuidos a su alrededor.',
+            'content' => '
+                <p>La pastilla y el disco de freno son piezas consumibles; sin embargo, la vida de la misma pieza puede diferir varias veces entre dos semirremolques. La diferencia no suele venir de la condición de la vía, sino de los hábitos de mantenimiento y uso.</p>
+                <h2>Los Errores más Frecuentes</h2>
+                <ul>
+                    <li><strong>Freno que roza:</strong> Un pasador de la pinza atascado o un mecanismo de retorno defectuoso mantiene la pastilla en contacto continuo con el disco; el desgaste se acelera, el disco se sobrecalienta y se agrieta</li>
+                    <li><strong>Selección incompatible de pastilla:</strong> Un material de fricción no homologado o inadecuado para el vehículo perjudica tanto la vida del disco como el equilibrio de frenado</li>
+                    <li><strong>Desajuste de frenado tractora-semirremolque:</strong> En combinaciones con un equilibrio de fuerza de frenado defectuoso, la carga recae sobre un lado; se agotan antes los frenos de la tractora o los del semirremolque</li>
+                    <li><strong>Mecanismo sucio o atascado:</strong> El polvo de obra y la sal de carretera bloquean los mecanismos de ajuste y generan un desgaste desequilibrado</li>
+                    <li><strong>Sustituir solo la pastilla:</strong> Montar una pastilla nueva sobre un disco desgastado alarga el periodo de asentamiento y consume rápidamente también la pastilla nueva</li>
+                </ul>
+                <h2>La Disciplina que Alarga la Vida</h2>
+                <p>En las revisiones periódicas debe observarse no solo el espesor de la pastilla, sino también el estado de la superficie del disco, el movimiento libre de la pinza y la simetría del desgaste en ambos lados del eje. El desgaste asimétrico es la señal más legible de un problema mecánico que aún no se ha convertido en avería. Realizar el mantenimiento de la pinza junto con el cambio de pastilla evita transferir el problema antiguo a la pieza nueva; una pequeña diferencia de mano de obra alarga notablemente el siguiente intervalo de cambio.</p>
+            ',
+        ],
+
+        'axle-suspension-maintenance' => [
+            'title'   => 'Mantenimiento de Eje y Suspensión: Los Guardianes Silenciosos del Agarre',
+            'excerpt' => 'La avería de suspensión rara vez llega de repente; el fuelle, el amortiguador y los casquillos avisan meses antes. La flota que lee estas señales gana tanto en neumáticos como en combustible.',
+            'content' => '
+                <p>El grupo de ejes y la suspensión del semirremolque son la única interfaz entre la carga y la vía. Mientras este sistema está sano, su presencia pasa desapercibida; cuando se desgasta, la factura no la paga él mismo, sino los neumáticos, el consumo de combustible y el daño a la carga.</p>
+                <h2>Puntos a Controlar Regularmente</h2>
+                <ul>
+                    <li><strong>Fuelles neumáticos:</strong> grietas superficiales, marcas de fricción y fugas de aire; el reventón del fuelle es una de las causas más frecuentes de quedarse parado en carretera</li>
+                    <li><strong>Amortiguadores:</strong> fuga de aceite y amortiguación ineficaz; un amortiguador muerto deja un patrón de desgaste irregular en el neumático</li>
+                    <li><strong>Casquillos y ojales de unión:</strong> a medida que crece el juego, la geometría del eje se mueve durante la marcha</li>
+                    <li><strong>Válvula de nivelación:</strong> un ajuste incorrecto altera la altura de la caja y el reparto de carga entre ejes</li>
+                    <li><strong>Alineación del eje:</strong> el origen clásico del tirón, el desgaste desigual del neumático y el aumento del consumo de combustible</li>
+                </ul>
+                <h2>El Neumático, el Testigo más Honesto</h2>
+                <p>La mayoría de los problemas de suspensión dan su primera expresión en la superficie del neumático: el patrón de dientes de sierra apunta a un amortiguador muerto, el desgaste de un solo hombro a un error de alineación, el desgaste local irregular a un casquillo con juego. Examinar el patrón de desgaste del neumático viejo al sustituirlo es un diagnóstico gratuito de la suspensión.</p>
+                <p>La alineación del eje debe medirse cargado y sobre suelo nivelado, según el procedimiento del fabricante. Un grupo de ejes bien alineado circula en silencio; lo que corresponde a la flota es mantener ese silencio con controles regulares.</p>
+            ',
+        ],
+
+        'trailer-lighting-electrics' => [
+            'title'   => 'Iluminación e Instalación Eléctrica: La Fuente de Avería más Frecuente en el Semirremolque',
+            'excerpt' => 'En los registros de servicio los primeros puestos son siempre los mismos: un stop que no se apaga, un intermitente que no enciende. El origen de las averías eléctricas, sin embargo, no suele ser la propia lámpara.',
+            'content' => '
+                <p>La instalación eléctrica del semirremolque parece simple: unas pocas lámparas, un conector, un mazo de cables. Sin embargo, este sistema simple es una de las zonas más exigidas del vehículo por la vibración, el agua, la sal de carretera y el ciclo continuo de conexión y desconexión, y no baja de la cima de las estadísticas de avería.</p>
+                <h2>Las Direcciones Reales de la Avería</h2>
+                <ul>
+                    <li><strong>Corrosión del conector:</strong> la humedad que entra en el enchufe tractora-semirremolque forma una capa de óxido verde en los pines; aumenta la resistencia de contacto, las lámparas se atenúan o parpadean</li>
+                    <li><strong>Errores de puesta a tierra:</strong> en los circuitos que retornan a través del chasis, una superficie de contacto pintada u oxidada es el origen de las averías más inestables</li>
+                    <li><strong>Desgaste del cableado:</strong> un cable que roza un canto metálico afilado o que está tenso pierde su aislamiento y produce un cortocircuito</li>
+                    <li><strong>Empalmes de reparación amateur:</strong> los empalmes abiertos envueltos en cinta atraen el agua al interior del cable y trasladan la avería a metros de distancia</li>
+                </ul>
+                <h2>Enfoque de Solución Duradera</h2>
+                <p>La transición a la iluminación LED elimina en gran medida la frecuencia de cambio de bombillas; sin embargo, la propia instalación sigue requiriendo mantenimiento. Limpiar los pines del conector y protegerlos con la grasa adecuada, conectar firmemente los puntos de tierra al metal desnudo y sellar cada empalme de cable con un aislamiento termorretráctil reduce visiblemente la frecuencia de averías.</p>
+                <p>La ronda de luces previa al viaje no es una formalidad, sino la inspección más barata: una luz de stop apagada es tanto una multa de tráfico como un riesgo de colisión trasera. Cada reparación eléctrica hecha a la ligera es el pago anticipado de la próxima avería.</p>
+            ',
+        ],
+
+        'kingpin-wear-measurement' => [
+            'title'   => 'Desgaste del King-Pin y la Quinta Rueda: Medición, Tolerancia y Momento de Cambio',
+            'excerpt' => 'La única pieza que conecta la tractora con el semirremolque es el king-pin; su desgaste avanza en silencio, pero su consecuencia afecta a toda la combinación.',
+            'content' => '
+                <p>El king-pin es el único elemento de unión que transmite todas las fuerzas de tracción y frenado del semirremolque a la quinta rueda. Cada arranque, cada frenada y cada maniobra pasan por esta pequeña pieza de acero; su desgaste es inevitable, pero dejarlo sin control es inaceptable.</p>
+                <h2>¿Cómo se Mide el Desgaste?</h2>
+                <p>El desgaste del king-pin no se mide a simple vista, sino con calibre. Los fabricantes ofrecen calibres de medición para el cuerpo del pin y el diámetro del cuello; cuando el calibre encaja sobre el pin, se lee directamente si el desgaste está dentro del límite permitido. La evaluación no debe limitar solo el diámetro, sino también abarcar la perpendicularidad y la deformación del pin: un pin doblado o con un escalón en su superficie debe sustituirse aunque el diámetro esté dentro del límite. En la evaluación siempre debe usarse como referencia la tabla de tolerancias del fabricante del pin.</p>
+                <h2>No Olvidar el Lado de la Quinta Rueda</h2>
+                <ul>
+                    <li>El juego en la mordaza de bloqueo genera golpeteo y sacudidas aunque el pin esté sano</li>
+                    <li>Si se descuida la lubricación de la placa de la quinta rueda, el desgaste se acelera en ambos lados</li>
+                    <li>Que el mecanismo de bloqueo cierra por completo debe verificarse físicamente en cada conexión</li>
+                    <li>Los pernos o la soldadura de conexión del pin deben controlarse periódicamente</li>
+                </ul>
+                <p>El golpeteo que se siente en marcha durante el arranque y el frenado es, típicamente, la señal del juego en el conjunto pin-mordaza. El cambio del king-pin es una operación de taller planificada; su descuido, en cambio, acarrea consecuencias que llegan hasta el riesgo de desenganche en carretera. Determinar el periodo de medición no según el calendario de inspección, sino según la intensidad real de uso del vehículo, es el enfoque más seguro.</p>
+            ',
+        ],
+
+        'welding-repair-safety' => [
+            'title'   => 'Reparación por Soldadura en Semirremolques: ¿Cuándo es Segura, Cuándo es Arriesgada?',
+            'excerpt' => 'No toda grieta se cierra con soldadura. El valor de la soldadura de reparación depende tanto de la destreza del soldador como de que se realice en el lugar correcto y con el procedimiento correcto.',
+            'content' => '
+                <p>Una de las decisiones más frecuentes en el terreno es esta: ¿soldamos esta grieta? La respuesta varía según la pieza, el material y la causa de la grieta. Una soldadura de reparación mal ubicada no solo no resuelve el problema, sino que puede agravar el daño de forma invisible.</p>
+                <h2>Zona de Reparación Segura</h2>
+                <p>Los daños en zonas no estructurales —escalones, conexiones de guardabarros, soportes secundarios— pueden repararse con seguridad mediante el método adecuado. En elementos portantes principales como las vigas del chasis, entran en juego otras reglas: los aceros de alta resistencia son sensibles al aporte térmico; una soldadura no controlada reduce la resistencia del material alrededor de la grieta y traslada el daño a la zona vecina. En estas zonas, la reparación debe hacerse con la preparación del bisel de soldadura conforme al procedimiento de reparación del fabricante, el material de aporte correcto y, si es necesario, una placa de refuerzo.</p>
+                <h2>Situaciones de Riesgo</h2>
+                <ul>
+                    <li><strong>Grieta de origen no comprendido:</strong> si una grieta de fatiga se suelda y se cierra, vuelve en el mismo punto o muy cerca</li>
+                    <li><strong>Carrocerías de cisterna:</strong> soldar sin desgasificar un tanque que ha transportado producto inflamable significa riesgo de explosión; este trabajo solo debe hacerse en instalaciones autorizadas</li>
+                    <li><strong>Zona de eje y freno:</strong> nunca debe aplicarse soldadura al cuerpo del eje sin la aprobación del fabricante</li>
+                    <li><strong>Mano de obra no certificada:</strong> la reparación en estructura portante exige un soldador certificado que domine el procedimiento</li>
+                </ul>
+                <p>La regla es simple: no se diseña una reparación sin encontrar el origen de la grieta, y no se suelda en estructura portante sin el procedimiento del fabricante. Consultar al fabricante ante cualquier duda vale más que la solución más rápida, porque una reparación correcta a la primera siempre es más barata que una reparación repetida.</p>
+            ',
+        ],
+
+        'load-securing-equipment' => [
+            'title'   => 'Equipos de Sujeción de Carga: Uso Correcto de Correas, Cadenas y Separadores',
+            'excerpt' => 'El equipo de sujeción de carga solo funciona cuando se elige y se usa correctamente; una correa dañada o una cadena atada con el ángulo equivocado es una falsa sensación de seguridad.',
+            'content' => '
+                <p>El frenado, las curvas y los baches generan fuerzas que intentan mover continuamente la carga en la caja. La función del equipo de sujeción de carga es contrarrestar estas fuerzas, pero el equipo solo ofrece la capacidad indicada en su etiqueta cuando se usa correctamente.</p>
+                <h2>Fundamentos de la Selección del Equipo</h2>
+                <ul>
+                    <li><strong>Correas de amarre:</strong> son el estándar para la carga general; una correa cuya etiqueta no puede leerse, o que tiene un corte o un nudo, queda fuera de uso</li>
+                    <li><strong>Cadenas y tensores:</strong> se prefieren para maquinaria y cargas de acero pesado; los ganchos deben encajar completamente en los puntos de amarre de la carga</li>
+                    <li><strong>Protectores de esquina:</strong> evitan que la correa se corte en un canto afilado y permiten que la tensión se reparta alrededor de la carga</li>
+                    <li><strong>Esteras antideslizantes:</strong> aumentan la fricción y reducen el número de amarres necesarios; su efecto es limitado en suelo mojado y con grasa</li>
+                    <li><strong>Separadores y puntales intermedios:</strong> evitan que la carga se desplace y cierre huecos dentro de la caja</li>
+                </ul>
+                <h2>Los Errores más Frecuentes en el Terreno</h2>
+                <p>El error más común es determinar el número de amarres a ojo: el número correcto se calcula según el peso de la carga, la condición de fricción y el ángulo de amarre. El segundo error son los amarres que se alejan del ángulo recto; cuanto más se tumba la correa, más rápido se debilita el efecto de presión hacia abajo. El tercero es descuidar el control durante el viaje: a medida que la carga se asienta, las correas se aflojan, y la tensión debe volver a comprobarse siempre en la primera parada.</p>
+                <p>La sujeción de carga no es una lista de equipo, sino una cuestión de cálculo y hábito. El conductor que aplica el equipo correcto en el punto correcto, con el ángulo correcto y en número suficiente, protege no solo la carga, sino también a sí mismo y al tráfico.</p>
+            ',
+        ],
+
+        'ebs-diagnostics' => [
+            'title'   => 'Diagnóstico de Averías con Datos del Sistema de Frenado Electrónico',
+            'excerpt' => 'El sistema de frenado del semirremolque moderno es también una fuente de datos; el servicio que sabe leer la memoria del EBS encuentra la avería no por conjetura, sino por registro.',
+            'content' => '
+                <p>El sistema de frenado electrónico (EBS), mientras gestiona la fuerza de frenado electrónicamente, funciona al mismo tiempo como una caja negra: guarda en su memoria los códigos de avería, las intervenciones del ABS, los datos del sensor de carga y los eventos del sistema. Estos registros, leídos correctamente, dejan de convertir el diagnóstico de averías en un trabajo de conjetura.</p>
+                <h2>¿Qué se Lee en los Datos del EBS?</h2>
+                <ul>
+                    <li><strong>Códigos de avería activos e históricos:</strong> en qué circuito, desde cuándo y con qué frecuencia se produce la avería</li>
+                    <li><strong>Señales de velocidad de rueda:</strong> el patrón de señal irregular que produce un sensor ABS sucio o con el juego abierto</li>
+                    <li><strong>Valores del sensor de carga:</strong> la carga de eje leída desde la presión de la suspensión; la base de la distribución de la fuerza de frenado</li>
+                    <li><strong>Contadores de kilometraje y uso:</strong> datos de uso real para la planificación del mantenimiento</li>
+                </ul>
+                <h2>Escenarios de Diagnóstico Típicos</h2>
+                <p>Si la queja del conductor de "la luz de freno se enciende de vez en cuando" coincide en los registros con cortes en la señal de velocidad de una rueda determinada, la dirección está clara: juego del sensor o avería en el recorrido del cable. Si el valor del sensor de carga no coincide con la carga real, el equilibrio de frenado está alterado; esto también puede ser la explicación de una asimetría en el desgaste de las pastillas. Los registros de intervención frecuente del ABS, por su parte, pueden apuntar no al freno, sino a un problema de suspensión o de distribución de carga.</p>
+                <p>Un hábito importante: borrar el código y poner el vehículo en ruta no es diagnóstico. Si el código se borra sin eliminar la causa, la misma avería vuelve con los datos, pero esta vez habrá pasado por medio un riesgo de seguridad vial. Cuando los datos del EBS se leen regularmente, el sistema de frenado escribe su propio calendario de mantenimiento.</p>
+            ',
+        ],
+
+        'tire-management-program' => [
+            'title'   => 'Gestión de Neumáticos: Seguimiento de Carcasa, Recauchutado y Decisiones de Retirada',
+            'excerpt' => 'El neumático es una de las mayores partidas operativas del semirremolque; lo que marca la diferencia no es la marca del neumático, sino cómo se gestiona a lo largo de su vida.',
+            'content' => '
+                <p>Un neumático de semirremolque no vive una sola vida: la carcasa bien gestionada empieza una segunda y a veces una tercera vida mediante el recauchutado. El objetivo de un programa de gestión de neumáticos es obtener de cada carcasa el máximo kilometraje total que pueda extraerse con seguridad.</p>
+                <h2>Los Componentes del Programa</h2>
+                <ul>
+                    <li><strong>Identificación:</strong> seguimiento de cada neumático por número de serie o de flota; la respuesta a qué carcasa está dónde y en qué vida se encuentra</li>
+                    <li><strong>Disciplina de presión:</strong> la baja presión, al fatigar el cuerpo de la carcasa, es el factor número uno que acaba con la posibilidad de recauchutado</li>
+                    <li><strong>Seguimiento de la profundidad de dibujo:</strong> la medición periódica permite tanto el momento correcto de retirada como el diagnóstico temprano del desgaste irregular</li>
+                    <li><strong>Plan de rotación y posición:</strong> uso equilibrado entre posiciones con carácter de desgaste diferente</li>
+                    <li><strong>Decisión de recauchutado:</strong> según la edad de la carcasa, el historial de daños y la inspección del cuerpo; junto con la auditoría del recauchutador</li>
+                </ul>
+                <h2>Los Matices de la Decisión de Retirada</h2>
+                <p>Retirar el neumático demasiado pronto desperdicia vida de dibujo; retirarlo demasiado tarde deja la carcasa incapaz de ser recauchutada y destruye su verdadero valor. La ventana correcta es el intervalo antes de que la profundidad de dibujo baje del límite legal y antes de que el cuerpo de la carcasa sufra daño. El desgaste acelerado en la zona del hombro debe evaluarse junto con un control de suspensión o alineación; de lo contrario, el neumático nuevo compartirá el mismo destino.</p>
+                <p>Un buen registro de neumáticos es también un archivo de salud del vehículo: los patrones de desgaste hablan de la suspensión, las pérdidas de presión de las llantas y válvulas, la frecuencia de daños de las condiciones de ruta. La flota que gestiona el neumático, en realidad, gestiona todo el vehículo.</p>
+            ',
+        ],
+
+        'inspection-preparation-checklist' => [
+            'title'   => 'Pasar la Inspección Periódica a la Primera: Lista de Verificación de Preparación',
+            'excerpt' => 'La cita de inspección no es un examen; si se acude preparado, es un trámite de aprobación. El coste de una segunda inspección no está tanto en la tarifa como en el día de servicio perdido.',
+            'content' => '
+                <p>Un semirremolque que suspende la inspección periódica no genera ingresos hasta la siguiente cita. Sin embargo, todos los puntos que se revisan en la inspección son predecibles; si el vehículo se controla con la misma mirada antes de ir a la estación, el resultado no será una sorpresa.</p>
+                <h2>Lista de Verificación Previa a la Inspección</h2>
+                <ul>
+                    <li><strong>Sistema de frenado:</strong> espesores de pastilla, escucha de fugas de aire, funcionamiento de las luces de freno y que la luz de aviso del EBS esté apagada</li>
+                    <li><strong>Iluminación y electricidad:</strong> todas las lámparas, reflectores e iluminación de matrícula; los cristales rotos y los portalámparas con humedad deben haberse sustituido</li>
+                    <li><strong>Neumáticos:</strong> profundidad de dibujo, daños en el flanco, presiones y par de apriete de las tuercas; incluida la rueda de repuesto</li>
+                    <li><strong>Suspensión y eje:</strong> superficies del fuelle, fuga del amortiguador, juego visible y conexión rota</li>
+                    <li><strong>Chasis y carrocería:</strong> grietas, corrosión avanzada, parachoques suelto y barreras de protección lateral</li>
+                    <li><strong>King-pin y conexión:</strong> control visual y, si existe, el último registro de medición</li>
+                    <li><strong>Documentos:</strong> permiso de circulación, informe de la inspección anterior y, si corresponde, plazos de documentos adicionales como ADR/ATP</li>
+                </ul>
+                <h2>La Gran Consecuencia de los Pequeños Defectos</h2>
+                <p>Estadísticamente, los puntos que más suspenden en la inspección no son los más caros: una lámpara que no enciende, una matrícula que no se lee, un reflector que falta. Por eso el último paso de la preparación es recorrer el vehículo por fuera con la mirada de la estación. En las flotas que vinculan la preparación de la inspección al plan de viajes, la repetición de la inspección es la excepción; el vehículo va a la estación a buscar la aprobación, no a buscar una lista de reparaciones.</p>
+            ',
+        ],
+
+        'tipper-body-type-guide' => [
+            'title'   => 'Guía de Selección de Caja Basculante: ¿Media Caña, Tipo Roca o Serie Ligera?',
+            'excerpt' => 'La caja basculante no es un solo producto, sino una familia; el miembro correcto se elige según el carácter del material a transportar y el ritmo de la operación.',
+            'content' => '
+                <p>La primera pregunta del comprador de un basculante suele ser el volumen; sin embargo, el factor determinante real es la forma y el blindaje de la caja. Dos cajas del mismo volumen ofrecen, con cargas diferentes, una vida útil y un rendimiento completamente distintos.</p>
+                <h2>Tres Caracteres Principales</h2>
+                <ul>
+                    <li><strong>Media caña (half-pipe):</strong> la sección circular hace que la carga se deslice sin pegarse y acelera la descarga; al no tener soldadura de esquina, resiste bien a la fatiga. Destaca en fresado de asfalto, excavación húmeda y material pegajoso</li>
+                    <li><strong>Tipo roca:</strong> chapa de desgaste gruesa, suelo reforzado y estructura resistente a impactos; es la caja de trabajos con carga de choque y piezas grandes, como minas y canteras. Su precio es un elevado peso en vacío</li>
+                    <li><strong>Serie ligera:</strong> peso en vacío reducido con chapas finas pero de alta resistencia; transporta más tonelaje en cada viaje en cargas de baja abrasividad como arena, tierra y productos agrícolas</li>
+                </ul>
+                <h2>¿Cómo se Decide?</h2>
+                <p>La primera pregunta es: ¿cuál es el material más duro que se cargará en la caja? La caja debe elegirse según la carga más agresiva que se transporte, aunque sea ocasionalmente; una serie ligera cargada con roca grande agota su vida rápidamente. La segunda pregunta es el ritmo de la operación: en una operación de arena con muchos viajes diarios, la ventaja de tonelaje de la serie ligera se traduce directamente en ingresos, mientras que en un trabajo minero de un solo turno, la durabilidad del tipo roca reduce el coste total.</p>
+                <p>Para trabajos mixtos también existe un término medio: chapa de desgaste gruesa en el suelo y la zona trasera, estructura ligera en las paredes laterales. El basculante correcto no se elige del catálogo, sino de su lista de cargas.</p>
+            ',
+        ],
+
+        'tipper-tipping-stability' => [
+            'title'   => 'Prevención de Accidentes de Vuelco en Basculantes: Estabilidad en el Momento del Volteo',
+            'excerpt' => 'Los accidentes más graves de basculantes no ocurren en marcha, sino con la caja en el aire. Lo que evita el vuelco no es la suerte, sino unos segundos de disciplina antes de la descarga.',
+            'content' => '
+                <p>A medida que la caja se eleva, el centro de gravedad del vehículo se traslada rápidamente hacia arriba; un basculante completamente alzado está mecánicamente en su momento más vulnerable. En ese instante, una pequeña inclinación del terreno o que la carga se pegue a un lado puede ser suficiente para volcar el vehículo.</p>
+                <h2>Causas Típicas del Vuelco</h2>
+                <ul>
+                    <li><strong>Terreno inclinado o blando:</strong> la inclinación lateral actúa amplificándose durante el levantamiento; el hundimiento de un solo lado en suelo blando produce el mismo resultado</li>
+                    <li><strong>Carga pegajosa:</strong> si tierra húmeda o arcilla queda colgada en una mitad de la caja, el centro de gravedad se desplaza bruscamente hacia un lado</li>
+                    <li><strong>Desalineación tractora-semirremolque:</strong> en una combinación en ángulo, la fuerza de levantamiento fuerza el chasis lateralmente</li>
+                    <li><strong>Viento:</strong> la caja alzada es una gran superficie de vela; con viento fuerte la descarga debe posponerse</li>
+                    <li><strong>Oscilación de la suspensión:</strong> en suspensión neumática, saltarse el procedimiento de descarga crea una plataforma inestable durante el levantamiento</li>
+                </ul>
+                <h2>Disciplina de Descarga Segura</h2>
+                <p>El orden de las reglas está claro: el vehículo se alinea sobre suelo plano y firme, en el mismo eje que la tractora; si el procedimiento del fabricante lo exige, la suspensión se pone en modo de descarga; se abren los cierres de la compuerta y el levantamiento se realiza bajo observación continua. Si se percibe que la carga no fluye, la caja no se eleva más: se baja y el problema se resuelve en el suelo. Balancear el vehículo hacia adelante y atrás para sacudir la caja es el hábito más común y más peligroso del terreno.</p>
+                <p>Los accidentes de vuelco casi siempre terminan con la misma frase: "siempre lo hacíamos así." La operación segura es el nombre del procedimiento que no permite pronunciar esa frase.</p>
+            ',
+        ],
+
+        'lowbed-permit-processes' => [
+            'title'   => 'Procesos de Permisos en Operaciones de Lowbed: Hoja de Ruta para el Exceso de Gálibo',
+            'excerpt' => 'En el transporte pesado y fuera de gálibo, el camino más largo suele ser, más que la ruta física, el proceso de permisos; el papeleo bien planificado gana en la mesa los días que se perderían en el terreno.',
+            'content' => '
+                <p>Cualquier carga que exceda las medidas estándar —demasiado ancha, demasiado alta, demasiado larga o demasiado pesada— solo puede salir a la carretera con un permiso especial. La verdadera experiencia del operador de lowbed es gestionar este proceso de permisos con la misma profesionalidad que el propio transporte.</p>
+                <h2>Los Pasos Principales del Proceso</h2>
+                <ul>
+                    <li><strong>Estudio de la carga:</strong> medidas exactas, peso y centro de gravedad de la carga; cálculo del gálibo total junto con la combinación del vehículo</li>
+                    <li><strong>Estudio de la ruta:</strong> capacidades de puentes, alturas de pasos inferiores, cruces estrechos y travesías urbanas; ruta alternativa si es necesaria</li>
+                    <li><strong>Solicitud de permiso:</strong> solicitud a la autoridad vial correspondiente con datos del vehículo, la carga y la ruta; el plazo varía según el país y el grado de exceso</li>
+                    <li><strong>Plan de escolta:</strong> según el grado de exceso, vehículo guía, señalización y, si es necesario, escolta oficial</li>
+                    <li><strong>Ventana horaria:</strong> en muchas rutas, el transporte fuera de gálibo solo puede realizarse en determinadas franjas horarias</li>
+                </ul>
+                <h2>Errores Frecuentes</h2>
+                <p>El error más costoso es desviarse de la ruta autorizada: un atajo aparentemente pequeño puede llevar a un puente de capacidad insuficiente o a un paso inferior infranqueable, y bloquear el transporte durante días. El segundo error es declarar las medidas de forma optimista; la diferencia detectada en el terreno invalida el permiso. El tercero es dejar para el último momento, en transportes transfronterizos, el régimen de permisos propio de cada país.</p>
+                <p>Los operadores experimentados planifican el proceso al revés: primero se aclaran el permiso y la ruta, y la fecha de carga se fija en función de ello. En el transporte pesado, la prisa es el lujo más caro, incluso más que en la carretera, en el papeleo.</p>
+            ',
+        ],
+
+        'extendable-lowbed-wind' => [
+            'title'   => 'Plataformas Lowbed Extensibles: Los Transportistas de la Era de las Turbinas Eólicas',
+            'excerpt' => 'A medida que se alargan las palas de las turbinas y los segmentos de torre, el transportista también tiene que alargarse con ellos; el lowbed telescópico se ha convertido en la columna vertebral de la logística de energía renovable.',
+            'content' => '
+                <p>A medida que crece la energía eólica, también crecen los componentes de las turbinas: palas, torres y unidades de nacelle han superado con creces las medidas clásicas de semirremolque. La respuesta en carretera a estas cargas son las plataformas lowbed y semi-lowbed cuyo chasis puede extenderse telescópicamente.</p>
+                <h2>La Lógica del Chasis Telescópico</h2>
+                <p>El chasis extensible funciona mediante el bloqueo escalonado de perfiles de viga entrelazados: la plataforma se abre según la longitud de la carga; en el regreso vacío se recoge y se acerca a las medidas normales del vehículo. Este doble carácter es el corazón de la operación: se proporciona la longitud necesaria en el viaje cargado, mientras que el regreso vacío se realiza en condiciones de tráfico estándar y con menor coste. En los modelos que se extienden en varias etapas, la gestión de cables y líneas de freno se resuelve con sistemas de carrete dentro del chasis.</p>
+                <h2>Las Sutilezas del Transporte de Palas</h2>
+                <ul>
+                    <li>La pala se apoya sobre soportes adaptadores especiales; no se aplica carga puntual sobre la superficie compuesta</li>
+                    <li>El radio de barrido de la carga larga obliga a un estudio de ruta en curvas y cruces</li>
+                    <li>El balanceo de la punta de la pala se gestiona según el límite de velocidad y las condiciones de viento</li>
+                    <li>En terreno montañoso entran en juego versiones del adaptador de pala que pueden inclinar la pala</li>
+                </ul>
+                <p>Al evaluar una inversión en lowbed extensible, debe atenderse no solo a la longitud máxima, sino también a la capacidad de maniobra en longitud cerrada, a la seguridad del bloqueo en cada etapa de extensión y a que las cargas de eje se mantengan equilibradas en cada etapa. El calendario de la transición energética se mide por las turbinas que se instalan en el terreno; los vehículos que transportan esas turbinas trabajan con estos silenciosos detalles de ingeniería.</p>
+            ',
+        ],
+
+        'silo-discharge-optimisation' => [
+            'title'   => 'Formas de Acortar el Tiempo de Descarga en Silos: Presión, Inclinación y Fluidificación',
+            'excerpt' => 'El dinero del silo no se gana en la carretera, sino que se gana o se pierde bajo el silo; lo que determina el tiempo de descarga no es el azar, sino tres variables ajustables.',
+            'content' => '
+                <p>En una operación de silo, el número de viajes diarios del vehículo suele estar determinado no por la carretera, sino por el tiempo que se pasa en el punto de descarga. Cada descarga que se alarga significa una tractora esperando, un conductor esperando y un viaje perdido. La buena noticia es que el tiempo de descarga es, en gran medida, una variable gestionable.</p>
+                <h2>Tres Variables Principales</h2>
+                <ul>
+                    <li><strong>Gestión de la presión:</strong> el equilibrio entre la presión del tanque y el flujo de la línea de producto varía de un producto a otro; elevar la presión a ciegas no siempre acelera el flujo, e incluso puede provocar atascos</li>
+                    <li><strong>Inclinación y posición:</strong> que el vehículo se incline ligeramente hacia atrás durante la descarga favorece el flujo del producto hacia la salida cónica; en los silos basculantes, el uso correcto del ángulo de elevación acorta notablemente el tiempo</li>
+                    <li><strong>Fluidificación:</strong> los cojines de aireación del fondo del tanque aflojan el producto en polvo con aire y lo vuelven fluido; activar la secuencia de cojines según el procedimiento del fabricante evita el puenteo</li>
+                </ul>
+                <h2>Conocer el Producto</h2>
+                <p>El cemento, la harina, el polvo de PVC y los productos granulados tienen caracteres de flujo completamente diferentes; el producto húmedo, además, impone sus propias reglas. Los operadores experimentados registran las combinaciones de presión y cojín por producto; así, cada descarga no es una prueba, sino una receta repetida.</p>
+                <p>El último eslabón es la salud del equipo: las juntas desgastadas pierden presión, un cojín perforado abre un canal en lugar de fluidificar, una manguera estrechada ralentiza toda la línea. Cuando el tiempo de descarga se mide y se registra regularmente, un tiempo que se alarga puede leerse como señal de mantenimiento antes de que crezca la avería.</p>
+            ',
+        ],
+
+        'food-grade-silo-hygiene' => [
+            'title'   => 'Operaciones de Silo Grado Alimentario: Estándares de Higiene y Certificaciones',
+            'excerpt' => 'Un silo que transporta harina, azúcar o leche en polvo debe gestionarse como una instalación alimentaria sobre ruedas; aquí la higiene no es una opción, sino el billete de entrada al mercado.',
+            'content' => '
+                <p>En el transporte grado alimentario, el tanque es una superficie alimentaria en contacto con el producto y se gestiona con la misma seriedad que una instalación alimentaria. Para el operador que quiera trabajar en este segmento, la higiene no es un concepto que reposa en la carpeta de certificados de calidad, sino un procedimiento que se repite en cada viaje.</p>
+                <h2>Los Componentes de la Higiene</h2>
+                <ul>
+                    <li><strong>Superficies adecuadas:</strong> el interior del tanque, las juntas y las mangueras en contacto con el producto deben ser de material apto para alimentos; una superficie lisa evita la retención de residuos</li>
+                    <li><strong>Lavado certificado:</strong> en los cambios de producto, el tanque se limpia en una estación de lavado autorizada y se expide un certificado de lavado; este documento es requisito previo en la mayoría de los puntos de carga</li>
+                    <li><strong>Registro de la carga anterior:</strong> se lleva registro de los últimos productos transportados; muchos cargadores de alimentos no realizan la carga sin ver la lista de cargas anteriores</li>
+                    <li><strong>Precintado:</strong> los precintos de la boca de hombre y de las válvulas, desde la carga hasta la descarga, prueban que el producto no ha sido manipulado en ruta</li>
+                    <li><strong>Flota dedicada:</strong> la solución más limpia es separar por completo los vehículos alimentarios de las cargas químicas y minerales</li>
+                </ul>
+                <h2>El Lado del Certificado</h2>
+                <p>Los grandes compradores de la cadena de suministro alimentaria esperan del transportista una certificación basada en un sistema de gestión de seguridad alimentaria; los programas de certificación de higiene específicos para operaciones de transporte se han convertido de facto en estándar en este segmento. Tan importante como el propio certificado es poder mostrar en la auditoría un sistema que realmente funciona: los registros de lavado, las listas de cargas anteriores y el historial de sustitución de juntas deben poder presentarse en minutos cuando se solicitan.</p>
+                <p>La operación grado alimentario es laboriosa; pero precisamente esa laboriosidad es la barrera de entrada del segmento y la fuente de un flete estable.</p>
+            ',
+        ],
+
+        'multi-size-container-chassis' => [
+            'title'   => 'Multifuncionalidad en el Chasis Portacontenedores: Diseños Compatibles con Diferentes Tamaños',
+            'excerpt' => 'En el patio del puerto nunca se sabe qué contenedor llegará; el chasis multifuncional es la flexibilidad de responder con el mismo vehículo a cualquier combinación, del 20 pies al 45 pies.',
+            'content' => '
+                <p>El transporte de contenedores tiene variabilidad en su naturaleza: hoy un solo 40 pies, mañana dos 20 pies, pasado mañana un único 20 pies de alto peso. Un chasis de estructura fija solo responde parcialmente a esta variabilidad; el chasis multifuncional, en cambio, traslada la flexibilidad de combinación al propio vehículo mediante sus posiciones de bloqueo y su geometría.</p>
+                <h2>Las Soluciones que Proporcionan Flexibilidad</h2>
+                <ul>
+                    <li><strong>Estaciones de bloqueo múltiples:</strong> los grupos de twist-lock plegables hacen posible en el mismo chasis las posiciones de contenedores de 20, 30, 40 y 45 pies</li>
+                    <li><strong>Módulo trasero extensible:</strong> la sección trasera telescópica abre la longitud necesaria para contenedores de 45 pies y de tipo túnel; se recoge en vacío</li>
+                    <li><strong>Posición central deslizante:</strong> centrar el contenedor único de 20 pies sobre el grupo de ejes equilibra las cargas de eje; puede deslizarse a la posición trasera para acercarse a la rampa de descarga</li>
+                    <li><strong>Compatibilidad con túnel gooseneck (cuello de cisne):</strong> permite transportar contenedores de altura extra a la altura legal</li>
+                </ul>
+                <h2>Puntos a Considerar en la Selección</h2>
+                <p>La flexibilidad no es gratuita: cada mecanismo adicional supone algo de peso y algo de partida de mantenimiento. La decisión correcta debe basarse en la mezcla real de carga de la flota; en una línea que transporta predominantemente 40 pies, los extras de un chasis totalmente flexible son peso muerto transportado; en un trabajo portuario mixto, en cambio, las mismas características eliminan la necesidad de un segundo vehículo.</p>
+                <p>En el lado mecánico, el punto crítico son los bloqueos: los twist-locks y los bloqueos deslizantes deben engrasarse regularmente, y las cabezas de bloqueo deformadas deben sustituirse antes de que se espere. Esos cuatro pequeños bloqueos que unen el contenedor al chasis soportan toda la seguridad del transporte.</p>
+            ',
+        ],
+
+        'curtainsider-en12642-xl' => [
+            'title'   => 'Certificaciones de Sujeción de Carga en Semirremolques de Lona: ¿Qué Significa una Caja Certificada XL?',
+            'excerpt' => 'Una lona ordinaria protege la carga de las condiciones meteorológicas; una caja certificada XL, en cambio, sujeta la carga. Esa diferencia lo cambia todo, desde el equipo de amarre hasta la velocidad de la operación.',
+            'content' => '
+                <p>En un semirremolque de lona estándar, la lona y la estructura de la caja son fundamentalmente una cubierta; la sujeción de la carga se garantiza casi por completo con correas y amarres. La caja de clase XL, en cambio, es producto de una filosofía distinta: la propia carrocería —pared frontal, puertas traseras, techo y estructura lateral reforzada de la lona— se diseña y se prueba como un elemento de seguridad que sujeta la carga en determinadas condiciones.</p>
+                <h2>¿Qué Aporta en la Práctica una Caja XL?</h2>
+                <ul>
+                    <li><strong>Menos trabajo de amarre:</strong> en cargas apiladas correctamente y sin huecos, la resistencia de la carrocería puede cubrir una parte importante de la necesidad de amarre</li>
+                    <li><strong>Operación rápida en rampa:</strong> la reducción del número de correas en la carga y descarga acorta el tiempo en la puerta</li>
+                    <li><strong>Claridad en la inspección:</strong> la placa de certificación sobre la caja aporta una base concreta para la evaluación de sujeción de carga en los controles de carretera</li>
+                    <li><strong>Preferencia del cargador:</strong> muchos grandes cargadores industriales exigen en sus contratos una caja certificada</li>
+                </ul>
+                <h2>Advertencia Crítica: XL no es Magia</h2>
+                <p>El certificado acredita la resistencia de la carrocería, no que la carga pueda transportarse sin amarre en cualquier condición. La capacidad de sujeción de la caja depende de condiciones como que la carga se apile sin huecos hacia adelante y hacia los lados; si el patrón de carga no cumple esas condiciones, las reglas clásicas de amarre siguen aplicándose exactamente igual. Además, los elementos estructurales dañados —lona rasgada, viga del techo deformada, cerradura de puerta que no funciona— anulan de facto la validez del certificado en el terreno, y debe asegurarse que la conformidad se mantiene después de la reparación.</p>
+                <p>Resumen: la caja XL, combinada con una cultura de carga correcta, es una característica de ingeniería con la que se compran velocidad y seguridad al mismo tiempo.</p>
+            ',
+        ],
+
+        'reefer-panel-atp' => [
+            'title'   => 'Tecnología de Paneles en Carrocerías Frigoríficas y el Certificado ATP',
+            'excerpt' => 'Por muy potente que sea la unidad de refrigeración, el elemento que realmente conserva la temperatura es el panel de la caja; el certificado ATP es la prueba internacional de esa protección.',
+            'content' => '
+                <p>En el transporte frigorífico, la atención suele dirigirse a la unidad de refrigeración; sin embargo, la unidad solo recupera el calor perdido. Lo que determina la pérdida en sí es la caja: la calidad de aislamiento de los paneles define tanto el consumo energético del vehículo como la gama de productos que puede transportar.</p>
+                <h2>La Anatomía del Panel Sándwich</h2>
+                <p>La caja frigorífica moderna está formada por paneles sándwich en los que se rellena espuma de poliuretano de alta densidad entre dos capas de superficie. Las superficies suelen ser poliéster reforzado o chapa recubierta; el verdadero trabajo está en el núcleo de espuma de celda cerrada. Los detalles que determinan la calidad del panel no son visibles a simple vista: el relleno homogéneo de la espuma, la continuidad en las uniones de los paneles y un diseño de conexión que no genera puente térmico. El suelo, además, debe estructurarse de modo que no se aplaste bajo la carga y resista el tráfico de carretillas elevadoras.</p>
+                <h2>¿Qué Acredita el Certificado ATP?</h2>
+                <ul>
+                    <li>Acredita la suficiencia de aislamiento y protección de temperatura de la caja en el transporte internacional de alimentos perecederos</li>
+                    <li>El vehículo se mide en una estación de pruebas autorizada y se etiqueta conforme a su clase</li>
+                    <li>El certificado tiene plazo; como el aislamiento envejece con el tiempo, requiere una inspección de renovación periódica</li>
+                    <li>La mayoría de los grandes cargadores de alimentos internacionales no realiza la carga sin un certificado vigente</li>
+                </ul>
+                <p>La lección práctica para el operador es esta: el aislamiento es una característica viva. Los daños en los paneles, el desgaste de las juntas de las puertas y los agujeros sin reparar erosionan silenciosamente el aislamiento; el aumento del tiempo de funcionamiento de la unidad de refrigeración es la primera factura de ello. La flota que cuida la carrocería tanto como la unidad de refrigeración se protege tanto en combustible como de sorpresas en la renovación del certificado.</p>
+            ',
+        ],
+
+        'platform-project-cargo' => [
+            'title'   => 'Cargas de Proyecto en Semirremolques de Plataforma: Soluciones Especiales para la Industria Pesada',
+            'excerpt' => 'Transformador, estructura de acero, generador, cuerpo de prensa: el transportista de las cargas que no caben en catálogo es el semirremolque de plataforma correctamente equipado.',
+            'content' => '
+                <p>La carga de proyecto es, como su nombre indica, fuera de lo estándar: cada transporte llega con sus propias medidas, su propio centro de gravedad y su propio plan de amarre. El semirremolque de plataforma es el vehículo fundamental de este mundo: su estructura abierta y plana se adapta a la carga con grúa desde cualquier dirección y a geometrías inusuales.</p>
+                <h2>Características de la Plataforma Adecuada para la Carga de Proyecto</h2>
+                <ul>
+                    <li><strong>Chasis y suelo reforzados:</strong> estructura reforzada en las zonas donde se concentran las cargas puntuales; resistencia de suelo que funcione junto con placas de reparto de carga para las patas de la maquinaria pesada</li>
+                    <li><strong>Puntos de amarre de alta capacidad:</strong> argollas de carga pesada y puntos marcados con capacidad apta para conexión de cadenas</li>
+                    <li><strong>Equipamiento flexible:</strong> topes desmontables, elementos de extensión y, cuando es necesario, caballetes especiales que sobrepasan la carga</li>
+                    <li><strong>Opciones de eje:</strong> en las variantes pesadas, soluciones de eje adicional y de eje autodireccional que gestionan tanto la carga de eje legal como la maniobra</li>
+                </ul>
+                <h2>La Fórmula del Éxito: Ingeniería Antes del Transporte</h2>
+                <p>En el transporte de proyectos, el trabajo empieza mucho antes de colocar la carga sobre la plataforma. Se determina el centro de gravedad de la carga y se calcula su posición sobre la plataforma en función de las cargas de eje; el plan de amarre se elabora según la masa de la carga y la condición de fricción; la ruta se estudia en cuanto a gálibo y capacidades de puentes. El día de carga es solo el día en que se aplican esos cálculos.</p>
+                <p>Esto es exactamente lo que busca el cliente de la industria pesada: un equipo que gestione el transporte como un proyecto de ingeniería, tanto como el propio vehículo. El semirremolque de plataforma, en las manos correctas, es la solución estándar para cada carga que no cabe en los catálogos.</p>
+            ',
+        ],
     ],
 ];

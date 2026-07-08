@@ -80,7 +80,7 @@ $asset = static function (string $path): string {
     <!-- Ortak header davranışı: mobil çekmece, mega menüler, dil seçici,
          scrolled durumu (ana sayfayla aynı modül). -->
     <script type="module">
-        import { initNavigation } from '<?= base_url('assets/js/navigation.js') ?>';
+        import { initNavigation } from '<?= $asset('assets/js/navigation.js') ?>';
         initNavigation();
     </script>
     <script src="<?= $asset('assets/js/theme-toggle.js') ?>" defer></script>

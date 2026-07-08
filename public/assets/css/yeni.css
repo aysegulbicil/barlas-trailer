@@ -517,7 +517,10 @@ html.has-anim .depth-bg__layer { opacity: 0.5; }
 .road__stage { position: absolute; inset: 0; }
 .road__stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 
-/* 3D aktifken statik görsel gizlenir */
+/* Statik yedek görsel VARSAYILAN GİZLİ: konvoy 3B'si flaş olmadan belirir.
+   (Eski davranış: görsel görünür başlar, 3B gelince gizlenirdi → sayfa
+   açılışında bir kare "gelip kaybolan" hero-2.webp flaş'ı oluyordu. tshow
+   sahnesinin desenine hizalandı: yalnız 3B çalışamazsa road--static ile göster.) */
 .road__fallback {
     position: absolute;
     inset-inline: 10%;
@@ -525,8 +528,11 @@ html.has-anim .depth-bg__layer { opacity: 0.5; }
     transform: translateY(-50%);
     width: 80%;
     filter: drop-shadow(0 26px 36px rgba(3, 7, 14, 0.55));
+    display: none;
 }
-.road--3d .road__fallback { display: none; }
+/* 3B çalışamazsa (WebGL/THREE yok, reduced-motion, gsap yok, init hatası) JS
+   road--static ekler → statik yedek görünür (mobil/eski cihaz güvenli). */
+.road--static .road__fallback { display: block; }
 
 .road__head {
     position: relative;
@@ -572,12 +578,12 @@ html.has-anim .depth-bg__layer { opacity: 0.5; }
 .road__cap.is-on { opacity: 1; transform: none; }
 
 /* 3D yokken (mobil / reduced-motion / WebGL yok): sade statik düzen */
-.road:not(.road--3d) .road__frame { min-height: 0; padding-block: var(--sec-y); justify-content: flex-start; }
-.road:not(.road--3d) .road__stage { position: relative; inset: auto; min-height: 300px; order: 1; }
-.road:not(.road--3d) .road__fallback { position: relative; inset: auto; transform: none; width: min(680px, 92%); margin-inline: auto; }
-.road:not(.road--3d) .road__head { padding-block-start: 0; }
-.road:not(.road--3d) .road__caps { margin-block-start: 1.5rem; min-height: 0; display: grid; gap: 0.8rem; order: 2; }
-.road:not(.road--3d) .road__cap { position: static; opacity: 1; transform: none; max-width: 560px; }
+.road--static .road__frame { min-height: 0; padding-block: var(--sec-y); justify-content: flex-start; }
+.road--static .road__stage { position: relative; inset: auto; min-height: 300px; order: 1; }
+.road--static .road__fallback { position: relative; inset: auto; transform: none; width: min(680px, 92%); margin-inline: auto; }
+.road--static .road__head { padding-block-start: 0; }
+.road--static .road__caps { margin-block-start: 1.5rem; min-height: 0; display: grid; gap: 0.8rem; order: 2; }
+.road--static .road__cap { position: static; opacity: 1; transform: none; max-width: 560px; }
 
 @media (prefers-reduced-transparency: reduce) {
     .road__cap { background: var(--bg-2); backdrop-filter: none; }

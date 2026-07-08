@@ -45,15 +45,19 @@ $megaCategories = ProductCatalog::categories();
 
 $megaCoverStyle = static function (array $category): string {
     $slug = $category['slug'];
-    $categoryPath = 'assets/images/category-' . $slug . '.jpg';
-    if (is_file(FCPATH . $categoryPath)) {
+    if (is_file(FCPATH . 'assets/images/category-' . $slug . '.jpg')) {
         return '';
     }
 
+    // Prefer the smaller .webp (same resolution order as the product pages);
+    // fall back to .jpg so the menu cover matches the product detail image.
     foreach ($category['products'] ?? [] as $product) {
-        $productPath = 'assets/images/products/' . $slug . '-' . $product['slug'] . '.jpg';
-        if (is_file(FCPATH . $productPath)) {
-            return 'background-image: url(\'' . base_url($productPath) . '?v=' . filemtime(FCPATH . $productPath) . '\'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center;';
+        $base = 'assets/images/products/' . $slug . '-' . $product['slug'];
+        foreach (['.webp', '.jpg'] as $ext) {
+            $productPath = $base . $ext;
+            if (is_file(FCPATH . $productPath)) {
+                return 'background-image: url(\'' . base_url($productPath) . '?v=' . filemtime(FCPATH . $productPath) . '\'), var(--blueprint), var(--placeholder-dark); background-size: cover, var(--blueprint-size), var(--blueprint-size); background-position: center;';
+            }
         }
     }
 

@@ -94,10 +94,16 @@ class Products extends BaseController
         }
 
         // OG görseli: ürün fotoğrafı varsa WhatsApp/sosyal medya önizleme kartı
-        // bunu kullanır (assets/images/products/{kategori}-{ürün}.jpg). Yoksa
-        // meta.php varsayılan OG görseline düşer.
-        $imageRel  = 'assets/images/products/' . $categorySlug . '-' . $productSlug . '.jpg';
-        $metaImage = is_file(FCPATH . $imageRel) ? base_url($imageRel) : null;
+        // bunu kullanır. Ürün sayfası/menü ile aynı çözümleme sırası: önce
+        // .webp (güncel görsel), yoksa .jpg; hiçbiri yoksa meta.php varsayılanı.
+        $imageBase = 'assets/images/products/' . $categorySlug . '-' . $productSlug;
+        $metaImage = null;
+        foreach (['.webp', '.jpg'] as $ext) {
+            if (is_file(FCPATH . $imageBase . $ext)) {
+                $metaImage = base_url($imageBase . $ext);
+                break;
+            }
+        }
 
         return view('pages/products/detail', [
             'metaTitle'       => $product['name'] . ' — ' . $this->categoryName($category),
