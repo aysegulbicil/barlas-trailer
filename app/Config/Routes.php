@@ -67,6 +67,25 @@ $routes->group('panel', ['filter' => 'session'], static function (RouteCollectio
 
 /*
  * --------------------------------------------------------------------
+ * İç Araçlar hub'ı (/patron) — locale önekinsiz, dizine girmez
+ * --------------------------------------------------------------------
+ * Bu rotalar, Docker/Apache ortamında deploy/apache-apps.conf Alias'ının
+ * sunduğu apps/_shared/auth/public/*.php dosyalarının CI4 karşılığıdır.
+ * Alias VARSA istekler ona düşer (bu grup devreye girmez); Alias YOKSA
+ * (ör. Hostinger paylaşımlı hosting) /patron artık burada çalışır — 404 biter.
+ * Eski .php bağlantıları da (bookmark / next parametresi) aynı metotlara düşsün.
+ */
+$routes->get('patron', 'Patron::index', ['as' => 'patron']);
+$routes->get('patron/index.php', 'Patron::index');
+$routes->match(['get', 'post'], 'patron/login', 'Patron::login', ['as' => 'patron.login']);
+$routes->match(['get', 'post'], 'patron/login.php', 'Patron::login');
+$routes->get('patron/logout', 'Patron::logout', ['as' => 'patron.logout']);
+$routes->get('patron/logout.php', 'Patron::logout');
+$routes->get('patron/go-qr', 'Patron::goQr', ['as' => 'patron.goqr']);
+$routes->get('patron/go-qr.php', 'Patron::goQr');
+
+/*
+ * --------------------------------------------------------------------
  * Localized routes
  * --------------------------------------------------------------------
  * Every public page lives under a /{locale} prefix (e.g. /tr, /en/blog).

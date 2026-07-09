@@ -102,13 +102,11 @@
 .cine-full[data-theme="light"] .cine-chap-host.is-on .cine-chap-ghost b,
 [data-theme="light"].cine-full .cine-chap-host.is-on .cine-chap-ghost b { opacity: 0.05; }
 
-/* Yol başlığında içerik kutunun ALT kısmındadır (üst dolgu büyük) —
-   hayaleti başlık/lead hizasına, alta yasla. */
-.cine-full .road__head .cine-chap-ghost b {
-    inset-block-start: auto;
-    inset-block-end: -0.12em;
-    transform: none;
-}
+/* Yol (konvoy / "02") bölümünde hayalet rakam GİZLENİR: tam ekran başlıkta
+   dev hayalet "02" ile küçük "// 02" numaratörü dikeyde ayrışıp "02 iki kez"
+   görünüyordu (kullanıcı bildirimi). Küçük numaratör tek başına kalır; 3D
+   konvoy sahnesi (.road / initRoad) bundan etkilenmez. */
+.cine-full .road__head .cine-chap-ghost { display: none; }
 
 /* ---------------------------------------------------------------------------
    3) Güven şeridi (marquee) — ITEM ✦ ITEM ✦ ... sonsuz bant
