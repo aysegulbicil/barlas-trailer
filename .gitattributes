@@ -1,0 +1,4 @@
+# Force LF for shell scripts so they run correctly on the Linux server
+# regardless of the committer's OS (Windows CRLF would break the shebang).
+*.sh    text eol=lf
+deploy.sh text eol=lf
