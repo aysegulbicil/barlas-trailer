@@ -37,5 +37,7 @@ jobs:
             set -euo pipefail
             cd "$HOME/domains/barlastrailer.com/barlas-trailer"
             git fetch --prune origin fable-test
-            git checkout -f fable-test
+            # -B resets the local branch to the remote tip even from a detached
+            # HEAD, guaranteeing deploy.sh is present before we invoke it.
+            git checkout -B fable-test origin/fable-test
             bash deploy.sh
