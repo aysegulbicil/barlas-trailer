@@ -35,6 +35,48 @@ $masterIcons = [
     'capacity'   => 'M6 4v8a6 6 0 0012 0V4 M6 8h12 M12 18v3',
     'info'       => 'M6 4h12v16H6z M9 8h6 M9 12h6 M9 16h4',
 ];
+
+/* ---------------------------------------------------------------------
+   Product + BreadcrumbList JSON-LD (SEO). Fiyat teklif usulü olduğundan
+   "offers" bilinçli yoktur; görsel yalnız ürün fotoğrafı varsa eklenir
+   ($metaImage, Products::detail'den gelir).
+--------------------------------------------------------------------- */
+$productLd = [
+    '@context'    => 'https://schema.org',
+    '@type'       => 'Product',
+    'name'        => $product['name'],
+    'description' => lang('Products.detail_meta', [$product['name']]),
+    'brand'       => ['@type' => 'Brand', 'name' => lang('Common.site_name')],
+    'category'    => $categoryName,
+    'url'         => current_url(),
+];
+if (! empty($metaImage)) {
+    $productLd['image'] = $metaImage;
+}
+
+$breadcrumbLd = [
+    '@context'        => 'https://schema.org',
+    '@type'           => 'BreadcrumbList',
+    'itemListElement' => [
+        [
+            '@type'    => 'ListItem',
+            'position' => 1,
+            'name'     => lang('Navigation.products'),
+            'item'     => locale_url('products'),
+        ],
+        [
+            '@type'    => 'ListItem',
+            'position' => 2,
+            'name'     => $categoryName,
+            'item'     => locale_url('products/' . $category['slug']),
+        ],
+        [
+            '@type'    => 'ListItem',
+            'position' => 3,
+            'name'     => $product['name'],
+        ],
+    ],
+];
 ?>
 
 <?php $this->section('bodyClass') ?>products<?php $this->endSection() ?>
@@ -44,6 +86,9 @@ $masterIcons = [
 <?php $this->endSection() ?>
 
 <?php $this->section('content') ?>
+
+<script type="application/ld+json"><?= json_encode($productLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP) ?></script>
+<script type="application/ld+json"><?= json_encode($breadcrumbLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP) ?></script>
 
 <?= view('partials/page-hero', [
     'pageTitle'   => $product['name'],

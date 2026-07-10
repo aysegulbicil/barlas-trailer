@@ -107,6 +107,9 @@ $asset = static function (string $path): string {
 
     <?= $this->include('partials/footer') ?>
 
+    <!-- Birinci taraf ölçüm (çerezsiz; Panel > Analitik buradan beslenir) -->
+    <?= $this->include('partials/metrics') ?>
+
     <!-- Ortak header davranışı: mobil çekmece, mega menüler, dil seçici,
          scrolled durumu (ana sayfayla aynı modül). -->
     <script type="module">

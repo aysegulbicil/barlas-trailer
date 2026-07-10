@@ -89,7 +89,9 @@ class Filters extends BaseFilters
             // + bal kabı katmanıyla korunur (App\Controllers\Ai).
             // teklif API'si muaf: SPA (app.js) token taşımaz; appsauth
             // oturumu şart + SameSite=Lax çerez cross-site POST'ta gitmez.
-            'csrf' => ['except' => ['*/ai/ask', 'teklif/server/api/*']],
+            // metrics/hit muaf: sendBeacon token taşıyamaz; yanıtsız,
+            // yan etkisiz sayaç ucudur (App\Controllers\Metrics).
+            'csrf' => ['except' => ['*/ai/ask', 'teklif/server/api/*', 'metrics/hit']],
             // 'honeypot',
             // 'invalidchars',
         ],

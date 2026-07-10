@@ -66,9 +66,47 @@ $options = [
         'icon'  => 'M14.5 6.5a4 4 0 11-5 5L4 17l3 3 5.5-5.5a4 4 0 002-8z',
     ],
 ];
+
+/* ---------------------------------------------------------------------
+   Organization JSON-LD — yalnız ana sayfada (Google marka paneli: ad,
+   logo, iletişim, sosyal profiller). Sosyal adresler partials/footer.php
+   içindeki $social listesiyle aynı tutulmalıdır.
+--------------------------------------------------------------------- */
+helper('whatsapp');
+$orgLd = [
+    '@context'    => 'https://schema.org',
+    '@type'       => 'Organization',
+    'name'        => lang('Common.site_name'),
+    'url'         => base_url(),
+    'logo'        => base_url('assets/images/logo.png'),
+    'image'       => base_url('assets/images/og-default.jpg'),
+    'description' => lang('Common.meta_description'),
+    'email'       => lang('Common.email'),
+    'telephone'   => '+' . whatsapp_number(),
+    'address'     => [
+        '@type'           => 'PostalAddress',
+        'streetAddress'   => 'Fevziçakmak Mahallesi, Şehit Hamdi Karagöz Caddesi No: 4s',
+        'addressLocality' => 'Karatay',
+        'addressRegion'   => 'Konya',
+        'addressCountry'  => 'TR',
+    ],
+    'contactPoint' => [
+        '@type'             => 'ContactPoint',
+        'contactType'       => 'sales',
+        'telephone'         => '+' . whatsapp_number(),
+        'availableLanguage' => ['Turkish', 'English'],
+    ],
+    'sameAs' => [
+        'https://www.linkedin.com/company/barlastrailer/',
+        'https://www.instagram.com/barlastanker',
+        'https://youtube.com/@barlastanker',
+    ],
+];
 ?>
 
 <?= $this->section('content') ?>
+
+<script type="application/ld+json"><?= json_encode($orgLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP) ?></script>
 
 <!-- Header artık layout'tan gelir (partials/header — her sayfada aynı) -->
 

@@ -14,8 +14,12 @@ $metaDesc    = $metaDescription ?? lang('Common.meta_description');
 $metaImage   = $metaImage   ?? base_url('assets/images/og-default.jpg');
 $currentLoc  = current_locale();
 $canonical   = current_url();
-// Open Graph "tr" değil "tr_TR" bölgeli biçimi bekler.
-$ogLocales   = ['tr' => 'tr_TR', 'en' => 'en_US', 'ru' => 'ru_RU', 'ar' => 'ar_AR', 'fr' => 'fr_FR'];
+// Open Graph "tr" değil "tr_TR" bölgeli biçimi bekler — 15 dilin tamamı.
+$ogLocales   = [
+    'tr' => 'tr_TR', 'en' => 'en_US', 'de' => 'de_DE', 'ru' => 'ru_RU', 'ar' => 'ar_AR',
+    'fr' => 'fr_FR', 'es' => 'es_ES', 'it' => 'it_IT', 'nl' => 'nl_NL', 'pl' => 'pl_PL',
+    'ro' => 'ro_RO', 'bg' => 'bg_BG', 'el' => 'el_GR', 'he' => 'he_IL', 'zh' => 'zh_CN',
+];
 ?>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,6 +43,12 @@ $ogLocales   = ['tr' => 'tr_TR', 'en' => 'en_US', 'ru' => 'ru_RU', 'ar' => 'ar_A
 <meta property="og:description" content="<?= esc($metaDesc, 'attr') ?>">
 <meta property="og:url" content="<?= esc($canonical, 'attr') ?>">
 <meta property="og:image" content="<?= esc($metaImage, 'attr') ?>">
+<?php if (str_ends_with($metaImage, 'og-default.jpg')): ?>
+    <!-- Varsayılan kart 1200×630 üretilir; boyut bildirmek ilk paylaşımda önizlemeyi hızlandırır. -->
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+<?php endif; ?>
+<meta property="og:image:alt" content="<?= esc($siteName, 'attr') ?>">
 <meta property="og:locale" content="<?= esc($ogLocales[$currentLoc] ?? $currentLoc, 'attr') ?>">
 <?php foreach (supported_locales() as $loc): ?>
     <?php if ($loc === $currentLoc) { continue; } ?>

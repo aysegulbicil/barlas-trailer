@@ -282,6 +282,79 @@ class Panel extends BaseController
         return redirect()->to('/panel/content')->with('panel_msg', 'Yayınlandı: /tr/news/' . $id);
     }
 
+    /**
+     * Analitik: birinci taraf beacon akışının 30 günlük özeti.
+     * Kaynak: writable/data/metrics/hits-Y-m-d.jsonl (App\Controllers\Metrics).
+     * Tekil ziyaretçi hash'i günlük tuzla üretildiğinden tekiller yalnız
+     * GÜN İÇİNDE anlamlıdır; 7 günlük değer günlük tekillerin toplamıdır.
+     */
+    public function metrics(): string
+    {
+        $this->guard();
+
+        $days      = [];
+        $pages     = [];
+        $locales   = [];
+        $referrers = [];
+        $totals    = ['hits7' => 0, 'uniq7' => 0, 'hits30' => 0];
+
+        for ($i = 29; $i >= 0; $i--) {
+            $date     = date('Y-m-d', strtotime('-' . $i . ' days'));
+            $hits     = 0;
+            $visitors = [];
+
+            $file = WRITEPATH . 'data/metrics/hits-' . $date . '.jsonl';
+            if (is_file($file)) {
+                foreach (file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+                    $row = json_decode($line, true);
+                    if (! is_array($row)) {
+                        continue;
+                    }
+
+                    $hits++;
+                    if (($row['v'] ?? '') !== '') {
+                        $visitors[$row['v']] = true;
+                    }
+
+                    $path = (string) ($row['p'] ?? '');
+                    if ($path !== '') {
+                        $pages[$path] = ($pages[$path] ?? 0) + 1;
+                    }
+
+                    $loc = (string) ($row['loc'] ?? '');
+                    if ($loc !== '') {
+                        $locales[$loc] = ($locales[$loc] ?? 0) + 1;
+                    }
+
+                    $ref = (string) ($row['ref'] ?? '');
+                    if ($ref !== '') {
+                        $referrers[$ref] = ($referrers[$ref] ?? 0) + 1;
+                    }
+                }
+            }
+
+            $days[] = ['date' => $date, 'hits' => $hits, 'uniques' => count($visitors)];
+            $totals['hits30'] += $hits;
+            if ($i <= 6) {
+                $totals['hits7'] += $hits;
+                $totals['uniq7'] += count($visitors);
+            }
+        }
+
+        arsort($pages);
+        arsort($locales);
+        arsort($referrers);
+
+        return view('pages/panel/metrics', [
+            'days'      => $days,
+            'today'     => $days[count($days) - 1],
+            'totals'    => $totals,
+            'pages'     => array_slice($pages, 0, 15, true),
+            'locales'   => array_slice($locales, 0, 15, true),
+            'referrers' => array_slice($referrers, 0, 15, true),
+        ]);
+    }
+
     /** Taslağı karar klasörüne taşır (drafts → published/rejected). */
     private function moveDraft(string $draftFile, string $target, array $payload): void
     {

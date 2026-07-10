@@ -15,6 +15,7 @@ $nav = [
     '/panel/faq-candidates' => 'SSS Adayları',
     '/panel/content'        => 'İçerik',
     '/panel/vehicles'       => 'Araçlar',
+    '/panel/metrics'        => 'Analitik',
     '/panel/agents'         => 'Ajanlar',
 ];
 $currentPath = '/' . trim(uri_string(), '/');

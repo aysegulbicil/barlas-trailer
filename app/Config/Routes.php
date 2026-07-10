@@ -36,6 +36,12 @@ $routes->get('sitemap.xml', 'Sitemap::index', ['as' => 'sitemap']);
 $routes->get('robots.txt', 'Sitemap::robots');
 
 /*
+ * Birinci taraf ölçüm beacon'ı (locale önekinsiz, çerezsiz — KVKK dostu).
+ * CSRF muafiyeti Config\Filters'ta; ayrıntı App\Controllers\Metrics.
+ */
+$routes->post('metrics/hit', 'Metrics::hit');
+
+/*
  * QR Araç Kimlik Kartı (§5.1) — QR kısa kalsın diye locale önekinsiz;
  * sayfa, ziyaretçinin çerez/tarayıcı diliyle yerelleşir.
  */
@@ -63,6 +69,7 @@ $routes->group('panel', ['filter' => 'session'], static function (RouteCollectio
     $routes->post('agents/toggle', 'Panel::toggleAgent', ['as' => 'panel.agents.toggle']);
     $routes->get('content', 'Panel::content', ['as' => 'panel.content']);
     $routes->post('content/decide', 'Panel::decideContent', ['as' => 'panel.content.decide']);
+    $routes->get('metrics', 'Panel::metrics', ['as' => 'panel.metrics']);
 });
 
 /*

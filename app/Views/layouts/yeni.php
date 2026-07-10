@@ -153,6 +153,9 @@ $asset = static function (string $path): string {
 
     <?= $this->include('partials/footer') ?>
 
+    <!-- Birinci taraf ölçüm (çerezsiz; Panel > Analitik buradan beslenir) -->
+    <?= $this->include('partials/metrics') ?>
+
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
