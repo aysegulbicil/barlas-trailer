@@ -21,6 +21,9 @@ jobs:
     steps:
       - name: Deploy over SSH
         uses: appleboy/ssh-action@v1.2.2
+        env:
+          PANEL_ADMIN_EMAIL: ${{ secrets.PANEL_ADMIN_EMAIL }}
+          PANEL_ADMIN_PASSWORD: ${{ secrets.PANEL_ADMIN_PASSWORD }}
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
@@ -31,6 +34,10 @@ jobs:
           # password: ${{ secrets.SSH_PASSWORD }}
 
           command_timeout: 15m
+
+          # Forwarded to deploy.sh for the /patron + /panel admin bootstrap.
+          # Optional: when the secrets are unset the bootstrap step is skipped.
+          envs: PANEL_ADMIN_EMAIL,PANEL_ADMIN_PASSWORD
 
           # The repo is already cloned on the server; we just run its deploy.sh.
           script: |

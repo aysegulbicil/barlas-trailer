@@ -1,0 +1,9 @@
+<?= $this->extend('qr/layout/app') ?>
+<?= $this->section('content') ?>
+<?php $isEdit = $department !== null; ?>
+<h1><?= $isEdit ? 'Departmanı düzenle' : 'Yeni departman' ?></h1>
+<p class="back-link"><a href="<?= qr_url('admin/departments') ?>">&larr; Departmanlar</a></p>
+<div class="card pad-lg" style="max-width:520px">
+    <?= view('qr/admin/departments/_form', ['department' => $department]) ?>
+</div>
+<?= $this->endSection() ?>

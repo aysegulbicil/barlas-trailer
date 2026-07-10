@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barlas Teklif Sistemi</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="assets/logo.png">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar no-print">
+  <div class="brand">
+    <img src="assets/logo.png" alt="Barlas" class="topbar-logo">
+    <span class="brand-text">Teklif Sistemi</span>
+  </div>
+  <div class="topbar-actions">
+    <button id="btnNew" class="btn btn-ghost">＋ Yeni Teklif</button>
+    <button id="btnHistory" class="btn btn-ghost">🗂 Geçmiş Teklifler</button>
+    <button id="btnSave" class="btn btn-primary">⬇ Kaydet &amp; PDF Oluştur</button>
+  </div>
+</header>
+
+<!-- ===== EDITOR VIEW ===== -->
+<main id="editorView" class="layout no-print">
+
+  <!-- LEFT: FORM -->
+  <section class="form-pane">
+
+    <div class="card">
+      <h3 class="card-title">1 · Müşteri &amp; Teklif</h3>
+      <div class="grid2">
+        <div class="field"><label>Teklif No</label><input id="offerNo" type="text"></div>
+        <div class="field"><label>Tarih</label><input id="date" type="text" placeholder="GG.AA.YYYY"></div>
+      </div>
+      <div class="field"><label>Müşteri Adı</label><input id="custName" type="text" placeholder="Sayın..."></div>
+      <div class="grid2">
+        <div class="field"><label>Firma</label><input id="custCompany" type="text"></div>
+        <div class="field"><label>Telefon</label><input id="custPhone" type="text"></div>
+      </div>
+      <div class="field"><label>Belge Teması</label>
+        <select id="theme">
+          <option value="light">Açık · Kurumsal Mavi</option>
+          <option value="dark">Koyu · Tam Zemin</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- PRODUCTS (repeatable) -->
+    <div class="section-head">
+      <h3 class="section-title">2 · Ürünler</h3>
+      <button id="btnAddItem" class="btn btn-ghost btn-add">＋ Ürün Ekle</button>
+    </div>
+    <div id="items"><!-- product blocks rendered by JS --></div>
+    <p class="hint">Aynı teklife farklı kategori / modelden ürün eklemek için “＋ Ürün Ekle”yi kullanın. Her ürün belgede ayrı bölüm olarak görünür.</p>
+
+    <div class="card">
+      <h3 class="card-title">3 · Fiyat &amp; Ödeme</h3>
+      <div class="field"><label>KDV (%)</label><input id="vat" type="number" min="0" step="1" value="20"></div>
+      <div class="price-summary">
+        <div><span>Ara Toplam</span><b id="subtotalAmount">0 TL</b></div>
+        <div><span>KDV Tutarı</span><b id="vatAmount">0 TL</b></div>
+        <div class="highlight"><span>KDV Dahil Toplam</span><b id="total">0 TL</b></div>
+      </div>
+      <div class="field"><label>Ödeme</label><input id="payment" type="text" placeholder="PEŞİN"></div>
+      <div class="field"><label>Teslimat</label><textarea id="delivery" rows="2"></textarea></div>
+    </div>
+
+  </section>
+
+  <!-- RIGHT: LIVE PREVIEW -->
+  <section class="preview-pane">
+    <div class="preview-bar">
+      <span>Canlı Önizleme</span>
+      <span class="preview-note">PDF bu şekilde oluşturulacak</span>
+    </div>
+    <div class="preview-canvas">
+      <div id="offerOutput" class="doc"><!-- filled by JS --></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== HISTORY PAGE ===== -->
+<section id="historyPage" class="history-page no-print" hidden>
+  <div class="history-head">
+    <div>
+      <h2 class="history-title">Geçmiş Teklifler</h2>
+      <p class="history-sub">Kayıtlı tekliflerinizi açıp düzenleyin, PDF’i indirin veya silin.</p>
+    </div>
+    <button id="btnHistoryBack" class="btn btn-ghost">← Editöre Dön</button>
+  </div>
+  <div id="historyList" class="history-list"></div>
+</section>
+
+<!-- PRINT TARGET -->
+<div id="printArea" class="print-only"></div>
+
+<!-- TOAST -->
+<div id="toast" class="toast no-print" hidden></div>
+
+<script src="assets/logo-base64.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

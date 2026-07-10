@@ -51,6 +51,42 @@ class Database extends Config
         ],
     ];
 
+    /**
+     * QR personel/yoklama uygulamasının (app/Controllers/Qr) veritabanı.
+     * İş verisi MySQL'de kalır (kullanıcı kararı, 2026-07-10): lokalde
+     * compose'daki barlas-db (qr_sistemi), canlıda Hostinger MySQL —
+     * bağlantı değerleri .env `database.qr.*` ile ezilir. Kamusal sayfalar
+     * bu bağlantıya ASLA dokunmaz.
+     *
+     * @var array<string, mixed>
+     */
+    public array $qr = [
+        'DSN'          => '',
+        'hostname'     => 'localhost',
+        'username'     => '',
+        'password'     => '',
+        'database'     => 'qr_sistemi',
+        'DBDriver'     => 'MySQLi',
+        'DBPrefix'     => '',
+        'pConnect'     => false,
+        'DBDebug'      => true,
+        'charset'      => 'utf8mb4',
+        'DBCollat'     => 'utf8mb4_general_ci',
+        'swapPre'      => '',
+        'encrypt'      => false,
+        'compress'     => false,
+        'strictOn'     => false,
+        'failover'     => [],
+        'port'         => 3306,
+        'numberNative' => false,
+        'foundRows'    => false,
+        'dateFormat'   => [
+            'date'     => 'Y-m-d',
+            'datetime' => 'Y-m-d H:i:s',
+            'time'     => 'H:i:s',
+        ],
+    ];
+
     //    /**
     //     * Sample database connection for SQLite3.
     //     *

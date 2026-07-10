@@ -2,7 +2,11 @@
 
 namespace Config;
 
+use App\Filters\AppsAuth;
 use App\Filters\LanguageFilter;
+use App\Filters\Qr\AdminFilter as QrAdminFilter;
+use App\Filters\Qr\AuthFilter as QrAuthFilter;
+use App\Filters\Qr\ScanFilter as QrScanFilter;
 use CodeIgniter\Config\Filters as BaseFilters;
 use CodeIgniter\Filters\Cors;
 use CodeIgniter\Filters\CSRF;
@@ -36,6 +40,12 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
         'language'      => LanguageFilter::class,
+        'appsauth'      => AppsAuth::class,
+        // QR uygulaması (app/Controllers/Qr) — kendi personel girişi/rolü var;
+        // Shield veya appsauth ile karışmasın diye qr önekli alias'lar.
+        'qrauth'        => QrAuthFilter::class,
+        'qradmin'       => QrAdminFilter::class,
+        'qrscan'        => QrScanFilter::class,
     ];
 
     /**
@@ -77,7 +87,9 @@ class Filters extends BaseFilters
             'language', // Resolves the active locale from the {locale} URI segment
             // ai/ask muaf: JSON ucu token taşımaz; kendi origin + throttle
             // + bal kabı katmanıyla korunur (App\Controllers\Ai).
-            'csrf' => ['except' => ['*/ai/ask']],
+            // teklif API'si muaf: SPA (app.js) token taşımaz; appsauth
+            // oturumu şart + SameSite=Lax çerez cross-site POST'ta gitmez.
+            'csrf' => ['except' => ['*/ai/ask', 'teklif/server/api/*']],
             // 'honeypot',
             // 'invalidchars',
         ],
@@ -111,5 +123,17 @@ class Filters extends BaseFilters
      *
      * @var array<string, array<string, list<string>>>
      */
-    public array $filters = [];
+    public array $filters = [
+        // QR personel sayfaları: admin olmayan, QR taramamış kullanıcıyı
+        // /qr/punch'a yollar (apps/qr Filters.php'deki 'scan' deseninin
+        // /qr önekli karşılığı).
+        'qrscan' => ['before' => [
+            'qr/dashboard',
+            'qr/history',
+            'qr/requests',
+            'qr/requests/*',
+            'qr/notifications',
+            'qr/notifications/*',
+        ]],
+    ];
 }

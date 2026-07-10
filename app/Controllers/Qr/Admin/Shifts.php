@@ -1,0 +1,113 @@
+<?php
+
+namespace App\Controllers\Qr\Admin;
+
+use App\Controllers\Qr\BaseController;
+use App\Models\Qr\ShiftModel;
+use App\Models\Qr\ShiftAssignmentModel;
+use App\Models\Qr\UserModel;
+
+class Shifts extends BaseController
+{
+    public function index()
+    {
+        return view('qr/admin/shifts/index', ['shifts' => (new ShiftModel())->ordered()]);
+    }
+
+    public function new()
+    {
+        return view($this->wantsJson() ? 'qr/admin/shifts/_form' : 'qr/admin/shifts/form', ['shift' => null]);
+    }
+
+    public function edit(int $id)
+    {
+        $shift = (new ShiftModel())->find($id);
+        if ($shift === null) {
+            return redirect()->to(qr_url('admin/shifts'))->with('error', 'Vardiya bulunamadı.');
+        }
+
+        return view($this->wantsJson() ? 'qr/admin/shifts/_form' : 'qr/admin/shifts/form', ['shift' => $shift]);
+    }
+
+    public function create()
+    {
+        if (! $this->validate($this->rules())) {
+            $msg = implode(' ', $this->validator->getErrors());
+
+            return $this->wantsJson() ? $this->jsonError($msg) : redirect()->back()->withInput()->with('error', $msg);
+        }
+        (new ShiftModel())->insert($this->payload());
+
+        return $this->wantsJson()
+            ? $this->jsonOk(qr_url('admin/shifts'), 'Vardiya eklendi.')
+            : redirect()->to(qr_url('admin/shifts'))->with('message', 'Vardiya eklendi.');
+    }
+
+    public function update(int $id)
+    {
+        if (! $this->validate($this->rules())) {
+            $msg = implode(' ', $this->validator->getErrors());
+
+            return $this->wantsJson() ? $this->jsonError($msg) : redirect()->back()->withInput()->with('error', $msg);
+        }
+        (new ShiftModel())->update($id, $this->payload());
+
+        return $this->wantsJson()
+            ? $this->jsonOk(qr_url('admin/shifts'), 'Vardiya güncellendi.')
+            : redirect()->to(qr_url('admin/shifts'))->with('message', 'Vardiya güncellendi.');
+    }
+
+    public function delete(int $id)
+    {
+        $shift = (new ShiftModel())->find($id);
+        if ($shift === null) {
+            return redirect()->to(qr_url('admin/shifts'))->with('error', 'Vardiya bulunamadı.');
+        }
+
+        $userCount       = (new UserModel())->where('shift_id', $id)->countAllResults();
+        $assignmentCount = (new ShiftAssignmentModel())->where('shift_id', $id)->countAllResults();
+        if ($userCount > 0 || $assignmentCount > 0) {
+            $parts = [];
+            if ($userCount > 0) {
+                $parts[] = $userCount . ' personelin varsayılan vardiyası';
+            }
+            if ($assignmentCount > 0) {
+                $parts[] = $assignmentCount . ' takvim ataması';
+            }
+
+            return redirect()->to(qr_url('admin/shifts'))
+                ->with('error', 'Bu vardiyaya bağlı ' . implode(' ve ', $parts) . ' var. Vardiya silinemez.');
+        }
+
+        (new ShiftModel())->delete($id);
+
+        return redirect()->to(qr_url('admin/shifts'))->with('message', 'Vardiya silindi.');
+    }
+
+    private function payload(): array
+    {
+        $start = (string) $this->request->getPost('start_time');
+        $end   = (string) $this->request->getPost('end_time');
+        $days  = $this->request->getPost('workdays');
+        $days  = is_array($days) ? array_values(array_filter($days, static fn ($d) => $d >= 1 && $d <= 7)) : [];
+
+        return [
+            'name'              => trim((string) $this->request->getPost('name')),
+            'start_time'        => $start,
+            'end_time'          => $end,
+            'grace_in_minutes'  => (int) $this->request->getPost('grace_in_minutes'),
+            'grace_out_minutes' => (int) $this->request->getPost('grace_out_minutes'),
+            'crosses_midnight'  => ($end !== '' && $start !== '' && $end <= $start) ? 1 : 0,
+            'workdays'          => implode(',', $days),
+        ];
+    }
+
+    private function rules(): array
+    {
+        return [
+            'name'       => 'required|max_length[100]',
+            'start_time' => 'required',
+            'end_time'   => 'required',
+        ];
+    }
+}

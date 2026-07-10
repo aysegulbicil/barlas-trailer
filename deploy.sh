@@ -128,6 +128,45 @@ if [ -d "$APP_DIR/writable" ]; then
   chmod -R u+rwX,g+rwX "$APP_DIR/writable" 2>/dev/null || warn "Could not chmod writable/."
 fi
 
+# ── 5.5 Internal tools / panel login bootstrap (Shield + SQLite) ─────────────
+# /patron and /panel authenticate against writable/db/barlas.sqlite. That DB is
+# runtime data (deploy never copies it), so the connection config, the schema
+# and the admin user must be provisioned on this server. Idempotent by design.
+ENV_FILE="$APP_DIR/.env"
+SQLITE_DB="$APP_DIR/writable/db/barlas.sqlite"
+
+[ -f "$ENV_FILE" ] || { warn ".env missing — creating one with only the SQLite connection."; touch "$ENV_FILE"; }
+
+if ! grep -q '^database\.default\.DBDriver' "$ENV_FILE"; then
+  log "Adding SQLite connection to .env …"
+  {
+    printf '\n# Shield identity DB (/panel + /patron) — added by deploy.sh\n'
+    printf 'database.default.DBDriver = SQLite3\n'
+    printf 'database.default.database = %s\n' "$SQLITE_DB"
+    printf 'database.default.foreignKeys = true\n'
+  } >> "$ENV_FILE"
+elif grep -q '^database\.default\.database *= */var/www/html/' "$ENV_FILE"; then
+  # A copied local .env still points at the Docker container path — repair it.
+  log "Rewriting Docker-era SQLite path in .env …"
+  sed -i "s#^database\.default\.database *=.*#database.default.database = $SQLITE_DB#" "$ENV_FILE"
+fi
+
+mkdir -p "$APP_DIR/writable/db"
+
+log "Running database migrations (App + Shield + Settings) …"
+( cd "$APP_DIR" && "$PHP_BIN" spark migrate --all ) \
+  || warn "migrate failed — /patron and /panel logins will not work until this is fixed."
+
+# Admin user comes from GitHub secrets (PANEL_ADMIN_EMAIL / PANEL_ADMIN_PASSWORD,
+# forwarded by deploy.yml). panel:admin updates the password if the user exists.
+if [ -n "${PANEL_ADMIN_EMAIL:-}" ] && [ -n "${PANEL_ADMIN_PASSWORD:-}" ]; then
+  log "Ensuring panel admin user exists (${PANEL_ADMIN_EMAIL}) …"
+  ( cd "$APP_DIR" && "$PHP_BIN" spark panel:admin "$PANEL_ADMIN_EMAIL" "$PANEL_ADMIN_PASSWORD" ) \
+    || warn "panel:admin failed — check the Actions log."
+else
+  log "PANEL_ADMIN_EMAIL / PANEL_ADMIN_PASSWORD not set — skipping admin bootstrap."
+fi
+
 # ── 6. Clear framework caches (best-effort) ──────────────────────────────────
 if [ -f "$APP_DIR/spark" ]; then
   log "Clearing CodeIgniter caches …"
