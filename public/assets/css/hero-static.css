@@ -294,9 +294,13 @@
 }
 
 /* =========================== REDUCED MOTION =========================== */
-/* Hareket istenmiyor: açılma yok, tam-ekran statik görsel + okunur metin. */
-@media (prefers-reduced-motion: reduce) {
-    .hs__eyebrow-dot,
-    .hs__hint-arrow::after { animation: none !important; }
-    .hs__half { transform: none !important; }
-}
+/* NOT (kullanıcı tercihi): site "her zaman animasyon açık" moduna alındı
+   (layout <head>'inde matchMedia ezmesi). Bu yüzden hero'nun "ikiye ayrılma"
+   açılışı reduced-motion'da da OYNAR — eskiden buradaki
+   `.hs__half { transform: none !important }` kuralı bu açılışı öldürüyordu
+   ve JS animasyonuyla çakışıyordu; bilinçli olarak kaldırıldı.
+   Erişilebilirliği geri getirmek istenirse (hem bu blok hem <head> ezmesi):
+   @media (prefers-reduced-motion: reduce) {
+       .hs__eyebrow-dot, .hs__hint-arrow::after { animation: none !important; }
+       .hs__half { transform: none !important; }
+   } */

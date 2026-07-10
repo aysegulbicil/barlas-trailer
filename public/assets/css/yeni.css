@@ -1332,9 +1332,14 @@ html.has-anim .why__cards > .is-in {
 .refs__logo:hover { transform: translateY(-3px); }
 .refs__logo img { height: 38px; width: auto; max-width: 160px; object-fit: contain; display: block; }
 
-@media (prefers-reduced-motion: reduce) {
-    .refs__belt-track { animation: none; flex-wrap: wrap; width: auto; }
-}
+/* NOT (kullanıcı tercihi): site "her zaman animasyon açık" moduna alındı
+   (layout <head>'inde matchMedia ezmesi). Eskiden reduced-motion'da bu bant
+   `animation: none; flex-wrap: wrap; width: auto` ile tek sıra akan banttan
+   çıkıp logoları ALT ALTA sarıyordu (bozuk görünüm). Bilinçli kaldırıldı →
+   bant her koşulda tek sıra akar. Erişilebilirliği geri getirmek istenirse:
+   @media (prefers-reduced-motion: reduce) {
+       .refs__belt-track { animation: none; flex-wrap: wrap; width: auto; }
+   } */
 
 /* --------------------------- Galeri ---------------------------------
    Üretimden kareler: 3 sütunlu mozaik. Kareler ekrana girerken hafifçe

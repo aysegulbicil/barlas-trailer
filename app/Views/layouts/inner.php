@@ -41,6 +41,36 @@ $asset = static function (string $path): string {
         })();
     </script>
 
+    <!-- "Her zaman animasyon açık" (kullanıcı tercihi): işletim sistemindeki
+         "animasyon efektlerini kapat" (prefers-reduced-motion: reduce) ayarını
+         SİTE İÇİN yok say — reduce sorgusunu her zaman "eşleşmiyor" döndür.
+         Diğer medya sorguları (tema, hover, işaretçi, genişlik) AYNEN geçer.
+         NOT: Erişilebilirlik ezmesidir; geri almak için bu bloğu sil. -->
+    <script>
+        (function () {
+            try {
+                var native = window.matchMedia && window.matchMedia.bind(window);
+                if (!native) return;
+                window.matchMedia = function (q) {
+                    var mql = native(q);
+                    if (typeof q === 'string' && /prefers-reduced-motion\s*:\s*reduce/i.test(q)) {
+                        return {
+                            media: mql.media,
+                            matches: false,
+                            onchange: null,
+                            addListener: function () {},
+                            removeListener: function () {},
+                            addEventListener: function () {},
+                            removeEventListener: function () {},
+                            dispatchEvent: function () { return false; }
+                        };
+                    }
+                    return mql;
+                };
+            } catch (e) { /* yut */ }
+        })();
+    </script>
+
     <?= $this->include('partials/meta') ?>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
