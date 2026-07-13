@@ -14,8 +14,8 @@ namespace App\Libraries;
  *   - openFolder() (Windows Explorer launcher) was NOT ported — a web
  *     request must never spawn desktop processes.
  *
- * Everything else (slugify, folder naming, counter semantics, headless
- * Chrome/Edge PDF generation) matches the original byte-for-byte behavior.
+ * Slugify, folder naming and counter semantics match the original. PDF
+ * generation is hardened to try every installed Chrome/Edge candidate.
  */
 final class TeklifStore
 {
@@ -77,17 +77,18 @@ final class TeklifStore
         return date('Y-m-d');
     }
 
-    /** Find a headless-print capable browser (Linux: Chromium/Chrome, Windows: Edge/Chrome). */
-    public static function findBrowser(): ?string
+    /** Find all installed headless-print capable browsers, in preferred order. */
+    public static function browsers(): array
     {
         if (PHP_OS_FAMILY !== 'Windows') {
+            $browsers = [];
             foreach (['/usr/bin/chromium', '/usr/bin/chromium-browser', '/usr/bin/google-chrome'] as $exe) {
                 if (is_file($exe)) {
-                    return $exe;
+                    $browsers[] = $exe;
                 }
             }
 
-            return null;
+            return $browsers;
         }
 
         $pf   = getenv('PROGRAMFILES') ?: 'C:\\Program Files';
@@ -95,20 +96,27 @@ final class TeklifStore
         $la   = getenv('LOCALAPPDATA') ?: '';
 
         $candidates = [
-            $pf86 . '\\Microsoft\\Edge\\Application\\msedge.exe',
-            $pf . '\\Microsoft\\Edge\\Application\\msedge.exe',
             $pf . '\\Google\\Chrome\\Application\\chrome.exe',
             $pf86 . '\\Google\\Chrome\\Application\\chrome.exe',
             $la . '\\Google\\Chrome\\Application\\chrome.exe',
+            $pf86 . '\\Microsoft\\Edge\\Application\\msedge.exe',
+            $pf . '\\Microsoft\\Edge\\Application\\msedge.exe',
         ];
 
+        $browsers = [];
         foreach ($candidates as $exe) {
             if ($exe && is_file($exe)) {
-                return $exe;
+                $browsers[] = $exe;
             }
         }
 
-        return null;
+        return array_values(array_unique($browsers));
+    }
+
+    /** Return the preferred installed browser for compatibility with callers. */
+    public static function findBrowser(): ?string
+    {
+        return self::browsers()[0] ?? null;
     }
 
     /**
@@ -123,27 +131,31 @@ final class TeklifStore
             return false;
         }
 
-        $exe = self::findBrowser();
-        if ($exe === null) {
+        $browsers = self::browsers();
+        if ($browsers === []) {
             return false;
         }
-
-        $profile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'barlas_pdf_' . uniqid();
 
         if (PHP_OS_FAMILY !== 'Windows') {
             // Docker/Linux: www-data's HOME is not writable (HOME=/tmp required),
             // the sandbox must stay off inside the container and /dev/shm is
             // only 64 MB, hence --disable-dev-shm-usage.
-            @unlink($pdfPath);
-            $cmd = 'HOME=/tmp ' . escapeshellarg($exe)
-                 . ' --headless --no-sandbox --disable-gpu --disable-dev-shm-usage'
-                 . ' --no-pdf-header-footer --no-margins'
-                 . ' --user-data-dir=' . escapeshellarg($profile)
-                 . ' --print-to-pdf=' . escapeshellarg($pdfPath)
-                 . ' ' . escapeshellarg('file://' . $htmlPath);
-            @exec($cmd . ' 2>&1', $out, $rc);
+            foreach ($browsers as $exe) {
+                $profile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'barlas_pdf_' . uniqid();
+                @unlink($pdfPath);
+                $cmd = 'HOME=/tmp ' . escapeshellarg($exe)
+                     . ' --headless --no-sandbox --disable-gpu --disable-dev-shm-usage'
+                     . ' --no-pdf-header-footer --no-margins'
+                     . ' --user-data-dir=' . escapeshellarg($profile)
+                     . ' --print-to-pdf=' . escapeshellarg($pdfPath)
+                     . ' ' . escapeshellarg('file://' . $htmlPath);
+                @exec($cmd . ' 2>&1', $out, $rc);
+                if (is_file($pdfPath) && filesize($pdfPath) > 800) {
+                    return true;
+                }
+            }
 
-            return is_file($pdfPath) && filesize($pdfPath) > 800;
+            return false;
         }
 
         // Windows (XAMPP dev) branch — kept as in the original.
@@ -153,13 +165,18 @@ final class TeklifStore
             '--headless --disable-gpu --print-to-pdf-no-header',
         ];
 
-        foreach ($variants as $flags) {
-            @unlink($pdfPath);
-            $cmd = '"' . $exe . '" ' . $flags . ' --no-margins --user-data-dir="' . $profile . '" '
-                 . '--print-to-pdf="' . $pdfPath . '" "' . $url . '"';
-            @exec('cmd /c "' . $cmd . '" 2>&1', $out, $rc);
-            if (is_file($pdfPath) && filesize($pdfPath) > 800) {
-                return true;
+        foreach ($browsers as $exe) {
+            foreach ($variants as $flags) {
+                $profile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'barlas_pdf_' . uniqid();
+                @unlink($pdfPath);
+                $cmd = escapeshellarg($exe) . ' ' . $flags
+                     . ' --no-margins --user-data-dir=' . escapeshellarg($profile)
+                     . ' --print-to-pdf=' . escapeshellarg($pdfPath)
+                     . ' ' . escapeshellarg($url);
+                @exec($cmd . ' 2>&1', $out, $rc);
+                if (is_file($pdfPath) && filesize($pdfPath) > 800) {
+                    return true;
+                }
             }
         }
 

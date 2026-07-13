@@ -227,6 +227,7 @@ body.standalone{background:#fff;margin:0;padding:0}
 
 @media print{
   .no-print{display:none !important}
+  .print-only{display:block !important}
   .topbar,.preview-bar,.form-pane{display:none !important}
   .layout{display:block;height:auto}
   .preview-pane{display:block}

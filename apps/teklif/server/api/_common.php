@@ -34,47 +34,56 @@ function dateISO($t){
   return date('Y-m-d');
 }
 
-/* find a headless-print capable browser (Linux: chromium, Windows: Edge/Chrome) */
-function findBrowser(){
+/* find all headless-print capable browsers, in preferred order */
+function findBrowsers(){
   if (PHP_OS_FAMILY !== 'Windows'){
+    $found = [];
     foreach (['/usr/bin/chromium', '/usr/bin/chromium-browser', '/usr/bin/google-chrome'] as $e){
-      if (is_file($e)) return $e;
+      if (is_file($e)) $found[] = $e;
     }
-    return null;
+    return $found;
   }
   $pf   = getenv('PROGRAMFILES')      ?: 'C:\\Program Files';
   $pf86 = getenv('PROGRAMFILES(X86)') ?: 'C:\\Program Files (x86)';
   $la   = getenv('LOCALAPPDATA')      ?: '';
   $candidates = [
-    $pf86.'\\Microsoft\\Edge\\Application\\msedge.exe',
-    $pf  .'\\Microsoft\\Edge\\Application\\msedge.exe',
     $pf  .'\\Google\\Chrome\\Application\\chrome.exe',
     $pf86.'\\Google\\Chrome\\Application\\chrome.exe',
     $la  .'\\Google\\Chrome\\Application\\chrome.exe',
+    $pf86.'\\Microsoft\\Edge\\Application\\msedge.exe',
+    $pf  .'\\Microsoft\\Edge\\Application\\msedge.exe',
   ];
-  foreach ($candidates as $e){ if ($e && is_file($e)) return $e; }
-  return null;
+  $found = [];
+  foreach ($candidates as $e){ if ($e && is_file($e)) $found[] = $e; }
+  return array_values(array_unique($found));
+}
+
+function findBrowser(){
+  return findBrowsers()[0] ?? null;
 }
 
 /* offer.html -> offer.pdf (silent, via Edge/Chrome headless) */
 function makePdf($htmlPath, $pdfPath){
   if (!function_exists('exec')) return false;
-  $exe = findBrowser();
-  if (!$exe) return false;
-  $prof = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'barlas_pdf_' . uniqid();
+  $browsers = findBrowsers();
+  if (!$browsers) return false;
 
   if (PHP_OS_FAMILY !== 'Windows'){
     // Docker/Linux: www-data'nın HOME'u yazılabilir değil (HOME=/tmp şart),
     // konteynerde sandbox kapalı olmalı, /dev/shm 64 MB olduğundan devre dışı.
-    @unlink($pdfPath);
-    $cmd = 'HOME=/tmp ' . escapeshellarg($exe)
-         . ' --headless --no-sandbox --disable-gpu --disable-dev-shm-usage'
-         . ' --no-pdf-header-footer --no-margins'
-         . ' --user-data-dir=' . escapeshellarg($prof)
-         . ' --print-to-pdf=' . escapeshellarg($pdfPath)
-         . ' ' . escapeshellarg('file://' . $htmlPath);
-    @exec($cmd . ' 2>&1', $o, $rc);
-    return is_file($pdfPath) && filesize($pdfPath) > 800;
+    foreach ($browsers as $exe){
+      $prof = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'barlas_pdf_' . uniqid();
+      @unlink($pdfPath);
+      $cmd = 'HOME=/tmp ' . escapeshellarg($exe)
+           . ' --headless --no-sandbox --disable-gpu --disable-dev-shm-usage'
+           . ' --no-pdf-header-footer --no-margins'
+           . ' --user-data-dir=' . escapeshellarg($prof)
+           . ' --print-to-pdf=' . escapeshellarg($pdfPath)
+           . ' ' . escapeshellarg('file://' . $htmlPath);
+      @exec($cmd . ' 2>&1', $o, $rc);
+      if (is_file($pdfPath) && filesize($pdfPath) > 800) return true;
+    }
+    return false;
   }
 
   $url  = 'file:///' . str_replace('\\', '/', $htmlPath);
@@ -82,12 +91,17 @@ function makePdf($htmlPath, $pdfPath){
     '--headless=new --disable-gpu --no-pdf-header-footer',
     '--headless --disable-gpu --print-to-pdf-no-header',
   ];
-  foreach ($variants as $flags){
-    @unlink($pdfPath);
-    $cmd = '"'.$exe.'" '.$flags.' --no-margins --user-data-dir="'.$prof.'" '
-         . '--print-to-pdf="'.$pdfPath.'" "'.$url.'"';
-    @exec('cmd /c "'.$cmd.'" 2>&1', $o, $rc);
-    if (is_file($pdfPath) && filesize($pdfPath) > 800) return true;
+  foreach ($browsers as $exe){
+    foreach ($variants as $flags){
+      $prof = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'barlas_pdf_' . uniqid();
+      @unlink($pdfPath);
+      $cmd = escapeshellarg($exe) . ' ' . $flags
+           . ' --no-margins --user-data-dir=' . escapeshellarg($prof)
+           . ' --print-to-pdf=' . escapeshellarg($pdfPath)
+           . ' ' . escapeshellarg($url);
+      @exec($cmd . ' 2>&1', $o, $rc);
+      if (is_file($pdfPath) && filesize($pdfPath) > 800) return true;
+    }
   }
   return false;
 }

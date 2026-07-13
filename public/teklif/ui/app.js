@@ -421,7 +421,11 @@ async function downloadPdf(folder, offerNo){
 }
 
 function printOffer(o){
-  $("offerOutput").innerHTML=docHTML(o);
+  const area=$("printArea");
+  area.innerHTML=`<div class="doc${o.theme==="dark"?" theme-dark":""}">${docHTML(o)}</div>`;
+
+  const cleanup=()=>{ area.innerHTML=""; };
+  window.addEventListener("afterprint",cleanup,{once:true});
   setTimeout(()=>window.print(),300);
 }
 
