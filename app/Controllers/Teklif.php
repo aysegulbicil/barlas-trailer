@@ -18,7 +18,7 @@ use RecursiveIteratorIterator;
  * The SPA itself is served as plain statics from public/teklif/ui/ (never
  * enters CI4); this controller only covers the dynamic surface behind the
  * `appsauth` filter:
- *   - api():   1:1 port of apps/teklif/server/api/{save,list,open,delete}.php
+ *   - api():   port of apps/teklif/server/api endpoints, including client PDF upload
  *   - data():  whitelisted JSON files from writable/data/teklif/data/
  *   - offer(): saved offer output files from writable/data/teklif/offers/
  *              (path-traversal guard ported from apps/teklif/gate.php)
@@ -58,7 +58,7 @@ class Teklif extends BaseController
     /**
      * GET|POST /teklif/server/api/{name} — API dispatcher.
      *
-     * $name arrives as "save.php" | "list.php" | "open.php" | "delete.php"
+     * $name arrives as a legacy .php endpoint name used by the SPA.
      * (the SPA calls the legacy .php URLs); anything else is a JSON 404.
      */
     public function api(string $name = ''): ResponseInterface
@@ -68,6 +68,7 @@ class Teklif extends BaseController
             'list.php'   => $this->apiList(),
             'open.php'   => $this->apiOpen(),
             'delete.php' => $this->apiDelete(),
+            'upload-pdf.php' => $this->apiUploadPdf(),
             default      => $this->respond(['ok' => false, 'error' => 'not_found'], 404),
         };
     }
@@ -342,6 +343,41 @@ class Teklif extends BaseController
         @rmdir($dir);
 
         return $this->respond(['ok' => ! is_dir($dir)]);
+    }
+
+    /** Store a browser-generated PDF in the already-created offer folder. */
+    private function apiUploadPdf(): ResponseInterface
+    {
+        $folder = TeklifStore::safeName((string) ($this->request->getPost('folder') ?? ''));
+        $base   = realpath(TeklifStore::offersDir());
+        $dir    = ($folder !== '' && $base !== false) ? realpath($base . '/' . $folder) : false;
+
+        if ($dir === false || ! is_dir($dir) || ! str_starts_with($dir, $base . DIRECTORY_SEPARATOR)) {
+            return $this->respond(['ok' => false, 'message' => 'Teklif klasörü bulunamadı'], 404);
+        }
+
+        $pdf = $this->request->getFile('pdf');
+        if ($pdf === null || ! $pdf->isValid() || $pdf->hasMoved()) {
+            return $this->respond(['ok' => false, 'message' => 'PDF dosyası alınamadı'], 400);
+        }
+
+        $size = $pdf->getSize();
+        $tmp  = $pdf->getTempName();
+        if ($size < 800 || $size > 30 * 1024 * 1024
+            || ! is_file($tmp) || file_get_contents($tmp, false, null, 0, 5) !== '%PDF-') {
+            return $this->respond(['ok' => false, 'message' => 'Geçersiz PDF dosyası'], 400);
+        }
+
+        $target = $dir . '/offer.pdf';
+        $staged = $dir . '/offer.pdf.uploading';
+        $bytes  = file_put_contents($staged, (string) file_get_contents($tmp), LOCK_EX);
+
+        if ($bytes !== $size || (! @rename($staged, $target) && (! @unlink($target) || ! @rename($staged, $target)))) {
+            @unlink($staged);
+            return $this->respond(['ok' => false, 'message' => 'PDF arşive yazılamadı'], 500);
+        }
+
+        return $this->respond(['ok' => true, 'bytes' => $bytes]);
     }
 
     // ------------------------------------------------------------------

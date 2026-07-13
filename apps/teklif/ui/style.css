@@ -144,6 +144,11 @@ table.spec tr:nth-child(even) td{background:#f7fafe}
 .item-divider{border-top:1px dashed var(--line);margin:16px 0 2px}
 .doc-foot{margin-top:20px;padding-top:10px;border-top:1px solid var(--line);font-size:8pt;color:#6b7a90;display:flex;justify-content:space-between;gap:12px;line-height:1.5}
 .watermark{position:absolute;top:42%;left:0;right:0;text-align:center;transform:rotate(-28deg);font-size:42pt;color:rgba(0,91,170,.06);font-weight:800;pointer-events:none;letter-spacing:2px}
+.doc-head,.subject-card,.price-card,.doc-foot,.item-heading,table.spec tr{break-inside:avoid;page-break-inside:avoid}
+
+/* Off-screen source used only while the browser creates a PDF. */
+.pdf-export-stage{position:fixed;left:-100000px;top:0;width:210mm;background:#fff;z-index:-1}
+.pdf-export-stage .doc{width:210mm;margin:0;box-shadow:none}
 
 /* standalone offer.html: belge içeriğe göre, temiz beyaz zemin */
 body.standalone{background:#fff;margin:0;padding:0}

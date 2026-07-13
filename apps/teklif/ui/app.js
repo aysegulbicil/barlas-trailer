@@ -396,11 +396,88 @@ async function save(){
       toast("✓ Teklif kaydedildi, PDF indiriliyor…","ok");
       await downloadPdf(j.folder, o.offer_no);
     }else{
-      toast("✓ Klasör oluşturuldu. PDF için yazdır penceresi açılıyor…","ok");
-      printOffer(o);
+      toast("Teklif kaydedildi, PDF tarayıcıda oluşturuluyor…");
+      try{
+        const blob=await createClientPdf(o);
+        downloadBlob(blob,(o.offer_no||"teklif")+".pdf");
+        if(j.folder) await uploadClientPdf(j.folder,blob);
+        toast("✓ Teklif kaydedildi ve PDF indirildi.","ok");
+      }catch(pdfError){
+        console.error("Tarayıcı PDF üretimi başarısız:",pdfError);
+        toast("PDF otomatik oluşturulamadı. Yazdır penceresi açılıyor…","err");
+        printOffer(o);
+      }
     }
   }catch(e){ toast("Kaydedilemedi: "+e.message,"err"); }
   finally{ $("btnSave").disabled=false; }
+}
+
+function waitForImages(root){
+  const images=[...root.querySelectorAll("img")];
+  return Promise.all(images.map(img=>{
+    if(img.complete) return Promise.resolve();
+    return new Promise(resolve=>{
+      img.addEventListener("load",resolve,{once:true});
+      img.addEventListener("error",resolve,{once:true});
+    });
+  }));
+}
+
+async function createClientPdf(o){
+  if(typeof window.html2pdf!=="function") throw new Error("PDF kütüphanesi yüklenemedi");
+
+  const stage=document.createElement("div");
+  stage.className="pdf-export-stage";
+  stage.innerHTML=`<div class="doc${o.theme==="dark"?" theme-dark":""}">${docHTML(o)}</div>`;
+  document.body.appendChild(stage);
+
+  try{
+    await waitForImages(stage);
+    const worker=window.html2pdf().set({
+      margin:0,
+      image:{type:"jpeg",quality:.96},
+      html2canvas:{
+        scale:2,
+        useCORS:true,
+        allowTaint:false,
+        logging:false,
+        backgroundColor:o.theme==="dark"?"#0f1c2e":"#ffffff"
+      },
+      jsPDF:{unit:"mm",format:"a4",orientation:"portrait"},
+      pagebreak:{
+        mode:["css","legacy"],
+        avoid:["tr",".doc-head",".subject-card",".price-card",".doc-foot",".item-heading"]
+      }
+    }).from(stage.firstElementChild).toPdf();
+    const blob=await worker.outputPdf("blob");
+    if(!(blob instanceof Blob) || blob.size<800) throw new Error("PDF çıktısı boş");
+    return blob;
+  }finally{
+    stage.remove();
+  }
+}
+
+function downloadBlob(blob,filename){
+  const objUrl=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=objUrl; a.download=filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(objUrl),5000);
+}
+
+async function uploadClientPdf(folder,blob){
+  const form=new FormData();
+  form.append("folder",folder);
+  form.append("pdf",blob,"offer.pdf");
+  try{
+    const r=await fetch(`${API}/upload-pdf.php`,{method:"POST",body:form});
+    const j=await r.json();
+    if(!r.ok || !j.ok) throw new Error(j.message||`HTTP ${r.status}`);
+    return true;
+  }catch(e){
+    console.warn("PDF arşiv klasörüne yüklenemedi:",e);
+    return false;
+  }
 }
 
 /* fetch the server-generated PDF and push it to the browser's Downloads */
