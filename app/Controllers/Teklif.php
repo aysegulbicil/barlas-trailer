@@ -75,16 +75,47 @@ class Teklif extends BaseController
     /** GET /teklif/data/{file} — whitelisted read-only JSON lookups. */
     public function data(string $file = ''): ResponseInterface
     {
-        $path = TeklifStore::dataDir() . '/' . $file;
+        if (! in_array($file, self::DATA_WHITELIST, true)) {
+            throw PageNotFoundException::forPageNotFound();
+        }
 
-        if (! in_array($file, self::DATA_WHITELIST, true) || ! is_file($path)) {
+        $dataDir = TeklifStore::dataDir();
+        $path    = $dataDir . '/' . $file;
+        $body    = null;
+
+        // writable/ deploy paketinde izlenmez. İlk canlı kurulumda katalog
+        // dosyalarını repoda izlenen apps/teklif/data kaynağından hazırla;
+        // mevcut (ve çalışma sırasında değişmiş olabilecek) dosyaya dokunma.
+        if (! is_file($path)) {
+            if (! is_dir($dataDir)) {
+                @mkdir($dataDir, 0775, true);
+            }
+
+            $seed = ROOTPATH . 'apps/teklif/data/' . $file;
+            if (is_file($seed)) {
+                @copy($seed, $path);
+                // Paylaşımlı hostta writable izinleri yanlışsa katalog yine
+                // okunabilsin; yazılabilir kopya sonraki doğru deployda oluşur.
+                if (! is_file($path)) {
+                    $path = $seed;
+                }
+            } elseif ($file === 'counter.json') {
+                $initialCounter = ['year' => (int) date('Y'), 'seq' => 0];
+                TeklifStore::jwrite($path, $initialCounter);
+                if (! is_file($path)) {
+                    $body = json_encode($initialCounter, JSON_UNESCAPED_UNICODE);
+                }
+            }
+        }
+
+        if (! is_file($path) && $body === null) {
             throw PageNotFoundException::forPageNotFound();
         }
 
         return $this->response
             ->setHeader('Content-Type', 'application/json; charset=utf-8')
             ->setHeader('Cache-Control', 'private, max-age=3600')
-            ->setBody((string) file_get_contents($path));
+            ->setBody($body ?? (string) file_get_contents($path));
     }
 
     /**
