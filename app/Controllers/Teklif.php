@@ -108,6 +108,29 @@ class Teklif extends BaseController
             }
         }
 
+        // Eski/yarım bir deploy boş products.json bırakmış olabilir. Dosya
+        // mevcut diye boş kataloğu servis etme; izlenen sağlam kataloğa düş.
+        if ($file === 'products.json' && is_file($path)) {
+            $catalog = json_decode((string) file_get_contents($path), true);
+            if (! is_array($catalog)
+                || ! isset($catalog['categories'])
+                || ! is_array($catalog['categories'])
+                || $catalog['categories'] === []) {
+                $seed        = ROOTPATH . 'apps/teklif/data/products.json';
+                $seedCatalog = is_file($seed)
+                    ? json_decode((string) file_get_contents($seed), true)
+                    : null;
+
+                if (is_array($seedCatalog)
+                    && isset($seedCatalog['categories'])
+                    && is_array($seedCatalog['categories'])
+                    && $seedCatalog['categories'] !== []) {
+                    @copy($seed, $dataDir . '/products.json');
+                    $path = $seed;
+                }
+            }
+        }
+
         if (! is_file($path) && $body === null) {
             throw PageNotFoundException::forPageNotFound();
         }
