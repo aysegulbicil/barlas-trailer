@@ -13,16 +13,6 @@ const formatTL = n => (Number(n)||0).toLocaleString("tr-TR") + " TL";
 
 /* ---------- INIT ---------- */
 async function init(){
-  try{
-    [PRODUCTS,TEMPLATES,COMPANY,COUNTER,STYLE_CSS] = await Promise.all([
-      fetch("../data/products.json").then(r=>r.json()),
-      fetch("../data/templates.json").then(r=>r.json()),
-      fetch("../data/company.json").then(r=>r.json()),
-      fetch("../data/counter.json").then(r=>r.json()),
-      fetch("style.css").then(r=>r.text())
-    ]);
-  }catch(e){ toast("Veri dosyaları yüklenemedi. Sunucu çalışıyor mu?","err"); return; }
-
   document.addEventListener("input", e=>{ if(e.target.closest(".form-pane")) render(); });
   $("theme").addEventListener("change", render);
   $("btnAddItem").addEventListener("click", addItemAndFocus);
@@ -31,7 +21,49 @@ async function init(){
   $("btnHistory").addEventListener("click", showHistory);
   $("btnHistoryBack").addEventListener("click", showEditor);
 
+  // Formu veri isteklerinden önce oluştur. Sunucu geç yanıt verse veya bir
+  // istek hata verse bile ilk ürün kutusu ve arayüz kullanılabilir görünsün.
   newOffer();
+  const provisionalOfferNo = $("offerNo").value;
+
+  try{
+    [PRODUCTS,TEMPLATES,COMPANY,COUNTER,STYLE_CSS] = await Promise.all([
+      fetchJson("../data/products.json"),
+      fetchJson("../data/templates.json"),
+      fetchJson("../data/company.json"),
+      fetchJson("../data/counter.json"),
+      fetchText("style.css")
+    ]);
+  }catch(e){
+    console.error("Teklif verileri yüklenemedi:", e);
+    toast("Ürün verileri yüklenemedi. Sayfayı yenileyin veya yeniden giriş yapın.","err");
+    return;
+  }
+
+  document.querySelectorAll("#items .item-card").forEach(fillCategoryOptions);
+  if ($("offerNo").value === provisionalOfferNo) $("offerNo").value = nextNo();
+  render();
+}
+
+async function fetchChecked(url){
+  const response=await fetch(url,{credentials:"same-origin",cache:"no-store"});
+  if(response.redirected && response.url.includes("/patron/login")){
+    window.location.assign(response.url);
+    throw new Error("Oturum doğrulanamadı");
+  }
+  if(!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
+  return response;
+}
+
+async function fetchJson(url){
+  const response=await fetchChecked(url);
+  const type=response.headers.get("content-type")||"";
+  if(!type.includes("json")) throw new Error(`${url}: JSON yerine ${type||"bilinmeyen içerik"} döndü`);
+  return response.json();
+}
+
+async function fetchText(url){
+  return (await fetchChecked(url)).text();
 }
 
 /* ---------- NEW OFFER ---------- */
@@ -91,8 +123,7 @@ function addItem(data){
   block.innerHTML=itemTemplate();
 
   const cat=block.querySelector(".it-category");
-  cat.innerHTML=`<option value="">— Kategori seçin —</option>`+
-    PRODUCTS.categories.map(c=>`<option value="${c.slug}">${esc(c.name)}</option>`).join("");
+  fillCategoryOptions(block);
 
   cat.addEventListener("change", ()=>{ onItemCategory(block); render(); });
   block.querySelector(".it-product").addEventListener("change", ()=>onItemProduct(block));
@@ -104,6 +135,14 @@ function addItem(data){
   $("items").appendChild(block);
   if(data) fillItem(block,data);
   return block;
+}
+
+function fillCategoryOptions(block){
+  const cat=block.querySelector(".it-category");
+  const selected=cat.value;
+  cat.innerHTML=`<option value="">— Kategori seçin —</option>`+
+    PRODUCTS.categories.map(c=>`<option value="${c.slug}">${esc(c.name)}</option>`).join("");
+  if(selected) cat.value=selected;
 }
 
 function removeItem(block){
